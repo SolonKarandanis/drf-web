@@ -1,5 +1,6 @@
 import Head from "next/head";
 import {FC} from 'react'
+import favicon from '@/public/assets/images/brand-logos/favicon.ico';
 
 interface Props {
     title: string;
