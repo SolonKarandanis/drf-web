@@ -1,5 +1,8 @@
 import type { Config } from 'tailwindcss'
 
+const colors = require("tailwindcss/colors");
+const plugin = require("tailwindcss/plugin");
+
 const config: Config = {
   darkMode: "class",
   content: [
@@ -230,6 +233,19 @@ const config: Config = {
     require('@tailwindcss/forms'),
     require('tailwind-clip-path'),
     require("preline/plugin"),
+    plugin(function ({ addComponents }) {
+      addComponents({
+        ".dirrtl": {
+          direction: "ltr",
+        },
+        ".dir-rtl": {
+          direction: "rtl",
+        },
+        ".dir-ltr": {
+          direction: "ltr",
+        },
+      });
+    }),
   ],
 }
 export default config
