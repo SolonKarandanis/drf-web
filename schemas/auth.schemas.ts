@@ -13,13 +13,12 @@ export const ResetSchema = z.object({
 });
 
 export const LoginSchema = z.object({
-    username: z.string().email({
+    username: z.string().min(1,{
         message: "Username is required",
     }),
     password: z.string().min(1, {
         message: "Password is required",
-    }),
-    code: z.optional(z.string()),
+    })
 });
 
 export const RegisterSchema = z.object({
@@ -41,4 +40,7 @@ export const RegisterSchema = z.object({
     confirmPassword: z.string().min(6, {
         message: "Minimum 6 characters required",
     }),
-});
+}).refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Password don't match",
+  });
