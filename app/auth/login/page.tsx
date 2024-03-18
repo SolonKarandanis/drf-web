@@ -1,5 +1,4 @@
 import Seo from '@/shared/layout-components/seo/Seo'
-
 import Link from 'next/link';
 
 const page = () => {
@@ -21,7 +20,7 @@ const page = () => {
                         <div className="box">
                             <div className="box-body !p-[3rem]">
                                 <p className="h5 font-semibold mb-2 text-center">Sign In</p>
-                                <p className="mb-4 text-[#8c9097] dark:text-white/50 opacity-[0.7] font-normal text-center">Welcome back Jhon !</p>
+                                <p className="mb-4 text-[#8c9097] dark:text-white/50 opacity-[0.7] font-normal text-center">Welcome back</p>
                                 <div className="grid grid-cols-12 gap-y-4">
                                     <div className="xl:col-span-12 col-span-12">
                                         <label htmlFor="signin-username" className="form-label text-default">User Name</label>
