@@ -4,7 +4,16 @@ import { InputProps } from '../props';
 
 
 
-const CFormInput:FC<InputProps>  = ({name,label,labelPosition='side',required=false,className='',props,error,...rest}) => {
+const CFormInput:FC<InputProps>  = ({
+    name,
+    label,
+    labelPosition='side',
+    required=false,
+    className='',
+    props,
+    error,
+    ...rest
+}) => {
     const requiredCss = required? 'required' : '';
     const labelHtml = (
         <label htmlFor={name} className={`form-label text-default ${requiredCss}`}>

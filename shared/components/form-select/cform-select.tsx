@@ -3,7 +3,15 @@ import CFormError from '@/shared/components/form-error/cform-error'
 import { SelectProps } from '../props'
 
 
-const CFormSelect:FC<SelectProps> = ({label,name,options,required=false,inputProps,error,...rest}) => {
+const CFormSelect:FC<SelectProps> = ({
+    label,
+    name,
+    options,
+    required=false,
+    inputProps,
+    error,
+    ...rest
+}) => {
     const labelHtml = required? (
         <label htmlFor={name} className="col-lg-4 col-form-label fw-bold fs-6">
             <span className='required'>{label}</span>
