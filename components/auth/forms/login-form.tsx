@@ -83,7 +83,7 @@ const LoginForm = () => {
                                 </div>
                             </div>
                             <div className="xl:col-span-12 col-span-12 grid mt-2">
-                                <button type="button" 
+                                <button type="submit" 
                                     className="ti-btn ti-btn-primary !bg-primary !text-white !font-medium">
                                         Sign In
                                 </button>
