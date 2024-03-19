@@ -5,7 +5,7 @@ interface Props extends FormHTMLAttributes<HTMLFormElement>{
 }
 
 
-const CustomForm:FC<Props> = ({children,...props}) => {
+const CForm:FC<Props> = ({children,...props}) => {
   return (
     <form noValidate className='space-y-6' {...props}>
         {children}
@@ -13,4 +13,4 @@ const CustomForm:FC<Props> = ({children,...props}) => {
   )
 }
 
-export default CustomForm
+export default CForm
