@@ -12,6 +12,7 @@ type RegisterSchema = z.infer<typeof RegisterSchema>;
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setConfirmShowPassword] = useState(false);
   const {register,handleSubmit,formState: { errors },} = useForm<RegisterSchema>({
       resolver: zodResolver(RegisterSchema),
       defaultValues: {
@@ -32,37 +33,47 @@ const RegisterForm = () => {
     <CForm onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-12 gap-y-4">
             <div className="xl:col-span-12 col-span-12">
-                <label htmlFor="signup-firstname" className="form-label text-default">First Name</label>
+                <label htmlFor="firstname" className="form-label text-default">First Name</label>
                 <input type="text" className="form-control form-control-lg w-full !rounded-md"
-                    id="signup-firstname" placeholder="first name"/>
+                    id="firstname" placeholder="first name"/>
             </div>
             <div className="xl:col-span-12 col-span-12">
-                <label htmlFor="signup-lastname" className="form-label text-default">Last Name</label>
+                <label htmlFor="lastname" className="form-label text-default">Last Name</label>
                 <input type="text" className="form-control form-control-lg w-full !rounded-md"
-                    id="signup-lastname" placeholder="last name"/>
+                    id="lastname" placeholder="last name"/>
             </div>
             <div className="xl:col-span-12 col-span-12">
-                <label htmlFor="signup-password" className="form-label text-default">Password</label>
+                <label htmlFor="email" className="form-label text-default">Email</label>
+                <input type="email" className="form-control form-control-lg w-full !rounded-md"
+                    id="email" placeholder="Email"/>
+            </div>
+            <div className="xl:col-span-12 col-span-12">
+                <label htmlFor="username" className="form-label text-default">Username</label>
+                <input type="text" className="form-control form-control-lg w-full !rounded-md"
+                    id="username" placeholder="Username" autoComplete="username"/>
+            </div>
+            <div className="xl:col-span-12 col-span-12">
+                <label htmlFor="password" className="form-label text-default">Password</label>
                 <div className="input-group">
                     <input type="password"
                         className="form-control form-control-lg !rounded-e-none"
-                        id="signup-password" placeholder="password"/>
-                    <button  aria-label="button" type="button" className="ti-btn ti-btn-light !rounded-s-none !mb-0"
-                        id="button-addon2">
-                            {/* <i className={`${passwordshow1 ? 'ri-eye-line' : 'ri-eye-off-line'} align-middle`}></i> */}
+                        id="password" placeholder="password" autoComplete="password"/>
+                    <button onClick={()=>setShowPassword(!showPassword)}  aria-label="button" 
+                        className="ti-btn ti-btn-light !rounded-s-none !mb-0" type="button" id="button-addon2">
+                        <i className={`${showPassword ? 'ri-eye-line' : 'ri-eye-off-line'} align-middle`}></i>
                     </button>
                 </div>
             </div>
             <div className="xl:col-span-12 col-span-12 mb-2">
-                <label htmlFor="signup-confirmpassword" className="form-label text-default">Confirm
+                <label htmlFor="confirmpassword" className="form-label text-default">Confirm
                     Password</label>
                 <div className="input-group">
                     <input type="password"
                         className="form-control form-control-lg !rounded-e-none"
-                        id="signup-confirmpassword" placeholder="confirm password"/>
-                    <button aria-label="button" type="button" className="ti-btn ti-btn-light !rounded-s-none !mb-0"
-                        id="button-addon21">
-                            {/* <i className={`${passwordshow2 ? 'ri-eye-line' : 'ri-eye-off-line'} align-middle`}></i> */}
+                        id="confirmpassword" placeholder="confirm password" autoComplete="new-password"/>
+                    <button onClick={()=>setConfirmShowPassword(!showConfirmPassword)}  aria-label="button" 
+                        className="ti-btn ti-btn-light !rounded-s-none !mb-0" type="button" id="button-addon21">
+                        <i className={`${showPassword ? 'ri-eye-line' : 'ri-eye-off-line'} align-middle`}></i>
                     </button>
                 </div>
                 <div className="mt-4">

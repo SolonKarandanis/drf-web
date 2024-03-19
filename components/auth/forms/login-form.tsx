@@ -36,6 +36,7 @@ const LoginForm = () => {
                             id="username" 
                             className="form-control form-control-lg w-full !rounded-md" 
                             placeholder="Username"
+                            autoComplete="username"
                             {...register("username")}/>
                             {errors.username && (
                                 <p className="text-xs italic text-red-500 mt-2">
@@ -55,6 +56,7 @@ const LoginForm = () => {
                                 id="password"
                                 className="form-control form-control-lg !rounded-s-md"  
                                 placeholder="Password"
+                                autoComplete="current-password"
                                 {...register("password")}/>
                             <button onClick={()=>setShowPassword(!showPassword)}  aria-label="button" 
                                 className="ti-btn ti-btn-light !rounded-s-none !mb-0" type="button" id="button-addon2">
