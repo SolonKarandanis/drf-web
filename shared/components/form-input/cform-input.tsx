@@ -1,4 +1,6 @@
-import { FC } from 'react'
+"use client";
+
+import { FC, useState } from 'react'
 import CFormError from '@/shared/components/form-error/cform-error'
 import { InputProps } from '../props';
 
@@ -7,13 +9,13 @@ import { InputProps } from '../props';
 const CFormInput:FC<InputProps>  = ({
     name,
     label,
-    labelPosition='side',
     required=false,
     className='',
     props,
     error,
     ...rest
 }) => {
+    const [showPassword, setShowPassword] = useState(false);
     const requiredCss = required? 'required' : '';
     const labelHtml = (
         <label htmlFor={name} className={`form-label text-default ${requiredCss}`}>
@@ -34,21 +36,23 @@ const CFormInput:FC<InputProps>  = ({
 
     const errorHtml = error ? (<CFormError error={error} />) : null;
 
-    const innerHtml = labelPosition==='side'? (
-        <>
-            {labelHtml}
-            <div className="col-lg-8 fv-row">
-                {inputHtml}
-                {errorHtml}
-            </div>
-        </>
-    ) :(
-        <div className="fv-row mb-0">
-            {labelHtml}
-            {inputHtml}
-            {errorHtml}
-        </div>
-    );
+    
+
+    // const innerHtml = labelPosition==='side'? (
+    //     <>
+    //         {labelHtml}
+    //         <div className="input-group">
+    //             {inputHtml}
+    //             {errorHtml}
+    //         </div>
+    //     </>
+    // ) :(
+    //     <div className="input-group">
+    //         {labelHtml}
+    //         {inputHtml}
+    //         {errorHtml}
+    //     </div>
+    // );
 
 
     return (
