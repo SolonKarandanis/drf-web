@@ -37,84 +37,65 @@ const RegisterForm = () => {
                 type='text'
                 required={true}
                 name='firstName' 
-                label='First Name'
-                placeholder="first name"
+                placeholder="First Name"
                 className={"w-full !rounded-md"}
                 props={register("firstName")}
-                error={errors.firstName?.message}/>
+                error={errors.firstName?.message}>
+                    First Name
+            </CFormInput>
             <CFormInput 
                 type='text'
                 required={true}
                 name='lastname' 
-                label='Last Name'
-                placeholder="last name"
+                placeholder="Last Name"
                 className={"w-full !rounded-md"}
                 props={register("lastName")}
-                error={errors.lastName?.message}/>
+                error={errors.lastName?.message}>
+                    Last Name
+            </CFormInput>
             <CFormInput 
                 type='email'
                 required={true}
                 name='email' 
-                label='Email'
                 placeholder="Email"
                 className={"w-full !rounded-md"}
                 props={register("email")}
-                error={errors.email?.message}/>
+                error={errors.email?.message}>
+                    Email
+            </CFormInput>
             <CFormInput 
                 type='text'
                 required={true}
                 name='username' 
-                label='Username'
                 placeholder="Username"
+                autoComplete="username"
                 className={"w-full !rounded-md"}
                 props={register("username")}
-                error={errors.username?.message}/>
+                error={errors.username?.message}>
+                    Username
+            </CFormInput>
             <CFormInput 
                 type='password'
                 required={true}
                 name='password' 
-                label='Password'
                 placeholder="Password"
+                autoComplete="new-password"
                 className={"!rounded-e-none"}
                 props={register("password")}
-                error={errors.password?.message}/>
-            
-            <div className="xl:col-span-12 col-span-12">
-                <label htmlFor="password" className="form-label text-default">Password</label>
-                <div className="input-group">
-                    <input type={(showPassword) ? 'text' : "password"}
-                        className="form-control form-control-lg !rounded-e-none"
-                        id="password" placeholder="password" autoComplete="password" {...register("password")}/>
-                    <button onClick={()=>setShowPassword(!showPassword)}  aria-label="button" 
-                        className="ti-btn ti-btn-light !rounded-s-none !mb-0" type="button" id="button-addon2">
-                        <i className={`${showPassword ? 'ri-eye-line' : 'ri-eye-off-line'} align-middle`}></i>
-                    </button>
-                    {errors.password && (
-                        <p className="text-xs italic text-red-500 mt-2">
-                        {errors.password?.message}
-                        </p>
-                    )}
-                </div>
-            </div>
-            <div className="xl:col-span-12 col-span-12 mb-2">
-                <label htmlFor="confirmpassword" className="form-label text-default">Confirm
-                    Password</label>
-                <div className="input-group">
-                    <input type={(showConfirmPassword) ? 'text' : "password"}
-                        className="form-control form-control-lg !rounded-e-none"
-                        id="confirmpassword" placeholder="confirm password" autoComplete="new-password" {...register("confirmPassword")}/>
-                    <button onClick={()=>setConfirmShowPassword(!showConfirmPassword)}  aria-label="button" 
-                        className="ti-btn ti-btn-light !rounded-s-none !mb-0" type="button" id="button-addon21">
-                        <i className={`${showConfirmPassword ? 'ri-eye-line' : 'ri-eye-off-line'} align-middle`}></i>
-                    </button>
-                    {errors.confirmPassword && (
-                        <p className="text-xs italic text-red-500 mt-2">
-                        {errors.confirmPassword?.message}
-                        </p>
-                    )}
-                </div>
-                
-            </div>
+                error={errors.password?.message}>
+                    Password
+            </CFormInput>
+            <CFormInput 
+                type='password'
+                required={true}
+                name='confirmpassword' 
+                placeholder="Confirm Password"
+                autoComplete="new-password"
+                className={"!rounded-e-none"}
+                props={register("confirmPassword")}
+                error={errors.confirmPassword?.message}>
+                    Confirm Password
+            </CFormInput>
             <div className="xl:col-span-12 col-span-12">
                 <div className="form-check !flex !ps-0">
                     <input className="form-check-input me-1" type="checkbox" value="" id="defaultCheck1"/>
