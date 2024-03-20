@@ -8,7 +8,7 @@ import { InputProps } from '../props';
 
 const CFormInput:FC<InputProps>  = ({
     name,
-    label,
+    children,
     type='text',
     required=false,
     className='',
@@ -20,7 +20,7 @@ const CFormInput:FC<InputProps>  = ({
     const requiredCss = required? 'required' : '';
     const labelHtml = (
         <label htmlFor={name} className={`form-label text-default ${requiredCss}`}>
-            {label}
+            {children}
         </label>
     )
 
@@ -29,17 +29,18 @@ const CFormInput:FC<InputProps>  = ({
             id={name}  
             name={name} 
             size={30}
-            type={type}
+            type={(showPassword) ? 'text' : "password"}
             className={`form-control form-control-lg ${className} `}
             aria-invalid={error ? "true" : "false"}
             {...(props ?? {})}
             {...rest}/>
+       
     ):(
         <input 
             id={name}  
             name={name} 
             size={30}
-            type={(showPassword) ? 'text' : "password"}
+            type={type}
             className={`form-control form-control-lg ${className} `}
             aria-invalid={error ? "true" : "false"}
             {...(props ?? {})}
@@ -50,7 +51,7 @@ const CFormInput:FC<InputProps>  = ({
 
     const showPasswordButtonHtml = (
         <button onClick={()=>setShowPassword(!showPassword)}  aria-label="button" 
-            className="ti-btn ti-btn-light !rounded-s-none !mb-0" type="button" id="button-addon2">
+            className="ti-btn ti-btn-light !rounded-s-none !mb-0" type="button">
             <i className={`${showPassword ? 'ri-eye-line' : 'ri-eye-off-line'} align-middle`}></i>
         </button>
     );
@@ -73,22 +74,6 @@ const CFormInput:FC<InputProps>  = ({
             {errorHtml}
         </>
     );
-
-    // const innerHtml = labelPosition==='side'? (
-    //     <>
-    //         {labelHtml}
-    //         <div className="input-group">
-    //             {inputHtml}
-    //             {errorHtml}
-    //         </div>
-    //     </>
-    // ) :(
-    //     <div className="input-group">
-    //         {labelHtml}
-    //         {inputHtml}
-    //         {errorHtml}
-    //     </div>
-    // );
 
 
     return (

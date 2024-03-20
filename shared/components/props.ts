@@ -23,12 +23,12 @@ export interface Props {
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
     name:string,
-    label:string,
     type:string,
     required?:boolean,
     className?:string,
     props?:Props,
-    error?:string
+    error?:string,
+    children: React.ReactNode
 }
 
 export interface Options{
