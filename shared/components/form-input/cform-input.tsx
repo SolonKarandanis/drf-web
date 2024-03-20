@@ -9,6 +9,7 @@ import { InputProps } from '../props';
 const CFormInput:FC<InputProps>  = ({
     name,
     label,
+    type='text',
     required=false,
     className='',
     props,
@@ -23,11 +24,22 @@ const CFormInput:FC<InputProps>  = ({
         </label>
     )
 
-    const inputHtml = (
+    const inputHtml = type ==='password' ? (
         <input 
             id={name}  
             name={name} 
             size={30}
+            type={type}
+            className={`form-control form-control-lg ${className} `}
+            aria-invalid={error ? "true" : "false"}
+            {...(props ?? {})}
+            {...rest}/>
+    ):(
+        <input 
+            id={name}  
+            name={name} 
+            size={30}
+            type={(showPassword) ? 'text' : "password"}
             className={`form-control form-control-lg ${className} `}
             aria-invalid={error ? "true" : "false"}
             {...(props ?? {})}
@@ -36,7 +48,31 @@ const CFormInput:FC<InputProps>  = ({
 
     const errorHtml = error ? (<CFormError error={error} />) : null;
 
-    
+    const showPasswordButtonHtml = (
+        <button onClick={()=>setShowPassword(!showPassword)}  aria-label="button" 
+            className="ti-btn ti-btn-light !rounded-s-none !mb-0" type="button" id="button-addon2">
+            <i className={`${showPassword ? 'ri-eye-line' : 'ri-eye-off-line'} align-middle`}></i>
+        </button>
+    );
+
+    const innerHtml = type ==='password' ? 
+    (
+        <>
+            {labelHtml}
+            <div className="input-group">
+                {inputHtml}
+                {showPasswordButtonHtml}
+                {errorHtml}
+            </div>
+        </>
+    ):
+    (
+        <>
+            {labelHtml}
+            {inputHtml}
+            {errorHtml}
+        </>
+    );
 
     // const innerHtml = labelPosition==='side'? (
     //     <>
@@ -57,9 +93,7 @@ const CFormInput:FC<InputProps>  = ({
 
     return (
         <section className="xl:col-span-12 col-span-12">
-            {labelHtml}
-            {inputHtml}
-            {errorHtml}
+            {innerHtml}
         </section>
     )
 }

@@ -24,6 +24,7 @@ export interface Props {
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
     name:string,
     label:string,
+    type:string,
     required?:boolean,
     className?:string,
     props?:Props,

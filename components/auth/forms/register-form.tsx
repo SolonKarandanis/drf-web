@@ -69,6 +69,15 @@ const RegisterForm = () => {
                 className={"w-full !rounded-md"}
                 props={register("username")}
                 error={errors.username?.message}/>
+            <CFormInput 
+                type='password'
+                required={true}
+                name='password' 
+                label='Password'
+                placeholder="Password"
+                className={"!rounded-e-none"}
+                props={register("password")}
+                error={errors.password?.message}/>
             
             <div className="xl:col-span-12 col-span-12">
                 <label htmlFor="password" className="form-label text-default">Password</label>
