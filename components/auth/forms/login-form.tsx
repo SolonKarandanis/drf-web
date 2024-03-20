@@ -8,6 +8,7 @@ import Link from "next/link";
 
 import { LoginSchema } from "@/schemas/auth.schemas";
 import CForm from "@/shared/components/form/cform";
+import CFormInput from "@/shared/components/form-input/cform-input";
 
 type LoginSchema = z.infer<typeof LoginSchema>;
 
@@ -30,45 +31,33 @@ const LoginForm = () => {
         <>
             <CForm onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid grid-cols-12 gap-y-4">
-                    <div className="xl:col-span-12 col-span-12">
-                        <label htmlFor="username" className="form-label text-default">User Name</label>
-                        <input type="text"
-                            id="username" 
-                            className="form-control form-control-lg w-full !rounded-md" 
-                            placeholder="Username"
-                            autoComplete="username"
-                            {...register("username")}/>
-                            {errors.username && (
-                                <p className="text-xs italic text-red-500 mt-2">
-                                {errors.username?.message}
-                                </p>
-                            )}
-                    </div>
-                    <div className="xl:col-span-12 col-span-12 mb-2">
-                        <label htmlFor="password" className="form-label text-default block">Password
+                    <CFormInput 
+                        type='text'
+                        required={true}
+                        name='username' 
+                        placeholder="Username"
+                        autoComplete="username"
+                        className={"w-full !rounded-md"}
+                        props={register("username")}
+                        error={errors.username?.message}>
+                            Username
+                    </CFormInput>
+                    <CFormInput 
+                        type='password'
+                        required={true}
+                        name='password' 
+                        placeholder="Password"
+                        autoComplete="current-password"
+                        className={"!rounded-e-none"}
+                        props={register("password")}
+                        error={errors.password?.message}>
+                            Password
                             <Link href="/components/authentication/reset-password/reset-basic/" 
                                 className="ltr:float-right rtl:float-left text-danger ml-1">
                                 Forget password ?
                             </Link>
-                        </label>
-                        <div className="input-group">
-                            <input type={(showPassword) ? 'text' : "password"}
-                                id="password"
-                                className="form-control form-control-lg !rounded-s-md"  
-                                placeholder="Password"
-                                autoComplete="current-password"
-                                {...register("password")}/>
-                            <button onClick={()=>setShowPassword(!showPassword)}  aria-label="button" 
-                                className="ti-btn ti-btn-light !rounded-s-none !mb-0" type="button" id="button-addon2">
-                                <i className={`${showPassword ? 'ri-eye-line' : 'ri-eye-off-line'} align-middle`}></i>
-                            </button>
-                            {errors.password && (
-                                <p className="text-xs italic text-red-500 mt-2">
-                                {errors.password?.message}
-                                </p>
-                            )}
-                        </div>
-
+                    </CFormInput>
+                    <div className="xl:col-span-12 col-span-12 mb-2">
                         <div className="mt-2">
                             <div className="form-check !ps-0">
                                 <input className="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
