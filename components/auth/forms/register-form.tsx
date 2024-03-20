@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
+import CFormInput from '@/shared/components/form-input/cform-input';
 
 type RegisterSchema = z.infer<typeof RegisterSchema>;
 
@@ -32,46 +33,43 @@ const RegisterForm = () => {
    <>
     <CForm onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-12 gap-y-4">
-            <div className="xl:col-span-12 col-span-12">
-                <label htmlFor="firstname" className="form-label text-default">First Name</label>
-                <input type="text" className="form-control form-control-lg w-full !rounded-md"
-                    id="firstname" placeholder="first name" {...register("firstName")}/>
-                    {errors.firstName && (
-                        <p className="text-xs italic text-red-500 mt-2">
-                        {errors.firstName?.message}
-                        </p>
-                    )}
-            </div>
-            <div className="xl:col-span-12 col-span-12">
-                <label htmlFor="lastname" className="form-label text-default">Last Name</label>
-                <input type="text" className="form-control form-control-lg w-full !rounded-md"
-                    id="lastname" placeholder="last name" {...register("lastName")}/>
-                    {errors.lastName && (
-                        <p className="text-xs italic text-red-500 mt-2">
-                        {errors.lastName?.message}
-                        </p>
-                    )}
-            </div>
-            <div className="xl:col-span-12 col-span-12">
-                <label htmlFor="email" className="form-label text-default">Email</label>
-                <input type="email" className="form-control form-control-lg w-full !rounded-md"
-                    id="email" placeholder="Email" {...register("email")}/>
-                    {errors.email && (
-                        <p className="text-xs italic text-red-500 mt-2">
-                        {errors.email?.message}
-                        </p>
-                    )}
-            </div>
-            <div className="xl:col-span-12 col-span-12">
-                <label htmlFor="username" className="form-label text-default">Username</label>
-                <input type="text" className="form-control form-control-lg w-full !rounded-md"
-                    id="username" placeholder="Username" autoComplete="username" {...register("username")}/>
-                    {errors.username && (
-                        <p className="text-xs italic text-red-500 mt-2">
-                        {errors.username?.message}
-                        </p>
-                    )}
-            </div>
+            <CFormInput 
+                type='text'
+                required={true}
+                name='firstName' 
+                label='First Name'
+                placeholder="first name"
+                className={"w-full !rounded-md"}
+                props={register("firstName")}
+                error={errors.firstName?.message}/>
+            <CFormInput 
+                type='text'
+                required={true}
+                name='lastname' 
+                label='Last Name'
+                placeholder="last name"
+                className={"w-full !rounded-md"}
+                props={register("lastName")}
+                error={errors.lastName?.message}/>
+            <CFormInput 
+                type='email'
+                required={true}
+                name='email' 
+                label='Email'
+                placeholder="Email"
+                className={"w-full !rounded-md"}
+                props={register("email")}
+                error={errors.email?.message}/>
+            <CFormInput 
+                type='text'
+                required={true}
+                name='username' 
+                label='Username'
+                placeholder="Username"
+                className={"w-full !rounded-md"}
+                props={register("username")}
+                error={errors.username?.message}/>
+            
             <div className="xl:col-span-12 col-span-12">
                 <label htmlFor="password" className="form-label text-default">Password</label>
                 <div className="input-group">

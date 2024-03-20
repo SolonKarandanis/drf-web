@@ -53,7 +53,9 @@ const CFormInput:FC<InputProps>  = ({
 
     return (
         <section className="xl:col-span-12 col-span-12">
-            {innerHtml}
+            {labelHtml}
+            {inputHtml}
+            {errorHtml}
         </section>
     )
 }
