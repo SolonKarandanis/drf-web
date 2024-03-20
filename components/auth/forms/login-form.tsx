@@ -2,19 +2,17 @@
 
 import * as z from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-
 import { LoginSchema } from "@/schemas/auth.schemas";
 import CForm from "@/shared/components/form/cform";
 import CFormInput from "@/shared/components/form-input/cform-input";
+import CButton from "@/shared/components/button/cbutton";
 
 type LoginSchema = z.infer<typeof LoginSchema>;
 
 
 const LoginForm = () => {
-    const [showPassword, setShowPassword] = useState(false);
     const {register,handleSubmit,formState: { errors },} = useForm<LoginSchema>({
         resolver: zodResolver(LoginSchema),
         defaultValues: {
@@ -72,6 +70,13 @@ const LoginForm = () => {
                             className="ti-btn ti-btn-primary !bg-primary !text-white !font-medium">
                                 Sign In
                         </button>
+                        <CButton 
+                            btnType='primary' 
+                            type="submit"
+                            className='btn btn-shadow btn-lg w-40'
+                            iconPosition='right'>
+                            Next
+                        </CButton>
                         {/* <Link href="/components/dashboards/crm/" className="ti-btn ti-btn-primary !bg-primary !text-white !font-medium">Sign In</Link> */}
                     </div>
                 </div>

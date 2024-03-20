@@ -3,7 +3,6 @@
 import { RegisterSchema } from '@/schemas/auth.schemas';
 import CForm from '@/shared/components/form/cform'
 import * as z from "zod";
-import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
@@ -12,8 +11,6 @@ import CFormInput from '@/shared/components/form-input/cform-input';
 type RegisterSchema = z.infer<typeof RegisterSchema>;
 
 const RegisterForm = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setConfirmShowPassword] = useState(false);
   const {register,handleSubmit,formState: { errors },} = useForm<RegisterSchema>({
       resolver: zodResolver(RegisterSchema),
       defaultValues: {
