@@ -36,21 +36,41 @@ const RegisterForm = () => {
                 <label htmlFor="firstname" className="form-label text-default">First Name</label>
                 <input type="text" className="form-control form-control-lg w-full !rounded-md"
                     id="firstname" placeholder="first name" {...register("firstName")}/>
+                    {errors.firstName && (
+                        <p className="text-xs italic text-red-500 mt-2">
+                        {errors.firstName?.message}
+                        </p>
+                    )}
             </div>
             <div className="xl:col-span-12 col-span-12">
                 <label htmlFor="lastname" className="form-label text-default">Last Name</label>
                 <input type="text" className="form-control form-control-lg w-full !rounded-md"
                     id="lastname" placeholder="last name" {...register("lastName")}/>
+                    {errors.lastName && (
+                        <p className="text-xs italic text-red-500 mt-2">
+                        {errors.lastName?.message}
+                        </p>
+                    )}
             </div>
             <div className="xl:col-span-12 col-span-12">
                 <label htmlFor="email" className="form-label text-default">Email</label>
                 <input type="email" className="form-control form-control-lg w-full !rounded-md"
                     id="email" placeholder="Email" {...register("email")}/>
+                    {errors.email && (
+                        <p className="text-xs italic text-red-500 mt-2">
+                        {errors.email?.message}
+                        </p>
+                    )}
             </div>
             <div className="xl:col-span-12 col-span-12">
                 <label htmlFor="username" className="form-label text-default">Username</label>
                 <input type="text" className="form-control form-control-lg w-full !rounded-md"
                     id="username" placeholder="Username" autoComplete="username" {...register("username")}/>
+                    {errors.username && (
+                        <p className="text-xs italic text-red-500 mt-2">
+                        {errors.username?.message}
+                        </p>
+                    )}
             </div>
             <div className="xl:col-span-12 col-span-12">
                 <label htmlFor="password" className="form-label text-default">Password</label>
@@ -62,6 +82,11 @@ const RegisterForm = () => {
                         className="ti-btn ti-btn-light !rounded-s-none !mb-0" type="button" id="button-addon2">
                         <i className={`${showPassword ? 'ri-eye-line' : 'ri-eye-off-line'} align-middle`}></i>
                     </button>
+                    {errors.password && (
+                        <p className="text-xs italic text-red-500 mt-2">
+                        {errors.password?.message}
+                        </p>
+                    )}
                 </div>
             </div>
             <div className="xl:col-span-12 col-span-12 mb-2">
@@ -75,6 +100,11 @@ const RegisterForm = () => {
                         className="ti-btn ti-btn-light !rounded-s-none !mb-0" type="button" id="button-addon21">
                         <i className={`${showConfirmPassword ? 'ri-eye-line' : 'ri-eye-off-line'} align-middle`}></i>
                     </button>
+                    {errors.confirmPassword && (
+                        <p className="text-xs italic text-red-500 mt-2">
+                        {errors.confirmPassword?.message}
+                        </p>
+                    )}
                 </div>
                 
             </div>
@@ -89,7 +119,7 @@ const RegisterForm = () => {
                 </div>
             </div>
             <div className="xl:col-span-12 col-span-12 grid mt-2">
-                  <button type="button" className="ti-btn ti-btn-lg bg-primary text-white 
+                  <button type="submit" className="ti-btn ti-btn-lg bg-primary text-white 
                       !font-medium dark:border-defaultborder/10">
                       Create Account
                   </button>
