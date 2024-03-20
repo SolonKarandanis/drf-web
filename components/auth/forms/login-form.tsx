@@ -71,9 +71,8 @@ const LoginForm = () => {
                                 Sign In
                         </button>
                         <CButton 
-                            btnType='primary' 
+                            intent="secondary" size="md" 
                             type="submit"
-                            className='btn btn-shadow btn-lg w-40'
                             iconPosition='right'>
                             Next
                         </CButton>
