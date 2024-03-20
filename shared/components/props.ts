@@ -1,8 +1,5 @@
 import { 
-    ButtonHTMLAttributes, 
-    InputHTMLAttributes, 
-    ReactElement, 
-    ReactNode, 
+    InputHTMLAttributes,  
     RefCallback,
     SelectHTMLAttributes 
 } from "react";
@@ -43,14 +40,4 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement>{
     required?:boolean,
     inputProps?:Props,
     error?:string
-}
-
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
-    className?:string ,
-    btnType: 'primary' | 'danger' | 'active-light-primary'
-    onClick?:React.MouseEventHandler<HTMLButtonElement>,
-    isLoading?:boolean,
-    icon?: ReactElement;
-    iconPosition?: 'left' | 'right'
-    children:ReactNode
 }
