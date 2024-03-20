@@ -1,14 +1,18 @@
-import {ButtonHTMLAttributes, FC, ReactElement, ReactNode} from 'react'
-import {cva,VariantProps} from 'class-variance-authority'
+import {ButtonHTMLAttributes, FC, ReactElement, ReactNode} from 'react';
+import {cva,VariantProps} from 'class-variance-authority';
+import { twMerge } from "tailwind-merge";
 
 const buttonVariants = cva('ti-btn ti-btn-wave',{
   variants:{
     intent:{
-      primary:'ti-btn-primary',
-      secondary:'ti-btn-secondary',
-      info:'ti-btn-info',
-      warning:'ti-btn-warning',
-      success:'ti-btn-success'
+      primary:'ti-btn-primary ti-btn-primary-full',
+      secondary:'ti-btn-secondary ti-btn-secondary-full',
+      success:'ti-btn-success ti-btn-success-full',
+      info:'ti-btn-info ti-btn-info-full',
+      warning:'ti-btn-warning ti-btn-warning-full',
+      danger:'ti-btn-warning ti-btn-danger-full',
+      light:'ti-btn-warning ti-btn-light',
+      dark:'ti-btn-warning ti-btn-dark',
     },
     size:{
       xs: '',
@@ -24,29 +28,23 @@ const buttonVariants = cva('ti-btn ti-btn-wave',{
   }
 });
 
-const btnOptions = {
-  primary: "bg-theme-500 hover:bg-theme-700 text-theme-50 font-bold rounded",
-  secondary: "bg-theme-50 hover:bg-theme-200 text-theme-700 font-bold rounded",
-  tertiary: "bg-theme-800 hover:bg-theme-700 text-theme-100 font-bold rounded",
-};
-
-const btnSizes = {
-  sm: "py-1 px-2 text-sm",
-  md: "py-2 px-4 text-md",
-  lg: "py-3 px-6 text-lg",
-};
 
 type ButtonIntents = VariantProps<typeof buttonVariants>["intent"];
+type ButtonSizes = VariantProps<typeof buttonVariants>["size"];
+type SVGComponent = React.ComponentType<React.SVGAttributes<SVGSVGElement>>;
+type ButtonIconPositions = 'left' | 'right';
+
 
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
   className?:string ,
   intent: ButtonIntents;
-  size?: keyof typeof btnSizes;
+  size?: ButtonSizes;
   onClick?:React.MouseEventHandler<HTMLButtonElement>,
   isLoading?:boolean,
+  isDisabled?:boolean,
   icon?: ReactElement;
-  iconPosition?: 'left' | 'right'
+  iconPosition?: ButtonIconPositions
   children:ReactNode
 }
 
@@ -57,6 +55,7 @@ const CButton:FC<ButtonProps> = ({
     size,
     onClick, 
     isLoading=false,
+    isDisabled=false,
     icon,
     iconPosition='left',
     children,
@@ -65,23 +64,27 @@ const CButton:FC<ButtonProps> = ({
     const iconHtml = icon ? (<span data-testid="Button.Icon" className="mr-3">{icon}</span>) : null;
     return (
         <button 
-          className={buttonVariants({
-            className,
-            intent
-          })}
+          className={twMerge(buttonVariants({
+            intent,
+            size
+          }),
+          className,
+          isDisabled && "ti-btn-disabled")}
           onClick={onClick}
           {...rest}>
-              {!isLoading && <span className='indicator-label'>
+              {!isLoading && <span className='me-2'>
                 {iconPosition === 'left' && (<>{iconHtml}{children}</>)}
                 {iconPosition === 'right' && (<>{children} {iconHtml}</>)}
                 </span>
               }
               { isLoading && (
                 <span data-testid="Button.Indicator" 
-                  className='indicator-progress' style={{display: 'block'}}>
-                  Please wait...
+                  className='me-2' style={{display: 'block'}}>
+                    Loading
                   <span data-testid="Button.Spinner" 
-                    className='spinner-border spinner-border-sm align-middle ms-2'></span>
+                    className='loading'>
+                      <i className="ri-refresh-line text-[1rem] animate-spin"></i>
+                  </span>
                 </span>
               )}
         </button>

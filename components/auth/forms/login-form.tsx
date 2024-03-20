@@ -72,8 +72,7 @@ const LoginForm = () => {
                         </button>
                         <CButton 
                             intent="secondary" size="md" 
-                            type="submit"
-                            iconPosition='right'>
+                            type="submit">
                             Next
                         </CButton>
                         {/* <Link href="/components/dashboards/crm/" className="ti-btn ti-btn-primary !bg-primary !text-white !font-medium">Sign In</Link> */}
