@@ -8,11 +8,24 @@ import { LoginSchema } from "@/schemas/auth.schemas";
 import CForm from "@/shared/components/form/cform";
 import CFormInput from "@/shared/components/form-input/cform-input";
 import CButton from "@/shared/components/button/cbutton";
+import { useRouter } from "next/router";
+import { useAppDispatch } from "@/shared/redux/hooks";
+import { useLazyGetLoggedInUserAccountQuery, useLoginMutation } from "@/shared/redux/features/authApiSlice";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { setLoginResponseInStorage } from "@/utils/functions";
+import { setAuth, setTokens } from "@/shared/redux/features/authSlice";
 
 type LoginSchema = z.infer<typeof LoginSchema>;
 
 
 const LoginForm = () => {
+    const router = useRouter();
+	const dispatch = useAppDispatch();
+	const [login, { isLoading }] = useLoginMutation();
+	const [getAccount,{}] =useLazyGetLoggedInUserAccountQuery();
+	const [token,setToken] = useState<string|undefined>(undefined);
+    
     const {register,handleSubmit,formState: { errors },} = useForm<LoginSchema>({
         resolver: zodResolver(LoginSchema),
         defaultValues: {
@@ -21,9 +34,46 @@ const LoginForm = () => {
         },
     });
 
+    const handleError =(error:ErrorResponse)=>{
+		const {status, data:{detail}} = error;
+		toast.error(`(${status}) ${detail}`);
+	}
+
     const onSubmit:SubmitHandler<LoginSchema> = (values: LoginSchema) =>{
-        console.log(values)
+        const {username,password} = values;
+        const request:LoginRequest={
+            username,
+            password
+        }
+
+        login(request)
+            .unwrap()
+			.then((loginResponse:LoginResponse) => {
+				const {access} = loginResponse;
+				setToken(access);
+				setLoginResponseInStorage(loginResponse);
+				dispatch(setTokens(loginResponse));
+			})
+			.catch((error:ErrorResponse) => {
+				handleError(error);
+			});
     }
+
+    useEffect(()=>{
+		if(token){
+			getAccount(token)
+			.unwrap()
+			.then((user:UserDetails)=>{
+				dispatch(setAuth(user));
+				toast.success('Logged in');
+				router.push('/dashboard');
+			})
+			.catch((error:ErrorResponse) => {
+				handleError(error);
+			});
+		}
+		
+	},[token]);
     
     return (
         <>
