@@ -8,7 +8,7 @@ import { LoginSchema } from "@/schemas/auth.schemas";
 import CForm from "@/shared/components/form/cform";
 import CFormInput from "@/shared/components/form-input/cform-input";
 import CButton from "@/shared/components/button/cbutton";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/navigation';
 import { useAppDispatch } from "@/shared/redux/hooks";
 import { useLazyGetLoggedInUserAccountQuery, useLoginMutation } from "@/shared/redux/features/authApiSlice";
 import { useEffect, useState } from "react";
