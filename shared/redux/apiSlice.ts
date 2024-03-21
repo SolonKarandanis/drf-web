@@ -7,6 +7,7 @@ import type {
 import {  logout, setAccesToken } from './features/authSlice';
 import { Mutex } from 'async-mutex';
 import { getAccessTokenValue, removeLoginResponseFromStorage, setStorageValue } from '@/utils/functions';
+import { ApiControllers } from './api/ApiControllers';
 
 const mutex = new Mutex();
 const token = getAccessTokenValue();
@@ -36,7 +37,7 @@ const baseQueryWithReauth: BaseQueryFn<
 			try {
 				const refreshResult = await baseQuery(
 					{
-						url: '/auth/token/refresh/',
+						url: `${ApiControllers.AUTH}/refresh/`,
 						method: 'POST',
 					},
 					api,

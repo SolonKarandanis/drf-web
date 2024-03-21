@@ -1,3 +1,4 @@
+import { ApiControllers } from '../api/ApiControllers';
 import { apiSlice } from '../apiSlice';
 
 
@@ -5,33 +6,33 @@ import { apiSlice } from '../apiSlice';
 const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         getUser: builder.query<UserDetails, void>({
-			query: (userId) => `/auth/users/${userId}`,
+			query: (userId) => `${ApiControllers.USERS}/${userId}`,
 		}),
         getLoggedInUserAccount: builder.query<UserDetails, string| undefined>({
 			query(token?:string) {
 				if(token){
 					return {
-						url: "/auth/users/account/",
+						url: `${ApiControllers.USERS}/account/`,
 						headers: { Authorization: `Bearer ${token}` }
 					  }
 				}
 				return {
-					url: "/auth/users/account/",
+					url: `${ApiControllers.USERS}/account/`,
 				}
 			  }
 			
 		}),
         getUsers: builder.query<User[], {page:number,size:number}>({
-			query: ({page,size}) => `/auth/users`,
+			query: ({page,size}) => `${ApiControllers.USERS}/`,
 		}),
         login: builder.mutation({
 			query: ({ username, password }:LoginRequest) => ({
-				url: '/auth/token/',
+				url: `${ApiControllers.AUTH}/`,
 				method: 'POST',
 				body: { username, password },
 			}),
 		}),
-        register: builder.mutation({
+        registerUser: builder.mutation({
 			query: ({
                 username,
 				first_name,
@@ -39,15 +40,15 @@ const authApiSlice = apiSlice.injectEndpoints({
 				email,
 				password,
 				password2,
-			}) => ({
-				url: '/auth/users/create/',
+			}:CreateUserRequest) => ({
+				url: `${ApiControllers.USERS}/create`,
 				method: 'POST',
 				body: { username,first_name, last_name, email, password, password2 },
 			}),
 		}),
 		verify: builder.mutation({
 			query: (token) => ({
-				url: '/auth/token/verify/',
+				url: `${ApiControllers.AUTH}/verify`,
 				method: 'POST',
 				body:{token}
 			}),
@@ -81,7 +82,7 @@ export const {
 	useLazyGetLoggedInUserAccountQuery,
 	useLazyGetUsersQuery,
 	useLoginMutation,
-	useRegisterMutation,
+	useRegisterUserMutation,
 	useVerifyMutation,
 	useActivationMutation,
 	useResetPasswordMutation,
