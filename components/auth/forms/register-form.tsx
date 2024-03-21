@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import CFormInput from '@/shared/components/form-input/cform-input';
+import CButton from '@/shared/components/button/cbutton';
 
 type RegisterSchema = z.infer<typeof RegisterSchema>;
 
@@ -104,10 +105,12 @@ const RegisterForm = () => {
                 </div>
             </div>
             <div className="xl:col-span-12 col-span-12 grid mt-2">
-                  <button type="submit" className="ti-btn ti-btn-lg bg-primary text-white 
-                      !font-medium dark:border-defaultborder/10">
-                      Create Account
-                  </button>
+                <CButton 
+                    intent="violet" 
+                    size="md" 
+                    type="submit">
+                    Create Account
+                </CButton>
             </div>
         </div>
     </CForm>
