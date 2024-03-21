@@ -41,14 +41,14 @@ const authApiSlice = apiSlice.injectEndpoints({
 				password,
 				password2,
 			}:CreateUserRequest) => ({
-				url: `${ApiControllers.USERS}/create`,
+				url: `${ApiControllers.USERS}/create/`,
 				method: 'POST',
 				body: { username,first_name, last_name, email, password, password2 },
 			}),
 		}),
 		verify: builder.mutation({
 			query: (token) => ({
-				url: `${ApiControllers.AUTH}/verify`,
+				url: `${ApiControllers.AUTH}/verify/`,
 				method: 'POST',
 				body:{token}
 			}),
