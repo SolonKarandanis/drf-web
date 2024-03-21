@@ -25,7 +25,7 @@ const authApiSlice = apiSlice.injectEndpoints({
 			query: ({page,size}) => `/auth/users`,
 		}),
         login: builder.mutation({
-			query: ({ username, password }) => ({
+			query: ({ username, password }:LoginRequest) => ({
 				url: '/auth/token/',
 				method: 'POST',
 				body: { username, password },
