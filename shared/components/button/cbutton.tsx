@@ -13,6 +13,7 @@ const buttonVariants = cva('ti-btn ti-btn-wave',{
       danger:'ti-btn-warning ti-btn-danger-full',
       light:'ti-btn-warning ti-btn-light',
       dark:'ti-btn-warning ti-btn-dark',
+      violet:'bg-violet-500 text-white',
     },
     size:{
       xs: '',

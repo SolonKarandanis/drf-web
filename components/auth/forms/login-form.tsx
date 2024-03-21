@@ -66,14 +66,11 @@ const LoginForm = () => {
                         </div>
                     </div>
                     <div className="xl:col-span-12 col-span-12 grid mt-2">
-                        <button type="submit" 
-                            className="ti-btn ti-btn-primary !bg-primary !text-white !font-medium">
-                                Sign In
-                        </button>
                         <CButton 
-                            intent="secondary" size="md" 
+                            intent="violet" 
+                            size="md" 
                             type="submit">
-                            Next
+                            Sign In
                         </CButton>
                         {/* <Link href="/components/dashboards/crm/" className="ti-btn ti-btn-primary !bg-primary !text-white !font-medium">Sign In</Link> */}
                     </div>
