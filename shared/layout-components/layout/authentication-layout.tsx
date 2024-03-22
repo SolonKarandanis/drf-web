@@ -1,3 +1,5 @@
+'use client';
+
 import { ReactNode } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { Provider } from 'react-redux'
@@ -9,7 +11,7 @@ const Authenticationlayout = ({children}:{ children: ReactNode}) => {
         <Provider store={makeStore()}>
             <HelmetProvider>
                 <Helmet>
-                    <body className=''></body>
+                    <body></body>
                 </Helmet>
                 {children}
             </HelmetProvider>
