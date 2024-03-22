@@ -26,11 +26,14 @@ const authApiSlice = apiSlice.injectEndpoints({
 			query: ({page,size}) => `${ApiControllers.USERS}/`,
 		}),
         login: builder.mutation({
-			query: ({ username, password }:LoginRequest) => ({
-				url: `${ApiControllers.AUTH}/`,
-				method: 'POST',
-				body: { username, password },
-			}),
+			query: ({ username, password }:LoginRequest)=>{
+				return {
+					url: `${ApiControllers.AUTH}/`,
+					method: 'POST',
+					body: { username, password },
+				}
+			}
+			
 		}),
         registerUser: builder.mutation({
 			query: ({
@@ -40,18 +43,22 @@ const authApiSlice = apiSlice.injectEndpoints({
 				email,
 				password,
 				password2,
-			}:CreateUserRequest) => ({
-				url: `${ApiControllers.USERS}/create/`,
-				method: 'POST',
-				body: { username,first_name, last_name, email, password, password2 },
-			}),
+			}:CreateUserRequest) => {
+				return {
+					url: `${ApiControllers.USERS}/create/`,
+					method: 'POST',
+					body: { username,first_name, last_name, email, password, password2 },
+				}
+			},
 		}),
 		verify: builder.mutation({
-			query: (token) => ({
-				url: `${ApiControllers.AUTH}/verify/`,
-				method: 'POST',
-				body:{token}
-			}),
+			query: (token) => {
+				return{
+					url: `${ApiControllers.AUTH}/verify/`,
+					method: 'POST',
+					body:{token}
+				}
+			},
 		}),
 		activation: builder.mutation({
 			query: ({ uid, token }) => ({
