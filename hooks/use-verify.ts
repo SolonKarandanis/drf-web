@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from '@/shared/redux/hooks';
-import { logout, setLoading, setTokens,setAuth } from '@/shared/redux/features/authSlice';
+import { logout, setTokens,setAuth, setLoading } from '@/shared/redux/features/authSlice';
 import { useLazyGetLoggedInUserAccountQuery, useVerifyMutation } from '@/shared/redux/features/authApiSlice';
 import { getAccessTokenValue,getRefreshTokenValue } from '@/utils/functions';
 
@@ -16,6 +16,7 @@ export default function useVerify() {
 	
 	useEffect(() => {
 		if(token){
+			dispatch(setLoading(true));
 			verify(token)
 				.unwrap()
 				.then(() => {
