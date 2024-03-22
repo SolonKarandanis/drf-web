@@ -11,8 +11,10 @@ interface Props {
 
 const RequireAuth:FC<Props> = ({ children }) => {
     const { isLoading, isAuthenticated } = useAppSelector(state => state.auth);
+	console.log(isAuthenticated)
+	console.log(isLoading)
 
-	if (isLoading) {
+	if (isLoading && isAuthenticated) {
 		return (
 			<div className='flex justify-center my-8'>
 				<Spinner lg />
@@ -20,7 +22,7 @@ const RequireAuth:FC<Props> = ({ children }) => {
 		);
 	}
 
-	if (!isAuthenticated) {
+	if (!isLoading && !isAuthenticated) {
 		redirect('/auth/login');
 	}
     return <>{children}</>;
