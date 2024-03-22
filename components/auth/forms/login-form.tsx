@@ -14,7 +14,7 @@ import { useLazyGetLoggedInUserAccountQuery, useLoginMutation } from "@/shared/r
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { setLoginResponseInStorage } from "@/utils/functions";
-import { setAuth, setTokens } from "@/shared/redux/features/authSlice";
+import { setAuth, setLoading, setTokens } from "@/shared/redux/features/authSlice";
 
 type LoginSchema = z.infer<typeof LoginSchema>;
 
@@ -34,8 +34,8 @@ const LoginForm = () => {
         },
     });
 
-    const handleError =(error:ErrorResponse)=>{
-		const {status, data:{detail}} = error;
+    const handleError =(errorResponse:ErrorResponse)=>{
+		const {status, data:{detail}} = errorResponse;
 		toast.error(`(${status}) ${detail}`);
 	}
 
@@ -45,7 +45,7 @@ const LoginForm = () => {
             username,
             password
         }
-
+        dispatch(setLoading(true));
         login(request)
             .unwrap()
 			.then((loginResponse:LoginResponse) => {

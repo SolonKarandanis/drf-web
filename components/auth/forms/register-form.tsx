@@ -11,12 +11,15 @@ import CButton from '@/shared/components/button/cbutton';
 import { useRouter } from 'next/navigation';
 import { useRegisterUserMutation } from '@/shared/redux/features/authApiSlice';
 import { toast } from 'react-toastify';
+import { useAppDispatch } from '@/shared/redux/hooks';
+import { setLoading } from '@/shared/redux/features/authSlice';
 
 type RegisterSchema = z.infer<typeof RegisterSchema>;
 
 const RegisterForm = () => {
     const router = useRouter();
     const [registerUser, { isLoading }] = useRegisterUserMutation();
+    const dispatch = useAppDispatch();
 
     const {register,handleSubmit,formState: { errors },} = useForm<RegisterSchema>({
         resolver: zodResolver(RegisterSchema),
@@ -45,6 +48,7 @@ const RegisterForm = () => {
             username,
             password2:confirmPassword
         }
+        dispatch(setLoading(true));
         registerUser(request)
 			.unwrap()
 			.then(() => {
