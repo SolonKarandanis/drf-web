@@ -1,8 +1,31 @@
 'use client';
 
 import { useEffect, useState} from 'react'
+import { useAppDispatch } from '@/shared/redux/hooks';
+import { useAppSelector } from '@/shared/redux/hooks';
+import { ThemeChanger } from "@/shared/redux/features/themeSlice";
+
+
+declare global {
+  interface Document {
+    mozCancelFullScreen?: () => Promise<void>;
+    msExitFullscreen?: () => Promise<void>;
+    webkitExitFullscreen?: () => Promise<void>;
+    mozFullScreenElement?: Element;
+    msFullscreenElement?: Element;
+    webkitFullscreenElement?: Element;
+  }
+
+  interface HTMLElement {
+    msRequestFullscreen?: () => Promise<void>;
+    mozRequestFullscreen?: () => Promise<void>;
+    webkitRequestFullscreen?: () => Promise<void>;
+  }
+}
 
 const Header = () => {
+  const dispatch = useAppDispatch();
+  const themeState = useAppSelector(state => state.theme);
   const data=  <span className="font-[600] py-[0.25rem] px-[0.45rem] rounded-[0.25rem] bg-pink/10 text-pink text-[0.625rem]">Free shipping</span>
   const cartProduct = [
     {
@@ -89,49 +112,49 @@ const Header = () => {
     setNotifications(updatedNotifications);
   };
 
-  // let [storedata, SetStoreData] = useState(local_varaiable);
+  const [storedata, SetStoreData] = useState(themeState);
 
   // //full screen
-  // const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // const toggleFullscreen = () => {
-  //   const element = document.documentElement;
-  //   if (
-  //     !document.fullscreenElement &&
-  //     !document.mozFullScreenElement &&
-  //     !document.webkitFullscreenElement
-  //   ) {
-  //     // Enter fullscreen mode
-  //     if (element.requestFullscreen) {
-  //       element.requestFullscreen();
-  //     } else if (element.mozRequestFullScreen) {
-  //       element.mozRequestFullScreen();
-  //     } else if (element.webkitRequestFullscreen) {
-  //       element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-  //     }
-  //   } else {
-  //     // Exit fullscreen mode
-  //     if (document.exitFullscreen) {
-  //       document.exitFullscreen();
-  //     } else if (document.mozCancelFullScreen) {
-  //       document.mozCancelFullScreen();
-  //     } else if (document.webkitExitFullscreen) {
-  //       document.webkitExitFullscreen();
-  //     }
-  //   }
-  // };
+  const toggleFullscreen = () => {
+    const element = document.documentElement;
+    if (
+      !document.fullscreenElement &&
+      !document.mozFullScreenElement &&
+      !document.webkitFullscreenElement
+    ) {
+      // Enter fullscreen mode
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.mozRequestFullscreen) {
+        element.mozRequestFullscreen();
+      } else if (element.webkitRequestFullscreen) {
+        // element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+      }
+    } else {
+      // Exit fullscreen mode
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
+  };
 
-  // useEffect(() => {
-  //   const fullscreenChangeHandler = () => {
-  //     setIsFullscreen(!!document.fullscreenElement);
-  //   };
+  useEffect(() => {
+    const fullscreenChangeHandler = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
 
-  //   document.addEventListener('fullscreenchange', fullscreenChangeHandler);
+    document.addEventListener('fullscreenchange', fullscreenChangeHandler);
 
-  //   return () => {
-  //     document.removeEventListener('fullscreenchange', fullscreenChangeHandler);
-  //   };
-  // }, []);
+    return () => {
+      document.removeEventListener('fullscreenchange', fullscreenChangeHandler);
+    };
+  }, []);
   
 
 
