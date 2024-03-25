@@ -155,7 +155,210 @@ const Header = () => {
       document.removeEventListener('fullscreenchange', fullscreenChangeHandler);
     };
   }, []);
-  
+
+  useEffect(() => {
+    const handleResize = () => {
+      const windowObject = window;
+      if (windowObject.innerWidth <= 991) {
+        // ThemeChanger({ ...local_varaiable, "dataToggled": "close" })
+      } else {
+        // ThemeChanger({...local_varaiable,"dataToggled":""})
+      }
+    };
+    handleResize(); // Check on component mount
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    SetStoreData(themeState);
+  }, [themeState]);
+
+  function menuClose() {
+    dispatch(ThemeChanger({ ...themeState, "dataToggled": "close" }));
+  }
+
+  const toggleSidebar = () => {
+    let sidemenuType = themeState.dataNavLayout;
+    if (window.innerWidth >= 992) {
+      if (sidemenuType === "vertical") {
+        let verticalStyle = themeState.dataVerticalStyle;
+        const navStyle = themeState.dataNavStyle;
+        switch (verticalStyle) {
+          // closed
+          case "closed":
+            dispatch(ThemeChanger({ ...themeState, "dataNavStyle": "" }));
+            if (themeState.dataToggled === "close-menu-close") {
+              dispatch(ThemeChanger({ ...themeState, "dataToggled": "" }));
+            } else {
+              dispatch(ThemeChanger({ ...themeState, "dataToggled": "close-menu-close" }));
+            }
+            break;
+          // icon-overlay
+          case "overlay":
+            dispatch(ThemeChanger({ ...themeState, "dataNavStyle": "" }));
+            if (themeState.dataToggled === "icon-overlay-close") {
+              dispatch(ThemeChanger({ ...themeState, "dataToggled": "" }));
+            } else {
+              if (window.innerWidth >= 992) {
+                dispatch(ThemeChanger({ ...themeState, "dataToggled": "icon-overlay-close" }));
+              }
+            }
+            break;
+          // icon-text
+          case "icontext":
+            dispatch(ThemeChanger({ ...themeState, "dataNavStyle": "" }));
+            if (themeState.dataToggled === "icon-text-close") {
+              dispatch(ThemeChanger({ ...themeState, "dataToggled": "" }));
+            } else {
+              dispatch(ThemeChanger({ ...themeState, "dataToggled": "icon-text-close" }));
+            }
+            break;
+          // doublemenu
+          case "doublemenu":
+            dispatch(ThemeChanger({ ...themeState, "dataNavStyle": "" }));
+            if (themeState.dataToggled === "double-menu-open") {
+              dispatch(ThemeChanger({ ...themeState, "dataToggled": "double-menu-close" }));
+            } else {
+              let sidemenu = document.querySelector(".side-menu__item.active");
+              if (sidemenu) {
+                dispatch(ThemeChanger({ ...themeState, "dataToggled": "double-menu-open" }));
+                if (sidemenu.nextElementSibling) {
+                  sidemenu.nextElementSibling.classList.add("double-menu-active");
+                } else {
+                  dispatch(ThemeChanger({ ...themeState, "dataToggled": "" }));
+                }
+              }
+            }
+            // doublemenu(ThemeChanger);
+            break;
+          // detached
+          case "detached":
+            if (themeState.dataToggled === "detached-close") {
+              dispatch(ThemeChanger({ ...themeState, "dataToggled": "" }));
+            } else {
+              dispatch(ThemeChanger({ ...themeState, "dataToggled": "detached-close" }));
+            }
+            break;
+          // default
+          case "default":
+            dispatch(ThemeChanger({ ...themeState, "dataToggled": "" }));
+        }
+        switch (navStyle) {
+          case "menu-click":
+            if (themeState.dataToggled === "menu-click-closed") {
+              dispatch(ThemeChanger({ ...themeState, "dataToggled": "" }));
+            }
+            else {
+              dispatch(ThemeChanger({ ...themeState, "dataToggled": "menu-click-closed" }));
+            }
+            break;
+          // icon-overlay
+          case "menu-hover":
+            if (themeState.dataToggled === "menu-hover-closed") {
+              dispatch(ThemeChanger({ ...themeState, "dataToggled": "" }));
+            } else {
+              dispatch(ThemeChanger({ ...themeState, "dataToggled": "menu-hover-closed" }));
+            }
+            break;
+          case "icon-click":
+            if (themeState.dataToggled === "icon-click-closed") {
+              dispatch(ThemeChanger({ ...themeState, "dataToggled": "" }));
+            } else {
+              dispatch(ThemeChanger({ ...themeState, "dataToggled": "icon-click-closed" }));
+            }
+            break;
+          case "icon-hover":
+            if (themeState.dataToggled === "icon-hover-closed") {
+              dispatch(ThemeChanger({ ...themeState, "dataToggled": "" }));
+            } else {
+              dispatch(ThemeChanger({ ...themeState, "dataToggled": "icon-hover-closed" }));
+            }
+            break;
+        }
+      }
+    }
+    else {
+      if (themeState.dataToggled === "close") {
+        dispatch(ThemeChanger({ ...themeState, "dataToggled": "open" }));
+        setTimeout(() => {
+          const element =  document.querySelector("#responsive-overlay");
+          if(element){
+            if (themeState.dataToggled == "open") {
+              element.classList.add("active");
+              element.addEventListener("click", () => {
+                element.classList.remove("active");
+                menuClose();
+              });
+            }
+            window.addEventListener("resize", () => {
+              if (window.screen.width >= 992) {
+                element.classList.remove("active");
+              }
+            });
+          }
+        }, 100);
+      } else {
+        dispatch(ThemeChanger({ ...themeState, "dataToggled": "close" }));
+      }
+    }
+  };
+
+  //Dark Model
+  const ToggleDark = () => {
+    dispatch(ThemeChanger({
+      ...themeState,
+      "class": themeState.class == "dark" ? "light" : "dark",
+      "dataHeaderStyles": themeState.dataHeaderStyles == "dark" ? "light" : "dark",
+      "dataMenuStyles": themeState.dataNavLayout == "horizontal" ? themeState.dataMenuStyles == "dark" ? "light" : "dark" : "dark"
+
+    }));
+    if (themeState.class != "dark") {
+      dispatch(ThemeChanger({
+        ...themeState,
+        "bodyBg": "",
+        "darkBg": "",
+        "inputBorder": "",
+        "Light": "",
+        "dataHeaderStyles": "",
+      }));
+      localStorage.setItem("ynexdarktheme", "dark");
+      localStorage.removeItem("ynexdarktheme");
+      localStorage.removeItem("ynexHeader");
+      localStorage.removeItem("ynexMenu");
+    }
+    else {
+      localStorage.setItem("ynexdarktheme", "dark");
+      localStorage.removeItem("ynexlighttheme");
+    }
+  };
+
+
+  useEffect(() => {
+    const navbar = document?.querySelector(".header");
+    const navbar1 = document?.querySelector(".app-sidebar");
+    const sticky = navbar?.clientHeight;
+    // const sticky1 = navbar1.clientHeight;
+
+    function stickyFn() {
+      if (sticky && window.pageYOffset >= sticky) {
+        navbar?.classList.add("sticky-pin");
+        navbar1?.classList.add("sticky-pin");
+      } else {
+        navbar?.classList.remove("sticky-pin");
+        navbar1?.classList.remove("sticky-pin");
+      }
+    }
+    window.addEventListener("scroll", stickyFn);
+    window.addEventListener("DOMContentLoaded", stickyFn);
+    // Cleanup event listeners when the component unmounts
+    return () => {
+      window.removeEventListener("scroll", stickyFn);
+      window.removeEventListener("DOMContentLoaded", stickyFn);
+    };
+  }, []);
 
 
   return (
