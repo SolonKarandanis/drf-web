@@ -173,7 +173,7 @@ const Header = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [dispatch,themeState]);
 
   useEffect(() => {
     SetStoreData(themeState);
