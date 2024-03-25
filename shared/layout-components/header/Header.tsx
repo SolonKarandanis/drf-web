@@ -6,6 +6,7 @@ import { useAppSelector } from '@/shared/redux/hooks';
 import { ThemeChanger } from "@/shared/redux/features/themeSlice";
 import { basePath } from '@/next.config';
 import Link from 'next/link';
+import Image from "next/image";
 
 
 declare global {
@@ -371,30 +372,78 @@ const Header = () => {
               <div className="header-element">
                 <div className="horizontal-logo">
                   <Link href="/components/dashboards/crm/" className="header-logo">
-                    <img 
+                    <Image
+                      alt="logo"
                       src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-logo.png`} 
-                      alt="logo" 
-                      className="desktop-logo" />
-                    <img 
+                      width={700}
+                      height={475}
+                      sizes="100vw"
+                      className='desktop-logo'
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                      }}
+                    />
+                    <Image
+                      alt="logo"
                       src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/toggle-logo.png`} 
-                      alt="logo" 
-                      className="toggle-logo" />
-                    <img 
+                      width={700}
+                      height={475}
+                      sizes="100vw"
+                      className='toggle-logo'
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                      }}
+                    />
+                    <Image
+                      alt="logo"
                       src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-dark.png`} 
-                      alt="logo" 
-                      className="desktop-dark" />
-                    <img 
+                      width={700}
+                      height={475}
+                      sizes="100vw"
+                      className='desktop-dark'
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                      }}
+                    />
+                    <Image
+                      alt="logo"
                       src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/toggle-dark.png`} 
-                      alt="logo" 
-                      className="toggle-dark" />
-                    <img 
+                      width={700}
+                      height={475}
+                      sizes="100vw"
+                      className='toggle-dark'
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                      }}
+                    />
+                    <Image
+                      alt="logo"
                       src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-white.png`} 
-                      alt="logo" 
-                      className="desktop-white" />
-                    <img 
+                      width={700}
+                      height={475}
+                      sizes="100vw"
+                      className='desktop-white'
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                      }}
+                    />
+                    <Image
+                      alt="logo"
                       src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/toggle-white.png`} 
-                      alt="logo" 
-                      className="toggle-white" />
+                      width={700}
+                      height={475}
+                      sizes="100vw"
+                      className='toggle-white'
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                      }}
+                    />
                   </Link>
                 </div>
               </div>
@@ -414,10 +463,14 @@ const Header = () => {
                 header-country hs-dropdown ti-dropdown  hidden sm:block [--placement:bottom-left]">
                   <button id="dropdown-flag" type="button"
                     className="hs-dropdown-toggle ti-dropdown-toggle !p-0 flex-shrink-0  !border-0 !rounded-full !shadow-none">
-                    <img 
-                      src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/flags/us_flag.jpg`} 
-                      alt="flag-img" 
-                      className="h-[1.25rem] w-[1.25rem] rounded-full" />
+                    <Image
+                      alt="flag-img"
+                      src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/flags/us_flag.jpg`}
+                      width={700}
+                      height={475}
+                      sizes="100vw"
+                      className="h-[1.25rem] w-[1.25rem] rounded-full"
+                    />
                   </button>
                   <div className="hs-dropdown-menu ti-dropdown-menu min-w-[10rem] hidden !-mt-3" 
                     aria-labelledby="dropdown-flag">
