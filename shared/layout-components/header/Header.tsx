@@ -162,9 +162,9 @@ const Header = () => {
     const handleResize = () => {
       const windowObject = window;
       if (windowObject.innerWidth <= 991) {
-        // ThemeChanger({ ...local_varaiable, "dataToggled": "close" })
+        dispatch(ThemeChanger({ ...themeState, "dataToggled": "close" }));
       } else {
-        // ThemeChanger({...local_varaiable,"dataToggled":""})
+        dispatch(ThemeChanger({...themeState,"dataToggled":""}));
       }
     };
     handleResize(); // Check on component mount
@@ -342,7 +342,6 @@ const Header = () => {
     const navbar = document?.querySelector(".header");
     const navbar1 = document?.querySelector(".app-sidebar");
     const sticky = navbar?.clientHeight;
-    // const sticky1 = navbar1.clientHeight;
 
     function stickyFn() {
       if (sticky && window.pageYOffset >= sticky) {
@@ -514,7 +513,37 @@ const Header = () => {
                         </li>
                       ))}
                     </ul>
+                    <div className={`p-3 empty-header-item border-t ${cartItemCount === 0 ? 'hidden' : 'block'}`}>
+                      <div className="grid">
+                        <Link href="#!" className="w-full ti-btn ti-btn-primary-full p-2">Proceed to checkout</Link>
+                      </div>
+                    </div>
+                    <div className={`p-[3rem] empty-item ${cartItemCount === 0 ? 'block' : 'hidden'}`}>
+                      <div className="text-center">
+                        <span className="!w-[4rem] !h-[4rem] !leading-[4rem] rounded-[50%] avatar bg-warning/10 !text-warning">
+                          <i className="ri-shopping-cart-2-line text-[2rem]"></i>
+                        </span>
+                        <h6 className="font-bold mb-1 mt-3 text-[1rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">Your Cart is Empty</h6>
+                        <span className="mb-3 !font-normal text-[0.8125rem] block text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">Add some items to make me happy :)</span>
+                        <Link href="#!" className="ti-btn ti-btn-primary btn-wave ti-btn-wave btn-sm m-1 !text-[0.75rem] !py-[0.25rem] !px-[0.5rem]"
+                          data-abc="true">continue shopping <i className="bi bi-arrow-right ms-1"></i></Link>
+                      </div>
+                    </div>
                   </div>
+              </div>
+              <div className="header-element py-[1rem] md:px-[0.65rem] px-2 notifications-dropdown 
+                header-notification hs-dropdown ti-dropdown !hidden md:!block [--placement:bottom-right]">
+                <button id="dropdown-notification" type="button"
+                  className="hs-dropdown-toggle relative ti-dropdown-toggle !p-0 !border-0 flex-shrink-0  !rounded-full !shadow-none align-middle text-xs">
+                  <i className="bx bx-bell header-link-icon  text-[1.125rem]"></i>
+                  <span className="flex absolute h-5 w-5 -top-[0.25rem] end-0  -me-[0.6rem]">
+                    <span
+                      className="animate-slow-ping absolute inline-flex -top-[2px] -start-[2px] h-full w-full rounded-full bg-secondary/40 opacity-75"></span>
+                    <span
+                      className="relative inline-flex justify-center items-center rounded-full  h-[14.7px] w-[14px] bg-secondary text-[0.625rem] text-white"
+                      id="notification-icon-badge">{notifications.length}</span>
+                  </span>
+                </button>
               </div>
             </div>
           </div>
