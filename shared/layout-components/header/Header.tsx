@@ -4,6 +4,8 @@ import { useEffect, useState} from 'react'
 import { useAppDispatch } from '@/shared/redux/hooks';
 import { useAppSelector } from '@/shared/redux/hooks';
 import { ThemeChanger } from "@/shared/redux/features/themeSlice";
+import { basePath } from '@/next.config';
+import Link from 'next/link';
 
 
 declare global {
@@ -362,7 +364,163 @@ const Header = () => {
 
 
   return (
-    <div>Header</div>
+    <>
+      <div className="app-header">
+        <nav className="main-header !h-[3.75rem]" aria-label="Global">
+          <div className="main-header-container ps-[0.725rem] pe-[1rem] ">
+            <div className="header-content-left">
+              <div className="header-element">
+                <div className="horizontal-logo">
+                  <Link href="/components/dashboards/crm/" className="header-logo">
+                    <img 
+                      src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-logo.png`} 
+                      alt="logo" 
+                      className="desktop-logo" />
+                    <img 
+                      src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/toggle-logo.png`} 
+                      alt="logo" 
+                      className="toggle-logo" />
+                    <img 
+                      src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-dark.png`} 
+                      alt="logo" 
+                      className="desktop-dark" />
+                    <img 
+                      src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/toggle-dark.png`} 
+                      alt="logo" 
+                      className="toggle-dark" />
+                    <img 
+                      src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-white.png`} 
+                      alt="logo" 
+                      className="desktop-white" />
+                    <img 
+                      src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/toggle-white.png`} 
+                      alt="logo" 
+                      className="toggle-white" />
+                  </Link>
+                </div>
+              </div>
+              <div className="header-element md:px-[0.325rem] !items-center" onClick={() => toggleSidebar()}>
+                <Link aria-label="Hide Sidebar"
+                  className="sidemenu-toggle animated-arrow  hor-toggle horizontal-navtoggle inline-flex items-center" href="#!"><span></span></Link>
+              </div>
+            </div>
+            <div className="header-content-right">
+              <div className="header-element py-[1rem] md:px-[0.65rem] px-2 header-search">
+                <button aria-label="button" type="button" data-hs-overlay="#search-modal"
+                  className="inline-flex flex-shrink-0 justify-center items-center gap-2  rounded-full font-medium focus:ring-offset-0 focus:ring-offset-white transition-all text-xs dark:bg-bgdark dark:hover:bg-black/20 dark:text-[#8c9097] dark:text-white/50 dark:hover:text-white dark:focus:ring-white/10 dark:focus:ring-offset-white/10">
+                  <i className="bx bx-search-alt-2 header-link-icon"></i>
+                </button>
+              </div>
+              <div className="header-element py-[1rem] md:px-[0.65rem] px-2  
+                header-country hs-dropdown ti-dropdown  hidden sm:block [--placement:bottom-left]">
+                  <button id="dropdown-flag" type="button"
+                    className="hs-dropdown-toggle ti-dropdown-toggle !p-0 flex-shrink-0  !border-0 !rounded-full !shadow-none">
+                    <img 
+                      src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/flags/us_flag.jpg`} 
+                      alt="flag-img" 
+                      className="h-[1.25rem] w-[1.25rem] rounded-full" />
+                  </button>
+                  <div className="hs-dropdown-menu ti-dropdown-menu min-w-[10rem] hidden !-mt-3" 
+                    aria-labelledby="dropdown-flag">
+                      <div className="ti-dropdown-divider divide-y divide-gray-200 dark:divide-white/10">
+                        <div className="py-2 first:pt-0 last:pb-0">
+                          
+                          <div className="ti-dropdown-item !p-[0.65rem] ">
+                            <div className="flex items-center space-x-2 rtl:space-x-reverse w-full">
+                              <div className="h-[1.375rem] flex items-center w-[1.375rem] rounded-full">
+                                <img 
+                                  src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/flags/us_flag.jpg`} 
+                                  alt="flag-img"
+                                  className="h-[1rem] w-[1rem] rounded-full" />
+                              </div>
+                              <div>
+                                <p className="!text-[0.8125rem] font-medium">
+                                  English
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <div 
+                className="header-element header-theme-mode hidden !items-center sm:block !py-[1rem] md:!px-[0.65rem] px-2" 
+                onClick={() => ToggleDark()}>
+                  <Link aria-label="anchor"
+                    className="hs-dark-mode-active:hidden flex hs-dark-mode group flex-shrink-0 justify-center items-center gap-2  rounded-full font-medium transition-all text-xs dark:bg-bgdark dark:hover:bg-black/20 dark:text-[#8c9097] dark:text-white/50 dark:hover:text-white dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+                    href="#!" data-hs-theme-click-value="dark">
+                    <i className="bx bx-moon header-link-icon"></i>
+                  </Link>
+                  <Link aria-label="anchor"
+                    className="hs-dark-mode-active:flex hidden hs-dark-mode group flex-shrink-0 justify-center items-center gap-2  rounded-full font-medium text-defaulttextcolor  transition-all text-xs dark:bg-bodybg dark:bg-bgdark dark:hover:bg-black/20 dark:text-[#8c9097] dark:text-white/50 dark:hover:text-white dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
+                    href="#!" data-hs-theme-click-value="light">
+                    <i className="bx bx-sun header-link-icon"></i>
+                  </Link>
+              </div>
+              <div 
+                className="header-element cart-dropdown hs-dropdown ti-dropdown md:!block !hidden py-[1rem] md:px-[0.65rem] px-2 
+                  [--placement:bottom-right]">
+                  <button id="dropdown-cart" type="button"
+                    className="hs-dropdown-toggle relative ti-dropdown-toggle !p-0 !border-0 flex-shrink-0  !rounded-full !shadow-none align-middle text-xs">
+                    <i className="bx bx-cart header-link-icon"></i>
+                    <span className="flex absolute h-5 w-5 -top-[0.25rem] end-0 -me-[0.6rem]">
+                      <span className="relative inline-flex rounded-full h-[14.7px] w-[14px] text-[0.625rem] bg-primary text-white justify-center items-center"
+                        id="cart-icon-badge">{cartItemCount}</span>
+                    </span>
+                  </button>
+
+                  <div className="main-header-dropdown bg-white !-mt-3 !p-0 hs-dropdown-menu ti-dropdown-menu 
+                    w-[22rem] border-0 border-defaultborder hidden"
+                    aria-labelledby="dropdown-cart">
+                    <div className="ti-dropdown-header !bg-transparent flex justify-between items-center !m-0 !p-4">
+                      <p className="text-defaulttextcolor  !text-[1.0625rem] dark:text-[#8c9097] dark:text-white/50 font-semibold">Cart Items</p>
+                      <Link href="#!"
+                        className="font-[600] py-[0.25/2rem] px-[0.45rem] rounded-[0.25rem] bg-success/10 text-success text-[0.75em] "
+                        id="cart-data">{cartItemCount} Item{cartItemCount !== 1 ? 's' : ''}</Link>
+                    </div>
+                    <div>
+                      <hr className="dropdown-divider dark:border-white/10" />
+                    </div>
+                    <ul className="list-none mb-0" id="header-cart-items-scroll">
+                      {cartItems.map((idx) => (
+                        <li className={`ti-dropdown-item border-b dark:border-defaultborder/10 border-defaultborder ${idx.class}`} key={Math.random()}>
+                          <div className="flex items-start cart-dropdown-item">
+
+                            <img src={`${process.env.NODE_ENV === "production" ? basePath : ""}${idx.src}`} alt="img"
+                              className="!h-[1.75rem] !w-[1.75rem] leading-[1.75rem] text-[0.65rem] rounded-[50%] br-5 me-3" />
+
+                            <div className="grow">
+                              <div className="flex items-start justify-between mb-0">
+                                <div className="mb-0 !text-[0.8125rem] text-[#232323] font-semibold dark:text-[#8c9097] dark:text-white/50">
+                                  <Link href="#!">{idx.name}</Link>
+                                </div>
+
+                                <div className="inline-flex">
+                                  <span className="text-black mb-1 dark:text-white !font-medium">{idx.price}</span>
+                                  <Link aria-label="anchor" href="#!" className="header-cart-remove ltr:float-right rtl:float-left dropdown-item-close" onClick={(event) => handleRemove(idx.id)}><i
+                                    className="ti ti-trash"></i></Link>
+                                </div>
+                              </div>
+                              <div className="min-w-fit flex  items-start justify-between">
+                                <ul className="header-product-item dark:text-white/50 flex">
+                                  <li>{idx.color}</li>
+                                  <li>{idx.text}</li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </>
   )
 }
 
