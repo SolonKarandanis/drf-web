@@ -481,10 +481,14 @@ const Header = () => {
                           <div className="ti-dropdown-item !p-[0.65rem] ">
                             <div className="flex items-center space-x-2 rtl:space-x-reverse w-full">
                               <div className="h-[1.375rem] flex items-center w-[1.375rem] rounded-full">
-                                <img 
-                                  src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/flags/us_flag.jpg`} 
+                                <Image
                                   alt="flag-img"
-                                  className="h-[1rem] w-[1rem] rounded-full" />
+                                  src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/flags/us_flag.jpg`}
+                                  width={700}
+                                  height={475}
+                                  sizes="100vw"
+                                  className="h-[1.25rem] w-[1.25rem] rounded-full"
+                                />
                               </div>
                               <div>
                                 <p className="!text-[0.8125rem] font-medium">
@@ -540,9 +544,14 @@ const Header = () => {
                       {cartItems.map((idx) => (
                         <li className={`ti-dropdown-item border-b dark:border-defaultborder/10 border-defaultborder ${idx.class}`} key={Math.random()}>
                           <div className="flex items-start cart-dropdown-item">
-
-                            <img src={`${process.env.NODE_ENV === "production" ? basePath : ""}${idx.src}`} alt="img"
-                              className="!h-[1.75rem] !w-[1.75rem] leading-[1.75rem] text-[0.65rem] rounded-[50%] br-5 me-3" />
+                            <Image
+                              alt="img"
+                              src={`${process.env.NODE_ENV === "production" ? basePath : ""}${idx.src}`}
+                              width={700}
+                              height={475}
+                              sizes="100vw"
+                              className="!h-[1.75rem] !w-[1.75rem] leading-[1.75rem] text-[0.65rem] rounded-[50%] br-5 me-3"
+                            />
 
                             <div className="grow">
                               <div className="flex items-start justify-between mb-0">
@@ -675,66 +684,119 @@ const Header = () => {
                       <div className="">
                         <Link href="#!" className="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20">
                           <div>
-                            <img src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/figma.png`} alt="figma"
-                              className="!h-[1.75rem] !w-[1.75rem] text-2xl avatar text-primary flex justify-center items-center mx-auto" />
+                            <Image
+                              alt="figma"
+                              src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/figma.png`}
+                              width={700}
+                              height={475}
+                              sizes="100vw"
+                              className="!h-[1.75rem] !w-[1.75rem] text-2xl avatar text-primary flex justify-center items-center mx-auto"
+                            />
                             <div className="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">Figma</div>
                           </div>
                         </Link>
                       </div>
                       <div className="">
                         <Link href="#!" className="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20">
-                          <img src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/microsoft-powerpoint.png`} alt="miscrosoft"
-                            className="leading-[1.75] text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto" />
+                          <Image
+                            alt="miscrosoft"
+                            src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/microsoft-powerpoint.png`}
+                            width={700}
+                            height={475}
+                            sizes="100vw"
+                            className="leading-[1.75] text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto"
+                          />
                           <div className="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">Power Point</div>
                         </Link>
                       </div>
                       <div className="">
                         <Link href="#!" className="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20">
-                          <img src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/microsoft-word.png`} alt="miscrodoftword"
-                            className="leading-none
-                         text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto"/>
+                          <Image
+                            alt="miscrodoftword"
+                            src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/microsoft-word.png`}
+                            width={700}
+                            height={475}
+                            sizes="100vw"
+                            className="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto"
+                          />
                           <div className="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">MS Word</div>
                         </Link>
                       </div>
                       <div className="">
                         <Link href="#!" className="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20">
-                          <img src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/calender.png`} alt="calander"
-                            className="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto" />
+                          <Image
+                            alt="calander"
+                            src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/calender.png`}
+                            width={700}
+                            height={475}
+                            sizes="100vw"
+                            className="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto"
+                          />
                           <div className="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">Calendar</div>
                         </Link>
                       </div>
                       <div className="">
                         <Link href="#!" className="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20">
-                          <img src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/sketch.png`} alt="apps"
-                            className="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto" />
+                          <Image
+                            alt="apps"
+                            src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/sketch.png`}
+                            width={700}
+                            height={475}
+                            sizes="100vw"
+                            className="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto"
+                          />
                           <div className="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">Sketch</div>
                         </Link>
                       </div>
                       <div className="">
                         <Link href="#!" className="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20">
-                          <img src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/google-docs.png`} alt="docs"
-                            className="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto" />
+                          <Image
+                            alt="docs"
+                            src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/google-docs.png`}
+                            width={700}
+                            height={475}
+                            sizes="100vw"
+                            className="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto"
+                          />
                           <div className="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">Docs</div>
                         </Link>
                       </div>
                       <div className="">
                         <Link href="#!" className="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20">
-                          <img src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/google.png`} alt="google"
-                            className="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto" />
+                          <Image
+                            alt="google"
+                            src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/google.png`}
+                            width={700}
+                            height={475}
+                            sizes="100vw"
+                            className="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto"
+                          />
                           <div className="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">Google</div>
                         </Link>
                       </div>
                       <div className="">
                         <Link href="#!" className="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20">
-                          <img src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/translate.png`} alt="translate"
-                            className="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto" />
+                          <Image
+                            alt="translate"
+                            src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/translate.png`}
+                            width={700}
+                            height={475}
+                            sizes="100vw"
+                            className="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto" 
+                          />
                           <div className="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">Translate</div>
                         </Link>
                       </div>
                       <div className="">
                         <Link href="#!" className="p-4 items-center related-app block text-center rounded-sm hover:bg-gray-50 dark:hover:bg-black/20">
-                          <img src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/google-sheets.png`} alt="sheets"
-                            className="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto" />
+                          <Image
+                            alt="sheets"
+                            src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/apps/google-sheets.png`}
+                            width={700}
+                            height={475}
+                            sizes="100vw"
+                            className="leading-none text-2xl !h-[1.75rem] !w-[1.75rem] align-middle flex justify-center mx-auto"
+                          />
                           <div className="text-[0.75rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">Sheets</div>
                         </Link>
                       </div>
@@ -765,7 +827,14 @@ const Header = () => {
                 ti-dropdown [--placement:bottom-left] profile-data">
                 <button id="dropdown-profile" type="button"
                   className="hs-dropdown-toggle ti-dropdown-toggle !gap-2 !p-0 flex-shrink-0 sm:me-2 me-0 !rounded-full !shadow-none text-xs align-middle !border-0 !shadow-transparent ">
-                  <img className="inline-block rounded-full " src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/faces/9.jpg`} width="32" height="32" alt="Image Description" />
+                  <Image
+                    alt="Image Description"
+                    src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/faces/9.jpg`}
+                    width={32}
+                    height={32}
+                    sizes="100vw"
+                    className="inline-block rounded-full "
+                  />
                 </button>
                 <div className="md:block hidden dropdown-profile">
                   <p className="font-semibold mb-0 leading-none text-[#536485] text-[0.813rem] ">Json Taylor</p>
