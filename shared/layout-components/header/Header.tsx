@@ -4,9 +4,7 @@ import { useEffect, useState} from 'react'
 import { useAppDispatch } from '@/shared/redux/hooks';
 import { useAppSelector } from '@/shared/redux/hooks';
 import { ThemeChanger } from "@/shared/redux/features/themeSlice";
-import { basePath } from '@/next.config';
 import Link from 'next/link';
-import Image from "next/image";
 import ModalSearch from '@/shared/layout-components/modal-search/ModalSearch';
 import SelectLanguage from './select-language/select-language';
 import ThemeToggler from './theme-toggler/theme-toggler';
