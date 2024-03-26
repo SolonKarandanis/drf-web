@@ -16,6 +16,7 @@ const ThemeToggler = () => {
     
         }));
         if (themeState.class != "dark") {
+          console.log('sssss')
           dispatch(ThemeChanger({
             ...themeState,
             "bodyBg": "",
