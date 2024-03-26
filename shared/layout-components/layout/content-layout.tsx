@@ -1,8 +1,6 @@
 'use client';
 
 import { ReactNode, useEffect, useState } from 'react'
-import {makeStore} from "@/shared/redux/store"
-import { Provider } from 'react-redux'
 import Header from '@/shared/layout-components/header/Header';
 import Sidebar from '@/shared/layout-components/sidebar/SideBar';
 import Footer from '@/shared/layout-components/footer/Footer';
@@ -27,7 +25,6 @@ const ContentLayout = ({children}:{ children: ReactNode}) => {
 
     const [MyclassName, setMyClass] = useState("");
     const Bodyclickk = () => {
-        const theme = makeStore().getState();
         if (localStorage.getItem("ynexverticalstyles") == "icontext") {
             setMyClass("");
         }
@@ -70,21 +67,19 @@ const ContentLayout = ({children}:{ children: ReactNode}) => {
     
     return (
        <>
-            <Provider store={makeStore()}>
-                <div style={{display: `${lateLoad ? 'block' : 'none'}`}}>
-                    <div className='page'>
-                        <Header/>
-                        <Sidebar/> 
-                        <div className='content'>
-                            <div className='main-content'  onClick={Bodyclickk}>
-                                {children}
-                            </div>
+            <div style={{display: `${lateLoad ? 'block' : 'none'}`}}>
+                <div className='page'>
+                    <Header/>
+                    <Sidebar/> 
+                    <div className='content'>
+                        <div className='main-content'  onClick={Bodyclickk}>
+                            {children}
                         </div>
-                        <Footer/>
                     </div>
-                    <Backtotop />
+                    <Footer/>
                 </div>
-            </Provider> 
+                <Backtotop />
+            </div>
        </>
     )
 }
