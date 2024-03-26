@@ -1,6 +1,6 @@
-
-import { redirect } from 'next/navigation';
+import LandingPage from "@/shared/landing-page/landing-page";
 
 export default function Home() {
-  redirect('/dashboard');
+ 
+  return (<><LandingPage /></>)
 }
