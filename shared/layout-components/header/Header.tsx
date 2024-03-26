@@ -15,6 +15,7 @@ import NotificationsDropdown from './notifications-dropdown/notifications-dropdo
 import AppsDropdown from './apps-dropdown/apps-dropdown';
 import FullscreenToggler from './fullscreen-toggler/fullscreen-toggler';
 import ProfileDropdown from './profile-dropdown/profile-dropdown';
+import Logo from './logo/logo';
 
 
 declare global {
@@ -221,84 +222,7 @@ const Header = () => {
         <nav className="main-header !h-[3.75rem]" aria-label="Global">
           <div className="main-header-container ps-[0.725rem] pe-[1rem] ">
             <div className="header-content-left">
-              <div className="header-element">
-                <div className="horizontal-logo">
-                  <Link href="/components/dashboards/crm/" className="header-logo">
-                    <Image
-                      alt="logo"
-                      src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-logo.png`} 
-                      width={700}
-                      height={475}
-                      sizes="100vw"
-                      className='desktop-logo'
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                      }}
-                    />
-                    <Image
-                      alt="logo"
-                      src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/toggle-logo.png`} 
-                      width={700}
-                      height={475}
-                      sizes="100vw"
-                      className='toggle-logo'
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                      }}
-                    />
-                    <Image
-                      alt="logo"
-                      src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-dark.png`} 
-                      width={700}
-                      height={475}
-                      sizes="100vw"
-                      className='desktop-dark'
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                      }}
-                    />
-                    <Image
-                      alt="logo"
-                      src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/toggle-dark.png`} 
-                      width={700}
-                      height={475}
-                      sizes="100vw"
-                      className='toggle-dark'
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                      }}
-                    />
-                    <Image
-                      alt="logo"
-                      src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-white.png`} 
-                      width={700}
-                      height={475}
-                      sizes="100vw"
-                      className='desktop-white'
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                      }}
-                    />
-                    <Image
-                      alt="logo"
-                      src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/toggle-white.png`} 
-                      width={700}
-                      height={475}
-                      sizes="100vw"
-                      className='toggle-white'
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                      }}
-                    />
-                  </Link>
-                </div>
-              </div>
+              <Logo />
               <div className="header-element md:px-[0.325rem] !items-center" onClick={() => toggleSidebar()}>
                 <Link aria-label="Hide Sidebar"
                   className="sidemenu-toggle animated-arrow  hor-toggle horizontal-navtoggle inline-flex items-center" href="#!"><span></span></Link>
