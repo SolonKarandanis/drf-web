@@ -5,7 +5,7 @@ interface Body{
     class: string;
 }
 
-interface ThemeState {
+export interface ThemeState {
 	lang: string;
 	dir: string;
 	class: string;
@@ -68,6 +68,7 @@ const themeSlice = createSlice({
 	initialState,
     reducers:{
         ThemeChanger:(state, action:PayloadAction<ThemeState>) =>{
+            console.log(state)
             state = action.payload;
         }
     }

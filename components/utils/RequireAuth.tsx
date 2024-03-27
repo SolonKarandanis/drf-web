@@ -11,8 +11,8 @@ interface Props {
 
 const RequireAuth:FC<Props> = ({ children }) => {
     const { isLoading, isAuthenticated } = useAppSelector(state => state.auth);
-	console.log(isAuthenticated)
-	console.log(isLoading)
+	// console.log(isAuthenticated)
+	// console.log(isLoading)
 
 	if (isLoading && isAuthenticated) {
 		return (

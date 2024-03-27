@@ -1,22 +1,25 @@
-import { ThemeChanger } from "@/shared/redux/features/themeSlice";
+import { ThemeChanger, ThemeState } from "@/shared/redux/features/themeSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import Link from "next/link"
+import { FC } from "react";
+
+interface Props{
+  localState:ThemeState;
+}
 
 
-const ThemeToggler = () => {
+const ThemeToggler= () => {
     const dispatch = useAppDispatch();
     const themeState = useAppSelector(state => state.theme);
-    
     const ToggleDark = () => {
         dispatch(ThemeChanger({
           ...themeState,
           "class": themeState.class == "dark" ? "light" : "dark",
           "dataHeaderStyles": themeState.dataHeaderStyles == "dark" ? "light" : "dark",
           "dataMenuStyles": themeState.dataNavLayout == "horizontal" ? themeState.dataMenuStyles == "dark" ? "light" : "dark" : "dark"
-    
         }));
+        
         if (themeState.class != "dark") {
-          console.log('sssss')
           dispatch(ThemeChanger({
             ...themeState,
             "bodyBg": "",
