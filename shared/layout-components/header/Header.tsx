@@ -10,7 +10,6 @@ import SelectLanguage from './select-language/select-language';
 import ThemeToggler from './theme-toggler/theme-toggler';
 import CartDropdown from './cart-dropdown/cart-dropdown';
 import NotificationsDropdown from './notifications-dropdown/notifications-dropdown';
-import AppsDropdown from './apps-dropdown/apps-dropdown';
 import FullscreenToggler from './fullscreen-toggler/fullscreen-toggler';
 import ProfileDropdown from './profile-dropdown/profile-dropdown';
 import Logo from './logo/logo';
@@ -244,7 +243,6 @@ const Header = () => {
               <ThemeToggler themeStoreState={themeState}/>
               <CartDropdown />
               <NotificationsDropdown />
-              <AppsDropdown />
               <FullscreenToggler />
               <ProfileDropdown />
 

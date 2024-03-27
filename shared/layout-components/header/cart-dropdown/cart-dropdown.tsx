@@ -79,7 +79,9 @@ const CartDropdown = () => {
                 w-[22rem] border-0 border-defaultborder hidden"
                 aria-labelledby="dropdown-cart">
                 <div className="ti-dropdown-header !bg-transparent flex justify-between items-center !m-0 !p-4">
-                    <p className="text-defaulttextcolor  !text-[1.0625rem] dark:text-[#8c9097] dark:text-white/50 font-semibold">Cart Items</p>
+                    <p className="text-defaulttextcolor  !text-[1.0625rem] dark:text-[#8c9097] dark:text-white/50 font-semibold">
+                        Cart Items
+                    </p>
                     <Link href="#!"
                     className="font-[600] py-[0.25/2rem] px-[0.45rem] rounded-[0.25rem] bg-success/10 text-success text-[0.75em] "
                     id="cart-data">{cartItemCount} Item{cartItemCount !== 1 ? 's' : ''}</Link>
