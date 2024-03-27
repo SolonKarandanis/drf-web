@@ -41,10 +41,13 @@ const Header = () => {
 
   useEffect(() => {
     const handleResize = () => {
+      console.log('handleResize')
       const windowObject = window;
       if (windowObject.innerWidth <= 991) {
+        console.log('windowObject.innerWidth <= 991')
         dispatch(ThemeChanger({ ...themeState, "dataToggled": "close" }));
       } else {
+        console.log('windowObject.innerWidth > 991')
         dispatch(ThemeChanger({...themeState,"dataToggled":""}));
       }
     };
@@ -60,12 +63,15 @@ const Header = () => {
   }, [themeState]);
 
   function menuClose() {
+    console.log('menuClose')
     dispatch(ThemeChanger({ ...themeState, "dataToggled": "close" }));
   }
 
   const toggleSidebar = () => {
+    console.log('toggleSidebar')
     let sidemenuType = themeState.dataNavLayout;
     if (window.innerWidth >= 992) {
+      console.log('window.innerWidth >= 992')
       if (sidemenuType === "vertical") {
         let verticalStyle = themeState.dataVerticalStyle;
         const navStyle = themeState.dataNavStyle;
@@ -164,6 +170,7 @@ const Header = () => {
       }
     }
     else {
+      console.log('window.innerWidth > 992')
       if (themeState.dataToggled === "close") {
         dispatch(ThemeChanger({ ...themeState, "dataToggled": "open" }));
         setTimeout(() => {
@@ -234,7 +241,7 @@ const Header = () => {
                 </button>
               </div>
               <SelectLanguage />
-              <ThemeToggler />
+              <ThemeToggler themeStoreState={themeState}/>
               <CartDropdown />
               <NotificationsDropdown />
               <AppsDropdown />

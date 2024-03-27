@@ -68,11 +68,26 @@ const themeSlice = createSlice({
 	initialState,
     reducers:{
         ThemeChanger:(state, action:PayloadAction<ThemeState>) =>{
-            console.log(state)
-            state = action.payload;
+            const theme= action.payload;
+            state = theme;
+        },
+        toggleDarkTheme: (state) =>{
+            state.class='dark';
+            state.dataHeaderStyles='dark';
+            state.dataMenuStyles='dark';
+        },
+        toggleLightTheme: (state) =>{
+            state.class='light';
+            state.dataHeaderStyles='';
+            state.dataMenuStyles='dark';
+            state.bodyBg ='';
+            state.darkBg='';
+            state.inputBorder='';
+            state.Light='';
+            state.dataHeaderStyles='';
         }
     }
 });
 
-export const { ThemeChanger } = themeSlice.actions;
+export const { ThemeChanger,toggleDarkTheme,toggleLightTheme } = themeSlice.actions;
 export default themeSlice.reducer;

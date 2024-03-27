@@ -1,43 +1,68 @@
-import { ThemeChanger, ThemeState } from "@/shared/redux/features/themeSlice";
-import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
+import { ThemeChanger, ThemeState,toggleDarkTheme,toggleLightTheme } from "@/shared/redux/features/themeSlice";
+import { useAppDispatch } from "@/shared/redux/hooks";
 import Link from "next/link"
-import { FC } from "react";
+import { FC, useState } from "react";
 
 interface Props{
-  localState:ThemeState;
+  themeStoreState:ThemeState;
 }
 
 
-const ThemeToggler= () => {
+const ThemeToggler:FC<Props>= ({themeStoreState}) => {
     const dispatch = useAppDispatch();
-    const themeState = useAppSelector(state => state.theme);
+    const lightTheme = themeStoreState.class == 'light'? true:false;
+    const [isLightTheme, SetIsLightTheme] = useState(lightTheme);
+
     const ToggleDark = () => {
-        dispatch(ThemeChanger({
-          ...themeState,
-          "class": themeState.class == "dark" ? "light" : "dark",
-          "dataHeaderStyles": themeState.dataHeaderStyles == "dark" ? "light" : "dark",
-          "dataMenuStyles": themeState.dataNavLayout == "horizontal" ? themeState.dataMenuStyles == "dark" ? "light" : "dark" : "dark"
-        }));
-        
-        if (themeState.class != "dark") {
-          dispatch(ThemeChanger({
-            ...themeState,
-            "bodyBg": "",
-            "darkBg": "",
-            "inputBorder": "",
-            "Light": "",
-            "dataHeaderStyles": "",
-          }));
-          localStorage.setItem("ynexdarktheme", "dark");
-          localStorage.removeItem("ynexdarktheme");
-          localStorage.removeItem("ynexHeader");
-          localStorage.removeItem("ynexMenu");
-        }
-        else {
-          localStorage.setItem("ynexdarktheme", "dark");
-          localStorage.removeItem("ynexlighttheme");
-        }
-      };
+      if(isLightTheme){
+        SetIsLightTheme(false);
+        dispatch(toggleDarkTheme());
+        localStorage.setItem("ynexdarktheme", "dark");
+        localStorage.removeItem("ynexlighttheme");
+      }
+      else{
+        SetIsLightTheme(true);
+        dispatch(toggleLightTheme());
+        localStorage.setItem("ynexdarktheme", "dark");
+        localStorage.removeItem("ynexdarktheme");
+        localStorage.removeItem("ynexHeader");
+        localStorage.removeItem("ynexMenu");
+      }
+
+      // let newState:ThemeState = {
+      //   ...localThemeState,
+      //   "class": localThemeState.class == "dark" ? "light" : "dark",
+      //   "dataHeaderStyles": localThemeState.dataHeaderStyles == "dark" ? "light" : "dark",
+      //   "dataMenuStyles": localThemeState.dataNavLayout == "horizontal" ? localThemeState.dataMenuStyles == "dark" ? "light" : "dark" : "dark"
+      // }
+      // console.log(newState);
+      // dispatch(ThemeChanger(newState));
+      // SetLocalThemeState(newState);
+      // console.log(localThemeState);
+      
+      // if (localThemeState.class != "dark") {
+      //   console.log(localThemeState);
+      //   newState ={
+      //     ...localThemeState,
+      //     "bodyBg": "",
+      //     "darkBg": "",
+      //     "inputBorder": "",
+      //     "Light": "",
+      //     "dataHeaderStyles": "",
+      //   }
+      //   console.log(newState);
+      //   dispatch(ThemeChanger(newState));
+      //   SetLocalThemeState(newState);
+      //   localStorage.setItem("ynexdarktheme", "dark");
+      //   localStorage.removeItem("ynexdarktheme");
+      //   localStorage.removeItem("ynexHeader");
+      //   localStorage.removeItem("ynexMenu");
+      // }
+      // else {
+      //   localStorage.setItem("ynexdarktheme", "dark");
+      //   localStorage.removeItem("ynexlighttheme");
+      // }
+    };
 
     return (
         <div 
