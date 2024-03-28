@@ -13,6 +13,8 @@ const ThemeToggler:FC<Props>= ({themeStoreState}) => {
     const lightTheme = themeStoreState.class == 'light'? true:false;
     const [isLightTheme, SetIsLightTheme] = useState(lightTheme);
 
+    
+
     const ToggleDark = () => {
       if(isLightTheme){
         SetIsLightTheme(false);
@@ -30,29 +32,26 @@ const ThemeToggler:FC<Props>= ({themeStoreState}) => {
       }
 
       // let newState:ThemeState = {
-      //   ...localThemeState,
-      //   "class": localThemeState.class == "dark" ? "light" : "dark",
-      //   "dataHeaderStyles": localThemeState.dataHeaderStyles == "dark" ? "light" : "dark",
-      //   "dataMenuStyles": localThemeState.dataNavLayout == "horizontal" ? localThemeState.dataMenuStyles == "dark" ? "light" : "dark" : "dark"
+      //   ...themeStoreState,
+      //   "class": themeStoreState.class == "dark" ? "light" : "dark",
+      //   "dataHeaderStyles": themeStoreState.dataHeaderStyles == "dark" ? "light" : "dark",
+      //   "dataMenuStyles": themeStoreState.dataNavLayout == "horizontal" ? themeStoreState.dataMenuStyles == "dark" ? "light" : "dark" : "dark"
       // }
-      // console.log(newState);
+
       // dispatch(ThemeChanger(newState));
-      // SetLocalThemeState(newState);
-      // console.log(localThemeState);
+
       
-      // if (localThemeState.class != "dark") {
-      //   console.log(localThemeState);
+      // if (theme.class != "dark") {
+      //   console.log(theme);
       //   newState ={
-      //     ...localThemeState,
+      //     ...theme,
       //     "bodyBg": "",
       //     "darkBg": "",
       //     "inputBorder": "",
       //     "Light": "",
       //     "dataHeaderStyles": "",
       //   }
-      //   console.log(newState);
       //   dispatch(ThemeChanger(newState));
-      //   SetLocalThemeState(newState);
       //   localStorage.setItem("ynexdarktheme", "dark");
       //   localStorage.removeItem("ynexdarktheme");
       //   localStorage.removeItem("ynexHeader");
