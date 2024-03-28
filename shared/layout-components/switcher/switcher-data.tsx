@@ -532,3 +532,262 @@ export const PrimaryColor5 = (actionfunction:ActionCreatorWithPayload<ThemeState
     localStorage.setItem("primaryRGB", "223, 90, 90");
     localStorage.setItem("primaryRGB1", "223 90 90");
 };
+
+export const BackgroundColor1 = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
+    const dispatch = useAppDispatch();
+    const [theme] = useThemeState();
+    dispatch(actionfunction({
+        ...theme,
+        "bodyBg": "34 44 110",
+        "darkBg": "20 30 96",
+        "inputBorder": "25 35 102",
+        "Light": "25 35 102",
+        "class": "dark",
+        "dataMenuStyles": "dark",
+        "dataHeaderStyles": "dark"
+    }));
+    localStorage.setItem('darkBgRGB', "20 30 96");
+    localStorage.setItem('bodyBgRGB', "34 44 110");
+    localStorage.setItem('Light', "25 35 102");
+    localStorage.setItem('ynexMenu', "dark");
+    localStorage.setItem('ynexHeader', "dark");
+
+
+};
+export const BackgroundColor2 = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
+    const dispatch = useAppDispatch();
+    const [theme] = useThemeState();
+    dispatch(actionfunction({
+        ...theme,
+        "bodyBg": "22 92 129",
+        "Light": "13 83 120",
+        "darkBg": "8 78 115",
+        "inputBorder": "13 83 120",
+        "class": "dark",
+        "dataMenuStyles": "dark",
+        "dataHeaderStyles": "dark"
+    }));
+    localStorage.setItem('darkBgRGB', "8 78 115");
+    localStorage.setItem('bodyBgRGB', "22 92 129");
+    localStorage.setItem('Light', "13 83 120",);
+    localStorage.setItem('ynexMenu', "dark");
+    localStorage.setItem('ynexHeader', "dark");
+};
+export const BackgroundColor3 = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
+    const dispatch = useAppDispatch();
+    const [theme] = useThemeState();
+    dispatch(actionfunction({
+        ...theme,
+        "bodyBg": "104 51 149",
+        "Light": "95 42 140",
+        "darkBg": "90 37 135",
+        "inputBorder": "95 42 140",
+        "class": "dark",
+        "dataMenuStyles": "dark",
+        "dataHeaderStyles": "dark"
+    }));
+    localStorage.setItem('darkBgRGB', "90 37 135");
+    localStorage.setItem('bodyBgRGB', "104 51 149");
+    localStorage.setItem('Light', "95 42 140");
+    localStorage.setItem('ynexMenu', "dark");
+    localStorage.setItem('ynexHeader', "dark");
+};
+export const BackgroundColor4 = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
+    const dispatch = useAppDispatch();
+    const [theme] = useThemeState();
+    dispatch(actionfunction({
+        ...theme,
+        "Light": "29 106 56",
+        "bodyBg": "38 115 64",
+        "darkBg": "24 101 51",
+        "inputBorder": "29 106 56;",
+        "class": "dark",
+        "dataMenuStyles": "dark",
+        "dataHeaderStyles": "dark"
+    }));
+    localStorage.setItem('darkBgRGB', "24 101 51");
+    localStorage.setItem('bodyBgRGB', "38 115 64");
+    localStorage.setItem('Light', "29 106 56");
+    localStorage.setItem('ynexMenu', "dark");
+    localStorage.setItem('ynexHeader', "dark");
+};
+export const BackgroundColor5 = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
+    const dispatch = useAppDispatch();
+    const [theme] = useThemeState();
+    dispatch(actionfunction({
+        ...theme,
+        "bodyBg": " 134 80 34",
+        "Light": "125 71 25",
+        "darkBg": "120 66 20",
+        "inputBorder": "125 71 25",
+        "class": "dark",
+        "dataMenuStyles": "dark",
+        "dataHeaderStyles": "dark"
+    }));
+    localStorage.setItem('darkBgRGB', "120 66 20");
+    localStorage.setItem('bodyBgRGB', "134 80 34");
+    localStorage.setItem('Light', "125 71 25");
+    localStorage.setItem('ynexMenu', "dark");
+    localStorage.setItem('ynexHeader', "dark");
+};
+
+const ColorPicker = ({...props}) => {
+    return (
+        <div className="color-picker-input">
+            <input type="color" {...props} />
+        </div>
+    );
+};
+
+function hexToRgb(hex:string) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+//themeprimarycolor
+const Themeprimarycolor = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
+    const dispatch = useAppDispatch();
+    const [theme] = useThemeState();
+    const [state, updateState] = useState("#FFFFFF");
+    const handleInput = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const  result = hexToRgb(e.target.value);
+        if(result){
+            const {r,g,b} = result
+            updateState(e.target.value);
+            dispatch(actionfunction({
+                ...theme,
+                "colorPrimaryRgb": `${r} ${g} ${b}`,
+                "colorPrimary": `${r} ${g} ${b}`
+            }));
+            localStorage.setItem("dynamiccolor", `${r} ${g} ${b}`);
+        }
+        
+    };
+    return (
+        <div className="Themeprimarycolor theme-container-primary pickr-container-primary">
+            <ColorPicker onChange={handleInput} value={state} />
+        </div>
+    );
+};
+
+export default Themeprimarycolor;
+
+export const Themebackgroundcolor = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
+    const dispatch = useAppDispatch();
+    const [theme] = useThemeState();
+    const [state, updateState] = useState("#FFFFFF");
+    const handleInput = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const  result = hexToRgb(e.target.value);
+        if(result){
+            const {r,g,b} = result
+            updateState(e.target.value);
+            dispatch(actionfunction({
+                ...theme,
+                "bodyBg": `${r + 14} ${g + 14} ${b + 14}`,
+                "darkBg": `${r} ${g} ${b}`,
+                "inputBorder": `${r + 5} ${g + 5} ${b + 5}`,
+                "Light": `${r + 5} ${g + 5} ${b + 5}`,
+                "class": "dark",
+                "dataHeaderStyles": "dark",
+                "dataMenuStyles": "",
+            }));
+            localStorage.setItem("bodyBgRGB", `${r + 14} ${g + 14} ${b + 14}`);
+            localStorage.setItem('darkBgRGB', `${r} ${g} ${b}`);
+            localStorage.setItem('Light', `${r + 5} ${g + 5} ${b + 5}`);
+            localStorage.setItem('inputBorder', `${r + 5} ${g + 5} ${b + 5}`);
+            localStorage.setItem('ynexMenu', "dark");
+            localStorage.setItem('ynexHeader', "dark");
+        }
+    };
+    return (
+        <div className="Themebackgroundcolor">
+            <ColorPicker onChange={handleInput} value={state} />
+        </div>
+    );
+};
+
+export const BgImage1 = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
+    const dispatch = useAppDispatch();
+    const [theme] = useThemeState();
+    dispatch(actionfunction({
+        ...theme,
+        "bgImg": "bgimg1"
+    }))
+    localStorage.setItem("bgimage1", "bgimg1");
+};
+export const BgImage2 = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
+    const dispatch = useAppDispatch();
+    const [theme] = useThemeState();
+    dispatch(actionfunction({
+        ...theme,
+        "bgImg": "bgimg2"
+    }))
+    localStorage.setItem("bgimage2", "bgimg2");
+};
+export const BgImage3 = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
+    const dispatch = useAppDispatch();
+    const [theme] = useThemeState();
+    dispatch(actionfunction({
+        ...theme,
+        "bgImg": "bgimg3"
+    }))
+    localStorage.setItem("bgimage3", "bgimg3");
+};
+export const BgImage4 = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
+    const dispatch = useAppDispatch();
+    const [theme] = useThemeState();
+    dispatch(actionfunction({
+        ...theme,
+        "bgImg": "bgimg4"
+    }))
+    localStorage.setItem("bgimage4", "bgimg4");
+};
+export const BgImage5 = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
+    const dispatch = useAppDispatch();
+    const [theme] = useThemeState();
+    dispatch(actionfunction({
+        ...theme,
+        "bgImg": "bgimg5"
+    }))
+    localStorage.setItem("bgimage5", "bgimg5");
+};
+
+export const Reset = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
+    const dispatch = useAppDispatch();
+    const [theme] = useThemeState();
+    Vertical(actionfunction)
+    dispatch(actionfunction({
+        ...theme,
+        lang: "en",
+        dir: "ltr",
+        class: "light",
+        dataMenuStyles: "dark",
+        dataNavLayout: "vertical",
+        dataHeaderStyles: "light",
+        dataVerticalStyle: "overlay",
+        dataToggled: "",
+        dataNavStyle: "",
+        horStyle: "",
+        dataPageStyle: "regular",
+        dataWidth: "fullwidth",
+        dataMenuPosition: "fixed",
+        dataHeaderPosition: "fixed",
+        iconOverlay: "",
+        colorPrimaryRgb: "",
+        colorPrimary: "",
+        bodyBg: "",
+        darkBg: "",
+        inputBorder: "",
+        Light: "",
+        bgImg: "",
+        loader: "disable",
+        iconText: "",
+        body: {
+            class: ""
+        }
+    }))
+    localStorage.clear();
+}
