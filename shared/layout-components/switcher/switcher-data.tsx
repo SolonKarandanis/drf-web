@@ -791,3 +791,282 @@ export const Reset = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme
     }))
     localStorage.clear();
 }
+
+export const LocalStorageBackup = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
+    const dispatch = useAppDispatch();
+    const [theme] = useThemeState();
+    (localStorage.ynexdarktheme) ? Dark(actionfunction) : "";
+    (localStorage.ynexlighttheme) ? Light(actionfunction) : "";
+    (localStorage.ynexrtl) ? Rtl(actionfunction) : "";
+    (localStorage.ynexregular) ? Regular(actionfunction) : "";
+    (localStorage.ynexclassic) ? Classic(actionfunction) : "";
+    (localStorage.ynexmodern) ? Modern(actionfunction) : "";
+    (localStorage.ynexloaderenable) ? Enable(actionfunction) : "";
+    (localStorage.ynexloaderdisable) ? Disable(actionfunction) : "";
+    (localStorage.ynexfullwidth) ? Fullwidth(actionfunction) : "";
+    (localStorage.ynexboxed) ? Boxed(actionfunction) : "";
+    (localStorage.ynexmenufixed) ? FixedMenu(actionfunction) : "";
+    (localStorage.ynexmenuscrollable) ? ScrollMenu(actionfunction) : "";
+    (localStorage.ynexheaderfixed) ? Headerpostionfixed(actionfunction) : "";
+    (localStorage.ynexheaderscrollable) ? Headerpostionscroll(actionfunction) : "";
+    (localStorage.bgimage1) ? BgImage1(actionfunction) : '';
+    (localStorage.bgimage2) ? BgImage2(actionfunction) : '';
+    (localStorage.bgimage3) ? BgImage3(actionfunction) : '';
+    (localStorage.bgimage4) ? BgImage4(actionfunction) : '';
+    (localStorage.bgimage5) ? BgImage5(actionfunction) : '';
+
+    (localStorage.ynexnavstyles === "menu-click") ? Menuclick(actionfunction) : '';
+    (localStorage.ynexnavstyles === "menu-hover") ? MenuHover(actionfunction) : '';
+    (localStorage.ynexnavstyles === "icon-click") ? IconClick(actionfunction) : '';
+    (localStorage.ynexnavstyles === "icon-hover") ? IconHover(actionfunction) : '';
+
+
+    (localStorage.ynexlayout == 'horizontal') && HorizontalClick(actionfunction);
+
+    // // ThemeColor MenuColor Start
+    switch (localStorage.ynexMenu) {
+        case 'light':
+            LightMenu(actionfunction);
+            break;
+        case 'dark':
+            DarkMenu(actionfunction);
+            break;
+        case 'color':
+            ColorMenu(actionfunction);
+            break;
+        case 'gradient':
+            GradientMenu(actionfunction);
+            break;
+        case 'transparent':
+            TransparentMenu(actionfunction);
+            break;
+        default:
+            break;
+    }
+
+    // ThemeColor MenuColor End
+
+    // ThemeColor Header Colors: start
+    switch (localStorage.ynexHeader) {
+        case 'light':
+            LightHeader(actionfunction);
+            break;
+        case 'dark':
+            DarkHeader(actionfunction);
+            break;
+        case 'color':
+            ColorHeader(actionfunction);
+            break;
+        case 'gradient':
+            GradientHeader(actionfunction);
+            break;
+        case 'transparent':
+            TransparentHeader(actionfunction);
+            break;
+        default:
+            break;
+    }
+    // ThemeColor Header Colors: End
+
+    // Theme Primary: Colors: Start
+    switch (localStorage.primaryRGB) {
+        case '58, 88, 146':
+            PrimaryColor1(actionfunction);
+            break;
+        case '92, 144, 1633':
+            PrimaryColor2(actionfunction);
+            break;
+        case '161, 90, 223':
+            PrimaryColor3(actionfunction);
+            break;
+        case '78, 172, 76':
+            PrimaryColor4(actionfunction);
+            break;
+        case '223, 90, 90':
+            PrimaryColor5(actionfunction);
+            break;
+        default:
+            break;
+    }
+    // Theme Primary: Colors: End
+
+    switch (localStorage.bodyBgRGB) {
+        case '50 62 93':
+            BackgroundColor1(actionfunction);
+            break;
+        case '81 93 50':
+            BackgroundColor2(actionfunction);
+            break;
+        case '93 64 107':
+            BackgroundColor3(actionfunction);
+            break;
+        case '64 101 107':
+            BackgroundColor4(actionfunction);
+            break;
+        case '107 64 64':
+            BackgroundColor5(actionfunction);
+            break;
+        default:
+            break;
+    }
+    switch (localStorage.darkBgRGB) {
+        case '50 62 93':
+            BackgroundColor1(actionfunction);
+            break;
+        case '81 93 50':
+            BackgroundColor2(actionfunction);
+            break;
+        case '93 64 107':
+            BackgroundColor3(actionfunction);
+            break;
+        case '64 101 107':
+            BackgroundColor4(actionfunction);
+            break;
+        case '107 64 64':
+            BackgroundColor5(actionfunction);
+            break;
+        default:
+            break;
+    }
+    switch (localStorage.Light) {
+        case '50 62 93':
+            BackgroundColor1(actionfunction);
+            break;
+        case '81 93 50':
+            BackgroundColor2(actionfunction);
+            break;
+        case '93 64 107':
+            BackgroundColor3(actionfunction);
+            break;
+        case '64 101 107':
+            BackgroundColor4(actionfunction);
+            break;
+        case '107 64 64':
+            BackgroundColor5(actionfunction);
+            break;
+        default:
+            break;
+    }
+    switch (localStorage.inputBorder) {
+        case '50 62 93':
+            BackgroundColor1(actionfunction);
+            break;
+        case '81 93 50':
+            BackgroundColor2(actionfunction);
+            break;
+        case '93 64 107':
+            BackgroundColor3(actionfunction);
+            break;
+        case '64 101 107':
+            BackgroundColor4(actionfunction);
+            break;
+        case '107 64 64':
+            BackgroundColor5(actionfunction);
+            break;
+        default:
+            break;
+    }
+
+    if (localStorage.ynexverticalstyles) {
+        let verticalStyles = localStorage.getItem("ynexverticalstyles");
+
+        switch (verticalStyles) {
+            case "default":
+                const defaultid = document.getElementById("switcher-default-menu") as HTMLInputElement;
+                defaultid.checked = true;
+                Defaultmenu(actionfunction)
+                break;
+            case "closed":
+                const closedid = document.getElementById("switcher-icontext-menu") as HTMLInputElement;
+                closedid.checked = true;
+                Closedmenu(actionfunction)
+                break;
+            case "icontext":
+                const icontextid = document.getElementById("switcher-icontext-menu") as HTMLInputElement;
+                icontextid.checked = true;
+                IconText(actionfunction)
+                break;
+            case "overlay":
+                const overlayid = document.getElementById("switcher-detached") as HTMLInputElement;
+                overlayid.checked = true;
+                IconOverayFn(actionfunction)
+                break;
+            case "detached":
+                const detachedid = document.getElementById("switcher-detached") as HTMLInputElement;
+                detachedid.checked = true;
+                DetachedFn(actionfunction)
+                break;
+            case "doublemenu":
+                const doubleMenuid = document.getElementById("switcher-double-menu") as HTMLInputElement;
+                doubleMenuid.checked = true;
+                DoubletFn(actionfunction)
+                break;
+
+            default:
+                const defaultbutton = document.getElementById("switcher-default-menu") as HTMLInputElement;
+                defaultbutton.checked = true;
+                break;
+        }
+    }
+
+    //Theme Primary:
+    if (localStorage.dynamiccolor) {     
+        dispatch(actionfunction({
+            ...theme,
+            "colorPrimaryRgb": localStorage.dynamiccolor,
+            "colorPrimary": localStorage.dynamiccolor
+        }))
+    }
+    //Theme BAckground:
+    if (localStorage.bodyBgRGB) {
+        let updateddarkBg = `${Number(localStorage.bodyBgRGB.split(" ")[0]) + 14} ${Number(localStorage.bodyBgRGB.split(" ")[1]) + 14} ${Number(localStorage.bodyBgRGB.split(" ")[2]) + 14}`
+        dispatch(actionfunction({
+            ...theme,
+            "bodyBg": updateddarkBg,
+            "darkBg": localStorage.bodyBgRGB,
+            "class": "dark",
+            "dataHeaderStyles": "dark",
+            "Light": localStorage.Light,
+            "inputBorder": localStorage.inputBorder
+        }))
+    }
+    switch (localStorage.ynexMenu) {
+        case 'light':
+            LightMenu(actionfunction);
+            break;
+        case 'dark':
+            DarkMenu(actionfunction);
+            break;
+        case 'color':
+            ColorMenu(actionfunction);
+            break;
+        case 'gradient':
+            GradientMenu(actionfunction);
+            break;
+        case 'transparent':
+            TransparentMenu(actionfunction);
+            break;
+        default:
+            break;
+    }
+    // ThemeColor Header Colors: start
+    switch (localStorage.ynexHeader) {
+        case 'light':
+            LightHeader(actionfunction);
+            break;
+        case 'dark':
+            DarkHeader(actionfunction);
+            break;
+        case 'color':
+            ColorHeader(actionfunction);
+            break;
+        case 'gradient':
+            GradientHeader(actionfunction);
+            break;
+        case 'transparent':
+            TransparentHeader(actionfunction);
+            break;
+        default:
+            break;
+    }
+}
