@@ -16,7 +16,7 @@ const ContentLayout = ({children}:{ children: ReactNode}) => {
     useEffect(() => {
         Add();
         setlateLoad(true);
-    });
+    },[setlateLoad]);
     
     useEffect(() => {
         import("preline");
