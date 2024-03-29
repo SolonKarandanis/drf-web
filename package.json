@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postcss": "sass ./public/assets/scss/style.scss ./public/assets/css/style.css && postcss ./public/assets/css/style.css -o ./public/assets/css/style.css",
+    "sass": "sass ./public/assets/scss/:./public/assets/css/",
+    "sass-min": "sass ./public/assets/scss/:./public/assets/css/ --style compressed"
   },
   "dependencies": {
     "@emotion/css": "^11.11.2",
