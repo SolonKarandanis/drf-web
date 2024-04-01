@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 
 import { ThemeState } from "@/shared/redux/features/themeSlice";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
@@ -647,8 +647,11 @@ function hexToRgb(hex:string) {
         b: parseInt(result[3], 16)
     } : null;
 }
+interface ThemeprimaryProps {
+    actionfunction: ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">,
+}
 //themeprimarycolor
-const Themeprimarycolor = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
+const Themeprimarycolor:FC<ThemeprimaryProps> = ({actionfunction}) => {
     const dispatch = useAppDispatch();
     const [theme] = useThemeState();
     const [state, updateState] = useState("#FFFFFF");
@@ -675,7 +678,7 @@ const Themeprimarycolor = (actionfunction:ActionCreatorWithPayload<ThemeState, "
 
 export default Themeprimarycolor;
 
-export const Themebackgroundcolor = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
+export const Themebackgroundcolor:FC<ThemeprimaryProps> = ({actionfunction}) => {
     const dispatch = useAppDispatch();
     const [theme] = useThemeState();
     const [state, updateState] = useState("#FFFFFF");
