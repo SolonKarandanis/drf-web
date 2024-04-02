@@ -5,6 +5,7 @@ import Header from '@/shared/layout-components/header/Header';
 import Sidebar from '@/shared/layout-components/sidebar/SideBar';
 import Footer from '@/shared/layout-components/footer/Footer';
 import Backtotop from '@/shared/layout-components/backtotop/BackToTop';
+import Switcher from '../switcher/switcher';
 
 const ContentLayout = ({children}:{ children: ReactNode}) => {
     const [lateLoad, setlateLoad] = useState(false);
@@ -67,6 +68,7 @@ const ContentLayout = ({children}:{ children: ReactNode}) => {
     
     return (
        <>
+            <Switcher/>
             <div style={{display: `${lateLoad ? 'block' : 'none'}`}}>
                 <div className='page'>
                     <Header/>
