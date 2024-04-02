@@ -7,9 +7,10 @@ import { useThemeState } from "@/hooks/use-themestate";
 
 
 
-export function Dark(actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) {
-    const dispatch = useAppDispatch();
-    const [theme] = useThemeState();
+export const Dark =(
+    actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">,
+    dispatch:any,
+    theme: ThemeState) =>{
     dispatch(actionfunction({
         ...theme,
         "class": "dark",
@@ -795,10 +796,11 @@ export const Reset = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme
     localStorage.clear();
 }
 
-export const LocalStorageBackup = (actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">) => {
-    const dispatch = useAppDispatch();
-    const [theme] = useThemeState();
-    (localStorage.ynexdarktheme) ? Dark(actionfunction) : "";
+export const LocalStorageBackup = (
+    actionfunction:ActionCreatorWithPayload<ThemeState, "theme/ThemeChanger">,
+    dispatch:any,
+    theme: ThemeState) => {
+    (localStorage.ynexdarktheme) ? Dark(actionfunction,dispatch,theme) : "";
     (localStorage.ynexlighttheme) ? Light(actionfunction) : "";
     (localStorage.ynexrtl) ? Rtl(actionfunction) : "";
     (localStorage.ynexregular) ? Regular(actionfunction) : "";

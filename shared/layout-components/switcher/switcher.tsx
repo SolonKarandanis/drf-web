@@ -20,7 +20,7 @@ const Switcher = () => {
   }, [dispatch,themeState])
 
   useEffect(() => {
-    switcherdata.LocalStorageBackup(ThemeChanger)
+    switcherdata.LocalStorageBackup(ThemeChanger,dispatch,themeState)
   }, [])
 
   const style = { 
@@ -107,7 +107,7 @@ const Switcher = () => {
                 </div>
                 <div className="flex items-center">
                   <input type="radio" name="theme-style" className="ti-form-radio" id="switcher-dark-theme" checked={themeState.class == "dark"} onChange={e => { }}
-                    onClick={() => switcherdata.Dark(ThemeChanger)} />
+                    onClick={() => switcherdata.Dark(ThemeChanger,dispatch,themeState)} />
                   <label htmlFor="switcher-dark-theme"
                     className="text-defaultsize text-defaulttextcolor dark:text-defaulttextcolor/70 ms-2  font-semibold">Dark</label>
                 </div>
