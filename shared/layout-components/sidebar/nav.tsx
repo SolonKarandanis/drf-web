@@ -6,9 +6,11 @@ export interface MenuItem{
 export interface Item{
     icon:JSX.Element;
     badgetxt?:JSX.Element;
+    path?:string;
     title:string;
     type:string;
     active:boolean;
+    selected:boolean;
     children:Children[];
 }
 
@@ -18,6 +20,7 @@ export interface Children{
     active:boolean;
     selected:boolean;
     title:string;
+    children?:Children[];
 }
 
 const DashboardIcon = <i className="bx bx-home side-menu__icon"></i>
@@ -34,6 +37,7 @@ export const MenuItems:MenuItem[] =[
                 title: 'Dashboards', 
                 type: "sub", 
                 active: false, 
+                selected: false,
                 children: [
                     {
                         path: "/components/dashboards/crm", 
@@ -53,6 +57,7 @@ export const MenuItems:MenuItem[] =[
                 title: "Nested Menu", 
                 type: "sub", 
                 active: false, 
+                selected: false,
                 children: 
                 [
 					{ 
