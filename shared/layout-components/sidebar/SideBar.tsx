@@ -1,13 +1,14 @@
 import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
 import { ThemeChanger } from "@/shared/redux/features/themeSlice";
 import {useState, useEffect, useCallback} from 'react'
-import { connect } from "react-redux";
+import { useRouter } from "next/router";
 import MenuItems, { Item } from "./nav";
 
 let history = [];
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
+  let location = useRouter();
   const themeState = useAppSelector(state => state.theme);
   const [menuitems, setMenuitems] = useState(MenuItems);
 
@@ -222,7 +223,7 @@ const SideBar = () => {
 
 	};
 
-  function menuClose() {
+  const menuClose = useCallback(()=>{
     const element =document.querySelector("html");
     if(element){
       if (element.getAttribute('data-toggled') == 'open', 'menu-click-closed', "menu-hover-closed", "icon-hover-closed", "icon-hover-closed" || element.getAttribute('data-toggled') == '') {
@@ -235,7 +236,223 @@ const SideBar = () => {
         }
       }
     }
+  },[dispatch,themeState]);
+
+
+  useEffect(() => {
+		const mainContent = document.querySelector(".main-content");
+		if (window.innerWidth <= 992) {
+			if (mainContent) {
+				mainContent.addEventListener("click", menuClose);
+				menuClose();
+			}
+		} else {
+			if (mainContent) {
+				mainContent.removeEventListener("click", menuClose);
+			}
+		}
+		window.addEventListener("resize", () => {
+			const mainContent = document.querySelector(".main-content");
+			setTimeout(() => {
+				if (window.innerWidth <= 992) {
+					if (mainContent) {
+						mainContent.addEventListener("click", menuClose);
+						menuClose();
+					}
+				} else {
+					if (mainContent) {
+						mainContent.removeEventListener("click", menuClose);
+						menuClose();
+					}
+				}
+			}, 100);
+		});
+	}, [menuClose]);
+
+  function switcherArrowFn() {
+		// used to remove is-expanded class and remove class on clicking arrow buttons
+		function slideClick() {
+			const slide = document.querySelectorAll<HTMLElement>(".slide");
+			const slideMenu = document.querySelectorAll<HTMLElement>(".slide-menu");
+			slide.forEach((element) => {
+				if (element.classList.contains("is-expanded") == true) {
+					element.classList.remove("is-expanded");
+				}
+			});
+			slideMenu.forEach((element) => {
+				if (element.classList.contains("open") == true) {
+					element.classList.remove("open");
+					element.style.display = "none";
+				}
+			});
+		}
+
+		slideClick();
 	}
+
+  function slideRight() {
+		const menuNav = document.querySelector<HTMLElement>(".main-menu");
+		const mainContainer1 = document.querySelector<HTMLElement>(".main-sidebar");
+
+		if (menuNav && mainContainer1) {
+			const marginLeftValue = Math.ceil(
+				Number(window.getComputedStyle(menuNav).marginInlineStart.split("px")[0])
+			);
+			const marginRightValue = Math.ceil(
+				Number(window.getComputedStyle(menuNav).marginInlineEnd.split("px")[0])
+			);
+			const check = menuNav.scrollWidth - mainContainer1.offsetWidth;
+			let mainContainer1Width = mainContainer1.offsetWidth;
+
+			if (menuNav.scrollWidth > mainContainer1.offsetWidth) {
+				if (!(themeState.dir === "rtl")) {
+					if (Math.abs(check) > Math.abs(marginLeftValue)) {
+						menuNav.style.marginInlineEnd = "0";
+
+						if (!(Math.abs(check) > Math.abs(marginLeftValue) + mainContainer1Width)) {
+							mainContainer1Width = Math.abs(check) - Math.abs(marginLeftValue);
+							const slideRightButton = document.querySelector<HTMLElement>("#slide-right");
+							if (slideRightButton) {
+								slideRightButton.classList.add("hidden");
+							}
+						}
+
+						menuNav.style.marginInlineStart =
+							(Number(menuNav.style.marginInlineStart.split("px")[0]) -
+								Math.abs(mainContainer1Width)) +
+							"px";
+
+						const slideRightButton = document.querySelector<HTMLElement>("#slide-right");
+						if (slideRightButton) {
+							slideRightButton.classList.remove("hidden");
+						}
+					}
+				} else {
+					if (Math.abs(check) > Math.abs(marginRightValue)) {
+						menuNav.style.marginInlineEnd = "0";
+
+						if (!(Math.abs(check) > Math.abs(marginRightValue) + mainContainer1Width)) {
+							mainContainer1Width = Math.abs(check) - Math.abs(marginRightValue);
+							const slideRightButton = document.querySelector<HTMLElement>("#slide-right");
+							if (slideRightButton) {
+								slideRightButton.classList.add("hidden");
+							}
+						}
+
+						menuNav.style.marginInlineStart =
+							(Number(menuNav.style.marginInlineStart.split("px")[0]) -
+								Math.abs(mainContainer1Width)) +
+							"px";
+
+						const slideLeftButton = document.querySelector<HTMLElement>("#slide-left");
+						if (slideLeftButton) {
+							slideLeftButton.classList.remove("hidden");
+						}
+					}
+				}
+			}
+
+			const element = document.querySelector<HTMLElement>(".main-menu > .slide.open");
+			const element1 = document.querySelector<HTMLElement>(".main-menu > .slide.open > ul");
+			if (element) {
+				element.classList.remove("active");
+			}
+			if (element1) {
+				element1.style.display = "none";
+			}
+		}
+
+		switcherArrowFn();
+	}
+
+  function slideLeft() {
+		const menuNav = document.querySelector<HTMLElement>(".main-menu");
+		const mainContainer1 = document.querySelector<HTMLElement>(".main-sidebar");
+
+		if (menuNav && mainContainer1) {
+			const marginLeftValue = Math.ceil(
+				Number(window.getComputedStyle(menuNav).marginInlineStart.split("px")[0])
+			);
+			const marginRightValue = Math.ceil(
+				Number(window.getComputedStyle(menuNav).marginInlineEnd.split("px")[0])
+			);
+			const check = menuNav.scrollWidth - mainContainer1.offsetWidth;
+			let mainContainer1Width = mainContainer1.offsetWidth;
+
+			if (menuNav.scrollWidth > mainContainer1.offsetWidth) {
+				if (!(themeState.dir === "rtl")) {
+					if (Math.abs(check) <= Math.abs(marginLeftValue)) {
+						menuNav.style.marginInlineStart = "0px";
+					}
+				} else {
+					if (Math.abs(check) > Math.abs(marginRightValue)) {
+						menuNav.style.marginInlineStart = "0";
+
+						if (!(Math.abs(check) > Math.abs(marginRightValue) + mainContainer1Width)) {
+							mainContainer1Width = Math.abs(check) - Math.abs(marginRightValue);
+							const slideRightButton = document.querySelector<HTMLElement>("#slide-right");
+							if (slideRightButton) {
+								slideRightButton.classList.add("hidden");
+							}
+						}
+
+						menuNav.style.marginInlineStart =
+							(Number(menuNav.style.marginInlineStart.split("px")[0]) -
+								Math.abs(mainContainer1Width)) +
+							"px";
+
+						const slideLeftButton = document.querySelector<HTMLElement>("#slide-left");
+						if (slideLeftButton) {
+							slideLeftButton.classList.remove("hidden");
+						}
+					}
+				}
+
+			}
+
+			const element = document.querySelector<HTMLElement>(".main-menu > .slide.open");
+			const element1 = document.querySelector<HTMLElement>(".main-menu > .slide.open > ul");
+			if (element) {
+				element.classList.remove("active");
+			}
+			if (element1) {
+				element1.style.display = "none";
+			}
+		}
+
+		switcherArrowFn();
+	}
+
+  const noChild = () => {
+		if (localStorage.ynexverticalstyles == 'doublemenu') {
+			dispatch(ThemeChanger({ ...themeState, "dataToggled": "double-menu-close" }));
+		}
+	};
+
+  useEffect(() => {
+		const pages = () => {
+			if (window.scrollY > 30 && document.querySelector(".app-sidebar")) {
+				let Scolls = document?.querySelectorAll(".sticky");
+				Scolls.forEach((e) => {
+					e.classList.add("sticky-pin");
+				});
+			} else {
+				let Scolls = document?.querySelectorAll(".sticky");
+				Scolls.forEach((e) => {
+					e.classList.remove("sticky-pin");
+				});
+			}
+		};
+
+		if (typeof window !== "undefined") {
+			window.addEventListener("scroll", pages);
+		}
+	});
+
+  // const handleClick = (e) => {
+	// 	e.preventDefault()
+	// 	router.push(href)
+	// }
 
   return (
     <div>SideBar</div>
