@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
-import {useState, useEffect} from 'react'
+import { ThemeChanger } from "@/shared/redux/features/themeSlice";
+import {useState, useEffect, useCallback} from 'react'
 import { connect } from "react-redux";
 import MenuItems, { Item } from "./nav";
 
@@ -10,35 +11,18 @@ const SideBar = () => {
   const themeState = useAppSelector(state => state.theme);
   const [menuitems, setMenuitems] = useState(MenuItems);
 
-  useEffect(() => {
-      history.push(location.pathname);  // add  history to history  stack for current location.pathname to prevent multiple history calls innerWidth  and innerWidth  calls from  multiple users. This is important because the history stack is not always empty when the user clicks  the history       
-      if (history.length > 2) {
-        history.shift();
-      }
-      if (history[0] !== history[1]) {
-        setSidemenu();
-      }
-      let mainContent = document.querySelector(".main-content");
-      mainContent?.addEventListener("click", mainContentClickFn);
-      return () => {
-        mainContent?.removeEventListener("click", mainContentClickFn);
-      };
-
-	}, [location,setSidemenu]);
-
   //  In Horizontal When we click the body it should we Closed
-	function mainContentClickFn() {
-		if (
+  const mainContentClickFn = useCallback(()=>{
+    if (
 			themeState.dataNavLayout === "horizontal" &&
 			window.innerWidth >= 992
 		) {
 			clearMenuActive();
-
 		}
-	}
-  
-  function setSidemenu(list?:Item) {
-		let dd = list ? list.path + "" : location.pathname;
+  },[themeState.dataNavLayout]);
+
+  const setSidemenu = useCallback((list?:Item)=>{
+    let dd = list ? list.path + "" : location.pathname;
 		if (menuitems) {
 			menuitems.filter(mainlevel => {
 				if (mainlevel.Items) {
@@ -93,7 +77,35 @@ const SideBar = () => {
 		}
 		if (themeState.dataVerticalStyle == "doublemenu") {
 		}
-	}
+  },[menuitems,themeState.dataVerticalStyle])
+
+  useEffect(() => {
+      history.push(location.pathname);  // add  history to history  stack for current location.pathname to prevent multiple history calls innerWidth  and innerWidth  calls from  multiple users. This is important because the history stack is not always empty when the user clicks  the history       
+      if (history.length > 2) {
+        history.shift();
+      }
+      if (history[0] !== history[1]) {
+        setSidemenu();
+      }
+      let mainContent = document.querySelector(".main-content");
+      mainContent?.addEventListener("click", mainContentClickFn);
+      return () => {
+        mainContent?.removeEventListener("click", mainContentClickFn);
+      };
+
+	}, [setSidemenu,mainContentClickFn]);
+
+  useEffect(() => {
+		if (
+			themeState.dataNavLayout == "horizontal" &&
+			window.innerWidth >= 992
+		) {
+			clearMenuActive();
+
+		}
+	}, [themeState.dataNavLayout]);
+
+  
 
   function clearMenuActive() {
 		MenuItems.filter((mainlevel) => {
@@ -118,6 +130,111 @@ const SideBar = () => {
 			return mainlevel;
 		});
 		setMenuitems((arr) => [...arr]);
+	}
+
+  function toggleSidemenu(item:Item) {
+		{
+			// To show/hide the menu
+			if (!item.active) {
+				menuitems.filter(mainlevel => {
+					if (mainlevel.Items) {
+						mainlevel.Items.filter((sublevel) => {
+							sublevel.active = false;
+							if (item === sublevel) {
+								sublevel.active = true;
+							}
+							if (sublevel.children) {
+								sublevel.children.filter((sublevel1) => {
+									sublevel1.active = false;
+									if (item === sublevel1) {
+										sublevel.active = true;
+										sublevel1.active = true;
+									}
+									if (sublevel1.children) {
+										sublevel1.children.filter((sublevel2) => {
+											sublevel2.active = false;
+											if (item === sublevel2) {
+												sublevel.active = true;
+												sublevel1.active = true;
+												sublevel2.active = true;
+											}
+											if (sublevel2.children) {
+												sublevel2.children.filter(sublevel3 => {
+													sublevel3.active = false;
+													if (item === sublevel3) {
+														sublevel.active = true;
+														sublevel1.active = true;
+														sublevel2.active = true;
+														sublevel3.active = true;
+													}
+													return sublevel2;
+												});
+											}
+											return sublevel2;
+										});
+									}
+									return sublevel1;
+								});
+							}
+							return sublevel;
+						});
+					}
+					return mainlevel;
+				});
+			}
+			else {
+				if (localStorage.ynexverticalstyles != 'doublemenu') {
+					item.active = !item.active;
+				}
+			}
+		}
+		if (localStorage.ynexverticalstyles === 'doublemenu' && themeState.dataToggled !== 'double-menu-open') {
+			dispatch(ThemeChanger({ ...themeState, "dataToggled": "double-menu-open" }));
+		}
+		setMenuitems((arr) => [...arr]);
+	}
+
+  function Onhover() {
+		if ((themeState.dataToggled == "icon-overlay-close" || themeState.dataVerticalStyle == "detached") && themeState.iconOverlay != "open") {
+			dispatch(ThemeChanger({ ...themeState, "iconOverlay": "open" }));
+		}
+	}
+	function Outhover() {
+		if ((themeState.dataToggled == "icon-overlay-close" || themeState.dataVerticalStyle == "detached") && themeState.iconOverlay == "open") {
+			dispatch(ThemeChanger({ ...themeState, "iconOverlay": "" }));
+		}
+	}
+	function Clickhandelar() {
+		if (localStorage.getItem("ynexverticalstyles") == "icontext") {
+			dispatch(ThemeChanger({ ...themeState, "iconText": "open" }));
+		}
+
+	}
+
+  let MenuOpen = () => {
+		let MainContent = document.querySelector(".main-content");
+		if (themeState.dataVerticalStyle == "icontext" && themeState.iconText != "open") {
+			dispatch(ThemeChanger({ ...themeState, "iconText": "open" }));
+			MainContent?.addEventListener("click", (_event) => {
+				dispatch(ThemeChanger({ ...themeState, "iconText": "" }));
+			});
+		}
+
+	};
+
+  function menuClose() {
+    const element =document.querySelector("html");
+    if(element){
+      if (element.getAttribute('data-toggled') == 'open', 'menu-click-closed', "menu-hover-closed", "icon-hover-closed", "icon-hover-closed" || element.getAttribute('data-toggled') == '') {
+        if (window.innerWidth <= 992) {
+          dispatch(ThemeChanger({ ...themeState, dataToggled: 'close' }));
+        }
+        const overlayElement = document.querySelector("#responsive-overlay");
+        if (overlayElement) {
+          overlayElement.classList.remove("active");
+        }
+      }
+    }
 	}
 
   return (
