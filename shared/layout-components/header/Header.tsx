@@ -40,13 +40,13 @@ const Header = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      console.log('handleResize')
+      // console.log('handleResize')
       const windowObject = window;
       if (windowObject.innerWidth <= 991) {
         console.log('windowObject.innerWidth <= 991')
         dispatch(ThemeChanger({ ...themeState, "dataToggled": "close" }));
       } else {
-        console.log('windowObject.innerWidth > 991')
+        // console.log('windowObject.innerWidth > 991')
         dispatch(ThemeChanger({...themeState,"dataToggled":""}));
       }
     };

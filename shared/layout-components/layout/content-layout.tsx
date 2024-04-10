@@ -68,7 +68,7 @@ const ContentLayout = ({children}:{ children: ReactNode}) => {
     
     return (
        <>
-            <Switcher/>
+            {/* <Switcher/> */}
             <div style={{display: `${lateLoad ? 'block' : 'none'}`}}>
                 <div className='page'>
                     <Header/>

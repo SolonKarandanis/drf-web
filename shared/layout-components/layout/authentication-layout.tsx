@@ -12,7 +12,7 @@ const Authenticationlayout = ({children}:{ children: ReactNode}) => {
               <body></body>
           </Helmet>
           {children}
-          <Switcher/>
+          {/* <Switcher/> */}
       </HelmetProvider>
     </>
   )
