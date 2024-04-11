@@ -1,14 +1,17 @@
+import { MouseEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
 import { ThemeChanger } from "@/shared/redux/features/themeSlice";
 import {useState, useEffect, useCallback} from 'react'
-import { useRouter } from "next/router";
+import { usePathname,useRouter } from 'next/navigation';
 import MenuItems, { Item } from "./nav";
 
 let history = [];
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
-  let location = useRouter();
+  const router = useRouter();
+  const pathname = usePathname();
+  
   const themeState = useAppSelector(state => state.theme);
   const [menuitems, setMenuitems] = useState(MenuItems);
 
@@ -23,7 +26,7 @@ const SideBar = () => {
   },[themeState.dataNavLayout]);
 
   const setSidemenu = useCallback((list?:Item)=>{
-    let dd = list ? list.path + "" : location.pathname;
+    let dd = list ? list.path + "" : pathname;
 		if (menuitems) {
 			menuitems.filter(mainlevel => {
 				if (mainlevel.Items) {
@@ -78,10 +81,10 @@ const SideBar = () => {
 		}
 		if (themeState.dataVerticalStyle == "doublemenu") {
 		}
-  },[menuitems,themeState.dataVerticalStyle])
+  },[menuitems,themeState.dataVerticalStyle,pathname])
 
   useEffect(() => {
-      history.push(location.pathname);  // add  history to history  stack for current location.pathname to prevent multiple history calls innerWidth  and innerWidth  calls from  multiple users. This is important because the history stack is not always empty when the user clicks  the history       
+      history.push(pathname);  // add  history to history  stack for current location.pathname to prevent multiple history calls innerWidth  and innerWidth  calls from  multiple users. This is important because the history stack is not always empty when the user clicks  the history       
       if (history.length > 2) {
         history.shift();
       }
@@ -94,7 +97,7 @@ const SideBar = () => {
         mainContent?.removeEventListener("click", mainContentClickFn);
       };
 
-	}, [setSidemenu,mainContentClickFn]);
+	}, [setSidemenu,mainContentClickFn,pathname]);
 
   useEffect(() => {
 		if (
@@ -449,10 +452,12 @@ const SideBar = () => {
 		}
 	});
 
-  // const handleClick = (e) => {
-	// 	e.preventDefault()
-	// 	router.push(href)
-	// }
+	const handleClick = (e:MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+		console.log(e)
+		e.preventDefault()
+		// router.push(href)
+	}
+
 
   return (
     <div>SideBar</div>
