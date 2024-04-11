@@ -4,23 +4,15 @@ export interface MenuItem{
 }
 
 export interface Item{
-    icon:JSX.Element;
+    icon?:JSX.Element;
     badgetxt?:JSX.Element;
     path?:string;
     title:string;
     type:string;
     active:boolean;
     selected:boolean;
-    children:Children[];
-}
-
-export interface Children{
-    path:string;
-    type:string;
-    active:boolean;
-    selected:boolean;
-    title:string;
-    children?:Children[];
+    class?:string;
+    children?:Item[];
 }
 
 const DashboardIcon = <i className="bx bx-home side-menu__icon"></i>

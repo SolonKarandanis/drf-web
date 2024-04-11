@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { Fragment, MouseEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
 import { ThemeChanger } from "@/shared/redux/features/themeSlice";
 import {useState, useEffect, useCallback} from 'react'
@@ -516,7 +516,136 @@ const SideBar = () => {
 						className="main-logo toggle-white"/>
 				</Link>
 			</div>
-			<SimpleBar className="main-sidebar " id="sidebar-scroll"></SimpleBar>
+			<SimpleBar className="main-sidebar " id="sidebar-scroll">
+				<nav className="main-menu-container nav nav-pills flex-column sub-open">
+					<div className="slide-left" id="slide-left" onClick={() => { slideLeft(); }}>
+						<svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24"
+							height="24" viewBox="0 0 24 24">
+							<path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path>
+						</svg>
+					</div>
+					<ul className="main-menu">
+						{menuitems.map((firstlayer) =>
+							<Fragment key={Math.random()}>
+								{firstlayer.menutitle ? <li className="slide__category">
+									<span className="category-name">{firstlayer.menutitle}</span>
+								</li> : ""}
+								{firstlayer.Items.map((secondlayer) =>
+									secondlayer.type === "link" ?
+										<li className={`slide ${secondlayer.active ? "active" : ""}`} key={Math.random()} >
+											<a onClick={(_event) => { setSidemenu(secondlayer); noChild(); handleClick("/")}} href={secondlayer.path + "/"} className={`side-menu__item ${secondlayer.selected ? "active" : ""}`}>{secondlayer.icon} <span className="side-menu__label">{secondlayer.title} {secondlayer.badgetxt ? (
+												<span className={secondlayer.class}>
+													{secondlayer.badgetxt}
+												</span>
+											) : (
+												""
+											)}</span></a>
+										</li>
+										: secondlayer.type === "sub" ?
+											<li className={`slide has-sub ${secondlayer.active ? "open" : ""}`} key={Math.random()} onClick={() => MenuOpen()}>
+												<a href="#!" className={`side-menu__item ${secondlayer.selected ? "active" : ""}`}
+													onClick={(event) => { event.preventDefault(); toggleSidemenu(secondlayer); }}>
+													{secondlayer.icon}
+													<span className="side-menu__label">{secondlayer.title}
+														{secondlayer.badgetxt ? (
+															<span className={secondlayer.class}>
+																{secondlayer.badgetxt}
+															</span>
+														) : (
+															""
+														)}
+													</span>
+													<i className="angle fe fe-chevron-right side-menu__angle"></i></a>
+												<ul
+													className={`slide-menu child1 ${secondlayer.active ? "active" : ""}
+													${secondlayer.active && localStorage.ynexverticalstyles == 'doublemenu' ?
+															"double-menu-active" : ""
+														}
+						`}
+													style={
+														secondlayer.active
+															? { display: "block" }
+															: { display: "none" }
+													}
+												>
+													<li className="slide side-menu__label1">
+														<a href="">{secondlayer.title}</a>
+													</li>
+													{secondlayer && secondlayer.children && secondlayer.children.map((thirdlayer) =>
+														<Fragment key={Math.random()} >
+															{thirdlayer.type === "link" ? <li className={`slide ${thirdlayer.active ? "active" : ""}`}>
+																<Link onClick={(event) => { setSidemenu(thirdlayer); }} href={thirdlayer.path + ""} className={`side-menu__item ${thirdlayer.selected ? "active" : ""}`}>
+																	{thirdlayer.icon}
+																	{thirdlayer.title}
+																</Link>
+															</li>
+																: thirdlayer.type === "sub" ? <li className={`slide has-sub ${secondlayer.active ? "open" : ""}`}>
+																	<a href="#!"
+																		className={`side-menu__item ${thirdlayer.selected ? "active" : ""}`}
+																		onClick={(evnt) => {
+																			evnt.preventDefault();
+																			toggleSidemenu(thirdlayer);
+																			Clickhandelar();
+
+																		}}>{thirdlayer.icon} <span className="">
+																			{thirdlayer.title}
+																		</span><i className="fe fe-chevron-right side-menu__angle"></i></a>
+																	<ul className={`slide-menu child2 ${thirdlayer.active ? "!block" : ""
+																		}`}>
+																		{thirdlayer && thirdlayer.children && thirdlayer.children.map((fourthlayer) => <Fragment key={Math.random()}>
+																			{fourthlayer.type === "link" ?
+																				<li className={`slide ${fourthlayer.active ? "active" : ""}`}>
+																					<Link onClick={(event) => { setSidemenu(fourthlayer); }} href={fourthlayer.path + ""} className={`side-menu__item ${fourthlayer.selected ? "active" : ""}`}>
+																						{fourthlayer.icon}
+																						{fourthlayer.title}
+																					</Link>
+																				</li>
+																				: fourthlayer.type === "sub" ? <li className={`slide has-sub ${fourthlayer.active ? "open" : ""}`}>
+
+																					<a href="#!" className="side-menu__item" onClick={(evnt) => {
+																						evnt.preventDefault();
+																						toggleSidemenu(fourthlayer);
+
+																					}}>{fourthlayer.icon} <span className="">{fourthlayer.title}</span><i className="ri ri-arrow-right-s-line side-menu__angle"></i></a>
+
+																					<ul className={`slide-menu child3 ${fourthlayer.active ? "!block" : ""
+																						}`}>
+																						{fourthlayer&& fourthlayer.children && fourthlayer.children.map((fivthlayer) => <Fragment key={Math.random()}>
+																							{fivthlayer.type === "link" ?
+																								<li className="slide">
+																									<Link href={fourthlayer.path + ""} className="side-menu__item">
+																										{fivthlayer.icon} {fivthlayer.title}</Link>
+																								</li> : <a href="#!" className="side-menu__item" onClick={(evnt) => {
+																									evnt.preventDefault();
+																									toggleSidemenu(fivthlayer);
+
+																								}}>{fivthlayer.icon} <span className="">{fivthlayer.title}</span><i className="ri ri-arrow-right-s-line side-menu__angle"></i></a>
+																							}
+
+																						</Fragment>)}
+
+																					</ul>
+
+																				</li> : ""
+
+																			}
+																		</Fragment>)}
+																	</ul>
+																</li> : ""
+															}
+														</Fragment>
+													)}
+												</ul>
+											</li> : "")
+								}
+							</Fragment>
+						)}
+					</ul>
+					<div className="slide-right" onClick={() => { slideRight(); }} id="slide-right">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"><path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path></svg>
+					</div>
+				</nav>
+			</SimpleBar>
 		</aside>
 	</>
   )
