@@ -89,6 +89,13 @@ export const MenuItems:MenuItem[] =[
                         active: false, 
                         selected: false 
                     },
+                    { 
+                        title: "Edit", 
+                        path: "/products/edit", 
+                        type: "link", 
+                        active: false, 
+                        selected: false 
+                    },
 					
 				]
 			},
