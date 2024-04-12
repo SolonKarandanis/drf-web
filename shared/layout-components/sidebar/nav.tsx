@@ -17,7 +17,6 @@ export interface Item{
 
 const DashboardIcon = <i className="bx bx-home side-menu__icon"></i>
 const NestedmenuIcon = <i className="bx bx-layer side-menu__icon"></i>
-const badge = <span className="badge !bg-warning/10 !text-warning !py-[0.25rem] !px-[0.45rem] !text-[0.75em] ms-2">12</span>
 
 export const MenuItems:MenuItem[] =[
     {
@@ -25,7 +24,6 @@ export const MenuItems:MenuItem[] =[
         Items: [
             {
                 icon: DashboardIcon, 
-                badgetxt: badge, 
                 title: 'Dashboards', 
                 type: "sub", 
                 active: false, 
@@ -38,6 +36,13 @@ export const MenuItems:MenuItem[] =[
                         selected: false, 
                         title: "CRM" 
                     },
+                    {
+                        path: "/dashboard", 
+                        type: "link", 
+                        active: false, 
+                        selected: false, 
+                        title: "Custom" 
+                    },
                 ]
             },
         ]
@@ -46,26 +51,20 @@ export const MenuItems:MenuItem[] =[
         menutitle: "Web app", Items: [
             {
 				icon: NestedmenuIcon, 
-                title: "Nested Menu", 
+                title: "Users", 
                 type: "sub", 
                 active: false, 
                 selected: false,
                 children: 
                 [
 					{ 
-                        title: "Nested-1", 
-                        path: "", 
+                        title: "Search", 
+                        path: "/users/search", 
                         type: "link", 
                         active: false, 
                         selected: false 
                     },
-					{
-						title: "Nested-2", 
-                        type: "sub", 
-                        active: false, 
-                        selected: false, 
-                        path: ""
-			        },
+					
 				]
 			},
         ]
