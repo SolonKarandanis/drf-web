@@ -67,6 +67,31 @@ export const MenuItems:MenuItem[] =[
 					
 				]
 			},
+            {
+				icon: NestedmenuIcon, 
+                title: "Products", 
+                type: "sub", 
+                active: false, 
+                selected: false,
+                children: 
+                [
+					{ 
+                        title: "Search", 
+                        path: "/products/search", 
+                        type: "link", 
+                        active: false, 
+                        selected: false 
+                    },
+                    { 
+                        title: "Create", 
+                        path: "/products/create", 
+                        type: "link", 
+                        active: false, 
+                        selected: false 
+                    },
+					
+				]
+			},
         ]
     },
 ]

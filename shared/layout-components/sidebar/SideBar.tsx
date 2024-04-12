@@ -533,7 +533,7 @@ const SideBar = () => {
 								{firstlayer.Items.map((secondlayer) =>
 									secondlayer.type === "link" ?
 										<li className={`slide ${secondlayer.active ? "active" : ""}`} key={Math.random()} >
-											<a onClick={(_event) => { setSidemenu(secondlayer); noChild(); handleClick("/")}} href={secondlayer.path + "/"} className={`side-menu__item ${secondlayer.selected ? "active" : ""}`}>{secondlayer.icon} <span className="side-menu__label">{secondlayer.title} {secondlayer.badgetxt ? (
+											<a onClick={(_event) => { setSidemenu(secondlayer); noChild(); }} href={secondlayer.path + "/"} className={`side-menu__item ${secondlayer.selected ? "active" : ""}`}>{secondlayer.icon} <span className="side-menu__label">{secondlayer.title} {secondlayer.badgetxt ? (
 												<span className={secondlayer.class}>
 													{secondlayer.badgetxt}
 												</span>
