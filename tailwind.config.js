@@ -1,20 +1,28 @@
-import type { Config } from 'tailwindcss'
+/** @type {import('tailwindcss').Config} */
 
 const colors = require("tailwindcss/colors");
 const plugin = require("tailwindcss/plugin");
 
-const config: Config = {
+module.exports = {
   darkMode: "class",
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./shared/**/*.{js,ts,jsx,tsx,mdx}",
     "./styles/globals.scss",
-    './node_modules/preline/dist/*.js'
-  ],
+    './node_modules/preline/dist/*.js', // <-- Problematic entry
+],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     screens: {
       lg: "992px",
       md: "768px",
@@ -99,6 +107,45 @@ const config: Config = {
         github:"rgb(var(--github))",
         google:"rgb(var(--google))",
         youtube:"rgb(var(--youtube))",
+
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       gradientColorStops: {
         primary: 'rgb(var(--primary))',
@@ -138,6 +185,21 @@ const config: Config = {
         instagram:"linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-1": "linear-gradient(102deg,transparent 41%,primary/50 0)",
+        "gradient-1": "linear-gradient(102deg,light 41%,transparent 0)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
     animation: {
@@ -152,11 +214,11 @@ const config: Config = {
       'slow-ping':'ping 2s linear infinite',
       'animate-wase': 'wase 4s linear infinite',
     },
-    keyframes:{
+    keyframes: {
       particles: {
         "0%": {
           transform: " translateY(0) rotate(0)",
-          opacity: "1",
+          opacity: 1,
         },
         "100%": {
           transform: "translateY(-90px) rotate(180deg)",
@@ -165,10 +227,10 @@ const config: Config = {
       },
       pulse: {
         "0%, 100%": {
-          opacity: "1",
+          opacity: 1,
         },
         "50%": {
-          opacity: "0.5",
+          opacity: 0.5,
         },
       },
       ping:{
@@ -225,13 +287,13 @@ const config: Config = {
           transform: "rotate(360deg)",
         },
       },
-    }
+    },
   },
   variants: {},
   plugins: [
     require("tailwindcss"),
-    require('@tailwindcss/forms'),
-    require('tailwind-clip-path'),
+    require("@tailwindcss/forms"),
+    require("tailwind-clip-path"),
     require("preline/plugin"),
     plugin(function ({ addComponents }) {
       addComponents({
@@ -248,4 +310,3 @@ const config: Config = {
     }),
   ],
 }
-export default config
