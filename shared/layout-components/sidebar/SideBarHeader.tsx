@@ -5,7 +5,7 @@ import { basePath } from '@/next.config';
 const SideBarHeader = () => {
   return (
     <div className="main-sidebar-header">
-        <Link href="/components/dashboards/crm/" className="header-logo">
+        <Link href="/dashboard/" className="header-logo">
             <Image
                 alt="logo"
                 src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-logo.png`}

@@ -7,6 +7,8 @@ import MenuItems, { Item } from "./nav";
 import Link from 'next/link';
 import SimpleBar from 'simplebar-react';
 import SideBarHeader from './SideBarHeader';
+import SlideLeft from './SlideLeft';
+import SlideRight from './SlideRight';
 
 let history = [];
 
@@ -275,160 +277,6 @@ const SideBar = () => {
 		});
 	}, [menuClose]);
 
-  function switcherArrowFn() {
-		// used to remove is-expanded class and remove class on clicking arrow buttons
-		function slideClick() {
-			const slide = document.querySelectorAll<HTMLElement>(".slide");
-			const slideMenu = document.querySelectorAll<HTMLElement>(".slide-menu");
-			slide.forEach((element) => {
-				if (element.classList.contains("is-expanded") == true) {
-					element.classList.remove("is-expanded");
-				}
-			});
-			slideMenu.forEach((element) => {
-				if (element.classList.contains("open") == true) {
-					element.classList.remove("open");
-					element.style.display = "none";
-				}
-			});
-		}
-
-		slideClick();
-	}
-
-  function slideRight() {
-		const menuNav = document.querySelector<HTMLElement>(".main-menu");
-		const mainContainer1 = document.querySelector<HTMLElement>(".main-sidebar");
-
-		if (menuNav && mainContainer1) {
-			const marginLeftValue = Math.ceil(
-				Number(window.getComputedStyle(menuNav).marginInlineStart.split("px")[0])
-			);
-			const marginRightValue = Math.ceil(
-				Number(window.getComputedStyle(menuNav).marginInlineEnd.split("px")[0])
-			);
-			const check = menuNav.scrollWidth - mainContainer1.offsetWidth;
-			let mainContainer1Width = mainContainer1.offsetWidth;
-
-			if (menuNav.scrollWidth > mainContainer1.offsetWidth) {
-				if (!(themeState.dir === "rtl")) {
-					if (Math.abs(check) > Math.abs(marginLeftValue)) {
-						menuNav.style.marginInlineEnd = "0";
-
-						if (!(Math.abs(check) > Math.abs(marginLeftValue) + mainContainer1Width)) {
-							mainContainer1Width = Math.abs(check) - Math.abs(marginLeftValue);
-							const slideRightButton = document.querySelector<HTMLElement>("#slide-right");
-							if (slideRightButton) {
-								slideRightButton.classList.add("hidden");
-							}
-						}
-
-						menuNav.style.marginInlineStart =
-							(Number(menuNav.style.marginInlineStart.split("px")[0]) -
-								Math.abs(mainContainer1Width)) +
-							"px";
-
-						const slideRightButton = document.querySelector<HTMLElement>("#slide-right");
-						if (slideRightButton) {
-							slideRightButton.classList.remove("hidden");
-						}
-					}
-				} else {
-					if (Math.abs(check) > Math.abs(marginRightValue)) {
-						menuNav.style.marginInlineEnd = "0";
-
-						if (!(Math.abs(check) > Math.abs(marginRightValue) + mainContainer1Width)) {
-							mainContainer1Width = Math.abs(check) - Math.abs(marginRightValue);
-							const slideRightButton = document.querySelector<HTMLElement>("#slide-right");
-							if (slideRightButton) {
-								slideRightButton.classList.add("hidden");
-							}
-						}
-
-						menuNav.style.marginInlineStart =
-							(Number(menuNav.style.marginInlineStart.split("px")[0]) -
-								Math.abs(mainContainer1Width)) +
-							"px";
-
-						const slideLeftButton = document.querySelector<HTMLElement>("#slide-left");
-						if (slideLeftButton) {
-							slideLeftButton.classList.remove("hidden");
-						}
-					}
-				}
-			}
-
-			const element = document.querySelector<HTMLElement>(".main-menu > .slide.open");
-			const element1 = document.querySelector<HTMLElement>(".main-menu > .slide.open > ul");
-			if (element) {
-				element.classList.remove("active");
-			}
-			if (element1) {
-				element1.style.display = "none";
-			}
-		}
-
-		switcherArrowFn();
-	}
-
-  function slideLeft() {
-		const menuNav = document.querySelector<HTMLElement>(".main-menu");
-		const mainContainer1 = document.querySelector<HTMLElement>(".main-sidebar");
-
-		if (menuNav && mainContainer1) {
-			const marginLeftValue = Math.ceil(
-				Number(window.getComputedStyle(menuNav).marginInlineStart.split("px")[0])
-			);
-			const marginRightValue = Math.ceil(
-				Number(window.getComputedStyle(menuNav).marginInlineEnd.split("px")[0])
-			);
-			const check = menuNav.scrollWidth - mainContainer1.offsetWidth;
-			let mainContainer1Width = mainContainer1.offsetWidth;
-
-			if (menuNav.scrollWidth > mainContainer1.offsetWidth) {
-				if (!(themeState.dir === "rtl")) {
-					if (Math.abs(check) <= Math.abs(marginLeftValue)) {
-						menuNav.style.marginInlineStart = "0px";
-					}
-				} else {
-					if (Math.abs(check) > Math.abs(marginRightValue)) {
-						menuNav.style.marginInlineStart = "0";
-
-						if (!(Math.abs(check) > Math.abs(marginRightValue) + mainContainer1Width)) {
-							mainContainer1Width = Math.abs(check) - Math.abs(marginRightValue);
-							const slideRightButton = document.querySelector<HTMLElement>("#slide-right");
-							if (slideRightButton) {
-								slideRightButton.classList.add("hidden");
-							}
-						}
-
-						menuNav.style.marginInlineStart =
-							(Number(menuNav.style.marginInlineStart.split("px")[0]) -
-								Math.abs(mainContainer1Width)) +
-							"px";
-
-						const slideLeftButton = document.querySelector<HTMLElement>("#slide-left");
-						if (slideLeftButton) {
-							slideLeftButton.classList.remove("hidden");
-						}
-					}
-				}
-
-			}
-
-			const element = document.querySelector<HTMLElement>(".main-menu > .slide.open");
-			const element1 = document.querySelector<HTMLElement>(".main-menu > .slide.open > ul");
-			if (element) {
-				element.classList.remove("active");
-			}
-			if (element1) {
-				element1.style.display = "none";
-			}
-		}
-
-		switcherArrowFn();
-	}
-
   const noChild = () => {
 		if (localStorage.ynexverticalstyles == 'doublemenu') {
 			dispatch(ThemeChanger({ ...themeState, "dataToggled": "double-menu-close" }));
@@ -472,12 +320,7 @@ const SideBar = () => {
 			<SideBarHeader />
 			<SimpleBar className="main-sidebar " id="sidebar-scroll">
 				<nav className="main-menu-container nav nav-pills flex-column sub-open">
-					<div className="slide-left" id="slide-left" onClick={() => { slideLeft(); }}>
-						<svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24"
-							height="24" viewBox="0 0 24 24">
-							<path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path>
-						</svg>
-					</div>
+					<SlideLeft />
 					<ul className="main-menu">
 						{menuitems.map((firstlayer) =>
 							<Fragment key={Math.random()}>
@@ -595,9 +438,7 @@ const SideBar = () => {
 							</Fragment>
 						)}
 					</ul>
-					<div className="slide-right" onClick={() => { slideRight(); }} id="slide-right">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"><path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path></svg>
-					</div>
+					<SlideRight />
 				</nav>
 			</SimpleBar>
 		</aside>
