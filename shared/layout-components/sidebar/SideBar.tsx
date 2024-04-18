@@ -5,9 +5,8 @@ import {useState, useEffect, useCallback} from 'react'
 import { usePathname,useRouter } from 'next/navigation';
 import MenuItems, { Item } from "./nav";
 import Link from 'next/link';
-import Image from "next/image";
-import { basePath } from '@/next.config';
 import SimpleBar from 'simplebar-react';
+import SideBarHeader from './SideBarHeader';
 
 let history = [];
 
@@ -470,52 +469,7 @@ const SideBar = () => {
 			id="sidebar" 
 			onMouseOver={() => Onhover()} 
 			onMouseLeave={() => Outhover()} >
-			<div className="main-sidebar-header">
-				<Link href="/components/dashboards/crm/" className="header-logo">
-					<Image
-						alt="logo"
-						src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-logo.png`}
-						width={700}
-						height={475}
-						sizes="100vw"
-						className="main-logo desktop-logo"/>
-					<Image
-						alt="logo"
-						src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/toggle-logo.png`} 
-						width={700}
-						height={475}
-						sizes="100vw"
-						className="main-logo toggle-logo"/>
-					<Image
-						alt="logo"
-						src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-dark.png`} 
-						width={700}
-						height={475}
-						sizes="100vw"
-						className="main-logo desktop-dark"/>
-					<Image
-						alt="logo"
-						src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/toggle-dark.png`} 
-						width={700}
-						height={475}
-						sizes="100vw"
-						className="main-logo toggle-dark"/>
-					<Image
-						alt="logo"
-						src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-white.png`} 
-						width={700}
-						height={475}
-						sizes="100vw"
-						className="main-logo desktop-white"/>
-					<Image
-						alt="logo"
-						src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/toggle-white.png`}
-						width={700}
-						height={475}
-						sizes="100vw"
-						className="main-logo toggle-white"/>
-				</Link>
-			</div>
+			<SideBarHeader />
 			<SimpleBar className="main-sidebar " id="sidebar-scroll">
 				<nav className="main-menu-container nav nav-pills flex-column sub-open">
 					<div className="slide-left" id="slide-left" onClick={() => { slideLeft(); }}>
