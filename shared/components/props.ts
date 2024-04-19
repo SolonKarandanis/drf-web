@@ -35,10 +35,12 @@ export interface Options{
 }
 
 export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement>{
-    label:string,
     name:string,
     options:Options[],
     required?:boolean,
+    className?:string,
+    sectionClassName?:string,
     inputProps?:Props,
-    error?:string
+    error?:string,
+    children: React.ReactNode
 }

@@ -1,33 +1,38 @@
 import {FC} from 'react'
+import { twMerge } from "tailwind-merge";
 import CFormError from '@/shared/components/form-error/cform-error'
 import { SelectProps } from '../props'
 
 
 const CFormSelect:FC<SelectProps> = ({
-    label,
     name,
     options,
     required=false,
     inputProps,
+    className,
+    sectionClassName,
     error,
+    children,
     ...rest
 }) => {
     const labelHtml = required? (
-        <label htmlFor={name} className="col-lg-4 col-form-label fw-bold fs-6">
-            <span className='required'>{label}</span>
+        <label htmlFor={name} className="block text-sm font-medium leading-6 text-gray-900">
+            <span className='required'>{children}</span>
         </label>
     ):(
         
-        <label htmlFor={name} className="col-lg-4 col-form-label fw-bold fs-6">
-            {label}
+        <label htmlFor={name} className="block text-sm font-medium leading-6 text-gray-900">
+            {children}
         </label>
     )
 
     return (
-        <section className="row mb-6">
+        <section className={sectionClassName}>
             {labelHtml}
-            <div className='col-lg-8 fv-row'>
-                <select className='form-select form-select-solid form-select-lg fw-bold' 
+            <div className='mt-2'>
+                <select 
+                    className={twMerge('block w-full rounded-md border-0 py-1.5',className)}
+                    
                     {...(inputProps ?? {})}
                     {...rest}>
                     {options.map((option) =>(
