@@ -18,5 +18,17 @@ export interface SectionProps{
         email: string;
         firstName: string;
         lastName: string;
+        country: string;
+        street: string;
+        city: string;
+        state: string;
+        zip: string;
+        username: string;
+        password: string;
+        confirmPassword: string;
     }>;
+}
+
+export interface AddressInfoProps extends SectionProps{
+    countries:{value:number,label:string}[]
 }
