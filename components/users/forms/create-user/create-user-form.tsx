@@ -10,8 +10,9 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify';
 import Stepper from "@/shared/components/stepper/stepper";
 import CForm from "@/shared/components/form/cform";
-import CFormInput from '@/shared/components/form-input/cform-input';
-import CFormSelect from "@/shared/components/form-select/cform-select";
+import PersonalInfo from "../sections/personal-info";
+import AddressInfo from "../sections/address-info";
+import Credentials from "../sections/credentials";
 
 type Inputs = z.infer<typeof CreateUserSchema>
 
@@ -59,6 +60,9 @@ const CreateUserForm = () => {
     const [previousStep, setPreviousStep] = useState(0)
     const [currentStep, setCurrentStep] = useState(0)
     const delta = currentStep - previousStep
+
+    
+
 
     const {
         register,
@@ -115,50 +119,7 @@ const CreateUserForm = () => {
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ duration: 0.3, ease: 'easeInOut' }}
                     >
-                        <h2 className='text-base font-semibold leading-7 text-gray-900'>
-                            Personal Information
-                        </h2>
-                        <p className='mt-1 text-sm leading-6 text-gray-600'>
-                            Provide your personal details.
-                        </p>
-                        <div className='grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6'>
-                            <CFormInput 
-                                type='text'
-                                required={true}
-                                name='firstName' 
-                                placeholder="First Name"
-                                className="w-full !rounded-md"
-                                sectionClassName="sm:col-span-3"
-                                autoComplete='firstName'
-                                props={register("firstName")}
-                                error={errors.firstName?.message}>
-                                    First Name
-                            </CFormInput>
-                            <CFormInput 
-                                type='text'
-                                required={true}
-                                name='lastName' 
-                                placeholder="Last name"
-                                className="w-full !rounded-md"
-                                sectionClassName="sm:col-span-3"
-                                autoComplete='lastName'
-                                props={register("lastName")}
-                                error={errors.lastName?.message}>
-                                    Last name
-                            </CFormInput>
-                            <CFormInput 
-                                type='email'
-                                required={true}
-                                name='email' 
-                                placeholder="Email"
-                                className="w-full !rounded-md"
-                                sectionClassName="sm:col-span-3"
-                                autoComplete='email'
-                                props={register("email")}
-                                error={errors.email?.message}>
-                                    Email address
-                            </CFormInput>
-                        </div>
+                        <PersonalInfo register={register} errors={errors} />
                     </motion.div>
                 )}
                 {currentStep === 1 && (
@@ -167,71 +128,7 @@ const CreateUserForm = () => {
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ duration: 0.3, ease: 'easeInOut' }}
                     >
-                        <h2 className='text-base font-semibold leading-7 text-gray-900'>
-                            Address
-                        </h2>
-                        <p className='mt-1 text-sm leading-6 text-gray-600'>
-                            Address where you can receive products.
-                        </p>
-                        <div className='grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6'>
-                            <CFormSelect 
-                                name="country"
-                                options={countries}
-                                required={true}
-                                inputProps={register("country")}
-                                className="text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                                sectionClassName="sm:col-span-3"
-                                autoComplete='country-name'
-                                error={errors.country?.message}>
-                                Country
-                            </CFormSelect>
-                            <CFormInput 
-                                type='text'
-                                required={true}
-                                name='street' 
-                                placeholder="Street"
-                                className="w-full !rounded-md"
-                                sectionClassName="sm:col-span-3"
-                                autoComplete='street-address'
-                                props={register("street")}
-                                error={errors.street?.message}>
-                                    Street address
-                            </CFormInput>
-                            <CFormInput 
-                                type='text'
-                                required={true}
-                                name='city' 
-                                placeholder="City"
-                                className="w-full !rounded-md"
-                                sectionClassName="sm:col-span-2 sm:col-start-1"
-                                props={register("city")}
-                                error={errors.city?.message}>
-                                    City
-                            </CFormInput>
-                            <CFormInput 
-                                type='text'
-                                required={true}
-                                name='state' 
-                                placeholder="State/Province"
-                                className="w-full !rounded-md"
-                                sectionClassName="sm:col-span-2"
-                                props={register("state")}
-                                error={errors.state?.message}>
-                                    State/Province
-                            </CFormInput>
-                            <CFormInput 
-                                type='text'
-                                required={true}
-                                name='zip' 
-                                placeholder="ZIP/Postal code"
-                                className="w-full !rounded-md"
-                                sectionClassName="sm:col-span-2"
-                                autoComplete='postal-code'
-                                props={register("zip")}
-                                error={errors.zip?.message}>
-                                    ZIP/Postal code
-                            </CFormInput>
-                        </div>
+                        <AddressInfo register={register} errors={errors} countries={countries} />
                     </motion.div>
                 )}
                 {currentStep === 2 && (
@@ -240,50 +137,7 @@ const CreateUserForm = () => {
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ duration: 0.3, ease: 'easeInOut' }}
                     >
-                        <h2 className='text-base font-semibold leading-7 text-gray-900'>
-                            Credentials
-                        </h2>
-                        <p className='mt-1 text-sm leading-6 text-gray-600'>
-                            Create Users Login Credentials
-                        </p>
-                        <div className='grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6'>
-                            <CFormInput 
-                                type='text'
-                                required={true}
-                                name='username' 
-                                placeholder="Username"
-                                autoComplete="username"
-                                className={"w-full !rounded-md"}
-                                sectionClassName="sm:col-span-2"
-                                props={register("username")}
-                                error={errors.username?.message}>
-                                    Username
-                            </CFormInput>
-                            <CFormInput 
-                                type='password'
-                                required={true}
-                                name='password' 
-                                placeholder="Password"
-                                autoComplete="new-password"
-                                className={"!rounded-e-none"}
-                                sectionClassName="sm:col-span-2"
-                                props={register("password")}
-                                error={errors.password?.message}>
-                                    Password
-                            </CFormInput>
-                            <CFormInput 
-                                type='password'
-                                required={true}
-                                name='confirmpassword' 
-                                placeholder="Confirm Password"
-                                autoComplete="new-password"
-                                className={"!rounded-e-none"}
-                                sectionClassName="sm:col-span-2"
-                                props={register("confirmPassword")}
-                                error={errors.confirmPassword?.message}>
-                                    Confirm Password
-                            </CFormInput>
-                        </div>
+                        <Credentials register={register} errors={errors} />
                     </motion.div>
                 )}
                 {currentStep === 3 && (
