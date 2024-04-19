@@ -64,6 +64,13 @@ export const MenuItems:MenuItem[] =[
                         active: false, 
                         selected: false 
                     },
+                    { 
+                        title: "Create User", 
+                        path: "/users/create", 
+                        type: "link", 
+                        active: false, 
+                        selected: false 
+                    },
 					
 				]
 			},
