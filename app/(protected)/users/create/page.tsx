@@ -1,6 +1,8 @@
+import CreateUserForm from "@/components/users/forms/create-user-form"
+
 const CreateUserPage = () => {
   return (
-    <div>Create</div>
+    <div><CreateUserForm/> </div>
   )
 }
 
