@@ -9,7 +9,7 @@ interface Props extends FormHTMLAttributes<HTMLFormElement>{
 
 const CForm:FC<Props> = ({children,className,...props}) => {
   return (
-    <form noValidate className='space-y-6' {...props}>
+    <form noValidate className={twMerge('space-y-6',className)} {...props}>
         {children}
     </form>
   )
