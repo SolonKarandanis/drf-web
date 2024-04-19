@@ -44,4 +44,18 @@ export const RegisterSchema = BaseAuthSchema.extend({
 }).refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"],
     message: "Password don't match",
-  });
+});
+
+export const CreateUserSchema = BaseAuthSchema.extend({
+    confirmPassword: z.string().min(6, {
+        message: "Minimum 6 characters required",
+    }),
+    country: z.string().min(1, 'Country is required'),
+    street: z.string().min(1, 'Street is required'),
+    city: z.string().min(1, 'City is required'),
+    state: z.string().min(1, 'State is required'),
+    zip: z.string().min(1, 'Zip is required')
+}).refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Password don't match",
+});
