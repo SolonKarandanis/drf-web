@@ -1,8 +1,10 @@
 "use client";
 
 import { FC, useState } from 'react'
+import { twMerge } from "tailwind-merge";
 import CFormError from '@/shared/components/form-error/cform-error'
 import { InputProps } from '../props';
+
 
 
 
@@ -12,6 +14,7 @@ const CFormInput:FC<InputProps>  = ({
     type='text',
     required=false,
     className='',
+    sectionClassName='',
     props,
     error,
     ...rest
@@ -30,7 +33,7 @@ const CFormInput:FC<InputProps>  = ({
             name={name} 
             size={30}
             type={(showPassword) ? 'text' : "password"}
-            className={`form-control form-control-lg ${className} `}
+            className={twMerge('form-control',className)}
             aria-invalid={error ? "true" : "false"}
             {...(props ?? {})}
             {...rest}/>
@@ -41,7 +44,7 @@ const CFormInput:FC<InputProps>  = ({
             name={name} 
             size={30}
             type={type}
-            className={`form-control form-control-lg ${className} `}
+            className={twMerge('form-control',className)}
             aria-invalid={error ? "true" : "false"}
             {...(props ?? {})}
             {...rest}/>
@@ -77,7 +80,7 @@ const CFormInput:FC<InputProps>  = ({
 
 
     return (
-        <section className="xl:col-span-12 col-span-12">
+        <section className={sectionClassName}>
             {innerHtml}
         </section>
     )

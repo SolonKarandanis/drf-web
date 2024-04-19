@@ -23,6 +23,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
     type:string,
     required?:boolean,
     className?:string,
+    sectionClassName?:string,
     props?:Props,
     error?:string,
     children: React.ReactNode
