@@ -86,6 +86,7 @@ const LoginForm = () => {
                         placeholder="Username"
                         autoComplete="username"
                         className={"w-full !rounded-md"}
+                        sectionClassName="col-span-12 xl:col-span-12"
                         props={register("username")}
                         error={errors.username?.message}>
                             Username
@@ -97,15 +98,16 @@ const LoginForm = () => {
                         placeholder="Password"
                         autoComplete="current-password"
                         className={"!rounded-e-none"}
+                        sectionClassName="col-span-12 xl:col-span-12"
                         props={register("password")}
                         error={errors.password?.message}>
                             Password
                             <Link href="/components/authentication/reset-password/reset-basic/" 
-                                className="ltr:float-right rtl:float-left text-danger ml-1">
+                                className="ml-1 ltr:float-right rtl:float-left text-danger">
                                 Forget password ?
                             </Link>
                     </CFormInput>
-                    <div className="xl:col-span-12 col-span-12 mb-2">
+                    <div className="col-span-12 mb-2 xl:col-span-12">
                         <div className="mt-2">
                             <div className="form-check !ps-0">
                                 <input className="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
@@ -115,7 +117,7 @@ const LoginForm = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="xl:col-span-12 col-span-12 grid mt-2">
+                    <div className="grid col-span-12 mt-2 xl:col-span-12">
                         <CButton 
                             intent="violet" 
                             size="md" 

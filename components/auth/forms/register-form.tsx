@@ -70,6 +70,7 @@ const RegisterForm = () => {
                     name='firstName' 
                     placeholder="First Name"
                     className={"w-full !rounded-md"}
+                    sectionClassName="col-span-12 xl:col-span-12"
                     props={register("firstName")}
                     error={errors.firstName?.message}>
                         First Name
@@ -80,6 +81,7 @@ const RegisterForm = () => {
                     name='lastname' 
                     placeholder="Last Name"
                     className={"w-full !rounded-md"}
+                    sectionClassName="col-span-12 xl:col-span-12"
                     props={register("lastName")}
                     error={errors.lastName?.message}>
                         Last Name
@@ -90,6 +92,7 @@ const RegisterForm = () => {
                     name='email' 
                     placeholder="Email"
                     className={"w-full !rounded-md"}
+                    sectionClassName="col-span-12 xl:col-span-12"
                     props={register("email")}
                     error={errors.email?.message}>
                         Email
@@ -101,6 +104,7 @@ const RegisterForm = () => {
                     placeholder="Username"
                     autoComplete="username"
                     className={"w-full !rounded-md"}
+                    sectionClassName="col-span-12 xl:col-span-12"
                     props={register("username")}
                     error={errors.username?.message}>
                         Username
@@ -112,6 +116,7 @@ const RegisterForm = () => {
                     placeholder="Password"
                     autoComplete="new-password"
                     className={"!rounded-e-none"}
+                    sectionClassName="col-span-12 xl:col-span-12"
                     props={register("password")}
                     error={errors.password?.message}>
                         Password
@@ -123,11 +128,12 @@ const RegisterForm = () => {
                     placeholder="Confirm Password"
                     autoComplete="new-password"
                     className={"!rounded-e-none"}
+                    sectionClassName="col-span-12 xl:col-span-12"
                     props={register("confirmPassword")}
                     error={errors.confirmPassword?.message}>
                         Confirm Password
                 </CFormInput>
-                <div className="xl:col-span-12 col-span-12">
+                <div className="col-span-12 xl:col-span-12">
                     <div className="form-check !flex !ps-0">
                         <input className="form-check-input me-1" type="checkbox" value="" id="defaultCheck1"/>
                         <label className="ps-2 form-check-label text-[#8c9097] dark:text-white/50 font-normal block" htmlFor="defaultCheck1">
@@ -137,7 +143,7 @@ const RegisterForm = () => {
                         </label>
                     </div>
                 </div>
-                <div className="xl:col-span-12 col-span-12 grid mt-2">
+                <div className="grid col-span-12 mt-2 xl:col-span-12">
                     <CButton 
                         intent="violet" 
                         size="md" 
