@@ -8,23 +8,23 @@ const page = () => {
     <>
        <Seo title={"Signup"}/>
        <div className="container">
-            <div className="flex justify-center authentication authentication-basic 
-                items-center h-full text-defaultsize text-defaulttextcolor">
+            <div className="flex items-center justify-center h-full authentication authentication-basic text-defaultsize text-defaulttextcolor">
                 <div className="grid grid-cols-12">
                     <div className="xxl:col-span-4 xl:col-span-4 lg:col-span-4 md:col-span-3 sm:col-span-2"></div>
-                    <div className="xxl:col-span-4 xl:col-span-4 lg:col-span-4 md:col-span-6 sm:col-span-8 col-span-12">
+                    <div className="col-span-12 xxl:col-span-4 xl:col-span-4 lg:col-span-4 md:col-span-6 sm:col-span-8">
                         <div className="box">
                             <div className="box-body !p-[3rem]">
-                                <p className="h5 font-semibold mb-2 text-center">Sign Up</p>
+                                <p className="mb-2 font-semibold text-center h5">Sign Up</p>
                                 <p className="mb-4 text-[#8c9097] dark:text-white/50 opacity-[0.7] font-normal text-center">
                                     Welcome &amp; Join us by creating a free account !
                                 </p>
                                 <RegisterForm />
                                 <div className="text-center">
-                                    <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 mt-4">Already have an account? <Link
-                                            href="/components/authentication/sign-in/signin-basic/" className="text-primary">Sign In</Link></p>
+                                    <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 mt-4">Already have an account? 
+                                        <Link href="/auth/login" className="text-sky-900">Sign In</Link>
+                                    </p>
                                 </div>
-                                <div className="text-center my-4 authentication-barrier">
+                                <div className="my-4 text-center authentication-barrier">
                                     <span>OR</span>
                                 </div>
                                 <Social />
