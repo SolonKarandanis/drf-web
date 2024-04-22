@@ -13,6 +13,8 @@ import CForm from "@/shared/components/form/cform";
 import PersonalInfo from "../sections/personal-info";
 import AddressInfo from "../sections/address-info";
 import Credentials from "../sections/credentials";
+import ArrowRight from "@/shared/svg/arrow-right";
+import ArrowLeft from "@/shared/svg/arrow-left";
 
 type Inputs = z.infer<typeof CreateUserSchema>
 
@@ -159,20 +161,7 @@ const CreateUserForm = () => {
                         disabled={currentStep === 0}
                         className='px-2 py-1 text-sm font-semibold bg-white rounded shadow-sm text-sky-900 ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50'
                     >
-                        <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        strokeWidth='1.5'
-                        stroke='currentColor'
-                        className='w-6 h-6'
-                        >
-                        <path
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                            d='M15.75 19.5L8.25 12l7.5-7.5'
-                        />
-                        </svg>
+                        <ArrowLeft />
                     </button>
                     <button
                         type='button'
@@ -180,20 +169,7 @@ const CreateUserForm = () => {
                         disabled={currentStep === steps.length - 1}
                         className='px-2 py-1 text-sm font-semibold bg-white rounded shadow-sm text-sky-900 ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50'
                     >
-                        <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        strokeWidth='1.5'
-                        stroke='currentColor'
-                        className='w-6 h-6'
-                        >
-                        <path
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                            d='M8.25 4.5l7.5 7.5-7.5 7.5'
-                        />
-                        </svg>
+                        <ArrowRight />
                     </button>
                 </div>
             </div> 
