@@ -15,7 +15,7 @@ import AddressInfo from "../sections/address-info";
 import Credentials from "../sections/credentials";
 import ArrowRight from "@/shared/svg/arrow-right";
 import ArrowLeft from "@/shared/svg/arrow-left";
-import FormPrompt from "@/shared/components/form-prompt/form-promt";
+
 
 type Inputs = z.infer<typeof CreateUserSchema>
 
@@ -116,7 +116,6 @@ const CreateUserForm = () => {
         <section className='inset-0 flex flex-col justify-between p-24 '>
             <Stepper steps={steps}  currentStep={currentStep}/>
             <CForm className='py-12 mt-12' onSubmit={handleSubmit(onSubmit)}>
-                <FormPrompt hasUnsavedChanges={isDirty}/>
                 {currentStep === 0 && (
                     <motion.div
                         initial={{ x: delta >= 0 ? '50%' : '-50%', opacity: 0 }}

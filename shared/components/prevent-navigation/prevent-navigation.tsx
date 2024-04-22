@@ -1,10 +1,12 @@
+'use client';
+
 import { FC,useEffect} from 'react'
 
 export interface Props{
     hasUnsavedChanges:boolean; 
 }
 
-const FormPrompt:FC<Props> = ({hasUnsavedChanges}) => {
+const PreventNavigation:FC<Props> = ({hasUnsavedChanges}) => {
     useEffect(() => {
         const onBeforeUnload = (e:BeforeUnloadEvent) => {
           if (hasUnsavedChanges) {
@@ -20,4 +22,4 @@ const FormPrompt:FC<Props> = ({hasUnsavedChanges}) => {
       return null;
 }
 
-export default FormPrompt
+export default PreventNavigation
