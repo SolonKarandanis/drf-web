@@ -15,6 +15,7 @@ import AddressInfo from "../sections/address-info";
 import Credentials from "../sections/credentials";
 import ArrowRight from "@/shared/svg/arrow-right";
 import ArrowLeft from "@/shared/svg/arrow-left";
+import PreventNavigation from "@/shared/components/prevent-navigation/prevent-navigation";
 
 
 type Inputs = z.infer<typeof CreateUserSchema>
@@ -64,9 +65,6 @@ const CreateUserForm = () => {
     const [currentStep, setCurrentStep] = useState(0)
     const delta = currentStep - previousStep
 
-    
-
-
     const {
         register,
         handleSubmit,
@@ -114,6 +112,7 @@ const CreateUserForm = () => {
 
     return (
         <section className='inset-0 flex flex-col justify-between p-24 '>
+            <PreventNavigation isDirty={isDirty} backHref={'/dashboard'} resetData={reset} />
             <Stepper steps={steps}  currentStep={currentStep}/>
             <CForm className='py-12 mt-12' onSubmit={handleSubmit(onSubmit)}>
                 {currentStep === 0 && (
