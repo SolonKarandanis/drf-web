@@ -34,6 +34,7 @@ const PreventNavigation:FC<Props> = ({ isDirty, backHref, resetData}) => {
      */
     const handleClick = (event: MouseEvent) => {
       const target = event.target as HTMLAnchorElement;
+      
 
       if (isDirty) {
         event.preventDefault();
