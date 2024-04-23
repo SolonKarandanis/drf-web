@@ -1,18 +1,22 @@
 "use client";
 
-import { DragEvent, FC, useState } from "react";
+import { DragEvent, useState, forwardRef } from "react";
 import { InputProps } from "../props";
 import { twMerge } from "tailwind-merge";
+import CFormError from "../form-error/cform-error";
 
-const FileDrop:FC<InputProps> = ({
-  name,
-  sectionClassName,
-  required,
-  children,
-  props,
-  error,
-  ...rest
-}) => {
+const FileDrop =forwardRef<HTMLInputElement, InputProps>(
+  ({ 
+    name,
+    sectionClassName,
+    className,
+    required,
+    children,
+    props,
+    error,
+    ...rest
+  }, ref) =>{
+
     const [isOver, setIsOver] = useState(false);
     const [files, setFiles] = useState<File[]>([]);
     // Define the event handlers
@@ -39,11 +43,11 @@ const FileDrop:FC<InputProps> = ({
             const reader = new FileReader();
     
             reader.onloadend = () => {
-            console.log(reader.result);
+              console.log(reader.result);
             };
     
             reader.onerror = () => {
-            console.error("There was an issue reading the file.");
+              console.error("There was an issue reading the file.");
             };
     
             reader.readAsDataURL(file);
@@ -58,6 +62,8 @@ const FileDrop:FC<InputProps> = ({
         </label>
     )
 
+    const errorHtml = error ? (<CFormError error={error} />) : null;
+
     return (
       <section className={sectionClassName}>
         {labelHtml}
@@ -65,13 +71,17 @@ const FileDrop:FC<InputProps> = ({
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
-          {...(props ?? {})}
+          className={twMerge('form-control',className)}
+          ref={ref}
           {...rest}
         >
         </input>
+        {errorHtml}
       </section>
     
   );
-}
+  }
+)
 
+FileDrop.displayName = "test"
 export default FileDrop

@@ -64,6 +64,7 @@ const CreateUserForm = () => {
     const [previousStep, setPreviousStep] = useState(0)
     const [currentStep, setCurrentStep] = useState(0)
     const delta = currentStep - previousStep
+    
 
     const {
         register,
@@ -76,6 +77,7 @@ const CreateUserForm = () => {
         resolver: zodResolver(CreateUserSchema)
     })
 
+
     const onSubmit: SubmitHandler<Inputs> = data => {
         console.log(data)
         reset()
@@ -86,12 +88,13 @@ const CreateUserForm = () => {
     const next = async () => {
         const fields = steps[currentStep].fields
         const output = await trigger(fields as FieldName[], { shouldFocus: true })
+        console.log(output)
 
         if (!output) return
 
         if (currentStep < steps.length - 1) {
             if (currentStep === steps.length - 2) {
-            await handleSubmit(onSubmit)()
+                await handleSubmit(onSubmit)()
             }
             setPreviousStep(currentStep)
             setCurrentStep(step => step + 1)
