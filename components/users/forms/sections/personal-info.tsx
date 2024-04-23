@@ -1,6 +1,7 @@
 import CFormInput from '@/shared/components/form-input/cform-input'
 import {FC} from 'react'
 import { SectionProps } from './props';
+import FileDrop from '@/shared/components/file-drop/file-drop';
 
 const PersonalInfo:FC<SectionProps> = ({register,errors}) => {
   return (
@@ -48,6 +49,12 @@ const PersonalInfo:FC<SectionProps> = ({register,errors}) => {
                 error={errors.email?.message}>
                     Email address
             </CFormInput>
+            <FileDrop
+                type="file"
+                name='profileImage' 
+                sectionClassName="sm:col-span-3">
+                Profile Image
+            </FileDrop>
         </div>
     </>
   )

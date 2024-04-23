@@ -1,7 +1,7 @@
 import { 
     InputHTMLAttributes,  
     RefCallback,
-    SelectHTMLAttributes 
+    SelectHTMLAttributes,
 } from "react";
 
 export interface Props {

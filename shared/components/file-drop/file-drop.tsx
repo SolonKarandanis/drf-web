@@ -1,6 +1,18 @@
-import { DragEvent, useState } from "react";
+"use client";
 
-const FileDrop = () => {
+import { DragEvent, FC, useState } from "react";
+import { InputProps } from "../props";
+import { twMerge } from "tailwind-merge";
+
+const FileDrop:FC<InputProps> = ({
+  name,
+  sectionClassName,
+  required,
+  children,
+  props,
+  error,
+  ...rest
+}) => {
     const [isOver, setIsOver] = useState(false);
     const [files, setFiles] = useState<File[]>([]);
     // Define the event handlers
@@ -39,23 +51,26 @@ const FileDrop = () => {
         });
     };
 
+    const requiredCss = required? 'required' : '';
+    const labelHtml = (
+        <label htmlFor={name} className={`form-label text-default ${requiredCss}`}>
+            {children}
+        </label>
+    )
+
     return (
-    <div
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "50px",
-        width: "300px",
-        border: "1px dotted",
-        backgroundColor: isOver ? "lightgray" : "white",
-      }}
-    >
-      Drag and drop some files here
-    </div>
+      <section className={sectionClassName}>
+        {labelHtml}
+        <input
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          {...(props ?? {})}
+          {...rest}
+        >
+        </input>
+      </section>
+    
   );
 }
 
