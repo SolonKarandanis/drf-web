@@ -30,7 +30,7 @@ const steps:Steps[] = [
     {
       id: 'Step 1',
       name: 'Personal Information',
-      fields: ['firstName', 'lastName', 'email']
+      fields: ['firstName', 'lastName', 'email','profileImage']
     },
     {
       id: 'Step 2',

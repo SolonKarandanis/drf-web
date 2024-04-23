@@ -6,6 +6,7 @@ export interface SectionProps{
         email: string;
         firstName: string;
         lastName: string;
+        profileImage: File;
         password: string;
         confirmPassword: string;
         country: string;
@@ -18,6 +19,7 @@ export interface SectionProps{
         email: string;
         firstName: string;
         lastName: string;
+        profileImage: File;
         country: string;
         street: string;
         city: string;
