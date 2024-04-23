@@ -50,13 +50,13 @@ const PersonalInfo:FC<SectionProps> = ({register,errors}) => {
                     error={errors.email?.message}>
                         Email address
                 </CFormInput>
-                <FileDrop
+                {/* <FileDrop
                     type="file"
                     sectionClassName="sm:col-span-3"
                     error={errors.profileImage?.message}
                     {...profileImageRef}>
                     Profile Image
-                </FileDrop>
+                </FileDrop> */}
             </div>
         </>
     )

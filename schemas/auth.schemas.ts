@@ -53,9 +53,9 @@ export const CreateUserSchema = BaseAuthSchema.extend({
     confirmPassword: z.string().min(6, {
         message: "Minimum 6 characters required",
     }),
-    profileImage: z.instanceof(File).optional()
-        .refine((files)=> files && files.size >= MAX_FILE_SIZE, `Max file size is 5MB.`)
-        .refine((files)=> files && ACCEPTED_IMAGE_TYPES.includes(files.type),".jpg, .jpeg, .png and .webp files are accepted."),
+    // profileImage: z.instanceof(File).optional()
+    //     .refine((files)=> files && files.size >= MAX_FILE_SIZE, `Max file size is 5MB.`)
+    //     .refine((files)=> files && ACCEPTED_IMAGE_TYPES.includes(files.type),".jpg, .jpeg, .png and .webp files are accepted."),
     country: z.string().min(1, 'Country is required'),
     street: z.string().min(1, 'Street is required'),
     city: z.string().min(1, 'City is required'),
