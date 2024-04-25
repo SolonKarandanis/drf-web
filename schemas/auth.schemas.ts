@@ -19,6 +19,7 @@ export const BaseAuthSchema = z.object({
     password: z.string().min(6, {
         message: "Minimum 6 characters required",
     }),
+    role:z.string(),
 });
 
 export const NewPasswordSchema = BaseAuthSchema.pick({
@@ -53,6 +54,7 @@ export const CreateUserSchema = BaseAuthSchema.extend({
     confirmPassword: z.string().min(6, {
         message: "Minimum 6 characters required",
     }),
+    
     // profileImage: z.instanceof(File).optional()
     //     .refine((files)=> files && files.size >= MAX_FILE_SIZE, `Max file size is 5MB.`)
     //     .refine((files)=> files && ACCEPTED_IMAGE_TYPES.includes(files.type),".jpg, .jpeg, .png and .webp files are accepted."),
