@@ -19,7 +19,7 @@ const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
                 required={true}
                 inputProps={register("role")}
                 className="text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                sectionClassName="col-span-12 xl:col-span-12"
+                sectionClassName="sm:col-span-3"
                 autoComplete='role-name'
                 error={errors.role?.message}>
                     Role
@@ -31,7 +31,7 @@ const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
                 placeholder="Username"
                 autoComplete="username"
                 className={"w-full !rounded-md"}
-                sectionClassName="sm:col-span-2"
+                sectionClassName="sm:col-span-3"
                 props={register("username")}
                 error={errors.username?.message}>
                     Username
@@ -43,7 +43,7 @@ const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
                 placeholder="Password"
                 autoComplete="new-password"
                 className={"!rounded-e-none"}
-                sectionClassName="sm:col-span-2"
+                sectionClassName="sm:col-span-3"
                 props={register("password")}
                 error={errors.password?.message}>
                     Password
@@ -55,7 +55,7 @@ const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
                 placeholder="Confirm Password"
                 autoComplete="new-password"
                 className={"!rounded-e-none"}
-                sectionClassName="sm:col-span-2"
+                sectionClassName="sm:col-span-3"
                 props={register("confirmPassword")}
                 error={errors.confirmPassword?.message}>
                     Confirm Password
