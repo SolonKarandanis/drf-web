@@ -71,9 +71,9 @@ const SearchUserForm = () => {
                 <div className="flex gap-2">
                     <FormField
                         control={form.control}
-                        name="email"
+                        name="role"
                         render={({ field }) => (
-                        <FormItem className='sm:col-span-3'>
+                        <FormItem>
                             <FormLabel>User Role</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                                 <FormControl>
@@ -84,6 +84,26 @@ const SearchUserForm = () => {
                                 <SelectContent>
                                     <SelectItem value="1">Buyer</SelectItem>
                                     <SelectItem value="2">Seller</SelectItem>
+                                </SelectContent> 
+                            </Select>
+                        </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="isActive"
+                        render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Is Active</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={String(field.value)}>
+                                <FormControl>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select status" />
+                                    </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                    <SelectItem value="true">Yes</SelectItem>
+                                    <SelectItem value="false">No</SelectItem>
                                 </SelectContent> 
                             </Select>
                         </FormItem>
