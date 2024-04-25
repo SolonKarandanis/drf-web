@@ -1,8 +1,9 @@
 import {FC} from 'react'
 import CFormInput from '@/shared/components/form-input/cform-input'
-import { SectionProps } from './props';
+import { CredentialsProps } from './props';
+import CFormSelect from '@/shared/components/form-select/cform-select';
 
-const Credentials:FC<SectionProps> = ({register,errors}) => {
+const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
   return (
     <>
         <h2 className='text-base font-semibold leading-7 text-gray-900'>
@@ -12,6 +13,17 @@ const Credentials:FC<SectionProps> = ({register,errors}) => {
             Create Users Login Credentials
         </p>
         <div className='grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6'>
+            <CFormSelect 
+                name="role"
+                options={roles}
+                required={true}
+                inputProps={register("role")}
+                className="text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                sectionClassName="col-span-12 xl:col-span-12"
+                autoComplete='role-name'
+                error={errors.role?.message}>
+                    Role
+            </CFormSelect>
             <CFormInput 
                 type='text'
                 required={true}

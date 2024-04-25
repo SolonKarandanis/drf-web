@@ -13,8 +13,20 @@ import { useRegisterUserMutation } from '@/shared/redux/features/authApiSlice';
 import { toast } from 'react-toastify';
 import { useAppDispatch } from '@/shared/redux/hooks';
 import { setLoading } from '@/shared/redux/features/authSlice';
+import CFormSelect from '@/shared/components/form-select/cform-select';
 
 type RegisterSchema = z.infer<typeof RegisterSchema>;
+
+const roles =[
+    {
+        value:1,
+        label:'Buyer',
+    },
+    {
+        value:2,
+        label:'Seller',
+    }
+]
 
 const RegisterForm = () => {
     const router = useRouter();
@@ -26,6 +38,7 @@ const RegisterForm = () => {
         defaultValues: {
             firstName:"",
             lastName:"",
+            role:"",
             email:"",
             username: "",
             password: "",
@@ -39,11 +52,12 @@ const RegisterForm = () => {
 	}
 
     const onSubmit:SubmitHandler<RegisterSchema> = (values: RegisterSchema) =>{
-        const {username,password,email,firstName,lastName,confirmPassword} = values;
+        const {username,password,email,role,firstName,lastName,confirmPassword} = values;
         const request:CreateUserRequest={
             email,
             first_name:firstName,
             last_name:lastName,
+            role,
             password,
             username,
             password2:confirmPassword
@@ -97,6 +111,17 @@ const RegisterForm = () => {
                     error={errors.email?.message}>
                         Email
                 </CFormInput>
+                <CFormSelect 
+                    name="role"
+                    options={roles}
+                    required={true}
+                    inputProps={register("role")}
+                    className="text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                    sectionClassName="col-span-12 xl:col-span-12"
+                    autoComplete='role-name'
+                    error={errors.role?.message}>
+                        Role
+                </CFormSelect>
                 <CFormInput 
                     type='text'
                     required={true}
@@ -109,7 +134,7 @@ const RegisterForm = () => {
                     error={errors.username?.message}>
                         Username
                 </CFormInput>
-                <CFormInput 
+                <CFormInput
                     type='password'
                     required={true}
                     name='password' 

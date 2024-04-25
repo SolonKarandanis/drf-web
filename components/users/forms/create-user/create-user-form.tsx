@@ -60,6 +60,17 @@ const countries =[
     },
 ]
 
+const roles =[
+    {
+        value:1,
+        label:'Buyer',
+    },
+    {
+        value:2,
+        label:'Seller',
+    }
+]
+
 const CreateUserForm = () => {
     const [previousStep, setPreviousStep] = useState(0)
     const [currentStep, setCurrentStep] = useState(0)
@@ -142,7 +153,7 @@ const CreateUserForm = () => {
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ duration: 0.3, ease: 'easeInOut' }}
                     >
-                        <Credentials register={register} errors={errors} />
+                        <Credentials register={register} errors={errors} roles={roles} />
                     </motion.div>
                 )}
                 {currentStep === 3 && (
