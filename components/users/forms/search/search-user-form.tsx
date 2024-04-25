@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react'
+import {FC} from 'react'
 import * as z from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
@@ -25,11 +25,20 @@ import {
 
 type Inputs = z.infer<typeof UserSearchSchema>
 
-const SearchUserForm = () => {
+interface Props{
+    onDataAction: (data:any) => Promise<void>;
+}
+
+const SearchUserForm:FC<Props> = ({onDataAction}) => {
     const form = useForm<Inputs>({resolver: zodResolver(UserSearchSchema)})
+
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        console.log(await onDataAction(data));
+    }
+
     return (
         <Form {...form}>
-            <form className="space-y-8">
+            <form className="space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
                 <div className="flex gap-2">
                     <FormField
                         control={form.control}
@@ -89,26 +98,7 @@ const SearchUserForm = () => {
                         </FormItem>
                         )}
                     />
-                    <FormField
-                        control={form.control}
-                        name="isActive"
-                        render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Is Active</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={String(field.value)}>
-                                <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select status" />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    <SelectItem value="true">Yes</SelectItem>
-                                    <SelectItem value="false">No</SelectItem>
-                                </SelectContent> 
-                            </Select>
-                        </FormItem>
-                        )}
-                    />
+                   
                 </div>
                
                 <div className='pt-5 mt-8'>

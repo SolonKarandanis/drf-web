@@ -19,7 +19,6 @@ export interface UserSearchRequest extends SearchRequest {
     name?: string;
     email?: string;
     role?:string;
-    isActive?: boolean;
 }
 
 interface SearchResponse{
