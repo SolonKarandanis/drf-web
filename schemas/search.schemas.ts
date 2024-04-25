@@ -4,5 +4,6 @@ export const UserSearchSchema = z.object({
     username: z.string().optional(),
     name: z.string().optional(),
     email: z.string().optional(),
-    isActive: z.boolean(),
+    role:z.string(),
+    isActive: z.boolean().optional(),
 });
