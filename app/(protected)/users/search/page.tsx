@@ -8,7 +8,9 @@ const SearchUsersPage = () => {
   }
 
   return (
-    <div><SearchUserForm /></div>
+    <div className="inset-0 flex flex-col justify-between p-24">
+      <SearchUserForm />
+    </div>
   )
 }
 

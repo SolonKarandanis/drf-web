@@ -10,12 +10,17 @@ import { Input } from "@/shared/shadcn/components/ui/input";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/shared/shadcn/components/ui/form";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+  } from "@/shared/shadcn/components/ui/select"
 
 
 type Inputs = z.infer<typeof UserSearchSchema>
@@ -25,21 +30,73 @@ const SearchUserForm = () => {
     return (
         <Form {...form}>
             <form className="space-y-8">
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                        <Input placeholder="" {...field} />
-                        </FormControl>
-                        <FormDescription>Your email address.</FormDescription>
-                        <FormMessage /> *
-                    </FormItem>
-                    )}
-                />
-                <Button type="submit">Submit</Button>
+                <div className="flex gap-2">
+                    <FormField
+                        control={form.control}
+                        name="username"
+                        render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Username</FormLabel>
+                            <FormControl>
+                                <Input placeholder="" {...field} />
+                            </FormControl>
+                        </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Name</FormLabel>
+                            <FormControl>
+                                <Input placeholder="" {...field} />
+                            </FormControl>
+                        </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Email</FormLabel>
+                            <FormControl>
+                                <Input placeholder="" {...field} />
+                            </FormControl>
+                        </FormItem>
+                        )}
+                    />
+                </div>
+                <div className="flex gap-2">
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                        <FormItem className='sm:col-span-3'>
+                            <FormLabel>User Role</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <FormControl>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select a role" />
+                                    </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                    <SelectItem value="1">Buyer</SelectItem>
+                                    <SelectItem value="2">Seller</SelectItem>
+                                </SelectContent> 
+                            </Select>
+                        </FormItem>
+                        )}
+                    />
+                </div>
+               
+                <div className='pt-5 mt-8'>
+                    <div className='flex justify-between'>
+                        <Button type="submit" variant="outline">Search</Button>
+                        <Button type="reset" variant="destructive">Clear</Button>
+                    </div>
+                </div>
             </form>
         </Form>
     )
