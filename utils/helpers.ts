@@ -9,7 +9,12 @@ function getValueOrFallback(
     return isNonNull(value) ? value : fallback;
 }
 
+function isStringValue <T>(value: T| string): value is string {
+    return typeof value === 'string';
+};
+
 export {
     isNonNull,
     getValueOrFallback,
+    isStringValue,
 }
