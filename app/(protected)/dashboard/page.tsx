@@ -1,12 +1,16 @@
-import SearchInput from '@/shared/components/search-input/search-input'
-import { Button } from '@/shared/shadcn/components/ui/button'
-
 const Page = () => {
+  const olderDate = new Date('2022-10-31');
+  const currentDate = new Date('2022-11-01');
+
+  const diff = olderDate.valueOf()- currentDate.valueOf()
+  const formatter = new Intl.RelativeTimeFormat('en', { 
+    numeric: 'always' 
+  });
+  const d=formatter.format(Math.round(diff / 86400000), 'day')
   return (
     <div>
-      dashboard
-      <Button variant="destructive">Default</Button>
-      <SearchInput />
+      
+      {d}
     </div>
   )
 }
