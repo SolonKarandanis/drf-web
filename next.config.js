@@ -1,7 +1,14 @@
-/** @type {import('next').NextConfig} */
+
+
+const withNextIntl= require("next-intl/plugin");
+
 const isProd = process.env.NODE_ENV === "production";
+const isDev = process.env.NODE_ENV === "development";
+const nextIntlConfig = withNextIntl();
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
+  output: isDev ? undefined : "export",
   reactStrictMode: true,
   trailingSlash: true,
   swcMinify: true,
@@ -14,4 +21,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = nextIntlConfig(nextConfig);
