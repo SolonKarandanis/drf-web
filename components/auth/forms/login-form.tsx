@@ -15,11 +15,13 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { setLoginResponseInStorage } from "@/utils/functions";
 import { setAuth, setLoading, setTokens } from "@/shared/redux/features/authSlice";
+import { useTranslations } from "next-intl";
 
 type LoginSchema = z.infer<typeof LoginSchema>;
 
 
 const LoginForm = () => {
+    const t = useTranslations('LOGIN');
     const router = useRouter();
 	const dispatch = useAppDispatch();
 	const [login, { isLoading }] = useLoginMutation();

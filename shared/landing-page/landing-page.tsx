@@ -7,9 +7,9 @@ const LandingPage = () => {
     const {isAuthenticated} = useAppSelector(state => state.auth);
     console.log(isAuthenticated)
     if(isAuthenticated){
-        redirect('/dashboard');
+        redirect('/en/dashboard');
     }
-    redirect('/auth/login');
+    redirect('/en/auth/login');
 }
 
 export default LandingPage
