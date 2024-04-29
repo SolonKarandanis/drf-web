@@ -1,10 +1,12 @@
 import LoginForm from '@/components/auth/forms/login-form';
 import Social from '@/components/auth/social';
 import Seo from '@/shared/layout-components/seo/Seo'
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 
 const page = () => {
+  const t = useTranslations('LOGIN');
   return (
     <>
        <Seo title={"Signin"}/> 
@@ -15,7 +17,7 @@ const page = () => {
                     <div className="col-span-12 xxl:col-span-4 xl:col-span-4 lg:col-span-4 md:col-span-6 sm:col-span-8">
                         <div className="box">
                             <div className="box-body !p-[3rem]">
-                              <p className="mb-2 font-semibold text-center h5">Sign In</p>
+                              <p className="mb-2 font-semibold text-center h5">{t("title")}</p>
                               <p className="mb-4 text-[#8c9097] dark:text-white/50 opacity-[0.7] font-normal text-center">Welcome back</p>
                               <LoginForm />
                               <div className="text-center">
