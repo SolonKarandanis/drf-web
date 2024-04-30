@@ -13,7 +13,7 @@ import { useAppDispatch } from "@/shared/redux/hooks";
 import { useLazyGetLoggedInUserAccountQuery, useLoginMutation } from "@/shared/redux/features/authApiSlice";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { setLoginResponseInStorage } from "@/utils/functions";
+import { getClientLocale, setLoginResponseInStorage } from "@/utils/functions";
 import { setAuth, setLoading, setTokens } from "@/shared/redux/features/authSlice";
 import { useTranslations } from "next-intl";
 
@@ -21,6 +21,7 @@ type LoginSchema = z.infer<typeof LoginSchema>;
 
 
 const LoginForm = () => {
+    const locale = getClientLocale();
     const t = useTranslations('LOGIN.FORM');
     const router = useRouter();
 	const dispatch = useAppDispatch();
@@ -68,7 +69,7 @@ const LoginForm = () => {
 			.then((user:UserDetails)=>{
 				dispatch(setAuth(user));
 				toast.success(t('SUCCESS.summary'));
-				router.push('/en/dashboard');
+				router.push(`/${locale}/dashboard`);
 			})
 			.catch((error:ErrorResponse) => {
 				handleError(error);
