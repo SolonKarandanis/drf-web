@@ -1,15 +1,20 @@
-import { basePath } from '@/next.config';
 import Link from 'next/link';
 import Image from "next/image";
+import { FC } from 'react';
 
-const Logo = () => {
+type Props = {
+	path?: string;
+}
+
+
+const Logo:FC<Props> = ({path}) => {
   return (
     <div className="header-element">
         <div className="horizontal-logo">
             <Link href="/components/dashboards/crm/" className="header-logo">
                 <Image
                     alt="logo"
-                    src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-logo.png`} 
+                    src={`${path}/assets/images/brand-logos/desktop-logo.png`} 
                     width={700}
                     height={475}
                     sizes="100vw"
@@ -21,7 +26,7 @@ const Logo = () => {
                 />
                 <Image
                     alt="logo"
-                    src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/toggle-logo.png`} 
+                    src={`${path}/assets/images/brand-logos/toggle-logo.png`} 
                     width={700}
                     height={475}
                     sizes="100vw"
@@ -33,7 +38,7 @@ const Logo = () => {
                 />
                 <Image
                     alt="logo"
-                    src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-dark.png`} 
+                    src={`${path}/assets/images/brand-logos/desktop-dark.png`} 
                     width={700}
                     height={475}
                     sizes="100vw"
@@ -45,7 +50,7 @@ const Logo = () => {
                 />
                 <Image
                     alt="logo"
-                    src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/toggle-dark.png`} 
+                    src={`${path}/assets/images/brand-logos/toggle-dark.png`} 
                     width={700}
                     height={475}
                     sizes="100vw"
@@ -57,7 +62,7 @@ const Logo = () => {
                 />
                 <Image
                     alt="logo"
-                    src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-white.png`} 
+                    src={`${path}/assets/images/brand-logos/desktop-white.png`} 
                     width={700}
                     height={475}
                     sizes="100vw"
@@ -69,7 +74,7 @@ const Logo = () => {
                 />
                 <Image
                     alt="logo"
-                    src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/toggle-white.png`} 
+                    src={`${path}/assets/images/brand-logos/toggle-white.png`} 
                     width={700}
                     height={475}
                     sizes="100vw"

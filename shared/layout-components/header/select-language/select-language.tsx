@@ -1,5 +1,3 @@
-'use client';
-
 import Image from "next/image";
 import { basePath } from '@/next.config';
 import { useRouter } from "next/navigation";

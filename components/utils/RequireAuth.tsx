@@ -4,15 +4,15 @@ import {FC} from 'react'
 import { redirect } from 'next/navigation';
 import { useAppSelector } from '@/shared/redux/hooks';
 import Spinner  from '@/shared/components/spinner/spinner';
+import { getClientLocale } from '@/utils/functions';
 
 interface Props {
 	children: React.ReactNode;
 }
 
 const RequireAuth:FC<Props> = ({ children }) => {
+	const locale = getClientLocale();
     const { isLoading, isAuthenticated } = useAppSelector(state => state.auth);
-	// console.log(isAuthenticated)
-	// console.log(isLoading)
 
 	if (isLoading && isAuthenticated) {
 		return (
@@ -23,7 +23,7 @@ const RequireAuth:FC<Props> = ({ children }) => {
 	}
 
 	if (!isLoading && !isAuthenticated) {
-		redirect('/auth/login');
+		redirect(`/${locale}/auth/login`);
 	}
     return <>{children}</>;
 }

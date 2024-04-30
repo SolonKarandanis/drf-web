@@ -7,21 +7,22 @@ import Switcher from '../switcher/switcher';
 import SideBarHeader from '../sidebar/SideBarHeader';
 import ContentLayoutClient from './content-layout-client';
 import ContentLayoutClientContent from './content-layout-client-content';
+import { basePath } from '@/next.config';
 
 type Props = {
 	children: ReactNode;
 }
 
 const ContentLayout:FC<Props> = ({children}) => {
-    
+    const path = process.env.NODE_ENV === "production" ? basePath : "";
     return (
        <>
             {/* <Switcher/> */}
             <ContentLayoutClient>
                 <div className='page'>
-                    {/* <Header/> */}
+                    <Header path={path}/>
                     <Sidebar>
-                        <SideBarHeader />
+                        <SideBarHeader path={path} />
                     </Sidebar>
                     <ContentLayoutClientContent>
                         {children}
