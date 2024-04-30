@@ -1,4 +1,4 @@
-import { type Locale } from "@/utils/locales";
+import { locales, type Locale } from "@/utils/locales";
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '@/styles/globals.scss'
@@ -8,7 +8,6 @@ import { FC } from "react";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 
-const locales = ['en', 'gr'];
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
