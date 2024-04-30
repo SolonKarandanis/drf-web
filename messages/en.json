@@ -1,5 +1,14 @@
 {
     "LOGIN":{
-        "title":"Sign In"
+        "PAGE":{
+            "title":"Sign In",
+            "description":"Welcome back",
+            "dont-have-account":"Dont have an account?",
+            "sign-up":"Sign Up",
+            "or":"OR"
+        },
+        "COMPONENT":{
+
+        }
     }
 }

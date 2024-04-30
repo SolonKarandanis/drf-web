@@ -1,5 +1,14 @@
 {
     "LOGIN":{
-        "title":"Είσοδος"
+        "PAGE":{
+            "title":"Είσοδος",
+            "description":"Καλώς ορίσατε πίσω",
+            "dont-have-account":"Δεν έχετε λογαριασμό;",
+            "sign-up":"Εγγραφείτε",
+            "or":"Ή"
+        },
+        "COMPONENT":{
+
+        }
     }
 }
