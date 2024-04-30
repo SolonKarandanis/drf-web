@@ -1,13 +1,18 @@
 'use client';
 
-import { ReactNode, useEffect, useState } from 'react'
+import { FC, ReactNode, useEffect, useState } from 'react'
 import Header from '@/shared/layout-components/header/Header';
 import Sidebar from '@/shared/layout-components/sidebar/SideBar';
 import Footer from '@/shared/layout-components/footer/Footer';
 import Backtotop from '@/shared/layout-components/backtotop/BackToTop';
 import Switcher from '../switcher/switcher';
+import SideBarHeader from '../sidebar/SideBarHeader';
 
-const ContentLayout = ({children}:{ children: ReactNode}) => {
+type Props = {
+	children: ReactNode;
+}
+
+const ContentLayout:FC<Props> = ({children}) => {
     const [lateLoad, setlateLoad] = useState(false);
 	const Add = () => {
 	  document.querySelector("body")?.classList.remove("error-1");
@@ -71,8 +76,10 @@ const ContentLayout = ({children}:{ children: ReactNode}) => {
             {/* <Switcher/> */}
             <div style={{display: `${lateLoad ? 'block' : 'none'}`}}>
                 <div className='page'>
-                    <Header/>
-                    <Sidebar/> 
+                    {/* <Header/> */}
+                    <Sidebar>
+                        <SideBarHeader />
+                    </Sidebar> 
                     <div className='content'>
                         <div className='main-content'  onClick={Bodyclickk}>
                             {children}
@@ -80,7 +87,7 @@ const ContentLayout = ({children}:{ children: ReactNode}) => {
                     </div>
                     <Footer/>
                 </div>
-                <Backtotop />
+                {/* <Backtotop /> */}
             </div>
        </>
     )

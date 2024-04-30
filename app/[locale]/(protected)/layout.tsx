@@ -8,7 +8,7 @@ type Props = {
 	params: {
 	  locale: Locale;
 	};
-  };
+};
 
 
 export default function Layout({ children,params:{locale} }: Props) {
