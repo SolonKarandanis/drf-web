@@ -6,6 +6,7 @@ import Backtotop from '@/shared/layout-components/backtotop/BackToTop';
 import Switcher from '../switcher/switcher';
 import SideBarHeader from '../sidebar/SideBarHeader';
 import ContentLayoutClient from './content-layout-client';
+import ContentLayoutClientContent from './content-layout-client-content';
 
 type Props = {
 	children: ReactNode;
@@ -21,15 +22,13 @@ const ContentLayout:FC<Props> = ({children}) => {
                     {/* <Header/> */}
                     <Sidebar>
                         <SideBarHeader />
-                    </Sidebar> 
-                    <div className='content'>
-                        <div className='main-content' >
-                            {children}
-                        </div>
-                    </div>
+                    </Sidebar>
+                    <ContentLayoutClientContent>
+                        {children}
+                    </ContentLayoutClientContent>
                     <Footer/>
                 </div>
-                {/* <Backtotop /> */}
+                <Backtotop />
             </ContentLayoutClient>
        </>
     )
