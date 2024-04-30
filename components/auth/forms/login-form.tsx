@@ -68,7 +68,7 @@ const LoginForm = () => {
 			.then((user:UserDetails)=>{
 				dispatch(setAuth(user));
 				toast.success(t('SUCCESS.summary'));
-				router.push('/dashboard');
+				router.push('/en/dashboard');
 			})
 			.catch((error:ErrorResponse) => {
 				handleError(error);
