@@ -21,7 +21,7 @@ type LoginSchema = z.infer<typeof LoginSchema>;
 
 
 const LoginForm = () => {
-    const t = useTranslations('LOGIN');
+    const t = useTranslations('LOGIN.FORM');
     const router = useRouter();
 	const dispatch = useAppDispatch();
 	const [login, { isLoading }] = useLoginMutation();
@@ -67,7 +67,7 @@ const LoginForm = () => {
 			.unwrap()
 			.then((user:UserDetails)=>{
 				dispatch(setAuth(user));
-				toast.success('Logged in');
+				toast.success(t('SUCCESS.summary'));
 				router.push('/dashboard');
 			})
 			.catch((error:ErrorResponse) => {
@@ -85,28 +85,28 @@ const LoginForm = () => {
                         type='text'
                         required={true}
                         name='username' 
-                        placeholder="Username"
+                        placeholder={t("LABELS.username")}
                         autoComplete="username"
                         className={"w-full !rounded-md"}
                         sectionClassName="col-span-12 xl:col-span-12"
                         props={register("username")}
                         error={errors.username?.message}>
-                            Username
+                            {t("LABELS.username")}
                     </CFormInput>
                     <CFormInput 
                         type='password'
                         required={true}
                         name='password' 
-                        placeholder="Password"
+                        placeholder={t("LABELS.password")}
                         autoComplete="current-password"
                         className={"!rounded-e-none"}
                         sectionClassName="col-span-12 xl:col-span-12"
                         props={register("password")}
                         error={errors.password?.message}>
-                            Password
+                            {t("LABELS.password")}
                             <Link href="/components/authentication/reset-password/reset-basic/" 
                                 className="ml-1 ltr:float-right rtl:float-left text-danger">
-                                Forget password ?
+                                {t("LABELS.forget-password")}
                             </Link>
                     </CFormInput>
                     <div className="col-span-12 mb-2 xl:col-span-12">
@@ -114,7 +114,7 @@ const LoginForm = () => {
                             <div className="form-check !ps-0">
                                 <input className="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
                                 <label className="form-check-label text-[#8c9097] dark:text-white/50 font-normal" htmlFor="defaultCheck1">
-                                    Remember password ?
+                                    {t("LABELS.remember-password")}
                                 </label>
                             </div>
                         </div>
@@ -124,7 +124,7 @@ const LoginForm = () => {
                             intent="violet" 
                             size="md" 
                             type="submit">
-                            Sign In
+                            {t("BUTTONS.sign-in")}
                         </CButton>
                         {/* <Link href="/components/dashboards/crm/" className="ti-btn ti-btn-primary !bg-primary !text-white !font-medium">Sign In</Link> */}
                     </div>
