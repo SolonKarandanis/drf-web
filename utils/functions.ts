@@ -48,6 +48,9 @@ function escape(s:string) {
 }
 
 function getCookie(name:string) {
+    if (typeof document === "undefined"){
+        return "en;"      
+    }
     var match = document.cookie.match(RegExp('(?:^|;\\s*)' + escape(name) + '=([^;]*)'));
     return match ? match[1] : null;
 }

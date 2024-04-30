@@ -15,7 +15,9 @@ export default function Layout({ children,params:{locale} }: Props) {
 	unstable_setRequestLocale(locale);
 	return (
 	<RequireAuth>
-		<ContentLayout>{children}</ContentLayout>
+		<ContentLayout>
+			{children}
+		</ContentLayout>
 	</RequireAuth>);
 }
 

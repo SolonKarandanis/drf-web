@@ -6,7 +6,7 @@ const SideBarHeader = () => {
     return (
         <div className="main-sidebar-header">
             <Link href="/dashboard/" className="header-logo">
-                {/* <Image
+                <Image
                     alt="logo"
                     src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/brand-logos/desktop-logo.png`}
                     width={700}
@@ -47,7 +47,7 @@ const SideBarHeader = () => {
                     width={700}
                     height={475}
                     sizes="100vw"
-                    className="main-logo toggle-white"/> */}
+                    className="main-logo toggle-white"/>
             </Link>
         </div>
     )
