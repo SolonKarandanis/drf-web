@@ -1,9 +1,13 @@
 import Image from "next/image";
-import { basePath } from '@/next.config';
 import { useRouter } from "next/navigation";
 import { Locale } from "@/utils/locales";
+import { FC } from "react";
 
-const SelectLanguage = () => {
+type Props = {
+	path?: string;
+}
+
+const SelectLanguage:FC<Props> = ({path})=> {
     const router = useRouter();
 
     function handleLocaleChange(newLocale: Locale): void {
@@ -18,7 +22,7 @@ const SelectLanguage = () => {
             className="hs-dropdown-toggle ti-dropdown-toggle !p-0 flex-shrink-0  !border-0 !rounded-full !shadow-none">
             <Image
                 alt="flag-img"
-                src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/flags/us_flag.jpg`}
+                src={`${path}/assets/images/flags/us_flag.jpg`}
                 width={700}
                 height={475}
                 sizes="100vw"
@@ -37,7 +41,7 @@ const SelectLanguage = () => {
                                 <div className="h-[1.375rem] flex items-center w-[1.375rem] rounded-full">
                                     <Image
                                         alt="flag-img"
-                                        src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/flags/us_flag.jpg`}
+                                        src={`${path}/assets/images/flags/us_flag.jpg`}
                                         width={700}
                                         height={475}
                                         sizes="100vw"

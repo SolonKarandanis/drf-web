@@ -243,12 +243,12 @@ const Header:FC<Props> = ({path})=> {
                   <i className="bx bx-search-alt-2 header-link-icon"></i>
                 </button>
               </div>
-              {/* <SelectLanguage /> */}
+              <SelectLanguage path={path} />
               <ThemeToggler themeStoreState={themeState}/>
-              {/* <CartDropdown /> */}
+              <CartDropdown  path={path}/>
               <NotificationsDropdown />
               <FullscreenToggler />
-              {/* <ProfileDropdown /> */}
+              <ProfileDropdown path={path}/>
 
               <div className="header-element md:px-[0.48rem]">
                 <button aria-label="button" type="button"

@@ -2,11 +2,13 @@
 
 import Link from "next/link"
 import Image from "next/image";
-import { basePath } from '@/next.config';
-import { useState } from "react";
+import { FC, useState } from "react";
 
+type Props = {
+	path?: string;
+}
 
-const CartDropdown = () => {
+const CartDropdown:FC<Props> = ({path}) => {
     const data=  <span className="font-[600] py-[0.25rem] px-[0.45rem] rounded-[0.25rem] bg-pink/10 text-pink text-[0.625rem]">Free shipping</span>
     const cartProduct = [
         {
@@ -97,7 +99,7 @@ const CartDropdown = () => {
                             <div className="flex items-start cart-dropdown-item">
                                 <Image
                                     alt="img"
-                                    src={`${process.env.NODE_ENV === "production" ? basePath : ""}${idx.src}`}
+                                    src={`${path}${idx.src}`}
                                     width={700}
                                     height={475}
                                     sizes="100vw"
