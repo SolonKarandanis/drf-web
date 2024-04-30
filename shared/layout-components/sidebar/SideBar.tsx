@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, Fragment, MouseEvent, ReactNode } from 'react';
+import {  FC, Fragment, MouseEvent, ReactNode } from 'react';
 import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
 import { ThemeChanger } from "@/shared/redux/features/themeSlice";
 import {useState, useEffect, useCallback} from 'react'
@@ -10,14 +10,15 @@ import Link from 'next/link';
 import SimpleBar from 'simplebar-react';
 import SlideLeft from './SlideLeft';
 import SlideRight from './SlideRight';
+import SideBarHeader from './SideBarHeader';
 
 let history = [];
 
 type Props = {
-	children: ReactNode;
-};
+	path?: string;
+}
 
-const SideBar:FC<Props> = ({children}) => {
+const SideBar:FC<Props> = ({path}) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const pathname = usePathname();
@@ -322,7 +323,7 @@ const SideBar:FC<Props> = ({children}) => {
 			id="sidebar" 
 			onMouseOver={() => Onhover()} 
 			onMouseLeave={() => Outhover()} >
-			{children}
+			<SideBarHeader path={path} />
 			<SimpleBar className="main-sidebar " id="sidebar-scroll">
 				<nav className="main-menu-container nav nav-pills flex-column sub-open">
 					<SlideLeft />

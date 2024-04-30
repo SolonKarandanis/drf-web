@@ -4,7 +4,6 @@ import Sidebar from '@/shared/layout-components/sidebar/SideBar';
 import Footer from '@/shared/layout-components/footer/Footer';
 import Backtotop from '@/shared/layout-components/backtotop/BackToTop';
 import Switcher from '../switcher/switcher';
-import SideBarHeader from '../sidebar/SideBarHeader';
 import ContentLayoutClient from './content-layout-client';
 import ContentLayoutClientContent from './content-layout-client-content';
 import { basePath } from '@/next.config';
@@ -21,9 +20,7 @@ const ContentLayout:FC<Props> = ({children}) => {
             <ContentLayoutClient>
                 <div className='page'>
                     <Header path={path}/>
-                    <Sidebar>
-                        <SideBarHeader path={path} />
-                    </Sidebar>
+                    <Sidebar path={path} />
                     <ContentLayoutClientContent>
                         {children}
                     </ContentLayoutClientContent>
