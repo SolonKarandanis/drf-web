@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState} from 'react'
+import { FC, useEffect, useState} from 'react'
 import { useAppDispatch } from '@/shared/redux/hooks';
 import { useAppSelector } from '@/shared/redux/hooks';
 import { ThemeChanger } from "@/shared/redux/features/themeSlice";
@@ -32,7 +32,11 @@ declare global {
   }
 }
 
-const Header = () => {
+type Props = {
+	path?: string;
+}
+
+const Header:FC<Props> = ({path})=> {
   const dispatch = useAppDispatch();
   const themeState = useAppSelector(state => state.theme);
 
@@ -226,7 +230,7 @@ const Header = () => {
         <nav className="main-header !h-[3.75rem]" aria-label="Global">
           <div className="main-header-container ps-[0.725rem] pe-[1rem] ">
             <div className="header-content-left">
-              <Logo />
+              <Logo path={path} />
               <div className="header-element md:px-[0.325rem] !items-center" onClick={() => toggleSidebar()}>
                 <Link aria-label="Hide Sidebar"
                   className="sidemenu-toggle animated-arrow  hor-toggle horizontal-navtoggle inline-flex items-center" href="#!"><span></span></Link>
@@ -239,12 +243,12 @@ const Header = () => {
                   <i className="bx bx-search-alt-2 header-link-icon"></i>
                 </button>
               </div>
-              <SelectLanguage />
+              <SelectLanguage path={path} />
               <ThemeToggler themeStoreState={themeState}/>
-              <CartDropdown />
+              <CartDropdown  path={path}/>
               <NotificationsDropdown />
               <FullscreenToggler />
-              <ProfileDropdown />
+              <ProfileDropdown path={path}/>
 
               <div className="header-element md:px-[0.48rem]">
                 <button aria-label="button" type="button"

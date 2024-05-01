@@ -1,4 +1,5 @@
 import SearchUserForm from "@/components/users/forms/search/search-user-form";
+import Table from "@/shared/components/table/table";
 
 const SearchUsersPage = () => {
 
@@ -19,6 +20,7 @@ const SearchUsersPage = () => {
   return (
     <div className="inset-0 flex flex-col justify-between p-24">
       <SearchUserForm  onDataAction={onDataAction}/>
+      <Table />
     </div>
   )
 }

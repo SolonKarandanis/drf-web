@@ -1,10 +1,16 @@
+'use client';
+
 import Link from 'next/link'
-import React from 'react'
+import { FC } from 'react'
 import Image from "next/image";
-import { basePath } from '@/next.config';
 import { useAppSelector } from '@/shared/redux/hooks';
 
-const ProfileDropdown = () => {
+type Props = {
+	path?: string;
+}
+
+
+const ProfileDropdown:FC<Props> = ({path})=> {
     const {user} = useAppSelector(state => state.auth);
     return (
         <div className="header-element md:!px-[0.65rem] px-2 hs-dropdown !items-center 
@@ -13,7 +19,7 @@ const ProfileDropdown = () => {
                 className="hs-dropdown-toggle ti-dropdown-toggle !gap-2 !p-0 flex-shrink-0 sm:me-2 me-0 !rounded-full !shadow-none text-xs align-middle !border-0 !shadow-transparent ">
                 <Image
                     alt="Image Description"
-                    src={`${process.env.NODE_ENV === "production" ? basePath : ""}/assets/images/faces/9.jpg`}
+                    src={`${path}/assets/images/faces/9.jpg`}
                     width={32}
                     height={32}
                     sizes="100vw"

@@ -14,6 +14,8 @@ import { toast } from 'react-toastify';
 import { useAppDispatch } from '@/shared/redux/hooks';
 import { setLoading } from '@/shared/redux/features/authSlice';
 import CFormSelect from '@/shared/components/form-select/cform-select';
+import { useTranslations } from 'next-intl';
+import { getClientLocale } from '@/utils/functions';
 
 type RegisterSchema = z.infer<typeof RegisterSchema>;
 
@@ -29,6 +31,8 @@ const roles =[
 ]
 
 const RegisterForm = () => {
+    const locale = getClientLocale();
+    const t = useTranslations('REGISTER.FORM');
     const router = useRouter();
     const [registerUser, { isLoading }] = useRegisterUserMutation();
     const dispatch = useAppDispatch();
@@ -66,8 +70,8 @@ const RegisterForm = () => {
         registerUser(request)
 			.unwrap()
 			.then(() => {
-				toast.success('Please check email to verify account');
-				router.push('/auth/login');
+				toast.success(t('SUCCESS.summary'));
+                router.push(`/${locale}/auth/login`);
 			})
 			.catch((error:ErrorResponse) => {
 				handleError(error);
@@ -82,34 +86,34 @@ const RegisterForm = () => {
                     type='text'
                     required={true}
                     name='firstName' 
-                    placeholder="First Name"
+                    placeholder={t("LABELS.first-name")}
                     className={"w-full !rounded-md"}
                     sectionClassName="col-span-12 xl:col-span-12"
                     props={register("firstName")}
                     error={errors.firstName?.message}>
-                        First Name
+                       {t("LABELS.first-name")}
                 </CFormInput>
                 <CFormInput 
                     type='text'
                     required={true}
                     name='lastname' 
-                    placeholder="Last Name"
+                    placeholder={t("LABELS.last-name")}
                     className={"w-full !rounded-md"}
                     sectionClassName="col-span-12 xl:col-span-12"
                     props={register("lastName")}
                     error={errors.lastName?.message}>
-                        Last Name
+                        {t("LABELS.last-name")}
                 </CFormInput>
                 <CFormInput 
                     type='email'
                     required={true}
                     name='email' 
-                    placeholder="Email"
+                    placeholder={t("LABELS.email")}
                     className={"w-full !rounded-md"}
                     sectionClassName="col-span-12 xl:col-span-12"
                     props={register("email")}
                     error={errors.email?.message}>
-                        Email
+                        {t("LABELS.email")}
                 </CFormInput>
                 <CFormSelect 
                     name="role"
@@ -120,51 +124,52 @@ const RegisterForm = () => {
                     sectionClassName="col-span-12 xl:col-span-12"
                     autoComplete='role-name'
                     error={errors.role?.message}>
-                        Role
+                        {t("LABELS.role")}
                 </CFormSelect>
                 <CFormInput 
                     type='text'
                     required={true}
                     name='username' 
-                    placeholder="Username"
+                    placeholder={t("LABELS.username")}
                     autoComplete="username"
                     className={"w-full !rounded-md"}
                     sectionClassName="col-span-12 xl:col-span-12"
                     props={register("username")}
                     error={errors.username?.message}>
-                        Username
+                        {t("LABELS.username")}
                 </CFormInput>
                 <CFormInput
                     type='password'
                     required={true}
                     name='password' 
-                    placeholder="Password"
+                    placeholder={t("LABELS.password")}
                     autoComplete="new-password"
                     className={"!rounded-e-none"}
                     sectionClassName="col-span-12 xl:col-span-12"
                     props={register("password")}
                     error={errors.password?.message}>
-                        Password
+                        {t("LABELS.password")}
                 </CFormInput>
                 <CFormInput 
                     type='password'
                     required={true}
                     name='confirmpassword' 
-                    placeholder="Confirm Password"
+                    placeholder={t("LABELS.confirm-password")}
                     autoComplete="new-password"
                     className={"!rounded-e-none"}
                     sectionClassName="col-span-12 xl:col-span-12"
                     props={register("confirmPassword")}
                     error={errors.confirmPassword?.message}>
-                        Confirm Password
+                        {t("LABELS.confirm-password")}
                 </CFormInput>
                 <div className="col-span-12 xl:col-span-12">
                     <div className="form-check !flex !ps-0">
                         <input className="form-check-input me-1" type="checkbox" value="" id="defaultCheck1"/>
                         <label className="ps-2 form-check-label text-[#8c9097] dark:text-white/50 font-normal block" htmlFor="defaultCheck1">
-                            By creating a account you agree to our <Link href="/components/pages/terms&conditions/"
-                            className="text-success"><u>Terms &amp; Conditions</u></Link> and <Link href="#!"
-                            className="text-success"><u>Privacy Policy</u></Link>
+                        {/* /components/pages/terms&conditions/ */}
+                            {t("LABELS.terms-description")} <Link href="/en"
+                            className="text-success"><u>{t("LABELS.terms")} &amp; {t("LABELS.conditions")}</u></Link> and <Link href="#!"
+                            className="text-success"><u>{t("LABELS.privacy-policy")}</u></Link>
                         </label>
                     </div>
                 </div>
@@ -173,7 +178,7 @@ const RegisterForm = () => {
                         intent="violet" 
                         size="md" 
                         type="submit">
-                        Create Account
+                        {t("BUTTONS.create-account")}
                     </CButton>
                 </div>
             </div>

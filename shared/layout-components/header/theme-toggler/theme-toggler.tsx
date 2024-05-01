@@ -1,3 +1,5 @@
+'use client';
+
 import { ThemeChanger, ThemeState,toggleDarkTheme,toggleLightTheme } from "@/shared/redux/features/themeSlice";
 import { useAppDispatch } from "@/shared/redux/hooks";
 import Link from "next/link"

@@ -1,3 +1,5 @@
+"use client"
+
 import {FC} from 'react'
 import { twMerge } from "tailwind-merge";
 import CFormError from '@/shared/components/form-error/cform-error'
