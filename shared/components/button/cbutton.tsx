@@ -1,3 +1,5 @@
+"use client"
+
 import {ButtonHTMLAttributes, FC, ReactElement, ReactNode} from 'react';
 import {cva,VariantProps} from 'class-variance-authority';
 import { twMerge } from "tailwind-merge";

@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/shared/shadcn/components/ui/button";
 import { Input } from "@/shared/shadcn/components/ui/input";
 import { FC } from "react";
