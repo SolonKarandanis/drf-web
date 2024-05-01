@@ -113,5 +113,14 @@
                 "summary": "Logged in to your account"
             } 
         }
+    },
+    "REGISTER":{
+        "PAGE":{
+            "title":"Sign Up",
+            "description":"Welcome & Join us by creating a free account !",
+            "already-have-account":"Already have an account?",
+            "sign-in":"Sign In",
+            "or":"OR"
+        }
     }
 }
