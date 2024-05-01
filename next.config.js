@@ -19,6 +19,9 @@ const nextConfig = {
     path: "/",
     unoptimized: true,
   },
+  experimental:{
+    typedRoutes: true
+  }
 };
 
 module.exports = nextIntlConfig(nextConfig);

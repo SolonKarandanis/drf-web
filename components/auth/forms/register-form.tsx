@@ -166,7 +166,8 @@ const RegisterForm = () => {
                     <div className="form-check !flex !ps-0">
                         <input className="form-check-input me-1" type="checkbox" value="" id="defaultCheck1"/>
                         <label className="ps-2 form-check-label text-[#8c9097] dark:text-white/50 font-normal block" htmlFor="defaultCheck1">
-                            {t("LABELS.terms-description")} <Link href="/components/pages/terms&conditions/"
+                        {/* /components/pages/terms&conditions/ */}
+                            {t("LABELS.terms-description")} <Link href="/en"
                             className="text-success"><u>{t("LABELS.terms")} &amp; {t("LABELS.conditions")}</u></Link> and <Link href="#!"
                             className="text-success"><u>{t("LABELS.privacy-policy")}</u></Link>
                         </label>
