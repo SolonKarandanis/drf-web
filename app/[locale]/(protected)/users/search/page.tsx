@@ -17,10 +17,40 @@ const SearchUsersPage = () => {
     // .then(data => console.log(data))
   }
 
+  const COLUMNS = [
+    {
+      header: "Id",
+      field: "id",
+    },
+    {
+      header: "User Name",
+      field: "username",
+    },
+    {
+      header: "Name",
+      field: "first_name",
+    },
+    {
+      header: "Email",
+      field: "email",
+    },
+    {
+      header: "Created",
+      field: "created_at",
+    },
+    {
+      header: "Status",
+      field: "status",
+    },
+    {
+      header: "Actions"
+    },
+  ]
+
   return (
     <div className="inset-0 flex flex-col justify-between p-24">
       <SearchUserForm  onDataAction={onDataAction}/>
-      <Table />
+      <Table columns={COLUMNS} />
     </div>
   )
 }

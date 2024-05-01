@@ -1,12 +1,16 @@
 "use client"
 
-import React from 'react'
+import { FC } from 'react'
 import Link from 'next/link'
+import { TableProps } from '../props'
 
-const Table = () => {
+const Table:FC<TableProps> = () => {
   return (
     <div className="overflow-x-auto mt-4">
         <div className="table-responsive">
+            <div className=" mb-4 flex">
+
+            </div>
             <table className="table whitespace-nowrap table-borderless 
                 min-w-full">
                 <thead>

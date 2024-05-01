@@ -1,6 +1,6 @@
-import { FC } from "react";
+import { FC, InputHTMLAttributes } from "react";
 
-interface Props{
+interface Props extends InputHTMLAttributes<HTMLInputElement>{
     filter:string;
     setFilter:(value:string)=>void
 }

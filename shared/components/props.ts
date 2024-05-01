@@ -2,6 +2,7 @@ import {
     InputHTMLAttributes,  
     RefCallback,
     SelectHTMLAttributes,
+    TableHTMLAttributes,
 } from "react";
 
 export interface Props {
@@ -43,4 +44,18 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement>{
     inputProps?:Props,
     error?:string,
     children: React.ReactNode
+}
+
+export interface TableColumns{
+    header:string;
+    field?:string;
+}
+
+export interface TableData{
+
+}
+
+export interface TableProps extends TableHTMLAttributes<HTMLTableElement>{
+    columns:TableColumns[];
+    
 }

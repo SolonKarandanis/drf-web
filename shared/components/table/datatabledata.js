@@ -7,30 +7,33 @@ import {
 
   export const COLUMNS = [
     {
-      Header: "Name",
-      accessor: "Name",
+      header: "Id",
+      field: "id",
     },
     {
-      Header: "Position",
-      accessor: "Position",
+      header: "User Name",
+      field: "username",
     },
     {
-      Header: "Office",
-      accessor: "Office",
+      header: "Name",
+      field: "first_name",
     },
     {
-      Header: "Age",
-      accessor: "Age",
+      header: "Email",
+      field: "email",
     },
     {
-      Header: "Start date",
-      accessor: "date",
+      header: "Created",
+      field: "created_at",
     },
     {
-      Header: "Salary",
-      accessor: "Salary",
+      header: "Status",
+      field: "status",
     },
-  ];
+    {
+      header: "Actions"
+    },
+  ]
 
   export const DATATABLE = [
     {
