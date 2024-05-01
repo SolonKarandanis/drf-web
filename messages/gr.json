@@ -121,6 +121,28 @@
             "already-have-account":"Έχετε ήδη λογαριασμό?",
             "sign-in":"Συνδεθείτε",
             "or":"Ή"
+        },
+        "FORM":{
+            "LABELS":{
+                "first-name":"Όνομα",
+                "last-name":"Επίθετο",
+                "email":"Email",
+                "role":"Ρόλος",
+                "username":"Όνομα χρήστη",
+                "password":"Κωδικός πρόσβασης",
+                "confirm-password":"Επιβεβαίωση Κωδικού",
+                "terms-description":"Δημιουργώντας έναν λογαριασμό συμφωνείτε με τους δικούς μας ",
+                "terms":"Όρους",
+                "conditions":"Συνθήκες",
+                "privacy-policy":"Πολιτική Απορρήτου"
+                
+            },
+            "BUTTONS":{
+                "create-account":"Δημιουργήστε λογαριασμό"
+            },
+            "SUCCESS": {
+                "summary": "Ελέγξτε το email για να επαληθεύσετε τον λογαριασμό"
+            } 
         }
     }
 }

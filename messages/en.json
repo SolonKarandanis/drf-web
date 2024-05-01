@@ -121,6 +121,28 @@
             "already-have-account":"Already have an account?",
             "sign-in":"Sign In",
             "or":"OR"
+        },
+        "FORM":{
+            "LABELS":{
+                "first-name":"First Name",
+                "last-name":"Last Name",
+                "email":"Email",
+                "role":"Role",
+                "username":"Username",
+                "password":"Password",
+                "confirm-password":"Confirm Password",
+                "terms-description":"By creating a account you agree to our ",
+                "terms":"Terms",
+                "conditions":"Conditions",
+                "privacy-policy":"Privacy Policy"
+                
+            },
+            "BUTTONS":{
+                "create-account":"Create Account"
+            },
+            "SUCCESS": {
+                "summary": "Please check email to verify account"
+            } 
         }
     }
 }
