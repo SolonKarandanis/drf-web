@@ -5,8 +5,7 @@ import Link from 'next/link'
 
 const Table = () => {
   return (
-    
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto mt-4">
         <div className="table-responsive">
             <table className="table whitespace-nowrap table-borderless 
                 min-w-full">
