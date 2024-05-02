@@ -49,7 +49,7 @@ const LoginForm = () => {
             username,
             password,
             redirect:true,
-            callbackUrl:`/${locale}/dashboard`
+            callbackUrl:`/${locale}`
         }).catch((error:ErrorResponse) => {
             handleError(error);
         });

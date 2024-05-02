@@ -11,14 +11,11 @@ declare module "next-auth" {
         access:string;
     }
 
+    
+}
+
+declare module "next-auth/jwt" {
     interface JWT extends DefaultJWT{
         user?: User;
     }
 }
-
-// declare module "next-auth/jwt" {
-//     interface JWT {
-//       role?: Role;
-//       subscribed: boolean;
-//     }
-// }

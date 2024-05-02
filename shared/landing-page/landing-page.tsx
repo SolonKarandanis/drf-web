@@ -11,6 +11,7 @@ const LandingPage = () => {
     // if(isAuthenticated){
     //     redirect(`/${locale}/dashboard`);
     // }
+    console.log('landing')
     redirect(`/${locale}/auth/login`);
 }
 
