@@ -4,8 +4,6 @@ import Link from "next/link";
 
 const Page = async () => {
   const session = await getServerSession(authOptions);
-  console.log('Dashboard')
-  console.log( session)
   const olderDate = new Date('2022-10-31');
   const currentDate = new Date('2022-11-01');
 
