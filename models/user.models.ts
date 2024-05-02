@@ -1,4 +1,4 @@
-interface BaseUser{
+interface BaseUserModel{
     username:string;
 	first_name: string;
 	last_name: string;
@@ -6,7 +6,7 @@ interface BaseUser{
     role:string;
 }
 
-interface User extends BaseUser{
+interface UserModel extends BaseUserModel {
     id:number;
     uuid:string;
     created_date:string;
@@ -15,9 +15,10 @@ interface User extends BaseUser{
     is_active:boolean;
 }
 
-type UserPublic = Pick<User, "id" | "username">;
 
-interface UserDetails extends User{
+type UserPublic = Pick<UserModel, "id" | "username">;
+
+interface UserDetails extends UserModel{
     groups:UserGroup[];
     permissions:string[];
 }
@@ -31,7 +32,7 @@ interface ChangePasswordRequest{
     new_password: string;
 }
 
-interface CreateUserRequest extends BaseUser{
+interface CreateUserRequest extends BaseUserModel{
     password:string;
     password2:string;
 }

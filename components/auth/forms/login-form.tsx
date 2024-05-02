@@ -45,7 +45,14 @@ const LoginForm = () => {
 
     const onSubmit:SubmitHandler<LoginSchema> = async (values: LoginSchema) =>{
         const {username,password} = values;
-        await signIn("credentials",{username,password});
+        signIn("credentials",{
+            username,
+            password,
+            redirect:true,
+            callbackUrl:`/${locale}/dashboard`
+        }).catch((error:ErrorResponse) => {
+            handleError(error);
+        });
         // dispatch(setLoading(true));
         // login(request)
         //     .unwrap()
@@ -55,9 +62,9 @@ const LoginForm = () => {
 		// 		setLoginResponseInStorage(loginResponse);
 		// 		dispatch(setTokens(loginResponse));
 		// 	})
-		// 	.catch((error:ErrorResponse) => {
-		// 		handleError(error);
-		// 	});
+			// .catch((error:ErrorResponse) => {
+			// 	handleError(error);
+			// });
     }
 
     // useEffect(()=>{
