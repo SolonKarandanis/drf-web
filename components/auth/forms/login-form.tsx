@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import { getClientLocale, setLoginResponseInStorage } from "@/utils/functions";
 import { setAuth, setLoading, setTokens } from "@/shared/redux/features/authSlice";
 import { useTranslations } from "next-intl";
+import {signIn} from "next-auth/react"
 
 type LoginSchema = z.infer<typeof LoginSchema>;
 
@@ -42,41 +43,38 @@ const LoginForm = () => {
 		toast.error(`(${status}) ${detail}`);
 	}
 
-    const onSubmit:SubmitHandler<LoginSchema> = (values: LoginSchema) =>{
+    const onSubmit:SubmitHandler<LoginSchema> = async (values: LoginSchema) =>{
         const {username,password} = values;
-        const request:LoginRequest={
-            username,
-            password
-        }
-        dispatch(setLoading(true));
-        login(request)
-            .unwrap()
-			.then((loginResponse:LoginResponse) => {
-				const {access} = loginResponse;
-				setToken(access);
-				setLoginResponseInStorage(loginResponse);
-				dispatch(setTokens(loginResponse));
-			})
-			.catch((error:ErrorResponse) => {
-				handleError(error);
-			});
+        await signIn("credentials",{username,password});
+        // dispatch(setLoading(true));
+        // login(request)
+        //     .unwrap()
+		// 	.then((loginResponse:LoginResponse) => {
+		// 		const {access} = loginResponse;
+		// 		setToken(access);
+		// 		setLoginResponseInStorage(loginResponse);
+		// 		dispatch(setTokens(loginResponse));
+		// 	})
+		// 	.catch((error:ErrorResponse) => {
+		// 		handleError(error);
+		// 	});
     }
 
-    useEffect(()=>{
-		if(token){
-			getAccount(token)
-			.unwrap()
-			.then((user:UserDetails)=>{
-				dispatch(setAuth(user));
-				toast.success(t('SUCCESS.summary'));
-				router.push(`/${locale}/dashboard`);
-			})
-			.catch((error:ErrorResponse) => {
-				handleError(error);
-			});
-		}
+    // useEffect(()=>{
+	// 	if(token){
+	// 		getAccount(token)
+	// 		.unwrap()
+	// 		.then((user:UserDetails)=>{
+	// 			dispatch(setAuth(user));
+	// 			toast.success(t('SUCCESS.summary'));
+	// 			router.push(`/${locale}/dashboard`);
+	// 		})
+	// 		.catch((error:ErrorResponse) => {
+	// 			handleError(error);
+	// 		});
+	// 	}
 		
-	},[token]);
+	// },[token]);
     
     return (
         <>
