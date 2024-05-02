@@ -6,11 +6,11 @@ import { redirect } from 'next/navigation';
 
 const LandingPage = () => {
     const locale = getClientLocale();
-    const {isAuthenticated} = useAppSelector(state => state.auth);
-    console.log(isAuthenticated)
-    if(isAuthenticated){
-        redirect(`/${locale}/dashboard`);
-    }
+    // const {isAuthenticated} = useAppSelector(state => state.auth);
+    // console.log(isAuthenticated)
+    // if(isAuthenticated){
+    //     redirect(`/${locale}/dashboard`);
+    // }
     redirect(`/${locale}/auth/login`);
 }
 

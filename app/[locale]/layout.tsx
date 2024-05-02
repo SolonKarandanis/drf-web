@@ -30,7 +30,7 @@ const RootLayout:FC<Props>= async ({children,params:{locale}}) => {
       suppressHydrationWarning>
       <body className={inter.className}>
         <CustomProvider>
-          <Setup />
+          {/* <Setup /> */}
           <NextIntlClientProvider messages={messages}>
             {children}
           </NextIntlClientProvider>
