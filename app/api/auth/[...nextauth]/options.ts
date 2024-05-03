@@ -34,29 +34,32 @@ export const authOptions: NextAuthOptions ={
             // `user` variable to the signIn() and jwt() callback
             async authorize(credentials, req) {
                 
-                try {
-                    const {access,refresh}:LoginResponse = await fetch(`${baseUrl}auth/token/`, {
+              
+                    const httpResponse= await fetch(`${baseUrl}auth/token/`, {
                         method: "POST",
                         headers: {
                           "Content-Type": "application/json"
                         },
                         body: JSON.stringify(credentials)
-                      })
-                      .then(response => response.json())
+                    })
+                    const response =await httpResponse.json();
+                    if(httpResponse.status===401){
+                        throw new Error(response.detail)
+                    }
+                   
        
-                      const user:User = await fetch(`${baseUrl}auth/users/account/`, {
+                    const {access,refresh} = response;
+                    const user:User = await fetch(`${baseUrl}auth/users/account/`, {
                         method: "GET",
                         headers: {
-                          "Content-Type": "application/json",
-                          "Authorization":`Bearer ${access}`,
+                            "Content-Type": "application/json",
+                            "Authorization":`Bearer ${access}`,
                         }
-                      })
-                      .then(response => response.json())
+                    })
+                    .then(response => response.json())
                       
                     if (user) return {...user,access,refresh};
-                } catch (error) {
-                    console.error(error);
-                }
+               
                 return null;
             }
         })
@@ -73,7 +76,7 @@ export const authOptions: NextAuthOptions ={
             }
             // Refresh the backend token if necessary
             if (getCurrentEpochTime() > (token["ref"] as number)) {
-                const response =await fetch(`${baseUrl}auth/token/verify/`, {
+                const response =await fetch(`${baseUrl}auth/token/refresh/`, {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json"
