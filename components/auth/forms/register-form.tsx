@@ -16,6 +16,9 @@ import { setLoading } from '@/shared/redux/features/authSlice';
 import CFormSelect from '@/shared/components/form-select/cform-select';
 import { useTranslations } from 'next-intl';
 import { getClientLocale } from '@/utils/functions';
+import { useEffect, useState } from 'react';
+import { passwordStrength } from "check-password-strength";
+import PasswordStrength from '@/shared/components/password-strength/password-strength';
 
 type RegisterSchema = z.infer<typeof RegisterSchema>;
 
@@ -36,8 +39,11 @@ const RegisterForm = () => {
     const router = useRouter();
     const [registerUser, { isLoading }] = useRegisterUserMutation();
     const dispatch = useAppDispatch();
+    
 
-    const {register,handleSubmit,formState: { errors },} = useForm<RegisterSchema>({
+    
+
+    const {register,handleSubmit,formState: { errors },watch} = useForm<RegisterSchema>({
         resolver: zodResolver(RegisterSchema),
         defaultValues: {
             firstName:"",
@@ -49,6 +55,14 @@ const RegisterForm = () => {
             confirmPassword:""
         },
     });
+
+    const [passStrength,setPassStrength]= useState<number>(0);
+
+    useEffect(() => {
+        const strength =passwordStrength(watch().password);
+        console.log(strength)
+        setPassStrength(strength.id);
+    }, [watch().password]);
 
     const handleError =(error:ErrorResponse)=>{
 		const {status, data:{detail}} = error;
@@ -150,6 +164,7 @@ const RegisterForm = () => {
                     error={errors.password?.message}>
                         {t("LABELS.password")}
                 </CFormInput>
+                <PasswordStrength passStrength={passStrength} />
                 <CFormInput 
                     type='password'
                     required={true}
