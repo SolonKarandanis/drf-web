@@ -60,7 +60,6 @@ const RegisterForm = () => {
 
     useEffect(() => {
         const strength =passwordStrength(watch().password);
-        console.log(strength)
         setPassStrength(strength.id);
     }, [watch().password]);
 
