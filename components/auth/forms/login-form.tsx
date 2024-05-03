@@ -11,10 +11,9 @@ import CButton from "@/shared/components/button/cbutton";
 import { useRouter } from 'next/navigation';
 import { useAppDispatch } from "@/shared/redux/hooks";
 import { useLazyGetLoggedInUserAccountQuery, useLoginMutation } from "@/shared/redux/features/authApiSlice";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { toast } from "react-toastify";
-import { getClientLocale, setLoginResponseInStorage } from "@/utils/functions";
-import { setAuth, setLoading, setTokens } from "@/shared/redux/features/authSlice";
+import { getClientLocale } from "@/utils/functions";
 import { useTranslations } from "next-intl";
 import {signIn} from "next-auth/react"
 
