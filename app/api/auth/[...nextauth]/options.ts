@@ -90,8 +90,6 @@ export const authOptions: NextAuthOptions ={
         // Since we're using Django as the backend we have to pass the JWT
         // token to the client instead of the `session`.
         async session({ session, token }) {
-            console.log('session')
-            console.log(token)
             const loggedInUser = token.user;
             session.access= loggedInUser.access;
             session.user= loggedInUser;
