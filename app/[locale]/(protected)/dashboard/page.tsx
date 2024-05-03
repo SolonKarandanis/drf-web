@@ -4,6 +4,7 @@ import Link from "next/link";
 
 const Page = async () => {
   const session = await getServerSession(authOptions);
+  console.log(session)
   const olderDate = new Date('2022-10-31');
   const currentDate = new Date('2022-11-01');
 
@@ -14,13 +15,7 @@ const Page = async () => {
   const d=formatter.format(Math.round(diff / 86400000), 'day')
   return (
     <div>
-      {/* {d} */}
-
-      {session ? (
-        <Link href="/api/auth/signout?callbackUrl=/">Logout</Link>
-      ):(
-        <Link href="/api/auth/signin">Login</Link>
-      )}
+      {d}
     </div>
   )
 }
