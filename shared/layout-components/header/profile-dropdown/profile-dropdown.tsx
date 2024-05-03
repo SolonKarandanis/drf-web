@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { FC } from 'react'
 import Image from "next/image";
 import { useAppSelector } from '@/shared/redux/hooks';
+import { useSession } from 'next-auth/react';
 
 type Props = {
 	path?: string;
@@ -11,7 +12,8 @@ type Props = {
 
 
 const ProfileDropdown:FC<Props> = ({path})=> {
-    const {user} = useAppSelector(state => state.auth);
+    const {data} = useSession();
+    const loggedUser = data?.user;
     return (
         <div className="header-element md:!px-[0.65rem] px-2 hs-dropdown !items-center 
             ti-dropdown [--placement:bottom-left] profile-data">
@@ -27,7 +29,7 @@ const ProfileDropdown:FC<Props> = ({path})=> {
                 />
             </button>
             <div className="hidden md:block dropdown-profile">
-                <p className="font-semibold mb-0 leading-none text-[#536485] text-[0.813rem] ">{user?.first_name} {user?.last_name}</p>
+                <p className="font-semibold mb-0 leading-none text-[#536485] text-[0.813rem] ">{loggedUser?.first_name} {loggedUser?.last_name}</p>
                 <span className="opacity-[0.7] font-normal text-[#536485] block text-[0.6875rem] ">Web Designer</span>
             </div>
             <div
@@ -54,7 +56,7 @@ const ProfileDropdown:FC<Props> = ({path})=> {
                     className="ti ti-wallet text-[1.125rem] me-2 opacity-[0.7]"></i>Bal: $7,12,950</Link></li>
                 <li><Link className="w-full ti-dropdown-item !text-[0.8125rem] !p-[0.65rem] !gap-x-0 !inline-flex" href="#!"><i
                     className="ti ti-headset text-[1.125rem] me-2 opacity-[0.7]"></i>Support</Link></li>
-                <li><Link className="w-full ti-dropdown-item !text-[0.8125rem] !p-[0.65rem] !gap-x-0 !inline-flex" href="#!"><i
+                <li><Link className="w-full ti-dropdown-item !text-[0.8125rem] !p-[0.65rem] !gap-x-0 !inline-flex" href="/api/auth/signout?callbackUrl=/"><i
                     className="ti ti-logout text-[1.125rem] me-2 opacity-[0.7]"></i>Log Out</Link></li>
                 </ul>
             </div>

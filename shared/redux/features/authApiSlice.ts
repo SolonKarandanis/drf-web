@@ -22,7 +22,7 @@ const authApiSlice = apiSlice.injectEndpoints({
 			  }
 			
 		}),
-        getUsers: builder.query<User[], {page:number,size:number}>({
+        getUsers: builder.query<UserModel[], {page:number,size:number}>({
 			query: ({page,size}) => `${ApiControllers.USERS}/`,
 		}),
         login: builder.mutation({

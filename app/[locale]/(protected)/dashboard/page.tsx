@@ -1,4 +1,9 @@
-const Page = () => {
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import { getServerSession } from "next-auth";
+
+const Page = async () => {
+  const session = await getServerSession(authOptions);
+  console.log(session)
   const olderDate = new Date('2022-10-31');
   const currentDate = new Date('2022-11-01');
 
@@ -9,7 +14,6 @@ const Page = () => {
   const d=formatter.format(Math.round(diff / 86400000), 'day')
   return (
     <div>
-      
       {d}
     </div>
   )

@@ -14,11 +14,12 @@ type Props = {
 export default function Layout({ children,params:{locale} }: Props) {
 	unstable_setRequestLocale(locale);
 	return (
-	<RequireAuth>
-		<ContentLayout>
-			{children}
-		</ContentLayout>
-	</RequireAuth>);
+		// <RequireAuth>
+			<ContentLayout>
+				{children}
+			</ContentLayout>
+		// </RequireAuth>
+	);
 }
 
 export function generateStaticParams() {

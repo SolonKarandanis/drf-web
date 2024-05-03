@@ -1,3 +1,5 @@
+"use client";
+
 import { getClientLocale } from "@/utils/functions";
 
 export interface MenuItem{

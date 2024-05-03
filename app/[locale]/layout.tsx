@@ -7,6 +7,8 @@ import Setup from '@/components/utils/Setup'
 import { FC } from "react";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import AuthProvider from "@/components/auth/auth-provider";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,12 +31,15 @@ const RootLayout:FC<Props>= async ({children,params:{locale}}) => {
     <html lang={locale} 
       suppressHydrationWarning>
       <body className={inter.className}>
-        <CustomProvider>
-          <Setup />
-          <NextIntlClientProvider messages={messages}>
-            {children}
-          </NextIntlClientProvider>
-        </CustomProvider>
+        <AuthProvider>
+          <CustomProvider>
+            <ToastContainer />;
+            {/* <Setup /> */}
+            <NextIntlClientProvider messages={messages}>
+              {children}
+            </NextIntlClientProvider>
+          </CustomProvider>
+        </AuthProvider>
       </body>
     </html>
   )

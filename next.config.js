@@ -18,9 +18,6 @@ const nextConfig = {
     loader: "imgix",
     path: "/",
     unoptimized: true,
-  },
-  experimental:{
-    typedRoutes: true
   }
 };
 

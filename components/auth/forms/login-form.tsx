@@ -11,11 +11,11 @@ import CButton from "@/shared/components/button/cbutton";
 import { useRouter } from 'next/navigation';
 import { useAppDispatch } from "@/shared/redux/hooks";
 import { useLazyGetLoggedInUserAccountQuery, useLoginMutation } from "@/shared/redux/features/authApiSlice";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { toast } from "react-toastify";
-import { getClientLocale, setLoginResponseInStorage } from "@/utils/functions";
-import { setAuth, setLoading, setTokens } from "@/shared/redux/features/authSlice";
+import { getClientLocale } from "@/utils/functions";
 import { useTranslations } from "next-intl";
+import {signIn} from "next-auth/react"
 
 type LoginSchema = z.infer<typeof LoginSchema>;
 
@@ -42,41 +42,45 @@ const LoginForm = () => {
 		toast.error(`(${status}) ${detail}`);
 	}
 
-    const onSubmit:SubmitHandler<LoginSchema> = (values: LoginSchema) =>{
+    const onSubmit:SubmitHandler<LoginSchema> = async (values: LoginSchema) =>{
         const {username,password} = values;
-        const request:LoginRequest={
+        signIn("credentials",{
             username,
-            password
-        }
-        dispatch(setLoading(true));
-        login(request)
-            .unwrap()
-			.then((loginResponse:LoginResponse) => {
-				const {access} = loginResponse;
-				setToken(access);
-				setLoginResponseInStorage(loginResponse);
-				dispatch(setTokens(loginResponse));
-			})
-			.catch((error:ErrorResponse) => {
-				handleError(error);
-			});
+            password,
+            redirect:true,
+            callbackUrl:`/${locale}`
+        }).catch((error:ErrorResponse) => {
+            handleError(error);
+        });
+        // dispatch(setLoading(true));
+        // login(request)
+        //     .unwrap()
+		// 	.then((loginResponse:LoginResponse) => {
+		// 		const {access} = loginResponse;
+		// 		setToken(access);
+		// 		setLoginResponseInStorage(loginResponse);
+		// 		dispatch(setTokens(loginResponse));
+		// 	})
+			// .catch((error:ErrorResponse) => {
+			// 	handleError(error);
+			// });
     }
 
-    useEffect(()=>{
-		if(token){
-			getAccount(token)
-			.unwrap()
-			.then((user:UserDetails)=>{
-				dispatch(setAuth(user));
-				toast.success(t('SUCCESS.summary'));
-				router.push(`/${locale}/dashboard`);
-			})
-			.catch((error:ErrorResponse) => {
-				handleError(error);
-			});
-		}
+    // useEffect(()=>{
+	// 	if(token){
+	// 		getAccount(token)
+	// 		.unwrap()
+	// 		.then((user:UserDetails)=>{
+	// 			dispatch(setAuth(user));
+	// 			toast.success(t('SUCCESS.summary'));
+	// 			router.push(`/${locale}/dashboard`);
+	// 		})
+	// 		.catch((error:ErrorResponse) => {
+	// 			handleError(error);
+	// 		});
+	// 	}
 		
-	},[token]);
+	// },[token]);
     
     return (
         <>
