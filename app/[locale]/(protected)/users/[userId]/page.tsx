@@ -14,6 +14,7 @@ const UserDetailsPage:FC<Props> = ({params:{userId}}) => {
 
 export default UserDetailsPage
 
+// export const revalidate = 120
 
 // export async function generateStaticParams(){
 //     //fetch all userIds
