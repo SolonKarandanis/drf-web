@@ -15,7 +15,7 @@ const PasswordStrength = ({ passStrength }: Props) => {
       {Array.from({ length: passStrength + 1 }).map((i, index) => (
         <div
           key={index}
-          className={cn("h-2 w-10 rounded-md bg-red-500", {
+          className={cn("h-2 w-10 rounded-md", {
             "bg-red-500": passStrength === 0,
             "bg-orange-500": passStrength === 1,
             "bg-yellow-500": passStrength === 2,
