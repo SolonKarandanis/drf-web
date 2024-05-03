@@ -8,6 +8,7 @@ import { FC } from "react";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import AuthProvider from "@/components/auth/auth-provider";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -32,6 +33,7 @@ const RootLayout:FC<Props>= async ({children,params:{locale}}) => {
       <body className={inter.className}>
         <AuthProvider>
           <CustomProvider>
+            <ToastContainer />;
             {/* <Setup /> */}
             <NextIntlClientProvider messages={messages}>
               {children}
