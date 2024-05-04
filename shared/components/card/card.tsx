@@ -4,8 +4,7 @@ DetailedHTMLProps,
 HTMLAttributes,
 HtmlHTMLAttributes,
 ImgHTMLAttributes,
-ReactNode,
-FC
+ReactNode
 } from "react";
   
 interface CardProps {
@@ -29,11 +28,12 @@ Card.Image = Image;
 Card.IconSection = IconSection;
 Card.Title = Title;
 Card.Description = Description;
+Card.Price = Price;
 
 export default Card
 
 
-function Image({src,className,...props}: ImgHTMLAttributes<HTMLImageElement>) {
+function Image({src,className,...props}: DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>) {
     return (
         <Link href="/components/pages/ecommerce/product-details/" 
             className="product-image">
@@ -46,7 +46,7 @@ function Image({src,className,...props}: ImgHTMLAttributes<HTMLImageElement>) {
 }
 
 
-function IconSection({children,className,...props}:HTMLAttributes<HTMLDivElement>){
+function IconSection({children,className,...props}: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>,HTMLDivElement>){
     return (
         <div className="product-icons" {...props}>
             {children}
@@ -54,12 +54,22 @@ function IconSection({children,className,...props}:HTMLAttributes<HTMLDivElement
     )
 }
 
+IconSection.Icon=Icon;
+
+function Icon({children,className,...props}: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>){
+  return (
+    <Link aria-label="anchor" href="/components/pages/ecommerce/wishlist/" className={className}>
+      {children}
+    </Link>
+  )
+}
+
 function Title({
     title,
     className,
     children,
     ...props
-}: HtmlHTMLAttributes<HTMLParagraphElement>) {
+}: DetailedHTMLProps<HtmlHTMLAttributes<HTMLParagraphElement>,HTMLParagraphElement>) {
     return (
         <p className="product-name font-semibold mb-0 flex items-center 
             justify-between" {...props}>
@@ -75,7 +85,7 @@ function Rating({
     className,
     children,
     ...props
-}:HTMLAttributes<HTMLSpanElement>){
+}:DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>,HTMLSpanElement>){
     return(
         <span className="ltr:float-right rtl:float-left text-warning text-xs">
             {children}
@@ -88,7 +98,7 @@ function Description({
     className,
     children,
     ...props
-}: HtmlHTMLAttributes<HTMLParagraphElement>) {
+}: DetailedHTMLProps<HtmlHTMLAttributes<HTMLParagraphElement>,HTMLParagraphElement>) {
     return (
         <p className="product-description text-[.6875rem] text-[#8c9097] dark:text-white/50 mb-2" {...props}>
             {children}
@@ -100,15 +110,11 @@ function Price({
     className,
     children,
     ...props
-  }: HtmlHTMLAttributes<HTMLParagraphElement>) {
+  }: DetailedHTMLProps<HtmlHTMLAttributes<HTMLParagraphElement>,HTMLParagraphElement>) {
     return (
-      <p
-        className={
-          className +
-          " text-center text-sm p-2 text-green-600"
-        }
-      >
-        {children}
+      <p  className="mb-1 font-semibold text-[1rem] flex items-center justify-between" 
+        {...props}>
+          {children}
       </p>
     );
   }
@@ -117,7 +123,7 @@ function Price({
     className,
     children,
     ...props
-  }: HtmlHTMLAttributes<HTMLButtonElement>) {
+  }: DetailedHTMLProps<HtmlHTMLAttributes<HTMLButtonElement>,HTMLButtonElement>) {
     return (
       <button
         className={

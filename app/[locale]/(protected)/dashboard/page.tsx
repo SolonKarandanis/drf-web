@@ -37,10 +37,16 @@ const Page = async () => {
         <div className="grid grid-cols-12 gap-x-6">
           <Card>
             <Card.Image src={item.preview} />
+            <Card.IconSection>
+              <Card.IconSection.Icon className="wishlist"><i className="ri-heart-line"></i></Card.IconSection.Icon>
+              <Card.IconSection.Icon className="cart"><i className="ri-shopping-cart-line"></i></Card.IconSection.Icon>
+              <Card.IconSection.Icon className="view"><i className="ri-eye-line"></i></Card.IconSection.Icon>
+            </Card.IconSection>
             <Card.Title title={item.title}>
               <Card.Title.Rating>{item.rating}</Card.Title.Rating>
             </Card.Title>
             <Card.Description>{item.description}</Card.Description>
+            <Card.Price>{item.newpr}</Card.Price>
           </Card>
 
           <div className="xxl:col-span-3 xl:col-span-6 lg:col-span-6 md:col-span-6 sm:col-span-12 col-span-12">
