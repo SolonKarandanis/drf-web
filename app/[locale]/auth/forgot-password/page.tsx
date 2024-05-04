@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 
 export const metadata:Metadata={
-  title:"Drf Reset",
+  title:"Drf Forgot password",
   description:"Drf market place",
   authors:[
     {
@@ -13,7 +13,7 @@ export const metadata:Metadata={
   ]
 }
 
-const ResetPasswordPage= () => {
+const ForgotPasswordPage= () => {
   return (
     <>
       <div className="container">
@@ -81,4 +81,4 @@ const ResetPasswordPage= () => {
   )
 }
 
-export default ResetPasswordPage
+export default ForgotPasswordPage

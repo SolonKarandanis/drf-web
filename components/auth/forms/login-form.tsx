@@ -109,7 +109,7 @@ const LoginForm = () => {
                         props={register("password")}
                         error={errors.password?.message}>
                             {t("LABELS.password")}
-                            <Link href={`/${locale}/auth/reset-password`}
+                            <Link href={`/${locale}/auth/forgot-password`}
                                 className="ml-1 ltr:float-right rtl:float-left text-danger">
                                 {t("LABELS.forget-password")}
                             </Link>

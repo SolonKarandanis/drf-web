@@ -67,3 +67,18 @@ export const CreateUserSchema = BaseAuthSchema.extend({
     path: ["confirmPassword"],
     message: "Password don't match",
 });
+
+export const ResetPasswordSchema = z.object({
+    currentPassword: z.string().min(1, {
+        message: "Password is required",
+    }),
+    newPassword: z.string().min(1, {
+        message: "Minimum 6 characters required",
+    }),
+    confirmPassword: z.string().min(1, {
+        message: "Minimum 6 characters required",
+    }),
+}).refine((data) => data.newPassword === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Password don't match",
+});;
