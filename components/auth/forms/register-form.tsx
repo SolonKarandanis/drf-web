@@ -74,7 +74,6 @@ const RegisterForm = () => {
             email,
             first_name:firstName,
             last_name:lastName,
-            role,
             password,
             username,
             password2:confirmPassword

@@ -16,7 +16,7 @@ export const metadata:Metadata={
 
 const Page = async () => {
   const session = await getServerSession(authOptions);
-  // console.log(session)
+  console.log(session?.user)
   const olderDate = new Date('2022-10-31');
   const currentDate = new Date('2022-11-01');
 
