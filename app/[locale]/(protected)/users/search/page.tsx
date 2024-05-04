@@ -1,5 +1,16 @@
 import SearchUserForm from "@/components/users/forms/search/search-user-form";
 import Table from "@/shared/components/table/table";
+import { Metadata } from "next";
+
+export const metadata:Metadata={
+  title:"Drf Search Users",
+  description:"Drf market place",
+  authors:[
+    {
+      name:"Solon Karandanis",
+    }
+  ]
+}
 
 const SearchUsersPage = () => {
 

@@ -1,16 +1,24 @@
 import LoginForm from '@/components/auth/forms/login-form';
 import Social from '@/components/auth/social';
-import Seo from '@/shared/layout-components/seo/Seo'
+import { Metadata } from 'next';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 
+export const metadata:Metadata={
+  title:"Drf Signin",
+  description:"Drf market place",
+  authors:[
+    {
+      name:"Solon Karandanis",
+    }
+  ]
+}
 
 const page = () => {
   const t = useTranslations('LOGIN.PAGE');
   const locale = useLocale();
   return (
     <>
-       <Seo title={"Signin"}/> 
        <div className="container">
             <div className="flex items-center justify-center h-full authentication authentication-basic text-defaultsize text-defaulttextcolor">
                 <div className="grid grid-cols-12">

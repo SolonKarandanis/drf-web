@@ -1,4 +1,15 @@
+import { Metadata } from 'next';
 import {FC} from 'react'
+
+export const metadata:Metadata={
+  title:"Drf User Profile Page",
+  description:"Drf market place",
+  authors:[
+    {
+      name:"Solon Karandanis",
+    }
+  ]
+}
 
 interface Props{
     params:{

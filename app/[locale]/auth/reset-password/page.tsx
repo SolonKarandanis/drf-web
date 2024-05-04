@@ -1,12 +1,21 @@
 import Social from '@/components/auth/social'
-import Seo from '@/shared/layout-components/seo/Seo'
+import { Metadata } from 'next'
 import Link from 'next/link'
 import React from 'react'
+
+export const metadata:Metadata={
+  title:"Drf Reset",
+  description:"Drf market place",
+  authors:[
+    {
+      name:"Solon Karandanis",
+    }
+  ]
+}
 
 const ResetPasswordPage= () => {
   return (
     <>
-      <Seo title={"Reset-basic"}/>
       <div className="container">
         <div className="flex justify-center authentication authentication-basic 
           items-center h-full text-defaultsize text-defaulttextcolor">
