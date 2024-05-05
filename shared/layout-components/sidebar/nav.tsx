@@ -1,7 +1,5 @@
 "use client";
 
-import { getClientLocale } from "@/utils/functions";
-
 export interface MenuItem{
     menutitle:string;
     Items: Item[];
@@ -21,7 +19,6 @@ export interface Item{
 
 const DashboardIcon = <i className="bx bx-home side-menu__icon"></i>
 const NestedmenuIcon = <i className="bx bx-layer side-menu__icon"></i>
-const locale = getClientLocale();
 
 export const MenuItems:MenuItem[] =[
     {
@@ -42,7 +39,7 @@ export const MenuItems:MenuItem[] =[
                         title: "CRM" 
                     },
                     {
-                        path: `/${locale}/dashboard`, 
+                        path: `/dashboard`, 
                         type: "link", 
                         active: false, 
                         selected: false, 
@@ -64,14 +61,14 @@ export const MenuItems:MenuItem[] =[
                 [
 					{ 
                         title: "Search",
-                        path: `/${locale}/users/search`,
+                        path: `/users/search`,
                         type: "link", 
                         active: false, 
                         selected: false 
                     },
                     { 
                         title: "Create User",
-                        path: `/${locale}/users/create`,
+                        path: `/users/create`,
                         type: "link", 
                         active: false, 
                         selected: false 
@@ -89,21 +86,21 @@ export const MenuItems:MenuItem[] =[
                 [
 					{ 
                         title: "Search",
-                        path: `/${locale}/products/search`,
+                        path: `/products/search`,
                         type: "link", 
                         active: false, 
                         selected: false 
                     },
                     { 
                         title: "Create",
-                        path: `/${locale}/products/create`,
+                        path: `/products/create`,
                         type: "link", 
                         active: false, 
                         selected: false 
                     },
                     { 
                         title: "Edit",
-                        path: `/${locale}/products/edit`,
+                        path: `/products/edit`,
                         type: "link", 
                         active: false, 
                         selected: false 
