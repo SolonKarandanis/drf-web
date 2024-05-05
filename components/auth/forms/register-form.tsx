@@ -15,7 +15,6 @@ import { useAppDispatch } from '@/shared/redux/hooks';
 import { setLoading } from '@/shared/redux/features/authSlice';
 import CFormSelect from '@/shared/components/form-select/cform-select';
 import { useTranslations } from 'next-intl';
-import { getClientLocale } from '@/utils/functions';
 import { useEffect, useState } from 'react';
 import { passwordStrength } from "check-password-strength";
 import PasswordStrength from '@/shared/components/password-strength/password-strength';
@@ -34,7 +33,6 @@ const roles =[
 ]
 
 const RegisterForm = () => {
-    const locale = getClientLocale();
     const t = useTranslations('REGISTER.FORM');
     const router = useRouter();
     const [registerUser, { isLoading }] = useRegisterUserMutation();
@@ -83,7 +81,7 @@ const RegisterForm = () => {
 			.unwrap()
 			.then(() => {
 				toast.success(t('SUCCESS.summary'));
-                router.push(`/${locale}/auth/login`);
+                router.push('/auth/login');
 			})
 			.catch((error:ErrorResponse) => {
 				handleError(error);

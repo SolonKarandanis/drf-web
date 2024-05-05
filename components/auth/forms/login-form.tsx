@@ -13,7 +13,6 @@ import { useAppDispatch } from "@/shared/redux/hooks";
 import { useLazyGetLoggedInUserAccountQuery, useLoginMutation } from "@/shared/redux/features/authApiSlice";
 import {  useState } from "react";
 import { toast } from "react-toastify";
-import { getClientLocale } from "@/utils/functions";
 import { useTranslations } from "next-intl";
 import {signIn} from "next-auth/react"
 
@@ -21,7 +20,6 @@ type LoginSchema = z.infer<typeof LoginSchema>;
 
 
 const LoginForm = () => {
-    const locale = getClientLocale();
     const t = useTranslations('LOGIN.FORM');
     const router = useRouter();
 	const dispatch = useAppDispatch();
@@ -48,7 +46,7 @@ const LoginForm = () => {
             username,
             password,
             redirect:true,
-            callbackUrl:`/${locale}`
+            callbackUrl:'/'
         }).catch((error:ErrorResponse) => {
             handleError(error);
         });
@@ -109,7 +107,7 @@ const LoginForm = () => {
                         props={register("password")}
                         error={errors.password?.message}>
                             {t("LABELS.password")}
-                            <Link href={`/${locale}/auth/forgot-password`}
+                            <Link href='/auth/forgot-password'
                                 className="ml-1 ltr:float-right rtl:float-left text-danger">
                                 {t("LABELS.forget-password")}
                             </Link>

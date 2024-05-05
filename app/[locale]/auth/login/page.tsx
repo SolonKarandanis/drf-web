@@ -16,7 +16,6 @@ export const metadata:Metadata={
 
 const page = () => {
   const t = useTranslations('LOGIN.PAGE');
-  const locale = useLocale();
   return (
     <>
        <div className="container">
@@ -31,7 +30,7 @@ const page = () => {
                               <LoginForm />
                               <div className="text-center">
                                 <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 mt-4">{t("dont-have-account")}
-                                  <Link href={`/${locale}/auth/register`} className="text-sky-900">{t("sign-up")}</Link>
+                                  <Link href='/auth/register' className="text-sky-900">{t("sign-up")}</Link>
                                 </p>
                               </div>
                               <div className="my-4 text-center authentication-barrier">

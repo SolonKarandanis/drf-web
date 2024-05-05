@@ -1,7 +1,7 @@
 import RegisterForm from '@/components/auth/forms/register-form';
 import Social from '@/components/auth/social';
 import { Metadata } from 'next';
-import { useLocale, useTranslations } from 'next-intl';
+import {  useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 export const metadata:Metadata={
@@ -15,7 +15,6 @@ export const metadata:Metadata={
   }
 
 const page = () => {
-    const locale = useLocale();
     const t = useTranslations('REGISTER.PAGE');
     return (
         <>
@@ -33,7 +32,7 @@ const page = () => {
                                     <RegisterForm />
                                     <div className="text-center">
                                         <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 mt-4">{t("already-have-account")}
-                                            <Link href={`/${locale}/auth/login`} className="text-sky-900">{t("sign-in")}</Link>
+                                            <Link href='/auth/login' className="text-sky-900">{t("sign-in")}</Link>
                                         </p>
                                     </div>
                                     <div className="my-4 text-center authentication-barrier">
