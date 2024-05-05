@@ -1,6 +1,7 @@
 {
     "GLOBAL":{
         "UNAUTHORIZED": "You are not authorized to access this page",
+        "OR":"Ή",
         "BUTTONS":{
             "cancel": "Cancel",
             "load": "Load",
@@ -92,8 +93,7 @@
             "title":"Είσοδος",
             "description":"Καλώς ορίσατε πίσω",
             "dont-have-account":"Δεν έχετε λογαριασμό;",
-            "sign-up":"Εγγραφείτε",
-            "or":"Ή"
+            "sign-up":"Εγγραφείτε"
         },
         "FORM":{
             "LABELS":{
@@ -119,8 +119,7 @@
             "title":"Εγγραφείτε",
             "description":"Καλώς ήρθατε & Ελάτε μαζί μας δημιουργώντας έναν δωρεάν λογαριασμό!",
             "already-have-account":"Έχετε ήδη λογαριασμό?",
-            "sign-in":"Συνδεθείτε",
-            "or":"Ή"
+            "sign-in":"Συνδεθείτε"
         },
         "FORM":{
             "LABELS":{

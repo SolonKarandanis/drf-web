@@ -1,6 +1,7 @@
 {
     "GLOBAL":{
         "UNAUTHORIZED": "You are not authorized to access this page",
+        "OR":"OR",
         "BUTTONS":{
             "cancel": "Cancel",
             "load": "Load",
@@ -92,8 +93,7 @@
             "title":"Sign In",
             "description":"Welcome back",
             "dont-have-account":"Dont have an account?",
-            "sign-up":"Sign Up",
-            "or":"OR"
+            "sign-up":"Sign Up"
         },
         "FORM":{
             "LABELS":{
@@ -119,8 +119,7 @@
             "title":"Sign Up",
             "description":"Welcome & Join us by creating a free account !",
             "already-have-account":"Already have an account?",
-            "sign-in":"Sign In",
-            "or":"OR"
+            "sign-in":"Sign In"
         },
         "FORM":{
             "LABELS":{
