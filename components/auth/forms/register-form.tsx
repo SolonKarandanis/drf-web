@@ -18,6 +18,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { passwordStrength } from "check-password-strength";
 import PasswordStrength from '@/shared/components/password-strength/password-strength';
+import { ErrorResponse } from '@/models/error.models';
 
 type RegisterSchema = z.infer<typeof RegisterSchema>;
 
