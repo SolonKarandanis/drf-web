@@ -1,5 +1,7 @@
+import ForgotPasswordForm from '@/components/auth/forms/forgot-password-form'
 import Social from '@/components/auth/social'
 import { Metadata } from 'next'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import React from 'react'
 
@@ -14,6 +16,7 @@ export const metadata:Metadata={
 }
 
 const ForgotPasswordPage= () => {
+  const t = useTranslations();
   return (
     <>
       <div className="container">
@@ -27,42 +30,9 @@ const ForgotPasswordPage= () => {
                   <div className="box">
                     <div className="box-body !p-[3rem]">
                       <p className="h5 font-semibold mb-2 text-center">
-                        Reset Password
+                        Forgot Password
                       </p>
-                      <div className="grid grid-cols-12 gap-y-4">
-                        <div className="xl:col-span-12 col-span-12">
-                            <label htmlFor="reset-password" className="form-label text-default">Current Password</label>
-                            <div className="input-group">
-                                <input type='password' className="form-control form-control-lg !rounded-e-none" id="reset-password" placeholder="current password"/>
-                                <button  aria-label="button" className="ti-btn ti-btn-light !mb-0 !rounded-s-none" type="button" id="button-addon2"><i className={` align-middle`}></i></button>
-                            </div>
-                        </div>
-                        <div className="xl:col-span-12 col-span-12">
-                            <label htmlFor="reset-newpassword" className="form-label text-default">New Password</label>
-                            <div className="input-group">
-                                <input type='password' className="form-control form-control-lg !rounded-e-none" id="reset-newpassword" placeholder="new password"/>
-                                <button  aria-label="button" className="ti-btn ti-btn-light !mb-0 !rounded-s-none" type="button"  id="button-addon21"><i  className={` align-middle`}></i></button>
-                            </div>
-                        </div>
-                        <div className="xl:col-span-12 col-span-12 mb-2">
-                            <label htmlFor="reset-confirmpassword" className="form-label text-default ">Confirm Password</label>
-                            <div className="input-group">
-                                <input type='password' className="form-control form-control-lg !rounded-e-none" id="reset-confirmpassword" placeholder="confirm password"/>
-                                <button  aria-label="button" className="ti-btn ti-btn-light !mb-0 !rounded-s-none" type="button" id="button-addon22"><i  className={` align-middle`}></i></button>
-                            </div>
-                            <div className="mt-4">
-                                <div className="form-check !ps-0">
-                                    <input className="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
-                                    <label className="form-check-label text-[#8c9097] dark:text-white/50 font-normal" htmlFor="defaultCheck1">
-                                        Remember password ?
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="xl:col-span-12 col-span-12 grid mt-2">
-                            <Link href="/components/authentication/sign-in/signin-basic/" className="ti-btn ti-btn-lg bg-primary text-white !font-medium dark:border-defaultborder/10">Create</Link>
-                        </div>
-                      </div>
+                      <ForgotPasswordForm />
                       <div className="text-center">
                             <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 mt-4">Already have an account? <Link href="/components/authentication/sign-in/signin-basic/" className="text-primary">Sign In</Link></p>
                       </div>

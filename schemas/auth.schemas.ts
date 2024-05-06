@@ -26,11 +26,7 @@ export const NewPasswordSchema = BaseAuthSchema.pick({
     password:true
 });
   
-export const ResetSchema = z.object({
-    email: z.string().email({
-        message: "Email is required",
-    }),
-});
+
 
 export const LoginSchema = z.object({
     username: z.string().min(1,{
@@ -68,6 +64,21 @@ export const CreateUserSchema = BaseAuthSchema.extend({
     message: "Password don't match",
 });
 
+export const ForgotPasswordSchema = z.object({
+    email: z.string().email({
+        message: "Email is required",
+    }),
+    newPassword: z.string().min(1, {
+        message: "Minimum 6 characters required",
+    }),
+    confirmPassword: z.string().min(1, {
+        message: "Minimum 6 characters required",
+    }),
+}).refine((data) => data.newPassword === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Password don't match",
+});
+
 export const ResetPasswordSchema = z.object({
     currentPassword: z.string().min(1, {
         message: "Password is required",
@@ -81,4 +92,4 @@ export const ResetPasswordSchema = z.object({
 }).refine((data) => data.newPassword === data.confirmPassword, {
     path: ["confirmPassword"],
     message: "Password don't match",
-});;
+});
