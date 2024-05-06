@@ -143,5 +143,25 @@
                 "summary": "Please check email to verify account"
             } 
         }
+    },
+    "FORGOT-PASSWORD":{
+        "PAGE":{
+            "title":"Forgot Password",
+            "already-have-account":"Already have an account?",
+            "sign-in":"Sign In"
+        },
+        "FORM":{
+            "LABELS":{
+                "email":"Email",
+                "password":"Password",
+                "confirm-password":"Confirm Password"
+            },
+            "BUTTONS":{
+                "create-new-password":"Create new password"
+            },
+            "SUCCESS": {
+                "summary": "Please check email to verify account"
+            } 
+        }
     }
 }

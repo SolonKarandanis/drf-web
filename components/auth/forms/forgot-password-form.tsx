@@ -20,7 +20,7 @@ type Inputs = z.infer<typeof ForgotPasswordSchema>;
 
 const ForgotPasswordForm = () => {
   const locale = getClientLocale();
-  const t = useTranslations('REGISTER.FORM');
+  const t = useTranslations('FORGOT-PASSWORD.FORM');
   const router = useRouter();
   
   const {register,handleSubmit,formState: { errors },watch} = useForm<Inputs>({
@@ -88,7 +88,7 @@ const ForgotPasswordForm = () => {
                   intent="violet" 
                   size="md" 
                   type="submit">
-                  {t("BUTTONS.create-account")}
+                  {t("BUTTONS.create-new-password")}
               </CButton>
           </div>
         </div>

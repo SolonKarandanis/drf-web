@@ -30,14 +30,16 @@ const ForgotPasswordPage= () => {
                   <div className="box">
                     <div className="box-body !p-[3rem]">
                       <p className="h5 font-semibold mb-2 text-center">
-                        Forgot Password
+                        {t("FORGOT-PASSWORD.PAGE.title")}
                       </p>
                       <ForgotPasswordForm />
                       <div className="text-center">
-                            <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 mt-4">Already have an account? <Link href="/components/authentication/sign-in/signin-basic/" className="text-primary">Sign In</Link></p>
+                        <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 mt-4">{t("FORGOT-PASSWORD.PAGE.already-have-account")}
+                          <Link href='/auth/login' className="text-primary">{t("FORGOT-PASSWORD.PAGE.sign-in")}</Link>
+                        </p>
                       </div>
                       <div className="text-center my-4 authentication-barrier">
-                          <span>OR</span>
+                          <span>{t("GLOBAL.OR")}</span>
                       </div>
                       <Social />
                     </div>

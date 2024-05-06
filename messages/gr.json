@@ -100,7 +100,7 @@
                 "username":"Όνομα χρήστη",
                 "password":"Κωδικός πρόσβασης",
                 "forget-password":"Ξεχάσατε τον κωδικό πρόσβασης;",
-                "remember-password":"θυμάστε τον κωδικό ?"
+                "remember-password":"θυμάστε τον κωδικό ;"
             },
             "BUTTONS":{
                 "sign-in":"Συνδεθείτε"
@@ -118,7 +118,7 @@
         "PAGE":{
             "title":"Εγγραφείτε",
             "description":"Καλώς ήρθατε & Ελάτε μαζί μας δημιουργώντας έναν δωρεάν λογαριασμό!",
-            "already-have-account":"Έχετε ήδη λογαριασμό?",
+            "already-have-account":"Έχετε ήδη λογαριασμό;",
             "sign-in":"Συνδεθείτε"
         },
         "FORM":{
@@ -138,6 +138,26 @@
             },
             "BUTTONS":{
                 "create-account":"Δημιουργήστε λογαριασμό"
+            },
+            "SUCCESS": {
+                "summary": "Ελέγξτε το email για να επαληθεύσετε τον λογαριασμό"
+            } 
+        }
+    },
+    "FORGOT-PASSWORD":{
+        "PAGE":{
+            "title":"Ξεχάσατε τον κωδικό",
+            "already-have-account":"Έχετε ήδη λογαριασμό;",
+            "sign-in":"Συνδεθείτε"
+        },
+        "FORM":{
+            "LABELS":{
+                "email":"Email",
+                "password":"Κωδικός πρόσβασης",
+                "confirm-password":"Επιβεβαίωση Κωδικού"
+            },
+            "BUTTONS":{
+                "create-new-password":"Δημιουργία νέου κωδικού πρόσβασης"
             },
             "SUCCESS": {
                 "summary": "Ελέγξτε το email για να επαληθεύσετε τον λογαριασμό"
