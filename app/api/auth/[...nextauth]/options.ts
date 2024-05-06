@@ -1,6 +1,8 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { User } from "next-auth";
+import { ErrorData} from "@/models/error.models"
+import { isErrorData, isLoginResponse } from "@/utils/helpers";
 
 
 
@@ -43,11 +45,13 @@ export const authOptions: NextAuthOptions ={
                         body: JSON.stringify(credentials)
                     })
                     const response =await httpResponse.json();
-                    if(httpResponse.status===401){
+                    if(httpResponse.status===401 && isErrorData(response)){
                         throw new Error(response.detail)
                     }
                    
-       
+                    if(!isLoginResponse(response)){
+                        return null;
+                    }
                     const {access,refresh} = response;
                     const user:User = await fetch(`${baseUrl}auth/users/account/`, {
                         method: "GET",

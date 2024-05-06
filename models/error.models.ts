@@ -1,8 +1,8 @@
-interface ErrorResponse{
+export interface ErrorResponse{
     status:number;
     data:ErrorData;
 }
 
-interface ErrorData{
+export interface ErrorData{
     detail:string;
 }
