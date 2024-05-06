@@ -1,7 +1,6 @@
 "use client"
 import * as z from "zod";
 import CForm from "@/shared/components/form/cform"
-import { getClientLocale } from "@/utils/functions";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,7 +18,6 @@ import CButton from "@/shared/components/button/cbutton";
 type Inputs = z.infer<typeof ForgotPasswordSchema>;
 
 const ForgotPasswordForm = () => {
-  const locale = getClientLocale();
   const t = useTranslations('FORGOT-PASSWORD.FORM');
   const router = useRouter();
   
