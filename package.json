@@ -32,6 +32,7 @@
     "filepond-plugin-image-preview": "^4.6.12",
     "framer-motion": "^11.1.5",
     "gridjs": "^6.2.0",
+    "handlebars": "^4.7.8",
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.371.0",
     "negotiator": "^0.6.3",
