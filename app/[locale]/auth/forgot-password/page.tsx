@@ -35,7 +35,7 @@ const ForgotPasswordPage= () => {
                       <ForgotPasswordForm />
                       <div className="text-center">
                         <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 mt-4">{t("FORGOT-PASSWORD.PAGE.already-have-account")}
-                          <Link href='/auth/login' className="text-primary">{t("FORGOT-PASSWORD.PAGE.sign-in")}</Link>
+                          <Link href='/auth/login' className="text-sky-900">{t("FORGOT-PASSWORD.PAGE.sign-in")}</Link>
                         </p>
                       </div>
                       <div className="text-center my-4 authentication-barrier">
