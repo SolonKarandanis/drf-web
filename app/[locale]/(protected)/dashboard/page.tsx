@@ -1,5 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import Card from "@/shared/components/card/card";
+import List from "@/shared/components/list/list";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 
@@ -59,6 +60,10 @@ const Page = async () => {
             <Card.Description>{item.description}</Card.Description>
             <Card.Price>{item.newpr}</Card.Price>
           </Card>
+          <List isOrdered={true}>
+            <List.ListItem>First Item</List.ListItem>
+            <List.ListItem>Second Item</List.ListItem>
+          </List>
         </div>
       </div>
     </div>
