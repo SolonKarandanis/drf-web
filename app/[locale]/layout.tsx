@@ -3,12 +3,12 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '@/styles/globals.scss'
 import CustomProvider from '@/shared/redux/provider'
-import Setup from '@/components/utils/Setup'
 import { FC } from "react";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import AuthProvider from "@/components/auth/auth-provider";
 import { ToastContainer } from "react-toastify";
+import { ProgressBar } from "@/shared/layout-components/progress-bar/progress-bar";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -36,7 +36,9 @@ const RootLayout:FC<Props>= async ({children,params:{locale}}) => {
             <ToastContainer />;
             {/* <Setup /> */}
             <NextIntlClientProvider messages={messages}>
-              {children}
+              <ProgressBar className="fixed top-0 h-1 bg-sky-500 z-50" >
+                {children}
+              </ProgressBar>
             </NextIntlClientProvider>
           </CustomProvider>
         </AuthProvider>
