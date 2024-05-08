@@ -27,14 +27,16 @@ export function useProgressBar() {
 }
 
 export function ProgressBar({ className, children }: { className: string, children: ReactNode }) {
-  let progress = useProgress(); 
+  let progress = useProgress();
   let width = useMotionTemplate`${progress.value}%`; 
+
 
   return (
     <ProgressBarContext.Provider value={progress}>
       <AnimatePresence onExitComplete={progress.reset}>
         {progress.state !== "complete" && (
           <motion.div
+            id="progress-bar"
             style={{ width }}
             exit={{ opacity: 0 }}
             className={className}

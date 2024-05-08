@@ -11,6 +11,7 @@ import SimpleBar from 'simplebar-react';
 import SlideLeft from './SlideLeft';
 import SlideRight from './SlideRight';
 import SideBarHeader from './SideBarHeader';
+import { ProgressBarLink } from '../progress-bar/progress-bar-link';
 
 let history = [];
 
@@ -377,10 +378,10 @@ const SideBar:FC<Props> = ({path}) => {
 													{secondlayer && secondlayer.children && secondlayer.children.map((thirdlayer) =>
 														<Fragment key={Math.random()} >
 															{thirdlayer.type === "link" ? <li className={`slide ${thirdlayer.active ? "active" : ""}`}>
-																<Link onClick={(event) => { setSidemenu(thirdlayer); }} href={thirdlayer.path + ""} className={`side-menu__item ${thirdlayer.selected ? "active" : ""}`}>
+																<ProgressBarLink onClick={(event) => { setSidemenu(thirdlayer); }} href={thirdlayer.path + ""} className={`side-menu__item ${thirdlayer.selected ? "active" : ""}`}>
 																	{thirdlayer.icon}
 																	{thirdlayer.title}
-																</Link>
+																</ProgressBarLink>
 															</li>
 																: thirdlayer.type === "sub" ? <li className={`slide has-sub ${secondlayer.active ? "open" : ""}`}>
 																	<a href="#!"
@@ -398,10 +399,10 @@ const SideBar:FC<Props> = ({path}) => {
 																		{thirdlayer && thirdlayer.children && thirdlayer.children.map((fourthlayer) => <Fragment key={Math.random()}>
 																			{fourthlayer.type === "link" ?
 																				<li className={`slide ${fourthlayer.active ? "active" : ""}`}>
-																					<Link onClick={(event) => { setSidemenu(fourthlayer); }} href={fourthlayer.path + ""} className={`side-menu__item ${fourthlayer.selected ? "active" : ""}`}>
+																					<ProgressBarLink onClick={(event) => { setSidemenu(fourthlayer); }} href={fourthlayer.path + ""} className={`side-menu__item ${fourthlayer.selected ? "active" : ""}`}>
 																						{fourthlayer.icon}
 																						{fourthlayer.title}
-																					</Link>
+																					</ProgressBarLink>
 																				</li>
 																				: fourthlayer.type === "sub" ? <li className={`slide has-sub ${fourthlayer.active ? "open" : ""}`}>
 
@@ -416,8 +417,8 @@ const SideBar:FC<Props> = ({path}) => {
 																						{fourthlayer&& fourthlayer.children && fourthlayer.children.map((fivthlayer) => <Fragment key={Math.random()}>
 																							{fivthlayer.type === "link" ?
 																								<li className="slide">
-																									<Link href={fourthlayer.path + ""} className="side-menu__item">
-																										{fivthlayer.icon} {fivthlayer.title}</Link>
+																									<ProgressBarLink href={fourthlayer.path + ""} className="side-menu__item">
+																										{fivthlayer.icon} {fivthlayer.title}</ProgressBarLink>
 																								</li> : <a href="#!" className="side-menu__item" onClick={(evnt) => {
 																									evnt.preventDefault();
 																									toggleSidemenu(fivthlayer);

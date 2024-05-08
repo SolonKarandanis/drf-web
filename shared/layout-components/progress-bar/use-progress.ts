@@ -1,5 +1,7 @@
 import { useSpring } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import useInterval from "./use-interval";
+
 
 export default function useProgress() {
     const [state, setState] = useState<
@@ -71,23 +73,3 @@ function rand(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
   
-function useInterval(callback: () => void, delay: number | null) {
-    const savedCallback = useRef(callback);
-
-    useEffect(() => {
-        savedCallback.current = callback;
-    }, [callback]);
-
-    useEffect(() => {
-        function tick() {
-        savedCallback.current();
-        }
-
-        if (delay !== null) {
-        tick();
-
-        let id = setInterval(tick, delay);
-        return () => clearInterval(id);
-        }
-    }, [delay]);
-}
