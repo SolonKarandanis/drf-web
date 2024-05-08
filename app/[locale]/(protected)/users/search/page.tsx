@@ -80,7 +80,7 @@ const SearchUsersPage = () => {
   return (
     <div className="inset-0 flex flex-col justify-between p-24">
       <SearchUserForm  onDataAction={onDataAction}/>
-      <Table columns={COLUMNS}  data={DATA}/>
+      {/* <Table columns={COLUMNS}  data={DATA}/> */}
     </div>
   )
 }
