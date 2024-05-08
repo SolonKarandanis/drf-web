@@ -4,6 +4,7 @@ import {
     SelectHTMLAttributes,
     TableHTMLAttributes,
 } from "react";
+import { Column } from "react-table";
 
 export interface Props {
     onChange: (event:any) => unknown;
@@ -46,16 +47,7 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement>{
     children: React.ReactNode
 }
 
-export interface TableColumns{
-    header:string;
-    field?:string;
-}
-
-export interface TableData{
-
-}
-
 export interface TableProps extends TableHTMLAttributes<HTMLTableElement>{
-    columns:TableColumns[];
-    
+    columns:readonly Column<object>[];
+    data:readonly object[];
 }

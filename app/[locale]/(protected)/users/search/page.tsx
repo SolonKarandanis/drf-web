@@ -1,6 +1,7 @@
 import SearchUserForm from "@/components/users/forms/search/search-user-form";
 import Table from "@/shared/components/table/table";
 import { Metadata } from "next";
+import { useMemo } from "react";
 
 export const metadata:Metadata={
   title:"Drf Search Users",
@@ -28,40 +29,58 @@ const SearchUsersPage = () => {
     // .then(data => console.log(data))
   }
 
-  const COLUMNS = [
+  const COLUMNS = useMemo(
+    () => [
+      {
+        header: "Id",
+        accessor: "id",
+      },
+      {
+        header: "User Name",
+        accessor: "username",
+      },
+      {
+        header: "Name",
+        accessor: "first_name",
+      },
+      {
+        header: "Email",
+        accessor: "email",
+      },
+      {
+        header: "Created",
+        accessor: "created_at",
+      },
+      {
+        header: "Status",
+        accessor: "status",
+      },
+      // {
+      //   header: "Actions",
+      //   accessor: "",
+      // },
+    ],
+    []
+  );
+
+  
+
+  const DATA =[
     {
-      header: "Id",
-      field: "id",
-    },
-    {
-      header: "User Name",
-      field: "username",
-    },
-    {
-      header: "Name",
-      field: "first_name",
-    },
-    {
-      header: "Email",
-      field: "email",
-    },
-    {
-      header: "Created",
-      field: "created_at",
-    },
-    {
-      header: "Status",
-      field: "status",
-    },
-    {
-      header: "Actions"
-    },
+      "id":1,
+      "username":"zle",
+      "first_name":"Zelensky",
+      "email":"sas@gmail.com",
+      "created_at":"",
+      "status":"In Progress"
+    }
+
   ]
 
   return (
     <div className="inset-0 flex flex-col justify-between p-24">
       <SearchUserForm  onDataAction={onDataAction}/>
-      <Table columns={COLUMNS} />
+      <Table columns={COLUMNS}  data={DATA}/>
     </div>
   )
 }
