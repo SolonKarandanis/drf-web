@@ -34,7 +34,11 @@ function ListItem(
     ...props 
   }:ListItemProps){
   return (
-    <li className={isOrdered ? 'ordered' : 'unordered'}>{children}</li>
+    <li 
+      className={isOrdered ? 'ordered' : 'unordered'} 
+      {...props}>
+        {children}
+    </li>
   )
 
 }
