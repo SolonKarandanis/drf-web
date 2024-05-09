@@ -34,7 +34,8 @@ const roles =[
 ]
 
 const RegisterForm = () => {
-    const t = useTranslations('REGISTER.FORM');
+    const t = useTranslations();
+    const rform='REGISTER.FORM';
     const router = useRouter();
     const [registerUser, { isLoading }] = useRegisterUserMutation();
     const dispatch = useAppDispatch();
@@ -87,7 +88,7 @@ const RegisterForm = () => {
         registerUser(request)
 			.unwrap()
 			.then(() => {
-				toast.success(t('SUCCESS.summary'));
+				toast.success(t(`${rform}.SUCCESS.summary`));
                 router.push('/auth/login');
 			})
 			.catch((error:ErrorResponse) => {
@@ -103,34 +104,34 @@ const RegisterForm = () => {
                     type='text'
                     required={true}
                     name='firstName' 
-                    placeholder={t("LABELS.first-name")}
+                    placeholder={t(`${rform}.LABELS.first-name`)}
                     className={"w-full !rounded-md"}
                     sectionClassName="col-span-12 xl:col-span-12"
                     props={register("firstName")}
                     error={errors.firstName?.message}>
-                       {t("LABELS.first-name")}
+                       {t(`${rform}.LABELS.first-name`)}
                 </CFormInput>
                 <CFormInput 
                     type='text'
                     required={true}
                     name='lastname' 
-                    placeholder={t("LABELS.last-name")}
+                    placeholder={t(`${rform}.LABELS.last-name`)}
                     className={"w-full !rounded-md"}
                     sectionClassName="col-span-12 xl:col-span-12"
                     props={register("lastName")}
                     error={errors.lastName?.message}>
-                        {t("LABELS.last-name")}
+                        {t(`${rform}.LABELS.last-name`)}
                 </CFormInput>
                 <CFormInput 
                     type='email'
                     required={true}
                     name='email' 
-                    placeholder={t("LABELS.email")}
+                    placeholder={t(`${rform}.LABELS.email`)}
                     className={"w-full !rounded-md"}
                     sectionClassName="col-span-12 xl:col-span-12"
                     props={register("email")}
                     error={errors.email?.message}>
-                        {t("LABELS.email")}
+                        {t(`${rform}.LABELS.email`)}
                 </CFormInput>
                 <CFormSelect 
                     name="role"
@@ -141,53 +142,53 @@ const RegisterForm = () => {
                     sectionClassName="col-span-12 xl:col-span-12"
                     autoComplete='role-name'
                     error={errors.role?.message}>
-                        {t("LABELS.role")}
+                        {t(`${rform}.LABELS.role`)}
                 </CFormSelect>
                 <CFormInput 
                     type='text'
                     required={true}
                     name='username' 
-                    placeholder={t("LABELS.username")}
+                    placeholder={t(`${rform}.LABELS.username`)}
                     autoComplete="username"
                     className={"w-full !rounded-md"}
                     sectionClassName="col-span-12 xl:col-span-12"
                     props={register("username")}
                     error={errors.username?.message}>
-                        {t("LABELS.username")}
+                        {t(`${rform}.LABELS.username`)}
                 </CFormInput>
                 <CFormInput
                     type='password'
                     required={true}
                     name='password' 
-                    placeholder={t("LABELS.password")}
+                    placeholder={t(`${rform}.LABELS.password`)}
                     autoComplete="new-password"
                     className={"!rounded-e-none"}
                     sectionClassName="col-span-12 xl:col-span-12"
                     props={register("password")}
                     error={errors.password?.message}>
-                        {t("LABELS.password")}
+                        {t(`${rform}.LABELS.password`)}
                 </CFormInput>
                 <PasswordStrength passStrength={passStrength} />
                 <CFormInput 
                     type='password'
                     required={true}
                     name='confirmpassword' 
-                    placeholder={t("LABELS.confirm-password")}
+                    placeholder={t(`${rform}.LABELS.confirm-password`)}
                     autoComplete="new-password"
                     className={"!rounded-e-none"}
                     sectionClassName="col-span-12 xl:col-span-12"
                     props={register("confirmPassword")}
                     error={errors.confirmPassword?.message}>
-                        {t("LABELS.confirm-password")}
+                        {t(`${rform}.LABELS.confirm-password`)}
                 </CFormInput>
                 <div className="col-span-12 xl:col-span-12">
                     <div className="form-check !flex !ps-0">
                         <input className="form-check-input me-1" type="checkbox" value="" id="defaultCheck1"/>
                         <label className="ps-2 form-check-label text-[#8c9097] dark:text-white/50 font-normal block" htmlFor="defaultCheck1">
                         {/* /components/pages/terms&conditions/ */}
-                            {t("LABELS.terms-description")} <Link href="/en"
-                            className="text-success"><u>{t("LABELS.terms")} &amp; {t("LABELS.conditions")}</u></Link> and <Link href="#!"
-                            className="text-success"><u>{t("LABELS.privacy-policy")}</u></Link>
+                            {t(`${rform}.LABELS.terms-description`)} <Link href="/en"
+                            className="text-success"><u>{t(`${rform}.LABELS.terms`)} &amp; {t(`${rform}.LABELS.conditions`)}</u></Link> and <Link href="#!"
+                            className="text-success"><u>{t(`${rform}.LABELS.privacy-policy`)}</u></Link>
                         </label>
                     </div>
                 </div>
@@ -197,7 +198,10 @@ const RegisterForm = () => {
                         size="md" 
                         type="submit"
                         disabled={isSubmitting || !isValid}>
-                        {isSubmitting ? "Adding..." : t("BUTTONS.create-account")}
+                        {isSubmitting ? 
+                            t("GLOBAL.BUTTONS.loading") : 
+                            t(`${rform}.BUTTONS.create-account`)
+                        }
                     </CButton>
                 </div>
             </div>
