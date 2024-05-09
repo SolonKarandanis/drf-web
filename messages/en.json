@@ -5,6 +5,7 @@
         "BUTTONS":{
             "cancel": "Cancel",
             "load": "Load",
+            "loading":"Loading....",
             "delete": "Delete",
             "search": "Search",
             "reset": "Reset",

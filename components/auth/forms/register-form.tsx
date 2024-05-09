@@ -42,7 +42,13 @@ const RegisterForm = () => {
 
     
 
-    const {register,handleSubmit,formState: { errors },watch} = useForm<RegisterSchema>({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors,isSubmitting, isValid },
+        watch
+    } = useForm<RegisterSchema>({
+        mode: "onChange",
         resolver: zodResolver(RegisterSchema),
         defaultValues: {
             firstName:"",
@@ -189,8 +195,9 @@ const RegisterForm = () => {
                     <CButton 
                         intent="violet" 
                         size="md" 
-                        type="submit">
-                        {t("BUTTONS.create-account")}
+                        type="submit"
+                        disabled={isSubmitting || !isValid}>
+                        {isSubmitting ? "Adding..." : t("BUTTONS.create-account")}
                     </CButton>
                 </div>
             </div>
