@@ -74,8 +74,9 @@ const RegisterForm = () => {
 		toast.error(`(${status}) ${detail}`);
 	}
 
-    const onSubmit:SubmitHandler<RegisterSchema> = (values: RegisterSchema) =>{
+    const onSubmit:SubmitHandler<RegisterSchema> = async (values: RegisterSchema) =>{
         const {username,password,email,role,firstName,lastName,confirmPassword} = values;
+
         const request:CreateUserRequest={
             email,
             first_name:firstName,
@@ -84,16 +85,23 @@ const RegisterForm = () => {
             username,
             password2:confirmPassword
         }
-        dispatch(setLoading(true));
-        registerUser(request)
-			.unwrap()
-			.then(() => {
-				toast.success(t(`${rform}.SUCCESS.summary`));
-                router.push('/auth/login');
-			})
-			.catch((error:ErrorResponse) => {
-				handleError(error);
-			});
+
+        const response = await registerUser(request);
+        // if (response?.error) {
+        //     toast.error(response.error);
+        // } else {
+        //     toast.success("Joke added!");
+        // }
+        // dispatch(setLoading(true));
+        // registerUser(request)
+		// 	.unwrap()
+		// 	.then(() => {
+		// 		toast.success(t(`${rform}.SUCCESS.summary`));
+        //         router.push('/auth/login');
+		// 	})
+		// 	.catch((error:ErrorResponse) => {
+		// 		handleError(error);
+		// 	});
     }
 
     return (
