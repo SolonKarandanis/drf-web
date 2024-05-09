@@ -12,11 +12,23 @@ import {
   DropdownMenuTrigger
 } from '@/shared/shadcn/components/ui/dropdown-menu'
 
+export type UserTableRow = {
+    id: number
+    first_name: string
+    last_name: string
+    email: string
+    created_date: string
+}
 
-export const columns: ColumnDef<UserModel>[] =[
+
+export const columns: ColumnDef<UserTableRow>[] =[
     {
         header:"Id",
         accessorKey:"id"
+    },
+    {
+        header:"Username",
+        accessorKey:"username"
     },
     {
         header:"First Name",
