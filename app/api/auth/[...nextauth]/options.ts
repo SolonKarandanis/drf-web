@@ -85,7 +85,7 @@ export const authOptions: NextAuthOptions ={
                     headers: {
                       "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(token["access"])
+                    body: JSON.stringify(token["refresh"])
                   })
                   .then(response => response.json())
                 token["access"] = response.data.access;
