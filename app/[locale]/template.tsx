@@ -1,3 +1,4 @@
+import NavigationTransition from '@/shared/layout-components/navigation-transition/navigation-transition'
 import {FC, ReactNode} from 'react'
 
 interface Props{
@@ -6,7 +7,7 @@ interface Props{
 
 const Template:FC<Props> = ({children}) => {
   return (
-    <>{children}</>
+    <NavigationTransition>{children}</NavigationTransition>
   )
 }
 
