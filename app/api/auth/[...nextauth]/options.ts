@@ -72,6 +72,7 @@ export const authOptions: NextAuthOptions ={
         async jwt({user,token,account}){
             // If `user` and `account` are set that means it is a login event
             if (user && account) {
+                console.log('jwt 1')
                 token["user"] = user;
                 token["access"] = user.access;
                 token["refresh"] = user.refresh;
@@ -80,6 +81,7 @@ export const authOptions: NextAuthOptions ={
             }
             // Refresh the backend token if necessary
             if (getCurrentEpochTime() > (token["ref"] as number)) {
+                console.log('jwt 2')
                 const response =await fetch(`${baseUrl}auth/token/refresh/`, {
                     method: "POST",
                     headers: {
@@ -97,6 +99,7 @@ export const authOptions: NextAuthOptions ={
         // Since we're using Django as the backend we have to pass the JWT
         // token to the client instead of the `session`.
         async session({ session, token }) {
+            console.log('session')
             const loggedInUser = token.user;
             session.access= loggedInUser.access;
             session.user= loggedInUser;
