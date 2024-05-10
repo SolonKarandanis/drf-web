@@ -29,7 +29,7 @@ interface AccordionProps{
     children:ReactNode
 }
 
-export default function Accordion({ 
+function Accordion({ 
     children, 
     ...restProps 
 }:AccordionProps) {
@@ -40,11 +40,17 @@ export default function Accordion({
     );
 }
 
+Accordion.Title = AccordionTitle;
+Accordion.Wrapper = AccordionWrapper;
+
+export default Accordion;
+
+
 interface AccordionTitleProps{
     children:ReactNode
 }
 
-Accordion.Title = function AccordionTitle({ 
+function AccordionTitle({ 
     children, 
     ...restProps 
 }:AccordionTitleProps) {
@@ -55,7 +61,7 @@ interface AccordionWrapperProps{
     children:ReactNode
 }
 
-Accordion.Wrapper = function AccordionWrapper({ 
+function AccordionWrapper({ 
     children, 
     ...restProps 
 }:AccordionWrapperProps) {
@@ -110,3 +116,4 @@ Accordion.Body = function AccordionBody({
       </Body>
     );
 };
+

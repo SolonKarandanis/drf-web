@@ -9,6 +9,7 @@ import { NextIntlClientProvider } from "next-intl";
 import AuthProvider from "@/components/auth/auth-provider";
 import { ToastContainer } from "react-toastify";
 import { ProgressBar } from "@/shared/layout-components/progress-bar/progress-bar";
+import RootStyleRegistry from "./style-registry";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -37,7 +38,9 @@ const RootLayout:FC<Props>= async ({children,params:{locale}}) => {
             {/* <Setup /> */}
             <NextIntlClientProvider messages={messages}>
               <ProgressBar className="fixed top-0 h-1 bg-sky-500 z-50" >
-                {children}
+                <RootStyleRegistry>
+                  {children}
+                </RootStyleRegistry>
               </ProgressBar>
             </NextIntlClientProvider>
           </CustomProvider>

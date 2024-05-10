@@ -1,4 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import Accordion from "@/shared/components/accordion/accordion";
 import Card from "@/shared/components/card/card";
 import List from "@/shared/components/list/list";
 import { Metadata } from "next";
@@ -42,7 +43,26 @@ const Page = async () => {
        { 'img': "../../../../assets/images/ecommerce/png/1.png" },
        { 'img': "../../../../assets/images/ecommerce/png/1.png" },
        { 'img': "../../../../assets/images/ecommerce/png/1.png" }],
- }
+  }
+
+  const faqData = [
+    {
+      id: 1,
+      header: "What is LogRocket?",
+      body:"Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    },
+    {
+      id: 2,
+      header: "LogRocket pricing?",
+      body:"Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    },
+    {
+      id: 3,
+      header: "Where can I Find the Doc?",
+      body:"Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    },
+  ];
+
   return (
     <div>
       <div className="xxl:col-span-9 xl:col-span-8 lg:col-span-8 md:col-span-12 col-span-12">
@@ -64,6 +84,17 @@ const Page = async () => {
             <List.ListItem>First Item</List.ListItem>
             <List.ListItem>Second Item</List.ListItem>
           </List>
+          {/* <Accordion>
+            <Accordion.Title>LogRocket FAQ</Accordion.Title>
+            <Accordion.Wrapper>
+              {faqData.map((item) =>(
+                <Accordion.Item key={item.id}>
+                  <Accordion.ItemHeader>{item.header}</Accordion.ItemHeader>
+                  <Accordion.Body>{item.body}</Accordion.Body>
+                </Accordion.Item>
+              ))}
+            </Accordion.Wrapper>
+          </Accordion> */}
         </div>
       </div>
     </div>
