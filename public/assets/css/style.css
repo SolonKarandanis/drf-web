@@ -184,6 +184,8 @@ Background Image
       @apply bg-background text-foreground;
     }
   }
+
+  @layer reset, base, tokens, recipes, utilities;
 /* End Tailwind Styles */
 :root {
   --body-bg:	240 241 247;

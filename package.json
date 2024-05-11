@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "prepare": "panda codegen",
+    "prepare clean": "panda codegen --clean",
+    "dev": "rm -rf .next && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -38,7 +40,7 @@
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.371.0",
     "negotiator": "^0.6.3",
-    "next": "14.0.4",
+    "next": "^14.2.3",
     "next-auth": "^4.24.7",
     "next-intl": "^3.12.0",
     "nodemailer": "^6.9.13",
@@ -52,7 +54,7 @@
     "react-hook-form": "^7.51.3",
     "react-icons": "^5.0.1",
     "react-perfect-scrollbar": "^1.5.8",
-    "react-quill": "^2.0.0",
+    "react-quill": "^0.0.2",
     "react-range-slider-input": "^3.0.7",
     "react-redux": "^9.1.0",
     "react-tabulator": "^0.19.0",
@@ -67,6 +69,7 @@
     "zod": "^3.23.4"
   },
   "devDependencies": {
+    "@pandacss/dev": "^0.39.1",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "@testing-library/user-event": "^14.5.2",

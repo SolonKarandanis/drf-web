@@ -8,6 +8,7 @@ module.exports = {
     'postcss-mixins': {},
     'postcss-reporter':{
       clearReportedMessages: true,
-    }
+    },
+    '@pandacss/dev/postcss': {},
   },
 }
