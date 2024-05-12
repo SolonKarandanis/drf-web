@@ -26,25 +26,27 @@ import {
 type Inputs = z.infer<typeof UserSearchSchema>
 
 interface Props{
-    onDataAction: (data:any) => Promise<void>;
+    // onDataAction: (data:any) => Promise<void>;
 }
 
-const SearchUserForm:FC<Props> = ({onDataAction}) => {
+const SearchUserForm:FC<Props> = ({}) => {
     const form = useForm<Inputs>({resolver: zodResolver(UserSearchSchema)})
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        console.log(await onDataAction(data));
+        // console.log(await onDataAction(data));
     }
 
     return (
         <Form {...form}>
-            <form className="space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
+            <form className="space-y-8" 
+                onSubmit={form.handleSubmit(onSubmit)}
+                data-testid="form">
                 <div className="flex gap-2">
                     <FormField
                         control={form.control}
                         name="username"
                         render={({ field }) => (
-                        <FormItem>
+                        <FormItem data-testid="username">
                             <FormLabel>Username</FormLabel>
                             <FormControl>
                                 <Input placeholder="" {...field} />
@@ -56,7 +58,7 @@ const SearchUserForm:FC<Props> = ({onDataAction}) => {
                         control={form.control}
                         name="name"
                         render={({ field }) => (
-                        <FormItem>
+                        <FormItem data-testid="name">
                             <FormLabel>Name</FormLabel>
                             <FormControl>
                                 <Input placeholder="" {...field} />
@@ -68,7 +70,7 @@ const SearchUserForm:FC<Props> = ({onDataAction}) => {
                         control={form.control}
                         name="email"
                         render={({ field }) => (
-                        <FormItem>
+                        <FormItem data-testid="email">
                             <FormLabel>Email</FormLabel>
                             <FormControl>
                                 <Input placeholder="" {...field} />
@@ -82,7 +84,7 @@ const SearchUserForm:FC<Props> = ({onDataAction}) => {
                         control={form.control}
                         name="role"
                         render={({ field }) => (
-                        <FormItem>
+                        <FormItem data-testid="role">
                             <FormLabel>User Role</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                                 <FormControl>
@@ -101,7 +103,7 @@ const SearchUserForm:FC<Props> = ({onDataAction}) => {
                    
                 </div>
                
-                <div className='pt-5 mt-8'>
+                <div className='pt-5 mt-8' data-testid="buttons">
                     <div className='flex justify-between'>
                         <Button type="submit" variant="outline">Search</Button>
                         <Button type="reset" variant="destructive">Clear</Button>

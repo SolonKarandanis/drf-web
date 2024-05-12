@@ -16,10 +16,10 @@ export const metadata:Metadata={
 
 const SearchUsersPage = () => {
 
-  const onDataAction = async (data: any) => {
-    "use server"
-    console.log(data);
-  }  
+  // const onDataAction = async (data: any) => {
+  //   "use server"
+  //   console.log(data);
+  // }  
 
   const DATA =[
     {
@@ -59,7 +59,7 @@ const SearchUsersPage = () => {
 
   return (
     <div className="inset-0 flex flex-col justify-between p-24">
-      <SearchUserForm  onDataAction={onDataAction}/>
+      <SearchUserForm  />
       <DataTable columns={columns}  data={DATA}/>
     </div>
   )

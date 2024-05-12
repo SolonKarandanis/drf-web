@@ -1,12 +1,12 @@
 import React from 'react'
 import { render, screen,fireEvent } from "@testing-library/react";
 import CButton from './cbutton';
-// import ClearIcon from '@mui/icons-material/Clear';
+import { MdClear } from "react-icons/md";
 
 describe('<Button />',()=>{
     it('1. On initial render the button is enabled',async () => {
         render(
-        <CButton btnType='primary' 
+        <CButton intent='primary' 
             type="submit"
             className='btn btn-shadow btn-lg w-40'>
             Search
@@ -16,7 +16,7 @@ describe('<Button />',()=>{
 
     it('2. The button has text content',async () =>{
         render(
-        <CButton btnType='primary' 
+        <CButton intent='primary' 
             type="submit"
             className='btn btn-shadow btn-lg w-40'>
             Search
@@ -27,7 +27,7 @@ describe('<Button />',()=>{
 
     it('3. The button is in loading state',async () =>{
         render(
-        <CButton btnType='primary' 
+        <CButton intent='primary' 
             type="submit"
             className='btn btn-shadow btn-lg w-40'
             isLoading={true}>
@@ -44,7 +44,7 @@ describe('<Button />',()=>{
     it('4. calls the onClick callback handler',async () =>{
         const onClick = jest.fn()
         render(
-            <CButton btnType='primary' 
+            <CButton intent='primary' 
                 type="submit"
                 className='btn btn-shadow btn-lg w-40'
                 onClick={onClick}>
@@ -60,14 +60,14 @@ describe('<Button />',()=>{
     it('5. It renders an Icon', async ()=>{
 
         render(
-            <CButton btnType='danger' 
+            <CButton intent='danger' 
                 type="submit"
                 className='btn btn-shadow btn-lg w-40'
+                icon={<MdClear />}
                 >
                 Clear
             </CButton> 
         )
-        // icon={<ClearIcon />}
         expect(screen.getByTestId('Button.Icon')).toBeInTheDocument()
 
     })
