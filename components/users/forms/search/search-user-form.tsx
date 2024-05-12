@@ -49,7 +49,9 @@ const SearchUserForm:FC<Props> = ({}) => {
                         <FormItem data-testid="username">
                             <FormLabel>Username</FormLabel>
                             <FormControl>
-                                <Input placeholder="" {...field} />
+                                <Input 
+                                    data-testid="input-username"
+                                    {...field} />
                             </FormControl>
                         </FormItem>
                         )}
@@ -61,7 +63,9 @@ const SearchUserForm:FC<Props> = ({}) => {
                         <FormItem data-testid="name">
                             <FormLabel>Name</FormLabel>
                             <FormControl>
-                                <Input placeholder="" {...field} />
+                                <Input 
+                                    data-testid="input-name" 
+                                    {...field} />
                             </FormControl>
                         </FormItem>
                         )}
@@ -73,7 +77,9 @@ const SearchUserForm:FC<Props> = ({}) => {
                         <FormItem data-testid="email">
                             <FormLabel>Email</FormLabel>
                             <FormControl>
-                                <Input placeholder="" {...field} />
+                                <Input 
+                                    data-testid="input-email" 
+                                    {...field} />
                             </FormControl>
                         </FormItem>
                         )}
