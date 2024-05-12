@@ -2,26 +2,8 @@ import { NextFetchEvent, NextRequest, NextResponse } from 'next/server'
 
 import { getToken } from 'next-auth/jwt'
 import { CustomMiddleware } from './chain'
-import { Locale,locales } from '@/utils/locales'
-
-const loginUrl = '/auth/login/';
-const allowedPaths = [loginUrl,'/auth/register/','/auth/forgot-password/']
-
-function getAllowedRoutes(allowedPaths: string[], locales: Locale[]) {
-    let allowedPathsWithLocale = [...allowedPaths]
-  
-    allowedPaths.forEach(route => {
-      locales.forEach(
-        locale =>
-          (allowedPathsWithLocale = [
-            ...allowedPathsWithLocale,
-            `/${locale}${route}`
-          ])
-      )
-    })
-  
-    return allowedPathsWithLocale
-}
+import { locales } from '@/utils/locales'
+import {getAllowedRoutes,allowedPaths} from './get-allowed-routes'
 
 export function withAuthenticationMiddleware(middleware: CustomMiddleware){
     return async (request: NextRequest, event: NextFetchEvent) =>{
@@ -40,7 +22,7 @@ export function withAuthenticationMiddleware(middleware: CustomMiddleware){
         ])
         const isPathAllowed =allowedPathsWithLocale.includes(pathname)
         if (!token && !isPathAllowed) {
-            const signInUrl = new URL(loginUrl, request.url)
+            const signInUrl = new URL('/auth/login/', request.url)
             signInUrl.searchParams.set('callbackUrl', pathname)
             return NextResponse.redirect(signInUrl)
         }
