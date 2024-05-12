@@ -22,10 +22,11 @@ describe('<Select />',() =>{
     it("1. Should render with default value selected", () => {
         render(
         <CFormSelect 
-            label='Animals' 
             name='animals' 
             options={animals} 
-            defaultValue={"cat"} />);
+            defaultValue={"cat"} >
+            Animals
+        </CFormSelect>);
      
         expect(screen.getByRole("combobox")).toHaveValue("cat");
         expect((screen.getByRole("option", { name: "Cat" }) as HTMLOptionElement).selected).toBe(true);
@@ -34,10 +35,11 @@ describe('<Select />',() =>{
     it("2. Should select correct value on change", async () => {
         render(
             <CFormSelect 
-                label='Animals' 
                 name='animals' 
                 options={animals} 
-                defaultValue={"cat"} />
+                defaultValue={"cat"} >
+                    Animals
+            </CFormSelect>
         )
      
         fireEvent.change(screen.getByRole("combobox"),{
