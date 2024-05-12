@@ -23,7 +23,7 @@ function getAllowedRoutes(allowedPaths: string[], locales: Locale[]) {
     return allowedPathsWithLocale
 }
 
-export function withAuthMiddleware(middleware: CustomMiddleware){
+export function withAuthenticationMiddleware(middleware: CustomMiddleware){
     return async (request: NextRequest, event: NextFetchEvent) =>{
         // Create a response object to pass down the chain
         const response = NextResponse.next()
