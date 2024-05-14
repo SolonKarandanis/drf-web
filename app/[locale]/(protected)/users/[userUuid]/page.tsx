@@ -1,3 +1,4 @@
+import PageHeader from '@/shared/layout-components/page-header/PageHeader';
 import { Metadata } from 'next';
 import {FC} from 'react'
 
@@ -13,13 +14,16 @@ export const metadata:Metadata={
 
 interface Props{
     params:{
-        userId:number;
+        userUuid:string;
     }
 }
 
-const UserDetailsPage:FC<Props> = ({params:{userId}}) => {
+const UserDetailsPage:FC<Props> = ({params:{userUuid}}) => {
   return (
-    <div>{userId}</div>
+    <>
+      {userUuid}
+      <PageHeader currentpage="Profile" activepage="Users" mainpage="Profile" />
+    </>
   )
 }
 

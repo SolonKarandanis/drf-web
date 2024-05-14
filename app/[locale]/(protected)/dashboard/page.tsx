@@ -2,6 +2,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import Accordion from "@/shared/components/accordion/accordion";
 import Card from "@/shared/components/card/card";
 import List from "@/shared/components/list/list";
+import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 
@@ -65,6 +66,10 @@ const Page = async () => {
 
   return (
     <div>
+      <PageHeader 
+        currentpage="Analytics" 
+        activepage="Dashboards" 
+        mainpage="Analytics" />
       <div className="xxl:col-span-9 xl:col-span-8 lg:col-span-8 md:col-span-12 col-span-12">
         <div className="grid grid-cols-12 gap-x-6">
           <Card>

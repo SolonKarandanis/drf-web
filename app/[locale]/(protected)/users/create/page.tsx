@@ -1,4 +1,5 @@
 import CreateUserForm from "@/components/users/forms/create-user/create-user-form"
+import PageHeader from "@/shared/layout-components/page-header/PageHeader"
 import { Metadata } from "next"
 
 export const metadata:Metadata={
@@ -13,7 +14,13 @@ export const metadata:Metadata={
 
 const CreateUserPage = () => {
   return (
-    <div><CreateUserForm/> </div>
+    <div>
+      <PageHeader 
+        currentpage="Create User" 
+        activepage="Users" 
+        mainpage="Create Users" />
+      <CreateUserForm/>
+    </div>
   )
 }
 

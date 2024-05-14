@@ -3,6 +3,7 @@ import { DataTable } from "@/shared/components/data-table/data-table";
 import { Metadata } from "next";
 import { useMemo } from "react";
 import { columns } from "./columns";
+import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 
 export const metadata:Metadata={
   title:"Drf Search Users",
@@ -58,10 +59,16 @@ const SearchUsersPage = () => {
   ]
 
   return (
-    <div className="inset-0 flex flex-col justify-between p-24">
-      <SearchUserForm  />
-      <DataTable columns={columns}  data={DATA}/>
-    </div>
+    <>
+      <PageHeader 
+          currentpage="Search Users" 
+          activepage="Users" 
+          mainpage="Search Users" />
+      <div className="inset-0 flex flex-col justify-between p-24">
+        <SearchUserForm  />
+        <DataTable columns={columns}  data={DATA}/>
+      </div>
+    </>
   )
 }
 
