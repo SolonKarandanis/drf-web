@@ -176,17 +176,22 @@ Background Image
     }
   }
 
-  @layer base {
-    * {
-      @apply border-border;
-    }
-    body {
-      @apply bg-background text-foreground;
-    }
-  }
+  
 
-  @layer reset, base, tokens, recipes, utilities;
 /* End Tailwind Styles */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Panda Css */
+  /* @layer reset, base, tokens, recipes, utilities; */
+/* End Panda Css */
 :root {
   --body-bg:	240 241 247;
   --primary:	132 90 223;

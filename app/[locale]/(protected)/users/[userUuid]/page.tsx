@@ -21,8 +21,8 @@ interface Props{
 const UserDetailsPage:FC<Props> = ({params:{userUuid}}) => {
   return (
     <>
-      {userUuid}
-      <PageHeader currentpage="Profile" activepage="Users" mainpage="Profile" />
+      <PageHeader 
+        currentpage="Profile" activepage="Users" mainpage={userUuid} />
     </>
   )
 }
