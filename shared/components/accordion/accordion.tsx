@@ -4,7 +4,8 @@ import {
     useState, 
     useContext, 
     createContext, 
-    ReactNode
+    ReactNode,
+    PropsWithChildren
 } from "react";
 import { 
     Container,
@@ -25,14 +26,8 @@ const ToggleContext = createContext<ToggleProps>({
     toggleShow:false,
     toggleIsShown(isShown) {},
 });
-interface AccordionProps{
-    children:ReactNode
-}
 
-function Accordion({ 
-    children, 
-    ...restProps 
-}:AccordionProps) {
+function Accordion({ children, ...restProps }: PropsWithChildren) {
     return (
       <Container {...restProps}>
         <Inner>{children}</Inner>
@@ -45,37 +40,16 @@ Accordion.Wrapper = AccordionWrapper;
 
 export default Accordion;
 
-
-interface AccordionTitleProps{
-    children:ReactNode
-}
-
-function AccordionTitle({ 
-    children, 
-    ...restProps 
-}:AccordionTitleProps) {
+function AccordionTitle({ children, ...restProps }: PropsWithChildren) {
     return <Title {...restProps}>{children}</Title>;
 };
 
-interface AccordionWrapperProps{
-    children:ReactNode
-}
-
-function AccordionWrapper({ 
-    children, 
-    ...restProps 
-}:AccordionWrapperProps) {
+function AccordionWrapper({ children, ...restProps }: PropsWithChildren) {
     return <Wrapper {...restProps}>{children}</Wrapper>;
 };
 
-interface AccordionItemProps{
-    children:ReactNode
-}
 
-Accordion.Item = function AccordionItem({ 
-    children, 
-    ...restProps 
-}:AccordionItemProps) {
+Accordion.Item = function AccordionItem({ children, ...restProps }: PropsWithChildren) {
     const [toggleShow, setToggleShow] = useState(true);
     const toggleIsShown = (isShown:boolean) => setToggleShow(!isShown);
     return (
@@ -85,14 +59,7 @@ Accordion.Item = function AccordionItem({
     );
 };
 
-interface AccordionItemHeaderProps{
-    children:ReactNode
-}
-
-Accordion.ItemHeader = function AccordionHeader({ 
-    children, 
-    ...restProps 
-}:AccordionItemHeaderProps) {
+Accordion.ItemHeader = function AccordionHeader({ children, ...restProps }: PropsWithChildren) {
     const { toggleIsShown,toggleShow} = useContext(ToggleContext);
     return (
       <Header onClick={() => toggleIsShown(toggleShow)} {...restProps}>
@@ -101,14 +68,7 @@ Accordion.ItemHeader = function AccordionHeader({
     );
 };
 
-interface AccordionBodyProps{
-    children:ReactNode
-}
-
-Accordion.Body = function AccordionBody({ 
-    children, 
-    ...restProps 
-}:AccordionBodyProps) {
+Accordion.Body = function AccordionBody({ children, ...restProps }: PropsWithChildren) {
     const { toggleShow } = useContext(ToggleContext);
     return (
       <Body className={toggleShow ? "open" : ""} {...restProps}>
