@@ -30,7 +30,15 @@ interface Props{
 }
 
 const SearchUserForm:FC<Props> = ({}) => {
-    const form = useForm<Inputs>({resolver: zodResolver(UserSearchSchema)})
+    const form = useForm<Inputs>({
+        resolver: zodResolver(UserSearchSchema),
+        defaultValues:{
+            email:"",
+            name:"",
+            username:"",
+            role:""
+        }
+    })
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         // console.log(await onDataAction(data));
