@@ -13,7 +13,8 @@ const AddressInfo:FC<AddressInfoProps> = ({register,errors,countries})=> {
             Address where you can receive products.
         </p>
         <div className='grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6'>
-            <CFormSelect 
+            <CFormSelect
+                data-testid="input-country"
                 name="country"
                 options={countries}
                 required={true}
@@ -24,7 +25,8 @@ const AddressInfo:FC<AddressInfoProps> = ({register,errors,countries})=> {
                 error={errors.country?.message}>
                 Country
             </CFormSelect>
-            <CFormInput 
+            <CFormInput
+                data-testid="input-street"
                 type='text'
                 required={true}
                 name='street' 
@@ -36,7 +38,8 @@ const AddressInfo:FC<AddressInfoProps> = ({register,errors,countries})=> {
                 error={errors.street?.message}>
                     Street address
             </CFormInput>
-            <CFormInput 
+            <CFormInput
+                data-testid="input-city"
                 type='text'
                 required={true}
                 name='city' 
@@ -47,7 +50,8 @@ const AddressInfo:FC<AddressInfoProps> = ({register,errors,countries})=> {
                 error={errors.city?.message}>
                     City
             </CFormInput>
-            <CFormInput 
+            <CFormInput
+                data-testid="input-state"
                 type='text'
                 required={true}
                 name='state' 
@@ -58,7 +62,8 @@ const AddressInfo:FC<AddressInfoProps> = ({register,errors,countries})=> {
                 error={errors.state?.message}>
                     State/Province
             </CFormInput>
-            <CFormInput 
+            <CFormInput
+                data-testid="input-zip"
                 type='text'
                 required={true}
                 name='zip' 

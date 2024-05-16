@@ -14,7 +14,8 @@ const PersonalInfo:FC<SectionProps> = ({register,errors}) => {
                 Provide your personal details.
             </p>
             <div className='grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6'>
-                <CFormInput 
+                <CFormInput
+                    data-testid="input-firstName"
                     type='text'
                     required={true}
                     name='firstName' 
@@ -26,7 +27,8 @@ const PersonalInfo:FC<SectionProps> = ({register,errors}) => {
                     error={errors.firstName?.message}>
                         First Name
                 </CFormInput>
-                <CFormInput 
+                <CFormInput
+                    data-testid="input-lastName"
                     type='text'
                     required={true}
                     name='lastName' 
@@ -38,7 +40,8 @@ const PersonalInfo:FC<SectionProps> = ({register,errors}) => {
                     error={errors.lastName?.message}>
                         Last name
                 </CFormInput>
-                <CFormInput 
+                <CFormInput
+                    data-testid="input-email"
                     type='email'
                     required={true}
                     name='email' 

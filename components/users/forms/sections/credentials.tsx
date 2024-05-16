@@ -13,7 +13,8 @@ const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
             Create Users Login Credentials
         </p>
         <div className='grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6'>
-            <CFormSelect 
+            <CFormSelect
+                data-testid="select-role"
                 name="role"
                 options={roles}
                 required={true}
@@ -24,7 +25,8 @@ const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
                 error={errors.role?.message}>
                     Role
             </CFormSelect>
-            <CFormInput 
+            <CFormInput
+                data-testid="input-username"
                 type='text'
                 required={true}
                 name='username' 
@@ -36,7 +38,8 @@ const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
                 error={errors.username?.message}>
                     Username
             </CFormInput>
-            <CFormInput 
+            <CFormInput
+                data-testid="input-password"
                 type='password'
                 required={true}
                 name='password' 
@@ -48,7 +51,8 @@ const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
                 error={errors.password?.message}>
                     Password
             </CFormInput>
-            <CFormInput 
+            <CFormInput
+                data-testid="input-confirmpassword"
                 type='password'
                 required={true}
                 name='confirmpassword' 
