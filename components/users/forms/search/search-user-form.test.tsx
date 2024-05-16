@@ -5,10 +5,14 @@ import userEvent from '@testing-library/user-event'
 
 import SearchUserForm from './search-user-form';
 
+beforeEach(()=>{
+    render(<SearchUserForm />);
+});
+
+
 describe("<SearchUserForm/>", () =>{
     describe('Render', () => {
         test("1. Should render all elements on the form", () => {
-            render(<SearchUserForm />);
             expect(screen.getByTestId("form")).toBeInTheDocument();
             expect(screen.getByTestId("username")).toBeInTheDocument();
             expect(screen.getByTestId("name")).toBeInTheDocument();
@@ -19,19 +23,16 @@ describe("<SearchUserForm/>", () =>{
     });
     describe('Behavior', () =>{
         test('1. Should be able to add text to the username input', async () => {
-            render(<SearchUserForm />);
             const input = screen.getByTestId('input-username')
             await userEvent.type(input, 'hey there')
             expect(input).toHaveValue("hey there")
         });
         test('2. Should be able to add text to the name input', async () => {
-            render(<SearchUserForm />);
             const input = screen.getByTestId("input-name")
             await userEvent.type(input, 'hey there')
             expect(input).toHaveValue("hey there")
         });
         test('3. Should be able to add text to the email input', async () => {
-            render(<SearchUserForm />);
             const input = screen.getByTestId("input-email")
             await userEvent.type(input, 'skarandanis@email.com')
             expect(input).toHaveValue("skarandanis@email.com")
