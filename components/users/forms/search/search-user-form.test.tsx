@@ -19,7 +19,7 @@ describe("<SearchUserForm/>", () =>{
     });
     describe('Behavior', () =>{
         it('1. Should be able to add text to the username input', async () => {
-            const input = screen.getByTestId("input-username")
+            const input = screen.getByTestId('input-username')
             await userEvent.type(input, 'hey there')
             expect(input).toHaveValue("hey there")
         });
@@ -30,8 +30,8 @@ describe("<SearchUserForm/>", () =>{
         });
         it('3. Should be able to add text to the email input', async () => {
             const input = screen.getByTestId("input-email")
-            await userEvent.type(input, 'hey there')
-            expect(input).toHaveValue("hey there")
+            await userEvent.type(input, 'skarandanis@email.com')
+            expect(input).toHaveValue("skarandanis@email.com")
         });
     })
     
