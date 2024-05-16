@@ -14,7 +14,7 @@ const AddressInfo:FC<AddressInfoProps> = ({register,errors,countries})=> {
         </p>
         <div className='grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6'>
             <CFormSelect
-                data-testid="input-country"
+                data-testid="select-country"
                 name="country"
                 options={countries}
                 required={true}

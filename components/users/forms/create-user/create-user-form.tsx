@@ -170,6 +170,7 @@ const CreateUserForm = () => {
             <div className='pt-5 mt-8'>
                 <div className='flex justify-between'>
                     <button
+                        data-testid="back-button"
                         type='button'
                         onClick={prev}
                         disabled={currentStep === 0}
@@ -178,6 +179,7 @@ const CreateUserForm = () => {
                         <ArrowLeft />
                     </button>
                     <button
+                        data-testid="next-button"
                         type='button'
                         onClick={next}
                         disabled={currentStep === steps.length - 1}
