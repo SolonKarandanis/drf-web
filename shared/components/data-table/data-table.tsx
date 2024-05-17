@@ -1,6 +1,6 @@
 'use client'
 
-import { DetailedHTMLProps, HTMLAttributes, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   ColumnDef,
   flexRender,
@@ -30,6 +30,8 @@ import {
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { Input } from '@/shared/shadcn/components/ui/input';
 import { useReactToPrint } from "react-to-print";
+// @ts-ignore
+import  Html2Pdf from 'js-html2pdf'
 
 
 interface DataTableProps<TData, TValue> {
@@ -74,8 +76,8 @@ export function DataTable<TData, TValue>({
                     margin: 0,
                     filename: "users.pdf",
                 }; 
-                // const exporter = new Html2Pdf(html, options);
-                // await exporter.getPdf(options); 
+                const exporter = new Html2Pdf(html, options);
+                await exporter.getPdf(options); 
             }
         }
     });
