@@ -109,7 +109,7 @@ export function DataTable<TData, TValue>({
                             <Button 
                                 onClick={handlePrint}
                                 variant='outline'
-                                className='w-max'>
+                                className='w-20'>
                                 Pdf
                             </Button>
                         </DropdownMenuContent>
