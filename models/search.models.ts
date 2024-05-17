@@ -21,16 +21,16 @@ export interface UserSearchRequest extends SearchRequest {
     role?:string;
 }
 
-interface SearchResponse{
+export interface SearchResponse{
     count: number;
     previous: number;
     next: number;
 }
 
-interface UserSearchResponse extends SearchResponse{
-    data: User[];
+export interface UserSearchResponse extends SearchResponse{
+    data: UserModel[];
 }
 
-interface ProductSearchResponse extends SearchResponse{
+export interface ProductSearchResponse extends SearchResponse{
     data:Product[];
 }

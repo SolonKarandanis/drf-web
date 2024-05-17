@@ -1,10 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import authReducer from './features/authSlice';
-import themeReducer from './features/themeSlice'
+import themeReducer from './features/themeSlice';
+import usersReducer from './features/users/usersSlice'
 import { apiSlice } from './apiSlice';
 
 const reducers = combineReducers({
-  auth: authReducer,
+  users: usersReducer,
   theme: themeReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
 })
