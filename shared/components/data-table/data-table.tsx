@@ -97,11 +97,22 @@ export function DataTable<TData, TValue>({
                 </div>
                 {/* Column visibility */}
                 <div className='flex items-center justify-between gap-1'>
-                    <Button 
-                        onClick={handlePrint}
-                        variant='outline'>
-                        Print
-                    </Button>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant='outline' className='ml-auto'>
+                                Export as
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent >
+                            <Button 
+                                onClick={handlePrint}
+                                variant='outline'
+                                className='w-max'>
+                                Pdf
+                            </Button>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant='outline' className='ml-auto'>
