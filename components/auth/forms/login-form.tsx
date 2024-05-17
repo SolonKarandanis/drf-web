@@ -15,6 +15,7 @@ import {  useState } from "react";
 import { toast } from "react-toastify";
 import { useTranslations } from "next-intl";
 import {signIn} from "next-auth/react"
+import { ErrorResponse } from "@/models/error.models";
 
 type LoginSchema = z.infer<typeof LoginSchema>;
 
