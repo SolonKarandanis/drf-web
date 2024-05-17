@@ -1,7 +1,6 @@
 import SearchUserForm from "@/components/users/forms/search/search-user-form";
 import { DataTable } from "@/shared/components/data-table/data-table";
 import { Metadata } from "next";
-import { useMemo } from "react";
 import { columns } from "./columns";
 import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { DetailedHTMLProps, HTMLAttributes, useRef, useState } from 'react';
 import {
   ColumnDef,
   flexRender,
@@ -29,6 +29,7 @@ import {
 } from '@/shared/shadcn/components/ui/dropdown-menu';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { Input } from '@/shared/shadcn/components/ui/input';
+
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -59,6 +60,12 @@ export function DataTable<TData, TValue>({
         getFilteredRowModel: getFilteredRowModel(),
         getPaginationRowModel: getPaginationRowModel()
     });
+
+    const printDocumentRef = useRef<HTMLDivElement>(null);
+
+    // const handlePrint = useReactToPrint({
+    //     content: () => componentRef.current
+    // });
 
     return (
         <>
@@ -103,8 +110,8 @@ export function DataTable<TData, TValue>({
                 </DropdownMenu>
             </div>
             {/* Table */}
-            <div className='rounded-md border'>
-                <Table>
+            <div className='rounded-md border' ref={printDocumentRef}>
+                <Table >
                     <TableHeader>
                         {table.getHeaderGroups().map(headerGroup => (
                             <TableRow key={headerGroup.id}>
