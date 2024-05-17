@@ -2,6 +2,8 @@ import { UserSearchResponse } from '@/models/search.models';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 
+
+
 interface UsersState {
 	users:UserModel[];
 	isLoading: boolean;

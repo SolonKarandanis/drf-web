@@ -2,9 +2,17 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import themeReducer from './features/themeSlice';
 import usersReducer from './features/users/usersSlice'
 import { apiSlice } from './apiSlice';
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+
+const usersPersistConfig = {
+  key: "users",
+  storage: storage,
+};
 
 const reducers = combineReducers({
-  users: usersReducer,
+  users: persistReducer(usersPersistConfig, usersReducer),
   theme: themeReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
 })
@@ -13,7 +21,8 @@ export const makeStore = () => {
     return configureStore({
       reducer: reducers,
       middleware: getDefaultMiddleware =>
-		      getDefaultMiddleware().concat(apiSlice.middleware),
+		    getDefaultMiddleware({ serializableCheck: false })
+          .concat(apiSlice.middleware),
 	    devTools: process.env.NODE_ENV !== 'production',
     })
   }
