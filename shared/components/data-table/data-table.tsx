@@ -29,6 +29,7 @@ import {
 } from '@/shared/shadcn/components/ui/dropdown-menu';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { Input } from '@/shared/shadcn/components/ui/input';
+import { useReactToPrint } from "react-to-print";
 
 
 interface DataTableProps<TData, TValue> {
@@ -63,9 +64,21 @@ export function DataTable<TData, TValue>({
 
     const printDocumentRef = useRef<HTMLDivElement>(null);
 
-    // const handlePrint = useReactToPrint({
-    //     content: () => componentRef.current
-    // });
+    const handlePrint = useReactToPrint({
+        content: () => printDocumentRef.current,
+        print: async (printIframe)=>{
+            const document = printIframe.contentDocument;
+            if (document) {
+                const html = document.getElementById('table');
+                const options = {
+                    margin: 0,
+                    filename: "users.pdf",
+                }; 
+                // const exporter = new Html2Pdf(html, options);
+                // await exporter.getPdf(options); 
+            }
+        }
+    });
 
     return (
         <>
@@ -83,34 +96,41 @@ export function DataTable<TData, TValue>({
                     />
                 </div>
                 {/* Column visibility */}
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant='outline' className='ml-auto'>
-                        Columns
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align='end'>
-                        {table
-                            .getAllColumns()
-                            .filter(column => column.getCanHide())
-                            .map(column => {
-                                return (
-                                <DropdownMenuCheckboxItem
-                                    key={column.id}
-                                    className='capitalize'
-                                    checked={column.getIsVisible()}
-                                    onCheckedChange={value => column.toggleVisibility(!!value)}
-                                >
-                                    {column.id}
-                                </DropdownMenuCheckboxItem>
-                                )
-                            })
-                        }
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <div className='flex items-center justify-between gap-1'>
+                    <Button 
+                        onClick={handlePrint}
+                        variant='outline'>
+                        Print
+                    </Button>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant='outline' className='ml-auto'>
+                                Columns
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align='end'>
+                            {table
+                                .getAllColumns()
+                                .filter(column => column.getCanHide())
+                                .map(column => {
+                                    return (
+                                    <DropdownMenuCheckboxItem
+                                        key={column.id}
+                                        className='capitalize'
+                                        checked={column.getIsVisible()}
+                                        onCheckedChange={value => column.toggleVisibility(!!value)}
+                                    >
+                                        {column.id}
+                                    </DropdownMenuCheckboxItem>
+                                    )
+                                })
+                            }
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                </div>
             </div>
             {/* Table */}
-            <div className='rounded-md border' ref={printDocumentRef}>
+            <div className='rounded-md border' ref={printDocumentRef} id='table'>
                 <Table >
                     <TableHeader>
                         {table.getHeaderGroups().map(headerGroup => (
