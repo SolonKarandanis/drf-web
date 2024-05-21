@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore, createListenerMiddleware } from '@reduxjs/toolkit';
 import themeReducer from './features/themeSlice';
 import usersReducer from './features/users/usersSlice'
 import { apiSlice } from './apiSlice';
@@ -17,11 +17,14 @@ const reducers = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
 })
 
+export const listenerMiddleware = createListenerMiddleware();
+
 export const makeStore = () => {
     return configureStore({
       reducer: reducers,
       middleware: getDefaultMiddleware =>
 		    getDefaultMiddleware({ serializableCheck: false })
+          .prepend(listenerMiddleware.middleware)
           .concat(apiSlice.middleware),
 	    devTools: process.env.NODE_ENV !== 'production',
     })
