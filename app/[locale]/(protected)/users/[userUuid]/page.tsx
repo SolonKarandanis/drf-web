@@ -43,13 +43,12 @@ const UserDetailsPage:FC<Props> = ({params:{userUuid}}) => {
       <PageHeader 
         currentpage="Profile" activepage="Users" mainpage={userUuid} />
         <div className="grid grid-cols-12 gap-x-6">
-          <div className="xxl:col-span-4 xl:col-span-12 col-span-12">
-            <div className="box overflow-hidden">
+          <div className="col-span-12 xxl:col-span-4 xl:col-span-12">
+            <div className="overflow-hidden box">
               <div className="box-body !p-0">
-                <div className="sm:flex items-start p-6 main-profile-cover">
+                <div className="items-start p-6 sm:flex main-profile-cover">
                   <div>
-                      <span className="avatar avatar-xxl avatar-rounded 
-                        online me-4">
+                      <span className="avatar avatar-xxl avatar-rounded online me-4">
                           <Image
                             alt="profile-picture"
                             src={`${path}/assets/images/faces/9.jpg`}
@@ -61,12 +60,12 @@ const UserDetailsPage:FC<Props> = ({params:{userUuid}}) => {
                   <div className="flex-grow main-profile-info">
                     <div className="flex items-center !justify-between">
                         <h6 className="font-semibold mb-1 text-black text-[1rem]">Json Taylor</h6>
-                        <button type="button" className="ti-btn ti-btn-light !font-medium !gap-0"><i className="ri-add-line me-1 align-middle inline-block"></i>Follow</button>
+                        <button type="button" className="ti-btn ti-btn-light !font-medium !gap-0"><i className="inline-block align-middle ri-add-line me-1"></i>Follow</button>
                     </div>
                     <p className="mb-1 text-black  opacity-[0.7]">Chief Executive Officer (C.E.O)</p>
                     <p className="text-[0.75rem] text-black mb-6 opacity-[0.5]">
-                        <span className="me-4 inline-flex text-black"><i className="ri-building-line me-1 align-middle"></i>Georgia</span>
-                        <span className="inline-flex text-black"><i className="ri-map-pin-line me-1 align-middle"></i>Washington D.C</span>
+                        <span className="inline-flex text-black me-4"><i className="align-middle ri-building-line me-1"></i>Georgia</span>
+                        <span className="inline-flex text-black"><i className="align-middle ri-map-pin-line me-1"></i>Washington D.C</span>
                     </p>
                     <div className="flex mb-0">
                       <div className="me-6">
@@ -128,29 +127,29 @@ const UserDetailsPage:FC<Props> = ({params:{userUuid}}) => {
                     </p>
                   </div>
                 </div>
-                <div className="p-6 border-b dark:border-defaultborder/10 border-dashed sm:flex items-center">
+                <div className="items-center p-6 border-b border-dashed dark:border-defaultborder/10 sm:flex">
                   <p className="text-[.9375rem] mb-2 me-6 font-semibold">
                     Social Networks :
                   </p>
-                  <div className="btn-list mb-0">
+                  <div className="mb-0 btn-list">
                     <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-primary text-primary me-[.375rem] mb-1">
-                        <i className="ri-facebook-line font-semibold"></i>
+                        <i className="font-semibold ri-facebook-line"></i>
                     </button>
                     <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-secondary me-[.375rem] mb-1">
-                        <i className="ri-twitter-line font-semibold"></i>
+                        <i className="font-semibold ri-twitter-line"></i>
                     </button>
                     <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-warning me-[.375rem] mb-1">
-                        <i className="ri-instagram-line font-semibold"></i>
+                        <i className="font-semibold ri-instagram-line"></i>
                     </button>
                     <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-success me-[.375rem] mb-1">
-                        <i className="ri-github-line font-semibold"></i>
+                        <i className="font-semibold ri-github-line"></i>
                     </button>
                     <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-danger me-[.375rem] mb-1">
-                        <i className="ri-youtube-line font-semibold"></i>
+                        <i className="font-semibold ri-youtube-line"></i>
                     </button>
                   </div>
                 </div>
-                <div className="p-6 border-b dark:border-defaultborder/10 border-dashed">
+                <div className="p-6 border-b border-dashed dark:border-defaultborder/10">
                   <p className="text-[.9375rem] mb-2 me-6 font-semibold">Skills :</p>
                   <div>
                       {Skillsdata.map((idx)=>(
@@ -161,29 +160,29 @@ const UserDetailsPage:FC<Props> = ({params:{userUuid}}) => {
               </div>
             </div>
           </div>
-          <div className="xxl:col-span-8 xl:col-span-12 col-span-12">
+          <div className="col-span-12 xxl:col-span-8 xl:col-span-12">
             <div className="grid grid-cols-12 gap-x-6">
-              <div className="xl:col-span-12 col-span-12">
+              <div className="col-span-12 xl:col-span-12">
                 <div className="box">
                   <div className="box-body !p-0">
                     <div className="!p-4 border-b dark:border-defaultborder/10 border-dashed 
                       md:flex items-center justify-between">
                         <nav className="-mb-0.5 sm:flex md:space-x-6 rtl:space-x-reverse pb-2">
-                          <Link className="w-full sm:w-auto flex active hs-tab-active:font-semibold  hs-tab-active:text-white hs-tab-active:bg-primary rounded-md py-2 px-4 text-primary text-sm" href="#!" id="activity-tab" data-hs-tab="#activity-tab-pane" aria-controls="activity-tab-pane">
-                              <i className="ri-gift-line  align-middle inline-block me-1"></i>Activity
+                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto active hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-primary text-primary" href="#!" id="activity-tab" data-hs-tab="#activity-tab-pane" aria-controls="activity-tab-pane">
+                              <i className="inline-block align-middle ri-gift-line me-1"></i>Activity
                           </Link>
-                          <Link className="w-full sm:w-auto flex hs-tab-active:font-semibold  hs-tab-active:text-white hs-tab-active:bg-primary rounded-md  py-2 px-4 text-primary text-sm" href="#!" id="posts-tab" data-hs-tab="#posts-tab-pane" aria-controls="posts-tab-pane">
-                              <i className="ri-bill-line me-1 align-middle inline-block"></i>Posts
+                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-primary text-primary" href="#!" id="posts-tab" data-hs-tab="#posts-tab-pane" aria-controls="posts-tab-pane">
+                              <i className="inline-block align-middle ri-bill-line me-1"></i>Posts
                           </Link>
-                          <Link className="w-full sm:w-auto flex hs-tab-active:font-semibold  hs-tab-active:text-white hs-tab-active:bg-primary rounded-md  py-2 px-4 text-primary text-sm" href="#!" id="followers-tab" data-hs-tab="#followers-tab-pane" aria-controls="followers-tab-pane">
-                              <i className="ri-money-dollar-box-line me-1 align-middle inline-block"></i>Friends
+                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-primary text-primary" href="#!" id="followers-tab" data-hs-tab="#followers-tab-pane" aria-controls="followers-tab-pane">
+                              <i className="inline-block align-middle ri-money-dollar-box-line me-1"></i>Friends
                           </Link>
-                          <Link className="w-full sm:w-auto flex hs-tab-active:font-semibold  hs-tab-active:text-white hs-tab-active:bg-primary rounded-md  py-2 px-4 text-primary text-sm" href="#!" id="gallery-tab" data-hs-tab="#gallery-tab-pane" aria-controls="gallery-tab-pane">
-                              <i className="ri-exchange-box-line me-1 align-middle inline-block"></i>Gallery
+                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-primary text-primary" href="#!" id="gallery-tab" data-hs-tab="#gallery-tab-pane" aria-controls="gallery-tab-pane">
+                              <i className="inline-block align-middle ri-exchange-box-line me-1"></i>Gallery
                           </Link>
                         </nav>
                         <div>
-                          <p className="font-semibold mb-2 ms-2">Profile 60% completed - <Link href="#!" className="text-primary text-[0.75rem]">Finish now</Link></p>
+                          <p className="mb-2 font-semibold ms-2">Profile 60% completed - <Link href="#!" className="text-primary text-[0.75rem]">Finish now</Link></p>
                           <div className="progress progress-xs progress-animate">
                               <div className="progress-bar bg-primary w-[60%]" ></div>
                           </div>
@@ -202,7 +201,7 @@ const UserDetailsPage:FC<Props> = ({params:{userUuid}}) => {
                                     <p className="mb-2">
                                         <b>You</b> Commented on <b>alexander taylor</b> post <Link className="text-secondary" href="#!"><u>#beautiful day</u></Link>.<span className="ltr:float-right rtl:float-left text-[.6875rem] text-[#8c9097] dark:text-white/50">24,Dec 2022 - 14:34</span>
                                     </p>
-                                    <p className="profile-activity-media mb-0 flex w-full mt-2 sm:mt-0">
+                                    <p className="flex w-full mt-2 mb-0 profile-activity-media sm:mt-0">
                                         <Link aria-label="anchor" href="#!">
                                           <Image
                                             alt=""
@@ -222,8 +221,127 @@ const UserDetailsPage:FC<Props> = ({params:{userUuid}}) => {
                                     </p>
                                 </div>
                             </li>
-                            
+                            <li>
+                                <div>
+                                    <span className="avatar avatar-sm avatar-rounded profile-timeline-avatar">
+                                      <Image
+                                        alt=""
+                                        src={`${path}/assets/images/faces/11.jpg`}
+                                        width={700}
+                                        height={475}
+                                        sizes="100vw"/>
+                                    </span>
+                                    <p className="text-[#8c9097] dark:text-white/50 mb-2">
+                                        <span className="text-default"><b>Json Smith</b> reacted to the post 👍</span>.<span className="ltr:float-right rtl:float-left text-[.6875rem] text-[#8c9097] dark:text-white/50">18,Dec 2022 - 12:16</span>
+                                    </p>
+                                    <p className="text-[#8c9097] dark:text-white/50 mb-0">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, repellendus rem rerum excepturi aperiam ipsam temporibus inventore ullam tempora eligendi libero sequi dignissimos cumque, et a sint tenetur consequatur omnis!
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                              <div>
+                                  <span className="avatar avatar-sm avatar-rounded profile-timeline-avatar">
+                                    <Image
+                                      alt=""
+                                      src={`${path}/assets/images/faces/4.jpg`}
+                                      width={700}
+                                      height={475}
+                                      sizes="100vw"/>
+                                  </span>
+                                  <p className="text-[#8c9097] dark:text-white/50 mb-2">
+                                      <span className="text-default"><b>Alicia Keys</b> shared a document with <b>you</b></span>.<span className="ltr:float-right rtl:float-left text-[.6875rem] text-[#8c9097] dark:text-white/50">21,Dec 2022 - 15:32</span>
+                                  </p>
+                                  <p className="flex items-center w-full mt-2 mb-0 profile-activity-media sm:mt-0">
+                                      <Link aria-label="anchor" href="#!">
+                                        <Image
+                                          alt=""
+                                          src={`${path}/assets/images/faces/3.jpg`}
+                                          width={700}
+                                          height={475}
+                                          sizes="100vw"/>
+                                      </Link>
+                                      <span className="text-[.6875rem] text-[#8c9097] dark:text-white/50">432.87KB</span>
+                                  </p>
+                              </div>
+                            </li>
+                            <li>
+                              <div>
+                                  <span className="avatar avatar-sm bg-success/10 !text-success avatar-rounded profile-timeline-avatar">
+                                      P
+                                  </span>
+                                  <p className="text-[#8c9097] dark:text-white/50 mb-4">
+                                      <span className="text-default"><b>You</b> shared a post with 4 people <b>Simon,Sasha, Anagha,Hishen</b></span>.<span className="ltr:float-right rtl:float-left text-[.6875rem] text-[#8c9097] dark:text-white/50">28,Dec 2022 - 18:46</span>
+                                  </p>
+                                  <p className="mb-4 profile-activity-media">
+                                      <Link aria-label="anchor" href="#!">
+                                          <img src="../../../assets/images/media/media-75.jpg" alt="" />
+                                      </Link>
+                                  </p>
+                                  <div>
+                                      <div className="avatar-list-stacked">
+                                          <span className="avatar avatar-sm avatar-rounded">
+                                              <img src="../../../assets/images/faces/2.jpg" alt="img" />
+                                          </span>
+                                          <span className="avatar avatar-sm avatar-rounded">
+                                              <img src="../../../assets/images/faces/8.jpg" alt="img" />
+                                          </span>
+                                          <span className="avatar avatar-sm avatar-rounded">
+                                              <img src="../../../assets/images/faces/2.jpg" alt="img" />
+                                          </span>
+                                          <span className="avatar avatar-sm avatar-rounded">
+                                              <img src="../../../assets/images/faces/10.jpg" alt="img" />
+                                          </span>
+                                      </div>
+                                  </div>
+                              </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <span className="avatar avatar-sm avatar-rounded profile-timeline-avatar">
+                                        <img src="../../../assets/images/faces/5.jpg" alt="" />
+                                    </span>
+                                    <p className="text-[#8c9097] dark:text-white/50 mb-1">
+                                        <span className="text-default"><b>Melissa Blue</b> liked your post <b>travel excites</b></span>.<span className="ltr:float-right rtl:float-left text-[.6875rem] text-[#8c9097] dark:text-white/50">11,Dec 2022 - 11:18</span>
+                                    </p>
+                                    <p className="text-[#8c9097] dark:text-white/50">you are already feeling the tense atmosphere of the video playing in the background</p>
+                                    <p className="mb-0 profile-activity-media sm:flex">
+                                        <Link aria-label="anchor" href="#!">
+                                            <img src="../../../assets/images/media/media-59.jpg" className="m-1" alt="" />
+                                        </Link>
+                                        <Link aria-label="anchor" href="#!">
+                                            <img src="../../../assets/images/media/media-60.jpg" className="m-1" alt="" />
+                                        </Link>
+                                        <Link aria-label="anchor" href="#!">
+                                            <img src="../../../assets/images/media/media-61.jpg" className="m-1" alt="" />
+                                        </Link>
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <span className="avatar avatar-sm avatar-rounded profile-timeline-avatar">
+                                        <img src="../../../assets/images/media/media-39.jpg" alt="" />
+                                    </span>
+                                    <p className="mb-1">
+                                        <b>You</b> Commented on <b>Peter Engola</b> post <Link className="text-secondary" href="#!"><u>#Mother Nature</u></Link>.<span className="ltr:float-right rtl:float-left text-[.6875rem] text-[#8c9097] dark:text-white/50">24,Dec 2022 - 14:34</span>
+                                    </p>
+                                    <p className="text-[#8c9097] dark:text-white/50">Technology id developing rapidly kepp uo your work 👌</p>
+                                    <p className="flex w-full mt-2 mb-0 profile-activity-media sm:mt-0">
+                                        <Link aria-label="anchor" href="#!">
+                                            <img src="../../../assets/images/media/media-26.jpg" alt="" />
+                                        </Link>
+                                        <Link aria-label="anchor" href="#!">
+                                            <img src="../../../assets/images/media/media-29.jpg" alt="" />
+                                        </Link>
+                                    </p>
+                                </div>
+                            </li>
                           </ul>
+                        </div>
+                        <div className="tab-pane fade !p-0 !border-0 hidden !rounded-md" id="posts-tab-pane"
+                            role="tabpanel" aria-labelledby="posts-tab" tabIndex={0}>
+
                         </div>
                       </div>
                     </div>

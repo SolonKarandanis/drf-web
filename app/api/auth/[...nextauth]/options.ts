@@ -80,8 +80,6 @@ export const authOptions: NextAuthOptions ={
             }
             // Refresh the backend token if necessary
             if (getCurrentEpochTime() > (token["ref"] as number)) {
-                console.log('jwt 2')
-                console.log(token)
                 const response =await fetch(`${baseUrl}auth/token/refresh/`, {
                     method: "POST",
                     headers: {
@@ -90,6 +88,7 @@ export const authOptions: NextAuthOptions ={
                     body: JSON.stringify(token["refresh"])
                   })
                   .then(response => response.json())
+                console.log(response)
                 token["access"] = response.data.access;
                 token["refresh"] = response.data.refresh;
                 token["ref"] = getCurrentEpochTime() + BACKEND_ACCESS_TOKEN_LIFETIME;
