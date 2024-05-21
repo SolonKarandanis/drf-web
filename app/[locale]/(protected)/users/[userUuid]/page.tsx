@@ -4,6 +4,7 @@ import Image from 'next/image';
 import {FC} from 'react'
 import { basePath } from '@/next.config';
 import Link from 'next/link';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 export const metadata:Metadata={
   title:"Drf User Profile Page",
@@ -28,6 +29,39 @@ const Skillsdata = [
   { id: 10, text: 'PowerShell' },
   { id: 11, text: 'Statistics' },
   { id: 12, text: 'SQL' },
+];
+
+const Friendsdata = [
+  { id: 1, src: "../../../assets/images/faces/2.jpg", name: 'Samantha May', mail: 'samanthamay2912@gmail.com', badge: 'Team Member', color: 'info' },
+  { id: 2, src: "../../../assets/images/faces/15.jpg", name: 'Andrew Garfield', mail: 'andrewgarfield98@gmail.com', badge: 'Team Lead', color: 'success' },
+  { id: 3, src: "../../../assets/images/faces/5.jpg", name: 'Jessica Cashew', mail: 'jessicacashew143@gmail.com', badge: 'Team Member', color: 'info' },
+  { id: 4, src: "../../../assets/images/faces/11.jpg", name: 'Simon Cowan', mail: 'jessicacashew143@gmail.com', badge: 'Team Manager', color: 'warning' },
+  { id: 5, src: "../../../assets/images/faces/7.jpg", name: 'Amanda nunes', mail: 'amandanunes45@gmail.com', badge: 'Team Member', color: 'info' },
+  { id: 6, src: "../../../assets/images/faces/12.jpg", name: 'Mahira Hose', mail: 'mahirahose9456@gmail.com', badge: 'Team Member', color: 'info' },
+];
+
+const Personalinfodata = [
+  { id: 1, text1: 'Name :', text2: 'Sonya Taylor' },
+  { id: 2, text1: 'Email :', text2: 'sonyataylor231@gmail.com' },
+  { id: 3, text1: 'Phone :', text2: '+(555) 555-1234' },
+  { id: 4, text1: 'Designation :', text2: 'C.E.O' },
+  { id: 5, text1: 'Age :', text2: '28' },
+  { id: 6, text1: 'Experience :', text2: '10 Years' },
+];
+
+const RecentPostsdata = [
+  { id: 1, src: "../../../assets/images/media/media-39.jpg", name: 'Animals', text: 'There are many variations of passages of Lorem Ipsum available' },
+  { id: 2, src: "../../../assets/images/media/media-56.jpg", name: 'Travel', text: 'Latin words, combined with a handful of model sentence' },
+  { id: 3, src: "../../../assets/images/media/media-54.jpg", name: 'Interior', text: 'Contrary to popular belief, Lorem Ipsum is not simply random' },
+  { id: 4, src: "../../../assets/images/media/media-64.jpg", name: 'Nature', text: 'It is a long established fact that a reader will be distracted by the readable content' }
+];
+
+const Suggestionsdata = [
+  { id: 1, src: "../../../assets/images/faces/15.jpg", name: 'Alister' },
+  { id: 2, src: "../../../assets/images/faces/4.jpg", name: 'Samantha Sams' },
+  { id: 3, src: "../../../assets/images/faces/11.jpg", name: 'Jason Mama' },
+  { id: 4, src: "../../../assets/images/faces/5.jpg", name: 'Alicia Sierra' },
+  { id: 5, src: "../../../assets/images/faces/7.jpg", name: 'Kiara Advain' }
 ];
 
 interface Props{
@@ -340,13 +374,431 @@ const UserDetailsPage:FC<Props> = ({params:{userUuid}}) => {
                           </ul>
                         </div>
                         <div className="tab-pane fade !p-0 !border-0 hidden !rounded-md" id="posts-tab-pane"
-                            role="tabpanel" aria-labelledby="posts-tab" tabIndex={0}>
-
+                          role="tabpanel" aria-labelledby="posts-tab" tabIndex={0}>
+                          <ul className="list-group !rounded-md">
+                            <li className="list-group-item">
+                                <div className="items-center leading-none sm:flex">
+                                    <div className="me-4">
+                                        <span className="avatar avatar-md avatar-rounded">
+                                            <img src="../../../assets/images/faces/9.jpg" alt="" />
+                                        </span>
+                                    </div>
+                                    <div className="flex-grow">
+                                        <div className="sm:flex">
+                                            <input type="text" className="form-control !rounded-e-none !w-full" placeholder="Recipient's username" aria-label="Recipient's username with two button addons" />
+                                            <button aria-label="button" className="ti-btn ti-btn-light !rounded-none !mb-0" type="button"><i className="bi bi-emoji-smile"></i></button>
+                                            <button aria-label="button" className="ti-btn ti-btn-light !rounded-none !mb-0" type="button"><i className="bi bi-paperclip"></i></button>
+                                            <button aria-label="button" className="ti-btn ti-btn-light !rounded-none !mb-0" type="button"><i className="bi bi-camera"></i></button>
+                                            <button className="ti-btn bg-primary !mb-0 !rounded-s-none text-white" type="button">Post</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li className="list-group-item" id="profile-posts-scroll">
+                              {/* <PerfectScrollbar> */}
+                                <div className="grid grid-cols-12 gap-4">
+                                  <div className="col-span-12 xxl:col-span-12 xl:col-span-12 lg:col-span-12 md:col-span-12">
+                                    <div className="border rounded dark:border-defaultborder/10">
+                                      <div className="flex flex-wrap items-start p-4">
+                                        <div className="me-2">
+                                            <span className="avatar avatar-sm avatar-rounded">
+                                                <img src="../../../assets/images/faces/9.jpg" alt="" />
+                                            </span>
+                                        </div>
+                                        <div className="flex-grow">
+                                            <p className="mb-1 font-semibold leading-none">You</p>
+                                            <p className="text-[.6875rem] mb-2 text-[#8c9097] dark:text-white/50">24, Dec - 04:32PM</p>
+                                            <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                            <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 mb-4">As opposed to using Content here 👌</p>
+                                            <div className="flex items-center justify-between mb-2 md:mb-0">
+                                                <div>
+                                                    <div className="btn-list">
+                                                        <button type="button" className="ti-btn ti-btn-primary !me-[.375rem] !py-1 !px-2 !text-[0.75rem] !font-medium btn-wave">
+                                                            Comment
+                                                        </button>
+                                                        <button aria-label="button" type="button" className="ti-btn !me-[.375rem] ti-btn-sm ti-btn-success">
+                                                            <i className="ri-thumb-up-line"></i>
+                                                        </button>
+                                                        <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-danger">
+                                                            <i className="ri-share-line"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start">
+                                            <div>
+                                                <span className="badge bg-primary/10 text-primary me-2">Fashion</span>
+                                            </div>
+                                            <div>
+                                                <div className="hs-dropdown ti-dropdown">
+                                                    <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-light" aria-expanded="false">
+                                                        <i className="ti ti-dots-vertical"></i>
+                                                    </button>
+                                                    <ul className="hidden hs-dropdown-menu ti-dropdown-menu">
+                                                        <li><Link className="ti-dropdown-item !py-2 !px-[0.9375rem] !text-[0.8125rem] !font-medium block" href="#!">Delete</Link></li>
+                                                        <li><Link className="ti-dropdown-item !py-2 !px-[0.9375rem] !text-[0.8125rem] !font-medium block" href="#!">Hide</Link></li>
+                                                        <li><Link className="ti-dropdown-item !py-2 !px-[0.9375rem] !text-[0.8125rem] !font-medium block" href="#!">Edit</Link></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="col-span-12 xxl:col-span-12 xl:col-span-12 lg:col-span-12 md:col-span-12">
+                                    <div className="border rounded dark:border-defaultborder/10">
+                                      <div className="flex flex-wrap items-start p-4">
+                                        <div className="me-2">
+                                            <span className="avatar avatar-sm avatar-rounded">
+                                                <img src="../../../assets/images/faces/9.jpg" alt="" />
+                                            </span>
+                                        </div>
+                                        <div className="flex-grow">
+                                            <p className="mb-1 font-semibold leading-none">You</p>
+                                            <p className="text-[.6875rem] mb-2 text-[#8c9097] dark:text-white/50">26, Dec - 12:45PM</p>
+                                            <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 mb-1">Shared pictures with 4 of friends <span>Hiren,Sasha,Biden,Thara</span>.</p>
+                                            <div className="flex justify-between mb-4 leading-none">
+                                                <div>
+                                                    <Link aria-label="anchor" href="#!">
+                                                        <span className="avatar avatar-md me-1">
+                                                            <img src="../../../assets/images/media/media-52.jpg" alt="" />
+                                                        </span>
+                                                    </Link>
+                                                    <Link aria-label="anchor" href="#!">
+                                                        <span className="avatar avatar-md me-1">
+                                                            <img src="../../../assets/images/media/media-56.jpg" alt="" />
+                                                        </span>
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center justify-between mb-2 md:mb-0">
+                                                <div>
+                                                    <div className="btn-list">
+                                                        <button type="button" className="ti-btn ti-btn-primary !me-[.375rem] !py-1 !px-2 !text-[0.75rem] !font-medium btn-wave">
+                                                            Comment
+                                                        </button>
+                                                        <button aria-label="button" type="button" className="ti-btn !me-[.375rem] ti-btn-sm ti-btn-success">
+                                                            <i className="ri-thumb-up-line"></i>
+                                                        </button>
+                                                        <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-danger">
+                                                            <i className="ri-share-line"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                          <div className="flex items-start">
+                                              <div>
+                                                  <span className="badge bg-success/10 text-secondary me-2">Nature</span>
+                                              </div>
+                                              <div>
+                                                  <div className="hs-dropdown ti-dropdown">
+                                                      <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-light" aria-expanded="false">
+                                                          <i className="ti ti-dots-vertical"></i>
+                                                      </button>
+                                                      <ul className="hidden hs-dropdown-menu ti-dropdown-menu">
+                                                          <li><Link className="ti-dropdown-item !py-2 !px-[0.9375rem] !text-[0.8125rem] !font-medium block" href="#!">Delete</Link></li>
+                                                          <li><Link className="ti-dropdown-item !py-2 !px-[0.9375rem] !text-[0.8125rem] !font-medium block" href="#!">Hide</Link></li>
+                                                          <li><Link className="ti-dropdown-item !py-2 !px-[0.9375rem] !text-[0.8125rem] !font-medium block" href="#!">Edit</Link></li>
+                                                      </ul>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div className="block mt-4 avatar-list-stacked text-end">
+                                              <span className="avatar avatar-xs avatar-rounded">
+                                                  <img src="../../../assets/images/faces/2.jpg" alt="img" />
+                                              </span>
+                                              <span className="avatar avatar-xs avatar-rounded">
+                                                  <img src="../../../assets/images/faces/8.jpg" alt="img" />
+                                              </span>
+                                              <span className="avatar avatar-xs avatar-rounded">
+                                                  <img src="../../../assets/images/faces/2.jpg" alt="img" />
+                                              </span>
+                                              <span className="avatar avatar-xs avatar-rounded">
+                                                  <img src="../../../assets/images/faces/10.jpg" alt="img" />
+                                              </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="col-span-12 xxl:col-span-12 xl:col-span-12 lg:col-span-12 md:col-span-12">
+                                    <div className="border rounded dark:border-defaultborder/10">
+                                      <div className="flex flex-wrap items-start p-4">
+                                        <div className="me-2">
+                                            <span className="avatar avatar-sm avatar-rounded">
+                                                <img src="../../../assets/images/faces/9.jpg" alt="" />
+                                            </span>
+                                        </div>
+                                        <div className="flex-grow">
+                                            <p className="mb-1 font-semibold leading-none">You</p>
+                                            <p className="text-[.6875rem] mb-2 text-[#8c9097] dark:text-white/50">29, Dec - 09:53AM</p>
+                                            <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 mb-1">Sharing an article that excites me about nature more than what i thought.</p>
+                                            <p className="mb-4 profile-post-link">
+                                                <Link href="#!" className="text-[0.75rem] text-primary">
+                                                    <u>https://www.discovery.com/ nature/caring-for-coral</u>
+                                                </Link>
+                                            </p>
+                                            <div className="flex items-center justify-between mb-2 md:mb-0">
+                                                <div>
+                                                    <div className="btn-list">
+                                                        <button type="button" className="ti-btn ti-btn-primary !me-[.375rem] !py-1 !px-2 !text-[0.75rem] !font-medium btn-wave">
+                                                            Comment
+                                                        </button>
+                                                        <button aria-label="button" type="button" className="ti-btn !me-[.375rem] ti-btn-sm ti-btn-success">
+                                                            <i className="ri-thumb-up-line"></i>
+                                                        </button>
+                                                        <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-danger">
+                                                            <i className="ri-share-line"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start">
+                                          <div>
+                                              <span className="badge bg-secondary/10 text-secondary me-2">Travel</span>
+                                          </div>
+                                          <div className="hs-dropdown ti-dropdown">
+                                              <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-light" aria-expanded="false">
+                                                  <i className="ti ti-dots-vertical"></i>
+                                              </button>
+                                              <ul className="hidden hs-dropdown-menu ti-dropdown-menu">
+                                                  <li><Link className="ti-dropdown-item !py-2 !px-[0.9375rem] !text-[0.8125rem] !font-medium block" href="#!">Delete</Link></li>
+                                                  <li><Link className="ti-dropdown-item !py-2 !px-[0.9375rem] !text-[0.8125rem] !font-medium block" href="#!">Hide</Link></li>
+                                                  <li><Link className="ti-dropdown-item !py-2 !px-[0.9375rem] !text-[0.8125rem] !font-medium block" href="#!">Edit</Link></li>
+                                              </ul>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="col-span-12 xxl:col-span-12 xl:col-span-12 lg:col-span-12 md:col-span-12">
+                                    <div className="border rounded dark:border-defaultborder/10">
+                                      <div className="flex flex-wrap items-start p-4">
+                                        <div className="me-2">
+                                            <span className="avatar avatar-sm avatar-rounded">
+                                                <img src="../../../assets/images/faces/9.jpg" alt="" />
+                                            </span>
+                                        </div>
+                                        <div className="flex-grow">
+                                            <p className="mb-1 font-semibold leading-none">You</p>
+                                            <p className="text-[.6875rem] mb-2 text-[#8c9097] dark:text-white/50">22, Dec - 11:22PM</p>
+                                            <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 mb-1">Shared pictures with 3 of your friends <span>Maya,Jacob,Amanda</span>.</p>
+                                            <div className="flex justify-between mb-4 leading-none">
+                                                <div>
+                                                    <Link aria-label="anchor" href="#!">
+                                                        <span className="avatar avatar-md me-1">
+                                                            <img src="../../../assets/images/media/media-40.jpg" alt="" className="rounded-md" />
+                                                        </span>
+                                                    </Link>
+                                                    <Link aria-label="anchor" href="#!">
+                                                        <span className="avatar avatar-md me-1">
+                                                            <img src="../../../assets/images/media/media-45.jpg" alt="" className="rounded-md" />
+                                                        </span>
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center justify-between mb-2 md:mb-0">
+                                                <div>
+                                                    <div className="btn-list">
+                                                        <button type="button" className="ti-btn ti-btn-primary !me-[.375rem] !py-1 !px-2 !text-[0.75rem] !font-medium btn-wave">
+                                                            Comment
+                                                        </button>
+                                                        <button aria-label="button" type="button" className="ti-btn !me-[.375rem] ti-btn-sm ti-btn-success">
+                                                            <i className="ri-thumb-up-line"></i>
+                                                        </button>
+                                                        <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-danger">
+                                                            <i className="ri-share-line"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                          <div className="flex items-start">
+                                              <div>
+                                                  <span className="badge bg-success/10 text-secondary me-2">Nature</span>
+                                              </div>
+                                              <div className="hs-dropdown ti-dropdown">
+                                                  <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-light" aria-expanded="false">
+                                                      <i className="ti ti-dots-vertical"></i>
+                                                  </button>
+                                                  <ul className="hidden hs-dropdown-menu ti-dropdown-menu">
+                                                      <li><Link className="ti-dropdown-item !py-2 !px-[0.9375rem] !text-[0.8125rem] !font-medium block" href="#!">Delete</Link></li>
+                                                      <li><Link className="ti-dropdown-item !py-2 !px-[0.9375rem] !text-[0.8125rem] !font-medium block" href="#!">Hide</Link></li>
+                                                      <li><Link className="ti-dropdown-item !py-2 !px-[0.9375rem] !text-[0.8125rem] !font-medium block" href="#!">Edit</Link></li>
+                                                  </ul>
+                                              </div>
+                                          </div>
+                                          <div className="block mt-4 avatar-list-stacked text-end">
+                                              <span className="avatar avatar-xs avatar-rounded">
+                                                  <img src="../../../assets/images/faces/1.jpg" alt="img" />
+                                              </span>
+                                              <span className="avatar avatar-xs avatar-rounded">
+                                                  <img src="../../../assets/images/faces/5.jpg" alt="img" />
+                                              </span>
+                                              <span className="avatar avatar-xs avatar-rounded">
+                                                  <img src="../../../assets/images/faces/16.jpg" alt="img" />
+                                              </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              {/* </PerfectScrollbar> */}
+                            </li>
+                            <li className="list-group-item">
+                                <div className="text-center">
+                                    <button type="button" className="ti-btn ti-btn-primary !font-medium">Show All</button>
+                                </div>
+                            </li>
+                          </ul>
+                        </div>
+                        <div className="tab-pane fade !p-0 !border-0 hidden" id="followers-tab-pane"
+                          role="tabpanel" aria-labelledby="followers-tab" tabIndex={0}>
+                            <div className="grid grid-cols-12 sm:gap-x-6">
+                              {Friendsdata.map((idx) =>(
+                                <div className="col-span-12 xxl:col-span-4 xl:col-span-4 lg:col-span-6 md:col-span-6" key={Math.random()}>
+                                    <div className="box !shadow-none border dark:border-defaultborder/10">
+                                        <div className="p-6 box-body">
+                                            <div className="text-center">
+                                                <span className="avatar avatar-xl avatar-rounded">
+                                                    <img src={idx.src} alt="" />
+                                                </span>
+                                                <div className="mt-2">
+                                                    <p className="mb-0 font-semibold">{idx.name}</p>
+                                                    <p className="text-[0.75rem] opacity-[0.7] mb-1 text-[#8c9097] dark:text-white/50">{idx.mail}</p>
+                                                    <span className={`badge bg-${idx.color}/10 rounded-full text-${idx.color}`}>{idx.badge}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="text-center box-footer">
+                                            <div className="btn-list">
+                                                <button type="button" className="ti-btn btn-sm !py-1 !px-2 !text-[0.75rem] me-1 ti-btn-light">Block</button>
+                                                <button type="button" className="ti-btn btn-sm !py-1 !px-2 !text-[0.75rem] text-white bg-primary">Unfollow</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              ))}
+                              <div className="col-span-12">
+                                  <div className="text-center !mt-4">
+                                      <button type="button" className="ti-btn ti-btn-primary !font-medium btn-wave">Show All</button>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div className="tab-pane fade !p-0 !border-0 hidden" id="gallery-tab-pane"
+                          role="tabpanel" aria-labelledby="gallery-tab" tabIndex={0}>
+                          <div className="grid grid-cols-12 sm:gap-x-6 gap-y-6">
+                              {/* <LightboxGallery/> */}
+                              <div className="col-span-12">
+                                  <div className="mt-6 text-center">
+                                      <button type="button" className="ti-btn ti-btn-primary !font-medium">Show All</button>
+                                  </div>
+                              </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
+              <div className="col-span-12 xl:col-span-4">
+                <div className="box">
+                    <div className="box-header">
+                        <div className="box-title">
+                            Personal Info
+                        </div>
+                    </div>
+                    <div className="box-body">
+                        <ul className="list-group">
+                            {Personalinfodata.map((idx)=>(
+
+                            <li className="list-group-item" key={Math.random()}>
+                                <div className="flex flex-wrap items-center">
+                                    <div className="font-semibold me-2">
+                                        {idx.text1}
+                                    </div>
+                                    <span className="text-[0.75rem] text-[#8c9097] dark:text-white/50">{idx.text2}</span>
+                                </div>
+                            </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+              </div>
+              <div className="col-span-12 xl:col-span-4">
+                  <div className="box">
+                      <div className="flex justify-between box-header">
+                          <div className="box-title">
+                              Recent Posts
+                          </div>
+                          <div>
+                              <span className="badge bg-primary/10 text-primary">Today</span>
+                          </div>
+                      </div>
+                      <div className="box-body">
+                          <ul className="list-group">
+                              {RecentPostsdata.map((idx)=>(
+
+                              <li className="list-group-item" key={Math.random()}>
+                                  <Link href="#!">
+                                      <div className="flex flex-wrap items-center">
+                                          <span className="avatar avatar-md me-4 !mb-0">
+                                              <img src={idx.src} className="img-fluid !rounded-md" alt="..." />
+                                          </span>
+                                          <div className="flex-grow">
+                                              <p className="mb-0 font-semibold">{idx.name}</p>
+                                              <p className="mb-0 text-[0.75rem] profile-recent-posts text-truncate text-[#8c9097] dark:text-white/50">
+                                                  {idx.text}
+                                              </p>
+                                          </div>
+                                      </div>
+                                  </Link>
+                              </li>
+                              ))}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div className="col-span-12 xl:col-span-4">
+                  <div className="box">
+                      <div className="flex justify-between box-header">
+                          <div className="box-title">
+                              Suggestions
+                          </div>
+                          <div>
+                              <button type="button" className="ti-btn !py-1 !px-2 !text-[0.75rem] !font-medium ti-btn-success">View All</button>
+                          </div>
+                      </div>
+                      <div className="box-body">
+                          <ul className="list-group">
+                              {Suggestionsdata.map((idx) =>(
+
+                              <li className="list-group-item" key={Math.random()}>
+                                  <div className="flex items-center justify-between">
+                                      <div className="flex items-center font-semibold">
+                                          <span className="avatar avatar-xs me-2">
+                                              <img src={idx.src} alt="" />
+                                          </span>{idx.name}
+                                      </div>
+                                      <div>
+                                          <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-primary !mb-0">
+                                              <i className="ri-add-line"></i>
+                                          </button>
+                                      </div>
+                                  </div>
+                              </li>
+                              ))}
+                          </ul>
+                      </div>
+                  </div>
               </div>
             </div>
           </div>
