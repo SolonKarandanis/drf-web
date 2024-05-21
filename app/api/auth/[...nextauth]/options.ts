@@ -80,6 +80,7 @@ export const authOptions: NextAuthOptions ={
             }
             // Refresh the backend token if necessary
             if (getCurrentEpochTime() > (token["ref"] as number)) {
+                console.log(token)
                 const response =await fetch(`${baseUrl}auth/token/refresh/`, {
                     method: "POST",
                     headers: {
