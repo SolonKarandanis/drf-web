@@ -4,8 +4,6 @@ import Image from 'next/image';
 import {FC} from 'react'
 import { basePath } from '@/next.config';
 import Link from 'next/link';
-import Test from './test';
-import Lightboxgallery from './lightboxgallery';
 
 export const metadata:Metadata={
   title:"Drf User Profile Page",
@@ -395,9 +393,6 @@ const UserDetailsPage:FC<Props> = ({params:{userUuid}}) => {
                                     </div>
                                 </div>
                             </li>
-                            <li className="list-group-item" id="profile-posts-scroll">
-                              <Test />
-                            </li>
                             <li className="list-group-item">
                                 <div className="text-center">
                                     <button type="button" className="ti-btn ti-btn-primary !font-medium">Show All</button>
@@ -438,17 +433,6 @@ const UserDetailsPage:FC<Props> = ({params:{userUuid}}) => {
                                   </div>
                               </div>
                             </div>
-                        </div>
-                        <div className="tab-pane fade !p-0 !border-0 hidden" id="gallery-tab-pane"
-                          role="tabpanel" aria-labelledby="gallery-tab" tabIndex={0}>
-                          <div className="grid grid-cols-12 sm:gap-x-6 gap-y-6">
-                              <Lightboxgallery/>
-                              <div className="col-span-12">
-                                  <div className="mt-6 text-center">
-                                      <button type="button" className="ti-btn ti-btn-primary !font-medium">Show All</button>
-                                  </div>
-                              </div>
-                          </div>
                         </div>
                       </div>
                     </div>
