@@ -79,6 +79,7 @@ const UserDetailsPage:FC<Props> = ({params:{userUuid}}) => {
           <div className="col-span-12 xxl:col-span-4 xl:col-span-12">
             <div className="overflow-hidden box">
               <div className="box-body !p-0">
+                
                 <div className="items-start p-6 sm:flex main-profile-cover">
                   <div>
                       <span className="avatar avatar-xxl avatar-rounded online me-4">
@@ -116,6 +117,8 @@ const UserDetailsPage:FC<Props> = ({params:{userUuid}}) => {
                     </div>
                   </div>
                 </div>
+
+
                 <div className="p-6 border-b border-dashed dark:border-defaultborder/10">
                   <div className="mb-6">
                       <p className="text-[.9375rem] mb-2 font-semibold">Professional Bio :</p>
