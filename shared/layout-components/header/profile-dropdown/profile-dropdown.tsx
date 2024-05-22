@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { FC } from 'react'
 import Image from "next/image";
-import { useAppSelector } from '@/shared/redux/hooks';
 import { useSession } from 'next-auth/react';
 
 type Props = {
@@ -13,7 +12,16 @@ type Props = {
 
 const ProfileDropdown:FC<Props> = ({path})=> {
     const {data} = useSession();
-    const loggedUser = data?.user;
+
+    function capitalizeFirstLetter(input:string) {
+        return input.replace(/^\w/, (c) => c.toUpperCase());
+    }
+    
+    if(!data){
+        return <></>
+    }
+    const loggedUser = data.user!;
+    const groupNames =loggedUser.groups.map((group)=> capitalizeFirstLetter(group.name));
     return (
         <div className="header-element md:!px-[0.65rem] px-2 hs-dropdown !items-center 
             ti-dropdown [--placement:bottom-left] profile-data">
@@ -29,8 +37,12 @@ const ProfileDropdown:FC<Props> = ({path})=> {
                 />
             </button>
             <div className="hidden md:block dropdown-profile">
-                <p className="font-semibold mb-0 leading-none text-[#536485] text-[0.813rem] ">{loggedUser?.first_name} {loggedUser?.last_name}</p>
-                <span className="opacity-[0.7] font-normal text-[#536485] block text-[0.6875rem] ">Web Designer</span>
+                <p className="font-semibold mb-0 leading-none text-[#536485] text-[0.813rem] ">
+                    {loggedUser?.first_name} {loggedUser?.last_name}
+                </p>
+                <span className="opacity-[0.7] font-normal text-[#536485] block text-[0.6875rem] ">
+                    {groupNames.join(', ')}
+                </span>
             </div>
             <div
                 className="hs-dropdown-menu ti-dropdown-menu !-mt-3 border-0 w-[11rem] !p-0 border-defaultborder hidden main-header-dropdown  pt-0 overflow-hidden header-profile-dropdown dropdown-menu-end"
