@@ -19,10 +19,15 @@ const isErrorData = (response: any): response is ErrorData => (response as Error
 
 const isLoginResponse = (response: any): response is LoginResponse => (response as LoginResponse).access !== undefined;
 
+function capitalizeFirstLetter(input:string) {
+    return input.replace(/^\w/, (c) => c.toUpperCase());
+}
+
 export {
     isNonNull,
     getValueOrFallback,
     isStringValue,
     isErrorData,
     isLoginResponse,
+    capitalizeFirstLetter,
 }

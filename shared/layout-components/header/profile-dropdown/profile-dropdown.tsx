@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { FC } from 'react'
 import Image from "next/image";
 import { useSession } from 'next-auth/react';
+import { getUserGroups } from '@/utils/user-utils';
 
 type Props = {
 	path?: string;
@@ -12,16 +13,12 @@ type Props = {
 
 const ProfileDropdown:FC<Props> = ({path})=> {
     const {data} = useSession();
-
-    function capitalizeFirstLetter(input:string) {
-        return input.replace(/^\w/, (c) => c.toUpperCase());
-    }
     
     if(!data){
         return <></>
     }
     const loggedUser = data.user!;
-    const groupNames =loggedUser.groups.map((group)=> capitalizeFirstLetter(group.name));
+    const groupNames =getUserGroups(loggedUser);
     return (
         <div className="header-element md:!px-[0.65rem] px-2 hs-dropdown !items-center 
             ti-dropdown [--placement:bottom-left] profile-data">
