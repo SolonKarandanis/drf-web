@@ -86,7 +86,7 @@ export const authOptions: NextAuthOptions ={
                     headers: {
                       "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(token["refresh"])
+                    body: JSON.stringify({refresh:token["refresh"]})
                   })
                   .then(response => response.json())
                 console.log(response)
