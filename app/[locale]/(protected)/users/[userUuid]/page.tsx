@@ -11,6 +11,7 @@ import Profile from '@/components/users/user-details/profile';
 import ContactInformation from '@/components/users/user-details/contanct-information';
 import SocialNetworks from '@/components/users/user-details/social-networks';
 import RecentActivity from '@/components/users/user-details/recent-activity';
+import PreviousOrders from '@/components/users/user-details/previous-orders';
 
 export const metadata:Metadata={
   title:"Drf User Profile Page",
@@ -37,15 +38,6 @@ const Skillsdata = [
   { id: 12, text: 'SQL' },
 ];
 
-const Friendsdata = [
-  { id: 1, src: "../../../assets/images/faces/2.jpg", name: 'Samantha May', mail: 'samanthamay2912@gmail.com', badge: 'Team Member', color: 'info' },
-  { id: 2, src: "../../../assets/images/faces/15.jpg", name: 'Andrew Garfield', mail: 'andrewgarfield98@gmail.com', badge: 'Team Lead', color: 'success' },
-  { id: 3, src: "../../../assets/images/faces/5.jpg", name: 'Jessica Cashew', mail: 'jessicacashew143@gmail.com', badge: 'Team Member', color: 'info' },
-  { id: 4, src: "../../../assets/images/faces/11.jpg", name: 'Simon Cowan', mail: 'jessicacashew143@gmail.com', badge: 'Team Manager', color: 'warning' },
-  { id: 5, src: "../../../assets/images/faces/7.jpg", name: 'Amanda nunes', mail: 'amandanunes45@gmail.com', badge: 'Team Member', color: 'info' },
-  { id: 6, src: "../../../assets/images/faces/12.jpg", name: 'Mahira Hose', mail: 'mahirahose9456@gmail.com', badge: 'Team Member', color: 'info' },
-];
-
 const Personalinfodata = [
   { id: 1, text1: 'Name :', text2: 'Sonya Taylor' },
   { id: 2, text1: 'Email :', text2: 'sonyataylor231@gmail.com' },
@@ -53,14 +45,6 @@ const Personalinfodata = [
   { id: 4, text1: 'Designation :', text2: 'C.E.O' },
   { id: 5, text1: 'Age :', text2: '28' },
   { id: 6, text1: 'Experience :', text2: '10 Years' },
-];
-
-const Suggestionsdata = [
-  { id: 1, src: "../../../assets/images/faces/15.jpg", name: 'Alister' },
-  { id: 2, src: "../../../assets/images/faces/4.jpg", name: 'Samantha Sams' },
-  { id: 3, src: "../../../assets/images/faces/11.jpg", name: 'Jason Mama' },
-  { id: 4, src: "../../../assets/images/faces/5.jpg", name: 'Alicia Sierra' },
-  { id: 5, src: "../../../assets/images/faces/7.jpg", name: 'Kiara Advain' }
 ];
 
 interface Props{
@@ -150,39 +134,7 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
                 </div>
               </div>
               <RecentActivity />
-              <div className="col-span-12 xl:col-span-4">
-                  <div className="box">
-                      <div className="flex justify-between box-header">
-                          <div className="box-title">
-                              Suggestions
-                          </div>
-                          <div>
-                              <button type="button" className="ti-btn !py-1 !px-2 !text-[0.75rem] !font-medium ti-btn-success">View All</button>
-                          </div>
-                      </div>
-                      <div className="box-body">
-                          <ul className="list-group">
-                              {Suggestionsdata.map((idx) =>(
-
-                              <li className="list-group-item" key={Math.random()}>
-                                  <div className="flex items-center justify-between">
-                                      <div className="flex items-center font-semibold">
-                                          <span className="avatar avatar-xs me-2">
-                                              <img src={idx.src} alt="" />
-                                          </span>{idx.name}
-                                      </div>
-                                      <div>
-                                          <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-primary !mb-0">
-                                              <i className="ri-add-line"></i>
-                                          </button>
-                                      </div>
-                                  </div>
-                              </li>
-                              ))}
-                          </ul>
-                      </div>
-                  </div>
-              </div>
+              <PreviousOrders />
             </div>
           </div>
         </div>
