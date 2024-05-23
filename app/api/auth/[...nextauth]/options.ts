@@ -90,8 +90,7 @@ export const authOptions: NextAuthOptions ={
                   })
                   .then(response => response.json())
                 console.log(response)
-                token["access"] = response.data.access;
-                token["refresh"] = response.data.refresh;
+                token["access"] = response.access;
                 token["ref"] = getCurrentEpochTime() + BACKEND_ACCESS_TOKEN_LIFETIME;
             }
             return token;
