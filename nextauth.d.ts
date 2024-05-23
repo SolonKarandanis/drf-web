@@ -9,6 +9,7 @@ declare module "next-auth" {
     interface User extends UserDetails{
         access:string;
         refresh:string;
+        email: string;
     }
 
     

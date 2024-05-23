@@ -117,33 +117,15 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
                     </div>
                   </div>
                 </div>
-                {/* <ContactInformation 
-                    email={loggedInUser.email}/> */}
-                <div className="p-6 border-b border-dashed dark:border-defaultborder/10">
-                  <p className="text-[.9375rem] mb-2 me-6 font-semibold">
-                    Contact Information :
-                  </p>
-                  <div className="text-[#8c9097] dark:text-white/50">
-                    <p className="mb-2">
-                        <span className="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
-                            <i className="ri-mail-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
-                        </span>
-                        sonyataylor2531@gmail.com
-                    </p>
-                    <p className="mb-2">
-                        <span className="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
-                            <i className="ri-phone-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
-                        </span>
-                        +(555) 555-1234
-                    </p>
-                    <p className="mb-0">
-                        <span className="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
-                            <i className="ri-map-pin-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
-                        </span>
-                        MIG-1-11, Monroe Street, Georgetown, Washington D.C, USA,20071
-                    </p>
-                  </div>
-                </div>
+                <ContactInformation 
+                    email={loggedInUser.email}
+                    phone='+(555) 555-1234'
+                    address='Maiandrou 58'
+                    city='Athens'
+                    country='Greece'
+                    state='Attiki'
+                    zipCode='14233'/>
+                
                 <div className="items-center p-6 border-b border-dashed dark:border-defaultborder/10 sm:flex">
                   <p className="text-[.9375rem] mb-2 me-6 font-semibold">
                     Social Networks :

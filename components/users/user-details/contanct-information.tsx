@@ -30,21 +30,18 @@ const ContactInformation:FC<Props> = ({
                 <span className="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
                     <i className="ri-mail-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
                 </span>
-                {/* sonyataylor2531@gmail.com  */}
                 {email}
             </p>
             <p className="mb-2">
                 <span className="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
                     <i className="ri-phone-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
                 </span>
-                {/* +(555) 555-1234  */}
                 {phone}
             </p>
             <p className="mb-0">
                 <span className="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
                     <i className="ri-map-pin-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
                 </span>
-                {/* MIG-1-11, Monroe Street, Georgetown, Washington D.C, USA,20071 */}
                 {location}
             </p>
             </div>
