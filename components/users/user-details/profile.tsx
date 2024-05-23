@@ -32,13 +32,13 @@ const Profile:FC<Props> = ({
         </div>
         <div className="flex-grow main-profile-info">
         <div className="flex items-center !justify-between">
-            <h6 className="font-semibold mb-1 text-black text-[1rem]">Json Taylor</h6>
+            <h6 className="font-semibold mb-1 text-black text-[1rem]">{firstName} {lastName}</h6>
             <button type="button" className="ti-btn ti-btn-light !font-medium !gap-0"><i className="inline-block align-middle ri-add-line me-1"></i>Follow</button>
         </div>
-        <p className="mb-1 text-black  opacity-[0.7]">Chief Executive Officer (C.E.O)</p>
+        <p className="mb-1 text-black  opacity-[0.7]">{roles}</p>
         <p className="text-[0.75rem] text-black mb-6 opacity-[0.5]">
-            <span className="inline-flex text-black me-4"><i className="align-middle ri-building-line me-1"></i>Georgia</span>
-            <span className="inline-flex text-black"><i className="align-middle ri-map-pin-line me-1"></i>Washington D.C</span>
+            <span className="inline-flex text-black me-4"><i className="align-middle ri-building-line me-1"></i>{country}</span>
+            <span className="inline-flex text-black"><i className="align-middle ri-map-pin-line me-1"></i>{city}</span>
         </p>
         <div className="flex mb-0">
             <div className="me-6">
