@@ -2,6 +2,7 @@ import { locales, type Locale } from "@/utils/locales";
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '@/styles/globals.scss'
+// import '@pigment-css/react/styles.css';
 import CustomProvider from '@/shared/redux/provider'
 import { FC } from "react";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
@@ -37,7 +38,7 @@ const RootLayout:FC<Props>= async ({children,params:{locale}}) => {
             <ToastContainer />;
             {/* <Setup /> */}
             <NextIntlClientProvider messages={messages}>
-              <ProgressBar className="fixed top-0 h-1 bg-sky-500 z-50" >
+              <ProgressBar className="fixed top-0 z-50 h-1 bg-sky-500" >
                 {/* <RootStyleRegistry> */}
                   {children}
                 {/* </RootStyleRegistry> */}

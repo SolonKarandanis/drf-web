@@ -1,6 +1,7 @@
 
 
 const withNextIntl= require("next-intl/plugin");
+// const { withPigment }= require('@pigment-css/nextjs-plugin');
 
 const isProd = process.env.NODE_ENV === "production";
 const isDev = process.env.NODE_ENV === "development";
