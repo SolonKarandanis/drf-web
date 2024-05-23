@@ -10,6 +10,7 @@ import { getUserGroups } from '@/utils/user-utils';
 import Profile from '@/components/users/user-details/profile';
 import ContactInformation from '@/components/users/user-details/contanct-information';
 import SocialNetworks from '@/components/users/user-details/social-networks';
+import RecentActivity from '@/components/users/user-details/recent-activity';
 
 export const metadata:Metadata={
   title:"Drf User Profile Page",
@@ -54,13 +55,6 @@ const Personalinfodata = [
   { id: 6, text1: 'Experience :', text2: '10 Years' },
 ];
 
-const RecentPostsdata = [
-  { id: 1, src: "../../../assets/images/media/media-39.jpg", name: 'Animals', text: 'There are many variations of passages of Lorem Ipsum available' },
-  { id: 2, src: "../../../assets/images/media/media-56.jpg", name: 'Travel', text: 'Latin words, combined with a handful of model sentence' },
-  { id: 3, src: "../../../assets/images/media/media-54.jpg", name: 'Interior', text: 'Contrary to popular belief, Lorem Ipsum is not simply random' },
-  { id: 4, src: "../../../assets/images/media/media-64.jpg", name: 'Nature', text: 'It is a long established fact that a reader will be distracted by the readable content' }
-];
-
 const Suggestionsdata = [
   { id: 1, src: "../../../assets/images/faces/15.jpg", name: 'Alister' },
   { id: 2, src: "../../../assets/images/faces/4.jpg", name: 'Samantha Sams' },
@@ -99,24 +93,13 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
                     city='Athens'
                     country='Greece'/>
 
-                <div className="p-6 border-b border-dashed dark:border-defaultborder/10">
-                  <div className="mb-6">
+                <div className="items-center justify-between p-6 border-b border-dashed dark:border-defaultborder/10 md:flex">
+                    <div className="mb-6">
                       <p className="text-[.9375rem] mb-2 font-semibold">Professional Bio :</p>
                       <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 opacity-[0.7] mb-0">
                           I am <b className="text-defaulttextcolor">Sonya Taylor,</b> here by conclude that,i am the founder and managing director of the prestigeous company name laugh at all and acts as the cheif executieve officer of the company.
                       </p>
-                  </div>
-                  <div className="mb-0">
-                    <p className="text-[.9375rem] mb-2 font-semibold">Links :</p>
-                    <div className="mb-0">
-                        <p className="mb-1">
-                            <Link href="#!" className="text-blue"><u>https://www.spruko.com/</u></Link>
-                        </p>
-                        <p className="mb-0">
-                            <Link href="#!" className="text-blue"><u>https://themeforest.net/user/ spruko/portfolio</u></Link>
-                        </p>
                     </div>
-                  </div>
                 </div>
                 <ContactInformation 
                     email={loggedInUser.email}
@@ -142,36 +125,6 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
           </div>
           <div className="col-span-12 xxl:col-span-8 xl:col-span-12">
             <div className="grid grid-cols-12 gap-x-6">
-              <div className="col-span-12 xl:col-span-12">
-                <div className="box">
-                  <div className="box-body !p-0">
-                    <div className="!p-4 border-b dark:border-defaultborder/10 border-dashed 
-                      md:flex items-center justify-between">
-                        <nav className="-mb-0.5 sm:flex md:space-x-6 rtl:space-x-reverse pb-2">
-                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto active hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-primary text-primary" href="#!" id="activity-tab" data-hs-tab="#activity-tab-pane" aria-controls="activity-tab-pane">
-                              <i className="inline-block align-middle ri-gift-line me-1"></i>Activity
-                          </Link>
-                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-primary text-primary" href="#!" id="posts-tab" data-hs-tab="#posts-tab-pane" aria-controls="posts-tab-pane">
-                              <i className="inline-block align-middle ri-bill-line me-1"></i>Posts
-                          </Link>
-                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-primary text-primary" href="#!" id="followers-tab" data-hs-tab="#followers-tab-pane" aria-controls="followers-tab-pane">
-                              <i className="inline-block align-middle ri-money-dollar-box-line me-1"></i>Friends
-                          </Link>
-                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-primary text-primary" href="#!" id="gallery-tab" data-hs-tab="#gallery-tab-pane" aria-controls="gallery-tab-pane">
-                              <i className="inline-block align-middle ri-exchange-box-line me-1"></i>Gallery
-                          </Link>
-                        </nav>
-                        <div>
-                          <p className="mb-2 font-semibold ms-2">Profile 60% completed - <Link href="#!" className="text-primary text-[0.75rem]">Finish now</Link></p>
-                          <div className="progress progress-xs progress-animate">
-                              <div className="progress-bar bg-primary w-[60%]" ></div>
-                          </div>
-                        </div>
-                    </div>
-                    
-                  </div>
-                </div>
-              </div>
               <div className="col-span-12 xl:col-span-4">
                 <div className="box">
                     <div className="box-header">
@@ -196,40 +149,7 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
                     </div>
                 </div>
               </div>
-              <div className="col-span-12 xl:col-span-4">
-                  <div className="box">
-                      <div className="flex justify-between box-header">
-                          <div className="box-title">
-                              Recent Posts
-                          </div>
-                          <div>
-                              <span className="badge bg-primary/10 text-primary">Today</span>
-                          </div>
-                      </div>
-                      <div className="box-body">
-                          <ul className="list-group">
-                              {RecentPostsdata.map((idx)=>(
-
-                              <li className="list-group-item" key={Math.random()}>
-                                  <Link href="#!">
-                                      <div className="flex flex-wrap items-center">
-                                          <span className="avatar avatar-md me-4 !mb-0">
-                                              <img src={idx.src} className="img-fluid !rounded-md" alt="..." />
-                                          </span>
-                                          <div className="flex-grow">
-                                              <p className="mb-0 font-semibold">{idx.name}</p>
-                                              <p className="mb-0 text-[0.75rem] profile-recent-posts text-truncate text-[#8c9097] dark:text-white/50">
-                                                  {idx.text}
-                                              </p>
-                                          </div>
-                                      </div>
-                                  </Link>
-                              </li>
-                              ))}
-                          </ul>
-                      </div>
-                  </div>
-              </div>
+              <RecentActivity />
               <div className="col-span-12 xl:col-span-4">
                   <div className="box">
                       <div className="flex justify-between box-header">

@@ -33,7 +33,12 @@ const Profile:FC<Props> = ({
         <div className="flex-grow main-profile-info">
         <div className="flex items-center !justify-between">
             <h6 className="font-semibold mb-1 text-black text-[1rem]">{firstName} {lastName}</h6>
-            <button type="button" className="ti-btn ti-btn-light !font-medium !gap-0"><i className="inline-block align-middle ri-add-line me-1"></i>Follow</button>
+            <div>
+                <p className="mb-2 font-semibold ms-2">Profile 60% completed</p>
+                <div className="progress progress-xs progress-animate">
+                    <div className="progress-bar bg-primary w-[60%]" ></div>
+                </div>
+            </div>
         </div>
         <p className="mb-1 text-black  opacity-[0.7]">{roles}</p>
         <p className="text-[0.75rem] text-black mb-6 opacity-[0.5]">
