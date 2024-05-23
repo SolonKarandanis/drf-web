@@ -112,6 +112,10 @@ Background Image
 @tailwind components;
 @tailwind utilities;
 
+/* Panda Css */
+/* @layer reset, base, tokens, recipes, utilities; */
+/* End Panda Css */
+
 @layer base {
     :root {
       --background: 0 0% 100%;
@@ -189,9 +193,7 @@ Background Image
   }
 }
 
-/* Panda Css */
-  /* @layer reset, base, tokens, recipes, utilities; */
-/* End Panda Css */
+
 :root {
   --body-bg:	240 241 247;
   --primary:	132 90 223;

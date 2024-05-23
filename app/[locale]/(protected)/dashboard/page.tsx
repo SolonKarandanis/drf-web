@@ -7,6 +7,7 @@ import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 
 
+
 export const metadata:Metadata={
   title:"Drf Dashboard",
   description:"Drf market place",
@@ -16,6 +17,7 @@ export const metadata:Metadata={
     }
   ]
 }
+
 
 const Page = async () => {
   const session = await getServerSession(authOptions);
@@ -70,7 +72,7 @@ const Page = async () => {
         currentpage="Analytics" 
         activepage="Dashboards" 
         mainpage="Analytics" />
-      <div className="xxl:col-span-9 xl:col-span-8 lg:col-span-8 md:col-span-12 col-span-12">
+      <div className="col-span-12 xxl:col-span-9 xl:col-span-8 lg:col-span-8 md:col-span-12">
         <div className="grid grid-cols-12 gap-x-6">
           <Card>
             <Card.Image src={item.preview} />
