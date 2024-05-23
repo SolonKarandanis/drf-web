@@ -1,17 +1,18 @@
 interface BaseUserModel{
     username:string;
-	first_name: string;
-	last_name: string;
+	firstName: string;
+	lastName: string;
 	email: string;
 }
 
 interface UserModel extends BaseUserModel {
     id:number;
     uuid:string;
-    created_date:string;
-    updated_date:string;
-    is_staff:boolean;
-    is_active:boolean;
+    createdDate:string;
+    updatedDate:string;
+    isStaff:boolean;
+    isActive:boolean;
+    isVerified:boolean;
     bio:string;
 }
 

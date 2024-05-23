@@ -70,8 +70,8 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
             <div className="overflow-hidden box">
               <div className="box-body !p-0">
                 <Profile  
-                    firstName={loggedInUser.first_name}
-                    lastName={loggedInUser.last_name}
+                    firstName={loggedInUser.firstName}
+                    lastName={loggedInUser.lastName}
                     roles={roles}
                     image={`${path}/assets/images/faces/9.jpg`}
                     city='Athens'

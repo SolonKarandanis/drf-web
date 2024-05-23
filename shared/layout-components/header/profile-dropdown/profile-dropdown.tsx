@@ -35,7 +35,7 @@ const ProfileDropdown:FC<Props> = ({path})=> {
             </button>
             <div className="hidden md:block dropdown-profile">
                 <p className="font-semibold mb-0 leading-none text-[#536485] text-[0.813rem] ">
-                    {loggedUser?.first_name} {loggedUser?.last_name}
+                    {loggedUser?.firstName} {loggedUser?.lastName}
                 </p>
                 <span className="opacity-[0.7] font-normal text-[#536485] block text-[0.6875rem] ">
                     {groupNames.join(', ')}
