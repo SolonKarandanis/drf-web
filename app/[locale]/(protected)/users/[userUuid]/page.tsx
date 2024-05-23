@@ -8,6 +8,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import { getUserGroups } from '@/utils/user-utils';
 import Profile from '@/components/users/user-details/profile';
+import ContactInformation from '@/components/users/user-details/contanct-information';
 
 export const metadata:Metadata={
   title:"Drf User Profile Page",
@@ -77,6 +78,7 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
   const path = process.env.NODE_ENV === "production" ? basePath : "";
   const session = await getServerSession(authOptions);
   const loggedInUser= session!.user!;
+//   loggedInUser
   const groupNames =getUserGroups(loggedInUser);
   const roles = groupNames.join(', ');
   
@@ -115,6 +117,8 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
                     </div>
                   </div>
                 </div>
+                {/* <ContactInformation 
+                    email={loggedInUser.email}/> */}
                 <div className="p-6 border-b border-dashed dark:border-defaultborder/10">
                   <p className="text-[.9375rem] mb-2 me-6 font-semibold">
                     Contact Information :
