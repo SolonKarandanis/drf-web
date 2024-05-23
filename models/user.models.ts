@@ -12,6 +12,7 @@ interface UserModel extends BaseUserModel {
     updated_date:string;
     is_staff:boolean;
     is_active:boolean;
+    bio:string;
 }
 
 
@@ -23,6 +24,7 @@ interface UserDetails extends UserModel{
 }
 
 interface UserGroup{
+    id:number;
     name:string;
 }
 
