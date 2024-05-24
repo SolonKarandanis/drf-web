@@ -9,6 +9,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoginSchema } from "@/schemas/auth.schemas";
 import * as z from "zod";
+import { ErrorResponse } from '@/models/error.models';
 
 
 
@@ -58,7 +59,7 @@ export default function useLogin() {
 		if(token){
 			getAccount(token)
 			.unwrap()
-			.then((user:UserDetails)=>{
+			.then((user:UserAcount)=>{
 				dispatch(setAuth(user));
 				toast.success('Logged in');
 				router.push('/dashboard');

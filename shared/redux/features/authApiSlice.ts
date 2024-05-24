@@ -5,10 +5,10 @@ import { apiSlice } from '../apiSlice';
 
 const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        getUser: builder.query<UserDetails, void>({
+        getUser: builder.query<UserAcount, void>({
 			query: (userId) => `${ApiControllers.USERS}/${userId}`,
 		}),
-        getLoggedInUserAccount: builder.query<UserDetails, string| undefined>({
+        getLoggedInUserAccount: builder.query<UserAcount, string| undefined>({
 			query(token?:string) {
 				if(token){
 					return {
@@ -38,8 +38,8 @@ const authApiSlice = apiSlice.injectEndpoints({
         registerUser: builder.mutation({
 			query: ({
                 username,
-				first_name,
-				last_name,
+				firstName,
+				lastName,
 				email,
 				password,
 				password2,
@@ -47,7 +47,7 @@ const authApiSlice = apiSlice.injectEndpoints({
 				return {
 					url: `${ApiControllers.USERS}/create/`,
 					method: 'POST',
-					body: { username,first_name, last_name, email, password, password2 },
+					body: { username,firstName, lastName, email, password, password2 },
 				}
 			},
 		}),

@@ -34,7 +34,7 @@ export default function useVerify() {
 
 			getAccount(token)
 				.unwrap()
-				.then((user:UserDetails)=>{
+				.then((user:UserAcount)=>{
 					dispatch(setAuth(user));
 				})
 				.catch((error)=>{

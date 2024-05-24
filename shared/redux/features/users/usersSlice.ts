@@ -7,7 +7,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 interface UsersState {
 	users:UserModel[];
 	isLoading: boolean;
-	selectedUser:UserDetails | null;
+	selectedUser:UserAcount | null;
     error:string| null;
 }
 
@@ -28,7 +28,7 @@ const usersSlice = createSlice({
         resetUsers:(state)=>{
             state.users = [];
         },
-        setSelectedUser: (state,action:PayloadAction<UserDetails>)=>{
+        setSelectedUser: (state,action:PayloadAction<UserAcount>)=>{
             state.selectedUser = action.payload;
         }
     }

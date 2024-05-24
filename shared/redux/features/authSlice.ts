@@ -5,7 +5,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 interface AuthState {
 	isAuthenticated: boolean;
 	isLoading: boolean;
-	user:UserDetails | null;
+	user:UserAcount | null;
 	token:string | null;
 	refreshToken:string|null;
 }
@@ -31,7 +31,7 @@ const authSlice = createSlice({
 			state.token= access;
 			state.refreshToken=refresh;
 		},
-		setAuth: (state, action: PayloadAction<UserDetails>) => {
+		setAuth: (state, action: PayloadAction<UserAcount>) => {
 			state.isAuthenticated = true;
 			state.user= action.payload;
 			state.isLoading = false;

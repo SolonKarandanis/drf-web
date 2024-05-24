@@ -19,7 +19,7 @@ interface UserModel extends BaseUserModel {
 
 type UserPublic = Pick<UserModel, "id" | "username">;
 
-interface UserDetails extends UserModel{
+interface UserAcount extends UserModel{
     groups:UserGroup[];
     permissions:string[];
 }
