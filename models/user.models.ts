@@ -13,6 +13,7 @@ interface UserModel extends BaseUserModel {
     isStaff:boolean;
     isActive:boolean;
     isVerified:boolean;
+    status: string;
     bio:string;
     details?:UserDetails;
 }
