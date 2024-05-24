@@ -14,6 +14,16 @@ interface UserModel extends BaseUserModel {
     isActive:boolean;
     isVerified:boolean;
     bio:string;
+    details?:UserDetails;
+}
+
+interface UserDetails{
+    userId:number;
+    state?:string;
+    city?:string;
+    address?:string;
+    zip?:string;
+    phone?:string;
 }
 
 
