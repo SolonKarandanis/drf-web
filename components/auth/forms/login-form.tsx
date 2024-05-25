@@ -15,7 +15,6 @@ import {  useState } from "react";
 import { toast } from "react-toastify";
 import { useTranslations } from "next-intl";
 import {signIn} from "next-auth/react"
-import { ErrorResponse } from "@/models/error.models";
 
 type LoginSchema = z.infer<typeof LoginSchema>;
 
@@ -36,10 +35,10 @@ const LoginForm = () => {
         },
     });
 
-    const handleError =(errorResponse:ErrorResponse)=>{
-		const {status, data:{detail}} = errorResponse;
-		toast.error(`(${status}) ${detail}`);
-	}
+    // const handleError =(errorResponse:ErrorResponse)=>{
+	// 	const {status, data:{detail}} = errorResponse;
+	// 	toast.error(`(${status}) ${detail}`);
+	// }
 
     const onSubmit:SubmitHandler<LoginSchema> = async (values: LoginSchema) =>{
         const {username,password} = values;
@@ -48,9 +47,7 @@ const LoginForm = () => {
             password,
             redirect:true,
             callbackUrl:'/'
-        }).catch((error:ErrorResponse) => {
-            handleError(error);
-        });
+        })
         // dispatch(setLoading(true));
         // login(request)
         //     .unwrap()

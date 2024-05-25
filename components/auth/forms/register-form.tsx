@@ -16,7 +16,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { passwordStrength } from "check-password-strength";
 import PasswordStrength from '@/shared/components/password-strength/password-strength';
-import { ErrorResponse } from '@/models/error.models';
+import { ValidationError } from '@/models/error.models';
 import { registerUser } from '@/actions/register-user';
 
 type RegisterSchema = z.infer<typeof RegisterSchema>;
@@ -64,17 +64,23 @@ const RegisterForm = () => {
         setPassStrength(strength.id);
     }, [watch().password]);
 
-    const handleError =(error:ErrorResponse)=>{
-		const {status, data:{detail}} = error;
-		toast.error(`(${status}) ${detail}`);
+    const handleError =(error:ValidationError)=>{
+        console.log(error)
+        switch (error.kind){
+            case "client":
+                toast.error(`${error}`);
+                break;
+            case "backend":
+                const {status, data} = error;
+                toast.error(`(${status}) ${data}`);
+                break;
+        }
 	}
 
     const onSubmit:SubmitHandler<RegisterSchema> = async (values: RegisterSchema) =>{
         const response = await registerUser(values);
-        console.log(response)
         if (response) {
-            // toast.error(response.error);
-            // handleError(response.error);
+            handleError(response);
         } else {
             toast.success(t(`${rform}.SUCCESS.summary`));
             // router.push('/auth/login');

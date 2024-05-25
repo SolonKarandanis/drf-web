@@ -9,7 +9,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoginSchema } from "@/schemas/auth.schemas";
 import * as z from "zod";
-import { ErrorResponse } from '@/models/error.models';
+
 
 
 
@@ -30,10 +30,6 @@ export default function useLogin() {
         },
     });
 
-    const handleError =(error:ErrorResponse)=>{
-		const {status, data:{detail}} = error;
-		toast.error(`(${status}) ${detail}`);
-	}
 
     const onSubmit:SubmitHandler<LoginSchema> = (values: LoginSchema) =>{
         const {username,password} = values;
@@ -50,9 +46,7 @@ export default function useLogin() {
 				setLoginResponseInStorage(loginResponse);
 				dispatch(setTokens(loginResponse));
 			})
-			.catch((error:ErrorResponse) => {
-				handleError(error);
-			});
+			
     };
 
     useEffect(()=>{
@@ -64,9 +58,7 @@ export default function useLogin() {
 				toast.success('Logged in');
 				router.push('/dashboard');
 			})
-			.catch((error:ErrorResponse) => {
-				handleError(error);
-			});
+			
 		}
 		
 	},[token]);

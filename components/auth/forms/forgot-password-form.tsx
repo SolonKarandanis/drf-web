@@ -9,7 +9,6 @@ import { ForgotPasswordSchema } from '@/schemas/auth.schemas';
 import { useEffect, useState } from "react";
 import { passwordStrength } from "check-password-strength";
 import PasswordStrength from '@/shared/components/password-strength/password-strength';
-import { ErrorResponse } from "@/models/error.models";
 import { toast } from "react-toastify";
 import CFormInput from "@/shared/components/form-input/cform-input";
 import CButton from "@/shared/components/button/cbutton";
@@ -32,10 +31,10 @@ const ForgotPasswordForm = () => {
     setPassStrength(strength.id);
   }, [watch().newPassword]);
 
-  const handleError =(error:ErrorResponse)=>{
-		const {status, data:{detail}} = error;
-		toast.error(`(${status}) ${detail}`);
-	}
+  // const handleError =(error:ErrorResponse)=>{
+	// 	const {status, data:{detail}} = error;
+	// 	toast.error(`(${status}) ${detail}`);
+	// }
 
   const onSubmit:SubmitHandler<Inputs> = (values: Inputs) =>{
     const {email,newPassword,confirmPassword} = values;

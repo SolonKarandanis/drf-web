@@ -59,6 +59,10 @@ function getClientLocale(){
     return getCookie('NEXT_LOCALE');
 }
 
+function objectToArrayOfObjects(object:Object){
+    return Object.entries(object).map((e) => ( { [e[0]]: e[1] } ));
+}
+
 export {
     getStorageValue,
     setStorageValue,
@@ -67,5 +71,6 @@ export {
     removeLoginResponseFromStorage,
     getAccessTokenValue,
     getRefreshTokenValue,
-    getClientLocale
+    getClientLocale,
+    objectToArrayOfObjects
 }

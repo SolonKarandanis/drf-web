@@ -15,7 +15,6 @@ import AddressInfo from "../sections/address-info";
 import Credentials from "../sections/credentials";
 import ArrowRight from "@/shared/svg/arrow-right";
 import ArrowLeft from "@/shared/svg/arrow-left";
-import { ErrorResponse } from "@/models/error.models";
 
 
 type Inputs = z.infer<typeof CreateUserSchema>
@@ -119,10 +118,10 @@ const CreateUserForm = () => {
         }
     }
 
-    const handleError =(error:ErrorResponse)=>{
-		const {status, data:{detail}} = error;
-		toast.error(`(${status}) ${detail}`);
-	}
+    // const handleError =(error:ErrorResponse)=>{
+	// 	const {status, data:{detail}} = error;
+	// 	toast.error(`(${status}) ${detail}`);
+	// }
 
     return (
         <section className='inset-0 flex flex-col justify-between p-24 '>
