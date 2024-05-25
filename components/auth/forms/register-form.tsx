@@ -10,7 +10,7 @@ import CFormInput from '@/shared/components/form-input/cform-input';
 import CButton from '@/shared/components/button/cbutton';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-import { useAppDispatch } from '@/shared/redux/hooks';
+// import { useAppDispatch } from '@/shared/redux/hooks';
 import CFormSelect from '@/shared/components/form-select/cform-select';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
@@ -37,7 +37,7 @@ const RegisterForm = () => {
     const rform='REGISTER.FORM';
     const router = useRouter();
     // const [registerUser, { isLoading }] = useRegisterUserMutation();
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
 
     const {
         register,
@@ -45,7 +45,6 @@ const RegisterForm = () => {
         formState: { errors,isSubmitting, isValid },
         watch
     } = useForm<RegisterSchema>({
-        mode: "onChange",
         resolver: zodResolver(RegisterSchema),
         defaultValues: {
             firstName:"",
@@ -72,11 +71,14 @@ const RegisterForm = () => {
 
     const onSubmit:SubmitHandler<RegisterSchema> = async (values: RegisterSchema) =>{
         const response = await registerUser(values);
-        // if (response?.error) {
-        //     toast.error(response.error);
-        // } else {
-        //     toast.success("Joke added!");
-        // }
+        console.log(response)
+        if (response) {
+            // toast.error(response.error);
+            // handleError(response.error);
+        } else {
+            toast.success(t(`${rform}.SUCCESS.summary`));
+            // router.push('/auth/login');
+        }
         // dispatch(setLoading(true));
         // registerUser(request)
 		// 	.unwrap()

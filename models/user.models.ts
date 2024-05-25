@@ -48,6 +48,7 @@ interface ChangePasswordRequest{
 interface CreateUserRequest extends BaseUserModel{
     password:string;
     password2:string;
+    role:string;
 }
 
 interface LoginRequest{
