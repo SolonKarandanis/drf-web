@@ -62,7 +62,7 @@ const RegisterForm = () => {
     useEffect(() => {
         const strength =passwordStrength(watch().password);
         setPassStrength(strength.id);
-    }, [watch().password]);
+    }, [watch]);
 
     const handleError =(error:ValidationError)=>{
         console.log(error)

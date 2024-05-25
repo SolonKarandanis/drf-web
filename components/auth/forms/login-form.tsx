@@ -20,14 +20,15 @@ type LoginSchema = z.infer<typeof LoginSchema>;
 
 
 const LoginForm = () => {
-    const t = useTranslations('LOGIN.FORM');
+    const t = useTranslations();
+    const lform='LOGIN.FORM';
     const router = useRouter();
 	const dispatch = useAppDispatch();
 	const [login, { isLoading }] = useLoginMutation();
 	const [getAccount,{}] =useLazyGetLoggedInUserAccountQuery();
 	const [token,setToken] = useState<string|undefined>(undefined);
     
-    const {register,handleSubmit,formState: { errors },} = useForm<LoginSchema>({
+    const {register,handleSubmit,formState: { errors ,isSubmitting, isValid },} = useForm<LoginSchema>({
         resolver: zodResolver(LoginSchema),
         defaultValues: {
           username: "",
@@ -86,28 +87,28 @@ const LoginForm = () => {
                         type='text'
                         required={true}
                         name='username' 
-                        placeholder={t("LABELS.username")}
+                        placeholder={t(`${lform}.LABELS.username`)}
                         autoComplete="username"
                         className={"w-full !rounded-md"}
                         sectionClassName="col-span-12 xl:col-span-12"
                         props={register("username")}
                         error={errors.username?.message}>
-                            {t("LABELS.username")}
+                            {t(`${lform}.LABELS.username`)}
                     </CFormInput>
                     <CFormInput 
                         type='password'
                         required={true}
                         name='password' 
-                        placeholder={t("LABELS.password")}
+                        placeholder={t(`${lform}.LABELS.password`)}
                         autoComplete="current-password"
                         className={"!rounded-e-none"}
                         sectionClassName="col-span-12 xl:col-span-12"
                         props={register("password")}
                         error={errors.password?.message}>
-                            {t("LABELS.password")}
+                            {t(`${lform}.LABELS.password`)}
                             <Link href='/auth/forgot-password'
                                 className="ml-1 ltr:float-right rtl:float-left text-danger">
-                                {t("LABELS.forget-password")}
+                                {t(`${lform}.LABELS.forget-password`)}
                             </Link>
                     </CFormInput>
                     <div className="col-span-12 mb-2 xl:col-span-12">
@@ -115,7 +116,7 @@ const LoginForm = () => {
                             <div className="form-check !ps-0">
                                 <input className="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
                                 <label className="form-check-label text-[#8c9097] dark:text-white/50 font-normal" htmlFor="defaultCheck1">
-                                    {t("LABELS.remember-password")}
+                                    {t(`${lform}.LABELS.remember-password`)}
                                 </label>
                             </div>
                         </div>
@@ -124,8 +125,12 @@ const LoginForm = () => {
                         <CButton 
                             intent="violet" 
                             size="md" 
-                            type="submit">
-                            {t("BUTTONS.sign-in")}
+                            type="submit"
+                            disabled={isSubmitting || !isValid}>
+                            {isSubmitting ? 
+                                t("GLOBAL.BUTTONS.loading") : 
+                                t(`${lform}.BUTTONS.sign-in`)
+                             }
                         </CButton>
                         {/* <Link href="/components/dashboards/crm/" className="ti-btn ti-btn-primary !bg-primary !text-white !font-medium">Sign In</Link> */}
                     </div>
