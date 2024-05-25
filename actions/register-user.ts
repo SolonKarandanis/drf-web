@@ -38,10 +38,10 @@ export async function registerUser(data:RegisterSchema){
       body: JSON.stringify(request)
     })
     const {status} = response;
-    const bodyJson= await response.json();
-    // console.log(bodyJson);
-    const arrayOfObj = objectToArrayOfObjects(bodyJson);
+
     if(status===400){
+        const bodyJson= await response.json();
+        const arrayOfObj = objectToArrayOfObjects(bodyJson);
         return {
             kind:"backend",
             status,

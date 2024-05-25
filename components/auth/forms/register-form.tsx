@@ -83,7 +83,7 @@ const RegisterForm = () => {
             handleError(response);
         } else {
             toast.success(t(`${rform}.SUCCESS.summary`));
-            // router.push('/auth/login');
+            router.push('/auth/login');
         }
         // dispatch(setLoading(true));
         // registerUser(request)
