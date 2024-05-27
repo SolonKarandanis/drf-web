@@ -65,14 +65,18 @@ const RegisterForm = () => {
     }, [watch]);
 
     const handleError =(error:ValidationError)=>{
-        console.log(error)
         switch (error.kind){
             case "client":
                 toast.error(`${error}`);
                 break;
             case "backend":
                 const {status, data} = error;
-                toast.error(`(${status}) ${data}`);
+                Object.values(data).forEach(dataValue =>{
+                    for (const [key, value] of Object.entries(dataValue)) {
+                        toast.error(`(${status}) ${value}`);
+                    }
+                    
+                })
                 break;
         }
 	}
