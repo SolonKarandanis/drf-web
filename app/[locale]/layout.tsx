@@ -2,15 +2,13 @@ import { locales, type Locale } from "@/utils/locales";
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '@/styles/globals.scss'
-// import '@pigment-css/react/styles.css';
 import CustomProvider from '@/shared/redux/provider'
 import { FC } from "react";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import AuthProvider from "@/components/auth/auth-provider";
-import { ToastContainer } from "react-toastify";
 import { ProgressBar } from "@/shared/layout-components/progress-bar/progress-bar";
-import RootStyleRegistry from "./style-registry";
+import ToastProvider from "@/shared/react-tostify/toast-provider";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -35,15 +33,16 @@ const RootLayout:FC<Props>= async ({children,params:{locale}}) => {
       <body className={inter.className}>
         <AuthProvider>
           <CustomProvider>
-            <ToastContainer />;
-            {/* <Setup /> */}
-            <NextIntlClientProvider messages={messages}>
-              <ProgressBar className="fixed top-0 z-50 h-1 bg-sky-500" >
-                {/* <RootStyleRegistry> */}
-                  {children}
-                {/* </RootStyleRegistry> */}
-              </ProgressBar>
-            </NextIntlClientProvider>
+            <ToastProvider>
+              {/* <Setup /> */}
+              <NextIntlClientProvider messages={messages}>
+                <ProgressBar className="fixed top-0 z-50 h-1 bg-sky-500" >
+                  {/* <RootStyleRegistry> */}
+                    {children}
+                  {/* </RootStyleRegistry> */}
+                </ProgressBar>
+              </NextIntlClientProvider>
+            </ToastProvider>
           </CustomProvider>
         </AuthProvider>
       </body>

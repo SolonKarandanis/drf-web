@@ -112,9 +112,6 @@ Background Image
 @tailwind components;
 @tailwind utilities;
 
-/* Panda Css */
-/* @layer reset, base, tokens, recipes, utilities; */
-/* End Panda Css */
 
 @layer base {
     :root {
@@ -184,14 +181,7 @@ Background Image
 
 /* End Tailwind Styles */
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
+
 
 
 :root {

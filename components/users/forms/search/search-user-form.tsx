@@ -21,6 +21,7 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/shared/shadcn/components/ui/select"
+  import { toast } from 'react-toastify';
 
 
 type Inputs = z.infer<typeof UserSearchSchema>
@@ -42,6 +43,7 @@ const SearchUserForm:FC<Props> = ({}) => {
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         // console.log(await onDataAction(data));
+        toast.success('success');
     }
 
     return (
