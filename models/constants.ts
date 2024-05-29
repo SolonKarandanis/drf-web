@@ -1,7 +1,7 @@
 enum Role{
-    ADMIN='admin',
-    BUYER='buyer',
-    SELLER='seller',
+    ADMIN='ADMIN',
+    BUYER='Buyer',
+    SUPPLIER='Supplier',
 }
 
 enum Perimissions{
