@@ -117,5 +117,16 @@ enum Perimissions{
     CHANGE_EVENT='change_event',
     DELETE_EVENT='delete_event',
     VIEW_EVENT='view_event',
-
+    ADD_USER_DETAILS='add_userdetails',
+    CHANGE_USER_DETAILS='change_userdetails',
+    DELETE_USER_DETAILS='delete_userdetails',
+    VIEW_USER_DETAILS='view_userdetails',
+    ADD_SOCIAL='add_social',
+    CHANGE_SOCIAL='change_social',
+    DELETE_SOCIAL='delete_social',
+    VIEW_SOCIAL='view_social',
+    ADD_SOCIAL_USER='add_socialuser',
+    CHANGE_SOCIAL_USER='change_socialuser',
+    DELETE_SOCIAL_USER='delete_socialuser',
+    VIEW_SOCIAL_USER='view_socialuser',
 }
