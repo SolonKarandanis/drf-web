@@ -1,4 +1,5 @@
 import { UserSearchResponse } from '@/models/search.models';
+import { UserAcount, UserModel } from '@/models/user.models';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 

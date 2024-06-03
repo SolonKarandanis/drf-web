@@ -21,7 +21,9 @@ const usersApiSlice = apiSlice.injectEndpoints({
 			}
 			
 		}),
-    })
+    }),
+    // @ts-ignore
+	overrideExisting: module.hot?.status() === "apply",
 })
 
 
