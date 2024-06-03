@@ -25,6 +25,7 @@ import { toast } from 'react-toastify';
 import { useAppDispatch } from "@/shared/redux/hooks";
 import { useSearchUsersMutation } from '@/shared/redux/features/users/usersApiSlice';
 import { UserSearchRequest, UserSearchResponse } from '@/models/search.models';
+import { UserStatus } from '@/models/user.models';
 
 
 type Inputs = z.infer<typeof UserSearchSchema>
@@ -48,13 +49,13 @@ const SearchUserForm:FC<Props> = ({}) => {
     })
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        console.log(data)
+        const {username,email,name,role,status} = data;
         const request:UserSearchRequest={
-            // username,
-            // email,
-            // name,
-            // role,
-            // status,
+            username,
+            email,
+            name,
+            role,
+            status: UserStatus[status as keyof typeof UserStatus],
             paging:{
                 page: 1,
                 limit: 10
