@@ -6,29 +6,39 @@ import type {
 } from '@reduxjs/toolkit/query';
 import {  logout, setAccesToken } from './features/authSlice';
 import { Mutex } from 'async-mutex';
-import { getAccessTokenValue, removeLoginResponseFromStorage, setStorageValue } from '@/utils/functions';
+import { removeLoginResponseFromStorage, setStorageValue } from '@/utils/functions';
 import { ApiControllers } from './api/ApiControllers';
+import { useSession } from 'next-auth/react';
+import { getAccessToken } from '@/utils/user-utils';
 
 const mutex = new Mutex();
-const token = getAccessTokenValue();
-let headers;
 
-if(token){
-	headers = {Authorization: `Bearer ${getAccessTokenValue()}`}
-}
-
-const baseQuery = fetchBaseQuery({
-	baseUrl: `${process.env.NEXT_PUBLIC_HOST}/api`,
-	credentials: 'include',
-	headers,
-});
 
 const baseQueryWithReauth: BaseQueryFn<
 	string | FetchArgs,
 	unknown,
 	FetchBaseQueryError
 > = async (args, api, extraOptions) => {
+	const {data} = useSession();
+	console.log('apiSlice')
+	console.log(data)
+	let headers;
+
+	if(data){
+		const loggedUser = data.user!;
+		const accessToken =getAccessToken(loggedUser);
+		headers = {Authorization: `Bearer ${accessToken}`}
+	}
+	
 	await mutex.waitForUnlock();
+	
+
+	const baseQuery = fetchBaseQuery({
+		baseUrl: `${process.env.NEXT_PUBLIC_HOST}/api`,
+		credentials: 'include',
+		headers,
+	});
+
 	let result = await baseQuery(args, api, extraOptions);
 
 	if (result.error && result.error.status === 401) {

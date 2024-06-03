@@ -23,13 +23,19 @@ const usersSlice = createSlice({
 	initialState,
 	reducers:{
         setUsers:(state, action:PayloadAction<UserSearchResponse>) =>{
-
+            state.users = action.payload.data
+            state.isLoading = false
         },
         resetUsers:(state)=>{
             state.users = [];
+            state.isLoading = false
         },
         setSelectedUser: (state,action:PayloadAction<UserAcount>)=>{
             state.selectedUser = action.payload;
+            state.isLoading = false
+        },
+        setError: (state)=>{
+            state.isLoading = false
         }
     }
 });
