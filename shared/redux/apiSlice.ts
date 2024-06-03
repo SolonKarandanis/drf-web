@@ -6,7 +6,6 @@ import type {
 } from '@reduxjs/toolkit/query';
 import {  logout, setAccesToken } from './features/authSlice';
 import { Mutex } from 'async-mutex';
-import { removeLoginResponseFromStorage, setStorageValue } from '@/utils/functions';
 import { ApiControllers } from './api/ApiControllers';
 import { useSession } from 'next-auth/react';
 import { getAccessToken } from '@/utils/user-utils';
@@ -55,14 +54,10 @@ const baseQueryWithReauth: BaseQueryFn<
 				);
 				const data:RefreshResponse = refreshResult.data as RefreshResponse;
 				if (data) {
-					const{access}=data;
 					api.dispatch(setAccesToken(data));
-					setStorageValue('access',access);
-
 					result = await baseQuery(args, api, extraOptions);
 				} else {
 					api.dispatch(logout());
-					removeLoginResponseFromStorage();
 				}
 			} finally {
 				release();

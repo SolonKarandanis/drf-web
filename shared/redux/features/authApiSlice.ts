@@ -5,9 +5,6 @@ import { apiSlice } from '../apiSlice';
 
 const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        getUser: builder.query<UserAcount, void>({
-			query: (userId) => `${ApiControllers.USERS}/${userId}`,
-		}),
         getLoggedInUserAccount: builder.query<UserAcount, string| undefined>({
 			query(token?:string) {
 				if(token){
@@ -22,9 +19,7 @@ const authApiSlice = apiSlice.injectEndpoints({
 			  }
 			
 		}),
-        getUsers: builder.query<UserModel[], {page:number,size:number}>({
-			query: ({page,size}) => `${ApiControllers.USERS}/`,
-		}),
+        
         login: builder.mutation({
 			query: ({ username, password }:LoginRequest)=>{
 				return {
@@ -85,9 +80,7 @@ const authApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-	useLazyGetUserQuery,
 	useLazyGetLoggedInUserAccountQuery,
-	useLazyGetUsersQuery,
 	useLoginMutation,
 	useRegisterUserMutation,
 	useVerifyMutation,
