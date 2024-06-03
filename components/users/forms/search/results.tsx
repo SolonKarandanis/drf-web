@@ -1,0 +1,47 @@
+"use client"
+
+import { DataTable } from '@/shared/components/data-table/data-table'
+import React from 'react'
+import { columns } from './columns'
+
+const Results = () => {
+    const DATA =[
+        {
+          "id":1,
+          "username":"admin",
+          "first_name":"admin",
+          "last_name":"admin",
+          "email":"skarandanis@gmail.com",
+          "created_date":"2023-11-27 07:45:50.195 +0200"
+        },
+        {
+          "id":2,
+          "username":"skaran",
+          "first_name":"Solon",
+          "last_name":"Karandanis",
+          "email":"skarandanis2@gmail.com",
+          "created_date":"2023-11-27 07:58:00.758 +0200"
+        },
+        {
+          "id":3,
+          "username":"stratos",
+          "first_name":"Stratos",
+          "last_name":"Karandanis",
+          "email":"skarandanis3@gmail.com",
+          "created_date":"2023-11-27 07:59:16.353 +0200"
+        },
+        {
+          "id":4,
+          "username":"panos",
+          "first_name":"Panagiotis",
+          "last_name":"Karandanis",
+          "email":"skarandanis4@gmail.com",
+          "created_date":"2023-11-27 07:59:33.343 +0200"
+        },
+    ]
+    return (
+        <DataTable columns={columns}  data={DATA}/>
+    )
+}
+
+export default Results
