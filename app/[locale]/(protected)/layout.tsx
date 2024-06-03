@@ -1,6 +1,8 @@
-import RequireAuth  from '@/components/utils/RequireAuth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/options';
+import SetTokensLocalStorage from '@/components/auth/set-tokens-localstorage';
 import ContentLayout from '@/shared/layout-components/layout/content-layout';
 import { Locale, locales } from '@/utils/locales';
+import { getServerSession } from 'next-auth';
 import { unstable_setRequestLocale } from 'next-intl/server';
 
 type Props = {
@@ -11,14 +13,27 @@ type Props = {
 };
 
 
-export default function Layout({ children,params:{locale} }: Props) {
+export default async function Layout({ children,params:{locale} }: Props) {
+	const session = await getServerSession(authOptions);
+	const user =session?.user
+	console.log(user)
 	unstable_setRequestLocale(locale);
-	return (
-		// <RequireAuth>
+
+	if(user){
+		const access = user.access;
+		const refresh = user.refresh;
+
+		return (
 			<ContentLayout>
+				<SetTokensLocalStorage access={access} refresh={refresh} />
 				{children}
 			</ContentLayout>
-		// </RequireAuth>
+		)
+	}
+	return (
+		<ContentLayout>
+			{children}
+		</ContentLayout>
 	);
 }
 

@@ -7,11 +7,15 @@ import type {
 import {  logout, setAccesToken } from './features/authSlice';
 import { Mutex } from 'async-mutex';
 import { ApiControllers } from './api/ApiControllers';
-import { useSession } from 'next-auth/react';
-import { getAccessToken } from '@/utils/user-utils';
 import { RefreshResponse } from '@/models/user.models';
+import { 
+	getAccessTokenValue, 
+	removeLoginResponseFromStorage, 
+	setStorageValue 
+} from '@/utils/functions';
 
 const mutex = new Mutex();
+
 
 
 const baseQueryWithReauth: BaseQueryFn<
@@ -19,15 +23,11 @@ const baseQueryWithReauth: BaseQueryFn<
 	unknown,
 	FetchBaseQueryError
 > = async (args, api, extraOptions) => {
-	const {data} = useSession();
-	console.log('apiSlice')
-	console.log(data)
 	let headers;
 
-	if(data){
-		const loggedUser = data.user!;
-		const accessToken =getAccessToken(loggedUser);
-		headers = {Authorization: `Bearer ${accessToken}`}
+	const token = getAccessTokenValue();
+	if(token){
+		headers = {Authorization: `Bearer ${token}`}
 	}
 	
 	await mutex.waitForUnlock();
@@ -55,11 +55,11 @@ const baseQueryWithReauth: BaseQueryFn<
 				);
 				const data:RefreshResponse = refreshResult.data as RefreshResponse;
 				if (data) {
+					const{access}=data;
 					api.dispatch(setAccesToken(data));
+					setStorageValue('access',access);
 					result = await baseQuery(args, api, extraOptions);
-				} else {
-					api.dispatch(logout());
-				}
+				} 
 			} finally {
 				release();
 			}

@@ -1,10 +1,8 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import Accordion from "@/shared/components/accordion/accordion";
 import Card from "@/shared/components/card/card";
 import List from "@/shared/components/list/list";
 import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 import { Metadata } from "next";
-import { getServerSession } from "next-auth";
 
 
 
@@ -20,8 +18,7 @@ export const metadata:Metadata={
 
 
 const Page = async () => {
-  const session = await getServerSession(authOptions);
-  console.log(session?.user)
+
   const olderDate = new Date('2022-10-31');
   const currentDate = new Date('2022-11-01');
 

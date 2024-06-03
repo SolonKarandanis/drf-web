@@ -1,3 +1,5 @@
+import { LoginResponse } from "@/models/user.models";
+
 function getStorageValue(key:string) {
     // getting stored value
     if (typeof window !== "undefined") {
