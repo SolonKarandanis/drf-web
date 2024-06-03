@@ -1,18 +1,18 @@
-interface BaseUserModel{
+export interface BaseUserModel{
     username:string;
 	firstName: string;
 	lastName: string;
 	email: string;
 }
 
-enum UserStatus{
+export enum UserStatus{
     UNVERIFIED='user.unverified',
     ACTIVE='user.active',
     DEACTIVATED='user.deactivated',
     DELETED='user.deleted',
 } 
 
-interface UserModel extends BaseUserModel {
+export interface UserModel extends BaseUserModel {
     id:number;
     uuid:string;
     createdDate:string;
@@ -25,7 +25,7 @@ interface UserModel extends BaseUserModel {
     details?:UserDetails;
 }
 
-interface UserDetails{
+export interface UserDetails{
     userId:number;
     state?:string;
     city?:string;
@@ -35,37 +35,37 @@ interface UserDetails{
 }
 
 
-type UserPublic = Pick<UserModel, "id" | "username">;
+export type UserPublic = Pick<UserModel, "id" | "username">;
 
-interface UserAcount extends UserModel{
+export interface UserAcount extends UserModel{
     groups:UserGroup[];
     permissions:string[];
 }
 
-interface UserGroup{
+export interface UserGroup{
     id:number;
     name:string;
 }
 
-interface ChangePasswordRequest{
+export interface ChangePasswordRequest{
     current_password: string;
     new_password: string;
 }
 
-interface CreateUserRequest extends BaseUserModel{
+export interface CreateUserRequest extends BaseUserModel{
     password:string;
     password2:string;
     role:string;
 }
 
-interface LoginRequest{
+export interface LoginRequest{
     username:string;
     password:string;
 }
 
-interface LoginResponse{
+export interface LoginResponse{
     access:string;
     refresh:string;
 }
 
-type RefreshResponse = Pick<LoginResponse, "access">;
+export type RefreshResponse = Pick<LoginResponse, "access">;

@@ -9,6 +9,7 @@ import { Mutex } from 'async-mutex';
 import { ApiControllers } from './api/ApiControllers';
 import { useSession } from 'next-auth/react';
 import { getAccessToken } from '@/utils/user-utils';
+import { RefreshResponse } from '@/models/user.models';
 
 const mutex = new Mutex();
 

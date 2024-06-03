@@ -1,6 +1,7 @@
 import { UserSearchRequest } from "@/models/search.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
+import { UserAcount, UserModel } from "@/models/user.models";
 
 const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: builder =>({
@@ -11,11 +12,11 @@ const usersApiSlice = apiSlice.injectEndpoints({
 			query: ({page,size}) => `${ApiControllers.USERS}/`,
 		}),
         searchUsers: builder.mutation({
-			query: ({ username,  }:UserSearchRequest)=>{
+			query: ( searchRequest:UserSearchRequest)=>{
 				return {
-					url: `${ApiControllers.AUTH}/`,
+					url: `${ApiControllers.USERS}/search`,
 					method: 'POST',
-					body: { username },
+					body: searchRequest ,
 				}
 			}
 			
@@ -27,4 +28,5 @@ const usersApiSlice = apiSlice.injectEndpoints({
 export const {
 	useLazyGetUserQuery,
     useLazyGetUsersQuery,
+    useSearchUsersMutation,
 } = usersApiSlice;

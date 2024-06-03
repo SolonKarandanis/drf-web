@@ -1,3 +1,5 @@
+import { UserModel, UserStatus } from "./user.models";
+
 export enum SortDirection {
     ASC = 'ASC',
     DESC = 'DESC',
@@ -19,7 +21,7 @@ export interface UserSearchRequest extends SearchRequest {
     name?: string;
     email?: string;
     role?:string;
-    status?:string;
+    status?:UserStatus;
 }
 
 export interface SearchResponse{

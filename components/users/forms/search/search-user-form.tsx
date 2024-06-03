@@ -20,8 +20,10 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-  } from "@/shared/shadcn/components/ui/select"
-  import { toast } from 'react-toastify';
+} from "@/shared/shadcn/components/ui/select"
+import { toast } from 'react-toastify';
+import { useAppDispatch } from "@/shared/redux/hooks";
+import { useSearchUsersMutation } from '@/shared/redux/features/users/usersApiSlice';
 
 
 type Inputs = z.infer<typeof UserSearchSchema>
@@ -31,6 +33,8 @@ interface Props{
 }
 
 const SearchUserForm:FC<Props> = ({}) => {
+    const dispatch = useAppDispatch();
+    const [search, { isLoading, }] = useSearchUsersMutation();
     const form = useForm<Inputs>({
         resolver: zodResolver(UserSearchSchema),
         defaultValues:{
