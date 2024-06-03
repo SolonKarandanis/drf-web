@@ -24,12 +24,13 @@ import {
 import { toast } from 'react-toastify';
 import { useAppDispatch } from "@/shared/redux/hooks";
 import { useSearchUsersMutation } from '@/shared/redux/features/users/usersApiSlice';
+import { UserSearchRequest, UserSearchResponse } from '@/models/search.models';
 
 
 type Inputs = z.infer<typeof UserSearchSchema>
 
 interface Props{
-    // onDataAction: (data:any) => Promise<void>;
+
 }
 
 const SearchUserForm:FC<Props> = ({}) => {
@@ -41,13 +42,28 @@ const SearchUserForm:FC<Props> = ({}) => {
             email:"",
             name:"",
             username:"",
-            role:""
+            role:"",
+            status:"ACTIVE"
         }
     })
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        // console.log(await onDataAction(data));
-        toast.success('success');
+        console.log(data)
+        const request:UserSearchRequest={
+            // username,
+            // email,
+            // name,
+            // role,
+            // status,
+            paging:{
+                page: 1,
+                limit: 10
+            }
+        }
+        search(request)
+        .then((response ) => {
+            console.log(response)
+        })
     }
 
     return (

@@ -1,3 +1,4 @@
+import { CreateUserRequest, LoginRequest, UserAcount } from '@/models/user.models';
 import { ApiControllers } from '../api/ApiControllers';
 import { apiSlice } from '../apiSlice';
 
