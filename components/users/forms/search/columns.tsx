@@ -14,10 +14,10 @@ import {
 
 export type UserTableRow = {
     id: number
-    first_name: string
-    last_name: string
+    firstName: string
+    lastName: string
     email: string
-    created_date: string
+    createdDate: string
 }
 
 
@@ -32,11 +32,11 @@ export const columns: ColumnDef<UserTableRow>[] =[
     },
     {
         header:"First Name",
-        accessorKey:"first_name"
+        accessorKey:"firstName"
     },
     {
         header:"Last Name",
-        accessorKey:"last_name"
+        accessorKey:"lastName"
     },
     {
         header:"Email",
@@ -44,9 +44,9 @@ export const columns: ColumnDef<UserTableRow>[] =[
     },
     {
         header:"Created",
-        accessorKey:"created_date",
+        accessorKey:"createdDate",
         cell: ({ row }) => {
-            const date = new Date(row.getValue('created_date'))
+            const date = new Date(row.getValue('createdDate'))
             const formatted = date.toLocaleDateString()
             return <div className='font-medium'>{formatted}</div>
         }
@@ -59,9 +59,9 @@ export const columns: ColumnDef<UserTableRow>[] =[
             return (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant='ghost' className='h-8 w-8 p-0'>
+                    <Button variant='ghost' className='w-8 h-8 p-0'>
                       <span className='sr-only'>Open menu</span>
-                      <MoreHorizontal className='h-4 w-4' />
+                      <MoreHorizontal className='w-4 h-4' />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align='end'>

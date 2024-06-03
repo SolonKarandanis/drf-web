@@ -43,6 +43,10 @@ const usersSlice = createSlice({
         resetUsers:(state)=>{
             state.users = [];
             state.isLoading = false
+            state.count = null
+            state.pages = null
+            state.next = null
+            state.previous = null
         },
         setSelectedUser: (state,action:PayloadAction<UserAcount>)=>{
             state.selectedUser = action.payload;

@@ -90,9 +90,9 @@ export function DataTable<TData, TValue>({
                 <div className='flex items-center py-4'>
                     <Input
                         placeholder='Search by name...'
-                        value={(table.getColumn('first_name')?.getFilterValue() as string) ?? ''}
+                        value={(table.getColumn('firstName')?.getFilterValue() as string) ?? ''}
                         onChange={event =>
-                            table.getColumn('first_name')?.setFilterValue(event.target.value)
+                            table.getColumn('firstName')?.setFilterValue(event.target.value)
                         }
                         className='max-w-sm'
                     />
@@ -143,7 +143,7 @@ export function DataTable<TData, TValue>({
                 </div>
             </div>
             {/* Table */}
-            <div className='rounded-md border' ref={printDocumentRef} id='table'>
+            <div className='border rounded-md' ref={printDocumentRef} id='table'>
                 <Table >
                     <TableHeader>
                         {table.getHeaderGroups().map(headerGroup => (
@@ -194,7 +194,7 @@ export function DataTable<TData, TValue>({
                 </Table>
             </div>
             {/* Pagination */}
-            <div className='flex items-center justify-end space-x-2 py-4'>
+            <div className='flex items-center justify-end py-4 space-x-2'>
                 <Button
                     variant='outline'
                     size='sm'

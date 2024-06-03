@@ -1,4 +1,5 @@
 import NextAuth from "next-auth";
+import { UserAcount } from "./models/user.models";
 
 declare module "next-auth" {
     
