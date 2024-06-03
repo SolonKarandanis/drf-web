@@ -1,3 +1,4 @@
+import { UserSearchRequest } from "@/models/search.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
 
@@ -8,6 +9,16 @@ const usersApiSlice = apiSlice.injectEndpoints({
 		}),
         getUsers: builder.query<UserModel[], {page:number,size:number}>({
 			query: ({page,size}) => `${ApiControllers.USERS}/`,
+		}),
+        searchUsers: builder.mutation({
+			query: ({ username,  }:UserSearchRequest)=>{
+				return {
+					url: `${ApiControllers.AUTH}/`,
+					method: 'POST',
+					body: { username },
+				}
+			}
+			
 		}),
     })
 })

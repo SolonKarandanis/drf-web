@@ -5,6 +5,13 @@ interface BaseUserModel{
 	email: string;
 }
 
+enum UserStatus{
+    UNVERIFIED='user.unverified',
+    ACTIVE='user.active',
+    DEACTIVATED='user.deactivated',
+    DELETED='user.deleted',
+} 
+
 interface UserModel extends BaseUserModel {
     id:number;
     uuid:string;
@@ -13,7 +20,7 @@ interface UserModel extends BaseUserModel {
     isStaff:boolean;
     isActive:boolean;
     isVerified:boolean;
-    status: string;
+    status: UserStatus;
     bio:string;
     details?:UserDetails;
 }
