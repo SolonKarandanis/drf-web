@@ -1,12 +1,17 @@
 {
   "extends": [
     "next/core-web-vitals",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended"
   ],
   "rules":{
     "no-empty-function": "off",
     "no-dupe-class-members":"off",
     "react/no-unknown-property":"off",
     "no-unused-vars":"off"
-  }
+  },
+  "plugins": [
+    "@tanstack/query"
+  ]
 }
