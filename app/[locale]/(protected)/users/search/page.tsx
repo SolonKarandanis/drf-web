@@ -16,11 +16,6 @@ export const metadata:Metadata={
 
 const SearchUsersPage = () => {
 
-  // const onDataAction = async (data: any) => {
-  //   "use server"
-  //   console.log(data);
-  // }  
-
   const DATA =[
     {
       "id":1,

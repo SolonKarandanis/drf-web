@@ -72,7 +72,6 @@ const SearchUserForm:FC<Props> = ({}) => {
         .unwrap()
         .then((response:UserSearchResponse ) => {
             dispatch(setUsers(response));
-            console.log(response)
         })
         .catch((error:ErrorResponse) => {
             handleError(error);
