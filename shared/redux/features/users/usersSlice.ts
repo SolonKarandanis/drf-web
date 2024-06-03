@@ -7,6 +7,10 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 interface UsersState {
 	users:UserModel[];
+    count: number| null;
+    pages:number| null;
+    next:number| null;
+    previous:number| null;
 	isLoading: boolean;
 	selectedUser:UserAcount | null;
     error:string| null;
@@ -14,6 +18,10 @@ interface UsersState {
 
 const initialState = {
 	users: [],
+    count: null,
+    pages: null,
+    next: null,
+    previous: null,
 	isLoading: false,
 	selectedUser:null,
 	error:null,
@@ -24,7 +32,12 @@ const usersSlice = createSlice({
 	initialState,
 	reducers:{
         setUsers:(state, action:PayloadAction<UserSearchResponse>) =>{
-            state.users = action.payload.data
+            const payload =action.payload
+            state.users = payload.data
+            state.count = payload.count
+            state.pages = payload.pages
+            state.next = payload.next
+            state.previous = payload.previous
             state.isLoading = false
         },
         resetUsers:(state)=>{

@@ -20,7 +20,7 @@ export interface UserSearchRequest extends SearchRequest {
     username?: string;
     name?: string;
     email?: string;
-    role?:string;
+    role:number;
     status?:UserStatus;
 }
 
@@ -28,6 +28,7 @@ export interface SearchResponse{
     count: number;
     previous: number;
     next: number;
+    pages: number;
 }
 
 export interface UserSearchResponse extends SearchResponse{

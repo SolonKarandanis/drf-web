@@ -27,6 +27,7 @@ import { useSearchUsersMutation } from '@/shared/redux/features/users/usersApiSl
 import { UserSearchRequest, UserSearchResponse } from '@/models/search.models';
 import { UserStatus } from '@/models/user.models';
 import { ErrorResponse } from '@/models/error.models';
+import { setUsers } from '@/shared/redux/features/users/usersSlice';
 
 
 type Inputs = z.infer<typeof UserSearchSchema>
@@ -44,7 +45,7 @@ const SearchUserForm:FC<Props> = ({}) => {
             email:"",
             name:"",
             username:"",
-            role:"",
+            role:0,
             status:"ACTIVE"
         }
     })
@@ -68,7 +69,9 @@ const SearchUserForm:FC<Props> = ({}) => {
             }
         }
         search(request)
-        .then((response ) => {
+        .unwrap()
+        .then((response:UserSearchResponse ) => {
+            dispatch(setUsers(response));
             console.log(response)
         })
         .catch((error:ErrorResponse) => {
@@ -132,7 +135,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                         render={({ field }) => (
                         <FormItem data-testid="role">
                             <FormLabel>User Role</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <Select onValueChange={field.onChange} defaultValue="">
                                 <FormControl>
                                     <SelectTrigger>
                                         <SelectValue placeholder="Select a role" />
@@ -151,8 +154,12 @@ const SearchUserForm:FC<Props> = ({}) => {
                
                 <div className='pt-5 mt-8' data-testid="buttons">
                     <div className='flex justify-between'>
-                        <Button type="submit" variant="outline">Search</Button>
-                        <Button type="reset" variant="destructive">Clear</Button>
+                        <Button type="submit" variant="outline">
+                            Search
+                        </Button>
+                        <Button type="reset" variant="destructive">
+                            Clear
+                        </Button>
                     </div>
                 </div>
             </form>
