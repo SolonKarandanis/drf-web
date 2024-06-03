@@ -8,11 +8,6 @@ import { LoginSchema } from "@/schemas/auth.schemas";
 import CForm from "@/shared/components/form/cform";
 import CFormInput from "@/shared/components/form-input/cform-input";
 import CButton from "@/shared/components/button/cbutton";
-import { useRouter } from 'next/navigation';
-import { useAppDispatch } from "@/shared/redux/hooks";
-import { useLazyGetLoggedInUserAccountQuery, useLoginMutation } from "@/shared/redux/features/authApiSlice";
-import {  useState } from "react";
-import { toast } from "react-toastify";
 import { useTranslations } from "next-intl";
 import {signIn} from "next-auth/react"
 
@@ -22,11 +17,6 @@ type LoginSchema = z.infer<typeof LoginSchema>;
 const LoginForm = () => {
     const t = useTranslations();
     const lform='LOGIN.FORM';
-    const router = useRouter();
-	const dispatch = useAppDispatch();
-	const [login, { isLoading }] = useLoginMutation();
-	const [getAccount,{}] =useLazyGetLoggedInUserAccountQuery();
-	const [token,setToken] = useState<string|undefined>(undefined);
     
     const {register,handleSubmit,formState: { errors ,isSubmitting, isValid },} = useForm<LoginSchema>({
         resolver: zodResolver(LoginSchema),
@@ -36,10 +26,6 @@ const LoginForm = () => {
         },
     });
 
-    // const handleError =(errorResponse:ErrorResponse)=>{
-	// 	const {status, data:{detail}} = errorResponse;
-	// 	toast.error(`(${status}) ${detail}`);
-	// }
 
     const onSubmit:SubmitHandler<LoginSchema> = async (values: LoginSchema) =>{
         const {username,password} = values;
@@ -49,18 +35,6 @@ const LoginForm = () => {
             redirect:true,
             callbackUrl:'/'
         })
-        // dispatch(setLoading(true));
-        // login(request)
-        //     .unwrap()
-			// .then((loginResponse:LoginResponse) => {
-			// 	const {access} = loginResponse;
-			// 	setToken(access);
-			// 	setLoginResponseInStorage(loginResponse);
-			// 	dispatch(setTokens(loginResponse));
-			// })
-			// .catch((error:ErrorResponse) => {
-			// 	handleError(error);
-			// });
     }
 
     // useEffect(()=>{

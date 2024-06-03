@@ -26,6 +26,7 @@ import { useAppDispatch } from "@/shared/redux/hooks";
 import { useSearchUsersMutation } from '@/shared/redux/features/users/usersApiSlice';
 import { UserSearchRequest, UserSearchResponse } from '@/models/search.models';
 import { UserStatus } from '@/models/user.models';
+import { ErrorResponse } from '@/models/error.models';
 
 
 type Inputs = z.infer<typeof UserSearchSchema>
@@ -48,6 +49,11 @@ const SearchUserForm:FC<Props> = ({}) => {
         }
     })
 
+    const handleError =(errorResponse:ErrorResponse)=>{
+		const {status, data:{detail}} = errorResponse;
+		toast.error(`(${status}) ${detail}`);
+	}
+
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         const {username,email,name,role,status} = data;
         const request:UserSearchRequest={
@@ -65,6 +71,9 @@ const SearchUserForm:FC<Props> = ({}) => {
         .then((response ) => {
             console.log(response)
         })
+        .catch((error:ErrorResponse) => {
+            handleError(error);
+        });
     }
 
     return (
