@@ -1,9 +1,9 @@
 'use client';
 
-import { useRef ,useEffect} from 'react'
+import { useRef ,useEffect, useState} from 'react'
 import { makeStore,AppStore } from './store';
 import { Provider } from 'react-redux';
-import { persistStore } from "redux-persist";
+import { Persistor, persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 
 interface Props {
@@ -16,11 +16,15 @@ export default function CustomProvider({ children }: Props) {
         // Create the store instance the first time this renders
         storeRef.current = makeStore()
     }
-    // useEffect(() =>{
 
-    // },[])
-    const persistore = persistStore(storeRef.current);
+    const persistore = useRef<Persistor>()
+    if(!persistore.current){
+        persistore.current= persistStore(storeRef.current)
+    }
+
     return <Provider store={storeRef.current}>
-        <PersistGate persistor={persistore}>{children}</PersistGate>
+        <PersistGate persistor={persistore.current}>
+            {children}
+        </PersistGate>
     </Provider>
 }
