@@ -27,7 +27,7 @@ import { useSearchUsersMutation } from '@/shared/redux/features/users/usersApiSl
 import { UserSearchRequest, UserSearchResponse } from '@/models/search.models';
 import { UserStatus } from '@/models/user.models';
 import { ErrorResponse } from '@/models/error.models';
-import { setUsers } from '@/shared/redux/features/users/usersSlice';
+import { setUsers,resetUsers } from '@/shared/redux/features/users/usersSlice';
 import { useTranslations } from 'next-intl';
 
 
@@ -78,6 +78,10 @@ const SearchUserForm:FC<Props> = ({}) => {
         .catch((error:ErrorResponse) => {
             handleError(error);
         });
+    }
+
+    const clear =() =>{
+        dispatch(resetUsers())
     }
 
     return (
@@ -168,7 +172,8 @@ const SearchUserForm:FC<Props> = ({}) => {
                         <Button 
                             type="reset" 
                             variant="destructive"
-                            disabled={isLoading}>
+                            disabled={isLoading}
+                            onClick={clear}>
                             {t(`GLOBAL.BUTTONS.reset`)}
                         </Button>
                     </div>
