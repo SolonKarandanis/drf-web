@@ -11,6 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/shared/shadcn/components/ui/dropdown-menu'
+import { VariantProps, cva } from 'class-variance-authority'
 
 export type UserTableRow = {
     id: number
@@ -20,6 +21,23 @@ export type UserTableRow = {
     createdDate: string
 }
 
+const userStatus = new Map<string, string>([
+  ["user.unverified","Unverified"],
+  ["user.active","Active"],
+  ["user.deactivated","Deactivated"],
+  ["user.deleted","Deleted"],
+]);
+
+const badgeVariants = cva('text-white badge',{
+  variants:{
+    intent:{
+      Unverified:'bg-primary',
+      Deactivated:'bg-warning',
+      Active:'bg-success',
+      Deleted:'bg-danger',
+    }, 
+  }
+});
 
 export const columns: ColumnDef<UserTableRow>[] =[
     {
@@ -37,6 +55,15 @@ export const columns: ColumnDef<UserTableRow>[] =[
     {
         header:"Last Name",
         accessorKey:"lastName"
+    },
+    {
+      header:"Status",
+      accessorKey:"status",
+      cell: ({ row }) => {
+        const status = row.getValue('status') as string;
+        const statusLabel = userStatus.get(status) as VariantProps<typeof badgeVariants>["intent"];
+        return <span className={badgeVariants({intent:statusLabel})}>{statusLabel}</span>
+      }
     },
     {
         header:"Email",
