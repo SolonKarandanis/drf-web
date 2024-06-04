@@ -1,4 +1,4 @@
-import { UserSearchResponse } from '@/models/search.models';
+import { Paging, UserSearchResponse } from '@/models/search.models';
 import { UserAcount, UserModel } from '@/models/user.models';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
@@ -11,10 +11,16 @@ interface UsersState {
     pages:number| null;
     next:number| null;
     previous:number| null;
-	isLoading: boolean;
+    tableSearchField:string;
+    paging:Paging;
 	selectedUser:UserAcount | null;
     error:string| null;
 }
+
+const intialPaging ={
+    page:1,
+    limit:5,
+} as Paging;
 
 const initialState = {
 	users: [],
@@ -22,7 +28,8 @@ const initialState = {
     pages: null,
     next: null,
     previous: null,
-	isLoading: false,
+    tableSearchField: "firstName",
+    paging: intialPaging,
 	selectedUser:null,
 	error:null,
 } as UsersState;
@@ -38,11 +45,9 @@ const usersSlice = createSlice({
             state.pages = payload.pages
             state.next = payload.next
             state.previous = payload.previous
-            state.isLoading = false
         },
         resetUsers:(state)=>{
             state.users = [];
-            state.isLoading = false
             state.count = null
             state.pages = null
             state.next = null
@@ -50,10 +55,9 @@ const usersSlice = createSlice({
         },
         setSelectedUser: (state,action:PayloadAction<UserAcount>)=>{
             state.selectedUser = action.payload;
-            state.isLoading = false
         },
         setError: (state)=>{
-            state.isLoading = false
+
         }
     }
 });

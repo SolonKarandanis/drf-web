@@ -9,7 +9,10 @@ const Results = () => {
     const usersState = useAppSelector((state) => state.users)
     
     return (
-        <DataTable columns={columns}  data={usersState.users}/>
+        <DataTable 
+            columns={columns}  
+            data={usersState.users} 
+            searchField={usersState.tableSearchField}/>
     )
 }
 

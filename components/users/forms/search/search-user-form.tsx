@@ -22,7 +22,7 @@ import {
     SelectValue,
 } from "@/shared/shadcn/components/ui/select"
 import { toast } from 'react-toastify';
-import { useAppDispatch } from "@/shared/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useSearchUsersMutation } from '@/shared/redux/features/users/usersApiSlice';
 import { UserSearchRequest, UserSearchResponse } from '@/models/search.models';
 import { UserStatus } from '@/models/user.models';
@@ -39,6 +39,8 @@ interface Props{
 
 const SearchUserForm:FC<Props> = ({}) => {
     const t = useTranslations();
+    
+
     const dispatch = useAppDispatch();
     const [search, { isLoading, }] = useSearchUsersMutation();
     const form = useForm<Inputs>({
@@ -51,6 +53,9 @@ const SearchUserForm:FC<Props> = ({}) => {
             status:"ACTIVE"
         }
     })
+
+    const usersState = useAppSelector((state) => state.users);
+    const paging = usersState.paging;
 
     const handleError =(errorResponse:ErrorResponse)=>{
 		const {status, data:{detail}} = errorResponse;
@@ -65,10 +70,7 @@ const SearchUserForm:FC<Props> = ({}) => {
             name,
             role,
             status: UserStatus[status as keyof typeof UserStatus],
-            paging:{
-                page: 1,
-                limit: 10
-            }
+            paging
         }
         search(request)
         .unwrap()

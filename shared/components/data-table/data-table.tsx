@@ -35,13 +35,15 @@ import  Html2Pdf from 'js-html2pdf'
 
 
 interface DataTableProps<TData, TValue> {
-    columns: ColumnDef<TData, TValue>[]
-    data: TData[]
+    columns: ColumnDef<TData, TValue>[];
+    data: TData[];
+    searchField:string;
 }
 
 export function DataTable<TData, TValue>({
     columns,
-    data
+    data,
+    searchField
 }: DataTableProps<TData, TValue>){
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -90,9 +92,9 @@ export function DataTable<TData, TValue>({
                 <div className='flex items-center py-4'>
                     <Input
                         placeholder='Search by name...'
-                        value={(table.getColumn('firstName')?.getFilterValue() as string) ?? ''}
+                        value={(table.getColumn(searchField)?.getFilterValue() as string) ?? ''}
                         onChange={event =>
-                            table.getColumn('firstName')?.setFilterValue(event.target.value)
+                            table.getColumn(searchField)?.setFilterValue(event.target.value)
                         }
                         className='max-w-sm'
                     />
