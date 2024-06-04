@@ -28,6 +28,7 @@ import { UserSearchRequest, UserSearchResponse } from '@/models/search.models';
 import { UserStatus } from '@/models/user.models';
 import { ErrorResponse } from '@/models/error.models';
 import { setUsers } from '@/shared/redux/features/users/usersSlice';
+import { useTranslations } from 'next-intl';
 
 
 type Inputs = z.infer<typeof UserSearchSchema>
@@ -37,6 +38,7 @@ interface Props{
 }
 
 const SearchUserForm:FC<Props> = ({}) => {
+    const t = useTranslations();
     const dispatch = useAppDispatch();
     const [search, { isLoading, }] = useSearchUsersMutation();
     const form = useForm<Inputs>({
@@ -153,11 +155,21 @@ const SearchUserForm:FC<Props> = ({}) => {
                
                 <div className='pt-5 mt-8' data-testid="buttons">
                     <div className='flex justify-between'>
-                        <Button type="submit" variant="outline">
-                            Search
+                        <Button 
+                            type="submit" 
+                            variant="outline"
+                            disabled={isLoading}>
+                            {isLoading ? 
+                                t("GLOBAL.BUTTONS.loading") : 
+                                t(`GLOBAL.BUTTONS.search`)
+                            }
+                            
                         </Button>
-                        <Button type="reset" variant="destructive">
-                            Clear
+                        <Button 
+                            type="reset" 
+                            variant="destructive"
+                            disabled={isLoading}>
+                            {t(`GLOBAL.BUTTONS.reset`)}
                         </Button>
                     </div>
                 </div>
