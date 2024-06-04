@@ -38,12 +38,20 @@ interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
     searchField:string;
+    count: number| null;
+    pages:number| null;
+    next:number| null;
+    previous:number| null;
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
-    searchField
+    searchField,
+    count,
+    pages,
+    next,
+    previous
 }: DataTableProps<TData, TValue>){
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -201,7 +209,7 @@ export function DataTable<TData, TValue>({
                     variant='outline'
                     size='sm'
                     onClick={() => table.previousPage()}
-                    disabled={!table.getCanPreviousPage()}
+                    disabled={!Boolean(previous)}
                 >
                     Previous
                 </Button>
@@ -209,7 +217,7 @@ export function DataTable<TData, TValue>({
                     variant='outline'
                     size='sm'
                     onClick={() => table.nextPage()}
-                    disabled={!table.getCanNextPage()}
+                    disabled={!Boolean(next)}
                 >
                     Next
                 </Button>

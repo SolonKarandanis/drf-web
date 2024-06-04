@@ -12,7 +12,11 @@ const Results = () => {
         <DataTable 
             columns={columns}  
             data={usersState.users} 
-            searchField={usersState.tableSearchField}/>
+            searchField={usersState.tableSearchField}
+            count={usersState.count}
+            pages={usersState.pages}
+            next={usersState.next}
+            previous={usersState.previous}/>
     )
 }
 
