@@ -19,22 +19,12 @@ export default async function Layout({ children,params:{locale} }: Props) {
 	console.log(user)
 	unstable_setRequestLocale(locale);
 
-	if(user){
-		const access = user.access;
-		const refresh = user.refresh;
-
-		return (
-			<ContentLayout>
-				<SetTokensLocalStorage access={access} refresh={refresh} />
-				{children}
-			</ContentLayout>
-		)
-	}
 	return (
 		<ContentLayout>
+			<SetTokensLocalStorage />
 			{children}
 		</ContentLayout>
-	);
+	)
 }
 
 export function generateStaticParams() {

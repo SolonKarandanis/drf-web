@@ -1,15 +1,16 @@
 "use client"
 
 import { setLoginResponseInStorage } from '@/utils/functions';
-import {FC} from 'react'
+import { useSession } from 'next-auth/react';
 
-interface Props{
-    access:string;
-    refresh:string;
-}
 
-const SetTokensLocalStorage:FC<Props> = ({access,refresh}) => {
-    setLoginResponseInStorage({access,refresh});
+const SetTokensLocalStorage= () => {
+    const {data} = useSession();
+    if(data && data.user){
+        const access =data.user.access
+        const refresh =data.user.refresh
+        setLoginResponseInStorage({access,refresh});
+    }
     return null;
 }
 

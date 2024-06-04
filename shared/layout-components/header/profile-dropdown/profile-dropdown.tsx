@@ -15,7 +15,7 @@ const ProfileDropdown:FC<Props> = ({path})=> {
     const {data} = useSession();
     
     if(!data){
-        return <></>
+        return null
     }
     const loggedUser = data.user!;
     const groupNames =getUserGroups(loggedUser);
