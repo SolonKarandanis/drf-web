@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger
 } from '@/shared/shadcn/components/ui/dropdown-menu'
 import { VariantProps, cva } from 'class-variance-authority'
+import Link from 'next/link'
 
 export type UserTableRow = {
     id: number
@@ -19,6 +20,7 @@ export type UserTableRow = {
     lastName: string
     email: string
     createdDate: string
+    uuid:string
 }
 
 const userStatus = new Map<string, string>([
@@ -46,7 +48,17 @@ export const columns: ColumnDef<UserTableRow>[] =[
     },
     {
         header:"Username",
-        accessorKey:"username"
+        accessorKey:"username",
+        cell: ({ row }) => {
+          const uuid = row.getValue('uuid') as string;
+          const username = row.getValue('username') as string;
+          return (
+            <Link  href={`/users/${uuid}`}
+              className="ml-1 hover:underline ltr:float-right rtl:float-left text-sky-600">
+              {username}
+            </Link>
+          )
+        }
     },
     {
         header:"First Name",
@@ -77,6 +89,10 @@ export const columns: ColumnDef<UserTableRow>[] =[
             const formatted = date.toLocaleDateString()
             return <div className='font-medium'>{formatted}</div>
         }
+    },
+    {
+      header:"Uuid",
+      accessorKey:"uuid"
     },
     {
         id: 'actions',
