@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import {
   ColumnDef,
   flexRender,
@@ -32,6 +32,8 @@ import { Input } from '@/shared/shadcn/components/ui/input';
 import { useReactToPrint } from "react-to-print";
 // @ts-ignore
 import  Html2Pdf from 'js-html2pdf'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/shadcn/components/ui/select';
+import { FormControl } from '@/shared/shadcn/components/ui/form';
 
 
 interface DataTableProps<TData, TValue> {
@@ -221,6 +223,26 @@ export function DataTable<TData, TValue>({
                 >
                     Next
                 </Button>
+                <span className="flex items-center gap-1">
+                    <div>Page</div>
+                    <strong>
+                        {next ? next -1: pages}
+                        of{' '}
+                        {pages}
+                    </strong>
+                </span>
+                <select
+                    value={table.getState().pagination.pageSize}
+                    onChange={e => {
+                        table.setPageSize(Number(e.target.value))
+                    }}
+                    >
+                    {[10, 20, 30, 40, 50].map(pageSize => (
+                        <option key={pageSize} value={pageSize}>
+                        Show {pageSize}
+                        </option>
+                    ))}
+                </select>
             </div>
         </>
     )
