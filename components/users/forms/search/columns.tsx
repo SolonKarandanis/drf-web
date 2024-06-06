@@ -92,7 +92,7 @@ export const columns: ColumnDef<UserTableRow>[] =[
     },
     {
       header:"Uuid",
-      accessorKey:"uuid"
+      accessorKey:"uuid",
     },
     {
         id: 'actions',
