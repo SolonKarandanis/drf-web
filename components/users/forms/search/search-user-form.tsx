@@ -54,6 +54,7 @@ const SearchUserForm:FC<Props> = ({}) => {
             status:undefined
         }
     })
+    const {errors} = form.formState
 
     const usersState = useAppSelector((state) => state.users);
     const paging = usersState.paging;
@@ -88,99 +89,106 @@ const SearchUserForm:FC<Props> = ({}) => {
     }
 
     return (
-        <Form {...form}>
+        <Form {...form} >
             <form className="space-y-8" 
                 onSubmit={form.handleSubmit(onSubmit)}
                 data-testid="form">
-                <div className="flex gap-2">
-                    <FormField
-                        control={form.control}
-                        name="username"
-                        render={({ field }) => (
-                        <FormItem data-testid="username">
-                            <FormLabel>Username</FormLabel>
-                            <FormControl>
-                                <Input 
-                                    data-testid="input-username"
-                                    {...field} />
-                            </FormControl>
-                        </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                        <FormItem data-testid="name">
-                            <FormLabel>Name</FormLabel>
-                            <FormControl>
-                                <Input 
-                                    data-testid="input-name" 
-                                    {...field} />
-                            </FormControl>
-                        </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                        <FormItem data-testid="email">
-                            <FormLabel>Email</FormLabel>
-                            <FormControl>
-                                <Input 
-                                    data-testid="input-email" 
-                                    {...field} />
-                            </FormControl>
-                        </FormItem>
-                        )}
-                    />
-                </div>
-                <div className="flex gap-2">
-                    <FormField
-                        control={form.control}
-                        name="role"
-                        render={({ field }) => (
-                        <FormItem data-testid="role">
-                            <FormLabel>User Role</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue="">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-10">
+                    <div className="grid grid-cols-1">
+                        <FormField
+                            control={form.control}
+                            name="username"
+                            render={({ field }) => (
+                            <FormItem data-testid="username">
+                                <FormLabel>Username</FormLabel>
                                 <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select a role" />
-                                    </SelectTrigger>
+                                    <Input 
+                                        data-testid="input-username"
+                                        {...field} />
                                 </FormControl>
-                                <SelectContent>
-                                    <SelectItem value="1">Buyer</SelectItem>
-                                    <SelectItem value="2">Seller</SelectItem>
-                                </SelectContent> 
-                            </Select>
-                        </FormItem>
-                        )}
-                    />
+                            </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                            <FormItem data-testid="name">
+                                <FormLabel>Name</FormLabel>
+                                <FormControl>
+                                    <Input 
+                                        data-testid="input-name" 
+                                        {...field} />
+                                </FormControl>
+                            </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                            <FormItem data-testid="email">
+                                <FormLabel>Email</FormLabel>
+                                <FormControl>
+                                    <Input 
+                                        data-testid="input-email" 
+                                        {...field} />
+                                </FormControl>
+                            </FormItem>
+                            )}
+                        />
+                    </div>
+                    <div className="">
+                        <FormField
+                            control={form.control}
+                            name="role"
+                            render={({ field }) => (
+                            <FormItem data-testid="role">
+                                <FormLabel>User Role</FormLabel>
+                                <Select onValueChange={field.onChange} defaultValue="">
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select a role" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        <SelectItem value="1">Buyer</SelectItem>
+                                        <SelectItem value="2">Seller</SelectItem>
+                                    </SelectContent> 
+                                </Select>
+                            </FormItem>
+                            )}
+                        />
 
-                    <FormField
-                        control={form.control}
-                        name="status"
-                        render={({ field }) => (
-                        <FormItem data-testid="status">
-                            <FormLabel>User Status</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue="">
-                                <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select status" />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    <SelectItem value="ACTIVE">Active</SelectItem>
-                                    <SelectItem value="UNVERIFIED">Unverified</SelectItem>
-                                    <SelectItem value="DEACTIVATED">Deactivated</SelectItem>
-                                    <SelectItem value="DELETED">Deleted</SelectItem>
-                                </SelectContent> 
-                            </Select>
-                        </FormItem>
-                        )}
-                    />
-                   
+                        <FormField
+                            control={form.control}
+                            name="status"
+                            render={({ field }) => (
+                            <FormItem data-testid="status">
+                                <FormLabel>User Status</FormLabel>
+                                <Select onValueChange={field.onChange} defaultValue="">
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select status" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        <SelectItem value="ACTIVE">Active</SelectItem>
+                                        <SelectItem value="UNVERIFIED">Unverified</SelectItem>
+                                        <SelectItem value="DEACTIVATED">Deactivated</SelectItem>
+                                        <SelectItem value="DELETED">Deleted</SelectItem>
+                                    </SelectContent> 
+                                </Select>
+                            </FormItem>
+                            )}
+                        />
+                        {errors.status? (
+                            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {errors.status?.message}
+                            </p>
+                        ): null}
+                    
+                    </div>
                 </div>
                 <div className='pt-5 mt-8' data-testid="buttons">
                     <div className='flex justify-between'>
@@ -204,7 +212,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                     </div>
                 </div>
             </form>
-        </Form>
+        </Form> 
     )
 }
 
