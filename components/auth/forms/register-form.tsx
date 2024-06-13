@@ -202,11 +202,8 @@ const RegisterForm = () => {
                         intent="violet" 
                         size="md" 
                         type="submit"
-                        disabled={isSubmitting || !isValid}>
-                        {isSubmitting ? 
-                            t("GLOBAL.BUTTONS.loading") : 
-                            t(`${rform}.BUTTONS.create-account`)
-                        }
+                        isDisabled={isSubmitting || !isValid}>
+                            {t(`${rform}.BUTTONS.create-account`)}
                     </CButton>
                 </div>
             </div>

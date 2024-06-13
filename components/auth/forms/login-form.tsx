@@ -100,11 +100,8 @@ const LoginForm = () => {
                             intent="violet" 
                             size="md" 
                             type="submit"
-                            disabled={isSubmitting || !isValid}>
-                            {isSubmitting ? 
-                                t("GLOBAL.BUTTONS.loading") : 
-                                t(`${lform}.BUTTONS.sign-in`)
-                             }
+                            isDisabled={isSubmitting || !isValid}>                    
+                                {t(`${lform}.BUTTONS.sign-in`)}
                         </CButton>
                         {/* <Link href="/components/dashboards/crm/" className="ti-btn ti-btn-primary !bg-primary !text-white !font-medium">Sign In</Link> */}
                     </div>
