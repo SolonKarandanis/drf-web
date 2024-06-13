@@ -51,7 +51,7 @@ const SearchUserForm:FC<Props> = ({}) => {
             name:"",
             username:"",
             role:0,
-            status:"ACTIVE"
+            status:undefined
         }
     })
 
@@ -164,7 +164,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                         render={({ field }) => (
                         <FormItem data-testid="status">
                             <FormLabel>User Status</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue="user.active">
+                            <Select onValueChange={field.onChange} defaultValue="">
                                 <FormControl>
                                     <SelectTrigger>
                                         <SelectValue placeholder="Select status" />

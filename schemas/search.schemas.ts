@@ -8,5 +8,5 @@ export const UserSearchSchema = z.object({
     name: z.string().optional(),
     email: z.string().optional(),
     role:z.number(),
-    status:z.enum(statusValues).optional()
+    status:z.enum(statusValues)
 });
