@@ -29,6 +29,7 @@ import { UserStatus } from '@/models/user.models';
 import { ErrorResponse } from '@/models/error.models';
 import { setUsers,resetUsers } from '@/shared/redux/features/users/usersSlice';
 import { useTranslations } from 'next-intl';
+import ButtonLoading from '@/shared/components/button-loading/button-loading';
 
 
 type Inputs = z.infer<typeof UserSearchSchema>
@@ -166,7 +167,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                             variant="outline"
                             disabled={isLoading}>
                             {isLoading ? 
-                                t("GLOBAL.BUTTONS.loading") : 
+                                <ButtonLoading /> : 
                                 t(`GLOBAL.BUTTONS.search`)
                             }
                             

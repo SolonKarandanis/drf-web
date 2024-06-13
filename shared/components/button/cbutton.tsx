@@ -4,7 +4,7 @@ import {ButtonHTMLAttributes, FC, ReactElement, ReactNode} from 'react';
 import {cva,VariantProps} from 'class-variance-authority';
 import { twMerge } from "tailwind-merge";
 import { useFormStatus } from 'react-dom';
-import { useTranslations } from 'next-intl';
+import ButtonLoading from '../button-loading/button-loading';
 
 const buttonVariants = cva('ti-btn ti-btn-wave',{
   variants:{
@@ -66,7 +66,7 @@ const CButton:FC<ButtonProps> = ({
     children,
     ...rest 
 }) => {
-    const t = useTranslations();
+
     const { pending, data, method, action } = useFormStatus();
     const isSubmitting = pending || isLoading;
     const iconHtml = icon ? (<span data-testid="Button.Icon" className="mr-3">{icon}</span>) : null;
@@ -85,16 +85,7 @@ const CButton:FC<ButtonProps> = ({
                 {iconPosition === 'right' && (<>{children} {iconHtml}</>)}
                 </span>
               }
-              { isSubmitting && (
-                <span data-testid="Button.Indicator" 
-                  className='me-2' style={{display: 'block'}}>
-                    {t("GLOBAL.BUTTONS.loading")}
-                  <span data-testid="Button.Spinner" 
-                    className='loading'>
-                      <i className="ri-refresh-line text-[1rem] animate-spin"></i>
-                  </span>
-                </span>
-              )}
+              { isSubmitting && <ButtonLoading />}
         </button>
     );
 }
