@@ -157,9 +157,31 @@ const SearchUserForm:FC<Props> = ({}) => {
                         </FormItem>
                         )}
                     />
+
+                    <FormField
+                        control={form.control}
+                        name="status"
+                        render={({ field }) => (
+                        <FormItem data-testid="status">
+                            <FormLabel>User Status</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue="user.active">
+                                <FormControl>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select status" />
+                                    </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                    <SelectItem value="ACTIVE">Active</SelectItem>
+                                    <SelectItem value="UNVERIFIED">Unverified</SelectItem>
+                                    <SelectItem value="DEACTIVATED">Deactivated</SelectItem>
+                                    <SelectItem value="DELETED">Deleted</SelectItem>
+                                </SelectContent> 
+                            </Select>
+                        </FormItem>
+                        )}
+                    />
                    
                 </div>
-               
                 <div className='pt-5 mt-8' data-testid="buttons">
                     <div className='flex justify-between'>
                         <Button 
