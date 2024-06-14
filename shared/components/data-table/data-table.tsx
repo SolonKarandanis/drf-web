@@ -223,7 +223,10 @@ export function DataTable<TData, TValue>({
                 <Button
                     variant='outline'
                     size='sm'
-                    onClick={() => handleChangepageClick(previous,table.getState().pagination.pageSize)}
+                    onClick={() => {
+                        table.previousPage()
+                        handleChangepageClick(previous,table.getState().pagination.pageSize)
+                    }}
                     disabled={!Boolean(previous)}
                 >
                     Previous
@@ -231,7 +234,10 @@ export function DataTable<TData, TValue>({
                 <Button
                     variant='outline'
                     size='sm'
-                    onClick={() => handleChangepageClick(next,table.getState().pagination.pageSize)}
+                    onClick={() => {
+                        table.nextPage()
+                        handleChangepageClick(next,table.getState().pagination.pageSize)
+                    }}
                     disabled={!Boolean(next)}
                 >
                     Next
@@ -247,7 +253,9 @@ export function DataTable<TData, TValue>({
                 <select
                     value={table.getState().pagination.pageSize}
                     onChange={e => {
-                        table.setPageSize(Number(e.target.value))
+                        const pageSize = Number(e.target.value)
+                        table.setPageSize(pageSize)
+                        handleChangepageClick(1,pageSize)
                     }}
                 >
                     {[5, 10, 20, 30, 40, 50].map(pageSize => (
