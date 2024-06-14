@@ -1,4 +1,4 @@
-import { Paging, UserSearchResponse } from '@/models/search.models';
+import { Paging, UserSearchRequest, UserSearchResponse } from '@/models/search.models';
 import { UserAcount, UserModel } from '@/models/user.models';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
@@ -12,15 +12,27 @@ interface UsersState {
     next:number| null;
     previous:number| null;
     tableSearchField:string;
-    paging:Paging;
+    request:UserSearchRequest;
 	selectedUser:UserAcount | null;
     error:string| null;
 }
+
+
 
 const intialPaging ={
     page:1,
     limit:5,
 } as Paging;
+
+export const initialRequest = {
+    email:"",
+    username:"",
+    name:"",
+    role:0,
+    status:undefined,
+    paging:intialPaging
+} as UserSearchRequest;
+
 
 const initialState = {
 	users: [],
@@ -29,7 +41,7 @@ const initialState = {
     next: null,
     previous: null,
     tableSearchField: "firstName",
-    paging: intialPaging,
+    request: initialRequest,
 	selectedUser:null,
 	error:null,
 } as UsersState;
@@ -53,6 +65,13 @@ const usersSlice = createSlice({
             state.next = null
             state.previous = null
         },
+        setSearchRequest:(state, action:PayloadAction<UserSearchRequest>) =>{
+            const payload =action.payload
+            state.request = payload
+        },
+        resetSearchRequest:(state)=>{
+            state.request =initialRequest
+        },
         setSelectedUser: (state,action:PayloadAction<UserAcount>)=>{
             state.selectedUser = action.payload;
         },
@@ -65,6 +84,8 @@ const usersSlice = createSlice({
 export const { 
     setUsers,
     setSelectedUser,
-    resetUsers 
+    resetUsers,
+    setSearchRequest,
+    resetSearchRequest,
 } = usersSlice.actions;
 export default usersSlice.reducer;

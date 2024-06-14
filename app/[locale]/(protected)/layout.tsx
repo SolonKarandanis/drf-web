@@ -16,6 +16,7 @@ type Props = {
 export default async function Layout({ children,params:{locale} }: Props) {
 	const session = await getServerSession(authOptions);
 	const user =session?.user
+	console.log('-------->Layout')
 	console.log(user)
 	unstable_setRequestLocale(locale);
 

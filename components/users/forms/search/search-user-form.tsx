@@ -27,7 +27,7 @@ import { useSearchUsersMutation } from '@/shared/redux/features/users/usersApiSl
 import { UserSearchRequest, UserSearchResponse } from '@/models/search.models';
 import { UserStatus } from '@/models/user.models';
 import { ErrorResponse } from '@/models/error.models';
-import { setUsers,resetUsers } from '@/shared/redux/features/users/usersSlice';
+import { setUsers,resetUsers,setSearchRequest,resetSearchRequest } from '@/shared/redux/features/users/usersSlice';
 import { useTranslations } from 'next-intl';
 import ButtonLoading from '@/shared/components/button-loading/button-loading';
 
@@ -40,10 +40,14 @@ interface Props{
 
 const SearchUserForm:FC<Props> = ({}) => {
     const t = useTranslations();
-    
+    const usersState = useAppSelector((state) => state.users);
 
     const dispatch = useAppDispatch();
     const [search, { isLoading, }] = useSearchUsersMutation();
+
+    const searchRequest = usersState.request
+    const paging = searchRequest.paging
+    
     const form = useForm<Inputs>({
         resolver: zodResolver(UserSearchSchema),
         defaultValues:{
@@ -56,8 +60,7 @@ const SearchUserForm:FC<Props> = ({}) => {
     })
     const {errors} = form.formState
 
-    const usersState = useAppSelector((state) => state.users);
-    const paging = usersState.paging;
+   
 
     const handleError =(errorResponse:ErrorResponse)=>{
 		const {status, data:{detail}} = errorResponse;
@@ -74,6 +77,7 @@ const SearchUserForm:FC<Props> = ({}) => {
             status: UserStatus[status as keyof typeof UserStatus],
             paging
         }
+        dispatch(setSearchRequest(request));
         search(request)
         .unwrap()
         .then((response:UserSearchResponse ) => {
@@ -85,6 +89,7 @@ const SearchUserForm:FC<Props> = ({}) => {
     }
 
     const clear =() =>{
+        dispatch(resetSearchRequest());
         dispatch(resetUsers())
     }
 
