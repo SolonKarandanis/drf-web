@@ -5,7 +5,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 interface UsersState {
 	users:UserModel[];
-    count: number| null;
+    count: number| undefined;
     pages:number| null;
     next:number| null;
     previous:number| null;
@@ -34,7 +34,7 @@ export const initialRequest = {
 
 const initialState = {
 	users: [],
-    count: null,
+    count: undefined,
     pages: null,
     next: null,
     previous: null,
@@ -58,7 +58,7 @@ const usersSlice = createSlice({
         },
         resetUsers:(state)=>{
             state.users = [];
-            state.count = null
+            state.count = undefined
             state.pages = null
             state.next = null
             state.previous = null

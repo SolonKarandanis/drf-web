@@ -91,7 +91,6 @@ const SearchUserForm:FC<Props> = ({}) => {
     const clear =() =>{
         dispatch(resetSearchRequest());
         dispatch(resetUsers());
-        form.reset();
     }
 
     return (

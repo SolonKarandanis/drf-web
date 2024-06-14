@@ -38,10 +38,11 @@ interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
     searchField:string;
-    count: number| null;
+    count: number| undefined;
     pages:number| null;
     next:number| null;
     previous:number| null;
+    onPagination: (page:number, pageSize:number) =>void
 }
 
 export function DataTable<TData, TValue>({
@@ -51,7 +52,8 @@ export function DataTable<TData, TValue>({
     count,
     pages,
     next,
-    previous
+    previous,
+    onPagination
 }: DataTableProps<TData, TValue>){
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -65,13 +67,19 @@ export function DataTable<TData, TValue>({
           columnFilters,
           columnVisibility
         },
+        initialState: {
+            pagination: {
+                pageSize: 5,
+            },
+        },
+        manualPagination: true,
+        rowCount: count,
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,
         onColumnVisibilityChange: setColumnVisibility,
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
-        getPaginationRowModel: getPaginationRowModel()
     });
 
     const printDocumentRef = useRef<HTMLDivElement>(null);
@@ -92,6 +100,11 @@ export function DataTable<TData, TValue>({
         }
     });
 
+    const handleChangepageClick = (page:number|null,pageSize:number) => {
+        if(page){
+            onPagination(page,pageSize);
+        }
+    };
    
 
     return (
@@ -210,7 +223,7 @@ export function DataTable<TData, TValue>({
                 <Button
                     variant='outline'
                     size='sm'
-                    onClick={() => table.previousPage()}
+                    onClick={() => handleChangepageClick(previous,table.getState().pagination.pageSize)}
                     disabled={!Boolean(previous)}
                 >
                     Previous
@@ -218,7 +231,7 @@ export function DataTable<TData, TValue>({
                 <Button
                     variant='outline'
                     size='sm'
-                    onClick={() => table.nextPage()}
+                    onClick={() => handleChangepageClick(next,table.getState().pagination.pageSize)}
                     disabled={!Boolean(next)}
                 >
                     Next
