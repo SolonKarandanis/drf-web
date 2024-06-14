@@ -37,6 +37,26 @@ const Results = () => {
                 handleError(error);
             });
     }
+
+    const handleSorting = (sortField:string, isDesc:boolean) =>{
+        console.log(sortField)
+        console.log(isDesc)
+        const searchRequest = {...usersState.request}
+        const page={
+            page: searchRequest.paging.page,
+            limit:searchRequest.paging.limit,
+            sortField
+        } as Paging;
+        searchRequest.paging= page;
+        search(searchRequest)
+            .unwrap()
+            .then((response:UserSearchResponse ) => {
+                dispatch(setUsers(response));
+            })
+            .catch((error:ErrorResponse) => {
+                handleError(error);
+            });
+    }
     
     return (
         <DataTable 
@@ -47,7 +67,8 @@ const Results = () => {
             pages={usersState.pages}
             next={usersState.next}
             previous={usersState.previous}
-            onPagination={handlePagination}/>
+            onPagination={handlePagination}
+            onSorting={handleSorting}/>
     )
 }
 

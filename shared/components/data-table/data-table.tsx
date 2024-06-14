@@ -42,7 +42,8 @@ interface DataTableProps<TData, TValue> {
     pages:number| null;
     next:number| null;
     previous:number| null;
-    onPagination: (page:number, pageSize:number) =>void
+    onPagination: (page:number, pageSize:number) =>void;
+    onSorting: (sortField:string, isDesc:boolean) =>void
 }
 
 export function DataTable<TData, TValue>({
@@ -53,8 +54,10 @@ export function DataTable<TData, TValue>({
     pages,
     next,
     previous,
-    onPagination
+    onPagination,
+    onSorting,
 }: DataTableProps<TData, TValue>){
+    const sortingState = useRef<SortingState>([])
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -100,12 +103,19 @@ export function DataTable<TData, TValue>({
         }
     });
 
-    const handleChangepageClick = (page:number|null,pageSize:number) => {
-        console.log(sorting)
+    const handlePagingClick = (page:number|null,pageSize:number) => {
         if(page){
             onPagination(page,pageSize);
         }
     };
+
+
+    const handleSortingClick = (column:any) =>{
+        // console.log(column)
+        const sortField = column.id
+        // console.log(column.getToggleSortingHandler()())
+        onSorting(sortField,false)
+    }
    
 
     return (
@@ -124,7 +134,7 @@ export function DataTable<TData, TValue>({
                     />
                 </div>
                 {/* Column visibility */}
-                <div className='flex items-center justify-between gap-1'>
+                <div className='flex items-center justify-between gap-1' >
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant='outline' className='ml-auto'>
@@ -182,7 +192,7 @@ export function DataTable<TData, TValue>({
                                                 ? { onClick: header.column.getToggleSortingHandler() }
                                                 : {})}
                                         >
-                                            <div className='flex flex-row'>
+                                            <div className='flex flex-row' onClick={() => handleSortingClick(header.column)}>
                                                 {header.isPlaceholder
                                                     ? null
                                                     : flexRender(
@@ -191,9 +201,13 @@ export function DataTable<TData, TValue>({
                                                     )
                                                 }
                                                 {header.column.getIsSorted() === "asc" ? (
-                                                        <span> <LuArrowUpAZ /></span>
+                                                        <span >
+                                                            <LuArrowUpAZ />
+                                                        </span>
                                                     ) : header.column.getIsSorted() === "desc" ? (
-                                                        <span> <LuArrowDownAZ /></span>
+                                                        <span>
+                                                            <LuArrowDownAZ />
+                                                        </span>
                                                     ) : null
                                                 }
                                             </div>
@@ -240,7 +254,7 @@ export function DataTable<TData, TValue>({
                     size='sm'
                     onClick={() => {
                         table.previousPage()
-                        handleChangepageClick(previous,table.getState().pagination.pageSize)
+                        handlePagingClick(previous,table.getState().pagination.pageSize)
                     }}
                     disabled={!Boolean(previous)}
                 >
@@ -251,7 +265,7 @@ export function DataTable<TData, TValue>({
                     size='sm'
                     onClick={() => {
                         table.nextPage()
-                        handleChangepageClick(next,table.getState().pagination.pageSize)
+                        handlePagingClick(next,table.getState().pagination.pageSize)
                     }}
                     disabled={!Boolean(next)}
                 >
@@ -270,7 +284,7 @@ export function DataTable<TData, TValue>({
                     onChange={e => {
                         const pageSize = Number(e.target.value)
                         table.setPageSize(pageSize)
-                        handleChangepageClick(1,pageSize)
+                        handlePagingClick(1,pageSize)
                     }}
                 >
                     {[5, 10, 20, 30, 40, 50].map(pageSize => (
