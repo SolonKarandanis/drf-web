@@ -27,7 +27,7 @@ import { useSearchUsersMutation } from '@/shared/redux/features/users/usersApiSl
 import { UserSearchRequest, UserSearchResponse } from '@/models/search.models';
 import { UserStatus } from '@/models/user.models';
 import { ErrorResponse } from '@/models/error.models';
-import { setUsers,resetUsers,setSearchRequest,resetSearchRequest } from '@/shared/redux/features/users/usersSlice';
+import { setUsers,resetUsers,setSearchRequest,resetSearchRequest, initialRequest } from '@/shared/redux/features/users/usersSlice';
 import { useTranslations } from 'next-intl';
 import ButtonLoading from '@/shared/components/button-loading/button-loading';
 
@@ -51,10 +51,10 @@ const SearchUserForm:FC<Props> = ({}) => {
     const form = useForm<Inputs>({
         resolver: zodResolver(UserSearchSchema),
         defaultValues:{
-            email:"",
-            name:"",
-            username:"",
-            role:0,
+            email:initialRequest.email,
+            name:initialRequest.name,
+            username:initialRequest.username,
+            role:initialRequest.role,
             status:undefined
         }
     })
@@ -90,7 +90,8 @@ const SearchUserForm:FC<Props> = ({}) => {
 
     const clear =() =>{
         dispatch(resetSearchRequest());
-        dispatch(resetUsers())
+        dispatch(resetUsers());
+        form.reset();
     }
 
     return (

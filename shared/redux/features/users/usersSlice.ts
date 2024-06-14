@@ -1,9 +1,7 @@
 import { Paging, UserSearchRequest, UserSearchResponse } from '@/models/search.models';
 import { UserAcount, UserModel } from '@/models/user.models';
-import { createSlice } from '@reduxjs/toolkit';
+import { createListenerMiddleware, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
-
-
 
 interface UsersState {
 	users:UserModel[];
@@ -80,6 +78,26 @@ const usersSlice = createSlice({
         }
     }
 });
+
+export const userSearchlistenerMiddleware = createListenerMiddleware();
+
+// userSearchlistenerMiddleware.startListening.withTypes<RootState, AppDispatch>()({
+//     predicate: (_action, currentState, previousState) => {
+//       return currentState.users.request.paging.page !== previousState.users.request.paging.page
+//     },
+//     effect: async (_action, listenerApi) => {
+//       listenerApi.cancelActiveListeners();
+//       await listenerApi.delay(500);
+  
+//       const pokemon = await pokemonSearch(listenerApi.getState().pokemon.search);
+//       listenerApi.dispatch(pokemonUpdated(pokemon));
+//         search(currentState.users.re)
+//         .unwrap()
+//         .then((response:UserSearchResponse ) => {
+//             listenerApi.dispatch(setUsers(response));
+//         })
+//     },
+//   });
 
 export const { 
     setUsers,
