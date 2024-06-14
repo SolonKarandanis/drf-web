@@ -79,13 +79,13 @@ const SearchUserForm:FC<Props> = ({}) => {
         }
         dispatch(setSearchRequest(request));
         search(request)
-        .unwrap()
-        .then((response:UserSearchResponse ) => {
-            dispatch(setUsers(response));
-        })
-        .catch((error:ErrorResponse) => {
-            handleError(error);
-        });
+            .unwrap()
+            .then((response:UserSearchResponse ) => {
+                dispatch(setUsers(response));
+            })
+            .catch((error:ErrorResponse) => {
+                handleError(error);
+            });
     }
 
     const clear =() =>{

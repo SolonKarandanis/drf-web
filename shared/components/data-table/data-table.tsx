@@ -32,6 +32,7 @@ import { useReactToPrint } from "react-to-print";
 import  Html2Pdf from 'js-html2pdf'
 import { LuArrowDownAZ } from "react-icons/lu";
 import { LuArrowUpAZ } from "react-icons/lu";
+import { SortDirection } from '@/models/search.models';
 
 
 interface DataTableProps<TData, TValue> {
@@ -43,7 +44,7 @@ interface DataTableProps<TData, TValue> {
     next:number| null;
     previous:number| null;
     onPagination: (page:number, pageSize:number) =>void;
-    onSorting: (sortField:string, isDesc:boolean) =>void
+    onSorting: (sortField:string, sortOrder:SortDirection) =>void
 }
 
 export function DataTable<TData, TValue>({
@@ -111,10 +112,14 @@ export function DataTable<TData, TValue>({
 
 
     const handleSortingClick = (column:any) =>{
-        // console.log(column)
         const sortField = column.id
-        // console.log(column.getToggleSortingHandler()())
-        onSorting(sortField,false)
+        const sorted =column.getIsSorted()     
+        if(sorted==false){
+            onSorting(sortField,SortDirection.ASC)
+        }
+        if(sorted=='asc'){
+            onSorting(sortField,SortDirection.DESC)
+        }
     }
    
 

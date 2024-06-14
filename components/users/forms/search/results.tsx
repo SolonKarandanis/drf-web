@@ -4,7 +4,7 @@ import { DataTable } from '@/shared/components/data-table/data-table'
 import { columns } from './columns'
 import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks'
 import { setPaging, setUsers } from '@/shared/redux/features/users/usersSlice';
-import { Paging, UserSearchResponse } from '@/models/search.models';
+import { Paging, SortDirection, UserSearchResponse } from '@/models/search.models';
 import { useSearchUsersMutation } from '@/shared/redux/features/users/usersApiSlice';
 import { ErrorResponse } from '@/models/error.models';
 import { toast } from 'react-toastify';
@@ -38,14 +38,13 @@ const Results = () => {
             });
     }
 
-    const handleSorting = (sortField:string, isDesc:boolean) =>{
-        console.log(sortField)
-        console.log(isDesc)
+    const handleSorting = (sortField:string, sortDirection:SortDirection) =>{
         const searchRequest = {...usersState.request}
         const page={
             page: searchRequest.paging.page,
             limit:searchRequest.paging.limit,
-            sortField
+            sortField,
+            sortDirection
         } as Paging;
         searchRequest.paging= page;
         search(searchRequest)
