@@ -44,7 +44,7 @@ const Results = () => {
             page: searchRequest.paging.page,
             limit:searchRequest.paging.limit,
             sortField,
-            sortDirection
+            sortOrder:sortDirection
         } as Paging;
         searchRequest.paging= page;
         search(searchRequest)

@@ -9,7 +9,7 @@ export interface Paging {
     page: number;
     limit: number;
     sortField?: string;
-    sortDirection?: SortDirection;
+    sortOrder?: SortDirection;
 }
 
 export interface SearchRequest {
