@@ -75,6 +75,7 @@ export const columns: ColumnDef<UserTableRow>[] =[
     {
       header:"Status",
       accessorKey:"status",
+      enableSorting:false,
       cell: ({ row }) => {
         const status = row.getValue('status') as string;
         const statusLabel = userStatus.get(status) as VariantProps<typeof badgeVariants>["intent"];

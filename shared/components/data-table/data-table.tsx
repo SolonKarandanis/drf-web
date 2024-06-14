@@ -182,19 +182,21 @@ export function DataTable<TData, TValue>({
                                                 ? { onClick: header.column.getToggleSortingHandler() }
                                                 : {})}
                                         >
-                                            {header.isPlaceholder
-                                                ? null
-                                                : flexRender(
-                                                    header.column.columnDef.header,
-                                                    header.getContext()
-                                                )
-                                            }
-                                            {header.column.getIsSorted() === "asc" ? (
-                                                    <span> <LuArrowUpAZ /></span>
-                                                ) : header.column.getIsSorted() === "desc" ? (
-                                                    <span> <LuArrowDownAZ /></span>
-                                                ) : null
-                                            }
+                                            <div className='flex flex-row'>
+                                                {header.isPlaceholder
+                                                    ? null
+                                                    : flexRender(
+                                                        header.column.columnDef.header,
+                                                        header.getContext()
+                                                    )
+                                                }
+                                                {header.column.getIsSorted() === "asc" ? (
+                                                        <span> <LuArrowUpAZ /></span>
+                                                    ) : header.column.getIsSorted() === "desc" ? (
+                                                        <span> <LuArrowDownAZ /></span>
+                                                    ) : null
+                                                }
+                                            </div>
                                         </TableHead>
                                     )
                                 })}
