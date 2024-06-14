@@ -70,6 +70,10 @@ const usersSlice = createSlice({
         resetSearchRequest:(state)=>{
             state.request =initialRequest
         },
+        setPaging:(state, action:PayloadAction<Paging>)=>{
+            const payload =action.payload
+            state.request.paging =payload
+        },
         setSelectedUser: (state,action:PayloadAction<UserAcount>)=>{
             state.selectedUser = action.payload;
         },
@@ -105,5 +109,6 @@ export const {
     resetUsers,
     setSearchRequest,
     resetSearchRequest,
+    setPaging,
 } = usersSlice.actions;
 export default usersSlice.reducer;

@@ -32,8 +32,6 @@ import { Input } from '@/shared/shadcn/components/ui/input';
 import { useReactToPrint } from "react-to-print";
 // @ts-ignore
 import  Html2Pdf from 'js-html2pdf'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/shadcn/components/ui/select';
-import { FormControl } from '@/shared/shadcn/components/ui/form';
 
 
 interface DataTableProps<TData, TValue> {
@@ -93,6 +91,8 @@ export function DataTable<TData, TValue>({
             }
         }
     });
+
+   
 
     return (
         <>
