@@ -58,7 +58,6 @@ export function DataTable<TData, TValue>({
     onPagination,
     onSorting,
 }: DataTableProps<TData, TValue>){
-    const sortingState = useRef<SortingState>([])
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});

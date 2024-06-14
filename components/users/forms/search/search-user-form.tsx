@@ -30,6 +30,7 @@ import { ErrorResponse } from '@/models/error.models';
 import { setUsers,resetUsers,setSearchRequest,resetSearchRequest, initialRequest } from '@/shared/redux/features/users/usersSlice';
 import { useTranslations } from 'next-intl';
 import ButtonLoading from '@/shared/components/button-loading/button-loading';
+import { useSearchUsers } from '@/hooks/use-search-users';
 
 
 type Inputs = z.infer<typeof UserSearchSchema>
@@ -41,6 +42,7 @@ interface Props{
 const SearchUserForm:FC<Props> = ({}) => {
     const t = useTranslations();
     const usersState = useAppSelector((state) => state.users);
+    // const [loading] = useSearchUsers(null);
 
     const dispatch = useAppDispatch();
     const [search, { isLoading, }] = useSearchUsersMutation();
