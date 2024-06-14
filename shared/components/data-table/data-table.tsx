@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   ColumnDef,
   flexRender,
@@ -8,9 +8,7 @@ import {
   VisibilityState,
   ColumnFiltersState,
   getCoreRowModel,
-  getSortedRowModel,
   getFilteredRowModel,
-  getPaginationRowModel,
   useReactTable
 } from '@tanstack/react-table';
 import {
@@ -32,6 +30,8 @@ import { Input } from '@/shared/shadcn/components/ui/input';
 import { useReactToPrint } from "react-to-print";
 // @ts-ignore
 import  Html2Pdf from 'js-html2pdf'
+import { LuArrowDownAZ } from "react-icons/lu";
+import { LuArrowUpAZ } from "react-icons/lu";
 
 
 interface DataTableProps<TData, TValue> {
@@ -73,12 +73,12 @@ export function DataTable<TData, TValue>({
             },
         },
         manualPagination: true,
+        manualSorting: true,
         rowCount: count,
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,
         onColumnVisibilityChange: setColumnVisibility,
         getCoreRowModel: getCoreRowModel(),
-        getSortedRowModel: getSortedRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
     });
 
@@ -101,6 +101,7 @@ export function DataTable<TData, TValue>({
     });
 
     const handleChangepageClick = (page:number|null,pageSize:number) => {
+        console.log(sorting)
         if(page){
             onPagination(page,pageSize);
         }
@@ -175,13 +176,25 @@ export function DataTable<TData, TValue>({
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map(header => {
                                     return (
-                                        <TableHead key={header.id}>
-                                        {header.isPlaceholder
-                                            ? null
-                                            : flexRender(
-                                                header.column.columnDef.header,
-                                                header.getContext()
-                                            )}
+                                        <TableHead 
+                                            key={header.id}
+                                            {...(header.column.getCanSort()
+                                                ? { onClick: header.column.getToggleSortingHandler() }
+                                                : {})}
+                                        >
+                                            {header.isPlaceholder
+                                                ? null
+                                                : flexRender(
+                                                    header.column.columnDef.header,
+                                                    header.getContext()
+                                                )
+                                            }
+                                            {header.column.getIsSorted() === "asc" ? (
+                                                    <span> <LuArrowUpAZ /></span>
+                                                ) : header.column.getIsSorted() === "desc" ? (
+                                                    <span> <LuArrowDownAZ /></span>
+                                                ) : null
+                                            }
                                         </TableHead>
                                     )
                                 })}

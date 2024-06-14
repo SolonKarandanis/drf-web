@@ -44,11 +44,13 @@ const badgeVariants = cva('text-white badge',{
 export const columns: ColumnDef<UserTableRow>[] =[
     {
         header:"Id",
-        accessorKey:"id"
+        accessorKey:"id",
+        enableSorting:true,
     },
     {
         header:"Username",
         accessorKey:"username",
+        enableSorting:true,
         cell: ({ row }) => {
           const uuid = row.getValue('uuid') as string;
           const username = row.getValue('username') as string;
@@ -62,11 +64,13 @@ export const columns: ColumnDef<UserTableRow>[] =[
     },
     {
         header:"First Name",
-        accessorKey:"firstName"
+        accessorKey:"firstName",
+        enableSorting:true
     },
     {
         header:"Last Name",
-        accessorKey:"lastName"
+        accessorKey:"lastName",
+        enableSorting:true,
     },
     {
       header:"Status",
@@ -79,11 +83,13 @@ export const columns: ColumnDef<UserTableRow>[] =[
     },
     {
         header:"Email",
-        accessorKey:"email"
+        accessorKey:"email",
+        enableSorting:true,
     },
     {
         header:"Created",
         accessorKey:"createdDate",
+        enableSorting:true,
         cell: ({ row }) => {
             const date = new Date(row.getValue('createdDate'))
             const formatted = date.toLocaleDateString()
