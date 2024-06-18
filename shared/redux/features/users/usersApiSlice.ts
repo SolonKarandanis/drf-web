@@ -22,7 +22,11 @@ const usersApiSlice = apiSlice.injectEndpoints({
 			
 		}),
 		getAllGroups: builder.query<UserGroup[],void>({
-			query:() => `${ApiControllers.USERS}/groups`
+			query:() =>{
+				return {
+					url:`${ApiControllers.USERS}/groups`,
+				}
+			}
 		})
     }),
     // @ts-ignore
@@ -34,4 +38,5 @@ export const {
 	useLazyGetUserQuery,
     useLazyGetUsersQuery,
     useSearchUsersMutation,
+	useGetAllGroupsQuery,
 } = usersApiSlice;

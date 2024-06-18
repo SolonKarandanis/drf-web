@@ -10,13 +10,14 @@ import CFormInput from '@/shared/components/form-input/cform-input';
 import CButton from '@/shared/components/button/cbutton';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-// import { useAppDispatch } from '@/shared/redux/hooks';
+import { useAppDispatch } from '@/shared/redux/hooks';
 import CFormSelect from '@/shared/components/form-select/cform-select';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { passwordStrength } from "check-password-strength";
 import PasswordStrength from '@/shared/components/password-strength/password-strength';
 import { ValidationError } from '@/models/error.models';
+import { useGetAllGroupsQuery } from '@/shared/redux/features/users/usersApiSlice';
 import { registerUser } from '@/actions/register-user';
 
 type RegisterSchema = z.infer<typeof RegisterSchema>;
@@ -36,8 +37,8 @@ const RegisterForm = () => {
     const t = useTranslations();
     const rform='REGISTER.FORM';
     const router = useRouter();
-    // const [registerUser, { isLoading }] = useRegisterUserMutation();
-    // const dispatch = useAppDispatch();
+    const { data, error, isLoading } = useGetAllGroupsQuery();
+    const dispatch = useAppDispatch();
 
     const {
         register,

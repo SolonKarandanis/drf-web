@@ -6,4 +6,8 @@ export enum ApiControllers {
     ORDERS = `orders`,
 }
 
+export const AllowedUrls = [
+    `${ApiControllers.USERS}/groups`
+]
+
 

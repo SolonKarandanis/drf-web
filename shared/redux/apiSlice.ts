@@ -6,7 +6,7 @@ import type {
 } from '@reduxjs/toolkit/query';
 import {  logout, setAccesToken } from './features/authSlice';
 import { Mutex } from 'async-mutex';
-import { ApiControllers } from './api/ApiControllers';
+import { AllowedUrls, ApiControllers } from './api/ApiControllers';
 import { RefreshResponse } from '@/models/user.models';
 import { 
 	getAccessTokenValue, 
@@ -23,12 +23,7 @@ const baseQueryWithReauth: BaseQueryFn<
 	unknown,
 	FetchBaseQueryError
 > = async (args, api, extraOptions) => {
-	let headers;
-
 	const token = getAccessTokenValue();
-	if(token){
-		headers = {Authorization: `Bearer ${token}`}
-	}
 	
 	await mutex.waitForUnlock();
 	
@@ -36,7 +31,11 @@ const baseQueryWithReauth: BaseQueryFn<
 	const baseQuery = fetchBaseQuery({
 		baseUrl: `${process.env.NEXT_PUBLIC_HOST}/api`,
 		credentials: 'include',
-		headers,
+		prepareHeaders: (headers, { getState,endpoint }) => {
+			if (token && !AllowedUrls.includes(endpoint)) headers.set('Authorization', `Bearer ${token}`);
+			
+			return headers;
+		}
 	});
 
 	let result = await baseQuery(args, api, extraOptions);
