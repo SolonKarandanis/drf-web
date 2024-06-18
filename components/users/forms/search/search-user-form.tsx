@@ -23,11 +23,11 @@ import {
 } from "@/shared/shadcn/components/ui/select"
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
-import { useSearchUsersMutation } from '@/shared/redux/features/users/usersApiSlice';
+import { useLazyGetAllGroupsQuery, useSearchUsersMutation } from '@/shared/redux/features/users/usersApiSlice';
 import { UserSearchRequest, UserSearchResponse } from '@/models/search.models';
 import { UserStatus } from '@/models/user.models';
 import { ErrorResponse } from '@/models/error.models';
-import { setUsers,resetUsers,setSearchRequest,resetSearchRequest, initialRequest } from '@/shared/redux/features/users/usersSlice';
+import { setUsers,resetUsers,setSearchRequest,resetSearchRequest, initialRequest, setUserGroups } from '@/shared/redux/features/users/usersSlice';
 import { useTranslations } from 'next-intl';
 import ButtonLoading from '@/shared/components/button-loading/button-loading';
 import { useSearchUsers } from '@/hooks/use-search-users';
@@ -41,8 +41,14 @@ interface Props{
 
 const SearchUserForm:FC<Props> = ({}) => {
     const t = useTranslations();
+    const [getAllGroups] = useLazyGetAllGroupsQuery();
     const usersState = useAppSelector((state) => state.users);
-    // const [loading] = useSearchUsers(null);
+    if(usersState.userGroups.length===0){
+        getAllGroups()
+            .unwrap()
+            .then((groups) => dispatch(setUserGroups(groups)))
+    }
+    const userGroups = usersState.userGroups
 
     const dispatch = useAppDispatch();
     const [search, { isLoading, }] = useSearchUsersMutation();
@@ -159,8 +165,13 @@ const SearchUserForm:FC<Props> = ({}) => {
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        <SelectItem value="1">Buyer</SelectItem>
-                                        <SelectItem value="2">Seller</SelectItem>
+                                        {userGroups.map((group)=>(
+                                            <SelectItem 
+                                                key={group.id}
+                                                value={String(group.id)}>
+                                                {group.name}
+                                            </SelectItem>
+                                        ))}
                                     </SelectContent> 
                                 </Select>
                             </FormItem>
