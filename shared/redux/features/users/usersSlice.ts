@@ -1,5 +1,5 @@
 import { Paging, UserSearchRequest, UserSearchResponse } from '@/models/search.models';
-import { UserAcount, UserModel } from '@/models/user.models';
+import { UserAcount, UserGroup, UserModel, UserStatus } from '@/models/user.models';
 import { createListenerMiddleware, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 
@@ -11,6 +11,8 @@ interface UsersState {
     previous:number| null;
     tableSearchField:string;
     request:UserSearchRequest;
+    userGroups:UserGroup[];
+    userStatuses:UserStatus[];
 	selectedUser:UserAcount | null;
     error:string| null;
 }
@@ -40,6 +42,8 @@ const initialState = {
     previous: null,
     tableSearchField: "firstName",
     request: initialRequest,
+    userGroups: [],
+    userStatuses:[],
 	selectedUser:null,
 	error:null,
 } as UsersState;
@@ -76,6 +80,9 @@ const usersSlice = createSlice({
         },
         setSelectedUser: (state,action:PayloadAction<UserAcount>)=>{
             state.selectedUser = action.payload;
+        },
+        setUserGroups: (state,action:PayloadAction<UserGroup[]>)=>{
+            state.userGroups= action.payload
         },
         setError: (state)=>{
 

@@ -1,12 +1,12 @@
 import { UserSearchRequest } from "@/models/search.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
-import { UserAcount, UserModel } from "@/models/user.models";
+import { UserAcount, UserGroup, UserModel } from "@/models/user.models";
 
 const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: builder =>({
-        getUser: builder.query<UserAcount, void>({
-			query: (userId) => `${ApiControllers.USERS}/${userId}`,
+        getUser: builder.query<UserAcount, string>({
+			query: (userUuid) => `${ApiControllers.USERS}/${userUuid}`,
 		}),
         getUsers: builder.query<UserModel[], {page:number,size:number}>({
 			query: ({page,size}) => `${ApiControllers.USERS}/`,
@@ -21,6 +21,9 @@ const usersApiSlice = apiSlice.injectEndpoints({
 			}
 			
 		}),
+		getAllGroups: builder.query<UserGroup[],void>({
+			query:() => `${ApiControllers.USERS}/groups`
+		})
     }),
     // @ts-ignore
 	overrideExisting: module.hot?.status() === "apply",
