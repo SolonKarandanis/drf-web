@@ -10,7 +10,7 @@ import CFormInput from '@/shared/components/form-input/cform-input';
 import CButton from '@/shared/components/button/cbutton';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-import { useAppDispatch } from '@/shared/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
 import CFormSelect from '@/shared/components/form-select/cform-select';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
@@ -20,19 +20,10 @@ import { ValidationError } from '@/models/error.models';
 import { useLazyGetAllGroupsQuery } from '@/shared/redux/features/users/usersApiSlice';
 import { registerUser } from '@/actions/register-user';
 import { setUserGroups } from '@/shared/redux/features/users/usersSlice';
+import { Options } from '@/shared/components/props';
 
 type RegisterSchema = z.infer<typeof RegisterSchema>;
 
-const roles =[
-    {
-        value:1,
-        label:'Buyer',
-    },
-    {
-        value:2,
-        label:'Seller',
-    }
-]
 
 const RegisterForm = () => {
     const t = useTranslations();
@@ -40,6 +31,13 @@ const RegisterForm = () => {
     const router = useRouter();
     const [getAllGroups] = useLazyGetAllGroupsQuery();
     const dispatch = useAppDispatch();
+    const usersState = useAppSelector((state) => state.users);
+    const userGroups = usersState.userGroups.map((group)=> {
+        return {
+            value:group.id,
+            label:group.name
+        } as Options
+    })
 
     useEffect(()=>{
         getAllGroups()
@@ -99,16 +97,6 @@ const RegisterForm = () => {
             toast.success(t(`${rform}.SUCCESS.summary`));
             router.push('/auth/login');
         }
-        // dispatch(setLoading(true));
-        // registerUser(request)
-		// 	.unwrap()
-		// 	.then(() => {
-		// 		toast.success(t(`${rform}.SUCCESS.summary`));
-        //         router.push('/auth/login');
-		// 	})
-		// 	.catch((error:ErrorResponse) => {
-		// 		handleError(error);
-		// 	});
     }
 
     return (
@@ -150,7 +138,7 @@ const RegisterForm = () => {
                 </CFormInput>
                 <CFormSelect 
                     name="role"
-                    options={roles}
+                    options={userGroups}
                     required={true}
                     inputProps={register("role")}
                     className="text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:max-w-xs sm:text-sm sm:leading-6"
