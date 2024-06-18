@@ -117,5 +117,6 @@ export const {
     setSearchRequest,
     resetSearchRequest,
     setPaging,
+    setUserGroups,
 } = usersSlice.actions;
 export default usersSlice.reducer;

@@ -17,8 +17,9 @@ import { useEffect, useState } from 'react';
 import { passwordStrength } from "check-password-strength";
 import PasswordStrength from '@/shared/components/password-strength/password-strength';
 import { ValidationError } from '@/models/error.models';
-import { useGetAllGroupsQuery } from '@/shared/redux/features/users/usersApiSlice';
+import { useLazyGetAllGroupsQuery } from '@/shared/redux/features/users/usersApiSlice';
 import { registerUser } from '@/actions/register-user';
+import { setUserGroups } from '@/shared/redux/features/users/usersSlice';
 
 type RegisterSchema = z.infer<typeof RegisterSchema>;
 
@@ -37,9 +38,17 @@ const RegisterForm = () => {
     const t = useTranslations();
     const rform='REGISTER.FORM';
     const router = useRouter();
-    const { data, error, isLoading } = useGetAllGroupsQuery();
+    const [getAllGroups] = useLazyGetAllGroupsQuery();
     const dispatch = useAppDispatch();
 
+    useEffect(()=>{
+        getAllGroups()
+            .unwrap()
+            .then((groups) => dispatch(setUserGroups(groups)))
+    },[])
+
+    
+    
     const {
         register,
         handleSubmit,

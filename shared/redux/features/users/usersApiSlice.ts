@@ -38,5 +38,5 @@ export const {
 	useLazyGetUserQuery,
     useLazyGetUsersQuery,
     useSearchUsersMutation,
-	useGetAllGroupsQuery,
+	useLazyGetAllGroupsQuery,
 } = usersApiSlice;
