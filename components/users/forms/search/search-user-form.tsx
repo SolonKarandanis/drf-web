@@ -62,7 +62,7 @@ const SearchUserForm:FC<Props> = ({}) => {
             email:initialRequest.email,
             name:initialRequest.name,
             username:initialRequest.username,
-            role:initialRequest.role,
+            role:String(initialRequest.role),
             status:undefined
         }
     })
@@ -81,7 +81,7 @@ const SearchUserForm:FC<Props> = ({}) => {
             username,
             email,
             name,
-            role,
+            role: Number(role),
             status: UserStatus[status as keyof typeof UserStatus],
             paging
         }
@@ -97,6 +97,7 @@ const SearchUserForm:FC<Props> = ({}) => {
     }
 
     const clear =() =>{
+        form.reset()
         dispatch(resetSearchRequest());
         dispatch(resetUsers());
     }
@@ -158,7 +159,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                             render={({ field }) => (
                             <FormItem data-testid="role">
                                 <FormLabel>User Role</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue="">
+                                <Select onValueChange={field.onChange} defaultValue="" >
                                     <FormControl>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select a role" />
@@ -177,6 +178,11 @@ const SearchUserForm:FC<Props> = ({}) => {
                             </FormItem>
                             )}
                         />
+                        {errors.role? (
+                            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {errors.role?.message}
+                            </p>
+                        ): null}
 
                         <FormField
                             control={form.control}
