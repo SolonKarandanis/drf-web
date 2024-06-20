@@ -164,5 +164,14 @@
                 "summary": "Please check email to verify account"
             } 
         }
+    },
+    "USERS":{
+        "SEARCH":{
+            "PAGE":{
+                "title":"Search Users",
+                "activepage":"Users",
+                "mainpage":"Search Users"
+            }
+        }
     }
 }
