@@ -33,6 +33,7 @@ import  Html2Pdf from 'js-html2pdf'
 import { LuArrowDownAZ } from "react-icons/lu";
 import { LuArrowUpAZ } from "react-icons/lu";
 import { SortDirection } from '@/models/search.models';
+import { useTranslations } from 'next-intl';
 
 
 interface DataTableProps<TData, TValue> {
@@ -58,6 +59,7 @@ export function DataTable<TData, TValue>({
     onPagination,
     onSorting,
 }: DataTableProps<TData, TValue>){
+    const t = useTranslations();
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -142,7 +144,7 @@ export function DataTable<TData, TValue>({
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant='outline' className='ml-auto'>
-                                Export as
+                                {t("GLOBAL.EXPORT-AS")}
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent >
@@ -150,7 +152,7 @@ export function DataTable<TData, TValue>({
                                 onClick={handlePrint}
                                 variant='outline'
                                 className='w-20'>
-                                Pdf
+                                {t("GLOBAL.PDF")}
                             </Button>
                         </DropdownMenuContent>
                     </DropdownMenu>
@@ -158,7 +160,7 @@ export function DataTable<TData, TValue>({
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant='outline' className='ml-auto'>
-                                Columns
+                                {t("GLOBAL.COLUMNS")}
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align='end'>
@@ -244,7 +246,7 @@ export function DataTable<TData, TValue>({
                                     colSpan={columns.length}
                                     className='h-24 text-center'
                                 >
-                                    No results.
+                                    {t("GLOBAL.NO-RESULTS")}
                                 </TableCell>
                             </TableRow>
                         )}
@@ -262,7 +264,7 @@ export function DataTable<TData, TValue>({
                     }}
                     disabled={!Boolean(previous)}
                 >
-                    Previous
+                    {t("GLOBAL.BUTTONS.previous")}
                 </Button>
                 <Button
                     variant='outline'
@@ -273,13 +275,13 @@ export function DataTable<TData, TValue>({
                     }}
                     disabled={!Boolean(next)}
                 >
-                    Next
+                    {t("GLOBAL.BUTTONS.next")}
                 </Button>
                 <span className="flex items-center gap-1">
-                    <div>Page</div>
+                    <div>{t("GLOBAL.PAGE")}</div>
                     <strong>
                         {next ? next -1: pages}
-                        of{' '}
+                        {t("GLOBAL.OF")}{' '}
                         {pages}
                     </strong>
                 </span>
@@ -293,7 +295,7 @@ export function DataTable<TData, TValue>({
                 >
                     {[5, 10, 20, 30, 40, 50].map(pageSize => (
                         <option key={pageSize} value={pageSize}>
-                        Show {pageSize}
+                        {t("GLOBAL.SHOW")} {pageSize}
                         </option>
                     ))}
                 </select>

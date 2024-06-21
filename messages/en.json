@@ -2,6 +2,13 @@
     "GLOBAL":{
         "UNAUTHORIZED": "You are not authorized to access this page",
         "OR":"OR",
+        "NO-RESULTS":"No results.",
+        "PAGE":"Page",
+        "OF":"of",
+        "SHOW":"Show",
+        "COLUMNS":"Columns",
+        "EXPORT-AS":"Export as",
+        "PDF":"Pdf",
         "BUTTONS":{
             "cancel": "Cancel",
             "load": "Load",
@@ -21,7 +28,9 @@
             "select": "Select",
             "ok": "OK",
             "yes": "Yes",
-            "no": "No"
+            "no": "No",
+            "previous":"Previous",
+            "next":"Next"
         },
         "FORMS": {
             "ERRORS": {

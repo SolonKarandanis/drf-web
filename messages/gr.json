@@ -2,6 +2,13 @@
     "GLOBAL":{
         "UNAUTHORIZED": "You are not authorized to access this page",
         "OR":"Ή",
+        "NO-RESULTS":"Χωρίς αποτέλεσμα.",
+        "PAGE":"Σελίδα",
+        "OF":"του",
+        "SHOW":"Προβολή",
+        "COLUMNS":"Στήλες",
+        "EXPORT-AS":"Εξαγωγή ως",
+        "PDF":"Pdf",
         "BUTTONS":{
             "cancel": "Ματαίωση",
             "load": "Φόρτωση",
@@ -21,7 +28,9 @@
             "select": "Επιλογή",
             "ok": "OK",
             "yes": "Ναι",
-            "no": "Όχι"
+            "no": "Όχι",
+            "previous":"Προηγούμενη",
+            "next":"Επόμενη"
         },
         "FORMS": {
             "ERRORS": {

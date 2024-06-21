@@ -30,7 +30,6 @@ import { ErrorResponse } from '@/models/error.models';
 import { setUsers,resetUsers,setSearchRequest,resetSearchRequest, initialRequest, setUserGroups } from '@/shared/redux/features/users/usersSlice';
 import { useTranslations } from 'next-intl';
 import ButtonLoading from '@/shared/components/button-loading/button-loading';
-import { useSearchUsers } from '@/hooks/use-search-users';
 
 
 type Inputs = z.infer<typeof UserSearchSchema>
