@@ -114,7 +114,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                             name="username"
                             render={({ field }) => (
                             <FormItem data-testid="username">
-                                <FormLabel>Username</FormLabel>
+                                <FormLabel>{t("USERS.SEARCH.FORM.LABELS.username")}</FormLabel>
                                 <FormControl>
                                     <Input 
                                         data-testid="input-username"
@@ -128,7 +128,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                             name="name"
                             render={({ field }) => (
                             <FormItem data-testid="name">
-                                <FormLabel>Name</FormLabel>
+                                <FormLabel>{t("USERS.SEARCH.FORM.LABELS.name")}</FormLabel>
                                 <FormControl>
                                     <Input 
                                         data-testid="input-name" 
@@ -142,7 +142,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                             name="email"
                             render={({ field }) => (
                             <FormItem data-testid="email">
-                                <FormLabel>Email</FormLabel>
+                                <FormLabel>{t("USERS.SEARCH.FORM.LABELS.email")}</FormLabel>
                                 <FormControl>
                                     <Input 
                                         data-testid="input-email" 
@@ -158,7 +158,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                             name="role"
                             render={({ field }) => (
                             <FormItem data-testid="role">
-                                <FormLabel>User Role</FormLabel>
+                                <FormLabel>{t("USERS.SEARCH.FORM.LABELS.role")}</FormLabel>
                                 <Select onValueChange={field.onChange} defaultValue="" >
                                     <FormControl>
                                         <SelectTrigger>
@@ -189,7 +189,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                             name="status"
                             render={({ field }) => (
                             <FormItem data-testid="status">
-                                <FormLabel>User Status</FormLabel>
+                                <FormLabel>{t("USERS.SEARCH.FORM.LABELS.status")}</FormLabel>
                                 <Select onValueChange={field.onChange} defaultValue="">
                                     <FormControl>
                                         <SelectTrigger>

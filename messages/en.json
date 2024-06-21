@@ -168,9 +168,18 @@
     "USERS":{
         "SEARCH":{
             "PAGE":{
-                "title":"Search Users",
+                "currentpage":"Search Users",
                 "activepage":"Users",
                 "mainpage":"Search Users"
+            },
+            "FORM":{
+                "LABELS":{
+                    "email":"Email",
+                    "username":"Username",
+                    "name":"Name",
+                    "role":"User Role",
+                    "status": "User Status"
+                }
             }
         }
     }
