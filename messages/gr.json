@@ -178,7 +178,25 @@
                     "username":"Όνομα χρήστη",
                     "name":"Όνομα",
                     "role":"Ρόλος χρήστη",
-                    "status": "Κατάσταση χρήστη"
+                    "status": "Κατάσταση χρήστη",
+                    "status-active":"Ενεργός",
+                    "status-unverified":"Ανεπιβεβαίωτος",
+                    "status-deactivated":"Απενεργοποιημένος",
+                    "status-deleted":"Διαγραμένος"
+                },
+                "TABLE":{
+                    "COLUMNS":{
+                        "id":"Id",
+                        "username":"Όνομα χρήστη",
+                        "firstName":"Όνομα",
+                        "lastName":"Επίθετο",
+                        "status":"Κατάσταση χρήστη",
+                        "email":"Email",
+                        "createdDate":"Δημιουργήθηκε",
+                        "uuid":"Uuid",
+                        "actions":"Ενέργειες"
+                    }
+                    
                 }
             }
         }

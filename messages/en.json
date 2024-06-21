@@ -178,7 +178,25 @@
                     "username":"Username",
                     "name":"Name",
                     "role":"User Role",
-                    "status": "User Status"
+                    "status": "User Status",
+                    "status-active":"Active",
+                    "status-unverified":"Unverified",
+                    "status-deactivated":"Deactivated",
+                    "status-deleted":"Deleted"
+                },
+                "TABLE":{
+                    "COLUMNS":{
+                        "id":"Id",
+                        "username":"Username",
+                        "firstName":"First Name",
+                        "lastName":"Last Name",
+                        "status":"Status",
+                        "email":"Email",
+                        "createdDate":"Created",
+                        "uuid":"Uuid",
+                        "actions":"Actions"
+                    }
+                    
                 }
             }
         }

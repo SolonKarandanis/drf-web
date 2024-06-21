@@ -197,10 +197,18 @@ const SearchUserForm:FC<Props> = ({}) => {
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        <SelectItem value="ACTIVE">Active</SelectItem>
-                                        <SelectItem value="UNVERIFIED">Unverified</SelectItem>
-                                        <SelectItem value="DEACTIVATED">Deactivated</SelectItem>
-                                        <SelectItem value="DELETED">Deleted</SelectItem>
+                                        <SelectItem value="ACTIVE">
+                                            {t("USERS.SEARCH.FORM.LABELS.status-active")}
+                                        </SelectItem>
+                                        <SelectItem value="UNVERIFIED">
+                                            {t("USERS.SEARCH.FORM.LABELS.status-unverified")}
+                                        </SelectItem>
+                                        <SelectItem value="DEACTIVATED">
+                                            {t("USERS.SEARCH.FORM.LABELS.status-deactivated")}
+                                        </SelectItem>
+                                        <SelectItem value="DELETED">
+                                            {t("USERS.SEARCH.FORM.LABELS.status-deleted")}
+                                        </SelectItem>
                                     </SelectContent> 
                                 </Select>
                             </FormItem>
