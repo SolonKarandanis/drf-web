@@ -3,6 +3,7 @@ import * as z from "zod";
 import { RegisterSchema } from '@/schemas/auth.schemas';
 import { objectToArrayOfObjects } from "@/utils/functions";
 import { ClientValidationError, BackendValidationError } from "@/models/error.models";
+import { CreateUserRequest } from "@/models/user.models";
 
 
 type RegisterSchema = z.infer<typeof RegisterSchema>;

@@ -57,7 +57,6 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
   const path = process.env.NODE_ENV === "production" ? basePath : "";
   const session = await getServerSession(authOptions);
   const loggedInUser= session!.user!;
-//   loggedInUser
   const groupNames =getUserGroups(loggedInUser);
   const roles = groupNames.join(', ');
   
