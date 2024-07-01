@@ -44,8 +44,6 @@ const RegisterForm = () => {
             .unwrap()
             .then((groups) => dispatch(setUserGroups(groups)))
     },[])
-
-    
     
     const {
         register,
