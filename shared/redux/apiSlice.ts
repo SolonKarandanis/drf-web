@@ -13,6 +13,7 @@ import {
 	removeLoginResponseFromStorage, 
 	setStorageValue 
 } from '@/utils/functions';
+import { baseUrl } from '@/utils/constants';
 
 const mutex = new Mutex();
 
@@ -29,7 +30,7 @@ const baseQueryWithReauth: BaseQueryFn<
 	
 
 	const baseQuery = fetchBaseQuery({
-		baseUrl: `${process.env.NEXT_PUBLIC_HOST}/api`,
+		baseUrl: baseUrl,
 		credentials: 'include',
 		prepareHeaders: (headers, { getState,endpoint }) => {
 			if (token && !AllowedUrls.includes(endpoint)) headers.set('Authorization', `Bearer ${token}`);
