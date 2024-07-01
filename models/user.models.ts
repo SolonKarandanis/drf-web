@@ -70,3 +70,12 @@ export interface LoginResponse{
 }
 
 export type RefreshResponse = Pick<LoginResponse, "access">;
+
+export interface UserSocials{
+    id:number;
+    userId:number;
+    socialId:number;
+    url:string;
+    socialName:string;
+    socialIcon:string;
+}

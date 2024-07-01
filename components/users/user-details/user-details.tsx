@@ -43,7 +43,7 @@ const UserDetails:FC<Props> = ({userUuid,path}) => {
   }
 
   if(data){
-    dispatch(setSelectedUser(data));
+    // dispatch(setSelectedUser(data));
     const groupNames =getUserGroups(data);
     const roles = groupNames.join(', ');
     const details = data.details;
