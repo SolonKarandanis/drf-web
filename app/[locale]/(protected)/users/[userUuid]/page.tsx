@@ -1,9 +1,7 @@
 import PageHeader from '@/shared/layout-components/page-header/PageHeader';
 import { Metadata } from 'next';
-import Image from 'next/image';
 import {FC} from 'react'
 import { basePath } from '@/next.config';
-import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import { getUserGroups } from '@/utils/user-utils';
@@ -12,6 +10,8 @@ import ContactInformation from '@/components/users/user-details/contanct-informa
 import SocialNetworks from '@/components/users/user-details/social-networks';
 import RecentActivity from '@/components/users/user-details/recent-activity';
 import PreviousOrders from '@/components/users/user-details/previous-orders';
+import { useAction } from "next-safe-action/hooks"
+import { getUserDetailsAction } from '@/actions/get-user-details';
 
 export const metadata:Metadata={
   title:"Drf User Profile Page",
@@ -59,6 +59,7 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
   const loggedInUser= session!.user!;
   const groupNames =getUserGroups(loggedInUser);
   const roles = groupNames.join(', ');
+  const { execute, result, isExecuting } = useAction(getUserDetailsAction)
   
   return (
     <>
