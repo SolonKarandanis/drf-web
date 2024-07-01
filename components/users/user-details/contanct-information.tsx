@@ -2,12 +2,12 @@ import {FC} from 'react'
 
 interface Props{
     email:string;
-    phone:string;
-    country:string;
-    city:string;
-    state:string;
-    zipCode:string;
-    address:string
+    phone?:string;
+    country?:string;
+    city?:string;
+    state?:string;
+    zipCode?:string;
+    address?:string
 }
 
 const ContactInformation:FC<Props> = ({

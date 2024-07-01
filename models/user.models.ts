@@ -27,6 +27,7 @@ export interface UserModel extends BaseUserModel {
 
 export interface UserDetails{
     userId:number;
+    country?:string;
     state?:string;
     city?:string;
     address?:string;
