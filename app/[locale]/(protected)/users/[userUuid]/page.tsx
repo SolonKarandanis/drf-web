@@ -10,6 +10,7 @@ import ContactInformation from '@/components/users/user-details/contanct-informa
 import SocialNetworks from '@/components/users/user-details/social-networks';
 import RecentActivity from '@/components/users/user-details/recent-activity';
 import PreviousOrders from '@/components/users/user-details/previous-orders';
+import UserDetails from '@/components/users/user-details/user-details';
 
 
 export const metadata:Metadata={
@@ -21,21 +22,6 @@ export const metadata:Metadata={
     }
   ]
 }
-
-const Skillsdata = [
-  { id: 1, text: 'Cloud computing' },
-  { id: 2, text: 'Data analysis' },
-  { id: 3, text: 'DevOps' },
-  { id: 4, text: 'Machine learning' },
-  { id: 5, text: 'Programming' },
-  { id: 6, text: 'Security' },
-  { id: 7, text: 'Python' },
-  { id: 8, text: 'JavaScript' },
-  { id: 9, text: 'Ruby' },
-  { id: 10, text: 'PowerShell' },
-  { id: 11, text: 'Statistics' },
-  { id: 12, text: 'SQL' },
-];
 
 const Personalinfodata = [
   { id: 1, text1: 'Name :', text2: 'Sonya Taylor' },
@@ -66,43 +52,7 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
         <div className="grid grid-cols-12 gap-x-6">
           <div className="col-span-12 xxl:col-span-4 xl:col-span-12">
             <div className="overflow-hidden box">
-              <div className="box-body !p-0">
-                <Profile  
-                    firstName={loggedInUser.firstName}
-                    lastName={loggedInUser.lastName}
-                    roles={roles}
-                    image={`${path}/assets/images/faces/9.jpg`}
-                    city='Athens'
-                    country='Greece'/>
-
-                <div className="items-center justify-between p-6 border-b border-dashed dark:border-defaultborder/10 md:flex">
-                    <div className="mb-6">
-                      <p className="text-[.9375rem] mb-2 font-semibold">Professional Bio :</p>
-                      <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 opacity-[0.7] mb-0">
-                          I am <b className="text-defaulttextcolor">Sonya Taylor,</b> here by conclude that,i am the founder and managing director of the prestigeous company name laugh at all and acts as the cheif executieve officer of the company.
-                      </p>
-                    </div>
-                </div>
-                <ContactInformation 
-                    email={loggedInUser.email}
-                    phone='+(555) 555-1234'
-                    address='Maiandrou 58'
-                    city='Athens'
-                    country='Greece'
-                    state='Attiki'
-                    zipCode='14233'/>
-                    
-                <SocialNetworks />
-                
-                <div className="p-6 border-b border-dashed dark:border-defaultborder/10">
-                  <p className="text-[.9375rem] mb-2 me-6 font-semibold">Skills :</p>
-                  <div>
-                      {Skillsdata.map((idx)=>(
-                          <span key={Math.random()} className="badge bg-light text-[#8c9097] dark:text-white/50 m-1">{idx.text}</span>
-                      ))}
-                  </div>
-                </div>
-              </div>
+              <UserDetails userUuid={userUuid} path={path} />
             </div>
           </div>
           <div className="col-span-12 xxl:col-span-8 xl:col-span-12">

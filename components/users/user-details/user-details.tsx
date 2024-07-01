@@ -26,7 +26,7 @@ const Skillsdata = [
 
 interface Props{
   userUuid:string;
-  path:string;
+  path?:string;
 }
 
 const UserDetails:FC<Props> = ({userUuid,path}) => {
