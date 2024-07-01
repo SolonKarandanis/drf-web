@@ -14,11 +14,13 @@ export const getUserDetailsAction = actionClient
 .schema(schema)
 .action(async ({ parsedInput: { uuid, accessToken } })=>{
     
-    await fetch(`${baseUrl}/${ApiControllers.USERS}/${uuid}`, {
+    const result = await fetch(`${baseUrl}/${ApiControllers.USERS}/${uuid}`, {
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json",
             'Authorization': `Bearer ${accessToken}`
         }
     })
+
+    return result
 });
