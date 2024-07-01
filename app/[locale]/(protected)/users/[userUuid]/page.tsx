@@ -1,6 +1,6 @@
 import PageHeader from '@/shared/layout-components/page-header/PageHeader';
 import { Metadata } from 'next';
-import {FC} from 'react'
+import {FC, useEffect} from 'react'
 import { basePath } from '@/next.config';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
@@ -59,7 +59,12 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
   const loggedInUser= session!.user!;
   const groupNames =getUserGroups(loggedInUser);
   const roles = groupNames.join(', ');
-  const { execute, result, isExecuting } = useAction(getUserDetailsAction)
+
+  // useEffect(()=>{
+  //   const result = getUserDetailsAction({uuid:userUuid,accessToken:loggedInUser.access})
+  //   console.log(result)
+  // },[])
+  // const { execute, result, isExecuting } = useAction(getUserDetailsAction)
   
   return (
     <>
