@@ -1,12 +1,12 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import SocialNetworks from "./social-networks";
-import { useGetUserQuery } from "@/shared/redux/features/users/usersApiSlice";
+import { useLazyGetUserQuery } from "@/shared/redux/features/users/usersApiSlice";
 import Profile from "./profile";
 import { getUserGroups } from "@/utils/user-utils";
 import ContactInformation from "./contanct-information";
-import { useAppDispatch } from "@/shared/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { setSelectedUser } from "@/shared/redux/features/users/usersSlice";
 
 
@@ -32,27 +32,37 @@ interface Props{
 }
 
 const UserDetails:FC<Props> = ({userUuid,path}) => {
-  const { data, error, isLoading } = useGetUserQuery(userUuid)
+  const [getUser, results] = useLazyGetUserQuery();
   const dispatch = useAppDispatch();
-  if(isLoading){
+  const usersState = useAppSelector((state) => state.users);
+
+   useEffect(()=>{
+    getUser(userUuid)
+      .unwrap()
+      .then((user) => dispatch(setSelectedUser(user)))
+  },[])
+
+  if(results.isLoading){
     return <>Loading...</>
   }
 
-  if(error){
+  if(results.isError){
     return <>Oh no, there was an error</>
   }
 
-  if(data){
-    // dispatch(setSelectedUser(data));
-    const groupNames =getUserGroups(data);
+ 
+
+  if(results.data){
+    const user = results.data;
+    const groupNames =getUserGroups(user);
     const roles = groupNames.join(', ');
-    const details = data.details;
+    const details = user.details;
 
     return (
       <div className="box-body !p-0">
         <Profile  
-          firstName={data.firstName}
-          lastName={data.lastName}
+          firstName={user.firstName}
+          lastName={user.lastName}
           roles={roles}
           image={`${path}/assets/images/faces/9.jpg`}
           city={details?.city}
@@ -67,7 +77,7 @@ const UserDetails:FC<Props> = ({userUuid,path}) => {
         </div>
 
         <ContactInformation 
-          email={data.email}
+          email={user.email}
           phone={details?.phone}
           address={details?.address}
           city={details?.city}
