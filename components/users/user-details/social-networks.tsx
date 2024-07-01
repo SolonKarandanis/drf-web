@@ -4,7 +4,11 @@ import {FC} from 'react'
 import { useAction } from "next-safe-action/hooks"
 import { getUserSocialsAction } from '@/actions/get-user-socials'
 
-const SocialNetworks = () => {
+interface Props{
+    userUuid:string;
+}
+
+const SocialNetworks:FC<Props> = ({userUuid}) => {
   return (
     <div className="items-center p-6 border-b border-dashed dark:border-defaultborder/10 sm:flex">
         <p className="text-[.9375rem] mb-2 me-6 font-semibold">

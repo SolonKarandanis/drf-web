@@ -6,6 +6,8 @@ import { useGetUserQuery } from "@/shared/redux/features/users/usersApiSlice";
 import Profile from "./profile";
 import { getUserGroups } from "@/utils/user-utils";
 import ContactInformation from "./contanct-information";
+import { useAppDispatch } from "@/shared/redux/hooks";
+import { setSelectedUser } from "@/shared/redux/features/users/usersSlice";
 
 
 const Skillsdata = [
@@ -31,6 +33,7 @@ interface Props{
 
 const UserDetails:FC<Props> = ({userUuid,path}) => {
   const { data, error, isLoading } = useGetUserQuery(userUuid)
+  const dispatch = useAppDispatch();
   if(isLoading){
     return <>Loading...</>
   }
@@ -40,6 +43,7 @@ const UserDetails:FC<Props> = ({userUuid,path}) => {
   }
 
   if(data){
+    dispatch(setSelectedUser(data));
     const groupNames =getUserGroups(data);
     const roles = groupNames.join(', ');
     const details = data.details;
@@ -71,7 +75,7 @@ const UserDetails:FC<Props> = ({userUuid,path}) => {
           state={details?.state}
           zipCode={details?.zip}/>
           
-        <SocialNetworks />
+        <SocialNetworks userUuid={userUuid} />
         <div className="p-6 border-b border-dashed dark:border-defaultborder/10">
           <p className="text-[.9375rem] mb-2 me-6 font-semibold">Skills :</p>
           <div>
