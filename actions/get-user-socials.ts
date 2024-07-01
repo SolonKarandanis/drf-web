@@ -15,7 +15,7 @@ export const getUserSocialsAction = actionClient
 .action(async ({ parsedInput: { uuid, accessToken } })=>{
     
     const result = await fetch(`${baseUrl}/${ApiControllers.USERS}/${uuid}`, {
-        method: 'PATCH',
+        method: 'GET',
         headers: {
             "Content-Type": "application/json",
             'Authorization': `Bearer ${accessToken}`

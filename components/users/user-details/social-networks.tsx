@@ -1,4 +1,8 @@
+"use client";
+
 import {FC} from 'react'
+import { useAction } from "next-safe-action/hooks"
+import { getUserSocialsAction } from '@/actions/get-user-socials'
 
 const SocialNetworks = () => {
   return (
