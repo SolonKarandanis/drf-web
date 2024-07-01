@@ -5,8 +5,8 @@ interface Props{
     firstName:string;
     lastName:string;
     roles:string;
-    country:string;
-    city:string;
+    country?:string;
+    city?:string;
     image:string
 }
 

@@ -51,8 +51,8 @@ const UserDetails:FC<Props> = ({userUuid,path}) => {
           lastName={data.lastName}
           roles={roles}
           image={`${path}/assets/images/faces/9.jpg`}
-          city='Athens'
-          country='Greece'/>
+          city={details?.city}
+          country={details?.country}/>
         <div className="items-center justify-between p-6 border-b border-dashed dark:border-defaultborder/10 md:flex">
           <div className="mb-6">
             <p className="text-[.9375rem] mb-2 font-semibold">Professional Bio :</p>
