@@ -1,7 +1,7 @@
 "use client";
 
 import { useAction } from "next-safe-action/hooks"
-import { getUserDetailsAction } from '@/actions/get-user-details';
+import { getUserSocialsAction } from '@/actions/get-user-socials'
 
 
 const UserDetails = () => {

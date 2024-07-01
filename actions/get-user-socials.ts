@@ -10,7 +10,7 @@ const schema = z.object({
     accessToken:z.string()
 });
 
-export const getUserDetailsAction = actionClient
+export const getUserSocialsAction = actionClient
 .schema(schema)
 .action(async ({ parsedInput: { uuid, accessToken } })=>{
     
