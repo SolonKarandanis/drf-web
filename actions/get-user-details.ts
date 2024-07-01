@@ -1,25 +1,24 @@
 "use server"
 
 import { actionClient } from "@/lib/safe-action"
+import { ApiControllers } from "@/shared/redux/api/ApiControllers";
+import { baseUrl } from "@/utils/constants";
 import * as z from "zod";
 
 const schema = z.object({
     uuid: z.string(),
+    accessToken:z.string()
 });
 
 export const getUserDetailsAction = actionClient
 .schema(schema)
-.action(async ({ parsedInput: { uuid } })=>{
+.action(async ({ parsedInput: { uuid, accessToken } })=>{
     
-    // await fetch(`http://localhost:3500/users/${id}`, {
-    //     method: 'PATCH',
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //         firstname: firstname,
-    //         lastname: lastname,
-    //         email: email,
-    //     })
-    // })
+    await fetch(`${baseUrl}/${ApiControllers.USERS}/${uuid}`, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${accessToken}`
+        }
+    })
 });
