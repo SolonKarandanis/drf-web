@@ -5,6 +5,8 @@ import { basePath } from '@/next.config';
 import RecentActivity from '@/components/users/user-details/recent-activity';
 import PreviousOrders from '@/components/users/user-details/previous-orders';
 import UserDetails from '@/components/users/user-details/user-details';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 
 
 export const metadata:Metadata={
@@ -34,10 +36,8 @@ interface Props{
 
 const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
   const path = process.env.NODE_ENV === "production" ? basePath : "";
-  // const session = await getServerSession(authOptions);
-  // const loggedInUser= session!.user!;
-  // const groupNames =getUserGroups(loggedInUser);
-  // const roles = groupNames.join(', ');
+  const session = await getServerSession(authOptions);
+  const loggedInUser= session!.user!;
   
   return (
     <>

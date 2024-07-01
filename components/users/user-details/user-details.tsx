@@ -66,7 +66,7 @@ const UserDetails:FC<Props> = ({userUuid,path}) => {
           </div>
         </div>
 
-      <ContactInformation 
+        <ContactInformation 
           email={data.email}
           phone={details?.phone}
           address={details?.address}
