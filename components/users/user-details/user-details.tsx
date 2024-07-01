@@ -36,7 +36,8 @@ const UserDetails:FC<Props> = ({userUuid,path}) => {
   const dispatch = useAppDispatch();
   const usersState = useAppSelector((state) => state.users);
 
-   useEffect(()=>{
+
+  useEffect(()=>{
     getUser(userUuid)
       .unwrap()
       .then((user) => dispatch(setSelectedUser(user)))

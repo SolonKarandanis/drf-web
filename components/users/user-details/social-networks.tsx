@@ -3,15 +3,18 @@
 import {FC, useEffect} from 'react'
 import { useAction } from "next-safe-action/hooks"
 import { getUserSocialsAction } from '@/actions/get-user-socials'
+import { useSession } from 'next-auth/react';
 
 interface Props{
     userUuid:string;
 }
 
 const SocialNetworks:FC<Props> = ({userUuid}) => {
+    const { data: session, status } = useSession()
+    const access = session!.access
     const { execute, result } = useAction(getUserSocialsAction);
     useEffect(()=>{
-        // execute({ uuid:userUuid });
+        execute({ uuid:userUuid, accessToken:access });
     },[])
     return (
         <div className="items-center p-6 border-b border-dashed dark:border-defaultborder/10 sm:flex">
