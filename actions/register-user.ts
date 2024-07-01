@@ -4,10 +4,11 @@ import { RegisterSchema } from '@/schemas/auth.schemas';
 import { objectToArrayOfObjects } from "@/utils/functions";
 import { ClientValidationError, BackendValidationError } from "@/models/error.models";
 import { CreateUserRequest } from "@/models/user.models";
+import { baseUrl } from "@/utils/constants";
 
 
 type RegisterSchema = z.infer<typeof RegisterSchema>;
-const baseUrl= process.env.NEXTAUTH_BACKEND_URL;
+
 
 export async function registerUser(data:RegisterSchema){
     const result = RegisterSchema.safeParse(data);
