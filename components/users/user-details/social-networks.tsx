@@ -23,7 +23,7 @@ const SocialNetworks:FC<Props> = ({userUuid}) => {
                         aria-label="button" 
                         type="button" 
                         className={`ti-btn ti-btn-sm mb-1 ${social.buttonCssClass}`}>
-                        <a href={social.url} className={`font-semibold ${social.socialIcon}`}></a>
+                        <a href={social.url} target="_blank" className={`font-semibold ${social.socialIcon}`}></a>
                     </button>
                 ))}
             </div>
