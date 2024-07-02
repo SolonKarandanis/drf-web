@@ -1,7 +1,7 @@
 import { UserSearchRequest } from "@/models/search.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
-import { UserAcount, UserGroup, UserModel } from "@/models/user.models";
+import { UserAcount, UserGroup, UserModel, UserSocials } from "@/models/user.models";
 
 const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: builder =>({
@@ -27,6 +27,13 @@ const usersApiSlice = apiSlice.injectEndpoints({
 					url:`${ApiControllers.USERS}/groups`,
 				}
 			}
+		}),
+		getUserSocials: builder.query<UserSocials[],string>({
+			query:(userUuid) =>{
+				return {
+					url:`${ApiControllers.SOCIALS}/${ApiControllers.USERS}/${userUuid}`,
+				}
+			}
 		})
     }),
     // @ts-ignore
@@ -39,4 +46,5 @@ export const {
     useLazyGetUsersQuery,
     useSearchUsersMutation,
 	useLazyGetAllGroupsQuery,
+	useGetUserSocialsQuery,
 } = usersApiSlice;

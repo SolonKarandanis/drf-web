@@ -4,6 +4,7 @@ export enum ApiControllers {
     PRODUCTS = `products`,
     CART = `cart`,
     ORDERS = `orders`,
+    SOCIALS = 'socials'
 }
 
 export const AllowedUrls = [
