@@ -1,7 +1,6 @@
 "use server"
 
 import { actionClient } from "@/lib/safe-action"
-import { UserSocials } from "@/models/user.models";
 import { fetchUserSocials } from "@/shared/redux/api/fetch/fetch-user-socials";
 import * as z from "zod";
 

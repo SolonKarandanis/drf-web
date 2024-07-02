@@ -31,7 +31,7 @@ const usersApiSlice = apiSlice.injectEndpoints({
 		getUserSocials: builder.query<UserSocials[],string>({
 			query:(userUuid) =>{
 				return {
-					url:`${ApiControllers.SOCIALS}/${ApiControllers.USERS}/${userUuid}`,
+					url:`${ApiControllers.SOCIALS}/users/${userUuid}`,
 				}
 			}
 		})

@@ -78,4 +78,5 @@ export interface UserSocials{
     url:string;
     socialName:string;
     socialIcon:string;
+    buttonCssClass:string;
 }
