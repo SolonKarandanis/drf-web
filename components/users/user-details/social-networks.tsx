@@ -14,7 +14,7 @@ const SocialNetworks:FC<Props> = ({userUuid}) => {
     const access = session!.access
     const { execute, result } = useAction(getUserSocialsAction);
     useEffect(()=>{
-        execute({ uuid:userUuid, accessToken:access });
+        execute({ uuid:userUuid});
     },[])
     return (
         <div className="items-center p-6 border-b border-dashed dark:border-defaultborder/10 sm:flex">
