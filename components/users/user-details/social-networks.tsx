@@ -1,7 +1,8 @@
 "use client";
 
+import { UserSocials } from '@/models/user.models';
 import { useGetUserSocialsQuery } from '@/shared/redux/features/users/usersApiSlice';
-import {FC} from 'react'
+import {FC, useOptimistic, useTransition} from 'react'
 
 
 interface Props{
@@ -9,7 +10,29 @@ interface Props{
 }
 
 const SocialNetworks:FC<Props> = ({userUuid}) => {
-    const {data: socials,isLoading,} = useGetUserSocialsQuery(userUuid);
+    const {data: socials=[],isLoading,} = useGetUserSocialsQuery(userUuid);
+    const [optimisticSocials, setOptimisticSocials] = useOptimistic(socials,(state:UserSocials[],newSocial:UserSocials)=>{
+        return [...state, newSocial];
+    });
+    const [isPending, startTransition] = useTransition();
+    // const [search, { isLoading, }] = useSearchUsersMutation();
+    // async function addSocial() {
+    //     try {
+    //         setOptimisticSocials(newTodo) 
+    //         await search(newTodo);
+    //     } catch (error) {
+    //         console.error(error);
+    //     } 
+    // }
+//     <button
+//     onClick={() =>
+//       startTransition(() => handleUpdate(!optimisticTodo.isCompleted))
+//     }
+//     disabled={isPending}
+//   >
+//     {optimisticTodo.isCompleted ? 'Uncheck' : 'Check'}
+//   </button>
+
     if (isLoading) return <div>Loading...</div>
     return (
         <div className="items-center p-6 border-b border-dashed dark:border-defaultborder/10 sm:flex">
@@ -17,7 +40,7 @@ const SocialNetworks:FC<Props> = ({userUuid}) => {
                 Social Networks :
             </p>
             <div className="mb-0 btn-list">
-                {socials?.map(social=> (
+                {optimisticSocials?.map(social=> (
                     <button 
                         key={social.id} 
                         aria-label="button" 
