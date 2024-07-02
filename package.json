@@ -73,6 +73,7 @@
     "sass": "^1.72.0",
     "simplebar-react": "^3.2.4",
     "swiper": "^11.0.7",
+    "swr": "^2.2.5",
     "tailwind-clip-path": "^1.0.0",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
