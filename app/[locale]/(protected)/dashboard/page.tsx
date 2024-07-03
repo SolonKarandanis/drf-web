@@ -1,9 +1,13 @@
-import Accordion from "@/shared/components/accordion/accordion";
 import Card from "@/shared/components/card/card";
 import List from "@/shared/components/list/list";
 import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 import { Metadata } from "next";
-
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/shared/shadcn/components/ui/accordion"
 
 
 export const metadata:Metadata={
@@ -88,17 +92,14 @@ const Page = async () => {
             <List.ListItem>First Item</List.ListItem>
             <List.ListItem>Second Item</List.ListItem>
           </List>
-          {/* <Accordion>
-            <Accordion.Title>LogRocket FAQ</Accordion.Title>
-            <Accordion.Wrapper>
-              {faqData.map((item) =>(
-                <Accordion.Item key={item.id}>
-                  <Accordion.ItemHeader>{item.header}</Accordion.ItemHeader>
-                  <Accordion.Body>{item.body}</Accordion.Body>
-                </Accordion.Item>
-              ))}
-            </Accordion.Wrapper>
-          </Accordion> */}
+          <Accordion type="single" collapsible>
+            <AccordionItem value="item-1">
+              <AccordionTrigger>Is it accessible?</AccordionTrigger>
+              <AccordionContent>
+                Yes. It adheres to the WAI-ARIA design pattern.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </div>
     </div>
