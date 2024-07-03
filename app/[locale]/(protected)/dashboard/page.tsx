@@ -8,6 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/shared/shadcn/components/ui/accordion"
+import { Calendar } from "@/shared/shadcn/components/ui/calendar";
 
 
 export const metadata:Metadata={
@@ -22,7 +23,6 @@ export const metadata:Metadata={
 
 
 const Page = async () => {
-
   const olderDate = new Date('2022-10-31');
   const currentDate = new Date('2022-11-01');
 
@@ -100,6 +100,7 @@ const Page = async () => {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
+          
         </div>
       </div>
     </div>
