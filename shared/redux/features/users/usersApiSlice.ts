@@ -47,6 +47,7 @@ const usersApiSlice = apiSlice.injectEndpoints({
 
 export const {
 	useLazyGetUserQuery,
+	useLazyGetUserImageQuery,
     useLazyGetUsersQuery,
     useSearchUsersMutation,
 	useLazyGetAllGroupsQuery,

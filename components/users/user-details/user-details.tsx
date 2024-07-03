@@ -2,12 +2,12 @@
 
 import { FC, useEffect } from "react";
 import SocialNetworks from "./social-networks";
-import { useLazyGetUserQuery } from "@/shared/redux/features/users/usersApiSlice";
+import { useLazyGetUserImageQuery, useLazyGetUserQuery } from "@/shared/redux/features/users/usersApiSlice";
 import Profile from "./profile";
 import { getUserGroups } from "@/utils/user-utils";
 import ContactInformation from "./contanct-information";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
-import { setSelectedUser } from "@/shared/redux/features/users/usersSlice";
+import { setProfileImage, setSelectedUser } from "@/shared/redux/features/users/usersSlice";
 
 
 const Skillsdata = [
@@ -32,7 +32,8 @@ interface Props{
 }
 
 const UserDetails:FC<Props> = ({userUuid,path}) => {
-  const [getUser, results] = useLazyGetUserQuery();
+  const [getUser, slectedUser] = useLazyGetUserQuery();
+  const [getUserImage, image] = useLazyGetUserImageQuery();
   const dispatch = useAppDispatch();
   const usersState = useAppSelector((state) => state.users);
 
@@ -40,21 +41,28 @@ const UserDetails:FC<Props> = ({userUuid,path}) => {
   useEffect(()=>{
     getUser(userUuid)
       .unwrap()
-      .then((user) => dispatch(setSelectedUser(user)))
+      .then((user) => {
+        dispatch(setSelectedUser(user))
+        getUserImage(userUuid)
+          .unwrap()
+          .then((image)=>{
+            dispatch(setProfileImage(image))
+          })
+      })
   },[])
 
-  if(results.isLoading){
+  if(slectedUser.isLoading){
     return <>Loading...</>
   }
 
-  if(results.isError){
+  if(slectedUser.isError){
     return <>Oh no, there was an error</>
   }
 
  
 
-  if(results.data){
-    const user = results.data;
+  if(slectedUser.data){
+    const user = slectedUser.data;
     const groupNames =getUserGroups(user);
     const roles = groupNames.join(', ');
     const details = user.details;

@@ -1,3 +1,4 @@
+import { Image } from '@/models/image.models';
 import { Paging, UserSearchRequest, UserSearchResponse } from '@/models/search.models';
 import { UserAcount, UserGroup, UserModel, UserStatus } from '@/models/user.models';
 import { createListenerMiddleware, createSlice } from '@reduxjs/toolkit';
@@ -14,6 +15,7 @@ interface UsersState {
     userGroups:UserGroup[];
     userStatuses:UserStatus[];
 	selectedUser:UserAcount | null;
+    userProfileImage:Image | null;
     error:string| null;
 }
 
@@ -45,6 +47,7 @@ const initialState = {
     userGroups: [],
     userStatuses:[],
 	selectedUser:null,
+    userProfileImage: null,
 	error:null,
 } as UsersState;
 
@@ -81,6 +84,9 @@ const usersSlice = createSlice({
         setSelectedUser: (state,action:PayloadAction<UserAcount>)=>{
             state.selectedUser = action.payload;
         },
+        setProfileImage:(state,action:PayloadAction<Image>)=>{
+            state.userProfileImage= action.payload
+        },
         setUserGroups: (state,action:PayloadAction<UserGroup[]>)=>{
             state.userGroups= action.payload
         },
@@ -113,6 +119,7 @@ export const userSearchlistenerMiddleware = createListenerMiddleware();
 export const { 
     setUsers,
     setSelectedUser,
+    setProfileImage,
     resetUsers,
     setSearchRequest,
     resetSearchRequest,
