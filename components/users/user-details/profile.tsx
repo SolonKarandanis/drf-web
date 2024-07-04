@@ -28,12 +28,14 @@ const Profile:FC<Props> = ({
         <div className="items-start p-6 sm:flex main-profile-cover">
             <div>
                 <span className="avatar avatar-xxl avatar-rounded online me-4">
-                    {image ? (<Image
-                        alt="profile-picture"
-                        src={`${host}${image.image}`}
-                        width={700}
-                        height={475}
-                        sizes="100vw"/>): null}
+                    {image ? (
+                        <Image
+                            alt="profile-picture"
+                            src={`${host}${image.image}`}
+                            width={700}
+                            height={475}
+                            sizes="100vw"/>
+                        ): null}
                 </span>
             </div>
             <div className="flex-grow main-profile-info">
