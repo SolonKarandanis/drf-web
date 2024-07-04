@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import themeReducer from './features/themeSlice';
 import usersReducer, { userSearchlistenerMiddleware } from './features/users/usersSlice'
+import configReducer from './features/config/configSlice'
 import { apiSlice } from './apiSlice';
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -14,6 +15,7 @@ const usersPersistConfig = {
 const reducers = combineReducers({
   users: persistReducer(usersPersistConfig, usersReducer),
   theme: themeReducer,
+  config:configReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
 })
 
