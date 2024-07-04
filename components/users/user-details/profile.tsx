@@ -4,6 +4,7 @@ import {FC} from 'react'
 import Image from 'next/image';
 import { ImageModel } from '@/models/image.models';
 import { useAppSelector } from '@/shared/redux/hooks';
+import ZoomableImage from '@/shared/components/zoomable-image/zoomable-image';
 
 interface Props{
     firstName:string;
@@ -29,12 +30,10 @@ const Profile:FC<Props> = ({
             <div>
                 <span className="avatar avatar-xxl avatar-rounded online me-4">
                     {image ? (
-                        <Image
-                            alt="profile-picture"
-                            src={`${host}${image.image}`}
-                            width={700}
-                            height={475}
-                            sizes="100vw"/>
+                        <ZoomableImage
+                            alt={image.alt}
+                            title={image.title}
+                            src={`${host}${image.image}`}/>
                         ): null}
                 </span>
             </div>
