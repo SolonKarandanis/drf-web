@@ -1,25 +1,26 @@
+import { ConfigModel } from '@/models/config.model';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-interface ConfigState{
-    baseUrl:string;
-}
 
 const initialState ={
-    baseUrl:''
-} as ConfigState
+    baseUrl:'',
+    djangoHost:''
+} as ConfigModel
 
 const configSlice = createSlice({
     name: 'config',
 	initialState,
     reducers:{
-        setBaseUrl: (state, action:PayloadAction<string>) =>{
-            state.baseUrl = action.payload;
+        setConfig: (state, action:PayloadAction<ConfigModel>) =>{
+            const config = action.payload;
+            state.baseUrl = config.baseUrl;
+            state.djangoHost=config.djangoHost;
         }
     }
 });
 
 export const { 
-    setBaseUrl,
+    setConfig,
 } = configSlice.actions;
 export default configSlice.reducer;

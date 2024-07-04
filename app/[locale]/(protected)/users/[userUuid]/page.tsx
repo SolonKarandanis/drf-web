@@ -1,7 +1,6 @@
 import PageHeader from '@/shared/layout-components/page-header/PageHeader';
 import { Metadata } from 'next';
 import {FC} from 'react'
-import { basePath } from '@/next.config';
 import RecentActivity from '@/components/users/user-details/recent-activity';
 import PreviousOrders from '@/components/users/user-details/previous-orders';
 import UserDetails from '@/components/users/user-details/user-details';
@@ -35,7 +34,6 @@ interface Props{
 }
 
 const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
-  const path = process.env.NODE_ENV === "production" ? basePath : "";
   const session = await getServerSession(authOptions);
   const loggedInUser= session!.user!;
   const access = loggedInUser.access;
@@ -47,7 +45,7 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
         <div className="grid grid-cols-12 gap-x-6">
           <div className="col-span-12 xxl:col-span-4 xl:col-span-12">
             <div className="overflow-hidden box">
-              <UserDetails userUuid={userUuid} path={path} />
+              <UserDetails userUuid={userUuid} />
             </div>
           </div>
           <div className="col-span-12 xxl:col-span-8 xl:col-span-12">

@@ -28,14 +28,14 @@ const Skillsdata = [
 
 interface Props{
   userUuid:string;
-  path?:string;
 }
 
-const UserDetails:FC<Props> = ({userUuid,path}) => {
+const UserDetails:FC<Props> = ({userUuid}) => {
   const [getUser, userData] = useLazyGetUserQuery();
   const [getUserImage, imageData] = useLazyGetUserImageQuery();
   const dispatch = useAppDispatch();
-  const usersState = useAppSelector((state) => state.users);
+  const configState = useAppSelector((state) => state.config);
+  const path = configState.baseUrl;
 
 
   useEffect(()=>{
@@ -74,7 +74,7 @@ const UserDetails:FC<Props> = ({userUuid,path}) => {
           firstName={user.firstName}
           lastName={user.lastName}
           roles={roles}
-          image={`${path}/assets/images/faces/9.jpg`}
+          image={image}
           city={details?.city}
           country={details?.country}/>
         <div className="items-center justify-between p-6 border-b border-dashed dark:border-defaultborder/10 md:flex">
