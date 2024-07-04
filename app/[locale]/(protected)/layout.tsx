@@ -4,6 +4,8 @@ import ContentLayout from '@/shared/layout-components/layout/content-layout';
 import { Locale, locales } from '@/utils/locales';
 import { getServerSession } from 'next-auth';
 import { unstable_setRequestLocale } from 'next-intl/server';
+import { basePath } from '@/next.config';
+import Setpath from '@/components/auth/set-path';
 
 type Props = {
 	children: React.ReactNode;
@@ -19,10 +21,12 @@ export default async function Layout({ children,params:{locale} }: Props) {
 	console.log('-------->Layout')
 	console.log(user)
 	unstable_setRequestLocale(locale);
+	const path = process.env.NODE_ENV === "production" ? basePath : "";
 
 	return (
 		<ContentLayout>
 			<SetTokensLocalStorage />
+			<Setpath path={path} />
 			{children}
 		</ContentLayout>
 	)
