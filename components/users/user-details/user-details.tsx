@@ -32,8 +32,8 @@ interface Props{
 }
 
 const UserDetails:FC<Props> = ({userUuid,path}) => {
-  const [getUser, slectedUser] = useLazyGetUserQuery();
-  const [getUserImage, image] = useLazyGetUserImageQuery();
+  const [getUser, userData] = useLazyGetUserQuery();
+  const [getUserImage, imageData] = useLazyGetUserImageQuery();
   const dispatch = useAppDispatch();
   const usersState = useAppSelector((state) => state.users);
 
@@ -51,21 +51,22 @@ const UserDetails:FC<Props> = ({userUuid,path}) => {
       })
   },[])
 
-  if(slectedUser.isLoading){
+  if(userData.isLoading){
     return <>Loading...</>
   }
 
-  if(slectedUser.isError){
+  if(userData.isError){
     return <>Oh no, there was an error</>
   }
 
  
 
-  if(slectedUser.data){
-    const user = slectedUser.data;
+  if(userData.data){
+    const user = userData.data;
     const groupNames =getUserGroups(user);
     const roles = groupNames.join(', ');
     const details = user.details;
+    const image = imageData.data;
 
     return (
       <div className="box-body !p-0">

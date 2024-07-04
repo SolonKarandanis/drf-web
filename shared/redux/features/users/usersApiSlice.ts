@@ -2,14 +2,14 @@ import { UserSearchRequest } from "@/models/search.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
 import { UserAcount, UserGroup, UserModel, UserSocials } from "@/models/user.models";
-import { Image } from "@/models/image.models";
+import { ImageModel } from "@/models/image.models";
 
 const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: builder =>({
         getUser: builder.query<UserAcount, string>({
 			query: (userUuid) => `${ApiControllers.USERS}/${userUuid}`,
 		}),
-		getUserImage: builder.query<Image, string>({
+		getUserImage: builder.query<ImageModel, string>({
 			query: (userUuid) => `${ApiControllers.USERS}/${userUuid}/image/`,
 		}),
         getUsers: builder.query<UserModel[], {page:number,size:number}>({

@@ -1,5 +1,6 @@
 import {FC} from 'react'
 import Image from 'next/image';
+import { ImageModel } from '@/models/image.models';
 
 interface Props{
     firstName:string;
@@ -7,7 +8,8 @@ interface Props{
     roles:string;
     country?:string;
     city?:string;
-    image:string
+    image?:ImageModel;
+    path?:string;
 }
 
 const Profile:FC<Props> = ({
