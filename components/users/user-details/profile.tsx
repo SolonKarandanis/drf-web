@@ -1,7 +1,6 @@
 "use client";
 
 import {FC} from 'react'
-import Image from 'next/image';
 import { ImageModel } from '@/models/image.models';
 import { useAppSelector } from '@/shared/redux/hooks';
 import ZoomableImage from '@/shared/components/zoomable-image/zoomable-image';
