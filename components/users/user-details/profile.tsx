@@ -4,6 +4,7 @@ import {FC} from 'react'
 import { ImageModel } from '@/models/image.models';
 import { useAppSelector } from '@/shared/redux/hooks';
 import ZoomableImage from '@/shared/components/zoomable-image/zoomable-image';
+import Image from "next/image";
 
 interface Props{
     firstName:string;
@@ -24,6 +25,7 @@ const Profile:FC<Props> = ({
 }) => {
     const configState = useAppSelector((state) => state.config);
     const host = configState.djangoHost
+    const path = configState.baseUrl
     return (
         <div className="items-start p-6 sm:flex main-profile-cover">
             <div>
@@ -33,7 +35,16 @@ const Profile:FC<Props> = ({
                             alt={image.alt}
                             title={image.title}
                             src={`${host}${image.image}`}/>
-                        ): null}
+                        ): (
+                            <Image
+                                alt="no-image"
+                                src={`${path}/assets/images1/faces/21.jpg`}
+                                width={700}
+                                height={475}
+                                sizes="100vw"
+                                className="h-[1.25rem] w-[1.25rem] rounded-full"
+                            />
+                        )}
                 </span>
             </div>
             <div className="flex-grow main-profile-info">
