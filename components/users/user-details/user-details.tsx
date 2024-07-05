@@ -8,6 +8,7 @@ import { getUserGroups } from "@/utils/user-utils";
 import ContactInformation from "./contanct-information";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { setProfileImage, setSelectedUser } from "@/shared/redux/features/users/usersSlice";
+import ProfileLoading from "./profile-loading";
 
 
 const Skillsdata = [
@@ -30,12 +31,13 @@ interface Props{
   userUuid:string;
 }
 
-const UserDetails:FC<Props> = ({userUuid}) => {
+const UserDetails:FC<Props> =  ({userUuid}) => {
   const [getUser, userData] = useLazyGetUserQuery();
   const [getUserImage, imageData] = useLazyGetUserImageQuery();
   const dispatch = useAppDispatch();
   const configState = useAppSelector((state) => state.config);
   const path = configState.baseUrl;
+  const isLoading = true
 
 
   useEffect(()=>{
@@ -50,10 +52,6 @@ const UserDetails:FC<Props> = ({userUuid}) => {
           })
       })
   },[])
-
-  if(userData.isLoading){
-    return <>Loading...</>
-  }
 
   if(userData.isError){
     return <>Oh no, there was an error</>
@@ -70,13 +68,21 @@ const UserDetails:FC<Props> = ({userUuid}) => {
 
     return (
       <div className="box-body !p-0">
-        <Profile  
-          firstName={user.firstName}
-          lastName={user.lastName}
-          roles={roles}
-          image={image}
-          city={details?.city}
-          country={details?.country}/>
+        {userData.isLoading? 
+          (
+            <ProfileLoading/>
+          ):
+          (
+            <Profile  
+              firstName={user.firstName}
+              lastName={user.lastName}
+              roles={roles}
+              image={image}
+              city={details?.city}
+              country={details?.country}/>
+          )
+        }
+       
         <div className="items-center justify-between p-6 border-b border-dashed dark:border-defaultborder/10 md:flex">
           <div className="mb-6">
             <p className="text-[.9375rem] mb-2 font-semibold">Professional Bio :</p>
