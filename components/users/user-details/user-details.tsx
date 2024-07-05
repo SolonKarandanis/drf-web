@@ -84,11 +84,21 @@ const UserDetails:FC<Props> =  ({userUuid}) => {
         }
        
         <div className="items-center justify-between p-6 border-b border-dashed dark:border-defaultborder/10 md:flex">
-          <div className="mb-6">
+          <div className="w-full mb-6 ">
             <p className="text-[.9375rem] mb-2 font-semibold">Professional Bio :</p>
-            <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 opacity-[0.7] mb-0">
-                I am <b className="text-defaulttextcolor">Sonya Taylor,</b> here by conclude that,i am the founder and managing director of the prestigeous company name laugh at all and acts as the cheif executieve officer of the company.
-            </p>
+            {isLoading ? (
+                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
+                  <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                  <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                  <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700"></div>
+                </div>
+              ):
+              (
+                <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 opacity-[0.7] mb-0">
+                  {user.bio}
+                </p>
+              )
+            }
           </div>
         </div>
 
