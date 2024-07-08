@@ -33,23 +33,33 @@ const SocialNetworks:FC<Props> = ({userUuid}) => {
 //     {optimisticTodo.isCompleted ? 'Uncheck' : 'Check'}
 //   </button>
 
-    if (isLoading) return <div>Loading...</div>
     return (
         <div className="items-center p-6 border-b border-dashed dark:border-defaultborder/10 sm:flex">
             <p className="text-[.9375rem] mb-2 me-6 font-semibold">
                 Social Networks :
             </p>
-            <div className="mb-0 btn-list">
-                {optimisticSocials?.map(social=> (
-                    <button 
-                        key={social.id} 
-                        aria-label="button" 
-                        type="button" 
-                        className={`ti-btn ti-btn-sm mb-1 ${social.buttonCssClass}`}>
-                        <a href={social.url} target="_blank" className={`font-semibold ${social.socialIcon}`}></a>
-                    </button>
-                ))}
-            </div>
+            {isLoading ? (
+                <div role="status" className="mb-1 animate-pulse ">
+                    <div role="status" className="animate-pulse">
+                        <div className="w-32 h-3 bg-gray-400 rounded-full dark:bg-gray-700"></div>
+                    </div>
+                </div>
+            ):(
+                <>
+                    <div className="mb-0 btn-list">
+                        {optimisticSocials?.map(social=> (
+                            <button 
+                                key={social.id} 
+                                aria-label="button" 
+                                type="button" 
+                                className={`ti-btn ti-btn-sm mb-1 ${social.buttonCssClass}`}>
+                                <a href={social.url} target="_blank" className={`font-semibold ${social.socialIcon}`}></a>
+                            </button>
+                        ))}
+                    </div>
+                </>
+            )}
+            
         </div>
     )
 }
