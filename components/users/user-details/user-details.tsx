@@ -109,7 +109,8 @@ const UserDetails:FC<Props> =  ({userUuid}) => {
           city={details?.city}
           country={details?.country}
           state={details?.state}
-          zipCode={details?.zip}/>
+          zipCode={details?.zip}
+          isLoading={userData.isLoading}/>
           
         <SocialNetworks userUuid={userUuid} />
         <div className="p-6 border-b border-dashed dark:border-defaultborder/10">

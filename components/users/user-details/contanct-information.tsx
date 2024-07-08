@@ -7,7 +7,8 @@ interface Props{
     city?:string;
     state?:string;
     zipCode?:string;
-    address?:string
+    address?:string;
+    isLoading:boolean;
 }
 
 const ContactInformation:FC<Props> = ({
@@ -17,7 +18,8 @@ const ContactInformation:FC<Props> = ({
     city,
     state,
     zipCode,
-    address
+    address,
+    isLoading = false
 }) => {
     let location=''
     if(address){
@@ -41,24 +43,48 @@ const ContactInformation:FC<Props> = ({
             Contact Information :
             </p>
             <div className="text-[#8c9097] dark:text-white/50">
-                <p className="mb-2">
+                <div className="flex items-center mb-2">
                     <span className="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
                         <i className="ri-mail-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
                     </span>
-                    {email}
-                </p>
-                <p className="mb-2">
+                    {isLoading ? (
+                        <div role="status" className="animate-pulse">
+                            <div className="w-32 h-3 bg-gray-400 rounded-full dark:bg-gray-700"></div>
+                        </div>
+                    ):(
+                        <>
+                            {email}
+                        </>
+                    )}
+                </div>
+                <div className="flex items-center mb-2">
                     <span className="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
                         <i className="ri-phone-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
                     </span>
-                    {phone}
-                </p>
-                <p className="mb-0">
+                    {isLoading ? (
+                        <div role="status" className="animate-pulse">
+                            <div className="h-3 bg-gray-400 rounded-full w-28 dark:bg-gray-700"></div>
+                        </div>
+                    ):(
+                        <>
+                            {phone}
+                        </>
+                    )}
+                </div>
+                <div className="flex items-center mb-0">
                     <span className="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
                         <i className="ri-map-pin-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
                     </span>
-                    {location}
-                </p>
+                    {isLoading ? (
+                        <div role="status" className="animate-pulse">
+                            <div className="w-56 h-3 bg-gray-400 rounded-full dark:bg-gray-700"></div>
+                        </div>
+                    ):(
+                        <>
+                            {location}
+                        </>
+                    )}
+                </div>
             </div>
         </div>
     )
