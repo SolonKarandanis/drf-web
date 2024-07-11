@@ -1,3 +1,5 @@
+"use client"
+
 import { cn } from "@/shared/shadcn/lib/utils";
 
 interface Props {
