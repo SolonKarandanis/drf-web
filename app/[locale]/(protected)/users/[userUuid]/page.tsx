@@ -53,19 +53,28 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
             <div className="grid grid-cols-12 gap-x-6">
               <div className="col-span-12 xl:col-span-12">
                 <div className="box">
+                  <div className="box-header">
+                        <div className="box-title">
+                            Actions
+                        </div>
+                  </div>
                   <div className="box-body !p-0">
                     <div className="!p-4 border-b dark:border-defaultborder/10 border-dashed md:flex items-center justify-between">
                       <nav className="-mb-0.5 sm:flex md:space-x-6 rtl:space-x-reverse pb-2">
-                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto active hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-primary text-primary" href="#!" id="activity-tab" data-hs-tab="#activity-tab-pane" aria-controls="activity-tab-pane">
+                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto active hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-purple text-primary" href="#!" 
+                            id="activity-tab" data-hs-tab="#activity-tab-pane" aria-controls="activity-tab-pane">
                               <i className="inline-block align-middle ri-gift-line me-1"></i>Activity
                           </Link>
-                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-primary text-primary" href="#!" id="posts-tab" data-hs-tab="#posts-tab-pane" aria-controls="posts-tab-pane">
+                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-danger text-primary bg-success" href="#!" 
+                            id="posts-tab" data-hs-tab="#posts-tab-pane" aria-controls="posts-tab-pane">
                               <i className="inline-block align-middle ri-bill-line me-1"></i>Posts
                           </Link>
-                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-primary text-primary" href="#!" id="followers-tab" data-hs-tab="#followers-tab-pane" aria-controls="followers-tab-pane">
+                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-purple text-primary bg-orange" href="#!" 
+                            id="followers-tab" data-hs-tab="#followers-tab-pane" aria-controls="followers-tab-pane">
                               <i className="inline-block align-middle ri-money-dollar-box-line me-1"></i>Friends
                           </Link>
-                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-primary text-primary" href="#!" id="gallery-tab" data-hs-tab="#gallery-tab-pane" aria-controls="gallery-tab-pane">
+                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-orange text-primary bg-danger" href="#!" 
+                            id="gallery-tab" data-hs-tab="#gallery-tab-pane" aria-controls="gallery-tab-pane">
                               <i className="inline-block align-middle ri-exchange-box-line me-1"></i>Gallery
                           </Link>
                       </nav>
