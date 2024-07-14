@@ -7,6 +7,7 @@ import UserDetails from '@/components/users/user-details/user-details';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import Link from 'next/link';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/shadcn/components/ui/tabs';
 
 
 export const metadata:Metadata={
@@ -55,36 +56,27 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
                 <div className="box">
                   <div className="box-header">
                         <div className="box-title">
-                            Actions
+                            Account
                         </div>
                   </div>
                   <div className="box-body !p-0">
                     <div className="!p-4 border-b dark:border-defaultborder/10 border-dashed md:flex items-center justify-between">
-                      <nav className="-mb-0.5 sm:flex md:space-x-6 rtl:space-x-reverse pb-2">
-                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto active hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-purple text-primary" href="#!" 
-                            id="activity-tab" data-hs-tab="#activity-tab-pane" aria-controls="activity-tab-pane">
-                              <i className="inline-block align-middle ri-gift-line me-1"></i>Account
-                          </Link>
-                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-danger text-primary bg-success" href="#!" 
-                            id="posts-tab" data-hs-tab="#posts-tab-pane" aria-controls="posts-tab-pane">
-                              <i className="inline-block align-middle ri-bill-line me-1"></i>Posts
-                          </Link>
-                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-purple text-primary bg-orange" href="#!" 
-                            id="followers-tab" data-hs-tab="#followers-tab-pane" aria-controls="followers-tab-pane">
-                              <i className="inline-block align-middle ri-money-dollar-box-line me-1"></i>Friends
-                          </Link>
-                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-orange text-primary bg-danger" href="#!" 
-                            id="gallery-tab" data-hs-tab="#gallery-tab-pane" aria-controls="gallery-tab-pane">
-                              <i className="inline-block align-middle ri-exchange-box-line me-1"></i>Gallery
-                          </Link>
-                      </nav>
-                    </div>
-                    <div className="!p-4">
-                      <div className="tab-content" id="myTabContent">
-                        <div className="tab-pane show active fade !p-0 !border-0" id="activity-tab-pane"
-                                                role="tabpanel" aria-labelledby="activity-tab" >
-                          
-
+                      <Tabs defaultValue="account" className="w-full">
+                        <TabsList>
+                          <TabsTrigger 
+                            value="settings">
+                            Settings
+                          </TabsTrigger>
+                          <TabsTrigger 
+                            value="change-password">
+                            Change Password
+                          </TabsTrigger>
+                          <TabsTrigger 
+                            value="status">
+                            Status
+                          </TabsTrigger>
+                        </TabsList>
+                        <TabsContent value="settings">
                           <div className="w-full max-w-full pl-1 xl:w-6/12">
                             <div className="relative flex flex-col h-full min-w-0 break-words bg-white border-0 shadow-soft-xl rounded-2xl bg-clip-border">
                               <div className="flex-auto p-4">
@@ -125,10 +117,34 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
                               </div>
                             </div>
                           </div>
-
-                        </div>
-                      </div>
+                        </TabsContent>
+                        <TabsContent value="change-password">
+                          Change your password here.
+                        </TabsContent>
+                        <TabsContent value="status">
+                          Status
+                        </TabsContent>
+                      </Tabs>
+                      {/* <nav className="-mb-0.5 sm:flex md:space-x-6 rtl:space-x-reverse pb-2">
+                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto active hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-purple text-primary" href="#!" 
+                            id="activity-tab" data-hs-tab="#activity-tab-pane" aria-controls="activity-tab-pane">
+                              <i className="inline-block align-middle ri-gift-line me-1"></i>Account
+                          </Link>
+                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-danger text-primary bg-success" href="#!" 
+                            id="posts-tab" data-hs-tab="#posts-tab-pane" aria-controls="posts-tab-pane">
+                              <i className="inline-block align-middle ri-bill-line me-1"></i>Posts
+                          </Link>
+                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-purple text-primary bg-orange" href="#!" 
+                            id="followers-tab" data-hs-tab="#followers-tab-pane" aria-controls="followers-tab-pane">
+                              <i className="inline-block align-middle ri-money-dollar-box-line me-1"></i>Friends
+                          </Link>
+                          <Link className="flex w-full px-4 py-2 text-sm rounded-md sm:w-auto hs-tab-active:font-semibold hs-tab-active:text-white hs-tab-active:bg-orange text-primary bg-danger" href="#!" 
+                            id="gallery-tab" data-hs-tab="#gallery-tab-pane" aria-controls="gallery-tab-pane">
+                              <i className="inline-block align-middle ri-exchange-box-line me-1"></i>Gallery
+                          </Link>
+                      </nav> */}
                     </div>
+                    
                   </div>
                 </div>
               </div>
