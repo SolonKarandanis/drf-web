@@ -4,7 +4,7 @@ import { UserAcount, UserGroup, UserModel, UserStatus } from '@/models/user.mode
 import { createListenerMiddleware, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-interface UsersState {
+export interface UsersState {
 	users:UserModel[];
     count: number| undefined;
     pages:number| null;

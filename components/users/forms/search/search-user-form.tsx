@@ -27,7 +27,7 @@ import { useLazyGetAllGroupsQuery, useSearchUsersMutation } from '@/shared/redux
 import { UserSearchRequest, UserSearchResponse } from '@/models/search.models';
 import { UserStatus } from '@/models/user.models';
 import { ErrorResponse } from '@/models/error.models';
-import { setUsers,resetUsers,setSearchRequest,resetSearchRequest, initialRequest, setUserGroups } from '@/shared/redux/features/users/usersSlice';
+import { setUsers,resetUsers,setSearchRequest,resetSearchRequest, initialRequest, setUserGroups, UsersState } from '@/shared/redux/features/users/usersSlice';
 import { useTranslations } from 'next-intl';
 import ButtonLoading from '@/shared/components/button-loading/button-loading';
 
@@ -41,7 +41,7 @@ interface Props{
 const SearchUserForm:FC<Props> = ({}) => {
     const t = useTranslations();
     const [getAllGroups] = useLazyGetAllGroupsQuery();
-    const usersState = useAppSelector((state) => state.users);
+    const usersState: UsersState = useAppSelector((state) => state.users);
     if(usersState.userGroups.length===0){
         getAllGroups()
             .unwrap()
