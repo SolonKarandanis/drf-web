@@ -32,7 +32,7 @@ export async function registerUser(data:RegisterSchema){
         username,
         password2:confirmPassword
     }
-    const response = await fetch(`${baseUrl}auth/users/create/`, {
+    const response = await fetch(`${baseUrl}/auth/users/create/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
