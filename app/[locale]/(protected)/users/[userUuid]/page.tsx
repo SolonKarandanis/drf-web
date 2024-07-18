@@ -118,6 +118,42 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
                             </div>
                           </div>
                         </div>
+                        <div className="w-full max-w-full px-3 xl:w-1/2 xl:flex-none">
+                          <div className="flex flex-wrap -mx-3">
+                            <div className="w-full max-w-full px-3 md:w-1/2 md:flex-none">
+                              <div className="relative flex flex-col min-w-0 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
+                                <div className="p-4 mx-6 mb-0 text-center bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+                                  <div className="w-16 h-16 text-center bg-center icon bg-gradient-to-tl from-purple-700 to-pink-500 shadow-soft-2xl rounded-xl">
+                                    <i className="relative text-xl text-white opacity-100 fas fa-landmark top-31/100"></i>
+                                  </div>
+                                </div>
+                                <div className="flex-auto p-4 pt-0 text-center">
+                                  <h6 className="mb-0 text-center">Salary</h6>
+                                  <span className="text-xs leading-tight">Belong Interactive</span>
+                                  <hr className="h-px my-4 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent" />
+                                  <h5 className="mb-0">+$2000</h5>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="w-full max-w-full px-3 mt-6 md:mt-0 md:w-1/2 md:flex-none">
+                              <div className="relative flex flex-col min-w-0 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
+                                <div className="p-4 mx-6 mb-0 text-center bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+                                  <div className="w-16 h-16 text-center bg-center icon bg-gradient-to-tl from-purple-700 to-pink-500 shadow-soft-2xl rounded-xl">
+                                    <i className="relative text-xl text-white opacity-100 fab fa-paypal top-31/100"></i>
+                                  </div>
+                                </div>
+                                <div className="flex-auto p-4 pt-0 text-center">
+                                  <h6 className="mb-0 text-center">Paypal</h6>
+                                  <span className="text-xs leading-tight">Freelance Payment</span>
+                                  <hr className="h-px my-4 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent" />
+                                  <h5 className="mb-0">$455.00</h5>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
                       </div>
                     </div>
                   </div>
