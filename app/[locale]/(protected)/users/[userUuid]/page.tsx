@@ -8,6 +8,8 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import Account from '@/components/users/user-details/account';
 import { basePath } from '@/next.config';
+import { FaPaypal } from "react-icons/fa";
+import { FaLandmark } from "react-icons/fa";
 
 
 export const metadata:Metadata={
@@ -124,7 +126,8 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
                               <div className="relative flex flex-col min-w-0 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
                                 <div className="p-4 mx-6 mb-0 text-center bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                                   <div className="w-16 h-16 text-center bg-center icon bg-gradient-to-tl from-purple-700 to-pink-500 shadow-soft-2xl rounded-xl">
-                                    <i className="relative text-xl text-white opacity-100 fas fa-landmark top-31/100"></i>
+                                    {/* <i className="relative text-xl text-white opacity-100 fas fa-landmark top-31/100"></i> */}
+                                    <FaLandmark className='relative text-xl text-white opacity-100 fas fa-landmark top-31/100' />
                                   </div>
                                 </div>
                                 <div className="flex-auto p-4 pt-0 text-center">
@@ -139,7 +142,8 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
                               <div className="relative flex flex-col min-w-0 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
                                 <div className="p-4 mx-6 mb-0 text-center bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                                   <div className="w-16 h-16 text-center bg-center icon bg-gradient-to-tl from-purple-700 to-pink-500 shadow-soft-2xl rounded-xl">
-                                    <i className="relative text-xl text-white opacity-100 fab fa-paypal top-31/100"></i>
+                                    {/* <i className="relative text-xl text-white opacity-100 fab fa-paypal top-31/100"></i> */}
+                                    <FaPaypal className='relative text-xl text-white opacity-100 fab fa-paypal top-31/100' />
                                   </div>
                                 </div>
                                 <div className="flex-auto p-4 pt-0 text-center">
