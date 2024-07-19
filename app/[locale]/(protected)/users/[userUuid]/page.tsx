@@ -8,7 +8,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import Account from '@/components/users/user-details/account';
 import { basePath } from '@/next.config';
-import { FaPaypal,FaLandmark, FaPlus } from "react-icons/fa";
+import { FaPaypal,FaLandmark, FaPlus,FaPencilAlt } from "react-icons/fa";
 
 
 export const metadata:Metadata={
@@ -175,9 +175,9 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
                               <div className="flex flex-wrap -mx-3">
                                 <div className="max-w-full px-3 mb-6 md:mb-0 md:w-1/2 md:flex-none">
                                   <div className="relative flex flex-row items-center flex-auto min-w-0 p-6 break-words bg-transparent border border-solid shadow-none rounded-xl border-slate-100 bg-clip-border">
-                                    <img className="mb-0 mr-4 w-1/10" src={`${path}/assets/images/logos/mastercard.png`} alt="logo" />
+                                    <img className="mb-0 mr-4 w-[10%]" src={`${path}/assets/images/logos/mastercard.png`} alt="logo" />
                                     <h6 className="mb-0">****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;7852</h6>
-                                    <i className="ml-auto cursor-pointer fas fa-pencil-alt text-slate-700" data-target="tooltip_trigger" data-placement="top"></i>
+                                    <FaPencilAlt  className="ml-auto cursor-pointer text-slate-700" data-target="tooltip_trigger" data-placement="top"/>
                                     <div data-target="tooltip" className="hidden px-2 py-1 text-sm text-white bg-black rounded-lg">
                                       Edit Card
                                       <div className="invisible absolute h-2 w-2 bg-inherit before:visible before:absolute before:h-2 before:w-2 before:rotate-45 before:bg-inherit before:content-['']" data-popper-arrow></div>
@@ -186,9 +186,9 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
                                 </div>
                                 <div className="max-w-full px-3 md:w-1/2 md:flex-none">
                                   <div className="relative flex flex-row items-center flex-auto min-w-0 p-6 break-words bg-transparent border border-solid shadow-none rounded-xl border-slate-100 bg-clip-border">
-                                    <img className="mb-0 mr-4 w-1/10" src={`${path}/assets/images/logos/visa.png`} alt="logo" />
+                                    <img className="mb-0 mr-4 w-[10%]" src={`${path}/assets/images/logos/visa.png`} alt="logo" />
                                     <h6 className="mb-0">****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;5248</h6>
-                                    <i className="ml-auto cursor-pointer fas fa-pencil-alt text-slate-700" data-target="tooltip_trigger" data-placement="top"></i>
+                                    <FaPencilAlt  className="ml-auto cursor-pointer text-slate-700" data-target="tooltip_trigger" data-placement="top"/>
                                     <div data-target="tooltip" className="hidden px-2 py-1 text-sm text-white bg-black rounded-lg">
                                       Edit Card
                                       <div className="invisible absolute h-2 w-2 bg-inherit before:visible before:absolute before:h-2 before:w-2 before:rotate-45 before:bg-inherit before:content-['']" data-popper-arrow></div>
