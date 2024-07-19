@@ -159,12 +159,14 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
                             <div className="p-4 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                               <div className="flex flex-wrap -mx-3">
                                 <div className="flex items-center flex-none w-1/2 max-w-full px-3">
-                                  <h6 className="mb-0 font-bold">Payment Method</h6>
+                                  <h6 className="mb-0 text-base font-bold">Payment Method</h6>
                                 </div>
                                 <div className="flex-none w-1/2 max-w-full px-3 text-right">
                                   <a className="inline-block w-48 px-6 py-3 text-xs font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25" > 
+                                    <div className='flex items-center justify-center gap-3'>
                                       <FaPlus />
                                       <span>Add New Card</span>
+                                    </div>
                                   </a>
                                 </div>
                               </div>
