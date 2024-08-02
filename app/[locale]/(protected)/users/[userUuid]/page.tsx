@@ -92,7 +92,7 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
               </div>
               
               <RecentActivity />
-              <PreviousOrders />
+              {/* <PreviousOrders /> */}
               <div className="col-span-12 xl:col-span-12">
                 <div className="box">
                   <div className="box-header">
