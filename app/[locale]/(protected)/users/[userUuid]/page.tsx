@@ -55,7 +55,7 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
                       <div className="p-4 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                         <div className="flex flex-wrap -mx-3">
                           <div className="flex items-center flex-none w-1/2 max-w-full px-3">
-                            <h6 className="mb-0">Invoices</h6>
+                            <h6 className="mb-0 font-bold text-[.9375rem]">Invoices</h6>
                           </div>
                           <div className="flex-none w-1/2 max-w-full px-3 text-right">
                             <button className="inline-block px-8 py-2 mb-0 text-xs font-bold text-center uppercase align-middle transition-all bg-transparent border border-solid rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in bg-150 active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25 border-fuchsia-500 text-fuchsia-500 hover:opacity-75">View All</button>
