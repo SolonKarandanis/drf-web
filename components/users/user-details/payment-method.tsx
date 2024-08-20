@@ -30,7 +30,7 @@ const PaymentMethod = () => {
                                 <h6 className="mb-0">****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;7852</h6>
                                 <FaPencilAlt  className="ml-auto cursor-pointer text-slate-700" data-target="tooltip_trigger" data-placement="top"/>
                                 <div data-target="tooltip" className="hidden px-2 py-1 text-sm text-white bg-black rounded-lg">
-                                    dit Card
+                                    Edit Card
                                     <div className="invisible absolute h-2 w-2 bg-inherit before:visible before:absolute before:h-2 before:w-2 before:rotate-45 before:bg-inherit before:content-['']" data-popper-arrow></div>
                                 </div>
                             </div>
