@@ -7,8 +7,6 @@ import UserDetails from '@/components/users/user-details/user-details';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 import Account from '@/components/users/user-details/account';
-import { basePath } from '@/next.config';
-import { FaPaypal,FaLandmark, FaPlus,FaPencilAlt } from "react-icons/fa";
 import RecentInvoices from '@/components/users/user-details/recent-invoices';
 import Billing from '@/components/users/user-details/billing';
 
@@ -35,7 +33,6 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
   const session = await getServerSession(authOptions);
   const loggedInUser= session!.user!;
   const access = loggedInUser.access;
-  const path = process.env.NODE_ENV === "production" ? basePath : "";
   
   return (
     <>
