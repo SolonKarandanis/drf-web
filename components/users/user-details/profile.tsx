@@ -29,7 +29,7 @@ const Profile:FC<Props> = ({
     return (
         <div className="items-start p-6 sm:flex main-profile-cover">
             <div>
-                <span className="avatar avatar-xxl avatar-rounded online me-4">
+                <span className="relative avatar avatar-xxl avatar-rounded online me-4">
                     {image ? (
                         <ZoomableImage
                             alt={image.alt}
@@ -45,6 +45,16 @@ const Profile:FC<Props> = ({
                                 className="h-[1.25rem] w-[1.25rem] rounded-full"
                             />
                         )}
+                        <div className="absolute flex items-center justify-center transition duration-500 rounded-full cursor-pointer w-14 h-14 group hover:bg-gray-200 opacity-60">
+                            <Image
+                                alt="upload-image"
+                                src={`${path}/assets/images1/media/upload.svg`}
+                                width={700}
+                                height={475}
+                                sizes="100vw"
+                                className="w-12 group-hover:block"
+                            />
+                        </div>
                 </span>
             </div>
             <div className="flex-grow main-profile-info">
