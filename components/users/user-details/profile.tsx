@@ -3,8 +3,7 @@
 import {FC} from 'react'
 import { ImageModel } from '@/models/image.models';
 import { useAppSelector } from '@/shared/redux/hooks';
-import ZoomableImage from '@/shared/components/zoomable-image/zoomable-image';
-import Image from "next/image";
+import ProfilePicture from '@/shared/components/profile-picture/profile-picture';
 
 interface Props{
     firstName:string;
@@ -26,36 +25,15 @@ const Profile:FC<Props> = ({
     const configState = useAppSelector((state) => state.config);
     const host = configState.djangoHost
     const path = configState.baseUrl
+    const imagePath = image ?   `${host}${image.image}` : `${path}/assets/images1/faces/21.jpg`;
     return (
         <div className="items-start p-6 sm:flex main-profile-cover">
             <div>
-                <span className="relative avatar avatar-xxl avatar-rounded online me-4">
-                    {image ? (
-                        <ZoomableImage
-                            alt={image.alt}
-                            title={image.title}
-                            src={`${host}${image.image}`}/>
-                        ): (
-                            <Image
-                                alt="no-image"
-                                src={`${path}/assets/images1/faces/21.jpg`}
-                                width={700}
-                                height={475}
-                                sizes="100vw"
-                                className="h-[1.25rem] w-[1.25rem] rounded-full"
-                            />
-                        )}
-                        <div className="absolute flex items-center justify-center transition duration-500 rounded-full cursor-pointer w-14 h-14 group hover:bg-gray-200 opacity-60">
-                            <Image
-                                alt="upload-image"
-                                src={`${path}/assets/images1/media/upload.svg`}
-                                width={700}
-                                height={475}
-                                sizes="100vw"
-                                className="w-12 group-hover:block"
-                            />
-                        </div>
-                </span>
+                <ProfilePicture 
+                    imagePath={imagePath}
+                    alt={image?.alt}
+                    title={image?.title}
+                />
             </div>
             <div className="flex-grow main-profile-info">
                 <div className="flex items-center !justify-between">
@@ -92,3 +70,32 @@ const Profile:FC<Props> = ({
 }
 
 export default Profile
+
+ {/* <span className="relative avatar avatar-xxl avatar-rounded online me-4">
+                    
+                    {image ? (
+                        <ZoomableImage
+                            alt={image.alt}
+                            title={image.title}
+                            src={`${host}${image.image}`}/>
+                        ): (
+                            <Image
+                                alt="no-image"
+                                src={`${path}/assets/images1/faces/21.jpg`}
+                                width={700}
+                                height={475}
+                                sizes="100vw"
+                                className="h-[1.25rem] w-[1.25rem] rounded-full"
+                            />
+                        )}
+                        <div className="absolute flex items-center justify-center transition duration-500 rounded-full cursor-pointer w-14 h-14 group hover:bg-gray-200 opacity-60">
+                            <Image
+                                alt="upload-image"
+                                src={`${path}/assets/images1/media/upload.svg`}
+                                width={700}
+                                height={475}
+                                sizes="100vw"
+                                className="w-12 group-hover:block"
+                            />
+                        </div>
+                </span> */}
