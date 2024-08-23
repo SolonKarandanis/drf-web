@@ -32,36 +32,14 @@ const ProfilePicture:FC<Props> = ({
                         width={700}
                         height={475}
                     />
-                    
-                    {/* {image ? (
-                        <Image
-                            src={`${host}${image.image}`}
-                            alt={image.alt || ''}
-                            sizes="100vw"
-                            width={700}
-                            height={475}
-                        />
-                    ):(
-                        
-                        <Image
-                            alt="no-image"
-                            src={`${path}/assets/images1/faces/21.jpg`}
-                            width={700}
-                            height={475}
-                            sizes="100vw"
-                            className="h-[1.25rem] w-[1.25rem] rounded-full"
-                        />
-                        
-                    )} */}
                 </span>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuLabel>My Profile Picture</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                    Show Profile Picture
                     <Dialog>
-                        <DialogTrigger asChild>
+                        <DialogTrigger >
                             Show Profile Picture
                         </DialogTrigger>
                         <DialogContent className="p-0 bg-transparent border-0 max-w-7xl">
@@ -75,7 +53,11 @@ const ProfilePicture:FC<Props> = ({
                         </DialogContent>
                     </Dialog>
                 </DropdownMenuItem>
-                <DropdownMenuItem>Upload a new Picture</DropdownMenuItem>
+                <DropdownMenuItem>
+                    Upload a new Picture
+                    <input 
+                        className="block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="default_size" type="file" />
+                </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     </div>
