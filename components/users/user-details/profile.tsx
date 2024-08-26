@@ -31,6 +31,7 @@ const Profile:FC<Props> = ({
             <div>
                 <ProfilePicture 
                     imagePath={imagePath}
+                    imageId={image?.id}
                     alt={image?.alt}
                     title={image?.title}
                 />
