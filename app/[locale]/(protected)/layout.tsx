@@ -10,13 +10,14 @@ import { ConfigModel } from '@/models/config.model';
 
 type Props = {
 	children: React.ReactNode;
+	modal: React.ReactNode;
 	params: {
 	  locale: Locale;
 	};
 };
 
 
-export default async function Layout({ children,params:{locale} }: Props) {
+export default async function Layout({ children,modal,params:{locale} }: Props) {
 	const session = await getServerSession(authOptions);
 	const user =session?.user
 	console.log('-------->Layout')
@@ -34,6 +35,7 @@ export default async function Layout({ children,params:{locale} }: Props) {
 		<ContentLayout>
 			<SetTokensLocalStorage />
 			<SetConfig config={config} />
+			{modal}
 			{children}
 		</ContentLayout>
 	)
