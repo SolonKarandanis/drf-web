@@ -42,7 +42,7 @@ const ProfilePicture:FC<Props> = ({
                     <DropdownMenuLabel>My Profile Picture</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
-                        <Link  href={`${pathname}/picture/${imageId}`}>
+                        <Link  href={`${pathname}/image/${imageId}`}>
                             Show Profile Picture
                         </Link>
                         {/* <Dialog>
