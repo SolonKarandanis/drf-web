@@ -24,6 +24,7 @@ const ProfilePicture:FC<Props> = ({
     title
 }) => {
     const pathname = usePathname();
+    // console.log(pathname)
     return (
         <div>
             <DropdownMenu>
@@ -42,7 +43,7 @@ const ProfilePicture:FC<Props> = ({
                     <DropdownMenuLabel>My Profile Picture</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
-                        <Link  href={`${pathname}/image/${imageId}`}>
+                        <Link  href={`en/users/image/${imageId}`}>
                             Show Profile Picture
                         </Link>
                         {/* <Dialog>
