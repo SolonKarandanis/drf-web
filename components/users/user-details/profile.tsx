@@ -33,7 +33,6 @@ const Profile:FC<Props> = ({
                     imagePath={imagePath}
                     imageId={image?.id}
                     alt={image?.alt}
-                    title={image?.title}
                 />
             </div>
             <div className="flex-grow main-profile-info">

@@ -13,15 +13,13 @@ import { usePathname } from 'next/navigation';
 interface Props{
     imagePath:string;
     imageId?:number;
-    title?:string;
     alt?:string;
 }
 
 const ProfilePicture:FC<Props> = ({
     imagePath,
     imageId,
-    alt,
-    title
+    alt
 }) => {
     const pathname = usePathname();
     // console.log(pathname)
@@ -43,22 +41,9 @@ const ProfilePicture:FC<Props> = ({
                     <DropdownMenuLabel>My Profile Picture</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
-                        <Link  href={`en/users/image/${imageId}`}>
+                        <Link  href={`/en/users/image/${imageId}`}>
                             Show Profile Picture
                         </Link>
-                        {/* <Dialog>
-                            <DialogTrigger >
-                            </DialogTrigger>
-                            <DialogContent className="p-0 bg-transparent border-0 max-w-7xl">
-                                <DialogDescription>
-                                    Description
-                                </DialogDescription>
-                                <DialogTitle>{title || 'no-image'}</DialogTitle>
-                                <div className="relative h-[calc(100vh-220px)] w-full overflow-clip rounded-md bg-transparent shadow-md">
-                                    <Image src={`${imagePath}`} fill alt={alt || ''} className="object-contain w-full h-full" />
-                                </div>
-                            </DialogContent>
-                        </Dialog> */}
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                         Upload a new Picture

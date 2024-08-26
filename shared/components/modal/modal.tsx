@@ -1,12 +1,16 @@
 "use client"
 
-import { Dialog, DialogContent, DialogOverlay } from "@/shared/shadcn/components/ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogOverlay, DialogTitle } from "@/shared/shadcn/components/ui/dialog"
 import { useRouter } from "next/navigation"
 
 export function Modal({
     children,
+    title,
+    description,
 }: {
-    children: React.ReactNode
+    children: React.ReactNode,
+    title:string,
+    description:string,
 }) {
     const router = useRouter()
 
@@ -17,7 +21,11 @@ export function Modal({
     return (
         <Dialog defaultOpen={true} open={true} onOpenChange={handleOpenChange}>
             <DialogOverlay>
-                <DialogContent className="overflow-y-hidden">
+                <DialogContent className="p-0 bg-transparent border-0 max-w-7xl">
+                    <DialogTitle>{title}</DialogTitle>
+                    <DialogDescription>
+                        {description}
+                    </DialogDescription>
                     {children}
                 </DialogContent>
             </DialogOverlay>
