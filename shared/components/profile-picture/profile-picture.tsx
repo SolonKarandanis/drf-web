@@ -9,15 +9,16 @@ import { DropdownMenu,
     DropdownMenuSeparator, 
     DropdownMenuTrigger 
 } from '@/shared/shadcn/components/ui/dropdown-menu';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useAppSelector } from '@/shared/redux/hooks';
+import { Button } from '@/shared/shadcn/components/ui/button';
 
 interface Props{
 }
 
 const ProfilePicture:FC<Props> = () => {
     const pathname = usePathname();
+    const router = useRouter()
     const configState = useAppSelector((state) => state.config);
     const profileImage = useAppSelector((state)=> state.users.userProfileImage);
     const host = configState.djangoHost
@@ -44,15 +45,19 @@ const ProfilePicture:FC<Props> = () => {
                     <DropdownMenuLabel>My Profile Picture</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
-                        <Link 
-                            href={`/${locale}/${usersUrl}/image/${profileImage?.id}`}>
+                        <Button
+                            type="submit" 
+                            variant="outline"
+                            onClick={() => router.push(`/${locale}/${usersUrl}/image/${profileImage?.id}`)}>
                             Show Profile Picture
-                        </Link>
+                        </Button>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                        Upload a new Picture
-                        <input 
-                            className="block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="default_size" type="file" />
+                        <Button
+                            type="submit" 
+                            variant="outline">
+                            Upload a new Picture
+                        </Button>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
