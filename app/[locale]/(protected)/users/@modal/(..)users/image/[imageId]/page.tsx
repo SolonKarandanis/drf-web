@@ -21,7 +21,7 @@ const ProfileImageModal:FC<Props> = ({
   const imagePath = profileImage ?   `${host}${profileImage.image}` : `${path}/assets/images1/faces/21.jpg`;
   return (
     <div>
-      <Modal description='d' title='Image'>
+      <Modal description='Users image' title='Profile Picture'>
         <div className="relative h-[calc(100vh-220px)] w-full overflow-clip rounded-md bg-transparent shadow-md">
           <Image src={imagePath} fill alt={profileImage?.alt || ''} className="object-contain w-full h-full" />
         </div>
