@@ -2,6 +2,7 @@
 
 import { Dialog, DialogContent, DialogDescription, DialogOverlay, DialogTitle } from "@/shared/shadcn/components/ui/dialog"
 import { useRouter } from "next/navigation"
+import { useState } from "react";
 
 export function Modal({
     children,
@@ -13,13 +14,20 @@ export function Modal({
     description:string,
 }) {
     const router = useRouter()
+    const [isDialogOpen, setIsDialogOpen] = useState(true);
 
-    const handleOpenChange = () => {
+    const handleOpenChange = (event:boolean) => {
+        setIsDialogOpen(event)
+        setTimeout(() => {
+            if (!open) {
+              document.body.style.pointerEvents = ''
+            }
+        }, 100)
         router.back()
     }
 
     return (
-        <Dialog defaultOpen={true} open={true} onOpenChange={handleOpenChange}>
+        <Dialog defaultOpen={true} open={isDialogOpen} onOpenChange={handleOpenChange}>
             <DialogOverlay>
                 <DialogContent className="p-0 bg-transparent border-0 max-w-7xl">
                     <DialogTitle>{title}</DialogTitle>

@@ -29,7 +29,7 @@ const ProfilePicture:FC<Props> = () => {
     return (
         <div>
             <DropdownMenu>
-                <DropdownMenuTrigger>
+                <DropdownMenuTrigger >
                     <span className="relative avatar avatar-xxl avatar-rounded online me-4">
                         <Image
                             src={`${imagePath}`}
@@ -44,7 +44,8 @@ const ProfilePicture:FC<Props> = () => {
                     <DropdownMenuLabel>My Profile Picture</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
-                        <Link  href={`/${locale}/${usersUrl}/image/${profileImage?.id}`}>
+                        <Link 
+                            href={`/${locale}/${usersUrl}/image/${profileImage?.id}`}>
                             Show Profile Picture
                         </Link>
                     </DropdownMenuItem>
