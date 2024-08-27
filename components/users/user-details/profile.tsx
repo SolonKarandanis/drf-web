@@ -1,8 +1,6 @@
 "use client";
 
 import {FC} from 'react'
-import { ImageModel } from '@/models/image.models';
-import { useAppSelector } from '@/shared/redux/hooks';
 import ProfilePicture from '@/shared/components/profile-picture/profile-picture';
 
 interface Props{
@@ -11,7 +9,6 @@ interface Props{
     roles:string;
     country?:string;
     city?:string;
-    image?:ImageModel;
 }
 
 const Profile:FC<Props> = ({
@@ -20,20 +17,12 @@ const Profile:FC<Props> = ({
     city,
     country,
     roles,
-    image
 }) => {
-    const configState = useAppSelector((state) => state.config);
-    const host = configState.djangoHost
-    const path = configState.baseUrl
-    const imagePath = image ?   `${host}${image.image}` : `${path}/assets/images1/faces/21.jpg`;
+
     return (
         <div className="items-start p-6 sm:flex main-profile-cover">
             <div>
-                <ProfilePicture 
-                    imagePath={imagePath}
-                    imageId={image?.id}
-                    alt={image?.alt}
-                />
+                <ProfilePicture />
             </div>
             <div className="flex-grow main-profile-info">
                 <div className="flex items-center !justify-between">

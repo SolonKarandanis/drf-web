@@ -1,3 +1,5 @@
+"use client";
+
 import {FC} from 'react'
 import Image from "next/image";
 import { DropdownMenu, 
@@ -9,19 +11,18 @@ import { DropdownMenu,
 } from '@/shared/shadcn/components/ui/dropdown-menu';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useAppSelector } from '@/shared/redux/hooks';
 
 interface Props{
-    imagePath:string;
-    imageId?:number;
-    alt?:string;
 }
 
-const ProfilePicture:FC<Props> = ({
-    imagePath,
-    imageId,
-    alt
-}) => {
+const ProfilePicture:FC<Props> = () => {
     const pathname = usePathname();
+    const configState = useAppSelector((state) => state.config);
+    const profileImage = useAppSelector((state)=> state.users.userProfileImage);
+    const host = configState.djangoHost
+    const path = configState.baseUrl
+    const imagePath = profileImage ?   `${host}${profileImage.image}` : `${path}/assets/images1/faces/21.jpg`;
     // console.log(pathname)
     return (
         <div>
@@ -30,7 +31,7 @@ const ProfilePicture:FC<Props> = ({
                     <span className="relative avatar avatar-xxl avatar-rounded online me-4">
                         <Image
                             src={`${imagePath}`}
-                            alt={alt || 'no-image'}
+                            alt={profileImage?.alt || 'no-image'}
                             sizes="100vw"
                             width={700}
                             height={475}
@@ -41,7 +42,7 @@ const ProfilePicture:FC<Props> = ({
                     <DropdownMenuLabel>My Profile Picture</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
-                        <Link  href={`/en/users/image/${imageId}`}>
+                        <Link  href={`/en/users/image/${profileImage?.id}`}>
                             Show Profile Picture
                         </Link>
                     </DropdownMenuItem>

@@ -77,7 +77,6 @@ const UserDetails:FC<Props> =  ({userUuid}) => {
               firstName={user.firstName}
               lastName={user.lastName}
               roles={roles}
-              image={image}
               city={details?.city}
               country={details?.country}/>
           )
