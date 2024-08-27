@@ -23,7 +23,9 @@ const ProfilePicture:FC<Props> = () => {
     const host = configState.djangoHost
     const path = configState.baseUrl
     const imagePath = profileImage ?   `${host}${profileImage.image}` : `${path}/assets/images1/faces/21.jpg`;
-    // console.log(pathname)
+    const splitArray = pathname.split("/")
+    const locale = splitArray[1];
+    const usersUrl = splitArray[2];
     return (
         <div>
             <DropdownMenu>
@@ -42,7 +44,7 @@ const ProfilePicture:FC<Props> = () => {
                     <DropdownMenuLabel>My Profile Picture</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
-                        <Link  href={`/en/users/image/${profileImage?.id}`}>
+                        <Link  href={`/${locale}/${usersUrl}/image/${profileImage?.id}`}>
                             Show Profile Picture
                         </Link>
                     </DropdownMenuItem>
