@@ -87,6 +87,9 @@ const usersSlice = createSlice({
         setProfileImage:(state,action:PayloadAction<ImageModel>)=>{
             state.userProfileImage= action.payload
         },
+        resetProfileImage:(state)=>{
+            state.userProfileImage =null
+        },
         setUserGroups: (state,action:PayloadAction<UserGroup[]>)=>{
             state.userGroups= action.payload
         },
@@ -120,6 +123,7 @@ export const {
     setUsers,
     setSelectedUser,
     setProfileImage,
+    resetProfileImage,
     resetUsers,
     setSearchRequest,
     resetSearchRequest,

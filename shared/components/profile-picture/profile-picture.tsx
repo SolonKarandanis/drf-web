@@ -48,6 +48,7 @@ const ProfilePicture:FC<Props> = () => {
                         <Button
                             type="submit" 
                             variant="outline"
+                            disabled={!profileImage}
                             onClick={() => router.push(`/${locale}/${usersUrl}/image/${profileImage?.id}`)}>
                             Show Profile Picture
                         </Button>

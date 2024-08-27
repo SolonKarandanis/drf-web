@@ -7,7 +7,7 @@ import Profile from "./profile";
 import { getUserGroups } from "@/utils/user-utils";
 import ContactInformation from "./contanct-information";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
-import { setProfileImage, setSelectedUser } from "@/shared/redux/features/users/usersSlice";
+import { resetProfileImage, setProfileImage, setSelectedUser } from "@/shared/redux/features/users/usersSlice";
 import ProfileLoading from "./profile-loading";
 
 
@@ -49,6 +49,9 @@ const UserDetails:FC<Props> =  ({userUuid}) => {
           .unwrap()
           .then((image)=>{
             dispatch(setProfileImage(image))
+          })
+          .catch((error)=>{
+            dispatch(resetProfileImage())
           })
       })
   },[])
