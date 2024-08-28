@@ -6,7 +6,7 @@ export interface ImageModel{
 }
 
 export interface UploadProfileImage{
-    image:any;
+    image:File;
     title:string;
     alt:string;
 }

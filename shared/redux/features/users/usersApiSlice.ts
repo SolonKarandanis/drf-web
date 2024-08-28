@@ -43,16 +43,15 @@ const usersApiSlice = apiSlice.injectEndpoints({
 			query:(uploadRequestMutation:UploadProfileImageMutation)=>{
 				const {userUuid,image,title,alt} = uploadRequestMutation;
 
-				const uploadRequest:UploadProfileImage = {
-					image,
-					alt,
-					title
-				}
+				const formData = new FormData();
+				formData.append('alt',alt);
+				formData.append('title',title);
+				formData.append('image',image,image.name);
 
 				return {
 					url:`${ApiControllers.USERS}/upload-profile-image/${userUuid}`,
 					method: 'POST',
-					body: uploadRequest ,
+					body: formData ,
 				}
 			}
 		})
