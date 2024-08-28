@@ -56,7 +56,8 @@ const ProfilePicture:FC<Props> = () => {
                     <DropdownMenuItem>
                         <Button
                             type="submit" 
-                            variant="outline">
+                            variant="outline"
+                            onClick={() => router.push(`/${locale}/${usersUrl}/image/upload`)}>
                             Upload a new Picture
                         </Button>
                     </DropdownMenuItem>
