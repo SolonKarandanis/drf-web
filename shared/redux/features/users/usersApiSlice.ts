@@ -2,15 +2,12 @@ import { UserSearchRequest } from "@/models/search.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
 import { UserAcount, UserGroup, UserModel, UserSocials } from "@/models/user.models";
-import { ImageModel } from "@/models/image.models";
+import { ImageModel, UploadProfileImage, UploadProfileImageMutation } from "@/models/image.models";
 
 const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: builder =>({
         getUser: builder.query<UserAcount, string>({
 			query: (userUuid) => `${ApiControllers.USERS}/${userUuid}`,
-		}),
-		getUserImage: builder.query<ImageModel, string>({
-			query: (userUuid) => `${ApiControllers.USERS}/${userUuid}/image/`,
 		}),
         getUsers: builder.query<UserModel[], {page:number,size:number}>({
 			query: ({page,size}) => `${ApiControllers.USERS}/`,
@@ -36,6 +33,26 @@ const usersApiSlice = apiSlice.injectEndpoints({
 			query:(userUuid) =>{
 				return {
 					url:`${ApiControllers.SOCIALS}/users/${userUuid}`,
+				}
+			}
+		}),
+		getUserImage: builder.query<ImageModel, string>({
+			query: (userUuid) => `${ApiControllers.USERS}/${userUuid}/image/`,
+		}),
+		uploadUserImage:builder.mutation({
+			query:(uploadRequestMutation:UploadProfileImageMutation)=>{
+				const {userUuid,image,title,alt} = uploadRequestMutation;
+
+				const uploadRequest:UploadProfileImage = {
+					image,
+					alt,
+					title
+				}
+
+				return {
+					url:`${ApiControllers.USERS}/upload-profile-image/${userUuid}`,
+					method: 'POST',
+					body: uploadRequest ,
 				}
 			}
 		})

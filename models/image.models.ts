@@ -4,3 +4,13 @@ export interface ImageModel{
     alt?:string;
     title:string;
 }
+
+export interface UploadProfileImage{
+    image:any;
+    title:string;
+    alt:string;
+}
+
+export interface UploadProfileImageMutation extends UploadProfileImage{
+    userUuid:string;
+}
