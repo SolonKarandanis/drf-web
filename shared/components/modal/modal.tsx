@@ -29,7 +29,7 @@ export function Modal({
     return (
         <Dialog defaultOpen={true} open={isDialogOpen} onOpenChange={handleOpenChange}>
             <DialogOverlay>
-                <DialogContent className="p-0 bg-transparent border-0 max-w-7xl">
+                <DialogContent className="p-0 border-0 max-w-7xl">
                     <DialogTitle>{title}</DialogTitle>
                     <DialogDescription>
                         {description}

@@ -11,7 +11,7 @@ const UploadProfileImageModal = () => {
                         <div id="image-preview" 
                             className="items-center max-w-sm p-6 mx-auto mb-4 text-center bg-gray-100 border-2 border-gray-400 border-dashed rounded-lg cursor-pointer">
                             <input id="upload" type="file" className="hidden" accept="image/*" />
-                            <label htmlFor="upload" className="cursor-pointer">
+                            <label htmlFor="upload" className="flex flex-col gap-y-0.5 cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" 
                                     fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" 
                                     className="w-8 h-8 mx-auto mb-4 text-gray-700">
