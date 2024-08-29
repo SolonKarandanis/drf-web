@@ -5,7 +5,7 @@ const MAX_FILE_SIZE = 2000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 export const UploadProfileImageSchema = z.object({
-    username: z.instanceof(File).superRefine((file, ctx) =>{
+    profileImage: z.instanceof(File).superRefine((file, ctx) =>{
         // First, add an issue if the mime type is wrong.
         if (!ACCEPTED_IMAGE_TYPES.includes(file.type)) {
             ctx.addIssue({

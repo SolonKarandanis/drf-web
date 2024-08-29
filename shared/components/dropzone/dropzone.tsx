@@ -5,6 +5,13 @@ import Image from "next/image";
 import { Button } from '@/shared/shadcn/components/ui/button';
 import ButtonLoading from '../button-loading/button-loading';
 import { useTranslations } from 'next-intl';
+import * as z from "zod";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { UploadProfileImageSchema } from '@/schemas/user.schemas';
+
+
+type Inputs = z.infer<typeof UploadProfileImageSchema>
 
 const Dropzone = () => {
     const t = useTranslations();
@@ -18,6 +25,18 @@ const Dropzone = () => {
         if(file){
 
         }
+    }
+
+    const form = useForm<Inputs>({
+        resolver: zodResolver(UploadProfileImageSchema),
+        defaultValues:{
+            profileImage:undefined
+        }
+    })
+    const {errors} = form.formState
+
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        
     }
 
     return (
