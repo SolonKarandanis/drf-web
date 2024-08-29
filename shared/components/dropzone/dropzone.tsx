@@ -4,8 +4,10 @@ import  { ChangeEvent, useState } from 'react'
 import Image from "next/image";
 import { Button } from '@/shared/shadcn/components/ui/button';
 import ButtonLoading from '../button-loading/button-loading';
+import { useTranslations } from 'next-intl';
 
 const Dropzone = () => {
+    const t = useTranslations();
     const [file, setFile] = useState<File| null>();
 
     const handleUploadFile=(event:ChangeEvent<HTMLInputElement>)=>{
@@ -82,7 +84,7 @@ const Dropzone = () => {
                                 variant="destructive"
                                 className="w-full"
                                 onClick={()=>setFile(null)}>
-                                Clear
+                                {t(`GLOBAL.BUTTONS.reset`)}
                             </Button>
                     </div>
                 </div>
