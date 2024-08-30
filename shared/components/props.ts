@@ -6,7 +6,7 @@ import {
 } from "react";
 import { Column } from "react-table";
 
-export interface Props {
+export interface RegisterProps {
     onChange: (event:any) => unknown;
     onBlur: (event:any) => unknown;
     ref: RefCallback<HTMLInputElement |HTMLSelectElement >;
@@ -26,7 +26,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
     required?:boolean,
     className?:string,
     sectionClassName?:string,
-    props?:Props,
+    props?:RegisterProps,
     error?:string,
     children: React.ReactNode
 }
@@ -42,7 +42,7 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement>{
     required?:boolean,
     className?:string,
     sectionClassName?:string,
-    inputProps?:Props,
+    inputProps?:RegisterProps,
     error?:string,
     children: React.ReactNode
 }

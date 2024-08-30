@@ -1,12 +1,12 @@
 
-import Dropzone from '@/shared/components/dropzone/dropzone';
+import UploadPicture from '@/components/users/user-details/upload-picture';
 import { Modal } from '@/shared/components/modal/modal'
 
 const UploadProfileImageModal = () => {
     return (
         <div>
             <Modal description='Upload Profile Image' title='Upload File'>
-                <Dropzone />
+                <UploadPicture />
             </Modal>
         </div>
     )
