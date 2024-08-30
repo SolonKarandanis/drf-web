@@ -9,6 +9,10 @@ import * as z from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { UploadProfileImageSchema } from '@/schemas/user.schemas';
+import { useAppDispatch } from '@/shared/redux/hooks';
+import { useUploadUserImageMutation } from '@/shared/redux/features/users/usersApiSlice';
+import { ErrorResponse } from '@/models/error.models';
+import { toast } from 'react-toastify';
 
 
 type Inputs = z.infer<typeof UploadProfileImageSchema>
@@ -16,8 +20,10 @@ type Inputs = z.infer<typeof UploadProfileImageSchema>
 const Dropzone = () => {
     const t = useTranslations();
     const [file, setFile] = useState<File| null>();
+    const dispatch = useAppDispatch();
+    const [upload, { isLoading, }] = useUploadUserImageMutation();
 
-    const {register,handleSubmit,formState: { errors ,isSubmitting, isValid,isLoading },setValue} = useForm<Inputs>({
+    const {register,handleSubmit,formState: { errors ,isSubmitting },setValue} = useForm<Inputs>({
         resolver: zodResolver(UploadProfileImageSchema),
         defaultValues:{
             profileImage:undefined
@@ -30,6 +36,11 @@ const Dropzone = () => {
         setFile(fileUpload);
         setValue("profileImage",fileUpload);
     }
+
+    const handleError =(errorResponse:ErrorResponse)=>{
+		const {status, data:{detail}} = errorResponse;
+		toast.error(`(${status}) ${detail}`);
+	}
 
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -92,7 +103,7 @@ const Dropzone = () => {
                                 className="w-full text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 
                                     focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 flex items-center justify-center  mb-2 cursor-pointer"
                                 disabled={!file ||isLoading}
-                                >
+                            >
                                 {isLoading ? 
                                     <ButtonLoading /> : 
                                     <span className="ml-2 text-center">Upload</span>

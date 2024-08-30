@@ -68,4 +68,5 @@ export const {
     useSearchUsersMutation,
 	useLazyGetAllGroupsQuery,
 	useGetUserSocialsQuery,
+	useUploadUserImageMutation,
 } = usersApiSlice;
