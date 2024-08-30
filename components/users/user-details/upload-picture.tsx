@@ -13,6 +13,7 @@ import Dropzone from '@/shared/components/dropzone/dropzone';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { useTranslations } from 'next-intl';
 import ButtonLoading from '@/shared/components/button-loading/button-loading';
+import { ChangeEvent } from 'react';
 
 type Inputs = z.infer<typeof UploadProfileImageSchema>
 
@@ -20,6 +21,12 @@ const UploadPicture = () => {
     const t = useTranslations();
     const dispatch = useAppDispatch();
     const [upload, { isLoading, }] = useUploadUserImageMutation();
+
+    const handleUploadFile=(event:ChangeEvent<HTMLInputElement>)=>{
+      if (!event.target.files) return;
+      const fileUpload = event.target.files[0];
+      setValue("profileImage",fileUpload);
+  }
 
     const {register,handleSubmit,formState: { errors ,isSubmitting },setValue, watch} = useForm<Inputs>({
       resolver: zodResolver(UploadProfileImageSchema),
@@ -38,8 +45,8 @@ const UploadPicture = () => {
         console.log(data)
     }
 
-    const handleSetUploadProfileImage = (file:File| null) =>{
-      setValue("profileImage",file);
+    const resetUploadProfileImage = () =>{
+      setValue("profileImage",null);
     }
 
     const profileImage = watch("profileImage")
@@ -49,10 +56,22 @@ const UploadPicture = () => {
         <div className="items-center max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md">
           <div className="px-4 py-6">
             <div className="flex flex-col items-center justify-center w-full gap-y-2">
-              <Dropzone 
+              <Dropzone
+                file={profileImage}
                 props={register("profileImage")} 
-                setUploadFile={handleSetUploadProfileImage} 
+                handleUploadFile={handleUploadFile} 
                 error={errors.profileImage?.message}>
+                  <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-700">
+                      Upload picture
+                  </h5>
+                  <p className="text-sm font-normal text-gray-400 md:px-6">
+                      Choose photo size should be less than 
+                      <b className="text-gray-600">2mb</b>
+                  </p>
+                  <p className="text-sm font-normal text-gray-400 md:px-6">
+                      and should be in 
+                      <b className="text-gray-600">JPG, PNG, or GIF</b> format.
+                  </p>
               </Dropzone>
               <Button 
                   type="submit"
@@ -71,7 +90,7 @@ const UploadPicture = () => {
                   variant="destructive"
                   className="w-full"
                   disabled={isLoading}
-                  onClick={()=>handleSetUploadProfileImage(null)}>
+                  onClick={resetUploadProfileImage}>
                   {t(`GLOBAL.BUTTONS.reset`)}
               </Button>
             </div>
