@@ -17,30 +17,27 @@ const Dropzone = () => {
     const t = useTranslations();
     const [file, setFile] = useState<File| null>();
 
-    const handleUploadFile=(event:ChangeEvent<HTMLInputElement>)=>{
-        if (!event.target.files) return;
-        const fileUpload = event.target.files[0];
-        setFile(fileUpload);
-
-        if(file){
-
-        }
-    }
-
-    const form = useForm<Inputs>({
+    const {register,handleSubmit,formState: { errors ,isSubmitting, isValid,isLoading },setValue} = useForm<Inputs>({
         resolver: zodResolver(UploadProfileImageSchema),
         defaultValues:{
             profileImage:undefined
         }
     })
-    const {errors} = form.formState
+
+    const handleUploadFile=(event:ChangeEvent<HTMLInputElement>)=>{
+        if (!event.target.files) return;
+        const fileUpload = event.target.files[0];
+        setFile(fileUpload);
+        setValue("profileImage",fileUpload);
+    }
+
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        
+        console.log(data)
     }
 
     return (
-        <section className="container items-center w-full py-32 mx-auto">
+        <form className="container items-center w-full py-32 mx-auto" onSubmit={handleSubmit(onSubmit)}>
             <div className="items-center max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md">
                 <div className="px-4 py-6">
                     <div id="image-preview" 
@@ -58,7 +55,7 @@ const Dropzone = () => {
                             
                             (
                                 <>
-                                    <input id="upload" type="file" className="hidden" accept="image/*" onChange={handleUploadFile}/>
+                                    <input id="upload" type="file" className="hidden" accept="image/*" {...register("profileImage")} onChange={handleUploadFile}/>
                                     <label htmlFor="upload" className="flex flex-col gap-y-0.5 cursor-pointer">
                                     <svg xmlns="http://www.w3.org/2000/svg" 
                                         fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" 
@@ -83,32 +80,37 @@ const Dropzone = () => {
                             )
                         
                         }
-                        
+                         {errors.profileImage? (
+                            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {errors.profileImage?.message}
+                            </p>
+                        ): null}
                     </div>
                     <div className="flex flex-col items-center justify-center w-full gap-y-2">
                             <Button 
                                 type="submit"
                                 className="w-full text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 
                                     focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 flex items-center justify-center  mb-2 cursor-pointer"
+                                disabled={!file ||isLoading}
                                 >
-                                    <span className="ml-2 text-center">Upload</span>
-                                {/* {isLoading ? 
+                                {isLoading ? 
                                     <ButtonLoading /> : 
-                                    Upload
-                                } */}
+                                    <span className="ml-2 text-center">Upload</span>
+                                }
                                 
                             </Button>
                             <Button 
                                 type="reset" 
                                 variant="destructive"
                                 className="w-full"
+                                disabled={isLoading}
                                 onClick={()=>setFile(null)}>
                                 {t(`GLOBAL.BUTTONS.reset`)}
                             </Button>
                     </div>
                 </div>
             </div>
-        </section>
+        </form>
     )
 }
 
