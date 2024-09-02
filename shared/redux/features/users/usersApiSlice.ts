@@ -1,4 +1,4 @@
-import { UserSearchRequest } from "@/models/search.models";
+import { UserSearchRequest, UserSearchResponse } from "@/models/search.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
 import { UserAcount, UserGroup, UserModel, UserSocials } from "@/models/user.models";
@@ -12,7 +12,7 @@ const usersApiSlice = apiSlice.injectEndpoints({
         getUsers: builder.query<UserModel[], {page:number,size:number}>({
 			query: ({page,size}) => `${ApiControllers.USERS}/`,
 		}),
-        searchUsers: builder.mutation({
+        searchUsers: builder.mutation<UserSearchResponse,UserSearchRequest>({
 			query: ( searchRequest:UserSearchRequest)=>{
 				return {
 					url: `${ApiControllers.USERS}/search`,
@@ -39,7 +39,7 @@ const usersApiSlice = apiSlice.injectEndpoints({
 		getUserImage: builder.query<ImageModel, string>({
 			query: (userUuid) => `${ApiControllers.USERS}/${userUuid}/image/`,
 		}),
-		uploadUserImage:builder.mutation({
+		uploadUserImage:builder.mutation<ImageModel,UploadProfileImageMutation>({
 			query:(uploadRequestMutation:UploadProfileImageMutation)=>{
 				const {userUuid,image,title,alt} = uploadRequestMutation;
 
@@ -49,7 +49,7 @@ const usersApiSlice = apiSlice.injectEndpoints({
 				formData.append('image',image,image.name);
 
 				return {
-					url:`${ApiControllers.USERS}/upload-profile-image/${userUuid}`,
+					url:`${ApiControllers.USERS}/${userUuid}/upload-profile-image/`,
 					method: 'POST',
 					body: formData ,
 				}

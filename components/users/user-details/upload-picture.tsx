@@ -1,7 +1,7 @@
 "use client"
 
 
-import { useAppDispatch } from '@/shared/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
 import { useUploadUserImageMutation } from '@/shared/redux/features/users/usersApiSlice';
 import * as z from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -14,19 +14,25 @@ import { Button } from '@/shared/shadcn/components/ui/button';
 import { useTranslations } from 'next-intl';
 import ButtonLoading from '@/shared/components/button-loading/button-loading';
 import { ChangeEvent } from 'react';
+import { setProfileImage, UsersState } from '@/shared/redux/features/users/usersSlice';
+import { ImageModel, UploadProfileImageMutation } from '@/models/image.models';
+import {  useRouter } from 'next/navigation';
 
 type Inputs = z.infer<typeof UploadProfileImageSchema>
 
 const UploadPicture = () => {
+    const router = useRouter()
     const t = useTranslations();
     const dispatch = useAppDispatch();
     const [upload, { isLoading, }] = useUploadUserImageMutation();
+    const usersState: UsersState = useAppSelector((state) => state.users);
+
 
     const handleUploadFile=(event:ChangeEvent<HTMLInputElement>)=>{
       if (!event.target.files) return;
       const fileUpload = event.target.files[0];
       setValue("profileImage",fileUpload);
-  }
+    }
 
     const {register,handleSubmit,formState: { errors ,isSubmitting },setValue, watch} = useForm<Inputs>({
       resolver: zodResolver(UploadProfileImageSchema),
@@ -42,7 +48,28 @@ const UploadPicture = () => {
   
   
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        console.log(data)
+      const userUuid = usersState.selectedUser?.uuid;
+      if(userUuid && data){
+        const {profileImage } =data;
+        console.log(profileImage)
+        const uploadPofileImageRequest:UploadProfileImageMutation ={
+          userUuid,
+          alt: profileImage!.name,
+          image:profileImage!,
+          title: profileImage!.name
+        }
+        upload(uploadPofileImageRequest)
+          .unwrap()
+          .then((response:ImageModel)=>{
+            setProfileImage(response);
+            router.back()
+          })
+          .catch((error:ErrorResponse) => {
+            handleError(error);
+          });
+      }
+      
+        
     }
 
     const resetUploadProfileImage = () =>{
