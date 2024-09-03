@@ -51,7 +51,6 @@ const UploadPicture = () => {
       const userUuid = usersState.selectedUser?.uuid;
       if(userUuid && data){
         const {profileImage } =data;
-        console.log(profileImage)
         const uploadPofileImageRequest:UploadProfileImageMutation ={
           userUuid,
           alt: profileImage!.name,
@@ -61,7 +60,7 @@ const UploadPicture = () => {
         upload(uploadPofileImageRequest)
           .unwrap()
           .then((response:ImageModel)=>{
-            setProfileImage(response);
+            dispatch(setProfileImage(response));
             router.back()
           })
           .catch((error:ErrorResponse) => {
