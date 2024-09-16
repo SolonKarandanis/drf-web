@@ -12,11 +12,13 @@ import { DropdownMenu,
 import { usePathname, useRouter } from 'next/navigation';
 import { useAppSelector } from '@/shared/redux/hooks';
 import { Button } from '@/shared/shadcn/components/ui/button';
+import { useTranslations } from 'next-intl';
 
 interface Props{
 }
 
 const ProfilePicture:FC<Props> = () => {
+    const t = useTranslations();
     const pathname = usePathname();
     const router = useRouter()
     const configState = useAppSelector((state) => state.config);
@@ -42,7 +44,7 @@ const ProfilePicture:FC<Props> = () => {
                     </span>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    <DropdownMenuLabel>My Profile Picture</DropdownMenuLabel>
+                    <DropdownMenuLabel>{t("USERS.DETAILS.LABELS.my-profile-picture")}</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
                         <Button
@@ -50,7 +52,7 @@ const ProfilePicture:FC<Props> = () => {
                             variant="outline"
                             disabled={!profileImage}
                             onClick={() => router.push(`/${locale}/${usersUrl}/image/${profileImage?.id}`)}>
-                            Show Profile Picture
+                            {t("USERS.DETAILS.BUTTONS.show-profile-picture")}
                         </Button>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
@@ -58,7 +60,7 @@ const ProfilePicture:FC<Props> = () => {
                             type="submit" 
                             variant="secondary"
                             onClick={() => router.push(`/${locale}/${usersUrl}/image/upload`)}>
-                            Upload a new Picture
+                            {t("USERS.DETAILS.BUTTONS.upload-profile-picture")}
                         </Button>
                     </DropdownMenuItem>
                 </DropdownMenuContent>

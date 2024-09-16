@@ -212,7 +212,16 @@
             }
         },
         "DETAILS":{
-            "bio":"Professional Bio"
+            "LABELS":{
+                "bio":"Professional Bio",
+                "profile":"Profile",
+                "completed":"completed",
+                "my-profile-picture":"My Profile Picture"
+            },
+            "BUTTONS":{
+                "show-profile-picture":"Show Profile Picture",
+                "upload-profile-picture":"Ανεβάστε μια νέα εικόνα"
+            }
         }
     }
 }

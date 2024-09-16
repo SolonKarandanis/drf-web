@@ -2,6 +2,7 @@
 
 import {FC} from 'react'
 import ProfilePicture from '@/shared/components/profile-picture/profile-picture';
+import { useTranslations } from 'next-intl';
 
 interface Props{
     firstName:string;
@@ -18,7 +19,7 @@ const Profile:FC<Props> = ({
     country,
     roles,
 }) => {
-
+    const t = useTranslations();
     return (
         <div className="items-start p-6 sm:flex main-profile-cover">
             <div>
@@ -28,7 +29,7 @@ const Profile:FC<Props> = ({
                 <div className="flex items-center !justify-between">
                     <h6 className="font-semibold mb-1 text-black text-[1rem]">{firstName} {lastName}</h6>
                     <div>
-                        <p className="mb-2 font-semibold ms-2">Profile 60% completed</p>
+                        <p className="mb-2 font-semibold ms-2">{t("USERS.DETAILS.LABELS.profile")} 60% {t("USERS.DETAILS.LABELS.completed")}</p>
                         <div className="progress progress-xs progress-animate">
                             <div className="progress-bar bg-primary w-[60%]" ></div>
                         </div>
