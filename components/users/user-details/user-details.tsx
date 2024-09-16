@@ -9,6 +9,7 @@ import ContactInformation from "./contanct-information";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { resetProfileImage, setProfileImage, setSelectedUser } from "@/shared/redux/features/users/usersSlice";
 import ProfileLoading from "./profile-loading";
+import { useTranslations } from "next-intl";
 
 
 const Skillsdata = [
@@ -32,6 +33,7 @@ interface Props{
 }
 
 const UserDetails:FC<Props> =  ({userUuid}) => {
+  const t = useTranslations();
   const [getUser, userData] = useLazyGetUserQuery();
   const [getUserImage, imageData] = useLazyGetUserImageQuery();
   const dispatch = useAppDispatch();
@@ -57,7 +59,7 @@ const UserDetails:FC<Props> =  ({userUuid}) => {
   },[])
 
   if(userData.isError){
-    return <>Oh no, there was an error</>
+    return <>{t("GLOBAL.FETCH-ERROR")}</>
   }
 
  
@@ -87,7 +89,7 @@ const UserDetails:FC<Props> =  ({userUuid}) => {
        
         <div className="items-center justify-between p-6 border-b border-dashed dark:border-defaultborder/10 md:flex">
           <div className="w-full mb-6 ">
-            <p className="text-[.9375rem] mb-2 font-semibold">Professional Bio :</p>
+            <p className="text-[.9375rem] mb-2 font-semibold">{t("USERS.DETAILS.bio")}:</p>
             {userData.isLoading ? (
                 <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
                   <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>

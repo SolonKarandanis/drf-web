@@ -1,6 +1,8 @@
+import { useTranslations } from 'next-intl';
 import React from 'react'
 
 const ProfileLoading = () => {
+  const t = useTranslations();
   return (
     <div role="status" className="w-full p-4 rounded shadow main-profile-cover animate-pulse md:p-6 dark:border-gray-700">
         <div className="flex flex-row">
@@ -18,7 +20,7 @@ const ProfileLoading = () => {
           <div className="w-48 h-6 mt-3 bg-gray-700 rounded-full dark:bg-gray-700"></div>
         </div>
         
-        <span className="sr-only">Loading...</span>
+        <span className="sr-only">{t("GLOBAL.LOADING")}</span>
     </div>
   )
 }

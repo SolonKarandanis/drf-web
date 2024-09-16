@@ -9,6 +9,8 @@
         "COLUMNS":"Columns",
         "EXPORT-AS":"Export as",
         "PDF":"Pdf",
+        "FETCH-ERROR":"Oh no, there was an error",
+        "LOADING":"Loading...",
         "BUTTONS":{
             "cancel": "Cancel",
             "load": "Load",
@@ -208,6 +210,9 @@
                     
                 }
             }
+        },
+        "DETAILS":{
+            "bio":"Professional Bio"
         }
     }
 }
