@@ -213,10 +213,14 @@
         },
         "DETAILS":{
             "LABELS":{
-                "bio":"Professional Bio",
-                "profile":"Profile",
-                "completed":"completed",
-                "my-profile-picture":"My Profile Picture"
+                "bio":"Επαγγελματικό Βιογραφικό",
+                "profile":"Προφίλ",
+                "completed":"ολοκληρώθηκε",
+                "my-profile-picture":"Η φωτογραφία προφίλ μου",
+                "view-profile-modal-description":"Εικόνα χρήστη",
+                "view-profile-modal-title":"Εικόνα προφίλ",
+                "upload-profile-modal-description":"Μεταφόρτωση εικόνας προφίλ",
+                "upload-profile-modal-title":"Μεταφόρτωση αρχείου"
             },
             "BUTTONS":{
                 "show-profile-picture":"Εμφάνιση εικόνας προφίλ",

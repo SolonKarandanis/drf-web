@@ -216,7 +216,11 @@
                 "bio":"Professional Bio",
                 "profile":"Profile",
                 "completed":"completed",
-                "my-profile-picture":"My Profile Picture"
+                "my-profile-picture":"My Profile Picture",
+                "view-profile-modal-description":"Users image",
+                "view-profile-modal-title":"Profile Picture",
+                "upload-profile-modal-description":"Upload Profile Image",
+                "upload-profile-modal-title":"Upload File"
             },
             "BUTTONS":{
                 "show-profile-picture":"Show Profile Picture",
