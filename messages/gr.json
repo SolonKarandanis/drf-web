@@ -222,9 +222,17 @@
                 "upload-profile-modal-description":"Μεταφόρτωση εικόνας προφίλ",
                 "upload-profile-modal-title":"Μεταφόρτωση αρχείου"
             },
+            "UPLOAD-PROFILE":{
+                "title":"Μεταφόρτωση εικόνας",
+                "photo-size-less-than":"Επιλέξτε το μέγεθος της φωτογραφίας θα πρέπει να είναι μικρότερο από",
+                "should-be-format":"και πρέπει να είναι ",
+                "format":"μορφή."
+            },
             "BUTTONS":{
                 "show-profile-picture":"Εμφάνιση εικόνας προφίλ",
-                "upload-profile-picture":"Upload a new Picture"
+                "upload-profile-picture":"Ανεβάστε μια νέα εικόνα",
+                "upload":"Μεταφόρτωση",
+                "reset":"Επαναφορά"
             }
         }
     }

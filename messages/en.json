@@ -222,9 +222,17 @@
                 "upload-profile-modal-description":"Upload Profile Image",
                 "upload-profile-modal-title":"Upload File"
             },
+            "UPLOAD-PROFILE":{
+                "title":"Upload picture",
+                "photo-size-less-than":"Choose photo size should be less than ",
+                "should-be-format":"and should be in ",
+                "format":"format."
+            },
             "BUTTONS":{
                 "show-profile-picture":"Show Profile Picture",
-                "upload-profile-picture":"Ανεβάστε μια νέα εικόνα"
+                "upload-profile-picture":"Ανεβάστε μια νέα εικόνα",
+                "upload":"Upload",
+                "reset":"Reset"
             }
         }
     }

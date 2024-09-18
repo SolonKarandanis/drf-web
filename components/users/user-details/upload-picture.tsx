@@ -88,15 +88,16 @@ const UploadPicture = () => {
                 handleUploadFile={handleUploadFile} 
                 error={errors.profileImage?.message}>
                   <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-700">
-                      Upload picture
+                      {t("USERS.DETAILS.UPLOAD-PROFILE.title")}
                   </h5>
                   <p className="text-sm font-normal text-gray-400 md:px-6">
-                      Choose photo size should be less than 
+                      {t("USERS.DETAILS.UPLOAD-PROFILE.photo-size-less-than")}
                       <b className="text-gray-600">2mb</b>
                   </p>
                   <p className="text-sm font-normal text-gray-400 md:px-6">
-                      and should be in 
-                      <b className="text-gray-600">JPG, PNG, or GIF</b> format.
+                      {t("USERS.DETAILS.UPLOAD-PROFILE.should-be-format")}
+                      <b className="text-gray-600">JPG, PNG, or GIF</b> 
+                      {t("USERS.DETAILS.UPLOAD-PROFILE.format")}
                   </p>
               </Dropzone>
               <Button 
@@ -107,7 +108,9 @@ const UploadPicture = () => {
               >
                   {isLoading ? 
                       <ButtonLoading /> : 
-                      <span className="ml-2 text-center">Upload</span>
+                      <span className="ml-2 text-center">
+                        {t("USERS.DETAILS.BUTTONS.upload")}
+                      </span>
                   }
                   
               </Button>
