@@ -1,6 +1,6 @@
 "use client"
 
-import {ButtonHTMLAttributes, FC, ReactElement, ReactNode} from 'react';
+import {ButtonHTMLAttributes, FC, ReactElement,PropsWithChildren} from 'react';
 import {cva,VariantProps} from 'class-variance-authority';
 import { twMerge } from "tailwind-merge";
 import { useFormStatus } from 'react-dom';
@@ -50,11 +50,10 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
   isDisabled?:boolean,
   icon?: ReactElement;
   iconPosition?: ButtonIconPositions
-  children:ReactNode
 }
 
 
-const CButton:FC<ButtonProps> = ({ 
+const CButton:FC<PropsWithChildren<ButtonProps>> = ({ 
     className='',
     intent,
     size,

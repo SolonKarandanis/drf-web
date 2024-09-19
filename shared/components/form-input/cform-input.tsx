@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState } from 'react'
+import { FC, useState,PropsWithChildren } from 'react'
 import { twMerge } from "tailwind-merge";
 import CFormError from '@/shared/components/form-error/cform-error'
 import { InputProps } from '../props';
@@ -8,7 +8,7 @@ import { InputProps } from '../props';
 
 
 
-const CFormInput:FC<InputProps>  = ({
+const CFormInput:FC<PropsWithChildren<InputProps>>  = ({
     name,
     children,
     type='text',

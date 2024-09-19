@@ -2,7 +2,7 @@ import { UserSearchRequest, UserSearchResponse } from "@/models/search.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
 import { UserAcount, UserGroup, UserModel, UserSocials } from "@/models/user.models";
-import { ImageModel, UploadProfileImage, UploadProfileImageMutation } from "@/models/image.models";
+import { ImageModel, UploadProfileImageMutation } from "@/models/image.models";
 
 const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: builder =>({

@@ -28,7 +28,6 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
     sectionClassName?:string,
     props?:RegisterProps,
     error?:string,
-    children: React.ReactNode
 }
 
 export interface Options{
@@ -44,7 +43,6 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement>{
     sectionClassName?:string,
     inputProps?:RegisterProps,
     error?:string,
-    children: React.ReactNode
 }
 
 export interface TableProps extends TableHTMLAttributes<HTMLTableElement>{

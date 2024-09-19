@@ -1,12 +1,12 @@
 "use client"
 
-import {FC} from 'react'
+import {FC,PropsWithChildren} from 'react'
 import { twMerge } from "tailwind-merge";
 import CFormError from '@/shared/components/form-error/cform-error'
 import { SelectProps } from '../props'
 
 
-const CFormSelect:FC<SelectProps> = ({
+const CFormSelect:FC<PropsWithChildren<SelectProps>> = ({
     name,
     options,
     required=false,

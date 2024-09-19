@@ -1,12 +1,11 @@
 "use client"
 
-import  { ChangeEvent, FC, ReactNode } from 'react'
+import  { ChangeEvent, FC,PropsWithChildren } from 'react'
 import Image from "next/image";
 import { RegisterProps } from '../props';
 import CFormError from '../form-error/cform-error';
 
 interface Props{
-    children?:ReactNode;
     handleUploadFile:(event:ChangeEvent<HTMLInputElement>)=>void;
     props?:RegisterProps,
     error?:string,
@@ -15,7 +14,7 @@ interface Props{
 
 
 
-const Dropzone:FC<Props> = ({
+const Dropzone:FC<PropsWithChildren<Props>> = ({
     children,
     handleUploadFile,
     props,
