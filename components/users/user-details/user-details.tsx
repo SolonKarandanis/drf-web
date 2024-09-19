@@ -90,7 +90,7 @@ const UserDetails:FC<Props> =  ({userUuid}) => {
        
         <div className="items-center justify-between p-6 border-b border-dashed dark:border-defaultborder/10 md:flex">
           <div className="w-full mb-6 ">
-            <section className="flex justify-between">
+            <section className="flex items-center justify-between">
               <p className="text-[.9375rem] mb-2 font-semibold">{t("USERS.DETAILS.LABELS.bio")}:</p>
               <Button 
                 type="reset" 

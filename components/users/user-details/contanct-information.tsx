@@ -1,3 +1,4 @@
+import { Button } from '@/shared/shadcn/components/ui/button';
 import {FC} from 'react'
 
 interface Props{
@@ -39,9 +40,17 @@ const ContactInformation:FC<Props> = ({
     }
     return (
         <div className="p-6 border-b border-dashed dark:border-defaultborder/10">
-            <p className="text-[.9375rem] mb-2 me-6 font-semibold">
-            Contact Information :
-            </p>
+            <section className="flex items-center justify-between">
+                <p className="text-[.9375rem] mb-2 me-6 font-semibold">
+                    Contact Information :
+                </p>
+                <Button 
+                    type="reset" 
+                    variant="info"
+                    className="w-20">
+                    Edit
+                </Button>
+            </section>
             <div className="text-[#8c9097] dark:text-white/50">
                 <div className="flex items-center mb-2">
                     <span className="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">

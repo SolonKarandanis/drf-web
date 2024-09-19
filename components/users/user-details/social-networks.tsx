@@ -2,6 +2,7 @@
 
 import { UserSocials } from '@/models/user.models';
 import { useGetUserSocialsQuery } from '@/shared/redux/features/users/usersApiSlice';
+import { Button } from '@/shared/shadcn/components/ui/button';
 import {FC, useOptimistic, useTransition} from 'react'
 
 
@@ -34,10 +35,18 @@ const SocialNetworks:FC<Props> = ({userUuid}) => {
 //   </button>
 
     return (
-        <div className="items-center p-6 border-b border-dashed dark:border-defaultborder/10 sm:flex">
-            <p className="text-[.9375rem] mb-2 me-6 font-semibold">
-                Social Networks :
-            </p>
+        <div className="items-center w-full p-6 border-b border-dashed dark:border-defaultborder/10">
+            <section className="flex items-center justify-between">
+                <p className="text-[.9375rem] mb-2 me-6 font-semibold">
+                    Social Networks :
+                </p>
+                <Button 
+                    type="reset" 
+                    variant="info"
+                    className="w-20">
+                    Edit
+                </Button>
+            </section>
             {isLoading ? (
                 <div role="status" className="mb-1 animate-pulse ">
                     <div role="status" className="animate-pulse">
