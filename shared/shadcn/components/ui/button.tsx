@@ -19,6 +19,13 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        success:'ti-btn-success ti-btn-success-full',
+        info:'ti-btn-info ti-btn-info-full',
+        warning:'ti-btn-warning ti-btn-warning-full',
+        danger:'ti-btn-warning ti-btn-danger-full',
+        light:'ti-btn-warning ti-btn-light',
+        dark:'ti-btn-warning ti-btn-dark',
+        violet:'bg-violet-500 text-white',
       },
       size: {
         default: "h-10 px-4 py-2",
