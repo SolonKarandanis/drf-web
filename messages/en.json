@@ -230,7 +230,7 @@
             },
             "BUTTONS":{
                 "show-profile-picture":"Show Profile Picture",
-                "upload-profile-picture":"Ανεβάστε μια νέα εικόνα",
+                "upload-profile-picture":"Upload a profile Picture",
                 "upload":"Upload",
                 "reset":"Reset"
             }
