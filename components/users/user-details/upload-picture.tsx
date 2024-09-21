@@ -42,8 +42,8 @@ const UploadPicture = () => {
     })
 
     const handleError =(errorResponse:ErrorResponse)=>{
-      const {status, data:{detail}} = errorResponse;
-      toast.error(`(${status}) ${detail}`);
+      const {status, data} = errorResponse;
+      toast.error(`(${status}) ${data}`);
     }
   
   
