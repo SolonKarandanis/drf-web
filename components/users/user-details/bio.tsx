@@ -1,7 +1,5 @@
 "use client"
 
-import { FormControl, FormField, FormItem, FormLabel } from '@/shared/shadcn/components/ui/form';
-import { Input } from '@/shared/shadcn/components/ui/input';
 import { useTranslations } from 'next-intl';
 import {FC, useState} from 'react'
 import UserEditButton from './user-edit-button';
@@ -40,19 +38,19 @@ const Bio:FC<Props> = ({
               (
                 <>
                   {isEdit ? (
-                    <FormField
-                      name="bio"
-                      render={({ field }) => (
-                      <FormItem data-testid="name">
-                          <FormLabel>{t("USERS.DETAILS.LABELS.bio")}</FormLabel>
-                          <FormControl>
-                              <Input 
-                                  data-testid="input-name" 
-                                  {...field} />
-                          </FormControl>
-                      </FormItem>
-                      )}
-                    />
+                    <>
+                        <section className="col-span-12 xl:col-span-12">
+                            <label htmlFor='bio-input' className="form-label text-default">
+                                ssss
+                            </label>
+                            <input 
+                                id="bio-input" 
+                                name="bio-input"
+                                size={30}
+                                type="text"
+                                className="form-control w-full !rounded-md"/>
+                        </section>
+                    </>
                   ):(
                     <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 opacity-[0.7] mb-0">
                       {bio}

@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from '@/shared/shadcn/components/ui/button'
 import {FC, MouseEventHandler} from 'react'
 
