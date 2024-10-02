@@ -17,9 +17,6 @@ export interface UsersState {
 	selectedUser:UserAcount | null;
     userProfileImage:ImageModel | null;
     error:string| null;
-    bioEditMode:boolean;
-    contactInfoEditMode:boolean;
-    socialNetworksMode:boolean;
 }
 
 
@@ -52,9 +49,6 @@ const initialState = {
 	selectedUser:null,
     userProfileImage: null,
 	error:null,
-    bioEditMode:false,
-    contactInfoEditMode:false,
-    socialNetworksMode:false,
 } as UsersState;
 
 const usersSlice = createSlice({
@@ -101,15 +95,6 @@ const usersSlice = createSlice({
         },
         setError: (state)=>{
 
-        },
-        toggleBioEditMode:(state)=>{
-            state.bioEditMode = !state.bioEditMode
-        },
-        toggleContactInfoEditMode:(state)=>{
-            state.contactInfoEditMode = !state.contactInfoEditMode
-        },
-        toggleSocialNetworksEditMode:(state)=>{
-            state.socialNetworksMode = !state.socialNetworksMode
         }
     }
 });
@@ -144,8 +129,5 @@ export const {
     resetSearchRequest,
     setPaging,
     setUserGroups,
-    toggleBioEditMode,
-    toggleContactInfoEditMode,
-    toggleSocialNetworksEditMode
 } = usersSlice.actions;
 export default usersSlice.reducer;
