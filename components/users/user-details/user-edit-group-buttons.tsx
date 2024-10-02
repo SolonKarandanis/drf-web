@@ -15,7 +15,7 @@ const UserEditGroupButtons:FC<Props> = ({
         <div className='flex justify-between'>
             <Button 
                 type="reset" 
-                variant="danger"
+                variant="destructive"
                 className="w-20"
                 onClick={onCancelClick}>
                 Cancel

@@ -3,7 +3,6 @@
 import { useTranslations } from 'next-intl';
 import {ChangeEvent,  FC, useState} from 'react'
 import UserEditButton from './user-edit-button';
-import { Button } from '@/shared/shadcn/components/ui/button';
 import UserEditGroupButtons from './user-edit-group-buttons';
 
 interface Props{
@@ -27,7 +26,7 @@ const Bio:FC<Props> = ({
 
     }
     
-    const handleChange = (event:ChangeEvent<HTMLInputElement>)=>{
+    const handleChange = (event:ChangeEvent<HTMLTextAreaElement>)=>{
         const value = event.target.value;
         setData(prev => prev===value? prev: value);
     }
@@ -46,37 +45,29 @@ const Bio:FC<Props> = ({
                     <UserEditButton onClick={handleEditButtonClick} />
                 )}
             </section>
-            {isLoading ? (
+            {isLoading && (
                 <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
-                  <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                  <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                  <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700"></div>
+                    <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                    <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                    <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700"></div>
                 </div>
-              ):
-              (
-                <>
-                  {isEdit ? (
-                    <>
-                        <section className="col-span-12 mt-3 mb-0 xl:col-span-12">
-                            <input 
-                                id="bio-input" 
-                                name="bio-input"
-                                size={30}
-                                type="text"
-                                value={data}
-                                onChange={handleChange}
-                                className="form-control w-full !rounded-md"/>
-                        </section>
-                    </>
-                  ):(
-                    <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 opacity-[0.7] mb-0 mt-3">
-                      {bio}
-                    </p>
-                  )}
-                  
-                </>
-              )
-            }
+            )}
+            {!isLoading && isEdit && (
+                <section className="col-span-12 mt-3 mb-0 xl:col-span-12">
+                    <textarea 
+                        id="bio-input" name="bio-input" 
+                        rows={4} 
+                        cols={50} 
+                        value={data}
+                        onChange={handleChange}
+                        className="form-control w-full !rounded-md"/>
+                </section>
+            )}
+            {!isLoading && !isEdit && (
+                <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 opacity-[0.7] mb-0 mt-3">
+                    {bio}
+                </p>
+            ) }
           </div>
         </div>
     )
