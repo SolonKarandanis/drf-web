@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect } from "react";
+import { FC, useEffect} from "react";
 import SocialNetworks from "./social-networks";
 import { useLazyGetUserImageQuery, useLazyGetUserQuery } from "@/shared/redux/features/users/usersApiSlice";
 import Profile from "./profile";
@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { resetProfileImage, setProfileImage, setSelectedUser } from "@/shared/redux/features/users/usersSlice";
 import ProfileLoading from "./profile-loading";
 import { useTranslations } from "next-intl";
-import { Button } from "@/shared/shadcn/components/ui/button";
+import Bio from "./bio";
 
 
 const Skillsdata = [
@@ -34,11 +34,14 @@ interface Props{
 }
 
 const UserDetails:FC<Props> =  ({userUuid}) => {
+  const configState = useAppSelector((state) => state.config);
+  const userState = useAppSelector((state) => state.users);
+  const bioEditMode = userState.bioEditMode;
   const t = useTranslations();
   const [getUser, userData] = useLazyGetUserQuery();
   const [getUserImage, imageData] = useLazyGetUserImageQuery();
   const dispatch = useAppDispatch();
-  const configState = useAppSelector((state) => state.config);
+  
   const path = configState.baseUrl;
   const isLoading = true
 
@@ -58,6 +61,10 @@ const UserDetails:FC<Props> =  ({userUuid}) => {
           })
       })
   },[])
+
+  // useEffect(()=>{
+  //   setBioEdit(bioEditMode)
+  // },[bioEditMode])
 
   if(userData.isError){
     return <>{t("GLOBAL.FETCH-ERROR")}</>
@@ -87,34 +94,11 @@ const UserDetails:FC<Props> =  ({userUuid}) => {
               country={details?.country}/>
           )
         }
+        <Bio 
+          bio={user.bio} 
+          isEdit={bioEditMode}
+          isLoading={userData.isLoading}/>
        
-        <div className="items-center justify-between p-6 border-b border-dashed dark:border-defaultborder/10 md:flex">
-          <div className="w-full mb-6 ">
-            <section className="flex items-center justify-between">
-              <p className="text-[.9375rem] mb-2 font-semibold">{t("USERS.DETAILS.LABELS.bio")}:</p>
-              <Button 
-                type="reset" 
-                variant="info"
-                className="w-20">
-                  Edit
-              </Button>
-            </section>
-            {userData.isLoading ? (
-                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
-                  <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                  <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                  <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700"></div>
-                </div>
-              ):
-              (
-                <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 opacity-[0.7] mb-0">
-                  {user.bio}
-                </p>
-              )
-            }
-          </div>
-        </div>
-
         <ContactInformation 
           email={user.email}
           phone={details?.phone}
