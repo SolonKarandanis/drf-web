@@ -10,7 +10,7 @@ interface Props{
 const UserEditButton:FC<Props> = ({onClick}) => {
   return (
     <Button 
-        type="reset" 
+        type="button" 
         variant="info"
         className="w-20"
         onClick={onClick}>
