@@ -127,37 +127,41 @@ const ContactInformation:FC<Props> = ({
                         </div>
                     )}
                     {!isLoading && isEdit && (
-                        <section className="flex flex-row col-span-12 mb-3 xl:col-span-12">
-                            <input 
-                                id="address-input" 
-                                name="address-input"
-                                size={20}
-                                type="text"
-                                className="form-control w-full !rounded-md"/>
-                            <input 
-                                id="city-input" 
-                                name="city-input"
-                                size={20}
-                                type="text"
-                                className="form-control w-full !rounded-md"/>
-                            <input 
-                                id="phone-input" 
-                                name="phone-input"
-                                size={20}
-                                type="text"
-                                className="form-control w-full !rounded-md"/>
-                            <input 
-                                id="region-input" 
-                                name="region-input"
-                                size={20}
-                                type="text"
-                                className="form-control w-full !rounded-md"/>
-                            <input 
-                                id="postalCode-input" 
-                                name="postalCode-input"
-                                size={20}
-                                type="text"
-                                className="form-control w-full !rounded-md"/>
+                        <section className="flex flex-col gap-3 mb-3">
+                            <div className="flex flex-row gap-2">
+                                <input 
+                                    id="address-input" 
+                                    name="address-input"
+                                    size={20}
+                                    type="text"
+                                    className="form-control !rounded-md"/>
+                                <input 
+                                    id="city-input" 
+                                    name="city-input"
+                                    size={20}
+                                    type="text"
+                                    className="form-control  !rounded-md"/>
+                                <input 
+                                    id="phone-input" 
+                                    name="phone-input"
+                                    size={20}
+                                    type="text"
+                                    className="form-control  !rounded-md"/>
+                            </div>
+                            <div className="flex flex-row gap-2">
+                                <input 
+                                    id="region-input" 
+                                    name="region-input"
+                                    size={20}
+                                    type="text"
+                                    className="form-control  !rounded-md"/>
+                                <input 
+                                    id="postalCode-input" 
+                                    name="postalCode-input"
+                                    size={20}
+                                    type="text"
+                                    className="form-control  !rounded-md"/>
+                            </div>
                         </section>
                     ) }
                     {!isLoading && !isEdit && (
