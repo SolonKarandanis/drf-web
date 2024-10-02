@@ -3,7 +3,9 @@
 import { UserSocials } from '@/models/user.models';
 import { useGetUserSocialsQuery } from '@/shared/redux/features/users/usersApiSlice';
 import { Button } from '@/shared/shadcn/components/ui/button';
-import {FC, useOptimistic, useTransition} from 'react'
+import {FC, useOptimistic, useState, useTransition} from 'react'
+import UserEditGroupButtons from './user-edit-group-buttons';
+import UserEditButton from './user-edit-button';
 
 
 interface Props{
@@ -16,6 +18,16 @@ const SocialNetworks:FC<Props> = ({userUuid}) => {
         return [...state, newSocial];
     });
     const [isPending, startTransition] = useTransition();
+    const [isEdit, setIsEdit] = useState<boolean>(false);
+
+    const handleEditButtonClick = () => {
+        setIsEdit(prev => !prev);
+    };
+
+    const handleSaveButtonClick = () =>{
+
+    }
+
     // const [search, { isLoading, }] = useSearchUsersMutation();
     // async function addSocial() {
     //     try {
@@ -40,12 +52,14 @@ const SocialNetworks:FC<Props> = ({userUuid}) => {
                 <p className="text-[.9375rem] mb-2 me-6 font-semibold">
                     Social Networks :
                 </p>
-                <Button 
-                    type="reset" 
-                    variant="info"
-                    className="w-20">
-                    Edit
-                </Button>
+                {isEdit ?(
+                    <UserEditGroupButtons 
+                        onCancelClick={handleEditButtonClick}  
+                        onSaveClick={handleSaveButtonClick}/>
+                    
+                ):(
+                    <UserEditButton onClick={handleEditButtonClick} />
+                )}
             </section>
             {isLoading ? (
                 <div role="status" className="mb-1 animate-pulse ">

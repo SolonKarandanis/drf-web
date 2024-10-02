@@ -1,5 +1,7 @@
 import { Button } from '@/shared/shadcn/components/ui/button';
-import {FC} from 'react'
+import {FC, useState} from 'react'
+import UserEditGroupButtons from './user-edit-group-buttons';
+import UserEditButton from './user-edit-button';
 
 interface Props{
     email:string;
@@ -22,6 +24,16 @@ const ContactInformation:FC<Props> = ({
     address,
     isLoading = false
 }) => {
+    const [isEdit, setIsEdit] = useState<boolean>(false);
+
+    const handleEditButtonClick = () => {
+        setIsEdit(prev => !prev);
+    };
+
+    const handleSaveButtonClick = () =>{
+
+    }
+
     let location=''
     if(address){
         location += `${address}`
@@ -44,12 +56,14 @@ const ContactInformation:FC<Props> = ({
                 <p className="text-[.9375rem] mb-2 me-6 font-semibold">
                     Contact Information :
                 </p>
-                <Button 
-                    type="reset" 
-                    variant="info"
-                    className="w-20">
-                    Edit
-                </Button>
+                {isEdit ?(
+                    <UserEditGroupButtons 
+                        onCancelClick={handleEditButtonClick}  
+                        onSaveClick={handleSaveButtonClick}/>
+                    
+                ):(
+                    <UserEditButton onClick={handleEditButtonClick} />
+                )}
             </section>
             <div className="text-[#8c9097] dark:text-white/50">
                 <div className="flex items-center mb-2">
