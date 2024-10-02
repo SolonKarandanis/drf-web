@@ -36,7 +36,6 @@ interface Props{
 const UserDetails:FC<Props> =  ({userUuid}) => {
   const configState = useAppSelector((state) => state.config);
   const userState = useAppSelector((state) => state.users);
-  const bioEditMode = userState.bioEditMode;
   const t = useTranslations();
   const [getUser, userData] = useLazyGetUserQuery();
   const [getUserImage, imageData] = useLazyGetUserImageQuery();
@@ -62,9 +61,7 @@ const UserDetails:FC<Props> =  ({userUuid}) => {
       })
   },[])
 
-  // useEffect(()=>{
-  //   setBioEdit(bioEditMode)
-  // },[bioEditMode])
+
 
   if(userData.isError){
     return <>{t("GLOBAL.FETCH-ERROR")}</>
@@ -96,7 +93,6 @@ const UserDetails:FC<Props> =  ({userUuid}) => {
         }
         <Bio 
           bio={user.bio} 
-          isEdit={bioEditMode}
           isLoading={userData.isLoading}/>
        
         <ContactInformation 

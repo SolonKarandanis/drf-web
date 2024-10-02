@@ -1,23 +1,26 @@
 "use client"
 
-import { Button } from '@/shared/shadcn/components/ui/button';
 import { FormControl, FormField, FormItem, FormLabel } from '@/shared/shadcn/components/ui/form';
 import { Input } from '@/shared/shadcn/components/ui/input';
 import { useTranslations } from 'next-intl';
-import {FC} from 'react'
+import {FC, useState} from 'react'
+import UserEditButton from './user-edit-button';
 
 interface Props{
     bio:string;
-    isEdit:boolean;
     isLoading:boolean;
 }
 
 const Bio:FC<Props> = ({
     bio,
-    isEdit,
-    isLoading
+    isLoading,
 }) => {
     const t = useTranslations();
+    const [isEdit, setIsEdit] = useState<boolean>(false);
+
+    const handleEditButtonClick = () => {
+        setIsEdit(prev => !prev);
+    };
 
     
     return (
@@ -25,12 +28,7 @@ const Bio:FC<Props> = ({
           <div className="w-full mb-6 ">
             <section className="flex items-center justify-between">
               <p className="text-[.9375rem] mb-2 font-semibold">{t("USERS.DETAILS.LABELS.bio")}:</p>
-              <Button 
-                type="reset" 
-                variant="info"
-                className="w-20">
-                  Edit
-              </Button>
+              <UserEditButton onClick={handleEditButtonClick} />
             </section>
             {isLoading ? (
                 <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
