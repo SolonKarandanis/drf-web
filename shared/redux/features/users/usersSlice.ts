@@ -1,8 +1,9 @@
 import { ImageModel } from '@/models/image.models';
 import { Paging, UserSearchRequest, UserSearchResponse } from '@/models/search.models';
 import { UserAcount, UserGroup, UserModel, UserStatus } from '@/models/user.models';
-import { createListenerMiddleware, createSlice } from '@reduxjs/toolkit';
+import { createListenerMiddleware, createSelector, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '../../store';
 
 export interface UsersState {
 	users:UserModel[];
@@ -131,3 +132,51 @@ export const {
     setUserGroups,
 } = usersSlice.actions;
 export default usersSlice.reducer;
+
+
+const users = (state: RootState) => state.users
+
+export const userLocationSelector = createSelector([users], (users) => {
+    const details = users.selectedUser?.details;
+
+    let location=''
+
+    if(details &&  details.address){
+        location += `${details.address}`
+    }
+    if(details && details.city){
+        location += `, ${details.city}`
+    }
+    if(details && details.state){
+        location += `, ${details.state}`
+    }
+    if(details && details.country){
+        location += `, ${details.country}`
+    }
+    if(details && details.zip){
+        location += `, ${details.zip}`
+    }
+    return location;
+});
+
+// export const totalItemQtySelector = createSelector([items], (items) => {
+//     console.log("custom selector runned");
+  
+//     return items.reduce(
+//       (total: number, curr: CartItem) => (total += curr.qty),
+//       0,
+//     );
+//   });
+  
+//   export const totalQtyLimitSelector = createSelector(
+//     [items, (items, limit: number) => limit],
+//     (items, limit) => {
+//       const total = items.reduce(
+//         (total: number, curr: CartItem) => (total += curr.qty),
+//         0,
+//       );
+//       return total > limit;
+//     },
+//   );
+
+// const isExceeded = useAppSelector((state) => totalQtyLimitSelector(state, 5));

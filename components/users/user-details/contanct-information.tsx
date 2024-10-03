@@ -10,11 +10,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ErrorResponse } from '@/models/error.models';
 import { toast } from 'react-toastify';
 import { Form } from '@/shared/shadcn/components/ui/form';
-import { useAppDispatch } from '@/shared/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
 import { useUpdateContanctInfoMutation } from '@/shared/redux/features/users/usersApiSlice';
 import { UpdateContactInfoRequest, UserAcount } from '@/models/user.models';
 import { useParams } from 'next/navigation';
-import { setSelectedUser } from '@/shared/redux/features/users/usersSlice';
+import { setSelectedUser, userLocationSelector } from '@/shared/redux/features/users/usersSlice';
 
 
 type Inputs = z.infer<typeof UpldateUserContactInfoSchema>
@@ -41,6 +41,7 @@ const ContactInformation:FC<Props> = ({
     isLoading = false,
     canEditUser
 }) => {
+    const location = useAppSelector(userLocationSelector);
     const [isEdit, setIsEdit] = useState<boolean>(false);
     const params = useParams<{locale:string,userUuid:string}>();
     const dispatch = useAppDispatch();
@@ -85,23 +86,7 @@ const ContactInformation:FC<Props> = ({
                 handleError(error);
             });
     };
-
-    let location=''
-    if(address){
-        location += `${address}`
-    }
-    if(city){
-        location += `, ${city}`
-    }
-    if(state){
-        location += `, ${state}`
-    }
-    if(country){
-        location += `, ${country}`
-    }
-    if(zipCode){
-        location += `, ${zipCode}`
-    }
+    
     return (
         <div className="p-6 border-b border-dashed dark:border-defaultborder/10">
             <section className="flex items-center justify-between">
