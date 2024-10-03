@@ -1,14 +1,16 @@
-import { SocialModel } from "@/models/social.models";
+import { SocialModel, UserSocials } from "@/models/social.models";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 
 export interface SocialState {
 	socials:SocialModel[];
+    selectedUserSocials:UserSocials[],
     error:string| null;
 }
 
 const initialState = {
 	socials: [],
+    selectedUserSocials:[],
 	error:null,
 } as SocialState;
 
@@ -23,6 +25,13 @@ const socialSlice = createSlice({
         },
         resetSocials:(state) =>{
             state = initialState;
+        },
+        setUserSocials:(state, action:PayloadAction<UserSocials[]>) =>{
+            const payload =action.payload;
+            state.selectedUserSocials=payload;
+        },
+        resetUserSocials:(state)=>{
+            state.selectedUserSocials = []
         }
     }
 });
@@ -30,6 +39,8 @@ const socialSlice = createSlice({
 export const { 
     setSocials,
     resetSocials,
+    setUserSocials,
+    resetUserSocials
 } = socialSlice.actions;
 export default socialSlice.reducer;
 
