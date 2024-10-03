@@ -42,8 +42,8 @@ const Bio:FC<Props> = ({
     })
 
     const handleError =(errorResponse:ErrorResponse)=>{
-		const {status, data:{detail}} = errorResponse;
-		toast.error(`(${status}) ${detail}`);
+		const {status, data} = errorResponse;
+		toast.error(`(${status}) ${data}`);
 	}
 
     const onSubmit: SubmitHandler<Inputs> = async (data) =>{
@@ -97,6 +97,7 @@ const Bio:FC<Props> = ({
                                 {...form.register("bio")}
                                 rows={4} 
                                 cols={50} 
+                                disabled={mutationLoading}
                                 className="form-control w-full !rounded-md"/>
                         </section>
                     </form>

@@ -10,6 +10,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ErrorResponse } from '@/models/error.models';
 import { toast } from 'react-toastify';
 import { Form } from '@/shared/shadcn/components/ui/form';
+import { useAppDispatch } from '@/shared/redux/hooks';
+import { useUpdateContanctInfoMutation } from '@/shared/redux/features/users/usersApiSlice';
+import { UpdateContactInfoRequest, UserAcount } from '@/models/user.models';
+import { useParams } from 'next/navigation';
+import { setSelectedUser } from '@/shared/redux/features/users/usersSlice';
 
 
 type Inputs = z.infer<typeof UpldateUserContactInfoSchema>
@@ -35,6 +40,9 @@ const ContactInformation:FC<Props> = ({
     isLoading = false
 }) => {
     const [isEdit, setIsEdit] = useState<boolean>(false);
+    const params = useParams<{locale:string,userUuid:string}>();
+    const dispatch = useAppDispatch();
+    const [updateContactInfo, { isLoading:mutationLoading }] = useUpdateContanctInfoMutation();
 
     const handleEditButtonClick = () => {
         setIsEdit(prev => !prev);
@@ -55,14 +63,25 @@ const ContactInformation:FC<Props> = ({
         }
     });
 
+   
+
     const handleError =(errorResponse:ErrorResponse)=>{
-		const {status, data:{detail}} = errorResponse;
-		toast.error(`(${status}) ${detail}`);
+		const {status, data} = errorResponse;
+		toast.error(`(${status}) ${data}`);
 	};
 
     const onSubmit: SubmitHandler<Inputs> = async (data) =>{
-        // const {bio} = data;
-        console.log(data)
+       const request:UpdateContactInfoRequest={...data}
+       updateContactInfo({userUuid:params.userUuid,request})
+            .unwrap()
+            .then((response:UserAcount ) => {
+                dispatch(setSelectedUser(response));
+                setIsEdit(prev => !prev);
+                toast.success('Successfully Updated user');
+            })
+            .catch((error:ErrorResponse) => {
+                handleError(error);
+            });
     };
 
     let location=''
@@ -113,6 +132,7 @@ const ContactInformation:FC<Props> = ({
                                     <input 
                                         {...form.register("email")}
                                         size={20}
+                                        disabled={mutationLoading}
                                         type="email"
                                         placeholder="Email"
                                         className="form-control w-full !rounded-md"/>
@@ -137,6 +157,7 @@ const ContactInformation:FC<Props> = ({
                                 <section className="col-span-12 mb-3 xl:col-span-12">
                                     <input 
                                         {...form.register("phone")}
+                                        disabled={mutationLoading}
                                         size={20}
                                         type="tel"
                                         placeholder="Phone"
@@ -164,18 +185,21 @@ const ContactInformation:FC<Props> = ({
                                         <input 
                                             {...form.register("address")}
                                             size={20}
+                                            disabled={mutationLoading}
                                             type="text"
                                             placeholder="Address"
                                             className="form-control !rounded-md"/>
                                         <input 
                                             {...form.register("city")}
                                             size={20}
+                                            disabled={mutationLoading}
                                             type="text"
                                             placeholder="City"
                                             className="form-control  !rounded-md"/>
                                         <input 
                                             {...form.register("state")}
                                             size={20}
+                                            disabled={mutationLoading}
                                             type="text"
                                             placeholder="State"
                                             className="form-control  !rounded-md"/>
@@ -184,12 +208,14 @@ const ContactInformation:FC<Props> = ({
                                         <input 
                                             {...form.register("country")}
                                             size={20}
+                                            disabled={mutationLoading}
                                             type="text"
                                             placeholder="Country"
                                             className="form-control  !rounded-md"/>
                                         <input 
                                             {...form.register("zip")}
                                             size={20}
+                                            disabled={mutationLoading}
                                             type="text"
                                             placeholder="Zip code"
                                             className="form-control  !rounded-md"/>

@@ -1,6 +1,6 @@
 export interface ErrorResponse{
     status:number;
-    data:ErrorData;
+    data:string;
 }
 
 export interface ErrorData{
