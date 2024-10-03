@@ -95,7 +95,7 @@ const UserDetails:FC<Props> =  ({userUuid,canEditUser}) => {
         <Bio 
           bio={user.bio} 
           isLoading={userData.isLoading}
-          canEditUser/>
+          canEditUser={canEditUser}/>
        
         <ContactInformation 
           email={user.email}
@@ -106,9 +106,9 @@ const UserDetails:FC<Props> =  ({userUuid,canEditUser}) => {
           state={details?.state}
           zipCode={details?.zip}
           isLoading={userData.isLoading}
-          canEditUser/>
+          canEditUser={canEditUser}/>
           
-        <SocialNetworks canEditUser/>
+        <SocialNetworks canEditUser={canEditUser}/>
         <div className="p-6 border-b border-dashed dark:border-defaultborder/10">
           <p className="text-[.9375rem] mb-2 me-6 font-semibold">Skills :</p>
           <div>

@@ -108,12 +108,12 @@ const ContactInformation:FC<Props> = ({
                 <p className="text-[.9375rem] mb-2 me-6 font-semibold">
                     Contact Information :
                 </p>
-                {isEdit ?(
+                {canEditUser && isEdit && (
                     <UserEditGroupButtons 
-                        onCancelClick={handleEditButtonClick}  
+                        onCancelClick={handleEditButtonClick} 
                         fomrId={formId}/>
-                    
-                ):(
+                )}
+                {canEditUser && !isEdit && (
                     <UserEditButton onClick={handleEditButtonClick} />
                 )}
             </section>

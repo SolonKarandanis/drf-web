@@ -54,11 +54,12 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                 <p className="text-[.9375rem] mb-2 me-6 font-semibold">
                     Social Networks :
                 </p>
-                {isEdit ?(
+                {canEditUser && isEdit && (
                     <UserEditGroupButtons 
-                        onCancelClick={handleEditButtonClick} />
-                    
-                ):(
+                        onCancelClick={handleEditButtonClick} 
+                        />
+                )}
+                {canEditUser && !isEdit && (
                     <UserEditButton onClick={handleEditButtonClick} />
                 )}
             </section>

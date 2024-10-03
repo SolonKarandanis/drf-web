@@ -75,12 +75,12 @@ const Bio:FC<Props> = ({
           <div className="w-full mb-6 ">
             <section className="flex items-center justify-between">
                 <p className="text-[.9375rem] mb-2 font-semibold">{t("USERS.DETAILS.LABELS.bio")}:</p>
-                {isEdit ?(
+                {canEditUser && isEdit && (
                     <UserEditGroupButtons 
                         onCancelClick={handleEditButtonClick} 
                         fomrId={formId}/>
-                    
-                ):(
+                )}
+                {canEditUser && !isEdit && (
                     <UserEditButton onClick={handleEditButtonClick} />
                 )}
             </section>
