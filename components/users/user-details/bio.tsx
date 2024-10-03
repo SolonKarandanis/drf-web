@@ -1,10 +1,18 @@
 "use client"
 
 import { useTranslations } from 'next-intl';
-import {ChangeEvent,  FC, useState} from 'react'
+import {FC, useState} from 'react'
 import UserEditButton from './user-edit-button';
 import UserEditGroupButtons from './user-edit-group-buttons';
+import { UpdateUserBioSchema } from '@/schemas/search.schemas';
+import * as z from "zod";
+import {SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ErrorResponse } from '@/models/error.models';
+import { toast } from 'react-toastify';
+import { Form } from '@/shared/shadcn/components/ui/form';
 
+type Inputs = z.infer<typeof UpdateUserBioSchema>
 interface Props{
     bio:string;
     isLoading:boolean;
@@ -16,19 +24,31 @@ const Bio:FC<Props> = ({
 }) => {
     const t = useTranslations();
     const [isEdit, setIsEdit] = useState<boolean>(false);
-    const [data, setData] = useState(bio);
+    const formId="bio-form";
+
+    const form = useForm<Inputs>({
+        resolver: zodResolver(UpdateUserBioSchema),
+        defaultValues:{
+            bio:bio
+        }
+    })
+
+    const handleError =(errorResponse:ErrorResponse)=>{
+		const {status, data:{detail}} = errorResponse;
+		toast.error(`(${status}) ${detail}`);
+	}
+
+    const onSubmit: SubmitHandler<Inputs> = async (data) =>{
+        const {bio} = data;
+        console.log(bio)
+    }
 
     const handleEditButtonClick = () => {
         setIsEdit(prev => !prev);
     };
 
     const handleSaveButtonClick = () =>{
-
-    }
-    
-    const handleChange = (event:ChangeEvent<HTMLTextAreaElement>)=>{
-        const value = event.target.value;
-        setData(prev => prev===value? prev: value);
+        form.handleSubmit(onSubmit);
     }
     
     return (
@@ -38,8 +58,8 @@ const Bio:FC<Props> = ({
                 <p className="text-[.9375rem] mb-2 font-semibold">{t("USERS.DETAILS.LABELS.bio")}:</p>
                 {isEdit ?(
                     <UserEditGroupButtons 
-                        onCancelClick={handleEditButtonClick}  
-                        onSaveClick={handleSaveButtonClick}/>
+                        onCancelClick={handleEditButtonClick} 
+                        fomrId={formId}/>
                     
                 ):(
                     <UserEditButton onClick={handleEditButtonClick} />
@@ -53,15 +73,17 @@ const Bio:FC<Props> = ({
                 </div>
             )}
             {!isLoading && isEdit && (
-                <section className="col-span-12 mt-3 mb-0 xl:col-span-12">
-                    <textarea 
-                        id="bio-input" name="bio-input" 
-                        rows={4} 
-                        cols={50} 
-                        value={data}
-                        onChange={handleChange}
-                        className="form-control w-full !rounded-md"/>
-                </section>
+                <Form {...form} >
+                    <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
+                        <section className="col-span-12 mt-3 mb-0 xl:col-span-12">
+                            <textarea 
+                                {...form.register("bio")}
+                                rows={4} 
+                                cols={50} 
+                                className="form-control w-full !rounded-md"/>
+                        </section>
+                    </form>
+                </Form>
             )}
             {!isLoading && !isEdit && (
                 <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 opacity-[0.7] mb-0 mt-3">

@@ -3,12 +3,12 @@ import {FC, MouseEventHandler} from 'react'
 
 interface Props{
     onCancelClick:MouseEventHandler<HTMLButtonElement>;
-    onSaveClick:MouseEventHandler<HTMLButtonElement>;
+    fomrId?:string;
 }
 
 const UserEditGroupButtons:FC<Props> = ({
     onCancelClick,
-    onSaveClick
+    fomrId
 }) => {
   return (
     <div className="w-44"  data-testid="buttons">
@@ -20,13 +20,23 @@ const UserEditGroupButtons:FC<Props> = ({
                 onClick={onCancelClick}>
                 Cancel
             </Button>
-            <Button 
-                type="button" 
-                variant="success"
-                className="w-20"
-                onClick={onSaveClick}>
-                Save 
-            </Button>
+            {fomrId ?(
+                <Button 
+                    form={fomrId}
+                    type="submit" 
+                    variant="success"
+                    className="w-20">
+                    Save 
+                </Button>
+            ):(
+                <Button 
+                    type="submit" 
+                    variant="success"
+                    className="w-20">
+                    Save 
+                </Button>
+            )}
+            
         </div>
     </div>
   )

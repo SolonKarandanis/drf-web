@@ -54,8 +54,7 @@ const SocialNetworks:FC<Props> = ({userUuid}) => {
                 </p>
                 {isEdit ?(
                     <UserEditGroupButtons 
-                        onCancelClick={handleEditButtonClick}  
-                        onSaveClick={handleSaveButtonClick}/>
+                        onCancelClick={handleEditButtonClick} />
                     
                 ):(
                     <UserEditButton onClick={handleEditButtonClick} />
