@@ -14,3 +14,13 @@ export interface UserSocials{
     socialIcon:string;
     buttonCssClass:string;
 }
+
+export interface CreateUserSocialRequest{
+    userId:number;
+    socialId:number;
+    url:string;
+}
+
+export interface DeleteUserSocialRequest{
+    socialItemId:number;
+}
