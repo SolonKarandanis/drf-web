@@ -34,4 +34,4 @@ export const {
 export default socialSlice.reducer;
 
 
-const users = (state: RootState) => state.users
+const users = (state: RootState) => state.socials

@@ -3,7 +3,6 @@ import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
 import { UpdateBioRequest, UpdateContactInfoRequest, UserAcount, UserGroup, UserModel } from "@/models/user.models";
 import { ImageModel, UploadProfileImageMutation } from "@/models/image.models";
-import { UserSocials } from "@/models/social.models";
 
 const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: builder =>({
@@ -27,13 +26,6 @@ const usersApiSlice = apiSlice.injectEndpoints({
 			query:() =>{
 				return {
 					url:`${ApiControllers.USERS}/groups`,
-				}
-			}
-		}),
-		getUserSocials: builder.query<UserSocials[],string>({
-			query:(userUuid) =>{
-				return {
-					url:`${ApiControllers.SOCIALS}/users/${userUuid}`,
 				}
 			}
 		}),
@@ -87,7 +79,6 @@ export const {
     useLazyGetUsersQuery,
     useSearchUsersMutation,
 	useLazyGetAllGroupsQuery,
-	useGetUserSocialsQuery,
 	useUploadUserImageMutation,
 	useUpdateUserBioMutation,
 	useUpdateContanctInfoMutation,
