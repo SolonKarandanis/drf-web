@@ -55,23 +55,22 @@ const usersApiSlice = apiSlice.injectEndpoints({
 				}
 			},
 		}),
-		updateUserBio:builder.mutation<UserAcount,UpdateBioRequest>({
-			query:(request:UpdateBioRequest)=>{
-				const {bio,userUuid} = request;
+		updateUserBio:builder.mutation<UserAcount,{userUuid:string, request:UpdateBioRequest}>({
+			query:({userUuid,request})=>{
+				const {bio} = request;
 				return {
 					url:`${ApiControllers.USERS}/${userUuid}/update-bio/`,
 					method: 'PUT',
-					body: {bio} ,
+					body: request ,
 				}
 			}
 		}),
-		updateContanctInfo:builder.mutation<UserAcount,UpdateContactInfoRequest>({
-			query:(request:UpdateContactInfoRequest)=>{
-				const {userUuid,address,city,country,phone,state,zip} = request;
+		updateContanctInfo:builder.mutation<UserAcount,{userUuid:string, request:UpdateContactInfoRequest}>({
+			query:({userUuid,request})=>{
 				return {
 					url:`${ApiControllers.USERS}/${userUuid}/update-contact-info/`,
 					method: 'PUT',
-					body: {address,city,country,phone,state,zip} ,
+					body: request ,
 				}
 			}
 		})

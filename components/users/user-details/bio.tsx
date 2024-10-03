@@ -11,6 +11,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ErrorResponse } from '@/models/error.models';
 import { toast } from 'react-toastify';
 import { Form } from '@/shared/shadcn/components/ui/form';
+import { useAppDispatch } from '@/shared/redux/hooks';
+import { useUpdateUserBioMutation } from '@/shared/redux/features/users/usersApiSlice';
+import { useParams } from 'next/navigation';
+import { UpdateBioRequest, UserAcount } from '@/models/user.models';
+import { setSelectedUser } from '@/shared/redux/features/users/usersSlice';
 
 type Inputs = z.infer<typeof UpdateUserBioSchema>
 interface Props{
@@ -24,6 +29,9 @@ const Bio:FC<Props> = ({
 }) => {
     const t = useTranslations();
     const [isEdit, setIsEdit] = useState<boolean>(false);
+    const dispatch = useAppDispatch();
+    const [updateBio, { isLoading:mutationLoading }] = useUpdateUserBioMutation();
+    const params = useParams<{locale:string,userUuid:string}>();
     const formId="bio-form";
 
     const form = useForm<Inputs>({
@@ -40,7 +48,19 @@ const Bio:FC<Props> = ({
 
     const onSubmit: SubmitHandler<Inputs> = async (data) =>{
         const {bio} = data;
-        console.log(bio)
+        const request:UpdateBioRequest={
+            bio
+        }
+        updateBio({userUuid:params.userUuid,request})
+            .unwrap()
+            .then((response:UserAcount ) => {
+                dispatch(setSelectedUser(response));
+                setIsEdit(prev => !prev);
+                toast.success('Successfully Updated user');
+            })
+            .catch((error:ErrorResponse) => {
+                handleError(error);
+            });
     }
 
     const handleEditButtonClick = () => {

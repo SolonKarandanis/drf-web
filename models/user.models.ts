@@ -82,8 +82,7 @@ export interface UserSocials{
 }
 
 export interface UpdateBioRequest{
-    bio:string;
-    userUuid:string;
+    bio?:string;
 }
 
 export interface UpdateContactInfoRequest{
@@ -93,5 +92,4 @@ export interface UpdateContactInfoRequest{
     address?:string;
     zip?:string;
     phone?:string;
-    userUuid:string;
 }
