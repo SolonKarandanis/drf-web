@@ -114,6 +114,7 @@ const ContactInformation:FC<Props> = ({
                                         {...form.register("email")}
                                         size={20}
                                         type="email"
+                                        placeholder="Email"
                                         className="form-control w-full !rounded-md"/>
                                 </section>
                             ) }
@@ -138,6 +139,7 @@ const ContactInformation:FC<Props> = ({
                                         {...form.register("phone")}
                                         size={20}
                                         type="tel"
+                                        placeholder="Phone"
                                         className="form-control w-full !rounded-md"/>
                                 </section>
                             ) }
@@ -163,16 +165,19 @@ const ContactInformation:FC<Props> = ({
                                             {...form.register("address")}
                                             size={20}
                                             type="text"
+                                            placeholder="Address"
                                             className="form-control !rounded-md"/>
                                         <input 
                                             {...form.register("city")}
                                             size={20}
                                             type="text"
+                                            placeholder="City"
                                             className="form-control  !rounded-md"/>
                                         <input 
                                             {...form.register("state")}
                                             size={20}
                                             type="text"
+                                            placeholder="State"
                                             className="form-control  !rounded-md"/>
                                     </div>
                                     <div className="flex flex-row gap-2">
@@ -180,11 +185,13 @@ const ContactInformation:FC<Props> = ({
                                             {...form.register("country")}
                                             size={20}
                                             type="text"
+                                            placeholder="Country"
                                             className="form-control  !rounded-md"/>
                                         <input 
                                             {...form.register("zip")}
                                             size={20}
                                             type="text"
+                                            placeholder="Zip code"
                                             className="form-control  !rounded-md"/>
                                     </div>
                                 </section>
