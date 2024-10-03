@@ -1,12 +1,12 @@
 "use client";
 
-import { UserSocials } from '@/models/user.models';
 import { useGetUserSocialsQuery } from '@/shared/redux/features/users/usersApiSlice';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import {FC, useOptimistic, useState, useTransition} from 'react'
 import UserEditGroupButtons from './user-edit-group-buttons';
 import UserEditButton from './user-edit-button';
 import { useParams } from 'next/navigation';
+import { UserSocials } from '@/models/social.models';
 
 
 interface Props{

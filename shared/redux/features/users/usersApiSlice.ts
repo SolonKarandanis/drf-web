@@ -1,8 +1,9 @@
 import { UserSearchRequest, UserSearchResponse } from "@/models/search.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
-import { UpdateBioRequest, UpdateContactInfoRequest, UserAcount, UserGroup, UserModel, UserSocials } from "@/models/user.models";
+import { UpdateBioRequest, UpdateContactInfoRequest, UserAcount, UserGroup, UserModel } from "@/models/user.models";
 import { ImageModel, UploadProfileImageMutation } from "@/models/image.models";
+import { UserSocials } from "@/models/social.models";
 
 const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: builder =>({
