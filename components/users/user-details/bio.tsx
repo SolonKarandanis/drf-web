@@ -47,9 +47,6 @@ const Bio:FC<Props> = ({
         setIsEdit(prev => !prev);
     };
 
-    const handleSaveButtonClick = () =>{
-        form.handleSubmit(onSubmit);
-    }
     
     return (
         <div className="items-center justify-between p-6 border-b border-dashed dark:border-defaultborder/10 md:flex">

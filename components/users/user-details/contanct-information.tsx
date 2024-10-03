@@ -5,6 +5,10 @@ import UserEditGroupButtons from './user-edit-group-buttons';
 import UserEditButton from './user-edit-button';
 import { UpldateUserContactInfoSchema } from '@/schemas/search.schemas';
 import * as z from "zod";
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ErrorResponse } from '@/models/error.models';
+import { toast } from 'react-toastify';
 
 
 type Inputs = z.infer<typeof UpldateUserContactInfoSchema>
@@ -35,9 +39,30 @@ const ContactInformation:FC<Props> = ({
         setIsEdit(prev => !prev);
     };
 
-    const handleSaveButtonClick = () =>{
+    const formId="contact-form";
 
-    }
+    const form = useForm<Inputs>({
+        resolver: zodResolver(UpldateUserContactInfoSchema),
+        defaultValues:{
+            email,
+            phone,
+            country,
+            city,
+            state,
+            zip:zipCode,
+            address,
+        }
+    });
+
+    const handleError =(errorResponse:ErrorResponse)=>{
+		const {status, data:{detail}} = errorResponse;
+		toast.error(`(${status}) ${detail}`);
+	};
+
+    const onSubmit: SubmitHandler<Inputs> = async (data) =>{
+        // const {bio} = data;
+        console.log(data)
+    };
 
     let location=''
     if(address){
