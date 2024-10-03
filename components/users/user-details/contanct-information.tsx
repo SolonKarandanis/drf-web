@@ -9,6 +9,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ErrorResponse } from '@/models/error.models';
 import { toast } from 'react-toastify';
+import { Form } from '@/shared/shadcn/components/ui/form';
 
 
 type Inputs = z.infer<typeof UpldateUserContactInfoSchema>
@@ -88,116 +89,114 @@ const ContactInformation:FC<Props> = ({
                 </p>
                 {isEdit ?(
                     <UserEditGroupButtons 
-                        onCancelClick={handleEditButtonClick}  />
+                        onCancelClick={handleEditButtonClick}  
+                        fomrId={formId}/>
                     
                 ):(
                     <UserEditButton onClick={handleEditButtonClick} />
                 )}
             </section>
             <div className="text-[#8c9097] dark:text-white/50">
-                <div className="flex items-center mb-2">
-                    <span className="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
-                        <i className="ri-mail-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
-                    </span>
-                    {isLoading && (
-                        <div role="status" className="animate-pulse">
-                            <div className="w-32 h-3 bg-gray-400 rounded-full dark:bg-gray-700"></div>
+                <Form {...form} >
+                    <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
+                        <div className="flex items-center mb-2">
+                            <span className="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
+                                <i className="ri-mail-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
+                            </span>
+                            {isLoading && (
+                                <div role="status" className="animate-pulse">
+                                    <div className="w-32 h-3 bg-gray-400 rounded-full dark:bg-gray-700"></div>
+                                </div>
+                            )}
+                            {!isLoading && isEdit && (
+                                <section className="col-span-12 mb-3 xl:col-span-12">
+                                    <input 
+                                        {...form.register("email")}
+                                        size={20}
+                                        type="email"
+                                        className="form-control w-full !rounded-md"/>
+                                </section>
+                            ) }
+                            {!isLoading && !isEdit && (
+                                <>
+                                    {email}
+                                </>
+                            ) }
                         </div>
-                    )}
-                    {!isLoading && isEdit && (
-                        <section className="col-span-12 mb-3 xl:col-span-12">
-                            <input 
-                                id="email-input" 
-                                name="email-input"
-                                size={20}
-                                type="email"
-                                className="form-control w-full !rounded-md"/>
-                        </section>
-                    ) }
-                    {!isLoading && !isEdit && (
-                        <>
-                            {email}
-                        </>
-                    ) }
-                </div>
-                <div className="flex items-center mb-2">
-                    <span className="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
-                        <i className="ri-phone-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
-                    </span>
-                    {isLoading && (
-                        <div role="status" className="animate-pulse">
-                            <div className="h-3 bg-gray-400 rounded-full w-28 dark:bg-gray-700"></div>
+                        <div className="flex items-center mb-2">
+                            <span className="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
+                                <i className="ri-phone-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
+                            </span>
+                            {isLoading && (
+                                <div role="status" className="animate-pulse">
+                                    <div className="h-3 bg-gray-400 rounded-full w-28 dark:bg-gray-700"></div>
+                                </div>
+                            )}
+                            {!isLoading && isEdit && (
+                                <section className="col-span-12 mb-3 xl:col-span-12">
+                                    <input 
+                                        {...form.register("phone")}
+                                        size={20}
+                                        type="tel"
+                                        className="form-control w-full !rounded-md"/>
+                                </section>
+                            ) }
+                            {!isLoading && !isEdit && (
+                                <>
+                                    {phone}
+                                </>
+                            ) }
                         </div>
-                    )}
-                    {!isLoading && isEdit && (
-                        <section className="col-span-12 mb-3 xl:col-span-12">
-                            <input 
-                                id="phone-input" 
-                                name="phone-input"
-                                size={20}
-                                type="tel"
-                                className="form-control w-full !rounded-md"/>
-                        </section>
-                    ) }
-                    {!isLoading && !isEdit && (
-                        <>
-                            {phone}
-                        </>
-                    ) }
-                </div>
-                <div className="flex items-center mb-0">
-                    <span className="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
-                        <i className="ri-map-pin-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
-                    </span>
-                    {isLoading && (
-                        <div role="status" className="animate-pulse">
-                            <div className="w-56 h-3 bg-gray-400 rounded-full dark:bg-gray-700"></div>
+                        <div className="flex items-center mb-0">
+                            <span className="avatar avatar-sm avatar-rounded me-2 bg-light text-[#8c9097] dark:text-white/50">
+                                <i className="ri-map-pin-line align-middle text-[.875rem] text-[#8c9097] dark:text-white/50"></i>
+                            </span>
+                            {isLoading && (
+                                <div role="status" className="animate-pulse">
+                                    <div className="w-56 h-3 bg-gray-400 rounded-full dark:bg-gray-700"></div>
+                                </div>
+                            )}
+                            {!isLoading && isEdit && (
+                                <section className="flex flex-col gap-3 mb-3">
+                                    <div className="flex flex-row gap-2">
+                                        <input 
+                                            {...form.register("address")}
+                                            size={20}
+                                            type="text"
+                                            className="form-control !rounded-md"/>
+                                        <input 
+                                            {...form.register("city")}
+                                            size={20}
+                                            type="text"
+                                            className="form-control  !rounded-md"/>
+                                        <input 
+                                            {...form.register("state")}
+                                            size={20}
+                                            type="text"
+                                            className="form-control  !rounded-md"/>
+                                    </div>
+                                    <div className="flex flex-row gap-2">
+                                        <input 
+                                            {...form.register("country")}
+                                            size={20}
+                                            type="text"
+                                            className="form-control  !rounded-md"/>
+                                        <input 
+                                            {...form.register("zip")}
+                                            size={20}
+                                            type="text"
+                                            className="form-control  !rounded-md"/>
+                                    </div>
+                                </section>
+                            ) }
+                            {!isLoading && !isEdit && (
+                                <>
+                                    {location}
+                                </>
+                            ) }
                         </div>
-                    )}
-                    {!isLoading && isEdit && (
-                        <section className="flex flex-col gap-3 mb-3">
-                            <div className="flex flex-row gap-2">
-                                <input 
-                                    id="address-input" 
-                                    name="address-input"
-                                    size={20}
-                                    type="text"
-                                    className="form-control !rounded-md"/>
-                                <input 
-                                    id="city-input" 
-                                    name="city-input"
-                                    size={20}
-                                    type="text"
-                                    className="form-control  !rounded-md"/>
-                                <input 
-                                    id="phone-input" 
-                                    name="phone-input"
-                                    size={20}
-                                    type="text"
-                                    className="form-control  !rounded-md"/>
-                            </div>
-                            <div className="flex flex-row gap-2">
-                                <input 
-                                    id="region-input" 
-                                    name="region-input"
-                                    size={20}
-                                    type="text"
-                                    className="form-control  !rounded-md"/>
-                                <input 
-                                    id="postalCode-input" 
-                                    name="postalCode-input"
-                                    size={20}
-                                    type="text"
-                                    className="form-control  !rounded-md"/>
-                            </div>
-                        </section>
-                    ) }
-                    {!isLoading && !isEdit && (
-                        <>
-                            {location}
-                        </>
-                    ) }
-                </div>
+                    </form>
+                </Form>
             </div>
         </div>
     )
