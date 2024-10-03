@@ -1,7 +1,7 @@
 import { UserSearchRequest, UserSearchResponse } from "@/models/search.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
-import { UserAcount, UserGroup, UserModel, UserSocials } from "@/models/user.models";
+import { UpdateBioRequest, UpdateContactInfoRequest, UserAcount, UserGroup, UserModel, UserSocials } from "@/models/user.models";
 import { ImageModel, UploadProfileImageMutation } from "@/models/image.models";
 
 const usersApiSlice = apiSlice.injectEndpoints({
@@ -53,6 +53,26 @@ const usersApiSlice = apiSlice.injectEndpoints({
 					method: 'POST',
 					body: formData ,
 				}
+			},
+		}),
+		updateUserBio:builder.mutation<UserAcount,UpdateBioRequest>({
+			query:(request:UpdateBioRequest)=>{
+				const {bio,userUuid} = request;
+				return {
+					url:`${ApiControllers.USERS}/${userUuid}/update-bio/`,
+					method: 'PUT',
+					body: {bio} ,
+				}
+			}
+		}),
+		updateContanctInfo:builder.mutation<UserAcount,UpdateContactInfoRequest>({
+			query:(request:UpdateContactInfoRequest)=>{
+				const {userUuid,address,city,country,phone,state,zip} = request;
+				return {
+					url:`${ApiControllers.USERS}/${userUuid}/update-contact-info/`,
+					method: 'PUT',
+					body: {address,city,country,phone,state,zip} ,
+				}
 			}
 		})
     }),
@@ -69,4 +89,6 @@ export const {
 	useLazyGetAllGroupsQuery,
 	useGetUserSocialsQuery,
 	useUploadUserImageMutation,
+	useUpdateUserBioMutation,
+	useUpdateContanctInfoMutation,
 } = usersApiSlice;

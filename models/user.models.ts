@@ -80,3 +80,18 @@ export interface UserSocials{
     socialIcon:string;
     buttonCssClass:string;
 }
+
+export interface UpdateBioRequest{
+    bio:string;
+    userUuid:string;
+}
+
+export interface UpdateContactInfoRequest{
+    country?:string;
+    state?:string;
+    city?:string;
+    address?:string;
+    zip?:string;
+    phone?:string;
+    userUuid:string;
+}
