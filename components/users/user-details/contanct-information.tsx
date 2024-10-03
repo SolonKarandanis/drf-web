@@ -3,7 +3,11 @@
 import {FC, useState} from 'react'
 import UserEditGroupButtons from './user-edit-group-buttons';
 import UserEditButton from './user-edit-button';
+import { UpldateUserContactInfoSchema } from '@/schemas/search.schemas';
+import * as z from "zod";
 
+
+type Inputs = z.infer<typeof UpldateUserContactInfoSchema>
 interface Props{
     email:string;
     phone?:string;
@@ -59,8 +63,7 @@ const ContactInformation:FC<Props> = ({
                 </p>
                 {isEdit ?(
                     <UserEditGroupButtons 
-                        onCancelClick={handleEditButtonClick}  
-                        onSaveClick={handleSaveButtonClick}/>
+                        onCancelClick={handleEditButtonClick}  />
                     
                 ):(
                     <UserEditButton onClick={handleEditButtonClick} />
