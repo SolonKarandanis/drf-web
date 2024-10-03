@@ -31,9 +31,10 @@ const Skillsdata = [
 
 interface Props{
   userUuid:string;
+  canEditUser:boolean;
 }
 
-const UserDetails:FC<Props> =  ({userUuid}) => {
+const UserDetails:FC<Props> =  ({userUuid,canEditUser}) => {
   const configState = useAppSelector((state) => state.config);
   const userState = useAppSelector((state) => state.users);
   const t = useTranslations();
@@ -93,7 +94,8 @@ const UserDetails:FC<Props> =  ({userUuid}) => {
         }
         <Bio 
           bio={user.bio} 
-          isLoading={userData.isLoading}/>
+          isLoading={userData.isLoading}
+          canEditUser/>
        
         <ContactInformation 
           email={user.email}
@@ -103,9 +105,10 @@ const UserDetails:FC<Props> =  ({userUuid}) => {
           country={details?.country}
           state={details?.state}
           zipCode={details?.zip}
-          isLoading={userData.isLoading}/>
+          isLoading={userData.isLoading}
+          canEditUser/>
           
-        <SocialNetworks userUuid={userUuid} />
+        <SocialNetworks canEditUser/>
         <div className="p-6 border-b border-dashed dark:border-defaultborder/10">
           <p className="text-[.9375rem] mb-2 me-6 font-semibold">Skills :</p>
           <div>

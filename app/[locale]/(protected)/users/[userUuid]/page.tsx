@@ -33,7 +33,7 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
   const session = await getServerSession(authOptions);
   const loggedInUser= session!.user!;
   const access = loggedInUser.access;
-  
+  const canEditUser = userUuid ===loggedInUser.uuid;
   return (
     <>
       <PageHeader 
@@ -41,7 +41,7 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
         <div className="grid grid-cols-12 gap-x-6">
           <div className="col-span-12 xxl:col-span-4 xl:col-span-12">
             <div className="overflow-hidden box">
-              <UserDetails userUuid={userUuid} />
+              <UserDetails userUuid={userUuid}  canEditUser/>
             </div>
           </div>
           <div className="col-span-12 xxl:col-span-8 xl:col-span-12">

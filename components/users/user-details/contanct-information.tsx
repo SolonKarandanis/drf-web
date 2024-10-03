@@ -27,6 +27,7 @@ interface Props{
     zipCode?:string;
     address?:string;
     isLoading:boolean;
+    canEditUser:boolean;
 }
 
 const ContactInformation:FC<Props> = ({
@@ -37,7 +38,8 @@ const ContactInformation:FC<Props> = ({
     state,
     zipCode,
     address,
-    isLoading = false
+    isLoading = false,
+    canEditUser
 }) => {
     const [isEdit, setIsEdit] = useState<boolean>(false);
     const params = useParams<{locale:string,userUuid:string}>();

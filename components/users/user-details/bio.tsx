@@ -21,11 +21,13 @@ type Inputs = z.infer<typeof UpdateUserBioSchema>
 interface Props{
     bio:string;
     isLoading:boolean;
+    canEditUser:boolean;
 }
 
 const Bio:FC<Props> = ({
     bio,
     isLoading,
+    canEditUser
 }) => {
     const t = useTranslations();
     const [isEdit, setIsEdit] = useState<boolean>(false);

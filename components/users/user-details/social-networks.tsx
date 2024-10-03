@@ -6,14 +6,16 @@ import { Button } from '@/shared/shadcn/components/ui/button';
 import {FC, useOptimistic, useState, useTransition} from 'react'
 import UserEditGroupButtons from './user-edit-group-buttons';
 import UserEditButton from './user-edit-button';
+import { useParams } from 'next/navigation';
 
 
 interface Props{
-    userUuid:string;
+    canEditUser:boolean;
 }
 
-const SocialNetworks:FC<Props> = ({userUuid}) => {
-    const {data: socials=[],isLoading,} = useGetUserSocialsQuery(userUuid);
+const SocialNetworks:FC<Props> = ({canEditUser}) => {
+    const params = useParams<{locale:string,userUuid:string}>();
+    const {data: socials=[],isLoading,} = useGetUserSocialsQuery(params.userUuid);
     const [optimisticSocials, setOptimisticSocials] = useOptimistic(socials,(state:UserSocials[],newSocial:UserSocials)=>{
         return [...state, newSocial];
     });
