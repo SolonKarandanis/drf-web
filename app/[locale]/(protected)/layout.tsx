@@ -7,6 +7,7 @@ import { unstable_setRequestLocale } from 'next-intl/server';
 import { basePath } from '@/next.config';
 import SetConfig from '@/components/auth/set-config';
 import { ConfigModel } from '@/models/config.model';
+import SetSocials from '@/components/auth/set-socials';
 
 type Props = {
 	children: React.ReactNode;
@@ -34,6 +35,7 @@ export default async function Layout({ children,params:{locale} }: Props) {
 		<ContentLayout>
 			<SetTokensLocalStorage />
 			<SetConfig config={config} />
+			<SetSocials />
 			{children}
 		</ContentLayout>
 	)

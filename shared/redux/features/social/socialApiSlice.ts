@@ -54,7 +54,7 @@ const socialsApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-    useGetSocialsQuery,
+    useLazyGetSocialsQuery,
 	useGetUserSocialsQuery,
     useCreateUserSocialsMutation,
     useDeleteUserSocialMutation,
