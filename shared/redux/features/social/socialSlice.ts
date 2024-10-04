@@ -53,3 +53,7 @@ export const userAvailableSocialsSelector = createSelector([socials], (socials) 
 
     return allSocials.filter(social=>selectedSocials.some(({socialId})=>social.id !== socialId))
 });
+
+export const userSelectedSocialsSelector = createSelector([socials], (socials) => {
+    return socials.selectedUserSocials;
+});

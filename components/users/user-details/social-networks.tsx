@@ -1,14 +1,14 @@
 "use client";
 
 import { Button } from '@/shared/shadcn/components/ui/button';
-import {FC, useOptimistic, useState, useTransition} from 'react'
+import {FC, useEffect, useOptimistic, useState, useTransition} from 'react'
 import UserEditGroupButtons from './user-edit-group-buttons';
 import UserEditButton from './user-edit-button';
 import { useParams } from 'next/navigation';
 import { UserSocials } from '@/models/social.models';
-import { useGetUserSocialsQuery } from '@/shared/redux/features/social/socialApiSlice';
-import Link from 'next/link';
-
+import { useLazyGetUserSocialsQuery } from '@/shared/redux/features/social/socialApiSlice';
+import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
+import { setUserSocials, userAvailableSocialsSelector, userSelectedSocialsSelector } from '@/shared/redux/features/social/socialSlice';
 
 interface Props{
     canEditUser:boolean;
@@ -16,12 +16,30 @@ interface Props{
 
 const SocialNetworks:FC<Props> = ({canEditUser}) => {
     const params = useParams<{locale:string,userUuid:string}>();
-    const {data: socials=[],isLoading,} = useGetUserSocialsQuery(params.userUuid);
-    const [optimisticSocials, setOptimisticSocials] = useOptimistic(socials,(state:UserSocials[],newSocial:UserSocials)=>{
-        return [...state, newSocial];
-    });
+    const dispatch = useAppDispatch();
+    const [getUserSocials, response]  = useLazyGetUserSocialsQuery();
     const [isPending, startTransition] = useTransition();
     const [isEdit, setIsEdit] = useState<boolean>(false);
+
+    useEffect(()=>{
+        getUserSocials(params.userUuid)
+          .unwrap()
+          .then((userSocials) => {
+            dispatch(setUserSocials(userSocials))
+          })
+          .catch((error)=>{
+            // dispatch(resetProfileImage())
+          })
+    },[])
+
+    const availableSocials = useAppSelector(userAvailableSocialsSelector);
+    const selectedUserSocials = useAppSelector(userSelectedSocialsSelector);
+    
+    const [optimisticSocials, setOptimisticSocials] = useOptimistic(selectedUserSocials,(state:UserSocials[],newSocial:UserSocials)=>{
+        return [...state, newSocial];
+    });
+    
+    
 
     const handleEditButtonClick = () => {
         setIsEdit(prev => !prev);
@@ -64,14 +82,14 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                     <UserEditButton onClick={handleEditButtonClick} />
                 )}
             </section>
-            {isLoading && (
+            {response.isLoading && (
                 <div role="status" className="mb-1 animate-pulse ">
                     <div role="status" className="animate-pulse">
                         <div className="w-32 h-3 bg-gray-400 rounded-full dark:bg-gray-700"></div>
                     </div>
                 </div>
             )}
-            {!isLoading && isEdit && (
+            {!response.isLoading && isEdit && (
                 <section className="flex flex-col gap-3 mt-3">
                     <div className="flex flex-row gap-8">
                         <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
@@ -93,7 +111,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                     </div>
                 </section>
             )}
-            {!isLoading && !isEdit && (
+            {!response.isLoading && !isEdit && (
                 <div className="mb-0 btn-list">
                     {optimisticSocials?.map(social=> (
                         <button 
