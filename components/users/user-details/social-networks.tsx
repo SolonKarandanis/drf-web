@@ -8,7 +8,7 @@ import { useParams } from 'next/navigation';
 import { UserSocials } from '@/models/social.models';
 import { useLazyGetUserSocialsQuery } from '@/shared/redux/features/social/socialApiSlice';
 import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
-import { setUserSocials, userAvailableSocialsSelector, userSelectedSocialsSelector } from '@/shared/redux/features/social/socialSlice';
+import { setUserSocials, socialsSelector, userAvailableSocialsSelector, userSelectedSocialsSelector } from '@/shared/redux/features/social/socialSlice';
 
 interface Props{
     canEditUser:boolean;
@@ -32,7 +32,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
           })
     },[])
 
-    const availableSocials = useAppSelector(userAvailableSocialsSelector);
+    const socials = useAppSelector(socialsSelector);
     const selectedUserSocials = useAppSelector(userSelectedSocialsSelector);
     
     const [optimisticSocials, setOptimisticSocials] = useOptimistic(selectedUserSocials,(state:UserSocials[],newSocial:UserSocials)=>{
@@ -91,24 +91,32 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
             )}
             {!response.isLoading && isEdit && (
                 <section className="flex flex-col gap-3 mt-3">
-                    <div className="flex flex-row gap-8">
-                        <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
-                            rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:bg-gray-700 
-                            dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
-                            dark:focus:border-blue-500">
-                            <option defaultValue="">Choose a country</option>
-                            <option value="US">United States</option>
-                            <option value="CA">Canada</option>
-                            <option value="FR">France</option>
-                            <option value="DE">Germany</option>
-                        </select>
-                        <div className="flex flex-row items-center text-[0.9375rem]">
-                            <button  className="ti-btn ti-btn-wave product-btn !gap-0 !m-0 !h-[3rem] !w-[2.7rem] 
-                                text-[0.8rem] bg-danger/10 text-danger hover:bg-danger hover:text-white hover:border-danger">
-                                <i className="ri-delete-bin-line"></i>
-                            </button>
-                        </div>
-                    </div>
+                    {selectedUserSocials.map((selectedSocials)=>{
+                        const selected = socials.find(s=>s.id===selectedSocials.socialId)!;
+                        const rest = socials.filter(s=>s.id !== selectedSocials.socialId);
+                        
+                        return (
+                            <div key={selectedSocials.id} className="flex flex-row gap-8">
+                                <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                                    rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:bg-gray-700 
+                                    dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
+                                    dark:focus:border-blue-500">
+                                    <option defaultValue={selected.id}>{selected.name}</option>
+                                    {rest.map((social)=>(
+                                        <option key={social.id} value={social.id}>
+                                            {social.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                <div className="flex flex-row items-center text-[0.9375rem]">
+                                    <button  className="ti-btn ti-btn-wave product-btn !gap-0 !m-0 !h-[3rem] !w-[2.7rem] 
+                                        text-[0.8rem] bg-danger/10 text-danger hover:bg-danger hover:text-white hover:border-danger">
+                                        <i className="ri-delete-bin-line"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        )
+                    })}
                 </section>
             )}
             {!response.isLoading && !isEdit && (

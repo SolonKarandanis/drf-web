@@ -47,6 +47,11 @@ export default socialSlice.reducer;
 
 const socials = (state: RootState) => state.socials
 
+export const socialsSelector = createSelector([socials], (socials) => {
+    return socials.socials;
+});
+
+
 export const userAvailableSocialsSelector = createSelector([socials], (socials) => {
     const allSocials = socials.socials;
     const selectedSocials = socials.selectedUserSocials;
