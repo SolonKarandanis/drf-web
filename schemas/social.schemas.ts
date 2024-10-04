@@ -2,7 +2,7 @@ import * as z from "zod";
 
 export const CreateUserSocialSchema = z.object({
     userId: z.number(),
-    socialId: z.number(),
+    socialId: z.string(),
     url: z.string().url()
 })
 
