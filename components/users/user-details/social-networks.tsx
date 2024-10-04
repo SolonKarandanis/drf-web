@@ -7,6 +7,7 @@ import UserEditButton from './user-edit-button';
 import { useParams } from 'next/navigation';
 import { UserSocials } from '@/models/social.models';
 import { useGetUserSocialsQuery } from '@/shared/redux/features/social/socialApiSlice';
+import Link from 'next/link';
 
 
 interface Props{
@@ -63,28 +64,48 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                     <UserEditButton onClick={handleEditButtonClick} />
                 )}
             </section>
-            {isLoading ? (
+            {isLoading && (
                 <div role="status" className="mb-1 animate-pulse ">
                     <div role="status" className="animate-pulse">
                         <div className="w-32 h-3 bg-gray-400 rounded-full dark:bg-gray-700"></div>
                     </div>
                 </div>
-            ):(
-                <>
-                    <div className="mb-0 btn-list">
-                        {optimisticSocials?.map(social=> (
-                            <button 
-                                key={social.id} 
-                                aria-label="button" 
-                                type="button" 
-                                className={`ti-btn ti-btn-sm mb-1 ${social.buttonCssClass}`}>
-                                <a href={social.url} target="_blank" className={`font-semibold ${social.socialIcon}`}></a>
-                            </button>
-                        ))}
-                    </div>
-                </>
             )}
-            
+            {!isLoading && isEdit && (
+                <section className="flex flex-col gap-3 mt-3">
+                    <div className="flex flex-row gap-2">
+                        <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                            rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40 p-2.5 dark:bg-gray-700 
+                            dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
+                            dark:focus:border-blue-500">
+                            <option defaultValue="">Choose a country</option>
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            <option value="FR">France</option>
+                            <option value="DE">Germany</option>
+                        </select>
+                        <div className="flex flex-row items-center !gap-2 text-[0.9375rem]">
+                            <button  className="ti-btn ti-btn-wave product-btn !gap-0 !m-0 !h-[1.75rem] !w-[1.75rem] 
+                                text-[0.8rem] bg-danger/10 text-danger hover:bg-danger hover:text-white hover:border-danger">
+                                <i className="ri-delete-bin-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            )}
+            {!isLoading && !isEdit && (
+                <div className="mb-0 btn-list">
+                    {optimisticSocials?.map(social=> (
+                        <button 
+                            key={social.id} 
+                            aria-label="button" 
+                            type="button" 
+                            className={`ti-btn ti-btn-sm mb-1 ${social.buttonCssClass}`}>
+                            <a href={social.url} target="_blank" className={`font-semibold ${social.socialIcon}`}></a>
+                        </button>
+                    ))}
+                </div>
+            )}
         </div>
     )
 }
