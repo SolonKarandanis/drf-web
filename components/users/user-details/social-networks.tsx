@@ -170,18 +170,29 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                                             <i className="ri-delete-bin-line"></i>
                                         </button>
                                         <div className='h-[3rem] w-[2.7rem]'>
-                                            {index ===fields.length -1 && userId &&(
+                                            {userId && index ===fields.length -1 &&(
                                                 <button  className="ti-btn ti-btn-wave product-btn !gap-0 !m-0 !h-[3rem] !w-[2.7rem] 
                                                     text-[0.8rem] ti-btn-success ti-btn-success-full"
                                                     onClick={() => append({userId,socialId:'1',url:''})}>
                                                     <i className="ri-add-line"></i>
                                                 </button>
                                             )}
+                                            
                                         </div>
                                     </div>
                                 </div>
                             )
                         })}
+                        {userId &&fields.length===0 &&(
+                             <div className="flex flex-col items-end lex">
+                                <button  className="ti-btn ti-btn-wave product-btn !gap-0 !m-0 !h-[3rem] !w-[2.7rem] 
+                                    text-[0.8rem] ti-btn-success ti-btn-success-full"
+                                    onClick={() => append({userId,socialId:'1',url:''})}>
+                                    <i className="ri-add-line"></i>
+                                </button>
+                             </div>
+                            
+                        )}
                         <div className='flex flex-col items-end mt-3'>
                             <Button 
                                 type="reset" 
