@@ -73,9 +73,9 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
             )}
             {!isLoading && isEdit && (
                 <section className="flex flex-col gap-3 mt-3">
-                    <div className="flex flex-row gap-2">
+                    <div className="flex flex-row gap-8">
                         <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
-                            rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40 p-2.5 dark:bg-gray-700 
+                            rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:bg-gray-700 
                             dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
                             dark:focus:border-blue-500">
                             <option defaultValue="">Choose a country</option>
@@ -84,8 +84,8 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                             <option value="FR">France</option>
                             <option value="DE">Germany</option>
                         </select>
-                        <div className="flex flex-row items-center !gap-2 text-[0.9375rem]">
-                            <button  className="ti-btn ti-btn-wave product-btn !gap-0 !m-0 !h-[1.75rem] !w-[1.75rem] 
+                        <div className="flex flex-row items-center text-[0.9375rem]">
+                            <button  className="ti-btn ti-btn-wave product-btn !gap-0 !m-0 !h-[3rem] !w-[2.7rem] 
                                 text-[0.8rem] bg-danger/10 text-danger hover:bg-danger hover:text-white hover:border-danger">
                                 <i className="ri-delete-bin-line"></i>
                             </button>

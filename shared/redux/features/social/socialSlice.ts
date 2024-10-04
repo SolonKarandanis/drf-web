@@ -1,5 +1,5 @@
 import { SocialModel, UserSocials } from "@/models/social.models";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 
 export interface SocialState {
@@ -45,4 +45,11 @@ export const {
 export default socialSlice.reducer;
 
 
-const users = (state: RootState) => state.socials
+const socials = (state: RootState) => state.socials
+
+export const userAvailableSocialsSelector = createSelector([socials], (socials) => {
+    const allSocials = socials.socials;
+    const selectedSocials = socials.selectedUserSocials;
+
+    return allSocials.filter(social=>selectedSocials.some(({socialId})=>social.id !== socialId))
+});
