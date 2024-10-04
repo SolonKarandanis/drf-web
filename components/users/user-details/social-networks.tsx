@@ -1,6 +1,4 @@
 "use client";
-
-import { Button } from '@/shared/shadcn/components/ui/button';
 import {FC, useEffect, useOptimistic, useState, useTransition} from 'react'
 import UserEditGroupButtons from './user-edit-group-buttons';
 import UserEditButton from './user-edit-button';
@@ -8,13 +6,23 @@ import { useParams } from 'next/navigation';
 import { UserSocials } from '@/models/social.models';
 import { useLazyGetUserSocialsQuery } from '@/shared/redux/features/social/socialApiSlice';
 import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
-import { setUserSocials, socialsSelector, userAvailableSocialsSelector, userSelectedSocialsSelector } from '@/shared/redux/features/social/socialSlice';
+import { setUserSocials, socialsSelector,  userSelectedSocialsSelector } from '@/shared/redux/features/social/socialSlice';
+import * as z from "zod";
+import { CreateUserSocialsSchema } from '@/schemas/social.schemas';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { userIdSelector } from '@/shared/redux/features/users/usersSlice';
 
 interface Props{
     canEditUser:boolean;
 }
 
+type Inputs = z.infer<typeof CreateUserSocialsSchema>
+type SocialsType = z.infer<typeof CreateUserSocialsSchema>["socials"][number];
+
+
 const SocialNetworks:FC<Props> = ({canEditUser}) => {
+    const userId = useAppSelector(userIdSelector);
     const params = useParams<{locale:string,userUuid:string}>();
     const dispatch = useAppDispatch();
     const [getUserSocials, response]  = useLazyGetUserSocialsQuery();
@@ -38,12 +46,23 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
     const [optimisticSocials, setOptimisticSocials] = useOptimistic(selectedUserSocials,(state:UserSocials[],newSocial:UserSocials)=>{
         return [...state, newSocial];
     });
+
+    const defaultSocialValues:SocialsType[] = optimisticSocials.map(({socialId,url})=> {
+        return {socialId,url,userId} as SocialsType;
+    })
     
     
 
     const handleEditButtonClick = () => {
         setIsEdit(prev => !prev);
     };
+
+    const form = useForm<Inputs>({
+        resolver: zodResolver(CreateUserSocialsSchema),
+        defaultValues:{
+            socials:defaultSocialValues
+        }
+    });
 
     const handleSaveButtonClick = () =>{
 
@@ -60,7 +79,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
     // }
 //     <button
 //     onClick={() =>
-//       startTransition(() => handleUpdate(!optimisticTodo.isCompleted))
+//       startTransition(() => addSocial(!optimisticTodo.isCompleted))
 //     }
 //     disabled={isPending}
 //   >
@@ -91,7 +110,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
             )}
             {!response.isLoading && isEdit && (
                 <section className="flex flex-col gap-3 mt-3">
-                    {selectedUserSocials.map((selectedSocials)=>{
+                    {optimisticSocials.map((selectedSocials)=>{
                         const selected = socials.find(s=>s.id===selectedSocials.socialId)!;
                         const rest = socials.filter(s=>s.id !== selectedSocials.socialId);
                         
@@ -108,6 +127,11 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                                         </option>
                                     ))}
                                 </select>
+                                <input 
+                                    size={20}
+                                    type="text"
+                                    placeholder="Url"
+                                    className="form-control w-full !rounded-md"/>
                                 <div className="flex flex-row items-center text-[0.9375rem]">
                                     <button  className="ti-btn ti-btn-wave product-btn !gap-0 !m-0 !h-[3rem] !w-[2.7rem] 
                                         text-[0.8rem] bg-danger/10 text-danger hover:bg-danger hover:text-white hover:border-danger">

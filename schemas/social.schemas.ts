@@ -1,9 +1,13 @@
 import * as z from "zod";
 
-export const CreateUserSocialsSchema = z.object({
+export const CreateUserSocialSchema = z.object({
     userId: z.number(),
     socialId: z.number(),
     url: z.string().url()
+})
+
+export const CreateUserSocialsSchema = z.object({
+    socials: z.array(CreateUserSocialSchema)
 });
 
 export const DeleteSocialUserSchema = z.object({

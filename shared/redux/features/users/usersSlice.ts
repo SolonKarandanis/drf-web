@@ -159,6 +159,13 @@ export const userLocationSelector = createSelector([users], (users) => {
     return location;
 });
 
+export const userIdSelector = createSelector([users], (users) =>{
+    const selectedUser =users.selectedUser;
+    if(selectedUser){
+        return selectedUser.id;
+    }
+});
+
 // export const totalItemQtySelector = createSelector([items], (items) => {
 //     console.log("custom selector runned");
   
