@@ -13,6 +13,7 @@ import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { userIdSelector } from '@/shared/redux/features/users/usersSlice';
 import { Form } from '@/shared/shadcn/components/ui/form';
+import { Button } from '@/shared/shadcn/components/ui/button';
 
 interface Props{
     canEditUser:boolean;
@@ -54,9 +55,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
     
     
 
-    const handleEditButtonClick = () => {
-        setIsEdit(prev => !prev);
-    };
+    
 
     const formId="socials-form";
 
@@ -80,6 +79,18 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
 
     const onSubmit: SubmitHandler<Inputs> = async (data) =>{
         console.log(JSON.stringify(data))
+    }
+
+    const handleEditButtonClick = () => {
+        setIsEdit(prev => !prev);
+    };
+
+    const handleDeleteAllButtonClick = () =>{
+
+    }
+
+    const handleDeleteItemButtonClick= (index:number) =>{
+        remove(index)
     }
 
     // const [search, { isLoading, }] = useSearchUsersMutation();
@@ -128,9 +139,9 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                         {fields.map((field, index) =>{
                             const selected = socials.find(s=>s.id===Number(field.socialId))!;
                             return (
-                                <div key={field.id} className="flex flex-row gap-8">
+                                <div key={field.id} className="flex flex-row gap-8 ">
                                     <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
-                                        rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:bg-gray-700 
+                                        rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5 dark:bg-gray-700 
                                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
                                         dark:focus:border-blue-500"
                                         {...register(`socials.${index}.socialId`)}
@@ -144,24 +155,44 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                                     <input 
                                         {...register(`socials.${index}.userId`)}
                                         type="hidden" 
+                                        className='hidden'
                                         />
                                     <input 
                                         {...register(`socials.${index}.url`)}
                                         size={20}
                                         type="text"
                                         placeholder="Url"
-                                        className="form-control w-full !rounded-md"/>
-                                    <div className="flex flex-row items-center text-[0.9375rem]">
+                                        className="form-control !rounded-md"/>
+                                    <div className="flex flex-row items-center text-[0.9375rem] gap-4">
                                         <button  className="ti-btn ti-btn-wave product-btn !gap-0 !m-0 !h-[3rem] !w-[2.7rem] 
                                             text-[0.8rem] bg-danger/10 text-danger hover:bg-danger hover:text-white hover:border-danger"
-                                            onClick={() => remove(index)}>
+                                            onClick={() => handleDeleteItemButtonClick(index)}>
                                             <i className="ri-delete-bin-line"></i>
                                         </button>
+                                        <div className='h-[3rem] w-[2.7rem]'>
+                                            {index ===fields.length -1 && userId &&(
+                                                <button  className="ti-btn ti-btn-wave product-btn !gap-0 !m-0 !h-[3rem] !w-[2.7rem] 
+                                                    text-[0.8rem] ti-btn-success ti-btn-success-full"
+                                                    onClick={() => append({userId,socialId:'1',url:''})}>
+                                                    <i className="ri-add-line"></i>
+                                                </button>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             )
                         })}
+                        <div className='flex flex-col items-end mt-3'>
+                            <Button 
+                                type="reset" 
+                                variant="destructive"
+                                className="w-[6.5rem]"
+                                onClick={handleDeleteAllButtonClick}>
+                                Delete All
+                            </Button>
+                        </div>
                     </section>
+                    
                 </form>
             )}
             {!response.isLoading && !isEdit && (
