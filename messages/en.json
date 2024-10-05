@@ -250,5 +250,28 @@
                 "delete-user-social":"Successfully deleted user social"
             } 
         }
+    },
+    "PRODUCTS":{
+        "SEARCH":{
+            "PAGE":{
+                "currentpage":"Search Products",
+                "activepage":"Products",
+                "mainpage":"Search Products"
+            }
+        },
+        "CREATE":{
+            "PAGE":{
+                "currentpage":"Create Product",
+                "activepage":"Products",
+                "mainpage":"Create Product"
+            }
+        },
+        "EDIT":{
+            "PAGE":{
+                "currentpage":"Edit Product",
+                "activepage":"Products",
+                "mainpage":"Edit Product"
+            }
+        }
     }
 }
