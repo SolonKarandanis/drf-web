@@ -1,4 +1,3 @@
-import Link from "next/link"
 import Categories from "./categories"
 import Brands from "./brands"
 import Discount from "./discount"
