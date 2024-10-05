@@ -1,18 +1,17 @@
 "use client";
-import {FC, useEffect, useOptimistic, useState, useTransition} from 'react'
+import {FC, useEffect, useOptimistic, useState} from 'react'
 import UserEditGroupButtons from './user-edit-group-buttons';
 import UserEditButton from './user-edit-button';
 import { useParams } from 'next/navigation';
 import { CreateUserSocialRequest, UserSocials } from '@/models/social.models';
 import { useCreateUserSocialsMutation, useDeleteAllUserSocialsMutation, useDeleteUserSocialMutation, useLazyGetUserSocialsQuery } from '@/shared/redux/features/social/socialApiSlice';
 import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
-import { setUserSocials, socialsSelector,  userSelectedSocialsSelector } from '@/shared/redux/features/social/socialSlice';
+import { resetUserSocials, setUserSocials, socialsSelector,  userSelectedSocialsSelector } from '@/shared/redux/features/social/socialSlice';
 import * as z from "zod";
 import { CreateUserSocialsSchema } from '@/schemas/social.schemas';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { userIdSelector } from '@/shared/redux/features/users/usersSlice';
-import { Form } from '@/shared/shadcn/components/ui/form';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { ErrorResponse } from '@/models/error.models';
 import { toast } from 'react-toastify';
@@ -33,7 +32,6 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
     const [createSocial, { isLoading:createMutationLoading }] = useCreateUserSocialsMutation();
     const [deleteSocial, { isLoading:deleteMutationLoading }] = useDeleteUserSocialMutation();
     const [deleteAllSocials, { isLoading:deleteAllMutationLoading }] = useDeleteAllUserSocialsMutation();
-    const [isPending, startTransition] = useTransition();
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
     const mutationLoading = createMutationLoading || deleteMutationLoading || deleteAllMutationLoading;
@@ -59,9 +57,6 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
     const defaultSocialValues:SocialsType[] = optimisticSocials.map(({socialId,url})=> {
         return {socialId:String(socialId),url,userId} as SocialsType;
     })
-    
-    
-
     
 
     const formId="socials-form";
@@ -90,7 +85,6 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
 	};
 
     const onSubmit: SubmitHandler<Inputs> = async (data) =>{
-        console.log(JSON.stringify(data))
         const request= data.socials.map(({socialId,url,userId})=> {
             return {
                 userId,
@@ -115,7 +109,16 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
     };
 
     const handleDeleteAllButtonClick = () =>{
-
+        deleteAllSocials({userUuid:params.userUuid})
+            .unwrap()
+            .then(( ) => {
+                dispatch(resetUserSocials());
+                setIsEdit(prev => !prev);
+                toast.success('Successfully deleted  all user socials');
+            })
+            .catch((error:ErrorResponse) => {
+                handleError(error);
+            });
     }
 
     const handleDeleteItemButtonClick= (index:number) =>{
@@ -124,33 +127,15 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
             remove(index)
             deleteSocial({userUuid:params.userUuid,socialId:Number(field.socialId)})
                 .unwrap()
-                .then((response:UserSocials[] ) => {
+                .then((response:UserSocials[]) => {
                     dispatch(setUserSocials(response));
-                    toast.success('Successfully Updated user');
+                    toast.success('Successfully deleted user social');
                 })
                 .catch((error:ErrorResponse) => {
                     handleError(error);
                 });
         }
     }
-
-    // const [search, { isLoading, }] = useSearchUsersMutation();
-    // async function addSocial() {
-    //     try {
-    //         setOptimisticSocials(newTodo) 
-    //         await search(newTodo);
-    //     } catch (error) {
-    //         console.error(error);
-    //     } 
-    // }
-//     <button
-//     onClick={() =>
-//       startTransition(() => addSocial(!optimisticTodo.isCompleted))
-//     }
-//     disabled={isPending}
-//   >
-//     {optimisticTodo.isCompleted ? 'Uncheck' : 'Check'}
-//   </button>
 
     return (
         <div className="items-center w-full p-6 border-b border-dashed dark:border-defaultborder/10">
@@ -242,16 +227,19 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                              </div>
                             
                         )}
-                        <div className='flex flex-col items-end mt-3'>
-                            <Button 
-                                type="reset" 
-                                variant="destructive"
-                                className="w-[6.5rem]"
-                                disabled={mutationLoading}
-                                onClick={handleDeleteAllButtonClick}>
-                                Delete All
-                            </Button>
-                        </div>
+                        {fields.length>0 && (
+                            <div className='flex flex-col items-end mt-3'>
+                                <Button 
+                                    type="reset" 
+                                    variant="destructive"
+                                    className="w-[6.5rem]"
+                                    disabled={mutationLoading}
+                                    onClick={()=>handleDeleteAllButtonClick()}>
+                                    Delete All
+                                </Button>
+                            </div>
+                        )}
+                        
                     </section>
                     
                 </form>
@@ -274,17 +262,3 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
 }
 
 export default SocialNetworks
-
-
-{/* <button
-type="button"
-className="block p-4 mx-auto bg-blue-300 rounded-lg hover:bg-blue-400"
-onClick={() =>
-  append({
-    postId: "new",
-    text: ""
-  })
-}
->
-Append
-</button> */}
