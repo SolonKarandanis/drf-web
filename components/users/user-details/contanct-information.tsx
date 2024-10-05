@@ -15,6 +15,7 @@ import { useUpdateContanctInfoMutation } from '@/shared/redux/features/users/use
 import { UpdateContactInfoRequest, UserAcount } from '@/models/user.models';
 import { useParams } from 'next/navigation';
 import { setSelectedUser, userLocationSelector } from '@/shared/redux/features/users/usersSlice';
+import { useTranslations } from 'next-intl';
 
 
 type Inputs = z.infer<typeof UpldateUserContactInfoSchema>
@@ -41,6 +42,7 @@ const ContactInformation:FC<Props> = ({
     isLoading = false,
     canEditUser
 }) => {
+    const t = useTranslations();
     const location = useAppSelector(userLocationSelector);
     const [isEdit, setIsEdit] = useState<boolean>(false);
     const params = useParams<{locale:string,userUuid:string}>();
@@ -80,7 +82,7 @@ const ContactInformation:FC<Props> = ({
             .then((response:UserAcount ) => {
                 dispatch(setSelectedUser(response));
                 setIsEdit(prev => !prev);
-                toast.success('Successfully Updated user');
+                toast.success(t("USERS.DETAILS.SUCCESS.update-user"));
             })
             .catch((error:ErrorResponse) => {
                 handleError(error);
@@ -91,7 +93,7 @@ const ContactInformation:FC<Props> = ({
         <div className="p-6 border-b border-dashed dark:border-defaultborder/10">
             <section className="flex items-center justify-between">
                 <p className="text-[.9375rem] mb-2 me-6 font-semibold">
-                    Contact Information :
+                    {t("USERS.DETAILS.LABELS.contact-information")}:
                 </p>
                 {canEditUser && isEdit && (
                     <UserEditGroupButtons 
@@ -122,7 +124,7 @@ const ContactInformation:FC<Props> = ({
                                         size={20}
                                         disabled={mutationLoading}
                                         type="email"
-                                        placeholder="Email"
+                                        placeholder={t("USERS.DETAILS.LABELS.email")}
                                         className="form-control w-full !rounded-md"/>
                                 </section>
                             ) }
@@ -148,7 +150,7 @@ const ContactInformation:FC<Props> = ({
                                         disabled={mutationLoading}
                                         size={20}
                                         type="tel"
-                                        placeholder="Phone"
+                                        placeholder={t("USERS.DETAILS.LABELS.phone")}
                                         className="form-control w-full !rounded-md"/>
                                 </section>
                             ) }
@@ -175,21 +177,21 @@ const ContactInformation:FC<Props> = ({
                                             size={20}
                                             disabled={mutationLoading}
                                             type="text"
-                                            placeholder="Address"
+                                            placeholder={t("USERS.DETAILS.LABELS.address")}
                                             className="form-control !rounded-md"/>
                                         <input 
                                             {...form.register("city")}
                                             size={20}
                                             disabled={mutationLoading}
                                             type="text"
-                                            placeholder="City"
+                                            placeholder={t("USERS.DETAILS.LABELS.city")}
                                             className="form-control  !rounded-md"/>
                                         <input 
                                             {...form.register("state")}
                                             size={20}
                                             disabled={mutationLoading}
                                             type="text"
-                                            placeholder="State"
+                                            placeholder={t("USERS.DETAILS.LABELS.state")}
                                             className="form-control  !rounded-md"/>
                                     </div>
                                     <div className="flex flex-row gap-2">
@@ -198,14 +200,14 @@ const ContactInformation:FC<Props> = ({
                                             size={20}
                                             disabled={mutationLoading}
                                             type="text"
-                                            placeholder="Country"
+                                            placeholder={t("USERS.DETAILS.LABELS.country")}
                                             className="form-control  !rounded-md"/>
                                         <input 
                                             {...form.register("zip")}
                                             size={20}
                                             disabled={mutationLoading}
                                             type="text"
-                                            placeholder="Zip code"
+                                            placeholder={t("USERS.DETAILS.LABELS.zip")}
                                             className="form-control  !rounded-md"/>
                                     </div>
                                 </section>

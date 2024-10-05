@@ -220,7 +220,15 @@
                 "view-profile-modal-description":"Users image",
                 "view-profile-modal-title":"Profile Picture",
                 "upload-profile-modal-description":"Upload Profile Image",
-                "upload-profile-modal-title":"Upload File"
+                "upload-profile-modal-title":"Upload File",
+                "contact-information":"Contact Information",
+                "email":"Email",
+                "phone":"Phone",
+                "address":"Address",
+                "city":"City",
+                "state":"State",
+                "country":"Country",
+                "zip":"Zip code"
             },
             "UPLOAD-PROFILE":{
                 "title":"Upload picture",
@@ -235,7 +243,7 @@
                 "reset":"Reset"
             },
             "SUCCESS": {
-                "update-user": "Ο χρήστης ενημερώθηκε με επιτυχία"
+                "update-user": "Successfully Updated user"
             } 
         }
     }
