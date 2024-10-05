@@ -2,7 +2,7 @@ import Link from 'next/link';
 import SearchBar from './search-bar';
 import SortBy from './sort-by';
 
-const SearchProductsHeader = () => {
+const ProductsHeader = () => {
   return (
       <div className="col-span-12 xl:col-span-12">
         <div className="box">
@@ -118,4 +118,4 @@ const SearchProductsHeader = () => {
   )
 }
 
-export default SearchProductsHeader
+export default ProductsHeader

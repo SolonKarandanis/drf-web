@@ -1,10 +1,9 @@
 import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 import { Metadata } from "next"
 import { useTranslations } from "next-intl";
-import Products from "./products";
 import Link from "next/link";
 import { Itemsdata1 } from "@/components/products/search/product-data";
-import SearchProductsHeader from "@/components/products/search/search-products-header";
+import ProductsHeader from "@/components/products/search/products-header";
 import Pagination from "@/components/products/search/pagination";
 import ProductsSidebar from "@/components/products/search/products-sidebar";
 
@@ -34,7 +33,7 @@ const SearchProductsPage =() =>{
             <div className="inset-0 flex flex-col justify-between p-24">
                 <div className="mb-6">
                     <div className="grid grid-cols-12 gap-x-6">
-                        <SearchProductsHeader />
+                        <ProductsHeader />
                         <ProductsSidebar />
                         <div className="col-span-12 xxl:col-span-9 xl:col-span-8 lg:col-span-8 md:col-span-12">
                             <div className="grid grid-cols-12 gap-x-6">
