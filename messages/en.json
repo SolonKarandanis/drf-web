@@ -233,7 +233,10 @@
                 "upload-profile-picture":"Upload a profile Picture",
                 "upload":"Upload",
                 "reset":"Reset"
-            }
+            },
+            "SUCCESS": {
+                "update-user": "Ο χρήστης ενημερώθηκε με επιτυχία"
+            } 
         }
     }
 }

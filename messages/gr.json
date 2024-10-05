@@ -233,7 +233,10 @@
                 "upload-profile-picture":"Ανεβάστε μια νέα εικόνα",
                 "upload":"Μεταφόρτωση",
                 "reset":"Επαναφορά"
-            }
+            },
+            "SUCCESS": {
+                "update-user": "Successfully Updated user"
+            } 
         }
     }
 }

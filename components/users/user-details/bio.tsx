@@ -58,7 +58,7 @@ const Bio:FC<Props> = ({
             .then((response:UserAcount ) => {
                 dispatch(setSelectedUser(response));
                 setIsEdit(prev => !prev);
-                toast.success('Successfully Updated user');
+                toast.success(t("USERS.DETAILS.SUCCESS.update-user"));
             })
             .catch((error:ErrorResponse) => {
                 handleError(error);

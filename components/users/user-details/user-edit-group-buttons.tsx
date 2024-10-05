@@ -1,5 +1,8 @@
+"use client"
+
 import ButtonLoading from '@/shared/components/button-loading/button-loading';
 import { Button } from '@/shared/shadcn/components/ui/button';
+import { useTranslations } from 'next-intl';
 import {FC, MouseEventHandler} from 'react'
 
 interface Props{
@@ -13,40 +16,41 @@ const UserEditGroupButtons:FC<Props> = ({
     fomrId,
     isLoading =false
 }) => {
-  return (
-    <div className="w-44"  data-testid="buttons">
-        <div className='flex justify-between'>
-            <Button 
-                type="reset" 
-                variant="destructive"
-                className="w-20"
-                onClick={onCancelClick}>
-                Cancel
-            </Button>
-            {fomrId ?(
+    const t = useTranslations();
+    return (
+        <div className="w-44"  data-testid="buttons">
+            <div className='flex justify-between'>
                 <Button 
-                    form={fomrId}
-                    type="submit" 
-                    variant="success"
+                    type="reset" 
+                    variant="destructive"
                     className="w-20"
-                    disabled={isLoading}>
-                    {isLoading ? 
-                        <ButtonLoading /> : <>Save</>
-                    }
+                    onClick={onCancelClick}>
+                    {t("GLOBAL.BUTTONS.cancel")}
                 </Button>
-            ):(
-                <Button 
-                    type="submit" 
-                    variant="success"
-                    className="w-20"
-                    disabled={isLoading}>
-                    Save 
-                </Button>
-            )}
-            
+                {fomrId ?(
+                    <Button 
+                        form={fomrId}
+                        type="submit" 
+                        variant="success"
+                        className="w-20"
+                        disabled={isLoading}>
+                        {isLoading ? 
+                            <ButtonLoading /> : <>{t("GLOBAL.BUTTONS.save")}</>
+                        }
+                    </Button>
+                ):(
+                    <Button 
+                        type="submit" 
+                        variant="success"
+                        className="w-20"
+                        disabled={isLoading}>
+                        {t("GLOBAL.BUTTONS.save")} 
+                    </Button>
+                )}
+                
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default UserEditGroupButtons
