@@ -15,6 +15,7 @@ import { userIdSelector } from '@/shared/redux/features/users/usersSlice';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { ErrorResponse } from '@/models/error.models';
 import { toast } from 'react-toastify';
+import { useTranslations } from 'next-intl';
 
 interface Props{
     canEditUser:boolean;
@@ -25,6 +26,7 @@ type SocialsType = z.infer<typeof CreateUserSocialsSchema>["socials"][number];
 
 
 const SocialNetworks:FC<Props> = ({canEditUser}) => {
+    const t = useTranslations();
     const userId = useAppSelector(userIdSelector);
     const params = useParams<{locale:string,userUuid:string}>();
     const dispatch = useAppDispatch();
@@ -97,7 +99,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
             .then((response:UserSocials[] ) => {
                 dispatch(setUserSocials(response));
                 setIsEdit(prev => !prev);
-                toast.success('Successfully Updated user');
+                toast.success(t("USERS.DETAILS.SUCCESS.update-user"));
             })
             .catch((error:ErrorResponse) => {
                 handleError(error);
@@ -114,7 +116,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
             .then(( ) => {
                 dispatch(resetUserSocials());
                 setIsEdit(prev => !prev);
-                toast.success('Successfully deleted  all user socials');
+                toast.success(t("USERS.DETAILS.SUCCESS.delete-user-socials"));
             })
             .catch((error:ErrorResponse) => {
                 handleError(error);
@@ -129,7 +131,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                 .unwrap()
                 .then((response:UserSocials[]) => {
                     dispatch(setUserSocials(response));
-                    toast.success('Successfully deleted user social');
+                    toast.success(t("USERS.DETAILS.SUCCESS.delete-user-social"));
                 })
                 .catch((error:ErrorResponse) => {
                     handleError(error);
@@ -141,7 +143,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
         <div className="items-center w-full p-6 border-b border-dashed dark:border-defaultborder/10">
             <section className="flex items-center justify-between">
                 <p className="text-[.9375rem] mb-2 me-6 font-semibold">
-                    Social Networks :
+                    {t("USERS.DETAILS.LABELS.social-networks")} :
                 </p>
                 {canEditUser && isEdit && (
                     <UserEditGroupButtons 
@@ -235,7 +237,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                                     className="w-[6.5rem]"
                                     disabled={mutationLoading}
                                     onClick={()=>handleDeleteAllButtonClick()}>
-                                    Delete All
+                                    {t("USERS.DETAILS.BUTTONS.delete-all")}
                                 </Button>
                             </div>
                         )}

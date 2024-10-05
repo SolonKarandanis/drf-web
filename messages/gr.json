@@ -222,6 +222,7 @@
                 "upload-profile-modal-description":"Μεταφόρτωση εικόνας προφίλ",
                 "upload-profile-modal-title":"Μεταφόρτωση αρχείου",
                 "contact-information":"Στοιχεία Επικοινωνίας",
+                "social-networks":"Κοινωνικά Δίκτυα",
                 "email":"Email",
                 "phone":"Τηλέφωνο",
                 "address":"Διεύθυνση",
@@ -240,10 +241,13 @@
                 "show-profile-picture":"Εμφάνιση εικόνας προφίλ",
                 "upload-profile-picture":"Ανεβάστε μια νέα εικόνα",
                 "upload":"Μεταφόρτωση",
-                "reset":"Επαναφορά"
+                "reset":"Επαναφορά",
+                "delete-all":"Διαγραφή όλων"
             },
             "SUCCESS": {
-                "update-user": "Ο χρήστης ενημερώθηκε με επιτυχία"
+                "update-user": "Ο χρήστης ενημερώθηκε με επιτυχία",
+                "delete-user-socials":"Διαγράφηκαν με επιτυχία όλα τα κοινωνικά δίκτυα του χρήστη",
+                "delete-user-social":"Διαγράφηκε με επιτυχία το κοινωνικό δίκτυο του χρήστη"
             } 
         }
     }
