@@ -78,7 +78,8 @@ const Bio:FC<Props> = ({
                 {canEditUser && isEdit && (
                     <UserEditGroupButtons 
                         onCancelClick={handleEditButtonClick} 
-                        fomrId={formId}/>
+                        fomrId={formId}
+                        isLoading={mutationLoading}/>
                 )}
                 {canEditUser && !isEdit && (
                     <UserEditButton onClick={handleEditButtonClick} />

@@ -3,8 +3,8 @@ import {FC, useEffect, useOptimistic, useState, useTransition} from 'react'
 import UserEditGroupButtons from './user-edit-group-buttons';
 import UserEditButton from './user-edit-button';
 import { useParams } from 'next/navigation';
-import { UserSocials } from '@/models/social.models';
-import { useLazyGetUserSocialsQuery } from '@/shared/redux/features/social/socialApiSlice';
+import { CreateUserSocialRequest, UserSocials } from '@/models/social.models';
+import { useCreateUserSocialsMutation, useDeleteAllUserSocialsMutation, useDeleteUserSocialMutation, useLazyGetUserSocialsQuery } from '@/shared/redux/features/social/socialApiSlice';
 import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
 import { setUserSocials, socialsSelector,  userSelectedSocialsSelector } from '@/shared/redux/features/social/socialSlice';
 import * as z from "zod";
@@ -14,6 +14,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { userIdSelector } from '@/shared/redux/features/users/usersSlice';
 import { Form } from '@/shared/shadcn/components/ui/form';
 import { Button } from '@/shared/shadcn/components/ui/button';
+import { ErrorResponse } from '@/models/error.models';
+import { toast } from 'react-toastify';
 
 interface Props{
     canEditUser:boolean;
@@ -28,8 +30,13 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
     const params = useParams<{locale:string,userUuid:string}>();
     const dispatch = useAppDispatch();
     const [getUserSocials, response]  = useLazyGetUserSocialsQuery();
+    const [createSocial, { isLoading:createMutationLoading }] = useCreateUserSocialsMutation();
+    const [deleteSocial, { isLoading:deleteMutationLoading }] = useDeleteUserSocialMutation();
+    const [deleteAllSocials, { isLoading:deleteAllMutationLoading }] = useDeleteAllUserSocialsMutation();
     const [isPending, startTransition] = useTransition();
     const [isEdit, setIsEdit] = useState<boolean>(false);
+
+    const mutationLoading = createMutationLoading || deleteMutationLoading || deleteAllMutationLoading;
 
     useEffect(()=>{
         getUserSocials(params.userUuid)
@@ -77,8 +84,30 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
         control:control
     });
 
+    const handleError =(errorResponse:ErrorResponse)=>{
+		const {status, data} = errorResponse;
+		toast.error(`(${status}) ${data}`);
+	};
+
     const onSubmit: SubmitHandler<Inputs> = async (data) =>{
         console.log(JSON.stringify(data))
+        const request= data.socials.map(({socialId,url,userId})=> {
+            return {
+                userId,
+                socialId: Number(socialId),
+                url
+            } as CreateUserSocialRequest
+        })
+        createSocial({userUuid:params.userUuid,request})
+            .unwrap()
+            .then((response:UserSocials[] ) => {
+                dispatch(setUserSocials(response));
+                setIsEdit(prev => !prev);
+                toast.success('Successfully Updated user');
+            })
+            .catch((error:ErrorResponse) => {
+                handleError(error);
+            });
     }
 
     const handleEditButtonClick = () => {
@@ -90,7 +119,19 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
     }
 
     const handleDeleteItemButtonClick= (index:number) =>{
-        remove(index)
+        const field =fields.find((field,idx)=> idx===index);
+        if(field){
+            remove(index)
+            deleteSocial({userUuid:params.userUuid,socialId:Number(field.socialId)})
+                .unwrap()
+                .then((response:UserSocials[] ) => {
+                    dispatch(setUserSocials(response));
+                    toast.success('Successfully Updated user');
+                })
+                .catch((error:ErrorResponse) => {
+                    handleError(error);
+                });
+        }
     }
 
     // const [search, { isLoading, }] = useSearchUsersMutation();
@@ -120,7 +161,8 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                 {canEditUser && isEdit && (
                     <UserEditGroupButtons 
                         onCancelClick={handleEditButtonClick} 
-                        fomrId={formId}/>
+                        fomrId={formId}
+                        isLoading={mutationLoading}/>
                 )}
                 {canEditUser && !isEdit && (
                     <UserEditButton onClick={handleEditButtonClick} />
@@ -145,7 +187,8 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
                                         dark:focus:border-blue-500"
                                         {...register(`socials.${index}.socialId`)}
-                                        defaultValue={field.socialId}>
+                                        defaultValue={field.socialId}
+                                        disabled={mutationLoading}>
                                         {socials.map((social)=>(
                                             <option key={social.id} value={social.id}>
                                                 {social.name}
@@ -159,6 +202,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                                         />
                                     <input 
                                         {...register(`socials.${index}.url`)}
+                                        disabled={mutationLoading}
                                         size={20}
                                         type="text"
                                         placeholder="Url"
@@ -166,6 +210,8 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                                     <div className="flex flex-row items-center text-[0.9375rem] gap-4">
                                         <button  className="ti-btn ti-btn-wave product-btn !gap-0 !m-0 !h-[3rem] !w-[2.7rem] 
                                             text-[0.8rem] bg-danger/10 text-danger hover:bg-danger hover:text-white hover:border-danger"
+                                            type='button'
+                                            disabled={mutationLoading}
                                             onClick={() => handleDeleteItemButtonClick(index)}>
                                             <i className="ri-delete-bin-line"></i>
                                         </button>
@@ -173,6 +219,8 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                                             {userId && index ===fields.length -1 &&(
                                                 <button  className="ti-btn ti-btn-wave product-btn !gap-0 !m-0 !h-[3rem] !w-[2.7rem] 
                                                     text-[0.8rem] ti-btn-success ti-btn-success-full"
+                                                    type='button'
+                                                    disabled={mutationLoading}
                                                     onClick={() => append({userId,socialId:'1',url:''})}>
                                                     <i className="ri-add-line"></i>
                                                 </button>
@@ -187,6 +235,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                              <div className="flex flex-col items-end lex">
                                 <button  className="ti-btn ti-btn-wave product-btn !gap-0 !m-0 !h-[3rem] !w-[2.7rem] 
                                     text-[0.8rem] ti-btn-success ti-btn-success-full"
+                                    type='button'
                                     onClick={() => append({userId,socialId:'1',url:''})}>
                                     <i className="ri-add-line"></i>
                                 </button>
@@ -198,6 +247,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                                 type="reset" 
                                 variant="destructive"
                                 className="w-[6.5rem]"
+                                disabled={mutationLoading}
                                 onClick={handleDeleteAllButtonClick}>
                                 Delete All
                             </Button>

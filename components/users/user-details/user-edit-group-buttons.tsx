@@ -1,14 +1,17 @@
+import ButtonLoading from '@/shared/components/button-loading/button-loading';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import {FC, MouseEventHandler} from 'react'
 
 interface Props{
     onCancelClick:MouseEventHandler<HTMLButtonElement>;
     fomrId?:string;
+    isLoading:boolean;
 }
 
 const UserEditGroupButtons:FC<Props> = ({
     onCancelClick,
-    fomrId
+    fomrId,
+    isLoading =false
 }) => {
   return (
     <div className="w-44"  data-testid="buttons">
@@ -25,14 +28,18 @@ const UserEditGroupButtons:FC<Props> = ({
                     form={fomrId}
                     type="submit" 
                     variant="success"
-                    className="w-20">
-                    Save 
+                    className="w-20"
+                    disabled={isLoading}>
+                    {isLoading ? 
+                        <ButtonLoading /> : <>Save</>
+                    }
                 </Button>
             ):(
                 <Button 
                     type="submit" 
                     variant="success"
-                    className="w-20">
+                    className="w-20"
+                    disabled={isLoading}>
                     Save 
                 </Button>
             )}
