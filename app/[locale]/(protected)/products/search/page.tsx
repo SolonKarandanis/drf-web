@@ -1,6 +1,10 @@
 import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 import { Metadata } from "next"
 import { useTranslations } from "next-intl";
+import Products from "./products";
+
+
+
 
 export const metadata:Metadata={
     title:"Drf Search Products",
@@ -14,6 +18,7 @@ export const metadata:Metadata={
 
 const SearchProductsPage =() =>{
     const t = useTranslations("PRODUCTS.SEARCH.PAGE");
+    
 
     return (
         <>
@@ -22,7 +27,7 @@ const SearchProductsPage =() =>{
                 activepage={t("activepage")}
                 mainpage={t("mainpage")} />
             <div className="inset-0 flex flex-col justify-between p-24">
-                search products
+                <Products />
             </div>
         </>
     )
