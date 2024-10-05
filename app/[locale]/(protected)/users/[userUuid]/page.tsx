@@ -1,14 +1,15 @@
 import PageHeader from '@/shared/layout-components/page-header/PageHeader';
 import { Metadata } from 'next';
-import {FC} from 'react'
+import {FC,lazy, Suspense } from 'react'
 import RecentActivity from '@/components/users/user-details/recent-activity';
 import PreviousOrders from '@/components/users/user-details/previous-orders';
 import UserDetails from '@/components/users/user-details/user-details';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
-import Account from '@/components/users/user-details/account';
-import RecentInvoices from '@/components/users/user-details/recent-invoices';
-import Billing from '@/components/users/user-details/billing';
+
+const Account = lazy(() => import("@/components/users/user-details/account"));
+const RecentInvoices = lazy(() => import("@/components/users/user-details/recent-invoices"));
+const Billing = lazy(() => import("@/components/users/user-details/billing"));
 
 
 export const metadata:Metadata={
@@ -46,11 +47,13 @@ const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
           </div>
           <div className="col-span-12 xxl:col-span-8 xl:col-span-12">
             <div className="grid grid-cols-12 gap-x-6">
-              <Account />
-              <RecentInvoices />
-              <RecentActivity />
-              {/* <PreviousOrders /> */}
-              <Billing />
+              <Suspense fallback={<>LOADING</>}>
+                <Account />
+                <RecentInvoices />
+                <RecentActivity />
+                {/* <PreviousOrders /> */}
+                <Billing />
+              </Suspense>
             </div>
           </div>
         </div>
