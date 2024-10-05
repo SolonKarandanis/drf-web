@@ -5,6 +5,7 @@ import Products from "./products";
 import Link from "next/link";
 import { Itemsdata1 } from "@/components/products/search/product-data";
 import SearchProductsHeader from "@/components/products/search/search-products-header";
+import Pagination from "@/components/products/search/pagination";
 
 
 
@@ -471,17 +472,7 @@ const SearchProductsPage =() =>{
                         </div>
                     </div>
                 </div>
-                <ul className="ti-pagination !px-3 !py-[0.375rem] !text-[1rem] !mb-4 flex justify-end">
-                    <li className="page-item disabled">
-                        <Link className="page-link !px-3 !py-[0.375rem]" href="#!">Previous</Link>
-                    </li>
-                    <li className="page-item"><Link className="page-link !px-3 !py-[0.375rem]" href="#!">1</Link></li>
-                    <li className="page-item"><Link className="page-link !px-3 !py-[0.375rem]" href="#!">2</Link></li>
-                    <li className="page-item"><Link className="page-link !px-3 !py-[0.375rem]" href="#!">3</Link></li>
-                    <li className="page-item">
-                        <Link className="page-link !px-3 !py-[0.375rem]" href="#!">Next</Link>
-                    </li>
-                </ul>
+                <Pagination />
             </div>
         </>
     )
