@@ -22,7 +22,7 @@ export const metadata:Metadata={
 
 const SearchProductsPage =() =>{
     const t = useTranslations("PRODUCTS.SEARCH.PAGE");
-    const productUuid ="asdasdasda"
+    const productUuid ="1"
     
 
     return (
