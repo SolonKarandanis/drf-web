@@ -16,8 +16,8 @@ const Results = () => {
     const [search] = useSearchUsersMutation();
 
     const handleError =(errorResponse:ErrorResponse)=>{
-		const {status, data:{detail}} = errorResponse;
-		toast.error(`(${status}) ${detail}`);
+		const {status, data} = errorResponse;
+		toast.error(`(${status}) ${data}`);
 	}
 
     const handlePagination = (page:number, pageSize:number) =>{

@@ -22,6 +22,7 @@ export const metadata:Metadata={
 
 const SearchProductsPage =() =>{
     const t = useTranslations("PRODUCTS.SEARCH.PAGE");
+    const productUuid ="asdasdasda"
     
 
     return (
@@ -60,7 +61,7 @@ const SearchProductsPage =() =>{
                                                     </Link>
                                                     <Link 
                                                         aria-label="anchor" 
-                                                        href="/components/pages/ecommerce/product-details/" 
+                                                        href={`/products/${productUuid}`}
                                                         className="view">
                                                         <i className="ri-eye-line"></i>
                                                     </Link>
