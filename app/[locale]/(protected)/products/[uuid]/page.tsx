@@ -1,8 +1,9 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import ImageGallery from "@/components/products/product-details/image-gallery";
 import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
-import { useTranslations } from "next-intl";
+
 import { FC } from "react";
 
 export const metadata:Metadata={
@@ -39,7 +40,7 @@ const ProductDetailsPage:FC<Props>  =  async ({params:{uuid}}) => {
                             <div className="sm:grid grid-cols-12 xxl:md:!gap-[4rem]">
                                 <div className="col-span-12 xxl:col-span-3 xl:col-span-12">
                                     <div className="sm:grid grid-cols-12 !gap-x-6 md:me-[1rem] ">
-                                        
+                                        <ImageGallery />
                                     </div>
                                 </div>
                             </div>
