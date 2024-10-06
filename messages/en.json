@@ -266,11 +266,11 @@
                 "mainpage":"Create Product"
             }
         },
-        "EDIT":{
+        "DETAILS":{
             "PAGE":{
-                "currentpage":"Edit Product",
+                "currentpage":"Product Details",
                 "activepage":"Products",
-                "mainpage":"Edit Product"
+                "mainpage":"Product Details"
             }
         }
     }
