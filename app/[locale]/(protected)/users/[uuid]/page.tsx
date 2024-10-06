@@ -26,23 +26,23 @@ export const metadata:Metadata={
 
 interface Props{
     params:{
-        userUuid:string;
+        uuid:string;
     }
 }
 
-const UserDetailsPage:FC<Props> = async ({params:{userUuid}}) => {
+const UserDetailsPage:FC<Props> = async ({params:{uuid}}) => {
   const session = await getServerSession(authOptions);
   const loggedInUser= session!.user!;
   const access = loggedInUser.access;
-  const canEditUser = userUuid ===loggedInUser.uuid;
+  const canEditUser = uuid ===loggedInUser.uuid;
   return (
     <>
       <PageHeader 
-        currentpage="Profile" activepage="Users" mainpage={userUuid} />
+        currentpage="Profile" activepage="Users" mainpage={uuid} />
         <div className="grid grid-cols-12 gap-x-6">
           <div className="col-span-12 xxl:col-span-4 xl:col-span-12">
             <div className="overflow-hidden box">
-              <UserDetails userUuid={userUuid}  canEditUser={canEditUser}/>
+              <UserDetails userUuid={uuid}  canEditUser={canEditUser}/>
             </div>
           </div>
           <div className="col-span-12 xxl:col-span-8 xl:col-span-12">

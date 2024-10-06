@@ -28,7 +28,7 @@ type SocialsType = z.infer<typeof CreateUserSocialsSchema>["socials"][number];
 const SocialNetworks:FC<Props> = ({canEditUser}) => {
     const t = useTranslations();
     const userId = useAppSelector(userIdSelector);
-    const params = useParams<{locale:string,userUuid:string}>();
+    const params = useParams<{locale:string,uuid:string}>();
     const dispatch = useAppDispatch();
     const [getUserSocials, response]  = useLazyGetUserSocialsQuery();
     const [createSocial, { isLoading:createMutationLoading }] = useCreateUserSocialsMutation();
@@ -39,7 +39,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
     const mutationLoading = createMutationLoading || deleteMutationLoading || deleteAllMutationLoading;
 
     useEffect(()=>{
-        getUserSocials(params.userUuid)
+        getUserSocials(params.uuid)
           .unwrap()
           .then((userSocials) => {
             dispatch(setUserSocials(userSocials))
@@ -94,7 +94,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                 url
             } as CreateUserSocialRequest
         })
-        createSocial({userUuid:params.userUuid,request})
+        createSocial({userUuid:params.uuid,request})
             .unwrap()
             .then((response:UserSocials[] ) => {
                 dispatch(setUserSocials(response));
@@ -111,7 +111,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
     };
 
     const handleDeleteAllButtonClick = () =>{
-        deleteAllSocials({userUuid:params.userUuid})
+        deleteAllSocials({userUuid:params.uuid})
             .unwrap()
             .then(( ) => {
                 dispatch(resetUserSocials());
@@ -129,7 +129,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
             remove(index)
             const selected = selectedUserSocials.find(s=>s.socialId===Number(field.socialId) && s.url===field.url);
             if(selected){
-                deleteSocial({userUuid:params.userUuid,id:selected.id})
+                deleteSocial({userUuid:params.uuid,id:selected.id})
                     .unwrap()
                     .then((response:UserSocials[]) => {
                         dispatch(setUserSocials(response));

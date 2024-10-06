@@ -33,7 +33,7 @@ const Bio:FC<Props> = ({
     const [isEdit, setIsEdit] = useState<boolean>(false);
     const dispatch = useAppDispatch();
     const [updateBio, { isLoading:mutationLoading }] = useUpdateUserBioMutation();
-    const params = useParams<{locale:string,userUuid:string}>();
+    const params = useParams<{locale:string,uuid:string}>();
     const formId="bio-form";
 
     const form = useForm<Inputs>({
@@ -53,7 +53,7 @@ const Bio:FC<Props> = ({
         const request:UpdateBioRequest={
             bio
         }
-        updateBio({userUuid:params.userUuid,request})
+        updateBio({userUuid:params.uuid,request})
             .unwrap()
             .then((response:UserAcount ) => {
                 dispatch(setSelectedUser(response));

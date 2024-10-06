@@ -45,7 +45,7 @@ const ContactInformation:FC<Props> = ({
     const t = useTranslations();
     const location = useAppSelector(userLocationSelector);
     const [isEdit, setIsEdit] = useState<boolean>(false);
-    const params = useParams<{locale:string,userUuid:string}>();
+    const params = useParams<{locale:string,uuid:string}>();
     const dispatch = useAppDispatch();
     const [updateContactInfo, { isLoading:mutationLoading }] = useUpdateContanctInfoMutation();
 
@@ -77,7 +77,7 @@ const ContactInformation:FC<Props> = ({
 
     const onSubmit: SubmitHandler<Inputs> = async (data) =>{
        const request:UpdateContactInfoRequest={...data}
-       updateContactInfo({userUuid:params.userUuid,request})
+       updateContactInfo({userUuid:params.uuid,request})
             .unwrap()
             .then((response:UserAcount ) => {
                 dispatch(setSelectedUser(response));
