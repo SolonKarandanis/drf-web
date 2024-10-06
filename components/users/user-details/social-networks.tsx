@@ -127,15 +127,19 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
         const field =fields.find((field,idx)=> idx===index);
         if(field){
             remove(index)
-            deleteSocial({userUuid:params.userUuid,socialId:Number(field.socialId)})
-                .unwrap()
-                .then((response:UserSocials[]) => {
-                    dispatch(setUserSocials(response));
-                    toast.success(t("USERS.DETAILS.SUCCESS.delete-user-social"));
-                })
-                .catch((error:ErrorResponse) => {
-                    handleError(error);
-                });
+            const selected = selectedUserSocials.find(s=>s.socialId===Number(field.socialId));
+            console.log(selected)
+            if(selected){
+                deleteSocial({userUuid:params.userUuid,id:selected.id})
+                    .unwrap()
+                    .then((response:UserSocials[]) => {
+                        dispatch(setUserSocials(response));
+                        toast.success(t("USERS.DETAILS.SUCCESS.delete-user-social"));
+                    })
+                    .catch((error:ErrorResponse) => {
+                        handleError(error);
+                    });
+            }
         }
     }
 
@@ -168,7 +172,8 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                         {fields.map((field, index) =>{
                             const selected = socials.find(s=>s.id===Number(field.socialId))!;
                             return (
-                                <div key={field.id} className="flex flex-row gap-8 ">
+                                <div key={field.id} className="flex flex-row gap-8 rounded-lg shadow-sm shadow-[#f6f7f6] p-5 
+                                    text-[1rem] border-t-[10px] border-solid border-[#f0f0f0] relative transition-all">
                                     <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
                                         rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5 dark:bg-gray-700 
                                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 

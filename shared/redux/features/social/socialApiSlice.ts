@@ -23,10 +23,10 @@ const socialsApiSlice = apiSlice.injectEndpoints({
 				}
 			}
 		}),
-        deleteUserSocial:builder.mutation<UserSocials[],{userUuid:string, socialId:number}>({
-            query:({userUuid,socialId})=>{
+        deleteUserSocial:builder.mutation<UserSocials[],{userUuid:string, id:number}>({
+            query:({userUuid,id})=>{
                 return {
-					url:`${ApiControllers.SOCIALS}/users/${userUuid}/delete/${socialId}`,
+					url:`${ApiControllers.SOCIALS}/users/${userUuid}/delete/${id}`,
 					method: 'PUT'
 				}
             }
