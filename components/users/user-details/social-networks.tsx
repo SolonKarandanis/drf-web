@@ -127,8 +127,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
         const field =fields.find((field,idx)=> idx===index);
         if(field){
             remove(index)
-            const selected = selectedUserSocials.find(s=>s.socialId===Number(field.socialId));
-            console.log(selected)
+            const selected = selectedUserSocials.find(s=>s.socialId===Number(field.socialId) && s.url===field.url);
             if(selected){
                 deleteSocial({userUuid:params.userUuid,id:selected.id})
                     .unwrap()
