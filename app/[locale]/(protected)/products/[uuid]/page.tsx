@@ -442,7 +442,159 @@ const ProductDetailsPage:FC<Props>  =  async ({params:{uuid}}) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+                                            <div className="mb-4">
+                                                <p className="text-[.9375rem] font-semibold mb-2">Product Details :</p>
+                                                <div className="min-w-full table-responsive">
+                                                    <table className="table w-full table-bordered whitespace-nowrap">
+                                                        <tbody>
+                                                            <tr className="border border-defaultborder dark:border-defaultborder/10">
+                                                                <th scope="row" className="!font-semibold text-start">
+                                                                    Brand
+                                                                </th>
+                                                                <td>Orange.Inc</td>
+                                                            </tr>
+                                                            <tr className="border border-defaultborder dark:border-defaultborder/10">
+                                                                <th scope="row" className="!font-semibold text-start">
+                                                                    Model Name
+                                                                </th>
+                                                                <td>
+                                                                    Orange watch series 4
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="border border-defaultborder dark:border-defaultborder/10">
+                                                                <th scope="row" className="!font-semibold text-start">
+                                                                    Color
+                                                                </th>
+                                                                <td>
+                                                                    Raging Brass
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="border border-defaultborder dark:border-defaultborder/10">
+                                                                <th scope="row" className="!font-semibold text-start">
+                                                                    Style
+                                                                </th>
+                                                                <td>
+                                                                    GPS
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="border border-defaultborder dark:border-defaultborder/10">
+                                                                <th scope="row" className="!font-semibold text-start">
+                                                                    Special Features
+                                                                </th>
+                                                                <td>
+                                                                    Heart rate sensor,GPS,Wifi calling,SAmoled display e.t.c
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div className="mb-4">
+                                                <p className="text-[.9375rem] font-semibold mb-2">Features :</p>
+                                                <div className="grid grid-cols-12 gap-x-6 gap-y-2">
+                                                    <div className="col-span-12 xl:col-span-6">
+                                                        <ul className="mb-0 list-disc ps-8">
+                                                            <li className="text-[#8c9097] dark:text-white/50 mb-2">
+                                                                Dial height: 44 mm
+                                                            </li>
+                                                            <li className="text-[#8c9097] dark:text-white/50 mb-2">
+                                                                Dial width: 35 mm
+                                                            </li>
+                                                            <li className="text-[#8c9097] dark:text-white/50 mb-2">
+                                                                SpO2
+                                                            </li>
+                                                            <li className="text-[#8c9097] dark:text-white/50 mb-2">
+                                                                30+ sports mode
+                                                            </li>
+                                                            <li className="text-[#8c9097] dark:text-white/50 mb-2">
+                                                                Upto 12 days battery life
+                                                            </li>
+                                                            <li className="text-[#8c9097] dark:text-white/50">
+                                                                Water resistant
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div className="col-span-12 xl:col-span-6">
+                                                        <ul className="mb-0 list-disc ps-7">
+                                                            <li className="text-[#8c9097] dark:text-white/50 mb-2">
+                                                                Battery powered
+                                                            </li>
+                                                            <li className="text-[#8c9097] dark:text-white/50 mb-2">
+                                                                Country of origin: USA
+                                                            </li>
+                                                            <li className="text-[#8c9097] dark:text-white/50">
+                                                                1-year warranty against manufacturing defects
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="mb-0">
+                                                <p className="text-[.9375rem] font-semibold mb-3">Reviews &amp; Ratings :</p>
+                                                <div className="grid-cols-12 gap-6 sm:grid">
+                                                    <div className="col-span-12 xxl:col-span-4 xl:col-span-12 lg:col-span-12 md:col-span-12 sm:col-span-12">
+                                                        <div className="flex items-start mb-4">
+                                                            <div className="leading-none me-2">
+                                                                <i className="ri-star-fill text-[1.5625rem] text-warning"></i>
+                                                            </div>
+                                                            <div className="leading-none">
+                                                                <p className="mb-1">4.2 out of 5</p>
+                                                                <p className="mb-0 text-[#8c9097] dark:text-white/50 text-[0.6875rem]">
+                                                                    Based on (23,435) ratings
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex items-center mb-4">
+                                                            <div className="text-[0.75rem] font-semibold">5 </div>
+                                                            <i className="ri-star-fill text-[.625rem] me-2"></i>
+                                                            <div className="flex-grow progress progress-xs">
+                                                                <div className="progress-bar !bg-success rounded-md w-[55%]" >
+                                                                </div>
+                                                            </div>
+                                                            <div className="text-[#8c9097] dark:text-white/50 ms-2 text-[0.75rem]">(10,893)</div>
+                                                        </div>
+                                                        <div className="flex items-center mb-4">
+                                                            <div className="text-[0.75rem] font-semibold">4 </div>
+                                                            <i className="ri-star-fill text-[.625rem] me-2 "></i>
+                                                            <div className="flex-grow progress progress-xs">
+                                                                <div className="progress-bar rounded-md !bg-success w-[22%]" >
+                                                                </div>
+                                                            </div>
+                                                            <div className="text-[#8c9097] dark:text-white/50 ms-2 text-[0.75rem]">(6,534)</div>
+                                                        </div>
+                                                        <div className="flex items-center mb-4">
+                                                            <div className="text-[0.75rem] font-semibold">3 </div>
+                                                            <i className="ri-star-fill text-[.625rem] me-2 "></i>
+                                                            <div className="flex-grow progress progress-xs">
+                                                                <div className="progress-bar rounded-s-md !bg-success w-[8%]" >
+                                                                </div>
+                                                            </div>
+                                                            <div className="text-[#8c9097] dark:text-white/50 ms-2 text-[0.75rem]">(4,342)</div>
+                                                        </div>
+                                                        <div className="flex items-center mb-4">
+                                                            <div className="text-[0.75rem] font-semibold">2 </div>
+                                                            <i className="ri-star-fill  me-2  text-[.625rem]"></i>
+                                                            <div className="flex-grow progress progress-xs">
+                                                                <div className="progress-bar rounded-md !bg-warning w-[9%]" >
+                                                                </div>
+                                                            </div>
+                                                            <div className="text-[#8c9097] dark:text-white/50 ms-2 text-[0.75rem]">(1,432)</div>
+                                                        </div>
+                                                        <div className="flex items-center">
+                                                            <div className="text-[0.75rem]  font-semibold">1 </div>
+                                                            <i className="ri-star-fill text-[.625rem] me-2"></i>
+                                                            <div className="flex-grow progress progress-xs">
+                                                                <div className="progress-bar rounded-md !bg-danger w-[6%]" >
+                                                                </div>
+                                                            </div>
+                                                            <div className="text-[#8c9097] dark:text-white/50 ms-2 text-[0.75rem]">(1,453)</div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-span-12 mt-4 xxl:col-span-8 xl:col-span-12 lg:col-span-12 md:col-span-12 sm:col-span-12 xxl:mt-0">
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
