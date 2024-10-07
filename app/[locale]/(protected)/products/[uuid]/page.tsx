@@ -591,9 +591,198 @@ const ProductDetailsPage:FC<Props>  =  async ({params:{uuid}}) => {
                                                         </div>
                                                     </div>
                                                     <div className="col-span-12 mt-4 xxl:col-span-8 xl:col-span-12 lg:col-span-12 md:col-span-12 sm:col-span-12 xxl:mt-0">
-                                                        
+                                                        <div className="p-4 border dark:border-defaultborder/10">
+                                                            <div className="flex flex-grow">
+                                                                <div className="me-2">
+                                                                    <span className="avatar avatar-sm avatar-rounded">
+                                                                        <img src="../../../../assets/images/faces/15.jpg" alt="" />
+                                                                    </span>
+                                                                </div>
+                                                                <div className="leading-none me-2">
+                                                                    <p className="mb-1 font-semibold text-[0.875rem]">Alex Carey</p>
+                                                                    <div className="mb-1">
+                                                                        <i className="ri-star-s-fill text-warning align-middle text-[0.75rem]"></i>
+                                                                        <i className="ri-star-s-fill text-warning align-middle text-[0.75rem]"></i>
+                                                                        <i className="ri-star-s-fill text-warning align-middle text-[0.75rem]"></i>
+                                                                        <i className="ri-star-s-fill text-warning align-middle text-[0.75rem]"></i>
+                                                                        <i className="ri-star-s-line text-warning align-middle text-[0.75rem]"></i>
+                                                                    </div>
+                                                                    <div className="text-[0.6875rem] text-[#8c9097] dark:text-white/50">
+                                                                        Reviewed on 24 nov,2022
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="mt-4 sm:ps-0 sm:mt-0 ps-2">
+                                                                <span className="text-white badge bg-success">Verified Purchase</span>
+                                                            </div>
+                                                            <div className="product-images sm:ps-4 ps-0">
+                                                                <div className="grid-cols-12 gap-6 sm:grid">
+                                                                    <div className="col-span-12 xl:col-span-6">
+                                                                        <div className="flex products-review-images">
+                                                                            <Link aria-label="anchor" href="#!">
+                                                                                <img src="../../../../assets/images/ecommerce/png/13.png" alt="" />
+                                                                            </Link>
+                                                                            <Link aria-label="anchor" href="#!">
+                                                                                <img src="../../../../assets/images/ecommerce/png/15.png" alt="" />
+                                                                            </Link>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="flex items-end col-span-12 mt-2 xl:col-span-6 sm:justify-end sm:mt-0">
+                                                                        <button type="button" className="ti-btn !py-1 !px-2 !text-[0.75rem] !font-medium ti-btn-light me-2 whitespace-nowrap">
+                                                                            Report abuse
+                                                                        </button>
+                                                                        <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-primary me-2">
+                                                                            <i className="ri-thumb-up-line"></i>
+                                                                        </button>
+                                                                        <button aria-label="button" type="button" className="ti-btn ti-btn-sm ti-btn-primary me-2">
+                                                                            <i className="ri-thumb-down-line"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-span-12 mt-6 xl:col-span-4 xxl:mt-0">
+                                            <div className="mb-[3rem]">
+                                                <div className="mb-6 offer-promotion dark:border-defaultborder/10">
+                                                    <div className="flex flex-wrap items-center justify-between xxl:flex lg:block sm:flex">
+                                                        <div className="mb-2 text-warning xxxl:mb-0">
+                                                            Use Code <span className="font-semibold promotion-code">FIRBUY</span>
+                                                            <Link className="text-[.625rem] text-warning ms-1" href="#!">T&amp;C.</Link>
+                                                        </div>
+                                                        <div className="sm:mt-0">
+                                                            <span className="bg-warning/10 text-defaulttextcolor text-[0.75rem] offer-details 
+                                                                mb-0 hover:text-warning">
+                                                                Get it for 
+                                                                <span className="font-semibold text-success">$1,099</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="mb-6">
+                                                    <p className="text-danger mb-0 text-[1rem]">Only 5 left in stock.</p>
+                                                    <p className="mb-0 text-[0.75rem]">
+                                                        Sold by 
+                                                        <span className="text-primary me-1">
+                                                            <u>Regaltos PVT.LTD</u>
+                                                        </span>
+                                                        and quality checked by 
+                                                        <span className="text-primary">
+                                                            <u>Spruko Tchnologies</u>.
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                                <div className="mb-6">
+                                                    <ul className="list-group">
+                                                        <li className="list-group-item">
+                                                            <div className="leading-none">
+                                                                <span className="text-success font-semibold text-[0.875rem] 
+                                                                    flex items-center">
+                                                                        <i className="ti ti-discount-2 text-[1.125rem] me-1"></i>
+                                                                        3 Available offers
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <li className="list-group-item">
+                                                            <div className="text-[0.75rem] text-default">
+                                                                <span className="font-semibold text-success me-1">
+                                                                    Bank Offer:
+                                                                </span>
+                                                                <span className="flex-grow">
+                                                                    5% off upto 500 on min purchase of $999
+                                                                    <Link href="#!" className="text-primary ms-1">View.</Link>
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <li className="list-group-item">
+                                                            <div className="text-[0.75rem] text-default">
+                                                                <span className="font-semibold text-success me-1">
+                                                                    Emi:
+                                                                </span>
+                                                                <span className="flex-grow">
+                                                                    No cost emi on selected bank card on min purchase of $1,499
+                                                                    <Link href="#!" className="text-primary ms-1">View.</Link>
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <li className="list-group-item !p-0 hs-collapse hidden w-full 
+                                                            overflow-hidden transition-[height] duration-300" 
+                                                            id="hs-show-hide-collapse-heading" 
+                                                            aria-labelledby="hs-show-hide-collapse">
+                                                            <ul className="list-group" id="offers-more">
+                                                                <li className="border-0 border-b list-group-item">
+                                                                    <div className="text-[0.75rem] text-defaulttextcolor">
+                                                                        <span className="font-semibold text-success me-1">
+                                                                            Free Delivery:
+                                                                        </span>
+                                                                        <span className="flex-grow">
+                                                                            Free delivery on first order
+                                                                            <Link href="#!" className="text-primary ms-1">
+                                                                                View.
+                                                                            </Link>
+                                                                        </span>
+                                                                    </div>
+                                                                </li>
+                                                                <li className="border-0 list-group-item">
+                                                                    <div className="text-[0.75rem] text-default">
+                                                                        <span className="font-semibold text-success me-1">
+                                                                            Promotion:
+                                                                        </span>
+                                                                        <span className="flex-grow">
+                                                                            Offer upto 30% on grosery on purchase of this item
+                                                                            <Link href="#!" className="text-primary ms-1">T&amp;C.</Link>
+                                                                        </span>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+
+                                                        <li className="border-t-0 list-group-item">
+                                                            <Link className="text-success text-[0.75rem] hs-collapse-toggle inline-flex 
+                                                                items-center gap-x-2" href="#!" id="hs-show-hide-collapse" 
+                                                                data-hs-collapse="#hs-show-hide-collapse-heading">
+                                                                <u>More Offers</u>
+                                                            </Link>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div className="mb-4">
+                                                    <p className="mb-0 font-semibold">Returns:</p>
+                                                    <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50">
+                                                        Min 7 days return and exchange policy. Return Policies may vary based on products and promotions. 
+                                                        For full details on our Returns Policies, please 
+                                                        <Link href="#!" className="text-primary">click here</Link>․
+                                                    </p>
+                                                </div>
+                                                <div className="alert alert-light mb-6 text-[0.75rem] text-[#8c9097] dark:text-white/50" role="alert">
+                                                    <Link aria-label="anchor" href="#!">
+                                                        <i className="ri-map-pin-line me-1 align-middle text-primary text-[.9375rem] inline-block"></i>
+                                                    </Link>
+                                                    Select location to find out estimated delivery date
+                                                </div>
+                                                <div className="grid gap-2">
+                                                    <Link href="/components/pages/ecommerce/cart/" 
+                                                        className="ti-btn bg-primary !font-medium text-white">
+                                                        Add To Cart
+                                                    </Link>
+                                                    <Link href="/components/pages/ecommerce/checkout/" 
+                                                        className="ti-btn bg-success !font-medium text-white">
+                                                        Buy Now
+                                                    </Link>
+                                                    <Link href="/components/pages/ecommerce/wishlist/" 
+                                                        className="ti-btn bg-light !font-medium">
+                                                        Add To Wishlist
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                            <div className="text-center">
+                                                <Link aria-label="anchor" href="#!">
+                                                    <img src="../../../../assets/images/ecommerce/png/25.png" alt="" 
+                                                        className="mx-auto rounded img-fluid bg-light" />
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
