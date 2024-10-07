@@ -13,7 +13,7 @@ export const metadata:Metadata={
 }
 
 const CreateProductPage =() =>{
-    const t = useTranslations("PRODUCTS.EDIT.PAGE");
+    const t = useTranslations("PRODUCTS.CREATE.PAGE");
 
     return (
         <>
