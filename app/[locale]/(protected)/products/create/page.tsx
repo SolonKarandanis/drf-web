@@ -1,4 +1,3 @@
-import { Addproduct, Addproduct1 } from "@/components/products/search/product-data";
 import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 const Select = dynamic(() => import("react-select"), { ssr: false });
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
