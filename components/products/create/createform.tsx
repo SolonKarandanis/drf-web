@@ -9,11 +9,13 @@ import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orien
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import { useState } from 'react';
 import { Addproduct, Addproduct1, Addproduct2, Addproduct3, Addproduct4, Addproduct5, Addproduct6, Addproduct7 } from '../search/product-data';
+import { FilePondFile } from 'filepond';
+import { ActualFileObject } from 'filepond';
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 const CreateForm = () => {
-    const [files, setFiles] = useState([]);
-    const [files1, setFiles1] = useState([]);
+    const [files, setFiles] = useState<ActualFileObject[]>([]);
+    const [files1, setFiles1] = useState<ActualFileObject[]>([]);
 
     const [startDate, setStartDate] = useState<Date>(new Date());
     const handleDateChange = (date:Date) => {
@@ -226,7 +228,9 @@ const CreateForm = () => {
                             server="/api" 
                             allowReorder={true} 
                             files={files} 
-                            onupdatefiles={setFiles} 
+                            onupdatefiles={fileItems => {
+                                setFiles(fileItems.map(fileItem => fileItem.file));
+                            }}
                             allowMultiple={false} 
                             allowImagePreview={true} 
                             maxFiles={10} 
@@ -238,7 +242,9 @@ const CreateForm = () => {
                             <p className="font-semibold mb-2 text-[0.875rem]">Warrenty Documents :</p>
                             <FilePond className="w-full product-documents"
                                 files={files1}
-                                onupdatefiles={setFiles1}
+                                onupdatefiles={fileItems => {
+                                    setFiles1(fileItems.map(fileItem => fileItem.file));
+                                }}
                                 allowMultiple={true}
                                 // maxFiles={6}
                                 server="/api"
