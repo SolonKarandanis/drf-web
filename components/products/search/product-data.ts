@@ -75,12 +75,13 @@ export const ItemData1 = [
       percentage:"72% off",
       preview: "../../../../assets/images/ecommerce/png/1.png",
       title: 'Dapzem & Co',
-     description:'Branded hoodie ethnic style',
+      description:'Branded hoodie ethnic style',
       oldpr: '$229',
       newpr: '$1,799',
       offerprice:'$229',
       data:"In Offer",
       quantity:1,
+      rating:4.2,
       images: [
          { 'img': "../../../../assets/images/ecommerce/png/1.png" },
          { 'img': "../../../../assets/images/ecommerce/png/1.png" },
@@ -96,6 +97,7 @@ export const ItemData1 = [
       newpr: '$2,499',
       offerprice:'$599',
       quantity:2,
+      rating:4.2,
       images: [
          { 'img': "../../../../assets/images/ecommerce/png/2.png" },
          { 'img': "../../../../assets/images/ecommerce/png/2.png" },
@@ -112,6 +114,7 @@ export const ItemData1 = [
       newpr: '$3,299',
       offerprice:'$1,199',
       quantity:1,
+      rating:4.2,
       images: [
          { 'img': "../../../../assets/images/ecommerce/png/3.png" },
          { 'img': "../../../../assets/images/ecommerce/png/3.png"},
@@ -128,6 +131,7 @@ export const ItemData1 = [
       newpr: '$1,299',
       offerprice:'$349',
       quantity:1,
+      rating:4.2,
       images: [
          { "img": "../../../../assets/images/ecommerce/png/4.png" },
          { "img": "../../../../assets/images/ecommerce/png/4.png" },
@@ -144,6 +148,7 @@ export const ItemData1 = [
       newpr: '$3,799',
       offerprice:'$1,899',
       quantity:1,
+      rating:4.2,
       images: [
          { 'img': "../../../../assets/images/ecommerce/png/5.png" },
          { 'img': "../../../../assets/images/ecommerce/png/5.png" },
@@ -159,6 +164,7 @@ export const ItemData1 = [
       newpr: '$2,499',
       offerprice:'$1,499',
       quantity:1,
+      rating:4.2,
       images: [
          { 'img': "../../../../assets/images/ecommerce/png/6.png" },
          { 'img': "../../../../assets/images/ecommerce/png/6.png" },
@@ -174,6 +180,7 @@ export const ItemData1 = [
       newpr: '$399',
       offerprice:'$299',
       quantity:1,
+      rating:4.2,
       images: [
          { 'img': "../../../../assets/images/ecommerce/png/7.png" },
          { 'img': "../../../../assets/images/ecommerce/png/7.png" },
@@ -190,6 +197,7 @@ export const ItemData1 = [
       newpr: '$5,699',
       offerprice:'$2,399',
       quantity:1,
+      rating:4.2,
       images: [
          { 'img': "../../../../assets/images/ecommerce/png/8.png" },
          { 'img': "../../../../assets/images/ecommerce/png/8.png" },
@@ -206,6 +214,7 @@ export const ItemData1 = [
       newpr: '$3,299',
       offerprice:'$1,899',
       quantity:1,
+      rating:4.2,
       images: [
          { 'img': "../../../../assets/images/ecommerce/png/9.png" },
          { 'img': "../../../../assets/images/ecommerce/png/9.png" },
@@ -223,6 +232,7 @@ export const ItemData1 = [
        newpr: '$4,999',
        offerprice:'$499',
        quantity:1,
+       rating:4.2,
        images: [
           { 'img': "../../../../assets/images/ecommerce/png/10.png" },
           { 'img': "../../../../assets/images/ecommerce/png/10.png" },
@@ -240,6 +250,7 @@ export const ItemData1 = [
        newpr: '$1,299',
        offerprice:'$249',
        quantity:1,
+       rating:4.2,
        images: [
           { 'img': "../../../../assets/images/ecommerce/png/11.png" },
           { 'img': "../../../../assets/images/ecommerce/png/11.png" },
@@ -256,6 +267,7 @@ export const ItemData1 = [
        newpr: '$799',
        offerprice:'$499',
        quantity:1,
+       rating:4.2,
        images: [
           { 'img': "../../../../assets/images/ecommerce/png/12.png" },
           { 'img': "../../../../assets/images/ecommerce/png/12.png" },
