@@ -1,5 +1,5 @@
 "use client";
-import {FC, useEffect, useOptimistic, useState} from 'react'
+import {FC, useEffect, useState} from 'react'
 import UserEditGroupButtons from './user-edit-group-buttons';
 import UserEditButton from './user-edit-button';
 import { useParams } from 'next/navigation';
@@ -53,11 +53,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
     const socials = useAppSelector(socialsSelector);
     const selectedUserSocials = useAppSelector(userSelectedSocialsSelector);
     
-    const [optimisticSocials, setOptimisticSocials] = useOptimistic(selectedUserSocials,(state:UserSocials[],newSocial:UserSocials)=>{
-        return [...state, newSocial];
-    });
-
-    const defaultSocialValues:SocialsType[] = optimisticSocials.map(({socialId,url})=> {
+    const defaultSocialValues:SocialsType[] = selectedUserSocials.map(({socialId,url})=> {
         return {socialId:String(socialId),url,userId} as SocialsType;
     })
     
@@ -253,7 +249,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
             )}
             {!response.isLoading && !isEdit && (
                 <div className="mb-0 btn-list">
-                    {optimisticSocials?.map(social=> (
+                    {selectedUserSocials?.map(social=> (
                         <button 
                             key={social.id} 
                             aria-label="button" 
