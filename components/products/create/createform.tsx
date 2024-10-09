@@ -3,11 +3,12 @@
 import { FilePond, registerPlugin } from 'react-filepond';
 import dynamic from 'next/dynamic';
 const Select = dynamic(() => import("react-select"), { ssr: false });
+ // @ts-ignore
 import DatePicker from 'react-datepicker';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import { useState } from 'react';
-import { Addproduct } from '../search/product-data';
+import { Addproduct, Addproduct1, Addproduct2, Addproduct3, Addproduct4, Addproduct5, Addproduct6, Addproduct7 } from '../search/product-data';
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 const CreateForm = () => {
@@ -57,7 +58,7 @@ const CreateForm = () => {
                                 className="form-label">
                                 Gender
                             </label>
-                            {/* <Select 
+                            <Select 
                                 id="product-gender-add"
                                 name="product-gender-add" 
                                 options={Addproduct1} 
@@ -66,7 +67,7 @@ const CreateForm = () => {
                                 menuPlacement='auto' 
                                 classNamePrefix="Select2" 
                                 placeholder="Select"
-                            /> */}
+                            />
                         </div>
                         <div className="col-span-12 xl:col-span-6">
                             <label 
@@ -74,7 +75,7 @@ const CreateForm = () => {
                                 className="form-label">
                                 Size
                             </label>
-                            {/* <Select 
+                            <Select 
                                 id="product-size-add" 
                                 name="product-size-add" 
                                 options={Addproduct2} 
@@ -83,7 +84,7 @@ const CreateForm = () => {
                                 menuPlacement='auto' 
                                 classNamePrefix="Select2" 
                                 placeholder="Select"
-                            /> */}
+                            />
                         </div>
                         <div className="col-span-12 xl:col-span-6">
                             <label 
@@ -91,7 +92,7 @@ const CreateForm = () => {
                                 className="form-label">
                                 Brand
                             </label>
-                            {/* <Select 
+                            <Select 
                                 id="product-brand-add"
                                 name="product-brand-add" 
                                 options={Addproduct3} 
@@ -100,7 +101,7 @@ const CreateForm = () => {
                                 menuPlacement='auto' 
                                 classNamePrefix="Select2" 
                                 placeholder="Select" 
-                            /> */}
+                            />
                         </div>
                         <div className="col-span-12 xl:col-span-6 color-selection">
                             <label 
@@ -108,7 +109,7 @@ const CreateForm = () => {
                                 className="form-label">
                                 Colors
                             </label>
-                            {/* <Select 
+                            <Select 
                                 id="product-color-add"
                                 isMulti name="colors" 
                                 options={Addproduct4} 
@@ -117,7 +118,7 @@ const CreateForm = () => {
                                 menuPlacement='auto' 
                                 classNamePrefix="Select2" 
                                 placeholder="Select"
-                            /> */}
+                            />
                         </div>
                         <div className="col-span-12 xl:col-span-6">
                             <label 
@@ -219,14 +220,23 @@ const CreateForm = () => {
                         </div>
                         <div className="col-span-12 xl:col-span-12 product-documents-container">
                             <p className="font-semibold mb-2 text-[0.875rem]">Product Images :</p>
-                        {/* <FilePond className="basic-filepond" accepted-file-types={["application/pdf", "image/png", "image/jpeg", "image/gif"]}
-                            server="/api" allowReorder={true} files={files} onupdatefiles={setFiles} allowMultiple={false} allowImagePreview={true} maxFiles={10} name="filepond"
-                            labelIdle='Drag & Drop your files or <span className="filepond--label-action">Browse</span>' /> */}
+                        <FilePond 
+                            className="basic-filepond" 
+                            accepted-file-types={["application/pdf", "image/png", "image/jpeg", "image/gif"]}
+                            server="/api" 
+                            allowReorder={true} 
+                            files={files} 
+                            onupdatefiles={setFiles} 
+                            allowMultiple={false} 
+                            allowImagePreview={true} 
+                            maxFiles={10} 
+                            name="filepond"
+                            labelIdle='Drag & Drop your files or <span className="filepond--label-action">Browse</span>' />
                         </div>
                         <label className="form-label opacity-[0.5] mt-4 xl:col-span-12 col-span-12">Minimum 0f 6 images are need to be uploaded,make sure the image size match the proper background size and all images should be uniformly maintained with width and height to the image container,image size should not exceed 2MB,once uploaded to change the image you need to wait minimum of 24hrs. </label>
                         <div className="col-span-12 xl:col-span-12 product-documents-container">
                             <p className="font-semibold mb-2 text-[0.875rem]">Warrenty Documents :</p>
-                            {/* <FilePond className="w-full product-documents"
+                            <FilePond className="w-full product-documents"
                                 files={files1}
                                 onupdatefiles={setFiles1}
                                 allowMultiple={true}
@@ -234,15 +244,15 @@ const CreateForm = () => {
                                 server="/api"
                                 name="files"
                                 labelIdle='Drag & Drop your file here or click '
-                            /> */}
+                            />
                         </div>
                         <div className="col-span-12 xl:col-span-6">
                             <label htmlFor="publish-date" className="form-label">Publish Date</label>
-                            {/* <DatePicker selected={startDate} onChange={handleDateChange} /> */}
+                            <DatePicker selected={startDate} onChange={handleDateChange} />
                         </div>
                         <div className="col-span-12 xl:col-span-6">
                             <label htmlFor="publish-time" className="form-label">Publish Time</label>
-                            {/* <DatePicker
+                            <DatePicker
                                 selected={startDate}
                                 onChange={handleDateChange}
                                 showTimeSelect
@@ -250,27 +260,47 @@ const CreateForm = () => {
                                 timeIntervals={15}
                                 timeCaption="Time"
                                 dateFormat="h:mm aa"
-                            /> */}
+                            />
                         </div>
                         <div className="col-span-12 xl:col-span-6">
                             <label htmlFor="product-status-add" className="form-label">Published Status</label>
-                            {/* <Select name="product-status-add" options={Addproduct5} className="w-full !rounded-md" isSearchable
-                                menuPlacement='auto' classNamePrefix="Select2" placeholder="Select" id="product-status-add"
-                            /> */}
+                            <Select 
+                                name="product-status-add" 
+                                options={Addproduct5} 
+                                className="w-full !rounded-md" 
+                                isSearchable
+                                menuPlacement='auto' 
+                                classNamePrefix="Select2" 
+                                placeholder="Select" 
+                                id="product-status-add"
+                            />
                         </div>
                         <div className="col-span-12 xl:col-span-6">
                             <label htmlFor="product-tags" className="form-label">Product Tags</label>
-                            {/* <Select isMulti name="product-tags" options={Addproduct6} defaultValue={[Addproduct6[0], Addproduct6[3]]}
-                                className="w-full !rounded-md" isSearchable id="product-tags"
-                                menuPlacement='auto' classNamePrefix="Select2" placeholder="Select"
-                            /> */}
+                            <Select 
+                                isMulti 
+                                name="product-tags" 
+                                options={Addproduct6} 
+                                defaultValue={[Addproduct6[0], Addproduct6[3]]}
+                                className="w-full !rounded-md" 
+                                isSearchable id="product-tags"
+                                menuPlacement='auto' 
+                                classNamePrefix="Select2" 
+                                placeholder="Select"
+                            />
                         </div>
                         <div className="col-span-12 xl:col-span-12">
                             <label htmlFor="product-status-add1" className="form-label">Availability</label>
-                            {/* <Select name="product-status-add1" options={Addproduct7} id="product-status-add1"
-                                className="w-full !rounded-md" isSearchable
-                                menuPlacement='auto' classNamePrefix="Select2" placeholder="Select"
-                            /> */}
+                            <Select 
+                                name="product-status-add1" 
+                                options={Addproduct7} 
+                                id="product-status-add1"
+                                className="w-full !rounded-md" 
+                                isSearchable
+                                menuPlacement='auto' 
+                                classNamePrefix="Select2" 
+                                placeholder="Select"
+                            />
                         </div>
                     </div>
                 </div>
