@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 import { CreateUserSocialRequest, UserSocials } from '@/models/social.models';
 import { useCreateUserSocialsMutation, useDeleteAllUserSocialsMutation, useDeleteUserSocialMutation, useLazyGetUserSocialsQuery } from '@/shared/redux/features/social/socialApiSlice';
 import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
-import { resetUserSocials, setUserSocials, socialsSelector,  userSelectedSocialsSelector } from '@/shared/redux/features/social/socialSlice';
+import {  resetUserSocials, setUserSocials, socialsSelector,  userSelectedSocialsSelector } from '@/shared/redux/features/social/socialSlice';
 import * as z from "zod";
 import { CreateUserSocialsSchema } from '@/schemas/social.schemas';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
@@ -42,7 +42,8 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
         getUserSocials(params.uuid)
           .unwrap()
           .then((userSocials) => {
-            dispatch(setUserSocials(userSocials))
+            dispatch(resetUserSocials());
+            dispatch(setUserSocials(userSocials));
           })
           .catch((error)=>{
             // dispatch(resetProfileImage())
