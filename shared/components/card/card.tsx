@@ -13,8 +13,7 @@ interface CardProps {
 
 const Card= ({ children }: CardProps) => {
   return (
-    <div className="xxl:col-span-3 xl:col-span-6 
-        lg:col-span-6 md:col-span-6 sm:col-span-12 col-span-12">
+    <div className="col-span-12 xxl:col-span-3 xl:col-span-6 lg:col-span-6 md:col-span-6 sm:col-span-12">
         <div className="box product-card">
             <div className="box-body">
                 {children}
@@ -32,13 +31,17 @@ Card.Price = Price;
 
 export default Card
 
+interface CardImageProps extends DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>{
+  href:string;
+}
 
-function Image({src,className,...props}: DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>) {
+
+function Image({href,src,className,...props}: CardImageProps) {
     return (
-        <Link href="/components/pages/ecommerce/product-details/" 
+        <Link href={href} 
             className="product-image">
             <img src={src} 
-                className="card-img mb-3 rounded-md"
+                className="mb-3 rounded-md card-img"
                 alt="..." 
                 {...props}/>
         </Link>
@@ -56,9 +59,13 @@ function IconSection({children,className,...props}: DetailedHTMLProps<HTMLAttrib
 
 IconSection.Icon=Icon;
 
-function Icon({children,className,...props}: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>){
+interface CardIconProps extends  DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>{
+  href:string;
+}
+
+function Icon({href,children,className,...props}: CardIconProps){
   return (
-    <Link aria-label="anchor" href="/components/pages/ecommerce/wishlist/" className={className}>
+    <Link aria-label="anchor" href={href} className={className}>
       {children}
     </Link>
   )
@@ -71,8 +78,7 @@ function Title({
     ...props
 }: DetailedHTMLProps<HtmlHTMLAttributes<HTMLParagraphElement>,HTMLParagraphElement>) {
     return (
-        <p className="product-name font-semibold mb-0 flex items-center 
-            justify-between" {...props}>
+        <p className="flex items-center justify-between mb-0 font-semibold product-name" {...props}>
             {title}
             {children}
         </p>
@@ -87,9 +93,9 @@ function Rating({
     ...props
 }:DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>,HTMLSpanElement>){
     return(
-        <span className="ltr:float-right rtl:float-left text-warning text-xs">
+        <span className="text-xs ltr:float-right rtl:float-left text-warning">
             {children}
-            <i className="ri-star-s-fill align-middle ms-1 inline-block"></i>
+            <i className="inline-block align-middle ri-star-s-fill ms-1"></i>
         </span>
     )
 }
