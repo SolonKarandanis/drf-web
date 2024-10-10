@@ -1,4 +1,4 @@
-import Card from "@/shared/components/card/card";
+
 import List from "@/shared/components/list/list";
 import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 import { Metadata } from "next";
@@ -75,19 +75,7 @@ const Page = async () => {
         mainpage="Analytics" />
       <div className="col-span-12 xxl:col-span-9 xl:col-span-8 lg:col-span-8 md:col-span-12">
         <div className="grid grid-cols-12 gap-x-6">
-          <Card>
-            <Card.Image src={item.preview} />
-            <Card.IconSection>
-              <Card.IconSection.Icon className="wishlist"><i className="ri-heart-line"></i></Card.IconSection.Icon>
-              <Card.IconSection.Icon className="cart"><i className="ri-shopping-cart-line"></i></Card.IconSection.Icon>
-              <Card.IconSection.Icon className="view"><i className="ri-eye-line"></i></Card.IconSection.Icon>
-            </Card.IconSection>
-            <Card.Title title={item.title}>
-              <Card.Title.Rating>{item.rating}</Card.Title.Rating>
-            </Card.Title>
-            <Card.Description>{item.description}</Card.Description>
-            <Card.Price>{item.newpr}</Card.Price>
-          </Card>
+         
           <List isOrdered={true}>
             <List.ListItem>First Item</List.ListItem>
             <List.ListItem>Second Item</List.ListItem>
