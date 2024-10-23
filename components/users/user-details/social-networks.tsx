@@ -14,7 +14,7 @@ import { Button } from '@/shared/shadcn/components/ui/button';
 import { useTranslations } from 'next-intl';
 import { useGetSocialNetworks } from '../hooks/useGetSocialNetworks';
 import { useMutateSocialNetworks } from '../hooks/useMutateSocialNetworks';
-import { defaultSocialValuesSelector } from '@/shared/redux/features/social/socialSlice';
+import { defaultSocialValuesSelector, socialsSelector, userSelectedSocialsSelector } from '@/shared/redux/features/social/socialSlice';
 
 interface Props{
     canEditUser:boolean;
@@ -26,12 +26,12 @@ type Inputs = z.infer<typeof CreateUserSocialsSchema>
 const SocialNetworks:FC<Props> = ({canEditUser}) => {
     const t = useTranslations();
     const userId = useAppSelector(userIdSelector);
+    const socials = useAppSelector(socialsSelector);
+    const selectedUserSocials = useAppSelector(userSelectedSocialsSelector);
     const defaultSocialValues = useAppSelector(defaultSocialValuesSelector(userId!));
     const params = useParams<{locale:string,uuid:string}>();
 
     const {
-        socials,
-        selectedUserSocials,
         response
     } = useGetSocialNetworks(params.uuid);
     const {
@@ -81,6 +81,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
 
     const handleDeleteAllButtonClick = () =>{
         handleDeleteAllMutation(params.uuid);
+        remove();
     }
 
     const handleDeleteItemButtonClick= (index:number) =>{

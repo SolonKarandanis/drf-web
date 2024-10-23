@@ -2,10 +2,8 @@ import { useLazyGetUserSocialsQuery } from "@/shared/redux/features/social/socia
 import { 
   resetUserSocials, 
   setUserSocials, 
-  socialsSelector, 
-  userSelectedSocialsSelector 
 } from "@/shared/redux/features/social/socialSlice";
-import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
+import { useAppDispatch } from "@/shared/redux/hooks";
 import { useEffect } from "react";
 
 
@@ -25,12 +23,9 @@ export function useGetSocialNetworks(uuid:string){
           })
     },[])
 
-    const socials = useAppSelector(socialsSelector);
-    const selectedUserSocials = useAppSelector(userSelectedSocialsSelector);
+    
 
     return {
-        socials,
-        selectedUserSocials,
         response
     }
 }
