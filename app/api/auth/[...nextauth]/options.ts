@@ -87,11 +87,11 @@ export const authOptions: NextAuthOptions ={
                     },
                     body: JSON.stringify({refresh:token["refresh"]})
                 })
-                .then(response => response.json())
+                // .then(response => response.json())
                 console.log('--->callbacks')
                 console.log(response)
-                token["access"] = response.access;
-                token["ref"] = getCurrentEpochTime() + BACKEND_ACCESS_TOKEN_LIFETIME;
+                // token["access"] = response.access;
+                // token["ref"] = getCurrentEpochTime() + BACKEND_ACCESS_TOKEN_LIFETIME;
             }
             return token;
         },
