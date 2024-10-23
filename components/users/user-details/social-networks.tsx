@@ -1,5 +1,5 @@
 "use client";
-import {FC, useEffect, useState} from 'react'
+import {FC,useState} from 'react'
 import UserEditGroupButtons from './user-edit-group-buttons';
 import UserEditButton from './user-edit-button';
 import { useParams } from 'next/navigation';
