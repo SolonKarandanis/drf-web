@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 import { CreateUserSocialRequest, UserSocials } from '@/models/social.models';
 import { useCreateUserSocialsMutation, useDeleteAllUserSocialsMutation, useDeleteUserSocialMutation, useLazyGetUserSocialsQuery } from '@/shared/redux/features/social/socialApiSlice';
 import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
-import {  resetUserSocials, setUserSocials, socialsSelector,  userSelectedSocialsSelector } from '@/shared/redux/features/social/socialSlice';
+import {  resetUserSocials, setUserSocials} from '@/shared/redux/features/social/socialSlice';
 import * as z from "zod";
 import { CreateUserSocialsSchema } from '@/schemas/social.schemas';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
@@ -16,6 +16,7 @@ import { Button } from '@/shared/shadcn/components/ui/button';
 import { ErrorResponse } from '@/models/error.models';
 import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
+import { useGetSocialNetworks } from '../hooks/useGetSocialNetworks';
 
 interface Props{
     canEditUser:boolean;
@@ -30,28 +31,15 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
     const userId = useAppSelector(userIdSelector);
     const params = useParams<{locale:string,uuid:string}>();
     const dispatch = useAppDispatch();
-    const [getUserSocials, response]  = useLazyGetUserSocialsQuery();
     const [createSocial, { isLoading:createMutationLoading }] = useCreateUserSocialsMutation();
     const [deleteSocial, { isLoading:deleteMutationLoading }] = useDeleteUserSocialMutation();
     const [deleteAllSocials, { isLoading:deleteAllMutationLoading }] = useDeleteAllUserSocialsMutation();
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
+    const {socials,selectedUserSocials,response} = useGetSocialNetworks(params.uuid);
+
     const mutationLoading = createMutationLoading || deleteMutationLoading || deleteAllMutationLoading;
 
-    useEffect(()=>{
-        getUserSocials(params.uuid)
-          .unwrap()
-          .then((userSocials) => {
-            dispatch(resetUserSocials());
-            dispatch(setUserSocials(userSocials));
-          })
-          .catch((error)=>{
-            // dispatch(resetProfileImage())
-          })
-    },[])
-
-    const socials = useAppSelector(socialsSelector);
-    const selectedUserSocials = useAppSelector(userSelectedSocialsSelector);
     
     const defaultSocialValues:SocialsType[] = selectedUserSocials.map(({socialId,url})=> {
         return {socialId:String(socialId),url,userId} as SocialsType;
