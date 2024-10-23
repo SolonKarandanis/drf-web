@@ -1,6 +1,7 @@
 import { SocialModel, UserSocials } from "@/models/social.models";
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
+import { SocialsType } from "@/schemas/social.schemas";
 
 export interface SocialState {
 	socials:SocialModel[];
@@ -51,14 +52,17 @@ export const socialsSelector = createSelector([socials], (socials) => {
     return socials.socials;
 });
 
-
-export const userAvailableSocialsSelector = createSelector([socials], (socials) => {
-    const allSocials = socials.socials;
-    const selectedSocials = socials.selectedUserSocials;
-
-    return allSocials.filter(social=>selectedSocials.some(({socialId})=>social.id !== socialId))
-});
-
 export const userSelectedSocialsSelector = createSelector([socials], (socials) => {
     return socials.selectedUserSocials;
+});
+
+
+export const userAvailableSocialsSelector = createSelector([socialsSelector,userSelectedSocialsSelector], (allSocials,selectedUserSocials) => {
+    return allSocials.filter(social=>selectedUserSocials.some(({socialId})=>social.id !== socialId))
+});
+
+export const defaultSocialValuesSelector = (userId: number) => createSelector([userSelectedSocialsSelector],(selectedUserSocials)=>{
+    return selectedUserSocials.map(({socialId,url})=>{
+        return {socialId:String(socialId),url,userId} as SocialsType;
+    });
 });

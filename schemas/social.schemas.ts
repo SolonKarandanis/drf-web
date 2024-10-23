@@ -13,3 +13,5 @@ export const CreateUserSocialsSchema = z.object({
 export const DeleteSocialUserSchema = z.object({
     socialItemId: z.number(),
 });
+
+export type SocialsType = z.infer<typeof CreateUserSocialsSchema>["socials"][number];

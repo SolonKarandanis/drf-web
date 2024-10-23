@@ -1,52 +1,50 @@
 "use client";
-import {FC,useState} from 'react'
+import {FC} from 'react'
 import UserEditGroupButtons from './user-edit-group-buttons';
 import UserEditButton from './user-edit-button';
 import { useParams } from 'next/navigation';
-import { CreateUserSocialRequest, UserSocials } from '@/models/social.models';
-import { useCreateUserSocialsMutation, useDeleteAllUserSocialsMutation, useDeleteUserSocialMutation, useLazyGetUserSocialsQuery } from '@/shared/redux/features/social/socialApiSlice';
-import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
-import {  resetUserSocials, setUserSocials} from '@/shared/redux/features/social/socialSlice';
+import { CreateUserSocialRequest } from '@/models/social.models';
+import { useAppSelector } from '@/shared/redux/hooks';
 import * as z from "zod";
-import { CreateUserSocialsSchema } from '@/schemas/social.schemas';
+import { CreateUserSocialsSchema, SocialsType } from '@/schemas/social.schemas';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { userIdSelector } from '@/shared/redux/features/users/usersSlice';
 import { Button } from '@/shared/shadcn/components/ui/button';
-import { ErrorResponse } from '@/models/error.models';
-import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
 import { useGetSocialNetworks } from '../hooks/useGetSocialNetworks';
+import { useMutateSocialNetworks } from '../hooks/useMutateSocialNetworks';
+import { defaultSocialValuesSelector } from '@/shared/redux/features/social/socialSlice';
 
 interface Props{
     canEditUser:boolean;
 }
 
 type Inputs = z.infer<typeof CreateUserSocialsSchema>
-type SocialsType = z.infer<typeof CreateUserSocialsSchema>["socials"][number];
 
 
 const SocialNetworks:FC<Props> = ({canEditUser}) => {
     const t = useTranslations();
     const userId = useAppSelector(userIdSelector);
+    const defaultSocialValues = useAppSelector(defaultSocialValuesSelector(userId!));
     const params = useParams<{locale:string,uuid:string}>();
-    const dispatch = useAppDispatch();
-    const [createSocial, { isLoading:createMutationLoading }] = useCreateUserSocialsMutation();
-    const [deleteSocial, { isLoading:deleteMutationLoading }] = useDeleteUserSocialMutation();
-    const [deleteAllSocials, { isLoading:deleteAllMutationLoading }] = useDeleteAllUserSocialsMutation();
-    const [isEdit, setIsEdit] = useState<boolean>(false);
 
-    const {socials,selectedUserSocials,response} = useGetSocialNetworks(params.uuid);
-
-    const mutationLoading = createMutationLoading || deleteMutationLoading || deleteAllMutationLoading;
-
-    
-    const defaultSocialValues:SocialsType[] = selectedUserSocials.map(({socialId,url})=> {
-        return {socialId:String(socialId),url,userId} as SocialsType;
-    })
-    
+    const {
+        socials,
+        selectedUserSocials,
+        response
+    } = useGetSocialNetworks(params.uuid);
+    const {
+        isEdit,
+        setIsEdit,
+        mutationLoading,
+        handleCreateMutation,
+        handleDeleteAllMutation,
+        handleDeleteOneMutation
+    } = useMutateSocialNetworks();
 
     const formId="socials-form";
+
 
     const  {
         handleSubmit,
@@ -66,11 +64,6 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
         control:control
     });
 
-    const handleError =(errorResponse:ErrorResponse)=>{
-		const {status, data} = errorResponse;
-		toast.error(`(${status}) ${data}`);
-	};
-
     const onSubmit: SubmitHandler<Inputs> = async (data) =>{
         const request= data.socials.map(({socialId,url,userId})=> {
             return {
@@ -79,16 +72,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                 url
             } as CreateUserSocialRequest
         })
-        createSocial({userUuid:params.uuid,request})
-            .unwrap()
-            .then((response:UserSocials[] ) => {
-                dispatch(setUserSocials(response));
-                setIsEdit(prev => !prev);
-                toast.success(t("USERS.DETAILS.SUCCESS.update-user"));
-            })
-            .catch((error:ErrorResponse) => {
-                handleError(error);
-            });
+        handleCreateMutation(params.uuid,request);
     }
 
     const handleEditButtonClick = () => {
@@ -96,16 +80,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
     };
 
     const handleDeleteAllButtonClick = () =>{
-        deleteAllSocials({userUuid:params.uuid})
-            .unwrap()
-            .then(( ) => {
-                dispatch(resetUserSocials());
-                setIsEdit(prev => !prev);
-                toast.success(t("USERS.DETAILS.SUCCESS.delete-user-socials"));
-            })
-            .catch((error:ErrorResponse) => {
-                handleError(error);
-            });
+        handleDeleteAllMutation(params.uuid);
     }
 
     const handleDeleteItemButtonClick= (index:number) =>{
@@ -114,15 +89,7 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
             remove(index)
             const selected = selectedUserSocials.find(s=>s.socialId===Number(field.socialId) && s.url===field.url);
             if(selected){
-                deleteSocial({userUuid:params.uuid,id:selected.id})
-                    .unwrap()
-                    .then((response:UserSocials[]) => {
-                        dispatch(setUserSocials(response));
-                        toast.success(t("USERS.DETAILS.SUCCESS.delete-user-social"));
-                    })
-                    .catch((error:ErrorResponse) => {
-                        handleError(error);
-                    });
+                handleDeleteOneMutation(params.uuid,selected.id);
             }
         }
     }
