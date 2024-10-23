@@ -136,8 +136,10 @@ export default usersSlice.reducer;
 
 const users = (state: RootState) => state.users
 
-export const userLocationSelector = createSelector([users], (users) => {
-    const details = users.selectedUser?.details;
+export const selectedUserSelector = createSelector([users],(users)=>  users.selectedUser);
+
+export const userLocationSelector = createSelector([selectedUserSelector], (selectedUser) => {
+    const details = selectedUser?.details;
 
     let location=''
 
@@ -159,12 +161,13 @@ export const userLocationSelector = createSelector([users], (users) => {
     return location;
 });
 
-export const userIdSelector = createSelector([users], (users) =>{
-    const selectedUser =users.selectedUser;
+export const userIdSelector = createSelector([selectedUserSelector], (selectedUser) =>{
     if(selectedUser){
         return selectedUser.id;
     }
 });
+
+export const  userBioSelector = createSelector([selectedUserSelector],(selectedUser)=> selectedUser?.bio)
 
 // export const totalItemQtySelector = createSelector([items], (items) => {
 //     console.log("custom selector runned");

@@ -1,21 +1,19 @@
 "use client"
 
-import {FC, useState} from 'react'
+import {FC} from 'react'
 import UserEditGroupButtons from './user-edit-group-buttons';
 import UserEditButton from './user-edit-button';
 import { UpldateUserContactInfoSchema } from '@/schemas/search.schemas';
 import * as z from "zod";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ErrorResponse } from '@/models/error.models';
-import { toast } from 'react-toastify';
 import { Form } from '@/shared/shadcn/components/ui/form';
-import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
-import { useUpdateContanctInfoMutation } from '@/shared/redux/features/users/usersApiSlice';
-import { UpdateContactInfoRequest, UserAcount } from '@/models/user.models';
+import { useAppSelector } from '@/shared/redux/hooks';
+import { UpdateContactInfoRequest } from '@/models/user.models';
 import { useParams } from 'next/navigation';
-import { setSelectedUser, userLocationSelector } from '@/shared/redux/features/users/usersSlice';
+import {  userLocationSelector } from '@/shared/redux/features/users/usersSlice';
 import { useTranslations } from 'next-intl';
+import { useMutateUserDetails } from '../hooks/useMutateUserDetails';
 
 
 type Inputs = z.infer<typeof UpldateUserContactInfoSchema>
@@ -44,10 +42,14 @@ const ContactInformation:FC<Props> = ({
 }) => {
     const t = useTranslations();
     const location = useAppSelector(userLocationSelector);
-    const [isEdit, setIsEdit] = useState<boolean>(false);
     const params = useParams<{locale:string,uuid:string}>();
-    const dispatch = useAppDispatch();
-    const [updateContactInfo, { isLoading:mutationLoading }] = useUpdateContanctInfoMutation();
+
+    const {
+        isEdit,
+        setIsEdit,
+        mutationLoading,
+        handleUpdateContanctInfoMutation
+    } = useMutateUserDetails();
 
     const handleEditButtonClick = () => {
         setIsEdit(prev => !prev);
@@ -68,25 +70,10 @@ const ContactInformation:FC<Props> = ({
         }
     });
 
-   
-
-    const handleError =(errorResponse:ErrorResponse)=>{
-		const {status, data} = errorResponse;
-		toast.error(`(${status}) ${data}`);
-	};
 
     const onSubmit: SubmitHandler<Inputs> = async (data) =>{
        const request:UpdateContactInfoRequest={...data}
-       updateContactInfo({userUuid:params.uuid,request})
-            .unwrap()
-            .then((response:UserAcount ) => {
-                dispatch(setSelectedUser(response));
-                setIsEdit(prev => !prev);
-                toast.success(t("USERS.DETAILS.SUCCESS.update-user"));
-            })
-            .catch((error:ErrorResponse) => {
-                handleError(error);
-            });
+       handleUpdateContanctInfoMutation(params.uuid,request);
     };
     
     return (

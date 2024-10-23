@@ -72,7 +72,6 @@ const UserDetails:FC<Props> =  ({userUuid,canEditUser}) => {
           )
         }
         <Bio 
-          bio={user.bio} 
           isLoading={userData.isLoading}
           canEditUser={canEditUser}/>
        

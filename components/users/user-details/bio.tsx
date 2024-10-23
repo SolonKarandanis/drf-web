@@ -1,38 +1,40 @@
 "use client"
 
 import { useTranslations } from 'next-intl';
-import {FC, useState} from 'react'
+import {FC} from 'react'
 import UserEditButton from './user-edit-button';
 import UserEditGroupButtons from './user-edit-group-buttons';
 import { UpdateUserBioSchema } from '@/schemas/search.schemas';
 import * as z from "zod";
 import {SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ErrorResponse } from '@/models/error.models';
-import { toast } from 'react-toastify';
 import { Form } from '@/shared/shadcn/components/ui/form';
-import { useAppDispatch } from '@/shared/redux/hooks';
-import { useUpdateUserBioMutation } from '@/shared/redux/features/users/usersApiSlice';
 import { useParams } from 'next/navigation';
-import { UpdateBioRequest, UserAcount } from '@/models/user.models';
-import { setSelectedUser } from '@/shared/redux/features/users/usersSlice';
+import { UpdateBioRequest } from '@/models/user.models';
+import { useMutateUserDetails } from '../hooks/useMutateUserDetails';
+import { useAppSelector } from '@/shared/redux/hooks';
+import { userBioSelector } from '@/shared/redux/features/users/usersSlice';
 
 type Inputs = z.infer<typeof UpdateUserBioSchema>
 interface Props{
-    bio:string;
     isLoading:boolean;
     canEditUser:boolean;
 }
 
 const Bio:FC<Props> = ({
-    bio,
     isLoading,
     canEditUser
 }) => {
     const t = useTranslations();
-    const [isEdit, setIsEdit] = useState<boolean>(false);
-    const dispatch = useAppDispatch();
-    const [updateBio, { isLoading:mutationLoading }] = useUpdateUserBioMutation();
+    const {
+        isEdit,
+        setIsEdit,
+        mutationLoading,
+        handleUpdateBioMutation
+    } = useMutateUserDetails();
+    const bio = useAppSelector(userBioSelector);
+
+
     const params = useParams<{locale:string,uuid:string}>();
     const formId="bio-form";
 
@@ -43,26 +45,12 @@ const Bio:FC<Props> = ({
         }
     })
 
-    const handleError =(errorResponse:ErrorResponse)=>{
-		const {status, data} = errorResponse;
-		toast.error(`(${status}) ${data}`);
-	}
-
     const onSubmit: SubmitHandler<Inputs> = async (data) =>{
         const {bio} = data;
         const request:UpdateBioRequest={
             bio
         }
-        updateBio({userUuid:params.uuid,request})
-            .unwrap()
-            .then((response:UserAcount ) => {
-                dispatch(setSelectedUser(response));
-                setIsEdit(prev => !prev);
-                toast.success(t("USERS.DETAILS.SUCCESS.update-user"));
-            })
-            .catch((error:ErrorResponse) => {
-                handleError(error);
-            });
+        handleUpdateBioMutation(params.uuid,request);
     }
 
     const handleEditButtonClick = () => {
