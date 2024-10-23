@@ -27,7 +27,7 @@ export function useMutateSocialNetworks(){
         .catch((error:ErrorResponse) => {
             handleError(error);
         });
-    }
+    };
 
     const handleDeleteAllMutation = (userUuid:string) =>{
         deleteAllSocials({userUuid})
@@ -40,7 +40,7 @@ export function useMutateSocialNetworks(){
             .catch((error:ErrorResponse) => {
                 handleError(error);
             });
-    }
+    };
 
     const handleDeleteOneMutation =(userUuid:string,id:number) =>{
         deleteSocial({userUuid,id})
@@ -52,7 +52,7 @@ export function useMutateSocialNetworks(){
             .catch((error:ErrorResponse) => {
                 handleError(error);
             });
-    }
+    };
 
     const mutationLoading = createMutationLoading || deleteMutationLoading || deleteAllMutationLoading;
 

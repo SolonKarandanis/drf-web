@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 import { CreateUserSocialRequest } from '@/models/social.models';
 import { useAppSelector } from '@/shared/redux/hooks';
 import * as z from "zod";
-import { CreateUserSocialsSchema, SocialsType } from '@/schemas/social.schemas';
+import { CreateUserSocialsSchema } from '@/schemas/social.schemas';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { userIdSelector } from '@/shared/redux/features/users/usersSlice';
