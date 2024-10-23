@@ -1,6 +1,8 @@
 import { LoginResponse, RefreshResponse, UserAcount } from '@/models/user.models';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '../store';
+
 
 
 interface AuthState {
@@ -55,3 +57,6 @@ const authSlice = createSlice({
 
 export const { setAuth,setAccesToken,setTokens, logout, setLoading,setAthenticated } = authSlice.actions;
 export default authSlice.reducer;
+
+const socials = (state: RootState) => state.users
+

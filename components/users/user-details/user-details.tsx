@@ -1,16 +1,15 @@
 "use client";
 
-import { FC, useEffect} from "react";
+import { FC} from "react";
 import SocialNetworks from "./social-networks";
-import { useLazyGetUserImageQuery, useLazyGetUserQuery } from "@/shared/redux/features/users/usersApiSlice";
 import Profile from "./profile";
 import { getUserGroups } from "@/utils/user-utils";
 import ContactInformation from "./contanct-information";
-import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
-import { resetProfileImage, setProfileImage, setSelectedUser } from "@/shared/redux/features/users/usersSlice";
+import { useAppSelector } from "@/shared/redux/hooks";
 import ProfileLoading from "./profile-loading";
 import { useTranslations } from "next-intl";
 import Bio from "./bio";
+import { useGetUserDetails } from "../hooks/useGetUserDetails";
 
 
 const Skillsdata = [
@@ -36,39 +35,19 @@ interface Props{
 
 const UserDetails:FC<Props> =  ({userUuid,canEditUser}) => {
   const configState = useAppSelector((state) => state.config);
-  const userState = useAppSelector((state) => state.users);
   const t = useTranslations();
-  const [getUser, userData] = useLazyGetUserQuery();
-  const [getUserImage, imageData] = useLazyGetUserImageQuery();
-  const dispatch = useAppDispatch();
+  const {
+    imageData,
+    userData
+  } = useGetUserDetails(userUuid);
+
   
   const path = configState.baseUrl;
   const isLoading = true
 
-
-  useEffect(()=>{
-    getUser(userUuid)
-      .unwrap()
-      .then((user) => {
-        dispatch(setSelectedUser(user))
-        getUserImage(userUuid)
-          .unwrap()
-          .then((image)=>{
-            dispatch(setProfileImage(image))
-          })
-          .catch((error)=>{
-            dispatch(resetProfileImage())
-          })
-      })
-  },[])
-
-
-
   if(userData.isError){
     return <>{t("GLOBAL.FETCH-ERROR")}</>
   }
-
- 
 
   if(userData.data){
     const user = userData.data;
