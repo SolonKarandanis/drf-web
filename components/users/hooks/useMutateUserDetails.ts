@@ -1,19 +1,23 @@
 import { handleError } from "@/lib/functions";
 import { ErrorResponse } from "@/models/error.models";
+import { ImageModel, UploadProfileImageMutation } from "@/models/image.models";
 import { UpdateBioRequest, UpdateContactInfoRequest, UserAcount } from "@/models/user.models";
-import { useUpdateContanctInfoMutation, useUpdateUserBioMutation } from "@/shared/redux/features/users/usersApiSlice";
-import { setSelectedUser } from "@/shared/redux/features/users/usersSlice";
+import { useUpdateContanctInfoMutation, useUpdateUserBioMutation, useUploadUserImageMutation } from "@/shared/redux/features/users/usersApiSlice";
+import { setProfileImage, setSelectedUser } from "@/shared/redux/features/users/usersSlice";
 import { useAppDispatch } from "@/shared/redux/hooks";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 export function useMutateUserDetails(){
+    const router = useRouter();
     const [isEdit, setIsEdit] = useState<boolean>(false);
     const t = useTranslations();
     const dispatch = useAppDispatch();
     const [updateContactInfo, { isLoading:contactInfoLoading }] = useUpdateContanctInfoMutation();
     const [updateBio, { isLoading:bioLoading }] = useUpdateUserBioMutation();
+    const [upload, { isLoading:pictureLoading }] = useUploadUserImageMutation();
 
     const handleUpdateContanctInfoMutation = (userUuid:string, request:UpdateContactInfoRequest)=>{
         updateContactInfo({userUuid,request})
@@ -41,7 +45,19 @@ export function useMutateUserDetails(){
             });
     };
 
-    const mutationLoading = contactInfoLoading || bioLoading;
+    const handleUploadProfilePictureMutation = (request:UploadProfileImageMutation) =>{
+        upload(request)
+            .unwrap()
+            .then((response:ImageModel)=>{
+                dispatch(setProfileImage(response));
+                router.back()
+            })
+            .catch((error:ErrorResponse) => {
+                handleError(error);
+            });
+    };
+
+    const mutationLoading = contactInfoLoading || bioLoading || pictureLoading;
 
 
     return {
@@ -50,5 +66,6 @@ export function useMutateUserDetails(){
         mutationLoading,
         handleUpdateContanctInfoMutation,
         handleUpdateBioMutation,
+        handleUploadProfilePictureMutation,
     }
 }

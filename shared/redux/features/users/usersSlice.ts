@@ -167,6 +167,12 @@ export const userIdSelector = createSelector([selectedUserSelector], (selectedUs
     }
 });
 
+export const userUuidSelector = createSelector([selectedUserSelector], (selectedUser) =>{
+    if(selectedUser){
+        return selectedUser.uuid;
+    }
+});
+
 export const  userBioSelector = createSelector([selectedUserSelector],(selectedUser)=> selectedUser?.bio)
 
 // export const totalItemQtySelector = createSelector([items], (items) => {
