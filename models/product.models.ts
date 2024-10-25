@@ -1,27 +1,43 @@
-interface BaseProduct{
+import { UserPublic } from "./user.models";
+
+export enum ProductPublishedStatus{
+    PUBLISHED = 'product.status.published',
+    SCHEDULED = 'product.status.scheduled',
+} 
+
+export enum ProductAvailabilityStatus{
+    IN_STOCK = 'product.availability.in.stock',
+    OUT_OF_STOCK = 'product.availability.out.of.stock',
+} 
+
+export interface BaseProduct{
     sku:string;
     title:string;
     content:string;
+    fabricDetails:string;
+    careInstructions:string;
     price:number;
     inventory:number;
+    publishStatus:ProductPublishedStatus;
+    availabilityStatus: ProductAvailabilityStatus
 }
 
-interface Product extends BaseProduct{
+export interface Product extends BaseProduct{
     id:number;
-    sale_price:number;
+    salePrice:number;
     uuid:string;
 }
 
-interface ProductDetails extends Product{
+export interface ProductDetails extends Product{
     owner:UserPublic;
     comments:Comment[];
 }
 
-interface CreateProductRequest extends BaseProduct{
+export interface CreateProductRequest extends BaseProduct{
 
 }
 
-interface PostProductCommentRequest{
-    product_id:number;
+export interface PostProductCommentRequest{
+    productId:number;
     comment:string;
 }

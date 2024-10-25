@@ -1,3 +1,4 @@
+import { Product } from "./product.models";
 import { UserModel, UserStatus } from "./user.models";
 
 export enum SortDirection {
