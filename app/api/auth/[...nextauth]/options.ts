@@ -1,8 +1,8 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { User } from "next-auth";
-import { ErrorData} from "@/models/error.models"
 import { isErrorData, isLoginResponse } from "@/utils/helpers";
+import { redirect } from 'next/navigation'
 
 
 
@@ -90,8 +90,12 @@ export const authOptions: NextAuthOptions ={
                 // .then(response => response.json())
                 console.log('--->callbacks')
                 console.log(response)
-                // token["access"] = response.access;
-                // token["ref"] = getCurrentEpochTime() + BACKEND_ACCESS_TOKEN_LIFETIME;
+                if(response.status===401){
+                    redirect(`/auth/login`) 
+                }
+                const body=await response.json();
+                token["access"] = body.access;
+                token["ref"] = getCurrentEpochTime() + BACKEND_ACCESS_TOKEN_LIFETIME;
             }
             return token;
         },
