@@ -1,3 +1,4 @@
+import { ImageModel } from "./image.models";
 import { UserPublic } from "./user.models";
 
 export enum ProductPublishedStatus{
@@ -25,12 +26,14 @@ export interface BaseProduct{
 export interface Product extends BaseProduct{
     id:number;
     salePrice:number;
+    previewImage:ImageModel|null;
     uuid:string;
 }
 
 export interface ProductDetails extends Product{
     owner:UserPublic;
     comments:Comment[];
+    images: ImageModel[];
 }
 
 export interface CreateProductRequest extends BaseProduct{
@@ -40,4 +43,26 @@ export interface CreateProductRequest extends BaseProduct{
 export interface PostProductCommentRequest{
     productId:number;
     comment:string;
+}
+
+export interface BaseTotals{
+    id:number;
+    name:string;
+    totalProducts:number;
+}
+
+export interface  CategoriesWithTotals extends BaseTotals{
+
+}
+
+export interface  BrandsWithTotals extends BaseTotals{
+    
+}
+
+export interface  SizesWithTotals extends BaseTotals{
+    
+}
+
+export interface  DiscountsWithTotals extends BaseTotals{
+    
 }

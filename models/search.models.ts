@@ -25,6 +25,13 @@ export interface UserSearchRequest extends SearchRequest {
     status?:UserStatus;
 }
 
+export interface ProductSearchRequest extends SearchRequest{
+    query?:string;
+    categories?:number[];
+    brands?:number[];
+    sizes?:number[];
+}
+
 export interface SearchResponse{
     count: number;
     previous: number;
