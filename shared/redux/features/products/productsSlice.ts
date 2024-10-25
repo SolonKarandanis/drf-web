@@ -1,6 +1,40 @@
+import { Product, ProductDetails } from '@/models/product.models';
+import { Paging, ProductSearchRequest } from '@/models/search.models';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 
+
+export interface ProductState {
+    request:ProductSearchRequest;
+	products:Product[],
+    count: number| undefined;
+    pages:number| null;
+    next:number| null;
+    previous:number| null;
+    selectedProduct:ProductDetails | null;
+    error:string| null;
+};
+
+const intialPaging ={
+    page:1,
+    limit:8,
+} as Paging;
+
+export const initialRequest:ProductSearchRequest = {
+    query:null,
+    paging:intialPaging
+};
+
+const initialState = {
+    request:initialRequest,
+	products: [],
+    count: undefined,
+    pages: null,
+    next: null,
+    previous: null,
+    selectedProduct:null,
+	error:null,
+} as ProductState;
 
 // export const pokemonSlice = createSlice({
 //     name: "pokemon",
