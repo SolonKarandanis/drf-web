@@ -1,33 +1,33 @@
 interface CartItem{
     id:number;
-    modification_alert:boolean;
+    modificationAlert:boolean;
     quantity:number;
-    unit_price:number;
-    total_price:number;
-    product_id:number;
+    unitPrice:number;
+    totalPrice:number;
+    productId:number;
     uuid:string;
 }
 
 interface Cart{
     id:number;
-    modification_alert:boolean;
-    total_price:number;
-    date_created:string;
-    date_modified:string;
+    modificationAlert:boolean;
+    totalPrice:number;
+    dateCreated:string;
+    dateModified:string;
     uuid:string;
-    cart_items:CartItem[];
+    cartItems:CartItem[];
 }
 
 interface AddToCartRequest{
-    product_id:number;
+    productId:number;
     quantity:number;
 }
 
 interface UpdateQuantityRequest{
-    cart_item_id:number;
+    cartItemId:number;
     quantity:number;
 }
 
 interface DeleteCartItemRequest{
-    cart_item_id:number;
+    cartItemId:number;
 }

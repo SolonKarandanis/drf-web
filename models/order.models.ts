@@ -1,36 +1,36 @@
 interface Order{
     id:number;
-    date_created:string;
-    buyer_id:number;
-    supplier_id:number;
+    dateCreated:string;
+    buyerId:number;
+    supplierId:number;
     status:string;
-    total_price:number;
-    is_shipped:boolean;
-    date_shipped:string;
+    totalPrice:number;
+    isShipped:boolean;
+    dateShipped:string;
     uuid:string;
 }
 
 interface OrderDetails extends Order{
     comments:Comment[];
-    order_items:OrderItem[];
+    orderItems:OrderItem[];
 }
 
 interface PostOrderComment{
-    order_id:number;
+    orderId:number;
     comment:string;
 }
 
 interface OrderItem{
     id:number;
-    product_id:number;
-    product_name:string;
+    productId:number;
+    productName:string;
     sku:string;
     manufacturer:string;
-    start_date:string;
-    end_date:string;
+    startDate:string;
+    endDate:string;
     status:string;
     price:number;
     quantity:number;
-    total_price:number;
+    totalPrice:number;
     uuid:string;
 }
