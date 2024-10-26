@@ -7,7 +7,7 @@ import { useAppDispatch } from "@/shared/redux/hooks";
 
 export function useGetUserSearchResults(){
     const dispatch = useAppDispatch();
-    const [search] = useSearchUsersMutation();
+    const [search,{ isLoading, }] = useSearchUsersMutation();
 
     const handleGetSearchResults = (request:UserSearchRequest) =>{
         search(request)
@@ -21,6 +21,7 @@ export function useGetUserSearchResults(){
     };
 
     return {
-        handleGetSearchResults
+        handleGetSearchResults,
+        isLoading
     }
 }

@@ -21,15 +21,21 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/shared/shadcn/components/ui/select"
-import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
-import { useLazyGetAllGroupsQuery, useSearchUsersMutation } from '@/shared/redux/features/users/usersApiSlice';
-import { UserSearchRequest, UserSearchResponse } from '@/models/search.models';
+import { useLazyGetAllGroupsQuery } from '@/shared/redux/features/users/usersApiSlice';
+import { UserSearchRequest } from '@/models/search.models';
 import { UserStatus } from '@/models/user.models';
-import { ErrorResponse } from '@/models/error.models';
-import { setUsers,resetUsers,setSearchRequest,resetSearchRequest, initialRequest, setUserGroups, UsersState } from '@/shared/redux/features/users/usersSlice';
+import {
+    resetUsers,
+    setSearchRequest,
+    resetSearchRequest, 
+    initialRequest, 
+    setUserGroups, 
+    UsersState 
+} from '@/shared/redux/features/users/usersSlice';
 import { useTranslations } from 'next-intl';
 import ButtonLoading from '@/shared/components/button-loading/button-loading';
+import { useGetUserSearchResults } from '../../hooks/useGetUserSearchResults';
 
 
 type Inputs = z.infer<typeof UserSearchSchema>
@@ -49,8 +55,12 @@ const SearchUserForm:FC<Props> = ({}) => {
     }
     const userGroups = usersState.userGroups
 
+    const {
+        handleGetSearchResults,
+        isLoading,
+    } = useGetUserSearchResults();
+
     const dispatch = useAppDispatch();
-    const [search, { isLoading, }] = useSearchUsersMutation();
 
     const searchRequest = usersState.request
     const paging = searchRequest.paging
@@ -67,12 +77,6 @@ const SearchUserForm:FC<Props> = ({}) => {
     })
     const {errors} = form.formState
 
-   
-
-    const handleError =(errorResponse:ErrorResponse)=>{
-		const {status, data} = errorResponse;
-		toast.error(`(${status}) ${data}`);
-	}
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         const {username,email,name,role,status} = data;
@@ -85,14 +89,7 @@ const SearchUserForm:FC<Props> = ({}) => {
             paging
         }
         dispatch(setSearchRequest(request));
-        search(request)
-            .unwrap()
-            .then((response:UserSearchResponse ) => {
-                dispatch(setUsers(response));
-            })
-            .catch((error:ErrorResponse) => {
-                handleError(error);
-            });
+        handleGetSearchResults(request);
     }
 
     const clear =() =>{
