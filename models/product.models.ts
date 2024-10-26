@@ -1,3 +1,4 @@
+import { Comment } from "./comment.models";
 import { ImageModel } from "./image.models";
 import { UserPublic } from "./user.models";
 

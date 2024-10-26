@@ -1,5 +1,7 @@
+import { ImageModel } from '@/models/image.models';
 import { Product, ProductDetails } from '@/models/product.models';
-import { Paging, ProductSearchRequest } from '@/models/search.models';
+import { Paging, ProductSearchRequest, ProductSearchResponse } from '@/models/search.models';
+import { UserPublic } from '@/models/user.models';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 
@@ -35,6 +37,42 @@ const initialState = {
     selectedProduct:null,
 	error:null,
 } as ProductState;
+
+const productSlice = createSlice({
+    name: 'products',
+	initialState,
+    reducers:{
+        setSearchRequest:(state, action:PayloadAction<ProductSearchRequest>) =>{
+            const payload =action.payload;
+            state.request = payload;
+        },
+        resetSearchRequest:(state)=>{
+            state.request =initialRequest;
+        },
+        setPaging:(state, action:PayloadAction<Paging>)=>{
+            const payload =action.payload;
+            state.request.paging =payload;
+        },
+        setProducts:(state, action:PayloadAction<ProductSearchResponse>) =>{
+            const payload =action.payload;
+            state.products = payload.data;
+            state.count = payload.count;
+            state.pages = payload.pages;
+            state.next = payload.next;
+            state.previous = payload.previous;
+        },
+        resetProducts:(state)=>{
+            state.products = [];
+            state.count = undefined;
+            state.pages = null;
+            state.next = null;
+            state.previous = null;
+        },
+        setSelectedProduct: (state,action:PayloadAction<ProductDetails>)=>{
+            state.selectedProduct=action.payload;
+        },
+    }
+});
 
 // export const pokemonSlice = createSlice({
 //     name: "pokemon",
