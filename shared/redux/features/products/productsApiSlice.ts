@@ -77,3 +77,15 @@ const productsApiSlice = apiSlice.injectEndpoints({
      // @ts-ignore
 	overrideExisting: module.hot?.status() === "apply",
 });
+
+export const {
+    useLazyGetBrandsWithTotalsQuery,
+    useLazyGetDiscountsWithTotalsQuery,
+    useLazyGetCategoriesWithTotalsQuery,
+    useLazyGetSizesWithTotalsQuery,
+    useLazyGetProductDetailsQuery,
+    useCreateProductMutation,
+    useUpdateProductMutation,
+    usePostProductCommentMutation,
+    useSearchProductsMutation
+} = productsApiSlice;
