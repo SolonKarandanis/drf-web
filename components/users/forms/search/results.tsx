@@ -3,22 +3,21 @@
 import { DataTable } from '@/shared/components/data-table/data-table'
 import { columns } from './columns'
 import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks'
-import { setPaging, setUsers } from '@/shared/redux/features/users/usersSlice';
-import { Paging, SortDirection, UserSearchResponse } from '@/models/search.models';
-import { useSearchUsersMutation } from '@/shared/redux/features/users/usersApiSlice';
+import { setPaging } from '@/shared/redux/features/users/usersSlice';
+import { Paging, SortDirection } from '@/models/search.models';
 import { ErrorResponse } from '@/models/error.models';
 import { toast } from 'react-toastify';
+import { useGetUserSearchResults } from '../../hooks/useGetUserSearchResults';
 
 
 const Results = () => {
     const usersState = useAppSelector((state) => state.users)
     const dispatch = useAppDispatch();
-    const [search] = useSearchUsersMutation();
 
-    const handleError =(errorResponse:ErrorResponse)=>{
-		const {status, data} = errorResponse;
-		toast.error(`(${status}) ${data}`);
-	}
+    const {
+        handleGetSearchResults
+    } = useGetUserSearchResults();
+
 
     const handlePagination = (page:number, pageSize:number) =>{
         const paging ={
@@ -28,14 +27,7 @@ const Results = () => {
         dispatch(setPaging(paging))
         const searchRequest = {...usersState.request}
         searchRequest.paging=paging
-        search(searchRequest)
-            .unwrap()
-            .then((response:UserSearchResponse ) => {
-                dispatch(setUsers(response));
-            })
-            .catch((error:ErrorResponse) => {
-                handleError(error);
-            });
+        handleGetSearchResults(searchRequest);
     }
 
     const handleSorting = (sortField:string, sortDirection:SortDirection) =>{
@@ -47,14 +39,7 @@ const Results = () => {
             sortOrder:sortDirection
         } as Paging;
         searchRequest.paging= page;
-        search(searchRequest)
-            .unwrap()
-            .then((response:UserSearchResponse ) => {
-                dispatch(setUsers(response));
-            })
-            .catch((error:ErrorResponse) => {
-                handleError(error);
-            });
+        handleGetSearchResults(searchRequest);
     }
     
     return (
