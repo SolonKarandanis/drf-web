@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import themeReducer from './features/themeSlice';
 import usersReducer from './features/users/usersSlice'
+import productsReducer from './features/products/productsSlice'
 import socialReducer from './features/social/socialSlice'
 import configReducer from './features/config/configSlice'
 import { apiSlice } from './apiSlice';
@@ -18,9 +19,15 @@ const socialPersistConfig = {
   storage: storage,
 };
 
+const productsPersistConfig = {
+  key: "products",
+  storage: storage,
+};
+
 const reducers = combineReducers({
   users: persistReducer(usersPersistConfig, usersReducer),
   socials:persistReducer(socialPersistConfig, socialReducer),
+  products:persistReducer(productsPersistConfig, productsReducer),
   theme: themeReducer,
   config:configReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,

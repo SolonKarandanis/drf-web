@@ -2,8 +2,9 @@ import { ImageModel } from '@/models/image.models';
 import { Product, ProductDetails } from '@/models/product.models';
 import { Paging, ProductSearchRequest, ProductSearchResponse } from '@/models/search.models';
 import { UserPublic } from '@/models/user.models';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '../../store';
 
 
 export interface ProductState {
@@ -71,8 +72,35 @@ const productSlice = createSlice({
         setSelectedProduct: (state,action:PayloadAction<ProductDetails>)=>{
             state.selectedProduct=action.payload;
         },
+        resetSelectedProduct:(state)=>{
+            state.selectedProduct=null;
+        }
     }
 });
+
+export const { 
+    resetProducts,
+    setProducts,
+    setSelectedProduct,
+    resetSelectedProduct,
+    setSearchRequest,
+    resetSearchRequest,
+    setPaging,
+} = productSlice.actions;
+
+export default productSlice.reducer;
+
+const products = (state: RootState) => state.products;
+
+export const selectedProductSelector = createSelector([products],(products)=>  products.selectedProduct);
+
+export const selectedProductIdSelector = createSelector([selectedProductSelector],(product)=>  product?.id);
+
+export const selectedProductUuidSelector = createSelector([selectedProductSelector],(product)=>  product?.uuid);
+
+export const productsSearchResultsSelector = createSelector([products],(products)=>  products.products);
+
+export const productsCountSelector = createSelector([products],(products)=>  products.count);
 
 // export const pokemonSlice = createSlice({
 //     name: "pokemon",
