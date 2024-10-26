@@ -41,6 +41,9 @@ export interface CreateProductRequest extends BaseProduct{
 
 }
 
+export interface UpdateProductRequest extends BaseProduct{
+}
+
 export interface PostProductCommentRequest{
     productId:number;
     comment:string;
