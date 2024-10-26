@@ -5,8 +5,6 @@ import { columns } from './columns'
 import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks'
 import { setPaging } from '@/shared/redux/features/users/usersSlice';
 import { Paging, SortDirection } from '@/models/search.models';
-import { ErrorResponse } from '@/models/error.models';
-import { toast } from 'react-toastify';
 import { useGetUserSearchResults } from '../../hooks/useGetUserSearchResults';
 
 
