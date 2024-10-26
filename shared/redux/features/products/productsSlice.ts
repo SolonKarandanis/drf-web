@@ -1,7 +1,5 @@
-import { ImageModel } from '@/models/image.models';
-import { Product, ProductDetails } from '@/models/product.models';
+import { BrandsWithTotals, CategoriesWithTotals, DiscountsWithTotals, Product, ProductDetails, SizesWithTotals } from '@/models/product.models';
 import { Paging, ProductSearchRequest, ProductSearchResponse } from '@/models/search.models';
-import { UserPublic } from '@/models/user.models';
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../store';
@@ -14,7 +12,11 @@ export interface ProductState {
     pages:number| null;
     next:number| null;
     previous:number| null;
-    selectedProduct:ProductDetails | null;
+    selectedProduct:ProductDetails| null;
+    categoriesWithTotals:CategoriesWithTotals[];
+    brandsWithTotals:BrandsWithTotals[];
+    sizesWithTotals:SizesWithTotals[];
+    discountsWithTotals:DiscountsWithTotals[];
     error:string| null;
 };
 
@@ -36,6 +38,10 @@ const initialState = {
     next: null,
     previous: null,
     selectedProduct:null,
+    categoriesWithTotals: [],
+    brandsWithTotals: [],
+    sizesWithTotals: [],
+    discountsWithTotals: [],
 	error:null,
 } as ProductState;
 
@@ -74,7 +80,19 @@ const productSlice = createSlice({
         },
         resetSelectedProduct:(state)=>{
             state.selectedProduct=null;
-        }
+        },
+        setCategoriesWithTotals:(state, action:PayloadAction<CategoriesWithTotals[]>) =>{
+            state.categoriesWithTotals=action.payload;
+        },
+        setBrandsWithTotals:(state, action:PayloadAction<BrandsWithTotals[]>) =>{
+            state.brandsWithTotals=action.payload;
+        },
+        setSizesWithTotals:(state, action:PayloadAction<SizesWithTotals[]>) =>{
+            state.sizesWithTotals=action.payload;
+        },
+        setDiscountsWithTotals:(state, action:PayloadAction<DiscountsWithTotals[]>) =>{
+            state.discountsWithTotals=action.payload;
+        },
     }
 });
 
