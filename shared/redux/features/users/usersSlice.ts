@@ -177,6 +177,10 @@ export const userUuidSelector = createSelector([selectedUserSelector], (selected
 
 export const  userBioSelector = createSelector([selectedUserSelector],(selectedUser)=> selectedUser?.bio)
 
+export const userUserGroupsSelector = createSelector([users],(users)=>  users.userGroups);
+
+export const userSearchRequestSelector = createSelector([users],(users)=>  users.request);
+
 // export const totalItemQtySelector = createSelector([items], (items) => {
 //     console.log("custom selector runned");
   

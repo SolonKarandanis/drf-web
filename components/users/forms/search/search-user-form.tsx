@@ -21,8 +21,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/shared/shadcn/components/ui/select"
-import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
-import { useLazyGetAllGroupsQuery } from '@/shared/redux/features/users/usersApiSlice';
+import { useAppDispatch } from "@/shared/redux/hooks";
 import { UserSearchRequest } from '@/models/search.models';
 import { UserStatus } from '@/models/user.models';
 import {
@@ -30,12 +29,11 @@ import {
     setSearchRequest,
     resetSearchRequest, 
     initialRequest, 
-    setUserGroups, 
-    UsersState 
 } from '@/shared/redux/features/users/usersSlice';
 import { useTranslations } from 'next-intl';
 import ButtonLoading from '@/shared/components/button-loading/button-loading';
 import { useGetUserSearchResults } from '../../hooks/useGetUserSearchResults';
+import { useGetUserGroups } from '../../hooks/useGetUserGroups';
 
 
 type Inputs = z.infer<typeof UserSearchSchema>
@@ -46,23 +44,19 @@ interface Props{
 
 const SearchUserForm:FC<Props> = ({}) => {
     const t = useTranslations();
-    const [getAllGroups] = useLazyGetAllGroupsQuery();
-    const usersState: UsersState = useAppSelector((state) => state.users);
-    if(usersState.userGroups.length===0){
-        getAllGroups()
-            .unwrap()
-            .then((groups) => dispatch(setUserGroups(groups)))
-    }
-    const userGroups = usersState.userGroups
+
+    const {
+        userGroups
+    } = useGetUserGroups();
 
     const {
         handleGetSearchResults,
         isLoading,
+        searchRequest,
     } = useGetUserSearchResults();
 
     const dispatch = useAppDispatch();
 
-    const searchRequest = usersState.request
     const paging = searchRequest.paging
     
     const form = useForm<Inputs>({
