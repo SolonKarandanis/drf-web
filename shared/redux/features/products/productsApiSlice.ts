@@ -1,4 +1,13 @@
-import { BrandsWithTotals, CategoriesWithTotals, CreateProductRequest, DiscountsWithTotals, PostProductCommentRequest, ProductDetails, SizesWithTotals, UpdateProductRequest } from "@/models/product.models";
+import { 
+    BrandsWithTotals, 
+    CategoriesWithTotals, 
+    CreateProductRequest, 
+    DiscountsWithTotals, 
+    PostProductCommentRequest, 
+    ProductDetails, 
+    SizesWithTotals, 
+    UpdateProductRequest 
+} from "@/models/product.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
 import { ProductSearchRequest, ProductSearchResponse } from "@/models/search.models";
