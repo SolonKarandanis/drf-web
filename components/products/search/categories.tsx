@@ -29,14 +29,15 @@ const Categories = () => {
                             <p className="font-semibold mb-0 text-[#8c9097] dark:text-white/50">
                                 CATEGORIES
                             </p>
-                            <CollapsibleTrigger asChild>
-                                <Button variant="ghost" size="sm" className="p-0 w-9">
-                                    <ChevronsUpDown className="w-4 h-4" />
-                                    <span className="sr-only">Toggle</span>
-                                </Button>
-                            </CollapsibleTrigger>
+                            {categoriesRest.length >0 &&(
+                                <CollapsibleTrigger asChild>
+                                    <Button variant="ghost" size="sm" className="p-0 w-9">
+                                        <ChevronsUpDown className="w-4 h-4" />
+                                        <span className="sr-only">Toggle</span>
+                                    </Button>
+                                </CollapsibleTrigger>
+                            )}
                         </div>
-                       
                         <div className="px-2 py-4 pb-0">
                             {categoriesLoading && (
                                 <SideBarLoading />
