@@ -7,7 +7,8 @@ import { useGetProductTotals } from '../hooks/useGetProductTotals';
 const Categories = () => {
     const {
         categoriesLoading,
-        categoriesWithTotals,
+        categoriesFirstThree,
+        categoriesRest
     } = useGetProductTotals();
     
     return (
@@ -17,7 +18,7 @@ const Categories = () => {
                     CATEGORIES
                 </p>
                 <div className="px-2 py-4 pb-0">
-                    {categoriesWithTotals.map((data)=>(
+                    {categoriesFirstThree.map((data)=>(
                         <div className="mb-2 form-check" key={data.id}>
                             <input className="form-check-input" type="checkbox" value=""
                                 id="electronics" />

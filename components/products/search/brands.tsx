@@ -7,7 +7,8 @@ import { useGetProductTotals } from '../hooks/useGetProductTotals';
 const Brands = () => {
     const {
         brandsLoading,
-        brandsWithTotals,
+        brandsFirstThree,
+        brandsRest
     } = useGetProductTotals();
     return (
         <div className="p-4 border-b dark:border-defaultborder/10">
@@ -15,7 +16,7 @@ const Brands = () => {
                 BRANDS
             </p>
             <div className="px-2 py-4 pb-0">
-                {brandsWithTotals.map((data)=>(
+                {brandsFirstThree.map((data)=>(
                     <div className="mb-2 form-check" key={data.id}>
                         <input className="form-check-input" type="checkbox" value=""
                             id="electronics" />

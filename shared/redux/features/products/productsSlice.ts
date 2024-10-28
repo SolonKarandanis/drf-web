@@ -126,11 +126,35 @@ export const productsCountSelector = createSelector([products],(products)=>  pro
 
 export const productsCategoriesTotalsSelector = createSelector([products],(products)=>  products.categoriesWithTotals);
 
+export const productsCategoriesTotalsFirstThreeSelector = createSelector([productsCategoriesTotalsSelector],(categories)=>  
+    categories.slice(0,3));
+
+export const productsCategoriesTotalsRestSelector = createSelector([productsCategoriesTotalsSelector],(categories)=>  
+    categories.slice(3));
+
 export const productsBrandsTotalsSelector = createSelector([products],(products)=>  products.brandsWithTotals);
+
+export const productsBrandsTotalsFirstThreeSelector = createSelector([productsBrandsTotalsSelector],(brands)=>  
+    brands.slice(0,3));
+
+export const productsBrandsTotalsRestSelector = createSelector([productsBrandsTotalsSelector],(brands)=>  
+    brands.slice(3));
 
 export const productsSizesTotalsSelector = createSelector([products],(products)=>  products.sizesWithTotals);
 
+export const productsSizesTotalsForstThreeSelector = createSelector([productsSizesTotalsSelector],(sizes)=>  
+    sizes.slice(0,3));
+
+export const productsSizesTotalsRestSelector = createSelector([productsSizesTotalsSelector],(sizes)=>  
+    sizes.slice(3));
+
 export const productsDiscountsTotalsSelector = createSelector([products],(products)=>  products.discountsWithTotals);
+
+export const productsDiscountsTotalsFirstThreeSelector = createSelector([productsDiscountsTotalsSelector],(discounts)=>  
+    discounts.slice(0,3));
+
+export const productsDiscountsTotalsRestSelector = createSelector([productsDiscountsTotalsSelector],(discounts)=>  
+    discounts.slice(3));
 
 // export const pokemonSlice = createSlice({
 //     name: "pokemon",

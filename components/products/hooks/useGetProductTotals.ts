@@ -5,13 +5,16 @@ import {
     useLazyGetSizesWithTotalsQuery
 } from "@/shared/redux/features/products/productsApiSlice";
 import { 
-    productsBrandsTotalsSelector,
-    productsCategoriesTotalsSelector,
-    productsDiscountsTotalsSelector,
-    productsSizesTotalsSelector,
+    productsBrandsTotalsFirstThreeSelector,
+    productsBrandsTotalsRestSelector,
+    productsCategoriesTotalsFirstThreeSelector,
+    productsCategoriesTotalsRestSelector,
+    productsDiscountsTotalsFirstThreeSelector,
+    productsDiscountsTotalsRestSelector,
+    productsSizesTotalsForstThreeSelector,
+    productsSizesTotalsRestSelector,
     setBrandsWithTotals,
     setCategoriesWithTotals, 
-    setDiscountsWithTotals, 
     setSizesWithTotals
 } from "@/shared/redux/features/products/productsSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
@@ -51,21 +54,29 @@ export function useGetProductTotals(){
             })
     },[]);
 
-    const categoriesWithTotals = useAppSelector(productsCategoriesTotalsSelector);
-    const brandsWithTotals = useAppSelector(productsBrandsTotalsSelector);
-    const sizesWithTotals = useAppSelector(productsSizesTotalsSelector);
-    const discountsWithTotals = useAppSelector(productsDiscountsTotalsSelector);
+    const categoriesFirstThree = useAppSelector(productsCategoriesTotalsFirstThreeSelector);
+    const categoriesRest = useAppSelector(productsCategoriesTotalsRestSelector);
+
+    const brandsFirstThree = useAppSelector(productsBrandsTotalsFirstThreeSelector);
+    const brandsRest = useAppSelector(productsBrandsTotalsRestSelector);
+
+    const sizesFirstThree = useAppSelector(productsSizesTotalsForstThreeSelector);
+    const sizesRest = useAppSelector(productsSizesTotalsRestSelector);
+
+    const discountsFirstThree = useAppSelector(productsDiscountsTotalsFirstThreeSelector);
+    const discountsRest = useAppSelector(productsDiscountsTotalsRestSelector);
 
     
     return {
         categoriesLoading,
-        categoriesWithTotals,
+        categoriesFirstThree,
+        categoriesRest,
         brandsLoading,
-        brandsWithTotals,
-        discountsLoading,
-        discountsWithTotals,
+        brandsFirstThree,
+        brandsRest,
         sizesLoading,
-        sizesWithTotals
+        sizesFirstThree,
+        sizesRest,
     }
     
 }
