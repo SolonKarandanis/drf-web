@@ -104,6 +104,10 @@ export const {
     setSearchRequest,
     resetSearchRequest,
     setPaging,
+    setCategoriesWithTotals,
+    setBrandsWithTotals,
+    setSizesWithTotals,
+    setDiscountsWithTotals
 } = productSlice.actions;
 
 export default productSlice.reducer;
@@ -119,6 +123,14 @@ export const selectedProductUuidSelector = createSelector([selectedProductSelect
 export const productsSearchResultsSelector = createSelector([products],(products)=>  products.products);
 
 export const productsCountSelector = createSelector([products],(products)=>  products.count);
+
+export const productsCategoriesTotalsSelector = createSelector([products],(products)=>  products.categoriesWithTotals);
+
+export const productsBrandsTotalsSelector = createSelector([products],(products)=>  products.brandsWithTotals);
+
+export const productsSizesTotalsSelector = createSelector([products],(products)=>  products.sizesWithTotals);
+
+export const productsDiscountsTotalsSelector = createSelector([products],(products)=>  products.discountsWithTotals);
 
 // export const pokemonSlice = createSlice({
 //     name: "pokemon",

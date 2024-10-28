@@ -26,28 +26,28 @@ const productsApiSlice = apiSlice.injectEndpoints({
 				}
 			}
         }),
-        getCategoriesWithTotals:builder.query<CategoriesWithTotals,void>({
+        getCategoriesWithTotals:builder.query<CategoriesWithTotals[],void>({
             query:() =>{
 				return {
 					url:`${ApiControllers.PRODUCTS}/categories/`,
 				}
 			}
         }),
-        getBrandsWithTotals:builder.query<BrandsWithTotals,void>({
+        getBrandsWithTotals:builder.query<BrandsWithTotals[],void>({
             query:() =>{
 				return {
 					url:`${ApiControllers.PRODUCTS}/brands/`,
 				}
 			}
         }),
-        getSizesWithTotals:builder.query<SizesWithTotals,void>({
+        getSizesWithTotals:builder.query<SizesWithTotals[],void>({
             query:() =>{
 				return {
 					url:`${ApiControllers.PRODUCTS}/sizes/`,
 				}
 			}
         }),
-        getDiscountsWithTotals:builder.query<DiscountsWithTotals,void>({
+        getDiscountsWithTotals:builder.query<DiscountsWithTotals[],void>({
             query:() =>{
 				return {
 					url:`${ApiControllers.PRODUCTS}/discounts/`,
