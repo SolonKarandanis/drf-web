@@ -3,8 +3,8 @@ import { ErrorResponse } from "@/models/error.models";
 import { ImageModel, UploadProfileImageMutation } from "@/models/image.models";
 import { UpdateBioRequest, UpdateContactInfoRequest, UserAcount } from "@/models/user.models";
 import { useUpdateContanctInfoMutation, useUpdateUserBioMutation, useUploadUserImageMutation } from "@/shared/redux/features/users/usersApiSlice";
-import { setProfileImage, setSelectedUser } from "@/shared/redux/features/users/usersSlice";
-import { useAppDispatch } from "@/shared/redux/hooks";
+import { setProfileImage, setSelectedUser, userBioSelector } from "@/shared/redux/features/users/usersSlice";
+import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -59,6 +59,8 @@ export function useMutateUserDetails(){
 
     const mutationLoading = contactInfoLoading || bioLoading || pictureLoading;
 
+    const bio = useAppSelector(userBioSelector);
+
 
     return {
         isEdit,
@@ -67,5 +69,6 @@ export function useMutateUserDetails(){
         handleUpdateContanctInfoMutation,
         handleUpdateBioMutation,
         handleUploadProfilePictureMutation,
+        bio,
     }
 }

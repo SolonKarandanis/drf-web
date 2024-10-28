@@ -30,9 +30,9 @@ const Bio:FC<Props> = ({
         isEdit,
         setIsEdit,
         mutationLoading,
-        handleUpdateBioMutation
+        handleUpdateBioMutation,
+        bio,
     } = useMutateUserDetails();
-    const bio = useAppSelector(userBioSelector);
 
 
     const params = useParams<{locale:string,uuid:string}>();

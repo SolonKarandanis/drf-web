@@ -38,11 +38,11 @@ export function useGetProductTotals(){
                 dispatch(setBrandsWithTotals(data));
             })
 
-        getDiscounts()
-            .unwrap()
-            .then((data) =>{
-                dispatch(setDiscountsWithTotals(data));
-            })
+        // getDiscounts()
+        //     .unwrap()
+        //     .then((data) =>{
+        //         dispatch(setDiscountsWithTotals(data));
+        //     })
 
         getSizes()
             .unwrap()
