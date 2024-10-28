@@ -213,6 +213,10 @@ module.exports = {
       'spin-slow': 'spin 3s linear infinite',
       'slow-ping':'ping 2s linear infinite',
       'animate-wase': 'wase 4s linear infinite',
+      "accordion-down": "accordion-down 0.2s ease-out",
+      "accordion-up": "accordion-up 0.2s ease-out",
+      "collapsible-down": "accordion-down 0.2s ease-out",
+      "collapsible-up": "accordion-up 0.2s ease-out",
     },
     keyframes: {
       particles: {
@@ -286,6 +290,22 @@ module.exports = {
         to: {
           transform: "rotate(360deg)",
         },
+      },
+      "accordion-down": {
+        from: { height: 0 },
+        to: { height: "var(--radix-accordion-content-height)" },
+      },
+      "accordion-up": {
+        from: { height: "var(--radix-accordion-content-height)" },
+        to: { height: 0 },
+      },
+      "collapsible-down": {
+        from: { height: 0 },
+        to: { height: "var(--radix-collapsible-content-height)" },
+      },
+      "collapsible-up": {
+        from: { height: "var(--radix-collapsible-content-height)" },
+        to: { height: 0 },
       },
     },
   },

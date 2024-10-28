@@ -26,7 +26,7 @@ const intialPaging ={
 } as Paging;
 
 export const initialRequest:ProductSearchRequest = {
-    query:null,
+    query:"",
     paging:intialPaging
 };
 
@@ -119,6 +119,8 @@ export const selectedProductSelector = createSelector([products],(products)=>  p
 export const selectedProductIdSelector = createSelector([selectedProductSelector],(product)=>  product?.id);
 
 export const selectedProductUuidSelector = createSelector([selectedProductSelector],(product)=>  product?.uuid);
+
+export const productsSearchRequestSelector = createSelector([products],(products)=>  products.request);
 
 export const productsSearchResultsSelector = createSelector([products],(products)=>  products.products);
 

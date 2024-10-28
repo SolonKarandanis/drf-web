@@ -6,6 +6,7 @@ import ProductsHeader from "@/components/products/search/products-header";
 import Pagination from "@/components/products/search/pagination";
 import ProductsSidebar from "@/components/products/search/products-sidebar";
 import Card from "@/shared/components/card/card";
+import ProductResults from "@/components/products/search/product-results";
 
 
 
@@ -37,35 +38,7 @@ const SearchProductsPage =() =>{
                         <ProductsHeader />
                         <ProductsSidebar />
                         <div className="col-span-12 xxl:col-span-9 xl:col-span-8 lg:col-span-8 md:col-span-12">
-                            <div className="grid grid-cols-12 gap-x-6">
-                                {Itemsdata1.map((item) =>(
-                                    <Card>
-                                        <Card.Image src={item.preview} href={`/products/${productUuid}`}/>
-                                        <Card.IconSection>
-                                            <Card.IconSection.Icon 
-                                                className="wishlist"
-                                                href={`/components/pages/ecommerce/wishlist/`}>
-                                                <i className="ri-heart-line"></i>
-                                            </Card.IconSection.Icon>
-                                            <Card.IconSection.Icon 
-                                                className="cart"
-                                                href={`/components/pages/ecommerce/cart/`}>
-                                                <i className="ri-shopping-cart-line"></i>
-                                            </Card.IconSection.Icon>
-                                            <Card.IconSection.Icon 
-                                                className="view" 
-                                                href={`/products/${productUuid}`}>
-                                                <i className="ri-eye-line"></i>
-                                            </Card.IconSection.Icon>
-                                        </Card.IconSection>
-                                        <Card.Title title={item.title}>
-                                            <Card.Title.Rating>{item.rating}</Card.Title.Rating>
-                                        </Card.Title>
-                                        <Card.Description>{item.description}</Card.Description>
-                                        <Card.Price>{item.newpr}</Card.Price>
-                                    </Card>
-                                ))}
-                            </div>
+                            <ProductResults />
                         </div>
                     </div>
                 </div>

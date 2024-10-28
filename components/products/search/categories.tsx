@@ -48,7 +48,7 @@ const Categories = () => {
                                     data={data}/>
                             ))}
                         </div>
-                        <CollapsibleContent className="space-y-2">
+                        <CollapsibleContent className="space-y-2 transition-all data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
                             <div className="px-2 py-4 pb-0">
                                 {categoriesRest.map((data)=>(
                                     <SideBarData 
