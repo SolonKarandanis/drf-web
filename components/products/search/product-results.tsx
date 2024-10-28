@@ -35,7 +35,7 @@ const ProductResults = () => {
                     <Card.Title title={item.title}>
                         {/* <Card.Title.Rating>{item.rating}</Card.Title.Rating> */}
                     </Card.Title>
-                    <Card.Description>{item.title}</Card.Description>
+                    <Card.Description>{item.content}</Card.Description>
                     <Card.Price>{item.price}</Card.Price>
                 </Card>
             ))}

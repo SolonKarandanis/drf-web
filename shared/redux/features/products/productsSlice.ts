@@ -26,7 +26,7 @@ const intialPaging ={
 } as Paging;
 
 export const initialRequest:ProductSearchRequest = {
-    query:"",
+    query:null,
     paging:intialPaging
 };
 
