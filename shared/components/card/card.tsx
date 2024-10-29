@@ -14,7 +14,7 @@ interface CardProps {
 const Card= ({ children }: CardProps) => {
   return (
     <div className="col-span-12 xxl:col-span-3 xl:col-span-6 lg:col-span-6 md:col-span-6 sm:col-span-12">
-        <div className="box product-card">
+        <div className="box product-card xxxl:max-h-[490px] xxxl:min-h-[490px] xxl:max-h-[350px] xxl:min-h-[350px]">
             <div className="box-body">
                 {children}
             </div>
