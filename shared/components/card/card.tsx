@@ -112,15 +112,36 @@ function Description({
     );
 }
 
+interface CardPriceProps extends  DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>{
+  price:number;
+  oldPrice?:number;
+  discount?:number;
+}
+
 function Price({
+    price,
+    oldPrice,
+    discount,
     className,
     children,
     ...props
-  }: DetailedHTMLProps<HtmlHTMLAttributes<HTMLParagraphElement>,HTMLParagraphElement>) {
+  }: CardPriceProps) {
     return (
       <p  className="mb-1 font-semibold text-[1rem] flex items-center justify-between" 
         {...props}>
-          {children}
+          <span>
+            {price}
+            {oldPrice && (
+              <span className="text-[#8c9097] dark:text-white/50 line-through ms-1 inline-block opacity-[0.6]">
+                {oldPrice}
+              </span>
+            )}
+          </span>
+          {discount && (
+            <span className="badge bg-secondary/10 text-sky-600 ltr:float-right rtl:float-left text-[0.625rem]">
+              {discount}% off
+            </span>
+          )}
       </p>
     );
   }
