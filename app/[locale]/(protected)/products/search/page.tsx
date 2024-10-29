@@ -1,11 +1,9 @@
 import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 import { Metadata } from "next"
 import { useTranslations } from "next-intl";
-import { Itemsdata1 } from "@/components/products/search/product-data";
 import ProductsHeader from "@/components/products/search/products-header";
 import Pagination from "@/components/products/search/pagination";
 import ProductsSidebar from "@/components/products/search/products-sidebar";
-import Card from "@/shared/components/card/card";
 import ProductResults from "@/components/products/search/product-results";
 
 
