@@ -3,16 +3,15 @@
 import Card from "@/shared/components/card/card";
 import { useGetProductSearchResults } from "../hooks/useGetProductSearchResults";
 import { useAppSelector } from "@/shared/redux/hooks";
-import { productsSearchResultsSelector } from "@/shared/redux/features/products/productsSlice";
 import ProductResultsLoading from "./product-results-loading";
 
 const ProductResults = () => {
     const {
+        results,
         handleGetSearchResults,
         isLoading
     } = useGetProductSearchResults();
     const configState = useAppSelector((state)=>state.config);
-    const results = useAppSelector(productsSearchResultsSelector);
     const host = configState.djangoHost
     const path = configState.baseUrl
 
