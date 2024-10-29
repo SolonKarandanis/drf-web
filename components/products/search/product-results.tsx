@@ -2,6 +2,8 @@
 
 import Card from "@/shared/components/card/card";
 import { useGetProductSearchResults } from "../hooks/useGetProductSearchResults";
+import { useAppSelector } from "@/shared/redux/hooks";
+import { selectedConfigSelector } from "@/shared/redux/features/config/configSlice";
 
 const ProductResults = () => {
     const {
@@ -9,6 +11,7 @@ const ProductResults = () => {
         results,
         isLoading
     } = useGetProductSearchResults();
+    const configState = useAppSelector(selectedConfigSelector);
 
     return (
         <div className="grid grid-cols-12 gap-x-6">

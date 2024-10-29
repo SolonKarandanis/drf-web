@@ -181,6 +181,8 @@ export const userUserGroupsSelector = createSelector([users],(users)=>  users.us
 
 export const userSearchRequestSelector = createSelector([users],(users)=>  users.request);
 
+export const userProfileImageSelector = createSelector([users],(users)=>  users.userProfileImage);
+
 // export const totalItemQtySelector = createSelector([items], (items) => {
 //     console.log("custom selector runned");
   

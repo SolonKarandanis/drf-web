@@ -13,6 +13,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useAppSelector } from '@/shared/redux/hooks';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { useTranslations } from 'next-intl';
+import { selectedConfigSelector } from '@/shared/redux/features/config/configSlice';
+import { userProfileImageSelector } from '@/shared/redux/features/users/usersSlice';
 
 interface Props{
 }
@@ -21,8 +23,8 @@ const ProfilePicture:FC<Props> = () => {
     const t = useTranslations();
     const pathname = usePathname();
     const router = useRouter()
-    const configState = useAppSelector((state) => state.config);
-    const profileImage = useAppSelector((state)=> state.users.userProfileImage);
+    const configState = useAppSelector(selectedConfigSelector);
+    const profileImage = useAppSelector(userProfileImageSelector);
     const host = configState.djangoHost
     const path = configState.baseUrl
     const imagePath = profileImage ?   `${host}${profileImage.image}` : `${path}/assets/images1/faces/21.jpg`;
