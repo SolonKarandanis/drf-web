@@ -3,45 +3,51 @@
 import Card from "@/shared/components/card/card";
 import { useGetProductSearchResults } from "../hooks/useGetProductSearchResults";
 import { useAppSelector } from "@/shared/redux/hooks";
-import { selectedConfigSelector } from "@/shared/redux/features/config/configSlice";
+import { productsSearchResultsSelector } from "@/shared/redux/features/products/productsSlice";
 
 const ProductResults = () => {
     const {
         handleGetSearchResults,
-        results,
         isLoading
     } = useGetProductSearchResults();
-    const configState = useAppSelector(selectedConfigSelector);
+    const configState = useAppSelector((state)=>state.config);
+    const results = useAppSelector(productsSearchResultsSelector);
+    const host = configState.djangoHost
+    const path = configState.baseUrl
 
     return (
         <div className="grid grid-cols-12 gap-x-6">
-            {results.map((item) =>(
-                <Card key={item.id}>
-                    <Card.Image src={item.previewImage?.image} href={`/products/${item.uuid}`}/>
-                    <Card.IconSection>
-                        <Card.IconSection.Icon 
-                            className="wishlist"
-                            href={`/components/pages/ecommerce/wishlist/`}>
-                            <i className="ri-heart-line"></i>
-                        </Card.IconSection.Icon>
-                        <Card.IconSection.Icon 
-                            className="cart"
-                            href={`/components/pages/ecommerce/cart/`}>
-                            <i className="ri-shopping-cart-line"></i>
-                        </Card.IconSection.Icon>
-                        <Card.IconSection.Icon 
-                            className="view" 
-                            href={`/products/${item.uuid}`}>
-                            <i className="ri-eye-line"></i>
-                        </Card.IconSection.Icon>
-                    </Card.IconSection>
-                    <Card.Title title={item.title}>
-                        {/* <Card.Title.Rating>{item.rating}</Card.Title.Rating> */}
-                    </Card.Title>
-                    <Card.Description>{item.content}</Card.Description>
-                    <Card.Price>{item.price}</Card.Price>
-                </Card>
-            ))}
+            {results.map((item) =>{
+                const productImage = item.previewImage
+                const imagePath = productImage ?   `${host}${productImage.image}` : `${path}/assets/images/faces/21.jpg`;
+                return (
+                    <Card key={item.id}>
+                        <Card.Image src={imagePath} href={`/products/${item.uuid}`}/>
+                        <Card.IconSection>
+                            <Card.IconSection.Icon 
+                                className="wishlist"
+                                href={`/components/pages/ecommerce/wishlist/`}>
+                                <i className="ri-heart-line"></i>
+                            </Card.IconSection.Icon>
+                            <Card.IconSection.Icon 
+                                className="cart"
+                                href={`/components/pages/ecommerce/cart/`}>
+                                <i className="ri-shopping-cart-line"></i>
+                            </Card.IconSection.Icon>
+                            <Card.IconSection.Icon 
+                                className="view" 
+                                href={`/products/${item.uuid}`}>
+                                <i className="ri-eye-line"></i>
+                            </Card.IconSection.Icon>
+                        </Card.IconSection>
+                        <Card.Title title={item.title}>
+                            {/* <Card.Title.Rating>{item.rating}</Card.Title.Rating> */}
+                        </Card.Title>
+                        <Card.Description>{item.content}</Card.Description>
+                        <Card.Price>{item.price}</Card.Price>
+                    </Card>
+                )
+            })}
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import { ConfigModel } from '@/models/config.model';
-import { createSelector, createSlice } from '@reduxjs/toolkit';
+import {  createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../store';
 
@@ -27,5 +27,3 @@ export const {
 export default configSlice.reducer;
 
 const config = (state: RootState) => state.config;
-
-export const selectedConfigSelector = createSelector([config],(config)=>  config);
