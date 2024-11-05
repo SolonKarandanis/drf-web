@@ -1,7 +1,8 @@
 "use client";
 
 import { BaseTotals } from "@/models/product.models";
-import { FC } from "react";
+import { Checkbox } from "@/shared/shadcn/components/ui/checkbox";
+import { FC, useState } from "react";
  
 
 
@@ -12,10 +13,16 @@ interface Props{
 const SideBarData:FC<Props> = ({
     data,
 }) => {
+    const [isChecked, setChecked]= useState(false);
+    const handleClick = () => setChecked(!isChecked)
+
+
     return (
         <div className="mb-2 form-check">
-            <input className="form-check-input" type="checkbox" value=""
-                id={data.name} />
+            <Checkbox 
+                id={data.name} 
+                checked={isChecked}
+                onClick={handleClick}/>
             <label className="form-check-label" htmlFor={data.name}>
                 {data.name}
             </label>
