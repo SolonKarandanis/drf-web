@@ -9,7 +9,7 @@ const ProductsSidebar = () => {
         <div className="box products-navigation-card">
             <Categories />
             <Brands />
-            {/* <Discount /> */}
+            <Discount />
             <Sizes />
         </div>
     </div>

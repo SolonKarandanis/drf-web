@@ -106,7 +106,7 @@ function Description({
     ...props
 }: DetailedHTMLProps<HtmlHTMLAttributes<HTMLParagraphElement>,HTMLParagraphElement>) {
     return (
-        <p className="product-description text-[.6875rem] text-[#8c9097] dark:text-white/50 mb-2" {...props}>
+        <p className="product-description text-[.6875rem] text-[#8c9097] dark:text-white/50 mb-2 line-clamp-2" {...props}>
             {children}
         </p>
     );

@@ -19,9 +19,7 @@ const ProductResults = () => {
         <div className="grid grid-cols-12 gap-x-6">
             {isLoading && (<ProductResultsLoading iterate={8} />)}
             {!isLoading && results.map((item) =>{
-                const contentLength = item.content.length;
-                const slicedContent =  item.content.slice(0,60) + ' ...';
-                const previewContent = contentLength >=60 ? slicedContent: contentLength;
+                
                 const productImage = item.previewImage
                 const imagePath = productImage ?   `${host}${productImage.image}` : `${path}/assets/images/faces/21.jpg`;
                 return (
@@ -47,7 +45,7 @@ const ProductResults = () => {
                         <Card.Title title={item.title}>
                             <Card.Title.Rating>4.2</Card.Title.Rating>
                         </Card.Title>
-                        <Card.Description>{previewContent}</Card.Description>
+                        <Card.Description>{item.content}</Card.Description>
                         <Card.Price price={item.price} oldPrice={item.price} discount={72}></Card.Price>
                     </Card>
                 )
