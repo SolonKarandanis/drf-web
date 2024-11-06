@@ -28,6 +28,7 @@ export interface UserSearchRequest extends SearchRequest {
 export interface ProductSearchRequest extends SearchRequest{
     query:string| null;
     categories?:number[];
+    discounts?:number[];
     brands?:number[];
     sizes?:number[];
 }

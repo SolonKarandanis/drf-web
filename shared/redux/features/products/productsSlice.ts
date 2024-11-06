@@ -53,6 +53,21 @@ const productSlice = createSlice({
             const payload =action.payload;
             state.request = payload;
         },
+        setSearchRequestCategories:(state,action:PayloadAction<number[]>)=>{
+            state.request.categories = action.payload;
+        },
+        setSearchRequestDiscounts:(state,action:PayloadAction<number[]>)=>{
+            state.request.discounts = action.payload;
+        },
+        setSearchRequestBrands:(state,action:PayloadAction<number[]>)=>{
+            state.request.brands = action.payload;
+        },
+        setSearchRequestSizes:(state,action:PayloadAction<number[]>)=>{
+            state.request.sizes = action.payload;
+        },
+        setSearchRequestQuery:(state,action:PayloadAction<string>)=>{
+            state.request.query = action.payload;
+        },
         resetSearchRequest:(state)=>{
             state.request =initialRequest;
         },
@@ -102,6 +117,11 @@ export const {
     setSelectedProduct,
     resetSelectedProduct,
     setSearchRequest,
+    setSearchRequestCategories,
+    setSearchRequestDiscounts,
+    setSearchRequestBrands,
+    setSearchRequestSizes,
+    setSearchRequestQuery,
     resetSearchRequest,
     setPaging,
     setCategoriesWithTotals,
