@@ -24,7 +24,7 @@ const SearchBar = () => {
     };
 
     return (
-        <div className="sm:flex" role="search">
+        <div className="sm:flex sm:justify-center" role="search">
             <input className="form-control !w-auto !rounded-sm me-2" 
                 type="search" onChange={(ele) => { myfunction(ele.target.value); }}
                 placeholder="Search" aria-label="Search" />
