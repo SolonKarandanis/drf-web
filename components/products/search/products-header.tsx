@@ -29,83 +29,10 @@ const ProductsHeader = () => {
                                         id="navbarDropdown"
                                         aria-expanded="false">
                                         Kids
-                                        <i className="inline-block align-middle ri-arrow-down-s-line ms-1"></i>
-                                    </Link>
-                                    <ul className="hidden hs-dropdown-menu ti-dropdown-menu"
-                                        aria-labelledby="navbarDropdown">
-                                        <li>
-                                            <Link className="ti-dropdown-item !py-2 !px-[0.9375rem] 
-                                                !text-[0.8125rem] !font-medium block"
-                                                href="#!">
-                                                Action
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link className="ti-dropdown-item !py-2 !px-[0.9375rem] 
-                                                !text-[0.8125rem] !font-medium block"
-                                                href="#!">
-                                                Another action
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <hr className="dropdown-divider" />
-                                        </li>
-                                        <li>
-                                            <Link className="ti-dropdown-item !py-2 !px-[0.9375rem] 
-                                                !text-[0.8125rem] !font-medium block"
-                                            href="#!">
-                                            Something else here
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="mb-2 nav-item xxl:mb-0">
-                                    <Link href="#!" className="nav-link whitespace-nowrap text-defaulttextcolor dark:text-defaulttextcolor/70 hover:text-gray-600">
-                                        Today Deals
-                                    </Link>
-                                </li>
-                                <li className="mb-2 nav-item xxl:mb-0">
-                                    <Link href="#!" className="nav-link whitespace-nowrap text-defaulttextcolor dark:text-defaulttextcolor/70 hover:text-gray-600">
-                                        Electronics
-                                    </Link>
-                                </li>
-                                <li className="mb-2 nav-item xxl:mb-0">
-                                    <Link href="#!" className="nav-link whitespace-nowrap text-defaulttextcolor dark:text-defaulttextcolor/70 hover:text-gray-600">
-                                        Home &amp; Kitchen
-                                    </Link>
-                                </li>
-                                <li className="mb-2 nav-item xxl:mb-0">
-                                    <Link href="#!" className="nav-link whitespace-nowrap text-defaulttextcolor dark:text-defaulttextcolor/70 hover:text-gray-600">
-                                        Fashion
-                                    </Link>
-                                </li>
-                                <li className="mb-2 nav-item xxl:mb-0">
-                                    <Link href="#!" className="nav-link whitespace-nowrap text-defaulttextcolor dark:text-defaulttextcolor/70 hover:text-gray-600">
-                                        <i className="inline-block align-middle ri-customer-service-line me-2"></i>
-                                        Customer Service
                                     </Link>
                                 </li>
                                 <li className="nav-item xxl:mb-mb-0 mb-2 xxl:ms-0 !ms-4">
                                     <SortBy />
-                                </li>
-                                <li className="nav-item xxl:mb-0 mb-2 xxl:ms-4 !ms-4">
-                                    <div className="inline-flex">
-                                        <button type="button"
-                                            className="ti-btn !py-[0.45rem] !px-3 bg-primary 
-                                            text-black !rounded-e-none">
-                                            IV
-                                        </button>
-                                        <button type="button"
-                                            className="ti-btn !py-[0.45rem] !px-3 bg-primary 
-                                            text-black !rounded-none">
-                                            III
-                                        </button>
-                                        <button type="button"
-                                            className="ti-btn !py-[0.45rem] !px-3 bg-primary 
-                                            text-black !rounded-s-none">
-                                            II
-                                        </button>
-                                    </div>
                                 </li>
                             </ul>
                             <SearchBar />
