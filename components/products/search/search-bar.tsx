@@ -10,6 +10,8 @@ const SearchBar = () => {
     const router = useRouter();
     const pathname = usePathname();
     const query = searchParams.get('query') ?? '';
+    const page = searchParams.get('page') ?? '1';
+    const size = searchParams.get('size') ?? '8';
 
     const {
         handleGetSearchResults,
@@ -20,8 +22,8 @@ const SearchBar = () => {
         const request:ProductSearchRequest={
             query:query,
             paging:{
-                page:1,
-                limit:8,
+                page:Number(page),
+                limit:Number(size),
             }
         };
         handleGetSearchResults(request);
