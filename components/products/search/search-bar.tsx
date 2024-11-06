@@ -3,6 +3,7 @@
 import { ChangeEvent, MouseEvent,  } from 'react';
 import { useGetProductSearchResults } from '../hooks/useGetProductSearchResults';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { ProductSearchRequest } from '@/models/search.models';
 
 const SearchBar = () => {
     const searchParams = useSearchParams();
@@ -16,7 +17,14 @@ const SearchBar = () => {
     } = useGetProductSearchResults();
 
     const handleSearch = (event:MouseEvent<HTMLInputElement>) => {
-        
+        const request:ProductSearchRequest={
+            query:query,
+            paging:{
+                page:1,
+                limit:8,
+            }
+        };
+        handleGetSearchResults(request);
     };
 
     const handleOnChange=(event:ChangeEvent<HTMLInputElement>)=>{
