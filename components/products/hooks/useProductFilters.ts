@@ -1,4 +1,4 @@
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
 export type ProductFilters = {
@@ -14,28 +14,35 @@ export type ProductFilters = {
 
 export function useProductFilters() {
     const searchParams = useSearchParams();
+    const router = useRouter();
+    const pathname = usePathname();
     const query = searchParams.get('query') ?? '';
-    const page = searchParams.get('page') ?? '1';
-    const size = searchParams.get('size') ?? '8';
+    const page = Number(searchParams.get('page') ?? '1');
+    const size = Number(searchParams.get('size') ?? '8');
 
-    const setFilters = useCallback((filters: ProductFilters) => {
-        const params = new URLSearchParams(searchParams.toString())
-        if (filters.query !== undefined) {
-            params.set('query', filters.query);
+    const setQuery = useCallback((query:string)=>{
+        if (query) {
+            router.push(`${pathname}?query=${query}`);
+        } else { 
+          router.push(pathname); 
         }
-        if (filters.page !== undefined) {
-            params.set('query', String(filters.page));
+    },[]);
+
+    const setPage = useCallback((page:number)=>{
+        if (page) {
+            router.push(`${pathname}?page=${page}`);
+        } else { 
+          router.push(pathname); 
         }
-        if (filters.limit !== undefined) {
-            params.set('query', String(filters.limit));
-        }
-        
-    }, []);
+    },[]);
+
+    
 
     return {
         query,
         page,
         size,
-        setFilters
+        setQuery,
+        setPage
     };
 }
