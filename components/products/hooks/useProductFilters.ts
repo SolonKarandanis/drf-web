@@ -36,13 +36,48 @@ export function useProductFilters() {
         }
     },[]);
 
-    
+    const setCategory = useCallback((category:number | number[])=>{
+        if (category) {
+            if(!Array.isArray(category)){
+                category = [category]
+            }
+            const url = `${pathname}?page`;
+            for(const [i, cat] of category.entries()){
+                if (i !== category.length - 1) {
+                    router.push(`${url}=${cat}&`);
+                }
+                else{
+                    router.push(`${url}=${cat}`);
+                }
+            }
+           
+        } else { 
+          router.push(pathname); 
+        }
+    },[]);
+
+    const setBrand = useCallback((brand:number[])=>{
+        if (brand) {
+            router.push(`${pathname}?page=${page}`);
+        } else { 
+          router.push(pathname); 
+        }
+    },[]);
+
+    const setSize = useCallback((size:number[])=>{
+        if (size) {
+            router.push(`${pathname}?page=${page}`);
+        } else { 
+          router.push(pathname); 
+        }
+    },[]);
 
     return {
         query,
         page,
         size,
         setQuery,
-        setPage
+        setPage,
+        setCategory
     };
 }
