@@ -98,6 +98,10 @@ export const productsSearchResultsSelector = createSelector([products],(products
 
 export const productsCountSelector = createSelector([products],(products)=>  products.count);
 
+export const productsPreviousSelector = createSelector([products],(products)=>  products.previous);
+
+export const productsNextSelector = createSelector([products],(products)=>  products.next);
+
 export const productsCategoriesTotalsSelector = createSelector([products],(products)=>  products.categoriesWithTotals);
 
 export const productsCategoriesTotalsFirstThreeSelector = createSelector([productsCategoriesTotalsSelector],(categories)=>  

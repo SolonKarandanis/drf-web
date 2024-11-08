@@ -2,7 +2,7 @@ import { handleError } from "@/lib/functions";
 import { ErrorResponse } from "@/models/error.models";
 import { ProductSearchRequest, ProductSearchResponse } from "@/models/search.models";
 import { useSearchProductsMutation } from "@/shared/redux/features/products/productsApiSlice";
-import { productsSearchResultsSelector, setProducts } from "@/shared/redux/features/products/productsSlice";
+import { productsCountSelector, productsNextSelector, productsPreviousSelector, productsSearchResultsSelector, setProducts } from "@/shared/redux/features/products/productsSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useEffect } from "react";
 import { useProductFilters } from "./useProductFilters";
@@ -12,6 +12,9 @@ export function useGetProductSearchResults(){
     const [search,{ isLoading, }] = useSearchProductsMutation();
     const {query,page,size} = useProductFilters();
     const results = useAppSelector(productsSearchResultsSelector);
+    const count = useAppSelector(productsCountSelector);
+    const previous = useAppSelector(productsPreviousSelector);
+    const next = useAppSelector(productsNextSelector);
     
 
     const handleGetSearchResults = (request:ProductSearchRequest) =>{
@@ -38,7 +41,10 @@ export function useGetProductSearchResults(){
 
     return {
         results,
-        handleGetSearchResults,
+        count,
+        previous,
+        next,
         isLoading,
+        handleGetSearchResults,
     }
 }
