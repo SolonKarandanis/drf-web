@@ -12,7 +12,7 @@ const SearchBar = () => {
     const {query,page,size,setQuery} = useProductFilters();
     const t = useTranslations();
     const {
-        handleGetSearchResults,
+        searchProducts,
         isLoading
     } = useGetProductSearchResults();
 
@@ -24,7 +24,7 @@ const SearchBar = () => {
                 limit:Number(size),
             }
         };
-        handleGetSearchResults(request);
+        searchProducts(request);
     };
 
     const handleOnChange=(event:ChangeEvent<HTMLInputElement>)=>{
