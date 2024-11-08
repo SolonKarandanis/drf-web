@@ -9,7 +9,7 @@ import ButtonLoading from '@/shared/components/button-loading/button-loading';
 import { useTranslations } from 'next-intl';
 
 const SearchBar = () => {
-    const {query,page,size,setQuery} = useProductFilters();
+    const {query,size,setQuery} = useProductFilters();
     const t = useTranslations();
     const {
         searchProducts,
@@ -20,7 +20,7 @@ const SearchBar = () => {
         const request:ProductSearchRequest={
             query:query,
             paging:{
-                page:Number(page),
+                page:1,
                 limit:Number(size),
             }
         };
