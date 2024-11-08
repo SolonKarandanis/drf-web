@@ -1,12 +1,11 @@
 import { BrandsWithTotals, CategoriesWithTotals, DiscountsWithTotals, Product, ProductDetails, SizesWithTotals } from '@/models/product.models';
-import { Paging, ProductSearchRequest, ProductSearchResponse } from '@/models/search.models';
+import { ProductSearchResponse } from '@/models/search.models';
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../store';
 
 
 export interface ProductState {
-    request:ProductSearchRequest;
 	products:Product[],
     count: number| undefined;
     pages:number| null;
@@ -20,18 +19,7 @@ export interface ProductState {
     error:string| null;
 };
 
-const intialPaging ={
-    page:1,
-    limit:8,
-} as Paging;
-
-export const initialRequest:ProductSearchRequest = {
-    query:null,
-    paging:intialPaging
-};
-
 const initialState = {
-    request:initialRequest,
 	products: [],
     count: undefined,
     pages: null,
