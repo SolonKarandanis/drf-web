@@ -2,15 +2,17 @@ import { handleError } from "@/lib/functions";
 import { ErrorResponse } from "@/models/error.models";
 import { ProductSearchRequest, ProductSearchResponse } from "@/models/search.models";
 import { useSearchProductsMutation } from "@/shared/redux/features/products/productsApiSlice";
-import { productsSearchRequestSelector, productsSearchResultsSelector, setProducts } from "@/shared/redux/features/products/productsSlice";
+import { productsSearchResultsSelector, setProducts } from "@/shared/redux/features/products/productsSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useEffect } from "react";
+import { useProductFilters } from "./useProductFilters";
 
 export function useGetProductSearchResults(){
     const dispatch = useAppDispatch();
     const [search,{ isLoading, }] = useSearchProductsMutation();
-    const searchRequest = useAppSelector(productsSearchRequestSelector);
+    const {query,page,size} = useProductFilters();
     const results = useAppSelector(productsSearchResultsSelector);
+    
 
     const handleGetSearchResults = (request:ProductSearchRequest) =>{
         search(request)
@@ -24,13 +26,19 @@ export function useGetProductSearchResults(){
     };
 
     useEffect(()=>{
-        handleGetSearchResults(searchRequest);
+        const request: ProductSearchRequest={
+            query,
+            paging:{
+                limit:size,
+                page
+            }
+        };
+        handleGetSearchResults(request);
     },[]);
 
     return {
         results,
         handleGetSearchResults,
         isLoading,
-        searchRequest
     }
 }

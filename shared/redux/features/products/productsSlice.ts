@@ -49,32 +49,6 @@ const productSlice = createSlice({
     name: 'products',
 	initialState,
     reducers:{
-        setSearchRequest:(state, action:PayloadAction<ProductSearchRequest>) =>{
-            const payload =action.payload;
-            state.request = payload;
-        },
-        setSearchRequestCategories:(state,action:PayloadAction<number[]>)=>{
-            state.request.categories = action.payload;
-        },
-        setSearchRequestDiscounts:(state,action:PayloadAction<number[]>)=>{
-            state.request.discounts = action.payload;
-        },
-        setSearchRequestBrands:(state,action:PayloadAction<number[]>)=>{
-            state.request.brands = action.payload;
-        },
-        setSearchRequestSizes:(state,action:PayloadAction<number[]>)=>{
-            state.request.sizes = action.payload;
-        },
-        setSearchRequestQuery:(state,action:PayloadAction<string>)=>{
-            state.request.query = action.payload;
-        },
-        resetSearchRequest:(state)=>{
-            state.request =initialRequest;
-        },
-        setPaging:(state, action:PayloadAction<Paging>)=>{
-            const payload =action.payload;
-            state.request.paging =payload;
-        },
         setProducts:(state, action:PayloadAction<ProductSearchResponse>) =>{
             const payload =action.payload;
             state.products = payload.data;
@@ -116,14 +90,6 @@ export const {
     setProducts,
     setSelectedProduct,
     resetSelectedProduct,
-    setSearchRequest,
-    setSearchRequestCategories,
-    setSearchRequestDiscounts,
-    setSearchRequestBrands,
-    setSearchRequestSizes,
-    setSearchRequestQuery,
-    resetSearchRequest,
-    setPaging,
     setCategoriesWithTotals,
     setBrandsWithTotals,
     setSizesWithTotals,
@@ -139,8 +105,6 @@ export const selectedProductSelector = createSelector([products],(products)=>  p
 export const selectedProductIdSelector = createSelector([selectedProductSelector],(product)=>  product?.id);
 
 export const selectedProductUuidSelector = createSelector([selectedProductSelector],(product)=>  product?.uuid);
-
-export const productsSearchRequestSelector = createSelector([products],(products)=>  products.request);
 
 export const productsSearchResultsSelector = createSelector([products],(products)=>  products.products);
 
