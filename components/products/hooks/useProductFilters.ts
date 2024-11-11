@@ -18,6 +18,8 @@ export function useProductFilters() {
     const pathname = usePathname();
     const query = searchParams.get('query') ?? '';
     const categories=searchParams.getAll('category').map(cat => Number(cat));
+    const brands=searchParams.getAll('brand').map(b => Number(b));
+    const sizes=searchParams.getAll('size').map(s => Number(s));
     const page = Number(searchParams.get('page') ?? '1');
     const size = Number(searchParams.get('size') ?? '8');
 
@@ -45,16 +47,11 @@ export function useProductFilters() {
 
     const setCategory = useCallback((category:number | number[])=>{
         if (category) {
-            if(!Array.isArray(category)){
-                category = [category]
-            }
-            if(categories){
-                const set = new Set(categories);
-                category.forEach(cat => set.add(cat));
-            }
+            category=toArray(category);
+            const set = handleSetValues(categories,category);
             const params = new URLSearchParams(searchParams);
             params.delete('category');
-            category.forEach(cat=> {
+            set.forEach(cat=> {
                 return params.append('category', String(cat));
             });
             router.push(`?${params.toString()}`);
@@ -66,19 +63,64 @@ export function useProductFilters() {
 
     const setBrand = useCallback((brand:number[])=>{
         if (brand) {
-            router.push(`${pathname}?page=${page}`);
+            brand=toArray(brand);
+            const set = handleSetValues(brands,brand);
+            const params = new URLSearchParams(searchParams);
+            params.delete('brand');
+            set.forEach(cat=> {
+                return params.append('brand', String(cat));
+            });
+            router.push(`?${params.toString()}`);
         } else { 
-          router.push(pathname); 
+            router.push(pathname);
         }
-    },[]);
+    },[brands]);
 
     const setSize = useCallback((size:number[])=>{
+        const set = new Set();
         if (size) {
-            router.push(`${pathname}?page=${page}`);
+            size=toArray(size);
+            const set = handleSetValues(sizes,size);
+            const params = new URLSearchParams(searchParams);
+            params.delete('size');
+            set.forEach(cat=> {
+                return params.append('size', String(cat));
+            });
+            router.push(`?${params.toString()}`);
         } else { 
-          router.push(pathname); 
+            router.push(pathname);
         }
-    },[]);
+    },[sizes]);
+
+    const toArray=(value:number | number[]):number[]=>{
+        if(!Array.isArray(value)){
+            value = [value]
+        }
+        return value;
+    }
+
+    const handleSetValues =(existingParams:number[],selectedParams:number[]):Set<number>=>{
+        const set = new Set<number>();
+        if(existingParams){
+            existingParams.forEach(p=> {
+                if(set.has(p)){
+                    set.delete(p);
+                }
+                else{
+                    set.add(p);
+                }
+            });
+            selectedParams.forEach(p => {
+                if(set.has(p)){
+                    set.delete(p);
+                }
+                else{
+                    set.add(p);
+                }
+            });
+        }
+        return set;
+    }
 
     return {
         query,
@@ -86,6 +128,8 @@ export function useProductFilters() {
         size,
         setQuery,
         setPage,
-        setCategory
+        setCategory,
+        setBrand,
+        setSize
     };
 }
