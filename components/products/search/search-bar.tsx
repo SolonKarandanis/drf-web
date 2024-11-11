@@ -39,7 +39,6 @@ const SearchBar = () => {
                 type="search"
                 value={query} 
                 onChange={handleOnChange} 
-                
                 placeholder="Search" 
                 aria-label="Search" />
             <Button 

@@ -11,7 +11,6 @@ import { ProductSearchRequest } from "@/models/search.models";
 const Pagination = () => {
   const {
     isLoading,
-    count,
     next,
     previous,
     searchProducts,

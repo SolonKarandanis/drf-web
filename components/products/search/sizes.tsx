@@ -15,6 +15,12 @@ const Sizes = () => {
         sizesRest
     } = useGetProductTotals();
     const [isOpen, setIsOpen] = useState(false);
+
+    const handleSizes =(id:number)=>{
+        console.log(id);
+    };
+
+
     return (
         <div className="box-body !p-0">
             <div className="p-4 border-b dark:border-defaultborder/10">
@@ -44,7 +50,8 @@ const Sizes = () => {
                             {!sizesLoading && sizesFirstThree.map((data)=>(
                                 <SideBarData 
                                     key={data.id}
-                                    data={data}/>
+                                    data={data}
+                                    onClick={handleSizes}/>
                             ))}
                         </div>
                         <CollapsibleContent className="space-y-2">
@@ -52,7 +59,8 @@ const Sizes = () => {
                                 {sizesRest.map((data)=>(
                                     <SideBarData 
                                         key={data.id}
-                                        data={data}/>
+                                        data={data}
+                                        onClick={handleSizes}/>
                                 ))}
                             </div>
                         </CollapsibleContent>

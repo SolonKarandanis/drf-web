@@ -17,7 +17,7 @@ export function useProductFilters() {
     const router = useRouter();
     const pathname = usePathname();
     const query = searchParams.get('query') ?? '';
-    const category=searchParams.getAll('category');
+    const categories=searchParams.getAll('category').map(cat => Number(cat));
     const page = Number(searchParams.get('page') ?? '1');
     const size = Number(searchParams.get('size') ?? '8');
 
@@ -48,6 +48,10 @@ export function useProductFilters() {
             if(!Array.isArray(category)){
                 category = [category]
             }
+            if(categories){
+                const set = new Set(categories);
+                category.forEach(cat => set.add(cat));
+            }
             const params = new URLSearchParams(searchParams);
             params.delete('category');
             category.forEach(cat=> {
@@ -58,7 +62,7 @@ export function useProductFilters() {
         } else { 
           router.push(pathname); 
         }
-    },[]);
+    },[categories]);
 
     const setBrand = useCallback((brand:number[])=>{
         if (brand) {

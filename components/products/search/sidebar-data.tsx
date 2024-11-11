@@ -8,13 +8,18 @@ import { FC, useState } from "react";
 
 interface Props{
     data: BaseTotals;
+    onClick: (id:number)=>void;
 }
 
 const SideBarData:FC<Props> = ({
     data,
+    onClick
 }) => {
     const [isChecked, setChecked]= useState(false);
-    const handleClick = () => setChecked(!isChecked)
+    const handleClick = () => {
+        onClick(data.id);
+        setChecked(!isChecked)
+    };
 
 
     return (

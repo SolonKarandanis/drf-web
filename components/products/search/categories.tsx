@@ -7,6 +7,7 @@ import SideBarData from './sidebar-data';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/shared/shadcn/components/ui/collapsible';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { ChevronsUpDown } from 'lucide-react';
+import { useProductFilters } from '../hooks/useProductFilters';
 
 const Categories = () => {
     const {
@@ -15,6 +16,11 @@ const Categories = () => {
         categoriesRest
     } = useGetProductTotals();
     const [isOpen, setIsOpen] = useState(false);
+    const {setCategory} = useProductFilters();
+
+    const handleCategory =(id:number)=>{
+        setCategory(id);
+    };
     
     return (
         <div className="box-body !p-0">
@@ -45,7 +51,8 @@ const Categories = () => {
                             {!categoriesLoading && categoriesFirstThree.map((data)=>(
                                 <SideBarData 
                                     key={data.id}
-                                    data={data}/>
+                                    data={data}
+                                    onClick={handleCategory}/>
                             ))}
                         </div>
                         <CollapsibleContent className="space-y-2 transition-all data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
@@ -53,7 +60,8 @@ const Categories = () => {
                                 {categoriesRest.map((data)=>(
                                     <SideBarData 
                                         key={data.id}
-                                        data={data}/>
+                                        data={data}
+                                        onClick={handleCategory}/>
                                 ))}
                             </div>
                         </CollapsibleContent>
