@@ -10,13 +10,14 @@ import {
     setProducts 
 } from "@/shared/redux/features/products/productsSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useProductFilters } from "./useProductFilters";
 
 export function useGetProductSearchResults(){
+    const effectRan = useRef(false);
     const dispatch = useAppDispatch();
     const [search,{ isLoading, }] = useSearchProductsMutation();
-    const {query,page,size} = useProductFilters();
+    const {query,categories,brands,sizes,page,size} = useProductFilters();
     const results = useAppSelector(productsSearchResultsSelector);
     const count = useAppSelector(productsCountSelector);
     const previous = useAppSelector(productsPreviousSelector);
@@ -35,15 +36,24 @@ export function useGetProductSearchResults(){
     };
 
     useEffect(()=>{
-        const request: ProductSearchRequest={
-            query,
-            paging:{
-                limit:size,
-                page
-            }
-        };
-        searchProducts(request);
+        if (!effectRan.current){
+            const request: ProductSearchRequest={
+                query,
+                categories,
+                brands,
+                sizes,
+                paging:{
+                    limit:size,
+                    page
+                }
+            };
+            searchProducts(request); 
+        }
+        return () => {
+            effectRan.current = true;
+        }
     },[]);
+
 
     return {
         results,
