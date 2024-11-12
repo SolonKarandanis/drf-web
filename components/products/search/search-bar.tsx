@@ -9,7 +9,7 @@ import ButtonLoading from '@/shared/components/button-loading/button-loading';
 import { useTranslations } from 'next-intl';
 
 const SearchBar = () => {
-    const {query,size,setQuery} = useProductFilters();
+    const {query,size,categories,brands,sizes, setQuery} = useProductFilters();
     const t = useTranslations();
     const {
         searchProducts,
@@ -19,6 +19,9 @@ const SearchBar = () => {
     const handleSearch = (event:MouseEvent<HTMLButtonElement>) => {
         const request:ProductSearchRequest={
             query:query,
+            categories,
+            brands,
+            sizes,
             paging:{
                 page:1,
                 limit:Number(size),
