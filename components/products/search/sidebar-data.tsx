@@ -9,18 +9,19 @@ import { FC, useState } from "react";
 interface Props{
     data: BaseTotals;
     onClick: (id:number)=>void;
+    checked?:boolean
 }
 
 const SideBarData:FC<Props> = ({
     data,
-    onClick
+    onClick,
+    checked
 }) => {
-    const [isChecked, setChecked]= useState(false);
+    const [isChecked, setChecked]= useState(checked? checked:false);
     const handleClick = () => {
         onClick(data.id);
         setChecked(!isChecked)
     };
-
 
     return (
         <div className="mb-2 form-check">

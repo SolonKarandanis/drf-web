@@ -16,11 +16,19 @@ const Categories = () => {
         categoriesRest
     } = useGetProductTotals();
     const [isOpen, setIsOpen] = useState(false);
-    const {setCategory} = useProductFilters();
+    const {categories,setCategory} = useProductFilters();
 
     const handleCategory =(id:number)=>{
         setCategory(id);
     };
+
+    const setIsChecked = (id:number):boolean =>{
+        const found =categories.find(c=>c===id);
+        if(found){
+            return true;
+        }
+        return false;
+    }
     
     return (
         <div className="box-body !p-0">
@@ -52,6 +60,7 @@ const Categories = () => {
                                 <SideBarData 
                                     key={data.id}
                                     data={data}
+                                    checked={setIsChecked(data.id)}
                                     onClick={handleCategory}/>
                             ))}
                         </div>

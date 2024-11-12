@@ -121,11 +121,15 @@ export function useProductFilters() {
         }
         return set;
     }
+    
 
     return {
         query,
         page,
         size,
+        categories,
+        brands,
+        sizes,
         setQuery,
         setPage,
         setCategory,
