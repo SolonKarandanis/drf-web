@@ -70,6 +70,7 @@ const Categories = () => {
                                     <SideBarData 
                                         key={data.id}
                                         data={data}
+                                        checked={setIsChecked(data.id)}
                                         onClick={handleCategory}/>
                                 ))}
                             </div>

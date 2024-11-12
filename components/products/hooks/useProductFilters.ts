@@ -61,7 +61,7 @@ export function useProductFilters() {
         }
     },[categories]);
 
-    const setBrand = useCallback((brand:number[])=>{
+    const setBrand = useCallback((brand:number | number[])=>{
         if (brand) {
             brand=toArray(brand);
             const set = handleSetValues(brands,brand);
@@ -76,7 +76,7 @@ export function useProductFilters() {
         }
     },[brands]);
 
-    const setSize = useCallback((size:number[])=>{
+    const setSize = useCallback((size:number | number[])=>{
         const set = new Set();
         if (size) {
             size=toArray(size);

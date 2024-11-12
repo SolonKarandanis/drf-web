@@ -7,6 +7,7 @@ import SideBarData from './sidebar-data';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/shared/shadcn/components/ui/collapsible';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { ChevronsUpDown } from 'lucide-react';
+import { useProductFilters } from '../hooks/useProductFilters';
 
 const Brands = () => {
     const {
@@ -15,10 +16,20 @@ const Brands = () => {
         brandsRest
     } = useGetProductTotals();
     const [isOpen, setIsOpen] = useState(false);
+    const {brands,setBrand} = useProductFilters();
 
     const handleBrands =(id:number)=>{
-        console.log(id);
+        setBrand(id);
     };
+
+
+    const setIsChecked = (id:number):boolean =>{
+        const found =brands.find(c=>c===id);
+        if(found){
+            return true;
+        }
+        return false;
+    }
 
     return (
         <div className="box-body !p-0">
@@ -50,6 +61,7 @@ const Brands = () => {
                                 <SideBarData 
                                     key={data.id}
                                     data={data}
+                                    checked={setIsChecked(data.id)}
                                     onClick={handleBrands}/>
                             ))}
                         </div>
@@ -59,6 +71,7 @@ const Brands = () => {
                                     <SideBarData 
                                         key={data.id}
                                         data={data}
+                                        checked={setIsChecked(data.id)}
                                         onClick={handleBrands}/>
                                 ))}
                             </div>
