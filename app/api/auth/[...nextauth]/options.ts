@@ -88,8 +88,6 @@ export const authOptions: NextAuthOptions ={
                     body: JSON.stringify({refresh:token["refresh"]})
                 })
                 // .then(response => response.json())
-                console.log('--->callbacks')
-                console.log(response)
                 if(response.status===401){
                     redirect(`/auth/login`) 
                 }

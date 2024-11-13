@@ -10,21 +10,18 @@ import {
     setProducts 
 } from "@/shared/redux/features/products/productsSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useProductFilters } from "./useProductFilters";
 
 export function useGetProductSearchResults(){
-    const effectRan = useRef(false);
     const dispatch = useAppDispatch();
     const [search,{ isLoading, }] = useSearchProductsMutation();
-    const {query,categories,brands,sizes,page,size} = useProductFilters();
     const results = useAppSelector(productsSearchResultsSelector);
     const count = useAppSelector(productsCountSelector);
     const previous = useAppSelector(productsPreviousSelector);
     const next = useAppSelector(productsNextSelector);
     
-
-    const searchProducts = (request:ProductSearchRequest) =>{
+    const searchProducts = useCallback((request:ProductSearchRequest)=>{
         search(request)
             .unwrap()
             .then((response:ProductSearchResponse) => {
@@ -33,7 +30,23 @@ export function useGetProductSearchResults(){
             .catch((error:ErrorResponse) => {
                 handleError(error);
             });
-    };
+    },[]);
+
+    return {
+        results,
+        count,
+        previous,
+        next,
+        isLoading,
+        searchProducts,
+    }
+}
+
+export function useGetInitialProductSearchResults(){
+    const effectRan = useRef(false);
+    const dispatch = useAppDispatch();
+    const [search] = useSearchProductsMutation();
+    const {query,categories,brands,sizes,page,size} = useProductFilters();
 
     useEffect(()=>{
         if (!effectRan.current){
@@ -47,20 +60,17 @@ export function useGetProductSearchResults(){
                     page
                 }
             };
-            searchProducts(request); 
+            search(request)
+                .unwrap()
+                .then((response:ProductSearchResponse) => {
+                    dispatch(setProducts(response));
+                })
+                .catch((error:ErrorResponse) => {
+                    handleError(error);
+                });
         }
         return () => {
             effectRan.current = true;
         }
     },[]);
-
-
-    return {
-        results,
-        count,
-        previous,
-        next,
-        isLoading,
-        searchProducts,
-    }
 }

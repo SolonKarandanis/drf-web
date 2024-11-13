@@ -1,7 +1,10 @@
 "use client";
 
 import Card from "@/shared/components/card/card";
-import { useGetProductSearchResults } from "../hooks/useGetProductSearchResults";
+import { 
+    useGetInitialProductSearchResults, 
+    useGetProductSearchResults 
+} from "../hooks/useGetProductSearchResults";
 import { useAppSelector } from "@/shared/redux/hooks";
 import ProductResultsLoading from "./product-results-loading";
 
@@ -10,6 +13,7 @@ const ProductResults = () => {
         results,
         isLoading
     } = useGetProductSearchResults();
+    const initialCall=useGetInitialProductSearchResults();
     const configState = useAppSelector((state)=>state.config);
     const host = configState.djangoHost
     const path = configState.baseUrl
