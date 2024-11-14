@@ -19,7 +19,7 @@ export function useProductFilters() {
     const query = searchParams.get('query') ?? '';
     const categories=searchParams.getAll('category').map(cat => Number(cat));
     const brands=searchParams.getAll('brand').map(b => Number(b));
-    const sizes=searchParams.getAll('size').map(s => Number(s));
+    const sizes=searchParams.getAll('psize').map(s => Number(s));
     const page = Number(searchParams.get('page') ?? '1');
     const size = Number(searchParams.get('size') ?? '8');
 
@@ -82,9 +82,9 @@ export function useProductFilters() {
             size=toArray(size);
             const set = handleSetValues(sizes,size);
             const params = new URLSearchParams(searchParams);
-            params.delete('size');
+            params.delete('psize');
             set.forEach(cat=> {
-                return params.append('size', String(cat));
+                return params.append('psize', String(cat));
             });
             router.push(`?${params.toString()}`);
         } else { 
