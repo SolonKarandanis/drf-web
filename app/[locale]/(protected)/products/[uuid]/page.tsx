@@ -1,5 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import ImageGallery from "@/components/products/product-details/image-gallery";
+import ProductRating from "@/components/products/product-details/product-rating";
 import SimilarProducts from "@/components/products/product-details/similar-products";
 import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 import { Metadata } from "next";
@@ -52,17 +53,7 @@ const ProductDetailsPage:FC<Props>  =  async ({params:{uuid}}) => {
                                             <p className="text-[1.125rem] font-semibold mb-0">
                                                 Orange Watch Series 4 (GPS + Cellular, 44mm) - Colored Aluminium Case with Multiple Featured Sports Band - Regular
                                             </p>
-                                            <p className="text-[1.125rem] mb-4">
-                                                <i className="align-middle ri-star-s-fill text-warning"></i>
-                                                <i className="align-middle ri-star-s-fill text-warning"></i>
-                                                <i className="align-middle ri-star-s-fill text-warning"></i>
-                                                <i className="align-middle ri-star-s-fill text-warning"></i>
-                                                <i className="align-middle ri-star-half-s-fill text-warning"></i>
-                                                <span className="font-semibold text-[#8c9097] dark:text-white/50 ms-1">
-                                                    4.3
-                                                    <Link className="text-info" href="#!">(2.4k Reviews)</Link>
-                                                </span>
-                                            </p>
+                                            <ProductRating />
                                             <div className="grid grid-cols-12 mb-6">
                                                 <div className="col-span-12 xxl:col-span-3 xl:col-span-12">
                                                     <p className="mb-1 lh-1 text-[0.6875rem] text-success font-semibold">Special Offer</p>
