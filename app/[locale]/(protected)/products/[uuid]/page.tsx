@@ -376,12 +376,7 @@ const ProductDetailsPage:FC<Props>  =  async ({params:{uuid}}) => {
                                                     </Link>
                                                 </div>
                                             </div>
-                                            <div className="text-center">
-                                                <Link aria-label="anchor" href="#!">
-                                                    <img src="../../../../assets/images/ecommerce/png/25.png" alt="" 
-                                                        className="mx-auto rounded img-fluid bg-light" />
-                                                </Link>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
