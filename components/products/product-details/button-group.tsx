@@ -7,7 +7,7 @@ const ButtonGroup = () => {
   return (
     <div className="grid gap-2">
         <Link href="/components/pages/ecommerce/cart/" 
-            className="ti-btn bg-primary !font-medium text-white">
+            className="ti-btn bg-primary !font-medium text-black">
             Add To Cart
         </Link>
         <Link href="/components/pages/ecommerce/checkout/" 

@@ -199,23 +199,9 @@ const ProductDetailsPage:FC<Props>  =  async ({params:{uuid}}) => {
                                             </div>
                                             <Reviews />
                                         </div>
+
                                         <div className="col-span-12 mt-6 xl:col-span-4 xxl:mt-0">
                                             <div className="mb-[3rem]">
-                                                <div className="mb-6 offer-promotion dark:border-defaultborder/10">
-                                                    <div className="flex flex-wrap items-center justify-between xxl:flex lg:block sm:flex">
-                                                        <div className="mb-2 text-warning xxxl:mb-0">
-                                                            Use Code <span className="font-semibold promotion-code">FIRBUY</span>
-                                                            <Link className="text-[.625rem] text-warning ms-1" href="#!">T&amp;C.</Link>
-                                                        </div>
-                                                        <div className="sm:mt-0">
-                                                            <span className="bg-warning/10 text-defaulttextcolor text-[0.75rem] offer-details 
-                                                                mb-0 hover:text-warning">
-                                                                Get it for 
-                                                                <span className="font-semibold text-success">$1,099</span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <div className="mb-6">
                                                     <p className="text-danger mb-0 text-[1rem]">Only 5 left in stock.</p>
                                                     <p className="mb-0 text-[0.75rem]">
@@ -229,80 +215,6 @@ const ProductDetailsPage:FC<Props>  =  async ({params:{uuid}}) => {
                                                         </span>
                                                     </p>
                                                 </div>
-                                                <div className="mb-6">
-                                                    <ul className="list-group">
-                                                        <li className="list-group-item">
-                                                            <div className="leading-none">
-                                                                <span className="text-success font-semibold text-[0.875rem] 
-                                                                    flex items-center">
-                                                                        <i className="ti ti-discount-2 text-[1.125rem] me-1"></i>
-                                                                        3 Available offers
-                                                                </span>
-                                                            </div>
-                                                        </li>
-                                                        <li className="list-group-item">
-                                                            <div className="text-[0.75rem] text-default">
-                                                                <span className="font-semibold text-success me-1">
-                                                                    Bank Offer:
-                                                                </span>
-                                                                <span className="flex-grow">
-                                                                    5% off upto 500 on min purchase of $999
-                                                                    <Link href="#!" className="text-primary ms-1">View.</Link>
-                                                                </span>
-                                                            </div>
-                                                        </li>
-                                                        <li className="list-group-item">
-                                                            <div className="text-[0.75rem] text-default">
-                                                                <span className="font-semibold text-success me-1">
-                                                                    Emi:
-                                                                </span>
-                                                                <span className="flex-grow">
-                                                                    No cost emi on selected bank card on min purchase of $1,499
-                                                                    <Link href="#!" className="text-primary ms-1">View.</Link>
-                                                                </span>
-                                                            </div>
-                                                        </li>
-                                                        <li className="list-group-item !p-0 hs-collapse hidden w-full 
-                                                            overflow-hidden transition-[height] duration-300" 
-                                                            id="hs-show-hide-collapse-heading" 
-                                                            aria-labelledby="hs-show-hide-collapse">
-                                                            <ul className="list-group" id="offers-more">
-                                                                <li className="border-0 border-b list-group-item">
-                                                                    <div className="text-[0.75rem] text-defaulttextcolor">
-                                                                        <span className="font-semibold text-success me-1">
-                                                                            Free Delivery:
-                                                                        </span>
-                                                                        <span className="flex-grow">
-                                                                            Free delivery on first order
-                                                                            <Link href="#!" className="text-primary ms-1">
-                                                                                View.
-                                                                            </Link>
-                                                                        </span>
-                                                                    </div>
-                                                                </li>
-                                                                <li className="border-0 list-group-item">
-                                                                    <div className="text-[0.75rem] text-default">
-                                                                        <span className="font-semibold text-success me-1">
-                                                                            Promotion:
-                                                                        </span>
-                                                                        <span className="flex-grow">
-                                                                            Offer upto 30% on grosery on purchase of this item
-                                                                            <Link href="#!" className="text-primary ms-1">T&amp;C.</Link>
-                                                                        </span>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-
-                                                        <li className="border-t-0 list-group-item">
-                                                            <Link className="text-success text-[0.75rem] hs-collapse-toggle inline-flex 
-                                                                items-center gap-x-2" href="#!" id="hs-show-hide-collapse" 
-                                                                data-hs-collapse="#hs-show-hide-collapse-heading">
-                                                                <u>More Offers</u>
-                                                            </Link>
-                                                        </li>
-                                                    </ul>
-                                                </div>
                                                 <div className="mb-4">
                                                     <p className="mb-0 font-semibold">Returns:</p>
                                                     <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50">
@@ -310,12 +222,6 @@ const ProductDetailsPage:FC<Props>  =  async ({params:{uuid}}) => {
                                                         For full details on our Returns Policies, please 
                                                         <Link href="#!" className="text-primary">click here</Link>․
                                                     </p>
-                                                </div>
-                                                <div className="alert alert-light mb-6 text-[0.75rem] text-[#8c9097] dark:text-white/50" role="alert">
-                                                    <Link aria-label="anchor" href="#!">
-                                                        <i className="ri-map-pin-line me-1 align-middle text-primary text-[.9375rem] inline-block"></i>
-                                                    </Link>
-                                                    Select location to find out estimated delivery date
                                                 </div>
                                                 <ButtonGroup />
                                             </div>
