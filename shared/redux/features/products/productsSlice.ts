@@ -119,6 +119,14 @@ const products = (state: RootState) => state.products;
 
 export const selectedProductSelector = createSelector([products],(products)=>  products.selectedProduct);
 
+export const selectedProductOwnerSelector = createSelector([products],(products)=>  products.selectedProductOwner);
+
+export const selectedProductCommentsSelector = createSelector([products],(products)=>  products.selectedProductComments);
+
+export const selectedProductImagesSelector = createSelector([products],(products)=>  products.selectedProductImages);
+
+export const selectedProductBrandSelector = createSelector([products],(products)=>  products.selectedProductBrand);
+
 export const selectedProductIdSelector = createSelector([selectedProductSelector],(product)=>  product?.id);
 
 export const selectedProductUuidSelector = createSelector([selectedProductSelector],(product)=>  product?.uuid);
