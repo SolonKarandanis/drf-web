@@ -44,13 +44,13 @@ const Brands = () => {
                     <div className="flex flex-col justify-between">
                         <div className='flex items-center gap-2'>
                             <p className="font-semibold mb-0 text-[#8c9097] dark:text-white/50">
-                            BRANDS
+                                {t("PRODUCTS.SEARCH.LABELS.brands")}
                             </p>
                             {brandsRest.length >0 &&(
                                 <CollapsibleTrigger asChild>
                                     <Button variant="ghost" size="sm" className="p-0 w-9">
                                         <ChevronsUpDown className="w-4 h-4" />
-                                        <span className="sr-only">Toggle</span>
+                                        <span className="sr-only">{t("GLOBAL.BUTTONS.toggle")}</span>
                                     </Button>
                                 </CollapsibleTrigger>
                             )}

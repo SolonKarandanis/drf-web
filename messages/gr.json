@@ -260,9 +260,9 @@
                 "mainpage":"Αναζήτηση προϊόντων"
             },
             "LABELS":{
-                "categories":"Κατηγορίες",
-                "brands":"Μάρκες",
-                "sizes":"Μεγέθη"
+                "categories":"ΚΑΤΗΓΟΡΙΕΣ",
+                "brands":"ΜΑΡΚΕΣ",
+                "sizes":"ΜΕΓΕΘΗ"
             }
         },
         "CREATE":{

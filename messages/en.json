@@ -260,9 +260,9 @@
                 "mainpage":"Search Products"
             },
             "LABELS":{
-                "categories":"Categories",
-                "brands":"Brands",
-                "sizes":"Sizes"
+                "categories":"CATEGORIES",
+                "brands":"BRANDS",
+                "sizes":"SIZES"
             }
         },
         "CREATE":{
