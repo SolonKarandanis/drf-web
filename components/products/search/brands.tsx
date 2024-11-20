@@ -8,6 +8,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/shared/sh
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { ChevronsUpDown } from 'lucide-react';
 import { useProductFilters } from '../hooks/useProductFilters';
+import { useTranslations } from 'next-intl';
 
 const Brands = () => {
     const {
@@ -17,6 +18,7 @@ const Brands = () => {
     } = useGetProductTotals();
     const [isOpen, setIsOpen] = useState(false);
     const {brands,setBrand} = useProductFilters();
+    const t = useTranslations();
 
     const handleBrands =(id:number)=>{
         setBrand(id);

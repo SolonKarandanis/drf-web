@@ -32,7 +32,8 @@
             "yes": "Yes",
             "no": "No",
             "previous":"Previous",
-            "next":"Next"
+            "next":"Next",
+            "toggle":"Toggle"
         },
         "FORMS": {
             "ERRORS": {
@@ -257,6 +258,11 @@
                 "currentpage":"Search Products",
                 "activepage":"Products",
                 "mainpage":"Search Products"
+            },
+            "LABELS":{
+                "categories":"Categories",
+                "brands":"Brands",
+                "sizes":"Sizes"
             }
         },
         "CREATE":{
