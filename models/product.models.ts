@@ -31,15 +31,18 @@ export interface Products extends BaseProduct{
     uuid:string;
 }
 
-
-export interface ProductDetails extends BaseProduct{
+export interface BaseProductDetails extends BaseProduct{
     id:number;
     salePrice:number;
+    uuid:string;
+}
+
+
+export interface ProductDetails extends BaseProductDetails{
     owner:UserPublic;
     comments:Comment[];
     images: ImageModel[];
     brand:Brand;
-    uuid:string;
 }
 
 export interface Brand{

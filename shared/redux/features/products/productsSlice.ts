@@ -3,13 +3,18 @@ import {
     CategoriesWithTotals, 
     DiscountsWithTotals, 
     Products, 
-    ProductDetails, 
-    SizesWithTotals 
+    SizesWithTotals, 
+    BaseProductDetails,
+    ProductDetails,
+    Brand
 } from '@/models/product.models';
 import { ProductSearchResponse } from '@/models/search.models';
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../store';
+import { UserPublic } from '@/models/user.models';
+import { Comment } from '@/models/comment.models';
+import { ImageModel } from '@/models/image.models';
 
 
 export interface ProductState {
@@ -18,7 +23,11 @@ export interface ProductState {
     pages:number| null;
     next:number| null;
     previous:number| null;
-    selectedProduct:ProductDetails| null;
+    selectedProduct:BaseProductDetails| null;
+    selectedProductOwner:UserPublic|null;
+    selectedProductComments:Comment[];
+    selectedProductImages:ImageModel[];
+    selectedProductBrand:Brand|null;
     categoriesWithTotals:CategoriesWithTotals[];
     brandsWithTotals:BrandsWithTotals[];
     sizesWithTotals:SizesWithTotals[];
@@ -33,6 +42,10 @@ const initialState = {
     next: null,
     previous: null,
     selectedProduct:null,
+    selectedProductOwner:null,
+    selectedProductComments:[],
+    selectedProductImages:[],
+    selectedProductBrand:null,
     categoriesWithTotals: [],
     brandsWithTotals: [],
     sizesWithTotals: [],
@@ -60,10 +73,19 @@ const productSlice = createSlice({
             state.previous = null;
         },
         setSelectedProduct: (state,action:PayloadAction<ProductDetails>)=>{
-            state.selectedProduct=action.payload;
+            const {owner,comments,images,brand, ...rest} =action.payload;
+            state.selectedProduct=rest;
+            state.selectedProductOwner=owner;
+            state.selectedProductComments=comments;
+            state.selectedProductImages=images;
+            state.selectedProductBrand=brand;
         },
         resetSelectedProduct:(state)=>{
             state.selectedProduct=null;
+            state.selectedProductOwner=null;
+            state.selectedProductComments=[];
+            state.selectedProductImages=[];
+            state.selectedProductBrand=null;
         },
         setCategoriesWithTotals:(state, action:PayloadAction<CategoriesWithTotals[]>) =>{
             state.categoriesWithTotals=action.payload;
