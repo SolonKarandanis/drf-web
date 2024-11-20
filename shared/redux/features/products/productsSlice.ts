@@ -1,4 +1,11 @@
-import { BrandsWithTotals, CategoriesWithTotals, DiscountsWithTotals, Product, ProductDetails, SizesWithTotals } from '@/models/product.models';
+import { 
+    BrandsWithTotals, 
+    CategoriesWithTotals, 
+    DiscountsWithTotals, 
+    Products, 
+    ProductDetails, 
+    SizesWithTotals 
+} from '@/models/product.models';
 import { ProductSearchResponse } from '@/models/search.models';
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
@@ -6,7 +13,7 @@ import { RootState } from '../../store';
 
 
 export interface ProductState {
-	products:Product[],
+	products:Products[],
     count: number| undefined;
     pages:number| null;
     next:number| null;

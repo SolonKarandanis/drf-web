@@ -24,17 +24,27 @@ export interface BaseProduct{
     availabilityStatus: ProductAvailabilityStatus
 }
 
-export interface Product extends BaseProduct{
+export interface Products extends BaseProduct{
     id:number;
     salePrice:number;
     previewImage:ImageModel|null;
     uuid:string;
 }
 
-export interface ProductDetails extends Product{
+
+export interface ProductDetails extends BaseProduct{
+    id:number;
+    salePrice:number;
     owner:UserPublic;
     comments:Comment[];
     images: ImageModel[];
+    brand:Brand;
+    uuid:string;
+}
+
+export interface Brand{
+    id:number;
+    name:string;
 }
 
 export interface CreateProductRequest extends BaseProduct{

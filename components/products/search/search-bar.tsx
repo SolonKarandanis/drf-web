@@ -42,7 +42,7 @@ const SearchBar = () => {
                 type="search"
                 value={query} 
                 onChange={handleOnChange} 
-                placeholder="Search" 
+                placeholder={t("GLOBAL.BUTTONS.search")} 
                 aria-label="Search" />
             <Button 
                 type="submit" 
