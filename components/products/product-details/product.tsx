@@ -1,13 +1,17 @@
 "use client"
 
-import React from 'react'
+import React, { FC } from 'react'
 import ProductRating from './product-rating'
 import Link from 'next/link'
 import Reviews from './reviews'
 import ButtonGroup from './button-group'
 import ProductInfo from './product-info'
 
-const Product = () => {
+interface Props{
+    uuid:string;
+}
+
+const Product:FC<Props> = ({uuid}) => {
   return (
     <div className="md:grid grid-cols-12 gap-x-[3rem]">
         <div className="col-span-12 mt-4 xl:col-span-8 xxl:mt-0">

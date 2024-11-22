@@ -47,7 +47,7 @@ const ProductDetailsPage:FC<Props>  =  async ({params:{uuid}}) => {
                                     </div>
                                 </div>
                                 <div className="col-span-12 xxl:col-span-9 xl:col-span-12">
-                                    <Product />
+                                    <Product  uuid={uuid}/>
                                 </div>
                             </div>
                         </div>
