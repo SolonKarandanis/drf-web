@@ -44,6 +44,14 @@ export interface ProductDetails extends BaseProductDetails{
     brand:Brand;
 }
 
+export interface SimilarProduct{
+    title:string;
+    price:number;
+    salePrice:number;
+    rating:number;
+    numberOfRatings:number;
+}
+
 export interface Brand{
     id:number;
     name:string;

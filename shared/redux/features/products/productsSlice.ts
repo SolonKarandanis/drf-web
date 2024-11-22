@@ -6,7 +6,8 @@ import {
     SizesWithTotals, 
     BaseProductDetails,
     ProductDetails,
-    Brand
+    Brand,
+    SimilarProduct
 } from '@/models/product.models';
 import { ProductSearchResponse } from '@/models/search.models';
 import { createSelector, createSlice } from '@reduxjs/toolkit';
@@ -28,6 +29,7 @@ export interface ProductState {
     selectedProductComments:Comment[];
     selectedProductImages:ImageModel[];
     selectedProductBrand:Brand|null;
+    selectedProductSimilarProducts:SimilarProduct[];
     categoriesWithTotals:CategoriesWithTotals[];
     brandsWithTotals:BrandsWithTotals[];
     sizesWithTotals:SizesWithTotals[];
@@ -45,6 +47,7 @@ const initialState = {
     selectedProductOwner:null,
     selectedProductComments:[],
     selectedProductImages:[],
+    selectedProductSimilarProducts:[],
     selectedProductBrand:null,
     categoriesWithTotals: [],
     brandsWithTotals: [],
@@ -82,11 +85,15 @@ const productSlice = createSlice({
         setSelectedProductImages: (state,action:PayloadAction<ImageModel[]>)=>{
             state.selectedProductImages=action.payload;
         },
+        setSelectedProductSimilarProducts: (state,action:PayloadAction<SimilarProduct[]>)=>{
+            state.selectedProductSimilarProducts=action.payload;
+        },
         resetSelectedProduct:(state)=>{
             state.selectedProduct=null;
             state.selectedProductOwner=null;
             state.selectedProductComments=[];
             state.selectedProductImages=[];
+            state.selectedProductSimilarProducts=[];
             state.selectedProductBrand=null;
         },
         setCategoriesWithTotals:(state, action:PayloadAction<CategoriesWithTotals[]>) =>{
@@ -109,6 +116,7 @@ export const {
     setProducts,
     setSelectedProduct,
     setSelectedProductImages,
+    setSelectedProductSimilarProducts,
     resetSelectedProduct,
     setCategoriesWithTotals,
     setBrandsWithTotals,
@@ -127,6 +135,8 @@ export const selectedProductOwnerSelector = createSelector([products],(products)
 export const selectedProductCommentsSelector = createSelector([products],(products)=>  products.selectedProductComments);
 
 export const selectedProductImagesSelector = createSelector([products],(products)=>  products.selectedProductImages);
+
+export const selectedProductSimilarProductsSelector = createSelector([products],(products)=>  products.selectedProductSimilarProducts);
 
 export const selectedProductBrandSelector = createSelector([products],(products)=>  products.selectedProductBrand);
 

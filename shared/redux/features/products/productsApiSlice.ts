@@ -5,17 +5,25 @@ import {
     DiscountsWithTotals, 
     PostProductCommentRequest, 
     ProductDetails, 
+    SimilarProduct, 
     SizesWithTotals, 
     UpdateProductRequest 
 } from "@/models/product.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
 import { ProductSearchRequest, ProductSearchResponse } from "@/models/search.models";
+import { ImageModel } from "@/models/image.models";
 
 const productsApiSlice = apiSlice.injectEndpoints({
     endpoints: builder =>({
         getProductDetails: builder.query<ProductDetails, string>({
 			query: (uuid) => `${ApiControllers.PRODUCTS}/${uuid}`,
+		}),
+        getProductImages: builder.query<ImageModel[], string>({
+			query: (uuid) => `${ApiControllers.PRODUCTS}/${uuid}/images/`,
+		}),
+        getSimilarProducts: builder.query<SimilarProduct[], string>({
+			query: (uuid) => `${ApiControllers.PRODUCTS}/${uuid}/similar/`,
 		}),
         searchProducts: builder.mutation<ProductSearchResponse,ProductSearchRequest>({
             query: ( searchRequest:ProductSearchRequest)=>{
