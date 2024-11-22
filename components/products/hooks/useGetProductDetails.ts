@@ -24,7 +24,7 @@ export function useGetProductDetails(uuid:string){
     useEffect(()=>{
         getProduct(uuid)
         .unwrap()
-        .then((products) =>setSelectedProduct(products))
+        .then((products) =>dispatch(setSelectedProduct(products)))
         .catch((error)=>{
             dispatch(resetSelectedProduct())
         })
