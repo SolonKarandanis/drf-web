@@ -73,12 +73,14 @@ const productSlice = createSlice({
             state.previous = null;
         },
         setSelectedProduct: (state,action:PayloadAction<ProductDetails>)=>{
-            const {owner,comments,images,brand, ...rest} =action.payload;
+            const {owner,comments,brand, ...rest} =action.payload;
             state.selectedProduct=rest;
             state.selectedProductOwner=owner;
             state.selectedProductComments=comments;
-            state.selectedProductImages=images;
             state.selectedProductBrand=brand;
+        },
+        setSelectedProductImages: (state,action:PayloadAction<ImageModel[]>)=>{
+            state.selectedProductImages=action.payload;
         },
         resetSelectedProduct:(state)=>{
             state.selectedProduct=null;
@@ -106,6 +108,7 @@ export const {
     resetProducts,
     setProducts,
     setSelectedProduct,
+    setSelectedProductImages,
     resetSelectedProduct,
     setCategoriesWithTotals,
     setBrandsWithTotals,

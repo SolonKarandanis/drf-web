@@ -41,7 +41,6 @@ export interface BaseProductDetails extends BaseProduct{
 export interface ProductDetails extends BaseProductDetails{
     owner:UserPublic;
     comments:Comment[];
-    images: ImageModel[];
     brand:Brand;
 }
 
