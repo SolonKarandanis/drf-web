@@ -1,10 +1,11 @@
 import { Comment } from "@/models/comment.models";
-import { BaseProductDetails, Brand } from "@/models/product.models";
+import { BaseProductDetails, Brand, Category } from "@/models/product.models";
 import { UserPublic } from "@/models/user.models";
 import { useLazyGetProductDetailsQuery } from "@/shared/redux/features/products/productsApiSlice";
 import { 
     resetSelectedProduct, 
     selectedProductBrandSelector, 
+    selectedProductCategoriesSelector, 
     selectedProductCommentsSelector, 
     selectedProductOwnerSelector, 
     selectedProductSelector, 
@@ -20,6 +21,7 @@ export function useGetProductDetails(uuid:string){
     const productOwner:UserPublic|null= useAppSelector(selectedProductOwnerSelector);
     const productComments:Comment[]= useAppSelector(selectedProductCommentsSelector);
     const productBrands:Brand|null= useAppSelector(selectedProductBrandSelector);
+    const productCategories:Category[]= useAppSelector(selectedProductCategoriesSelector);
 
     useEffect(()=>{
         getProduct(uuid)
@@ -34,6 +36,7 @@ export function useGetProductDetails(uuid:string){
         product,
         productOwner,
         productComments,
-        productBrands
+        productBrands,
+        productCategories,
     }
 }

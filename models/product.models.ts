@@ -42,6 +42,7 @@ export interface ProductDetails extends BaseProductDetails{
     owner:UserPublic;
     comments:Comment[];
     brand:Brand;
+    categories:Category[];
 }
 
 export interface SimilarProduct{
@@ -55,6 +56,12 @@ export interface SimilarProduct{
 export interface Brand{
     id:number;
     name:string;
+}
+
+export interface Category{
+    id:number;
+    name:string;
+    slug:string;
 }
 
 export interface CreateProductRequest extends BaseProduct{

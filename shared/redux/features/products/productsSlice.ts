@@ -7,7 +7,8 @@ import {
     BaseProductDetails,
     ProductDetails,
     Brand,
-    SimilarProduct
+    SimilarProduct,
+    Category
 } from '@/models/product.models';
 import { ProductSearchResponse } from '@/models/search.models';
 import { createSelector, createSlice } from '@reduxjs/toolkit';
@@ -29,6 +30,7 @@ export interface ProductState {
     selectedProductComments:Comment[];
     selectedProductImages:ImageModel[];
     selectedProductBrand:Brand|null;
+    selectedProductCategories:Category[];
     selectedProductSimilarProducts:SimilarProduct[];
     categoriesWithTotals:CategoriesWithTotals[];
     brandsWithTotals:BrandsWithTotals[];
@@ -49,6 +51,7 @@ const initialState = {
     selectedProductImages:[],
     selectedProductSimilarProducts:[],
     selectedProductBrand:null,
+    selectedProductCategories:[],
     categoriesWithTotals: [],
     brandsWithTotals: [],
     sizesWithTotals: [],
@@ -76,11 +79,12 @@ const productSlice = createSlice({
             state.previous = null;
         },
         setSelectedProduct: (state,action:PayloadAction<ProductDetails>)=>{
-            const {owner,comments,brand, ...rest} =action.payload;
+            const {owner,comments,brand,categories, ...rest} =action.payload;
             state.selectedProduct=rest;
             state.selectedProductOwner=owner;
             state.selectedProductComments=comments;
             state.selectedProductBrand=brand;
+            state.selectedProductCategories=categories;
         },
         setSelectedProductImages: (state,action:PayloadAction<ImageModel[]>)=>{
             state.selectedProductImages=action.payload;
@@ -95,6 +99,7 @@ const productSlice = createSlice({
             state.selectedProductImages=[];
             state.selectedProductSimilarProducts=[];
             state.selectedProductBrand=null;
+            state.selectedProductCategories=[];
         },
         setCategoriesWithTotals:(state, action:PayloadAction<CategoriesWithTotals[]>) =>{
             state.categoriesWithTotals=action.payload;
@@ -133,6 +138,8 @@ export const selectedProductSelector = createSelector([products],(products)=>  p
 export const selectedProductOwnerSelector = createSelector([products],(products)=>  products.selectedProductOwner);
 
 export const selectedProductCommentsSelector = createSelector([products],(products)=>  products.selectedProductComments);
+
+export const selectedProductCategoriesSelector = createSelector([products],(products)=>  products.selectedProductCategories);
 
 export const selectedProductImagesSelector = createSelector([products],(products)=>  products.selectedProductImages);
 
