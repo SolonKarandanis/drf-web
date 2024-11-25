@@ -46,11 +46,14 @@ export interface ProductDetails extends BaseProductDetails{
 }
 
 export interface SimilarProduct{
+    id:number;
+    sku:string;
     title:string;
     price:number;
     salePrice:number;
     rating:number;
     numberOfRatings:number;
+    uuid:string;
 }
 
 export interface Brand{
