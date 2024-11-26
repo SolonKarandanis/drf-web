@@ -19,6 +19,8 @@ const Product:FC<Props> = ({uuid}) => {
         isError,
         isLoading,
         product,
+        productSalePriceIntegerPart,
+        productSalePriceDecimalPart,
         productBrands,
         productCategories,
         productComments,
@@ -32,9 +34,6 @@ const Product:FC<Props> = ({uuid}) => {
     
 
     if(product){
-        const integerPart=Math.trunc(product.salePrice);
-        const decimalPart = Number((product.salePrice-integerPart).toFixed(2));
-        const formattedDecimalPart = `.${(decimalPart.toLocaleString("en")).split(".")[1]}` ;
         return (
             <div className="md:grid grid-cols-12 gap-x-[3rem]">
                 <div className="col-span-12 mt-4 xl:col-span-8 xxl:mt-0">
@@ -48,7 +47,7 @@ const Product:FC<Props> = ({uuid}) => {
                             <p className="mb-1">
                                 <span className="font-semibold h3">
                                     <sup className="text-[0.875rem]">
-                                        $</sup>{integerPart}<sup className="text-[0.875rem]">{formattedDecimalPart}
+                                        $</sup>{productSalePriceIntegerPart}<sup className="text-[0.875rem]">{productSalePriceDecimalPart}
                                     </sup>
                                 </span>
                             </p>

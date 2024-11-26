@@ -8,6 +8,8 @@ import {
     selectedProductCategoriesSelector, 
     selectedProductCommentsSelector, 
     selectedProductOwnerSelector, 
+    selectedProductSalePriceDecimalPartSelector, 
+    selectedProductSalePriceIntegerPartSelector, 
     selectedProductSelector, 
     setSelectedProduct 
 } from "@/shared/redux/features/products/productsSlice";
@@ -22,6 +24,8 @@ export function useGetProductDetails(uuid:string){
     const productComments:Comment[]= useAppSelector(selectedProductCommentsSelector);
     const productBrands:Brand|null= useAppSelector(selectedProductBrandSelector);
     const productCategories:Category[]= useAppSelector(selectedProductCategoriesSelector);
+    const productSalePriceIntegerPart:number = useAppSelector(selectedProductSalePriceIntegerPartSelector);
+    const productSalePriceDecimalPart:string = useAppSelector(selectedProductSalePriceDecimalPartSelector);
 
     useEffect(()=>{
         getProduct(uuid)
@@ -34,6 +38,8 @@ export function useGetProductDetails(uuid:string){
 
     return {
         product,
+        productSalePriceIntegerPart,
+        productSalePriceDecimalPart,
         productOwner,
         productComments,
         productBrands,

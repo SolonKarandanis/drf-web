@@ -135,6 +135,22 @@ const products = (state: RootState) => state.products;
 
 export const selectedProductSelector = createSelector([products],(products)=>  products.selectedProduct);
 
+export const selectedProductSalePriceSelector = createSelector([selectedProductSelector],(selectedProduct)=> selectedProduct?.salePrice);
+
+export const selectedProductSalePriceIntegerPartSelector = createSelector([selectedProductSalePriceSelector],(salePrice) =>{
+    return salePrice ? Math.trunc(salePrice): 0
+});
+
+export const selectedProductSalePriceDecimalPartSelector = createSelector([selectedProductSalePriceSelector,selectedProductSalePriceIntegerPartSelector],(salePrice,integer) =>{
+    if(salePrice){
+        const decimalPart = Number((salePrice-integer).toFixed(2));
+        const formattedDecimalPart = `.${(decimalPart.toLocaleString("en")).split(".")[1]}`;
+        return formattedDecimalPart;
+    }
+    
+    return "0";
+});
+
 export const selectedProductOwnerSelector = createSelector([products],(products)=>  products.selectedProductOwner);
 
 export const selectedProductCommentsSelector = createSelector([products],(products)=>  products.selectedProductComments);
