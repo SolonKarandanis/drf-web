@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useEffect } from "react";
 
 export function useGetProductDetailsImages(uuid:string){
-    const [getProductImages] = useLazyGetProductImagesQuery();
+    const [getProductImages,{isError,isLoading}] = useLazyGetProductImagesQuery();
     const dispatch = useAppDispatch();
 
     const productImages:ImageModel[]= useAppSelector(selectedProductImagesSelector);
@@ -20,6 +20,8 @@ export function useGetProductDetailsImages(uuid:string){
     },[])
 
     return {
-        productImages
+        productImages,
+        isError,
+        isLoading
     }
 }

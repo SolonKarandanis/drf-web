@@ -15,7 +15,7 @@ import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useEffect } from "react";
 
 export function useGetProductDetails(uuid:string){
-    const [getProduct] = useLazyGetProductDetailsQuery();
+    const [getProduct,{isError,isLoading}] = useLazyGetProductDetailsQuery();
     const dispatch = useAppDispatch();
     const product:BaseProductDetails|null= useAppSelector(selectedProductSelector);
     const productOwner:UserPublic|null= useAppSelector(selectedProductOwnerSelector);
@@ -38,5 +38,7 @@ export function useGetProductDetails(uuid:string){
         productComments,
         productBrands,
         productCategories,
+        isError,
+        isLoading
     }
 }

@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useEffect } from "react";
 
 export function useGetProductDetailsSimilarProducts(uuid:string){
-    const [getSimilarProducts] = useLazyGetSimilarProductsQuery();
+    const [getSimilarProducts,{isError,isLoading}] = useLazyGetSimilarProductsQuery();
     const dispatch = useAppDispatch();
 
     const similarProducts:SimilarProduct[]= useAppSelector(selectedProductSimilarProductsSelector);
@@ -20,6 +20,8 @@ export function useGetProductDetailsSimilarProducts(uuid:string){
     },[])
 
     return {
-        similarProducts
+        similarProducts,
+        isError,
+        isLoading
     }
 }
