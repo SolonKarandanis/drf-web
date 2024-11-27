@@ -33,7 +33,7 @@ const Product:FC<Props> = ({uuid}) => {
 
     
 
-    if(product){
+    if(product && productOwner && productBrands){
         return (
             <div className="md:grid grid-cols-12 gap-x-[3rem]">
                 <div className="col-span-12 mt-4 xl:col-span-8 xxl:mt-0">
@@ -123,44 +123,16 @@ const Product:FC<Props> = ({uuid}) => {
                     
                     <ProductInfo />
                     <div className="mb-4">
-                        <p className="text-[.9375rem] font-semibold mb-2">Features :</p>
-                        <div className="grid grid-cols-12 gap-x-6 gap-y-2">
-                            <div className="col-span-12 xl:col-span-6">
-                                <ul className="mb-0 list-disc ps-8">
-                                    <li className="text-[#8c9097] dark:text-white/50 mb-2">
-                                        Dial height: 44 mm
-                                    </li>
-                                    <li className="text-[#8c9097] dark:text-white/50 mb-2">
-                                        Dial width: 35 mm
-                                    </li>
-                                    <li className="text-[#8c9097] dark:text-white/50 mb-2">
-                                        SpO2
-                                    </li>
-                                    <li className="text-[#8c9097] dark:text-white/50 mb-2">
-                                        30+ sports mode
-                                    </li>
-                                    <li className="text-[#8c9097] dark:text-white/50 mb-2">
-                                        Upto 12 days battery life
-                                    </li>
-                                    <li className="text-[#8c9097] dark:text-white/50">
-                                        Water resistant
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="col-span-12 xl:col-span-6">
-                                <ul className="mb-0 list-disc ps-7">
-                                    <li className="text-[#8c9097] dark:text-white/50 mb-2">
-                                        Battery powered
-                                    </li>
-                                    <li className="text-[#8c9097] dark:text-white/50 mb-2">
-                                        Country of origin: USA
-                                    </li>
-                                    <li className="text-[#8c9097] dark:text-white/50">
-                                        1-year warranty against manufacturing defects
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        <p className="text-[.9375rem] font-semibold mb-2">Fabric Details :</p>
+                        <p className="text-[#8c9097] dark:text-white/50 mb-0">
+                            {product.fabricDetails}
+                        </p>
+                    </div>
+                    <div className="mb-4">
+                        <p className="text-[.9375rem] font-semibold mb-2">Care Instructions :</p>
+                        <p className="text-[#8c9097] dark:text-white/50 mb-0">
+                            {product.careInstructions}
+                        </p>
                     </div>
                     <Reviews />
                 </div>
@@ -168,15 +140,15 @@ const Product:FC<Props> = ({uuid}) => {
                 <div className="col-span-12 mt-6 xl:col-span-4 xxl:mt-0">
                     <div className="mb-[3rem]">
                         <div className="mb-6">
-                            <p className="text-danger mb-0 text-[1rem]">Only 5 left in stock.</p>
+                            <p className="text-danger mb-0 text-[1rem]">Only {product.inventory} left in stock.</p>
                             <p className="mb-0 text-[0.75rem]">
                                 Sold by 
-                                <span className="text-primary me-1">
-                                    <u>Regaltos PVT.LTD</u>
+                                <span className="ml-1 text-defaulttextcolor me-1">
+                                    <u>{productOwner.username}</u>
                                 </span>
-                                and quality checked by 
-                                <span className="text-primary">
-                                    <u>Spruko Tchnologies</u>.
+                                and made by 
+                                <span className="ml-1 text-destructive">
+                                    <u>{productBrands.name}</u>.
                                 </span>
                             </p>
                         </div>
