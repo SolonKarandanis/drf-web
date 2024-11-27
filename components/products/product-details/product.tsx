@@ -143,11 +143,11 @@ const Product:FC<Props> = ({uuid}) => {
                             <p className="text-danger mb-0 text-[1rem]">Only {product.inventory} left in stock.</p>
                             <p className="mb-0 text-[0.75rem]">
                                 Sold by 
-                                <span className="ml-1 text-defaulttextcolor me-1">
-                                    <u>{productOwner.username}</u>
+                                <span className="ml-1 text-info me-1">
+                                    <u>{productOwner.firstName} {' '} {productOwner.lastName}</u>
                                 </span>
                                 and made by 
-                                <span className="ml-1 text-destructive">
+                                <span className="ml-1 text-info">
                                     <u>{productBrands.name}</u>.
                                 </span>
                             </p>
