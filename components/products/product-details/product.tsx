@@ -143,9 +143,10 @@ const Product:FC<Props> = ({uuid}) => {
                             <p className="text-danger mb-0 text-[1rem]">Only {product.inventory} left in stock.</p>
                             <p className="mb-0 text-[0.75rem]">
                                 Sold by 
-                                <span className="ml-1 text-info me-1">
-                                    <u>{productOwner.firstName} {' '} {productOwner.lastName}</u>
-                                </span>
+                                <Link  href={`/users/${uuid}`}
+                                    className="ml-1 mr-1 hover:underline ltr:float-right rtl:float-left text-sky-600">
+                                    {productOwner.firstName} {' '} {productOwner.lastName}
+                                </Link>
                                 and made by 
                                 <span className="ml-1 text-info">
                                     <u>{productBrands.name}</u>.

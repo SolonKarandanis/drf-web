@@ -36,7 +36,7 @@ export interface UserDetails{
 }
 
 
-export type UserPublic = Pick<UserModel, "id" | "username" | "firstName"| "lastName" | "email">;
+export type UserPublic = Pick<UserModel, "id" | "username" | "firstName"| "lastName" | "email" | "uuid">;
 
 export interface UserAcount extends UserModel{
     groups:UserGroup[];
