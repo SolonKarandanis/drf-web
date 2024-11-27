@@ -1,6 +1,6 @@
 "use client"
 
-import React, { FC } from 'react'
+import React, { FC, Fragment } from 'react'
 import ProductRating from './product-rating'
 import Link from 'next/link'
 import Reviews from './reviews'
@@ -56,52 +56,30 @@ const Product:FC<Props> = ({uuid}) => {
                             </p>
                         </div>
                         <div className="col-span-12 mt-4 xxl:col-span-4 xl:col-span-6 lg:col-span-6 md:col-span-6 sm:col-span-12 mml:mt-0">
-                            <p className="mb-2 text-[.9375rem] font-semibold">Watch Type</p>
+                            <p className="mb-2 text-[.9375rem] font-semibold">Categories:</p>
                             <div className="inline-flex" role="group" aria-label="Basic radio toggle button group">
-                                <input type="radio" className="btn-check " name="select-type" id="type1" defaultChecked />
-                                <label className="ti-btn !py-[0.45rem] !px-3 ti-btn-light !border-e-0 
-                                    !text-defaulttextcolor dark:!text-defaulttextcolor/70 dark:!border-defaultborder/10 !text-[0.75rem] 
-                                    !font-medium !rounded-e-none hover:!bg-light hover:!text-defaulttextcolor" htmlFor="type1">
-                                    GPS
-                                </label>
-                                <input type="radio" className="btn-check" name="select-type" id="type2" />
-                                <label className="ti-btn !py-[0.45rem] !px-3 ti-btn-outline-light !text-defaulttextcolor 
-                                    dark:!text-defaulttextcolor/70 dark:!border-defaultborder/10 !text-[0.75rem] !rounded-s-none 
-                                    hover:!bg-light hover:!text-defaulttextcolor" htmlFor="type2">
-                                    GPS+Cellular
-                                </label>
-                            </div>
-                        </div>
-                        <div className="col-span-12 mt-4 xxl:col-span-5 xl:col-span-6 lg:col-span-6 md:col-span-6 sm:col-span-12 xxl:mt-0">
-                            <p className="mb-2 text-[.9375rem] font-semibold">Strap Material</p>
-                            <div className="inline-flex " role="group" aria-label="Basic radio toggle button group">
-                                <input type="radio" className="btn-check " name="strap-material" id="strap1" defaultChecked />
-                                <label className="ti-btn !py-[0.45rem] !px-3 ti-btn-light !border-e-0 !text-defaulttextcolor 
-                                    dark:!text-defaulttextcolor/70 dark:!border-defaultborder/10 !text-[0.75rem] !font-medium 
-                                    !rounded-e-none hover:!bg-light hover:!text-defaulttextcolor" htmlFor="strap1">
-                                    Leather
-                                </label>
-                                <input type="radio" className="btn-check " name="strap-material" id="strap2" />
-                                <label className="ti-btn !py-[0.45rem] !px-3 ti-btn-outline-light !border-e-0 !text-defaulttextcolor 
-                                    dark:!text-defaulttextcolor/70 dark:!border-defaultborder/10 !text-[0.75rem] !font-medium !rounded-none 
-                                    hover:!bg-light hover:!text-defaulttextcolor" htmlFor="strap2">
-                                    Stainless steel
-                                </label>
-                                <input type="radio" className="btn-check" name="strap-material" id="strap3" />
-                                <label className="ti-btn !py-[0.45rem] !px-3 ti-btn-outline-light !text-defaulttextcolor 
-                                    dark:!text-defaulttextcolor/70 dark:!border-defaultborder/10 !text-[0.75rem] !font-medium  
-                                    !rounded-s-none hover:!bg-light hover:!text-defaulttextcolor" htmlFor="strap3">
-                                    Synthetic
-                                </label>
+                                {productCategories.map((category)=>(
+                                    <Fragment key={category.id}>
+                                        <input 
+                                            type="radio" 
+                                            className="btn-check " 
+                                            name="select-type" 
+                                            id={String(category.id)} />
+                                        <label className="ti-btn !py-[0.45rem] !px-3 ti-btn-light !border-e-0 
+                                            !text-defaulttextcolor dark:!text-defaulttextcolor/70 dark:!border-defaultborder/10 !text-[0.75rem] 
+                                            !font-medium !rounded-e-none hover:!bg-light hover:!text-defaulttextcolor" 
+                                            htmlFor={String(category.id)}>
+                                            {category.name}
+                                        </label>
+                                    </Fragment>
+                                ))}
                             </div>
                         </div>
                     </div>
                     <div className="mb-4">
                         <p className="text-[.9375rem] font-semibold mb-1">Description :</p>
                         <p className="text-[#8c9097] dark:text-white/50 mb-0">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati accusamus, 
-                            quaerat nam quo optio reiciendis harum reprehenderit omnis tempora adipisci in iste aperiam unde, 
-                            repellendus possimus explicabo veritatis? Dignissimos, id.
+                            {product.content}
                         </p>
                     </div>
                     <div className="mb-4">
