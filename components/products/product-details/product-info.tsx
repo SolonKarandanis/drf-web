@@ -1,6 +1,20 @@
-import React from 'react'
+import {FC} from 'react'
 
-const ProductInfo = () => {
+interface Props{
+    brand:string;
+    modelName:string;
+    color:string;
+    availabilityStatus:string;
+    publishStatus:string;
+}
+
+const ProductInfo:FC<Props> = ({
+    brand,
+    modelName,
+    color,
+    availabilityStatus,
+    publishStatus
+}) => {
   return (
     <div className="mb-4">
         <p className="text-[.9375rem] font-semibold mb-2">Product Details :</p>
@@ -11,14 +25,14 @@ const ProductInfo = () => {
                         <th scope="row" className="!font-semibold text-start">
                             Brand
                         </th>
-                        <td>Orange.Inc</td>
+                        <td>{brand}</td>
                     </tr>
                     <tr className="border border-defaultborder dark:border-defaultborder/10">
                         <th scope="row" className="!font-semibold text-start">
                             Model Name
                         </th>
                         <td>
-                            Orange watch series 4
+                            {modelName}
                         </td>
                     </tr>
                     <tr className="border border-defaultborder dark:border-defaultborder/10">
@@ -26,23 +40,23 @@ const ProductInfo = () => {
                             Color
                         </th>
                         <td>
-                            Raging Brass
+                            {color}
                         </td>
                     </tr>
                     <tr className="border border-defaultborder dark:border-defaultborder/10">
                         <th scope="row" className="!font-semibold text-start">
-                            Style
+                            Availability Status
                         </th>
                         <td>
-                            GPS
+                            {availabilityStatus}
                         </td>
                     </tr>
                     <tr className="border border-defaultborder dark:border-defaultborder/10">
                         <th scope="row" className="!font-semibold text-start">
-                            Special Features
+                            Publish Status
                         </th>
                         <td>
-                            Heart rate sensor,GPS,Wifi calling,SAmoled display e.t.c
+                            {publishStatus}
                         </td>
                     </tr>
                 </tbody>
