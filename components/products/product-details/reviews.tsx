@@ -1,4 +1,4 @@
-import Link from 'next/link'
+
 import React from 'react'
 import Comments from './comments'
 import Ratings from './ratings'
