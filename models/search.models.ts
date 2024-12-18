@@ -1,4 +1,4 @@
-import { Product } from "./product.models";
+import { Products } from "./product.models";
 import { UserModel, UserStatus } from "./user.models";
 
 export enum SortDirection {
@@ -45,5 +45,5 @@ export interface UserSearchResponse extends SearchResponse{
 }
 
 export interface ProductSearchResponse extends SearchResponse{
-    data:Product[];
+    data:Products[];
 }

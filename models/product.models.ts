@@ -27,6 +27,7 @@ export interface BaseProduct{
 export interface Products extends BaseProduct{
     id:number;
     salePrice:number;
+    averageRating:number;
     previewImage:ImageModel|null;
     uuid:string;
 }
@@ -34,6 +35,8 @@ export interface Products extends BaseProduct{
 export interface BaseProductDetails extends BaseProduct{
     id:number;
     salePrice:number;
+    averageRating:number;
+    numberOfRatings:number;
     uuid:string;
 }
 
