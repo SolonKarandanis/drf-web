@@ -26,7 +26,7 @@ const productsApiSlice = apiSlice.injectEndpoints({
         getSimilarProducts: builder.mutation<SimilarProduct[], SimilarProductRequest>({
 			query: (request:SimilarProductRequest) => {
                 return {
-                    url:`${ApiControllers.PRODUCTS}/similar/`,
+                    url:`${ApiControllers.PRODUCTS}/similar-products/`,
                     method:'POST',
                     body:request,
                 }
