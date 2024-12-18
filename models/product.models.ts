@@ -21,7 +21,9 @@ export interface BaseProduct{
     price:number;
     inventory:number;
     publishStatus:ProductPublishedStatus;
+    publishStatusLabel:string;
     availabilityStatus: ProductAvailabilityStatus
+    availabilityStatusLabel:string;
 }
 
 export interface Products extends BaseProduct{

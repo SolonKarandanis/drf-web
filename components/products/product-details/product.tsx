@@ -125,8 +125,8 @@ const Product:FC<Props> = ({uuid}) => {
                         brand={productBrands.name}
                         color='Red'
                         modelName={product.title}
-                        availabilityStatus={product.availabilityStatus}
-                        publishStatus={product.publishStatus}/>
+                        availabilityStatus={product.availabilityStatusLabel}
+                        publishStatus={product.publishStatusLabel}/>
                     <div className="mb-4">
                         <p className="text-[.9375rem] font-semibold mb-2">Fabric Details :</p>
                         <p className="text-[#8c9097] dark:text-white/50 mb-0">
