@@ -53,7 +53,13 @@ export interface SimilarProduct{
     salePrice:number;
     rating:number;
     numberOfRatings:number;
+    previewImage:ImageModel;
     uuid:string;
+}
+
+export interface SimilarProductRequest{
+    categoryIds: number[];
+    limit:number;
 }
 
 export interface Brand{

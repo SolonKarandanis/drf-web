@@ -6,6 +6,7 @@ import {
     PostProductCommentRequest, 
     ProductDetails, 
     SimilarProduct, 
+    SimilarProductRequest, 
     SizesWithTotals, 
     UpdateProductRequest 
 } from "@/models/product.models";
@@ -22,8 +23,14 @@ const productsApiSlice = apiSlice.injectEndpoints({
         getProductImages: builder.query<ImageModel[], string>({
 			query: (uuid) => `${ApiControllers.PRODUCTS}/${uuid}/images/`,
 		}),
-        getSimilarProducts: builder.query<SimilarProduct[], string>({
-			query: (uuid) => `${ApiControllers.PRODUCTS}/${uuid}/similar/`,
+        getSimilarProducts: builder.mutation<SimilarProduct[], SimilarProductRequest>({
+			query: (request:SimilarProductRequest) => {
+                return {
+                    url:`${ApiControllers.PRODUCTS}/similar/`,
+                    method:'POST',
+                    body:request,
+                }
+            }
 		}),
         searchProducts: builder.mutation<ProductSearchResponse,ProductSearchRequest>({
             query: ( searchRequest:ProductSearchRequest)=>{
@@ -102,7 +109,6 @@ export const {
     useLazyGetSizesWithTotalsQuery,
     useLazyGetProductDetailsQuery,
     useLazyGetProductImagesQuery,
-    useLazyGetSimilarProductsQuery,
     useCreateProductMutation,
     useUpdateProductMutation,
     usePostProductCommentMutation,
