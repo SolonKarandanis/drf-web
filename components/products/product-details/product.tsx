@@ -144,7 +144,7 @@ const Product:FC<Props> = ({uuid}) => {
                         <p className="text-[.9375rem] font-semibold mb-3">Reviews &amp; Ratings :</p>
                         <div className="grid-cols-12 gap-6 sm:grid">
                             <Ratings />
-                            <Comments />
+                            <Comments comments={productComments} />
                         </div>
                     </div>
                 </div>

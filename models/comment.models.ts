@@ -7,4 +7,6 @@ export interface Comment{
     userId:number;
     username:string;
     userEmail:string;
+    userFirstName:string;
+    userLastName:string;
 }
