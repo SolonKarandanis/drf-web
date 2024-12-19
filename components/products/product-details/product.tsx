@@ -3,11 +3,12 @@
 import React, { FC, Fragment } from 'react'
 import ProductRating from './product-rating'
 import Link from 'next/link'
-import Reviews from './reviews'
 import ButtonGroup from './button-group'
 import ProductInfo from './product-info'
 import { useTranslations } from 'next-intl'
 import { useGetProductDetails } from '../hooks/useGetProductDetails'
+import Ratings from './ratings'
+import Comments from './comments'
 
 interface Props{
     uuid:string;
@@ -139,7 +140,13 @@ const Product:FC<Props> = ({uuid}) => {
                             {product.careInstructions}
                         </p>
                     </div>
-                    <Reviews />
+                    <div className="mb-0">
+                        <p className="text-[.9375rem] font-semibold mb-3">Reviews &amp; Ratings :</p>
+                        <div className="grid-cols-12 gap-6 sm:grid">
+                            <Ratings />
+                            <Comments />
+                        </div>
+                    </div>
                 </div>
     
                 <div className="col-span-12 mt-6 xl:col-span-4 xxl:mt-0">
