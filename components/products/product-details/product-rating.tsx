@@ -1,6 +1,14 @@
-import React from 'react'
+import { FC } from "react";
 
-const ProductRating = () => {
+interface Props{
+  rating:number;
+  reviews:number;
+}
+
+const ProductRating:FC<Props> = ({
+  rating,
+  reviews
+}) => {
   return (
     <p className="text-[1.125rem] mb-4">
         <i className="align-middle ri-star-s-fill text-warning"></i>

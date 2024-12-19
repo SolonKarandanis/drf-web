@@ -41,7 +41,7 @@ const Product:FC<Props> = ({uuid}) => {
                     <p className="text-[1.125rem] font-semibold mb-0">
                        {`(${product.sku}) ${product.title}`}
                     </p>
-                    <ProductRating />
+                    <ProductRating rating={product.averageRating} reviews={product.numberOfRatings} />
                     <div className="grid grid-cols-12 mb-6">
                         <div className="col-span-12 xxl:col-span-3 xl:col-span-12">
                             <p className="mb-1 lh-1 text-[0.6875rem] text-success font-semibold">Special Offer</p>
