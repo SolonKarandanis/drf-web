@@ -32,10 +32,7 @@ const Product:FC<Props> = ({uuid}) => {
         return <>{t("GLOBAL.FETCH-ERROR")}</>
     }
 
-    const loading = true
-
     
-
     if(product && productOwner && productBrands){
         return (
             <div className="md:grid grid-cols-12 gap-x-[3rem]">
@@ -57,21 +54,38 @@ const Product:FC<Props> = ({uuid}) => {
                     <div className="grid grid-cols-12 mb-6">
                         <div className="col-span-12 xxl:col-span-3 xl:col-span-12">
                             <p className="mb-1 lh-1 text-[0.6875rem] text-success font-semibold">Special Offer</p>
-                            <p className="mb-1">
-                                <span className="font-semibold h3">
-                                    <sup className="text-[0.875rem]">
-                                        $</sup>{productSalePriceIntegerPart}<sup className="text-[0.875rem]">{productSalePriceDecimalPart}
-                                    </sup>
-                                </span>
-                            </p>
-                            <p className="mb-0 text-[#8c9097] dark:text-white/50 text-[0.75rem]">
-                                M.R.P-<s>${product.price}</s>
-                            </p>
+                            {isLoading &&(
+                                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
+                                    <div className="h-4 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5 w-20"></div>
+                                    <div className="h-4 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5 w-28"></div>
+                                </div>
+                            )}
+                            {!isLoading && (
+                                <>
+                                    <p className="mb-1">
+                                        <span className="font-semibold h3">
+                                            <sup className="text-[0.875rem]">
+                                                $</sup>{productSalePriceIntegerPart}<sup className="text-[0.875rem]">
+                                                {productSalePriceDecimalPart}
+                                            </sup>
+                                        </span>
+                                    </p>
+                                    <p className="mb-0 text-[#8c9097] dark:text-white/50 text-[0.75rem]">
+                                        M.R.P-<s>${product.price}</s>
+                                    </p>
+                                </>
+                            )}
+                            
                         </div>
                         <div className="col-span-12 mt-4 xxl:col-span-4 xl:col-span-6 lg:col-span-6 md:col-span-6 sm:col-span-12 mml:mt-0">
                             <p className="mb-2 text-[.9375rem] font-semibold">Categories:</p>
+                            {isLoading &&(
+                                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
+                                    <div className="h-4 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                </div>
+                            )}
                             <div className="inline-flex" role="group" aria-label="Basic radio toggle button group">
-                                {productCategories.map((category)=>(
+                                {!isLoading && productCategories && productCategories.map((category)=>(
                                     <Fragment key={category.id}>
                                         <input 
                                             type="radio" 
@@ -91,9 +105,18 @@ const Product:FC<Props> = ({uuid}) => {
                     </div>
                     <div className="mb-4">
                         <p className="text-[.9375rem] font-semibold mb-1">Description :</p>
-                        <p className="text-[#8c9097] dark:text-white/50 mb-0">
-                            {product.content}
-                        </p>
+                        {isLoading &&(
+                            <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
+                                <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                            </div>
+                        )}
+                        {!isLoading && (
+                            <p className="text-[#8c9097] dark:text-white/50 mb-0">
+                                {product.content}
+                            </p>
+                        )}
                     </div>
                     <div className="mb-4">
                         <div className="grid grid-cols-12 gap-x-6">
@@ -142,15 +165,31 @@ const Product:FC<Props> = ({uuid}) => {
                         publishStatus={product.publishStatusLabel}/>
                     <div className="mb-4">
                         <p className="text-[.9375rem] font-semibold mb-2">Fabric Details :</p>
-                        <p className="text-[#8c9097] dark:text-white/50 mb-0">
-                            {product.fabricDetails}
-                        </p>
+                        {isLoading &&(
+                            <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
+                                <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                            </div>
+                        )}
+                        {!isLoading && (
+                            <p className="text-[#8c9097] dark:text-white/50 mb-0">
+                                {product.fabricDetails}
+                            </p>
+                        )}
                     </div>
                     <div className="mb-4">
                         <p className="text-[.9375rem] font-semibold mb-2">Care Instructions :</p>
-                        <p className="text-[#8c9097] dark:text-white/50 mb-0">
-                            {product.careInstructions}
-                        </p>
+                        {isLoading &&(
+                            <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
+                                <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                            </div>
+                        )}
+                        {!isLoading &&(
+                            <p className="text-[#8c9097] dark:text-white/50 mb-0">
+                                {product.careInstructions}
+                            </p>
+                        )}
                     </div>
                     <div className="mb-0">
                         <p className="text-[.9375rem] font-semibold mb-3">Reviews &amp; Ratings :</p>
@@ -164,18 +203,28 @@ const Product:FC<Props> = ({uuid}) => {
                 <div className="col-span-12 mt-6 xl:col-span-4 xxl:mt-0">
                     <div className="mb-[3rem]">
                         <div className="mb-6">
-                            <p className="text-danger mb-0 text-[1rem]">Only {product.inventory} left in stock.</p>
-                            <p className="mb-0 text-[0.75rem]">
-                                Sold by 
-                                <Link  href={`/users/${productOwner.uuid}`}
-                                    className="ml-1 mr-1 hover:underline ltr:float-right rtl:float-left text-sky-600">
-                                    {productOwner.firstName} {' '} {productOwner.lastName}
-                                </Link>
-                                and made by 
-                                <span className="ml-1 text-info">
-                                    <u>{productBrands.name}</u>.
-                                </span>
-                            </p>
+                            {isLoading &&(
+                                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
+                                    <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                    <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                </div>
+                            )}
+                            {!isLoading && (
+                                <>
+                                    <p className="text-danger mb-0 text-[1rem]">Only {product.inventory} left in stock.</p>
+                                    <p className="mb-0 text-[0.75rem]">
+                                        Sold by 
+                                        <Link  href={`/users/${productOwner.uuid}`}
+                                            className="ml-1 mr-1 hover:underline ltr:float-right rtl:float-left text-sky-600">
+                                            {productOwner.firstName} {' '} {productOwner.lastName}
+                                        </Link>
+                                        and made by 
+                                        <span className="ml-1 text-info">
+                                            <u>{productBrands.name}</u>.
+                                        </span>
+                                    </p>
+                                </>
+                            )}
                         </div>
                         <div className="mb-4">
                             <p className="mb-0 font-semibold">Returns:</p>
