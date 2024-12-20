@@ -10,6 +10,7 @@ import { useGetProductDetails } from '../hooks/useGetProductDetails'
 import Ratings from './ratings'
 import Comments from './comments'
 import SkuTitle from './sku-title'
+import Price from './price'
 
 interface Props{
     uuid:string;
@@ -49,28 +50,11 @@ const Product:FC<Props> = ({uuid}) => {
                     <div className="grid grid-cols-12 mb-6">
                         <div className="col-span-12 xxl:col-span-3 xl:col-span-12">
                             <p className="mb-1 lh-1 text-[0.6875rem] text-success font-semibold">Special Offer</p>
-                            {isLoading &&(
-                                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
-                                    <div className="h-4 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5 w-20"></div>
-                                    <div className="h-4 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5 w-28"></div>
-                                </div>
-                            )}
-                            {!isLoading && (
-                                <>
-                                    <p className="mb-1">
-                                        <span className="font-semibold h3">
-                                            <sup className="text-[0.875rem]">
-                                                $</sup>{productSalePriceIntegerPart}<sup className="text-[0.875rem]">
-                                                {productSalePriceDecimalPart}
-                                            </sup>
-                                        </span>
-                                    </p>
-                                    <p className="mb-0 text-[#8c9097] dark:text-white/50 text-[0.75rem]">
-                                        M.R.P-<s>${product.price}</s>
-                                    </p>
-                                </>
-                            )}
-                            
+                            <Price
+                                salePriceIntegerPart={productSalePriceIntegerPart}
+                                salePriceDecimalPart={productSalePriceDecimalPart} 
+                                price={product.price}
+                                loading={isLoading}/>
                         </div>
                         <div className="col-span-12 mt-4 xxl:col-span-4 xl:col-span-6 lg:col-span-6 md:col-span-6 sm:col-span-12 mml:mt-0">
                             <p className="mb-2 text-[.9375rem] font-semibold">Categories:</p>
