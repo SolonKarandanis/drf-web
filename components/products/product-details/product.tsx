@@ -13,6 +13,7 @@ import SkuTitle from './sku-title'
 import Price from './price'
 import Categories from './categories'
 import Content from './content'
+import FabricDetails from './fabric-details'
 
 interface Props{
     uuid:string;
@@ -119,17 +120,9 @@ const Product:FC<Props> = ({uuid}) => {
                         loading={isLoading}/>
                     <div className="mb-4">
                         <p className="text-[.9375rem] font-semibold mb-2">Fabric Details :</p>
-                        {isLoading &&(
-                            <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
-                                <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                                <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                            </div>
-                        )}
-                        {!isLoading && (
-                            <p className="text-[#8c9097] dark:text-white/50 mb-0">
-                                {product.fabricDetails}
-                            </p>
-                        )}
+                        <FabricDetails 
+                            details={product.fabricDetails}
+                            loading={isLoading}/>
                     </div>
                     <div className="mb-4">
                         <p className="text-[.9375rem] font-semibold mb-2">Care Instructions :</p>
