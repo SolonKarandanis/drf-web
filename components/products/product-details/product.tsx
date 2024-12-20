@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl'
 import { useGetProductDetails } from '../hooks/useGetProductDetails'
 import Ratings from './ratings'
 import Comments from './comments'
+import SkuTitle from './sku-title'
 
 interface Props{
     uuid:string;
@@ -37,16 +38,10 @@ const Product:FC<Props> = ({uuid}) => {
         return (
             <div className="md:grid grid-cols-12 gap-x-[3rem]">
                 <div className="col-span-12 mt-4 xl:col-span-8 xxl:mt-0">
-                    {isLoading &&(
-                        <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
-                            <div className="h-4 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5 w-80"></div>
-                        </div>
-                    )}
-                    {!isLoading && (
-                        <p className="text-[1.125rem] font-semibold mb-0">
-                        {`(${product.sku}) ${product.title}`}
-                        </p>
-                    )}
+                    <SkuTitle 
+                        sku={product.sku}
+                        title={product.title}
+                        loading={isLoading}/>
                     <ProductRating 
                         rating={product.averageRating} 
                         reviews={product.numberOfRatings} 
