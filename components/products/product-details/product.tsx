@@ -12,6 +12,7 @@ import Comments from './comments'
 import SkuTitle from './sku-title'
 import Price from './price'
 import Categories from './categories'
+import Content from './content'
 
 interface Props{
     uuid:string;
@@ -66,18 +67,9 @@ const Product:FC<Props> = ({uuid}) => {
                     </div>
                     <div className="mb-4">
                         <p className="text-[.9375rem] font-semibold mb-1">Description :</p>
-                        {isLoading &&(
-                            <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
-                                <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                                <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                                <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                            </div>
-                        )}
-                        {!isLoading && (
-                            <p className="text-[#8c9097] dark:text-white/50 mb-0">
-                                {product.content}
-                            </p>
-                        )}
+                        <Content 
+                            content={product.content}
+                            loading={isLoading}/>
                     </div>
                     <div className="mb-4">
                         <div className="grid grid-cols-12 gap-x-6">
