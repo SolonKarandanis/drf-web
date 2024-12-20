@@ -15,6 +15,7 @@ import Categories from './categories'
 import Content from './content'
 import FabricDetails from './fabric-details'
 import CareInstructions from './care-instructions'
+import StockInfo from './stock-info'
 
 interface Props{
     uuid:string;
@@ -145,28 +146,13 @@ const Product:FC<Props> = ({uuid}) => {
                 <div className="col-span-12 mt-6 xl:col-span-4 xxl:mt-0">
                     <div className="mb-[3rem]">
                         <div className="mb-6">
-                            {isLoading &&(
-                                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
-                                    <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                                    <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                                </div>
-                            )}
-                            {!isLoading && (
-                                <>
-                                    <p className="text-danger mb-0 text-[1rem]">Only {product.inventory} left in stock.</p>
-                                    <p className="mb-0 text-[0.75rem]">
-                                        Sold by 
-                                        <Link  href={`/users/${productOwner.uuid}`}
-                                            className="ml-1 mr-1 hover:underline ltr:float-right rtl:float-left text-sky-600">
-                                            {productOwner.firstName} {' '} {productOwner.lastName}
-                                        </Link>
-                                        and made by 
-                                        <span className="ml-1 text-info">
-                                            <u>{productBrands.name}</u>.
-                                        </span>
-                                    </p>
-                                </>
-                            )}
+                            <StockInfo 
+                                inventory={product.inventory}
+                                ownerId={productOwner.uuid}
+                                firstName={productOwner.firstName}
+                                lastName={productOwner.lastName}
+                                brandName={productBrands.name}
+                                loading={isLoading}/>
                         </div>
                         <div className="mb-4">
                             <p className="mb-0 font-semibold">Returns:</p>
