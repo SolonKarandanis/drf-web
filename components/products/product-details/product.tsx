@@ -162,7 +162,8 @@ const Product:FC<Props> = ({uuid}) => {
                         color='Red'
                         modelName={product.title}
                         availabilityStatus={product.availabilityStatusLabel}
-                        publishStatus={product.publishStatusLabel}/>
+                        publishStatus={product.publishStatusLabel}
+                        loading={isLoading}/>
                     <div className="mb-4">
                         <p className="text-[.9375rem] font-semibold mb-2">Fabric Details :</p>
                         {isLoading &&(

@@ -6,6 +6,7 @@ interface Props{
     color:string;
     availabilityStatus:string;
     publishStatus:string;
+    loading:boolean;
 }
 
 const ProductInfo:FC<Props> = ({
@@ -13,7 +14,8 @@ const ProductInfo:FC<Props> = ({
     modelName,
     color,
     availabilityStatus,
-    publishStatus
+    publishStatus,
+    loading=false
 }) => {
   return (
     <div className="mb-4">
@@ -25,14 +27,26 @@ const ProductInfo:FC<Props> = ({
                         <th scope="row" className="!font-semibold text-start">
                             Brand
                         </th>
-                        <td>{brand}</td>
+                        <td>
+                            {loading && (
+                                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
+                                    <div className="h-3 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                </div>
+                            )}
+                            {!loading && (<>{brand}</>)}
+                        </td>
                     </tr>
                     <tr className="border border-defaultborder dark:border-defaultborder/10">
                         <th scope="row" className="!font-semibold text-start">
                             Model Name
                         </th>
                         <td>
-                            {modelName}
+                            {loading && (
+                                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
+                                    <div className="h-3 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                </div>
+                            )}
+                            {!loading && (<>{modelName}</>)}
                         </td>
                     </tr>
                     <tr className="border border-defaultborder dark:border-defaultborder/10">
@@ -40,7 +54,12 @@ const ProductInfo:FC<Props> = ({
                             Color
                         </th>
                         <td>
-                            {color}
+                            {loading && (
+                                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
+                                    <div className="h-3 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                </div>
+                            )}
+                            {!loading && (<>{color}</>)}
                         </td>
                     </tr>
                     <tr className="border border-defaultborder dark:border-defaultborder/10">
@@ -48,7 +67,12 @@ const ProductInfo:FC<Props> = ({
                             Availability Status
                         </th>
                         <td>
-                            {availabilityStatus}
+                            {loading && (
+                                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
+                                    <div className="h-3 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                </div>
+                            )}
+                            {!loading && (<>{availabilityStatus}</>)}
                         </td>
                     </tr>
                     <tr className="border border-defaultborder dark:border-defaultborder/10">
@@ -56,7 +80,12 @@ const ProductInfo:FC<Props> = ({
                             Publish Status
                         </th>
                         <td>
-                            {publishStatus}
+                            {loading && (
+                                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
+                                    <div className="h-3 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                </div>
+                            )}
+                            {!loading && (<>{publishStatus}</>)}
                         </td>
                     </tr>
                 </tbody>
