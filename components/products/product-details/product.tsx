@@ -32,16 +32,28 @@ const Product:FC<Props> = ({uuid}) => {
         return <>{t("GLOBAL.FETCH-ERROR")}</>
     }
 
+    const loading = true
+
     
 
     if(product && productOwner && productBrands){
         return (
             <div className="md:grid grid-cols-12 gap-x-[3rem]">
                 <div className="col-span-12 mt-4 xl:col-span-8 xxl:mt-0">
-                    <p className="text-[1.125rem] font-semibold mb-0">
-                       {`(${product.sku}) ${product.title}`}
-                    </p>
-                    <ProductRating rating={product.averageRating} reviews={product.numberOfRatings} />
+                    {isLoading &&(
+                        <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
+                            <div className="h-4 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5 w-80"></div>
+                        </div>
+                    )}
+                    {!isLoading && (
+                        <p className="text-[1.125rem] font-semibold mb-0">
+                        {`(${product.sku}) ${product.title}`}
+                        </p>
+                    )}
+                    <ProductRating 
+                        rating={product.averageRating} 
+                        reviews={product.numberOfRatings} 
+                        loading={isLoading}/>
                     <div className="grid grid-cols-12 mb-6">
                         <div className="col-span-12 xxl:col-span-3 xl:col-span-12">
                             <p className="mb-1 lh-1 text-[0.6875rem] text-success font-semibold">Special Offer</p>

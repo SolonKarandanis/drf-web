@@ -3,12 +3,22 @@ import { FC } from "react";
 interface Props{
   rating:number;
   reviews:number;
+  loading:boolean;
 }
 
 const ProductRating:FC<Props> = ({
   rating,
-  reviews
+  reviews,
+  loading=false
 }) => {
+
+  if(loading){
+    return (
+      <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
+          <div className="h-4 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5 w-52"></div>
+      </div>
+    )
+  }
   return (
     <p className="text-[1.125rem] mb-4">
       {(!reviews || reviews ===0) &&(
