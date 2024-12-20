@@ -1,4 +1,5 @@
 import {FC} from 'react'
+import ProductInfoData from './product-info-data';
 
 interface Props{
     brand:string;
@@ -28,12 +29,9 @@ const ProductInfo:FC<Props> = ({
                             Brand
                         </th>
                         <td>
-                            {loading && (
-                                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
-                                    <div className="h-3 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                                </div>
-                            )}
-                            {!loading && (<>{brand}</>)}
+                            <ProductInfoData 
+                                data={brand}
+                                loading={loading}/>
                         </td>
                     </tr>
                     <tr className="border border-defaultborder dark:border-defaultborder/10">
@@ -41,12 +39,9 @@ const ProductInfo:FC<Props> = ({
                             Model Name
                         </th>
                         <td>
-                            {loading && (
-                                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
-                                    <div className="h-3 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                                </div>
-                            )}
-                            {!loading && (<>{modelName}</>)}
+                            <ProductInfoData 
+                                data={modelName}
+                                loading={loading}/>
                         </td>
                     </tr>
                     <tr className="border border-defaultborder dark:border-defaultborder/10">
@@ -54,12 +49,9 @@ const ProductInfo:FC<Props> = ({
                             Color
                         </th>
                         <td>
-                            {loading && (
-                                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
-                                    <div className="h-3 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                                </div>
-                            )}
-                            {!loading && (<>{color}</>)}
+                            <ProductInfoData 
+                                data={color}
+                                loading={loading}/>
                         </td>
                     </tr>
                     <tr className="border border-defaultborder dark:border-defaultborder/10">
@@ -67,12 +59,9 @@ const ProductInfo:FC<Props> = ({
                             Availability Status
                         </th>
                         <td>
-                            {loading && (
-                                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
-                                    <div className="h-3 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                                </div>
-                            )}
-                            {!loading && (<>{availabilityStatus}</>)}
+                            <ProductInfoData 
+                                data={availabilityStatus}
+                                loading={loading}/>
                         </td>
                     </tr>
                     <tr className="border border-defaultborder dark:border-defaultborder/10">
@@ -80,12 +69,9 @@ const ProductInfo:FC<Props> = ({
                             Publish Status
                         </th>
                         <td>
-                            {loading && (
-                                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
-                                    <div className="h-3 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                                </div>
-                            )}
-                            {!loading && (<>{publishStatus}</>)}
+                            <ProductInfoData 
+                                data={publishStatus}
+                                loading={loading}/>
                         </td>
                     </tr>
                 </tbody>
