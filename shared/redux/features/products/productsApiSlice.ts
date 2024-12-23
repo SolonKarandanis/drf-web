@@ -32,6 +32,14 @@ const productsApiSlice = apiSlice.injectEndpoints({
                 }
             }
 		}),
+        getSimilarProductsById: builder.query<SimilarProduct[], string>({
+			query: (uuid:string) => {
+                return {
+                    url:`${ApiControllers.PRODUCTS}/${uuid}/similar-products/`,
+                    method:'GET',
+                }
+            }
+		}),
         searchProducts: builder.mutation<ProductSearchResponse,ProductSearchRequest>({
             query: ( searchRequest:ProductSearchRequest)=>{
 				return {
