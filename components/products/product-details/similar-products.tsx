@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { FC } from 'react'
 import { useGetProductDetailsSimilarProducts } from '../hooks/useGetProductDetailsSimilarProducts';
 import SimilarProductItem from './similar-product-item';
+import SimilarProductsLoading from './similar-products-loading';
 
 interface Props{
     uuid:string;
@@ -30,6 +31,9 @@ const SimilarProducts:FC<Props> = ({uuid}) => {
             <div className="table-responsive">
                 <table className="table min-w-full table-bordered whitespace-nowrap">
                     <tbody>
+                        {isLoading && (
+                            <SimilarProductsLoading iterate={5} />
+                        )}
                         {!isLoading  && similarProducts && similarProducts.map(product=>(
                             <SimilarProductItem key={product.id} product={product} />
                         ))}
