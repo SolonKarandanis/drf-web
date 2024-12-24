@@ -1,3 +1,5 @@
+"use client"
+
 import { SimilarProduct } from '@/models/product.models';
 import Link from 'next/link';
 import {FC} from 'react'
