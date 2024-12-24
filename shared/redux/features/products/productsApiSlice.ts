@@ -117,6 +117,7 @@ export const {
     useLazyGetSizesWithTotalsQuery,
     useLazyGetProductDetailsQuery,
     useLazyGetProductImagesQuery,
+    useLazyGetSimilarProductsByIdQuery,
     useCreateProductMutation,
     useUpdateProductMutation,
     usePostProductCommentMutation,
