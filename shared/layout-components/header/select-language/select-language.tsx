@@ -1,4 +1,6 @@
-import { useRouter } from "next/navigation";
+'use client';
+
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { Locale } from "@/utils/locales";
 import { useLocale } from "next-intl";
 import { 
@@ -11,14 +13,22 @@ import {
 } from "@/shared/shadcn/components/ui/dropdown-menu";
 import { Button } from "@/shared/shadcn/components/ui/button";
 import { GlobeIcon } from "lucide-react";
+import { useTransition } from "react";
 
 const SelectLanguage= ()=> {
     const router = useRouter();
     const locale = useLocale() as Locale;
+    const pathname = usePathname();
+    const [isPending, startTransition] = useTransition();
+    const params = useParams();
 
     function handleLocaleChange(newLocale: Locale): void {
-        document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
-        router.refresh();
+        startTransition(() => {
+            const pathArray = pathname.split("/");
+            pathArray[1]=newLocale;
+            const newPath = pathArray.join("/");
+            router.push(newPath,{scroll:false});
+        });
     }
 
     return (
@@ -36,6 +46,7 @@ const SelectLanguage= ()=> {
 
                     <DropdownMenuCheckboxItem
                         checked={locale === "en"}
+                        disabled={isPending}
                         onClick={() => {
                             handleLocaleChange("en");
                         }}
@@ -44,6 +55,7 @@ const SelectLanguage= ()=> {
                     </DropdownMenuCheckboxItem>
                     <DropdownMenuCheckboxItem
                         checked={locale === "gr"}
+                        disabled={isPending}
                         onClick={() => {
                             handleLocaleChange("gr");
                         }}
