@@ -1,6 +1,6 @@
 'use client';
 
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Locale } from "@/utils/locales";
 import { useLocale } from "next-intl";
 import { 
@@ -20,7 +20,6 @@ const SelectLanguage= ()=> {
     const locale = useLocale() as Locale;
     const pathname = usePathname();
     const [isPending, startTransition] = useTransition();
-    const params = useParams();
 
     function handleLocaleChange(newLocale: Locale): void {
         startTransition(() => {
