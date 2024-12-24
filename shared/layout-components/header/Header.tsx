@@ -233,7 +233,7 @@ const Header:FC<Props> = ({path})=> {
               <Logo path={path} />
               <div className="header-element md:px-[0.325rem] !items-center" onClick={() => toggleSidebar()}>
                 <Link aria-label="Hide Sidebar"
-                  className="sidemenu-toggle animated-arrow  hor-toggle horizontal-navtoggle inline-flex items-center" href="#!"><span></span></Link>
+                  className="inline-flex items-center sidemenu-toggle animated-arrow hor-toggle horizontal-navtoggle" href="#!"><span></span></Link>
               </div>
             </div>
             <div className="header-content-right">
@@ -243,7 +243,7 @@ const Header:FC<Props> = ({path})=> {
                   <i className="bx bx-search-alt-2 header-link-icon"></i>
                 </button>
               </div>
-              <SelectLanguage path={path} />
+              <SelectLanguage />
               <ThemeToggler themeStoreState={themeState}/>
               <CartDropdown  path={path}/>
               <NotificationsDropdown />

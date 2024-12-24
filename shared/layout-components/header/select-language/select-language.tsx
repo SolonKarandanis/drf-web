@@ -1,14 +1,20 @@
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Locale } from "@/utils/locales";
-import { FC } from "react";
+import { useLocale } from "next-intl";
+import { 
+    DropdownMenu, 
+    DropdownMenuCheckboxItem, 
+    DropdownMenuContent, 
+    DropdownMenuLabel, 
+    DropdownMenuSeparator, 
+    DropdownMenuTrigger 
+} from "@/shared/shadcn/components/ui/dropdown-menu";
+import { Button } from "@/shared/shadcn/components/ui/button";
+import { GlobeIcon } from "lucide-react";
 
-type Props = {
-	path?: string;
-}
-
-const SelectLanguage:FC<Props> = ({path})=> {
+const SelectLanguage= ()=> {
     const router = useRouter();
+    const locale = useLocale() as Locale;
 
     function handleLocaleChange(newLocale: Locale): void {
         document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
@@ -16,48 +22,36 @@ const SelectLanguage:FC<Props> = ({path})=> {
     }
 
     return (
-        <div className="header-element py-[1rem] md:px-[0.65rem] px-2  
-            header-country hs-dropdown ti-dropdown  hidden sm:block [--placement:bottom-left]">
-            <button id="dropdown-flag" type="button"
-            className="hs-dropdown-toggle ti-dropdown-toggle !p-0 flex-shrink-0  !border-0 !rounded-full !shadow-none">
-            <Image
-                alt="flag-img"
-                src={`${path}/assets/images/flags/us_flag.jpg`}
-                width={700}
-                height={475}
-                sizes="100vw"
-                className="h-[1.25rem] w-[1.25rem] rounded-full"
-            />
-            </button>
-            <div className="hs-dropdown-menu ti-dropdown-menu min-w-[10rem] hidden !-mt-3" 
-                aria-labelledby="dropdown-flag">
-                <div className="ti-dropdown-divider divide-y divide-gray-200 dark:divide-white/10">
-                    <div className="py-2 first:pt-0 last:pb-0">
-                        <div className="ti-dropdown-item !p-[0.65rem] " 
-                            onClick={() => {
-                                handleLocaleChange("en");
-                            }}>
-                            <div className="flex items-center space-x-2 rtl:space-x-reverse w-full">
-                                <div className="h-[1.375rem] flex items-center w-[1.375rem] rounded-full">
-                                    <Image
-                                        alt="flag-img"
-                                        src={`${path}/assets/images/flags/us_flag.jpg`}
-                                        width={700}
-                                        height={475}
-                                        sizes="100vw"
-                                        className="h-[1.25rem] w-[1.25rem] rounded-full"
-                                    />
-                                </div>
-                                <div>
-                                    <p className="!text-[0.8125rem] font-medium">
-                                        English
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div className=" py-2 md:px-[0.65rem] px-2 ">
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button type="button" variant="ghost" size="icon" >
+                        <GlobeIcon className="size-5" />
+                    </Button>
+                </DropdownMenuTrigger>
+
+                <DropdownMenuContent align="end">
+                    <DropdownMenuLabel>Language</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+
+                    <DropdownMenuCheckboxItem
+                        checked={locale === "en"}
+                        onClick={() => {
+                            handleLocaleChange("en");
+                        }}
+                        >
+                        English
+                    </DropdownMenuCheckboxItem>
+                    <DropdownMenuCheckboxItem
+                        checked={locale === "gr"}
+                        onClick={() => {
+                            handleLocaleChange("gr");
+                        }}
+                        >
+                        Greek
+                    </DropdownMenuCheckboxItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
         </div>
     )
 }
