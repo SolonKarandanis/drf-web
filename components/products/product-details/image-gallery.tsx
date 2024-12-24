@@ -3,10 +3,13 @@
 import { Swiper as SwiperType } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Thumbs, FreeMode, Navigation } from 'swiper/modules';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 
+interface Props{
+    uuid:string;
+}
 
-const ImageGallery= () => {
+const ImageGallery:FC<Props>= ({uuid}) => {
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
     return (

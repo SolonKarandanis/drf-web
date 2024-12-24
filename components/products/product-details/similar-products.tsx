@@ -1,7 +1,14 @@
-import Link from 'next/link'
-import React from 'react'
+"use client"
 
-const SimilarProducts = () => {
+import Link from 'next/link'
+import { FC } from 'react'
+
+interface Props{
+    uuid:string;
+}
+
+
+const SimilarProducts:FC<Props> = ({uuid}) => {
   return (
     <div className="hidden col-span-12 xxl:col-span-12 xl:col-span-6 lg:col-span-6 md:col-span-6 sm:col-span-12 md:block">
         <p className="text-[.9375rem] font-semibold mb-2">

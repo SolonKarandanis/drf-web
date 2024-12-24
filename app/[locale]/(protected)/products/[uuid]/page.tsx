@@ -42,8 +42,8 @@ const ProductDetailsPage:FC<Props>  =  async ({params:{uuid}}) => {
                             <div className="sm:grid grid-cols-12 xxl:md:!gap-[4rem]">
                                 <div className="col-span-12 xxl:col-span-3 xl:col-span-12">
                                     <div className="sm:grid grid-cols-12 !gap-x-6 md:me-[1rem] ">
-                                        <ImageGallery />
-                                        <SimilarProducts />
+                                        <ImageGallery uuid={uuid} />
+                                        <SimilarProducts uuid={uuid} />
                                     </div>
                                 </div>
                                 <div className="col-span-12 xxl:col-span-9 xl:col-span-12">
