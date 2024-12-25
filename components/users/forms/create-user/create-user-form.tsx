@@ -3,11 +3,10 @@
 import * as z from "zod";
 import { useState } from "react";
 import { motion } from 'framer-motion'
-import { CreateUserSchema } from "@/schemas/auth.schemas";
+import { CreateUserSchema,getCreateUserSchema } from "@/schemas/auth.schemas";
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { toast } from 'react-toastify';
 import Stepper from "@/shared/components/stepper/stepper";
 import CForm from "@/shared/components/form/cform";
 import PersonalInfo from "../sections/personal-info";
@@ -15,9 +14,9 @@ import AddressInfo from "../sections/address-info";
 import Credentials from "../sections/credentials";
 import ArrowRight from "@/shared/svg/arrow-right";
 import ArrowLeft from "@/shared/svg/arrow-left";
+import { useTranslations } from "next-intl";
 
 
-type Inputs = z.infer<typeof CreateUserSchema>
 
 type Steps ={
     id:string;
@@ -74,6 +73,7 @@ const CreateUserForm = () => {
     const [previousStep, setPreviousStep] = useState(0)
     const [currentStep, setCurrentStep] = useState(0)
     const delta = currentStep - previousStep
+    const formT = useTranslations("USERS.VALIDATION");
     
 
     const {
@@ -83,17 +83,17 @@ const CreateUserForm = () => {
         reset,
         trigger,
         formState: { errors,isDirty }
-    } = useForm<Inputs>({
-        resolver: zodResolver(CreateUserSchema)
+    } = useForm<CreateUserSchema>({
+        resolver: zodResolver(getCreateUserSchema(formT))
     })
 
 
-    const onSubmit: SubmitHandler<Inputs> = data => {
+    const onSubmit: SubmitHandler<CreateUserSchema> = data => {
         console.log(data)
         reset()
     }
 
-    type FieldName = keyof Inputs
+    type FieldName = keyof CreateUserSchema
 
     const next = async () => {
         const fields = steps[currentStep].fields

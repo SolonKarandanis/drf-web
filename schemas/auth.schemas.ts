@@ -26,24 +26,6 @@ export function getBaseAuthSchema(
     });
 } 
 
-export const BaseAuthSchema = z.object({
-    username: z.string().min(1,{
-        message: "Username is required",
-    }),
-    email: z.string().email({
-        message: "Email is required",
-    }),
-    firstName: z.string().min(1,{
-        message: "First Name is required",
-    }),
-    lastName: z.string().min(1,{
-        message: "Last Name is required",
-    }),
-    password: z.string().min(6, {
-        message: "Minimum 6 characters required",
-    }),
-    role:z.string(),
-});
 
 export function getNewPasswordSchema(
     t?: (key: Messages, object?: TranslationValues | undefined) => string
@@ -84,24 +66,26 @@ export function getRegisterUserSchema(
 
 export type RegisterUserSchema = z.infer<ReturnType<typeof getRegisterUserSchema>>;
 
+export function getCreateUserSchema(
+    t?: (key: Messages, object?: TranslationValues | undefined) => string
+){
+    return getBaseAuthSchema(t).extend({
+        confirmPassword: z.string().min(6, {
+            message: t?.("min-confirm-password"),
+        }),
+        country: z.string().min(1, t?.("required-country")),
+        street: z.string().min(1, t?.("required-street")),
+        city: z.string().min(1, t?.("required-city")),
+        state: z.string().min(1, t?.("required-state")),
+        zip: z.string().min(1, t?.("required-zip"))
+    }).refine((data) => data.password === data.confirmPassword, {
+        path: ["confirmPassword"],
+        message: t?.("passowrds-dont-match"),
+    });
+}
 
-export const CreateUserSchema = BaseAuthSchema.extend({
-    confirmPassword: z.string().min(6, {
-        message: "Minimum 6 characters required",
-    }),
-    
-    // profileImage: z.instanceof(File).optional()
-    //     .refine((files)=> files && files.size >= MAX_FILE_SIZE, `Max file size is 5MB.`)
-    //     .refine((files)=> files && ACCEPTED_IMAGE_TYPES.includes(files.type),".jpg, .jpeg, .png and .webp files are accepted."),
-    country: z.string().min(1, 'Country is required'),
-    street: z.string().min(1, 'Street is required'),
-    city: z.string().min(1, 'City is required'),
-    state: z.string().min(1, 'State is required'),
-    zip: z.string().min(1, 'Zip is required')
-}).refine((data) => data.password === data.confirmPassword, {
-    path: ["confirmPassword"],
-    message: "Password don't match",
-});
+export type CreateUserSchema = z.infer<ReturnType<typeof getCreateUserSchema>>;
+
 
 export const ForgotPasswordSchema = z.object({
     email: z.string().email({
