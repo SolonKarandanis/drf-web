@@ -250,6 +250,21 @@
                 "delete-user-socials":"Successfully deleted  all user socials",
                 "delete-user-social":"Successfully deleted user social"
             } 
+        },
+        "VALIDATION":{
+            "required-username":"Username is required",
+            "required-first-name":"First Name is required",
+            "required-last-name":"Last Name is required",
+            "required-password":"Password is required",
+            "required-country":"Country is required",
+            "required-street":"Street is required",
+            "required-city":"City is required",
+            "required-state":"State is required",
+            "required-zip":"Zip is required",
+            "required-email":"Email is required",
+            "min-password":"Minimum 6 characters required",
+            "min-confirm-password":"Minimum 6 characters required",
+            "passowrds-dont-match":"Password don't match"
         }
     },
     "PRODUCTS":{

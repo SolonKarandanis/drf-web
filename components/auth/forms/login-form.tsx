@@ -37,21 +37,6 @@ const LoginForm = () => {
         })
     }
 
-    // useEffect(()=>{
-	// 	if(token){
-	// 		getAccount(token)
-	// 		.unwrap()
-	// 		.then((user:UserDetails)=>{
-	// 			dispatch(setAuth(user));
-	// 			toast.success(t('SUCCESS.summary'));
-	// 			router.push(`/${locale}/dashboard`);
-	// 		})
-	// 		.catch((error:ErrorResponse) => {
-	// 			handleError(error);
-	// 		});
-	// 	}
-		
-	// },[token]);
     
     return (
         <>
