@@ -248,8 +248,7 @@ const Header:FC<Props> = ({path})=> {
               <CartDropdown  path={path}/>
               <NotificationsDropdown />
               <FullscreenToggler />
-              <ProfileDropdown path={path}/>
-              <Link href="/api/auth/signout?callbackUrl=/">Logout</Link>
+              <ProfileDropdown />
               <div className="header-element md:px-[0.48rem]">
                 <button aria-label="button" type="button"
                   className="hs-dropdown-toggle switcher-icon inline-flex flex-shrink-0 justify-center items-center gap-2  rounded-full font-medium  align-middle transition-all text-xs dark:text-[#8c9097] dark:text-white/50 dark:hover:text-white dark:focus:ring-white/10 dark:focus:ring-offset-white/10"
