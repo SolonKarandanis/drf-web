@@ -8,7 +8,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/shared/shadcn/components/ui/accordion"
-import { Calendar } from "@/shared/shadcn/components/ui/calendar";
 
 
 export const metadata:Metadata={
@@ -31,41 +30,6 @@ const Page = async () => {
     numeric: 'always' 
   });
   const d=formatter.format(Math.round(diff / 86400000), 'day')
-  const item ={
-    id: '1',
-    percentage:"72% off",
-    preview: "../../../../assets/images/ecommerce/png/1.png",
-    title: 'Dapzem & Co',
-    description:'Branded hoodie ethnic style',
-    rating:4.2,
-    oldpr: '$229',
-    newpr: '$1,799',
-    offerprice:'$229',
-    data:"In Offer",
-    quantity:1,
-    images: [
-       { 'img': "../../../../assets/images/ecommerce/png/1.png" },
-       { 'img': "../../../../assets/images/ecommerce/png/1.png" },
-       { 'img': "../../../../assets/images/ecommerce/png/1.png" }],
-  }
-
-  const faqData = [
-    {
-      id: 1,
-      header: "What is LogRocket?",
-      body:"Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-    },
-    {
-      id: 2,
-      header: "LogRocket pricing?",
-      body:"Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-    },
-    {
-      id: 3,
-      header: "Where can I Find the Doc?",
-      body:"Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-    },
-  ];
 
   return (
     <div>
