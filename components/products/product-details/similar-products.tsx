@@ -14,9 +14,9 @@ interface Props{
 const SimilarProducts:FC<Props> = ({uuid}) => {
     const t = useTranslations();
     const {
-            isError,
-            isLoading,
-            similarProducts
+        isError,
+        isLoading,
+        similarProducts
     } = useGetProductDetailsSimilarProducts(uuid);
 
     if(isError){

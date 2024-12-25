@@ -4,13 +4,26 @@ import { Swiper as SwiperType } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Thumbs, FreeMode, Navigation } from 'swiper/modules';
 import { FC, useState } from 'react';
+import { useGetProductDetailsImages } from '../hooks/useGetProductDetailsImages';
+import { useTranslations } from 'next-intl';
+
 
 interface Props{
     uuid:string;
 }
 
 const ImageGallery:FC<Props>= ({uuid}) => {
+    const t = useTranslations();
+    const {
+        isError,
+        isLoading,
+        productImages
+    } = useGetProductDetailsImages(uuid);
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
+
+    if(isError){
+        return <>{t("GLOBAL.FETCH-ERROR")}</>
+    }
 
     return (
         <div className="xxl:col-span-12 xl:col-span-6 lg:col-span-6 md:col-span-6 sm:col-span-12 col-span-12 md:mb-[3rem] mb-4">
