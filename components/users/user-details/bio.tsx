@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import {FC} from 'react'
 import UserEditButton from './user-edit-button';
 import UserEditGroupButtons from './user-edit-group-buttons';
-import { UpdateUserBioSchema } from '@/schemas/search.schemas';
+
 import * as z from "zod";
 import {SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,8 +12,7 @@ import { Form } from '@/shared/shadcn/components/ui/form';
 import { useParams } from 'next/navigation';
 import { UpdateBioRequest } from '@/models/user.models';
 import { useMutateUserDetails } from '../hooks/useMutateUserDetails';
-import { useAppSelector } from '@/shared/redux/hooks';
-import { userBioSelector } from '@/shared/redux/features/users/usersSlice';
+import { UpdateUserBioSchema } from '@/schemas/user.schemas';
 
 type Inputs = z.infer<typeof UpdateUserBioSchema>
 interface Props{

@@ -31,9 +31,9 @@ const SelectLanguage= ()=> {
     }
 
     return (
-        <div className=" py-2 md:px-[0.65rem] px-2 flex-shrink-0 justify-center items-center gap-2  rounded-full font-medium transition-all text-xs ">
+        <div className=" py-1 md:px-[0.65rem] px-1 mt-2">
             <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+                <DropdownMenuTrigger asChild className="items-center justify-center flex-shrink-0 gap-2 text-xs font-medium transition-all rounded-full ">
                     <Button type="button" variant="ghost" size="icon">
                         <GlobeIcon className="size-5  dark:bg-bgdark dark:hover:bg-black/20 dark:text-[#8c9097] dark:text-white/50 dark:hover:text-white 
                         dark:focus:ring-white/10 dark:focus:ring-offset-white/10" />
@@ -45,21 +45,21 @@ const SelectLanguage= ()=> {
                     <DropdownMenuSeparator />
 
                     <DropdownMenuCheckboxItem
+                        className="cursor-pointer"
                         checked={locale === "en"}
                         disabled={isPending}
                         onClick={() => {
                             handleLocaleChange("en");
-                        }}
-                        >
+                        }}>
                         English
                     </DropdownMenuCheckboxItem>
                     <DropdownMenuCheckboxItem
+                        className="cursor-pointer"
                         checked={locale === "gr"}
                         disabled={isPending}
                         onClick={() => {
                             handleLocaleChange("gr");
-                        }}
-                        >
+                        }}>
                         Greek
                     </DropdownMenuCheckboxItem>
                 </DropdownMenuContent>

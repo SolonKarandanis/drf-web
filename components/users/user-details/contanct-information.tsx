@@ -3,7 +3,6 @@
 import {FC} from 'react'
 import UserEditGroupButtons from './user-edit-group-buttons';
 import UserEditButton from './user-edit-button';
-import { UpldateUserContactInfoSchema } from '@/schemas/search.schemas';
 import * as z from "zod";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,6 +13,7 @@ import { useParams } from 'next/navigation';
 import {  userLocationSelector } from '@/shared/redux/features/users/usersSlice';
 import { useTranslations } from 'next-intl';
 import { useMutateUserDetails } from '../hooks/useMutateUserDetails';
+import { UpldateUserContactInfoSchema } from '@/schemas/user.schemas';
 
 
 type Inputs = z.infer<typeof UpldateUserContactInfoSchema>
