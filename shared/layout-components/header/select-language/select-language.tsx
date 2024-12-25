@@ -31,11 +31,12 @@ const SelectLanguage= ()=> {
     }
 
     return (
-        <div className=" py-2 md:px-[0.65rem] px-2 ">
+        <div className=" py-2 md:px-[0.65rem] px-2 flex-shrink-0 justify-center items-center gap-2  rounded-full font-medium transition-all text-xs ">
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button type="button" variant="ghost" size="icon" >
-                        <GlobeIcon className="size-5" />
+                    <Button type="button" variant="ghost" size="icon">
+                        <GlobeIcon className="size-5  dark:bg-bgdark dark:hover:bg-black/20 dark:text-[#8c9097] dark:text-white/50 dark:hover:text-white 
+                        dark:focus:ring-white/10 dark:focus:ring-offset-white/10" />
                     </Button>
                 </DropdownMenuTrigger>
 
