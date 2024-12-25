@@ -11,7 +11,7 @@ import { Button } from '@/shared/shadcn/components/ui/button';
 import { useTranslations } from 'next-intl';
 import ButtonLoading from '@/shared/components/button-loading/button-loading';
 import { ChangeEvent } from 'react';
-import {  UsersState, userUuidSelector } from '@/shared/redux/features/users/usersSlice';
+import {  userUuidSelector } from '@/shared/redux/features/users/usersSlice';
 import { UploadProfileImageMutation } from '@/models/image.models';
 import { useMutateUserDetails } from '../hooks/useMutateUserDetails';
 
@@ -19,6 +19,7 @@ type Inputs = z.infer<typeof UploadProfileImageSchema>
 
 const UploadPicture = () => {
     const t = useTranslations();
+    const formT = useTranslations("USERS.VALIDATION");
     const {
       mutationLoading,
       handleUploadProfilePictureMutation
