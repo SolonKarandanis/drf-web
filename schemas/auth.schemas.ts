@@ -69,14 +69,21 @@ export function getLoginSchema(
 export type LoginSchema = z.infer<ReturnType<typeof getLoginSchema>>;
 
 
-export const RegisterSchema = BaseAuthSchema.extend({
-    confirmPassword: z.string().min(6, {
-        message: "Minimum 6 characters required",
-    }),
-}).refine((data) => data.password === data.confirmPassword, {
-    path: ["confirmPassword"],
-    message: "Password don't match",
-});
+export function getRegisterUserSchema(
+    t?: (key: Messages, object?: TranslationValues | undefined) => string
+){
+    return getBaseAuthSchema(t).extend({
+        confirmPassword: z.string().min(6, {
+            message: t?.("min-confirm-password"),
+        }),
+    }).refine((data) => data.password === data.confirmPassword, {
+        path: ["confirmPassword"],
+        message: t?.("passowrds-dont-match"),
+    });
+}
+
+export type RegisterUserSchema = z.infer<ReturnType<typeof getRegisterUserSchema>>;
+
 
 export const CreateUserSchema = BaseAuthSchema.extend({
     confirmPassword: z.string().min(6, {

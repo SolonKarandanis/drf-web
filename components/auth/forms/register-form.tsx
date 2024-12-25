@@ -1,6 +1,6 @@
 "use client";
 
-import { RegisterSchema } from '@/schemas/auth.schemas';
+import { RegisterUserSchema,getRegisterUserSchema } from '@/schemas/auth.schemas';
 import CForm from '@/shared/components/form/cform'
 import * as z from "zod";
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -22,11 +22,10 @@ import { registerUser } from '@/actions/register-user';
 import { setUserGroups } from '@/shared/redux/features/users/usersSlice';
 import { Options } from '@/shared/components/props';
 
-type RegisterSchema = z.infer<typeof RegisterSchema>;
-
 
 const RegisterForm = () => {
     const t = useTranslations();
+    const formT = useTranslations("USERS.VALIDATION");
     const rform='REGISTER.FORM';
     const router = useRouter();
     const [getAllGroups] = useLazyGetAllGroupsQuery();
@@ -50,8 +49,8 @@ const RegisterForm = () => {
         handleSubmit,
         formState: { errors,isSubmitting, isValid },
         watch
-    } = useForm<RegisterSchema>({
-        resolver: zodResolver(RegisterSchema),
+    } = useForm<RegisterUserSchema>({
+        resolver: zodResolver(getRegisterUserSchema(formT)),
         defaultValues: {
             firstName:"",
             lastName:"",
@@ -87,7 +86,7 @@ const RegisterForm = () => {
         }
 	}
 
-    const onSubmit:SubmitHandler<RegisterSchema> = async (values: RegisterSchema) =>{
+    const onSubmit:SubmitHandler<RegisterUserSchema> = async (values: RegisterUserSchema) =>{
         const response = await registerUser(values);
         if (response) {
             handleError(response);
