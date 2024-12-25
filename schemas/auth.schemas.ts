@@ -87,32 +87,44 @@ export function getCreateUserSchema(
 export type CreateUserSchema = z.infer<ReturnType<typeof getCreateUserSchema>>;
 
 
-export const ForgotPasswordSchema = z.object({
-    email: z.string().email({
-        message: "Email is required",
-    }),
-    newPassword: z.string().min(1, {
-        message: "Minimum 6 characters required",
-    }),
-    confirmPassword: z.string().min(1, {
-        message: "Minimum 6 characters required",
-    }),
-}).refine((data) => data.newPassword === data.confirmPassword, {
-    path: ["confirmPassword"],
-    message: "Password don't match",
-});
+export function getForgotPasswordSchema(
+    t?: (key: Messages, object?: TranslationValues | undefined) => string
+){
+    return z.object({
+        email: z.string().min(1,{
+            message: t?.("required-email"),
+        }),
+        newPassword: z.string().min(6, {
+            message: t?.("min-password"),
+        }),
+        confirmPassword: z.string().min(6, {
+            message: t?.("min-confirm-password"),
+        }),
+    }).refine((data) => data.newPassword === data.confirmPassword, {
+        path: ["confirmPassword"],
+        message: t?.("passowrds-dont-match"),
+    });
+}
 
-export const ResetPasswordSchema = z.object({
-    currentPassword: z.string().min(1, {
-        message: "Password is required",
-    }),
-    newPassword: z.string().min(1, {
-        message: "Minimum 6 characters required",
-    }),
-    confirmPassword: z.string().min(1, {
-        message: "Minimum 6 characters required",
-    }),
-}).refine((data) => data.newPassword === data.confirmPassword, {
-    path: ["confirmPassword"],
-    message: "Password don't match",
-});
+export type ForgotPasswordSchema = z.infer<ReturnType<typeof getForgotPasswordSchema>>;
+
+export function getResetPasswordSchema(
+    t?: (key: Messages, object?: TranslationValues | undefined) => string
+){
+    return z.object({
+        email: z.string().min(1,{
+            message: t?.("required-email"),
+        }),
+        newPassword: z.string().min(6, {
+            message: t?.("min-password"),
+        }),
+        confirmPassword: z.string().min(6, {
+            message: t?.("min-confirm-password"),
+        }),
+    }).refine((data) => data.newPassword === data.confirmPassword, {
+        path: ["confirmPassword"],
+        message: t?.("passowrds-dont-match"),
+    });
+}
+
+export type ResetPasswordSchema = z.infer<ReturnType<typeof getForgotPasswordSchema>>;

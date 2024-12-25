@@ -1,27 +1,26 @@
 "use client"
-import * as z from "zod";
+
 import CForm from "@/shared/components/form/cform"
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ForgotPasswordSchema } from '@/schemas/auth.schemas';
+import { ForgotPasswordSchema,getForgotPasswordSchema } from '@/schemas/auth.schemas';
 import { useEffect, useState } from "react";
 import { passwordStrength } from "check-password-strength";
 import PasswordStrength from '@/shared/components/password-strength/password-strength';
-import { toast } from "react-toastify";
 import CFormInput from "@/shared/components/form-input/cform-input";
 import CButton from "@/shared/components/button/cbutton";
 
 
-type Inputs = z.infer<typeof ForgotPasswordSchema>;
 
 const ForgotPasswordForm = () => {
   const t = useTranslations('FORGOT-PASSWORD.FORM');
+  const formT = useTranslations("USERS.VALIDATION");
   const router = useRouter();
   
-  const {register,handleSubmit,formState: { errors },watch} = useForm<Inputs>({
-    resolver: zodResolver(ForgotPasswordSchema),
+  const {register,handleSubmit,formState: { errors },watch} = useForm<ForgotPasswordSchema>({
+    resolver: zodResolver(getForgotPasswordSchema(formT)),
   });
 
   const [passStrength,setPassStrength]= useState<number>(0);
@@ -36,7 +35,7 @@ const ForgotPasswordForm = () => {
 	// 	toast.error(`(${status}) ${detail}`);
 	// }
 
-  const onSubmit:SubmitHandler<Inputs> = (values: Inputs) =>{
+  const onSubmit:SubmitHandler<ForgotPasswordSchema> = (values: ForgotPasswordSchema) =>{
     const {email,newPassword,confirmPassword} = values;
   }
   
