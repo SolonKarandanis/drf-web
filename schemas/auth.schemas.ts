@@ -1,5 +1,30 @@
 import * as z from "zod";
+import { type TranslationValues } from "next-intl";
 
+type Messages = keyof IntlMessages["USERS"]["VALIDATION"];
+
+export function getBaseAuthSchema(
+    t?: (key: Messages, object?: TranslationValues | undefined) => string
+){
+    return z.object({
+        username: z.string().min(1,{
+            message: t?.("required-username"),
+        }),
+        email: z.string().email({
+            message: t?.("required-email"),
+        }),
+        firstName: z.string().min(1,{
+            message: t?.("required-first-name"),
+        }),
+        lastName: z.string().min(1,{
+            message: t?.("required-last-name"),
+        }),
+        password: z.string().min(6, {
+            message: t?.("min-password"),
+        }),
+        role:z.string(),
+    });
+} 
 
 export const BaseAuthSchema = z.object({
     username: z.string().min(1,{
@@ -20,20 +45,29 @@ export const BaseAuthSchema = z.object({
     role:z.string(),
 });
 
-export const NewPasswordSchema = BaseAuthSchema.pick({
-    password:true
-});
-  
+export function getNewPasswordSchema(
+    t?: (key: Messages, object?: TranslationValues | undefined) => string
+){
+    return getBaseAuthSchema(t).pick({password:true});
+}
 
+export type NewPasswordSchema = z.infer<ReturnType<typeof getNewPasswordSchema>>;
 
-export const LoginSchema = z.object({
-    username: z.string().min(1,{
-        message: "Username is required",
-    }),
-    password: z.string().min(1, {
-        message: "Password is required",
-    })
-});
+export function getLoginSchema(
+    t?: (key: Messages, object?: TranslationValues | undefined) => string
+){
+    return z.object({
+        username: z.string().min(1,{
+            message: t?.("required-username"),
+        }),
+        password: z.string().min(6, {
+            message: t?.("min-password"),
+        }),
+    });
+}
+
+export type LoginSchema = z.infer<ReturnType<typeof getLoginSchema>>;
+
 
 export const RegisterSchema = BaseAuthSchema.extend({
     confirmPassword: z.string().min(6, {

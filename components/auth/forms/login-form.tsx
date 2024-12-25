@@ -1,25 +1,24 @@
 "use client";
 
-import * as z from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { LoginSchema } from "@/schemas/auth.schemas";
+import { getLoginSchema, LoginSchema } from "@/schemas/auth.schemas";
 import CForm from "@/shared/components/form/cform";
 import CFormInput from "@/shared/components/form-input/cform-input";
 import CButton from "@/shared/components/button/cbutton";
 import { useTranslations } from "next-intl";
 import {signIn} from "next-auth/react"
 
-type LoginSchema = z.infer<typeof LoginSchema>;
 
 
 const LoginForm = () => {
     const t = useTranslations();
+    const formT = useTranslations("USERS.VALIDATION");
     const lform='LOGIN.FORM';
     
     const {register,handleSubmit,formState: { errors ,isSubmitting, isValid },} = useForm<LoginSchema>({
-        resolver: zodResolver(LoginSchema),
+        resolver: zodResolver(getLoginSchema(formT)),
         defaultValues: {
           username: "",
           password: "",
