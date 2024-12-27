@@ -80,6 +80,58 @@ const CartDropdown = () => {
           totalPrice:4,
           uuid:'sss'
         },
+        {
+            id: 5,
+            imageSrc: "/assets/images/ecommerce/jpg/6.jpg",
+            name: 'Canvas Shoes',
+            unitPrice: 129.00,
+            color: 'Gray',
+            text: 'Sports',
+            modificationAlert:false,
+            productId:1,
+            quantity:4,
+            totalPrice:4,
+            uuid:'sss'
+          },
+          {
+            id: 5,
+            imageSrc: "/assets/images/ecommerce/jpg/6.jpg",
+            name: 'Canvas Shoes',
+            unitPrice: 129.00,
+            color: 'Gray',
+            text: 'Sports',
+            modificationAlert:false,
+            productId:1,
+            quantity:4,
+            totalPrice:4,
+            uuid:'sss'
+          },
+          {
+            id: 5,
+            imageSrc: "/assets/images/ecommerce/jpg/6.jpg",
+            name: 'Canvas Shoes',
+            unitPrice: 129.00,
+            color: 'Gray',
+            text: 'Sports',
+            modificationAlert:false,
+            productId:1,
+            quantity:4,
+            totalPrice:4,
+            uuid:'sss'
+          },
+          {
+            id: 5,
+            imageSrc: "/assets/images/ecommerce/jpg/6.jpg",
+            name: 'Canvas Shoes',
+            unitPrice: 129.00,
+            color: 'Gray',
+            text: 'Sports',
+            modificationAlert:false,
+            productId:1,
+            quantity:4,
+            totalPrice:4,
+            uuid:'sss'
+          },
       ];
     
     const [cartItems, setCartItems] = useState([...cartProduct]);
