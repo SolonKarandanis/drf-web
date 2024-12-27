@@ -1,9 +1,7 @@
 'use client';
 
 import Link from "next/link"
-import Image from "next/image";
 import { useRef, useState } from "react";
-import { useAppSelector } from "@/shared/redux/hooks";
 import { 
     DropdownMenu, 
     DropdownMenuContent, 
@@ -13,14 +11,10 @@ import {
 } from "@/shared/shadcn/components/ui/dropdown-menu";
 import { CartItem } from "@/models/cart.models";
 import CartItemDropdown from "./cart-item-dropdown";
+import { Virtuoso } from 'react-virtuoso'
 
 
 const CartDropdown = () => {
-    const configState = useAppSelector((state)=>state.config);
-    const path = configState.baseUrl
-
-
-    const data=  <span className="font-[600] py-[0.25rem] px-[0.45rem] rounded-[0.25rem] bg-pink/10 text-pink text-[0.625rem]">Free shipping</span>
     const cartProduct:CartItem[] = [
         {
           id: 1,
@@ -184,14 +178,11 @@ const CartDropdown = () => {
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <ul className={`mb-0 list-none overflow-y-auto `} id="header-cart-items-scroll">
-                        {cartItems.map((item) => {
-                            return (
-                               <CartItemDropdown
-                                key={item.id}
-                                item={item} 
-                                removeItem={handleRemove} />
-                            )
-                        })}
+                        <Virtuoso 
+                            className="!h-[200px]"
+                            data={cartItems} 
+                            totalCount={cartItemCount}
+                            itemContent={(_,item)=><CartItemDropdown  item={item} removeItem={handleRemove} />}/>
                     </ul>
                     <div className={`p-3 empty-header-item border-t ${cartItemCount === 0 ? 'hidden' : 'block'}`}>
                         <div className="grid">
