@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useAppSelector } from "@/shared/redux/hooks";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/shared/shadcn/components/ui/dropdown-menu";
+import { CartItem } from "@/models/cart.models";
 
 
 const CartDropdown = () => {
@@ -13,51 +14,71 @@ const CartDropdown = () => {
 
 
     const data=  <span className="font-[600] py-[0.25rem] px-[0.45rem] rounded-[0.25rem] bg-pink/10 text-pink text-[0.625rem]">Free shipping</span>
-    const cartProduct = [
+    const cartProduct:CartItem[] = [
         {
           id: 1,
-          src: "/assets/images/ecommerce/jpg/1.jpg",
+          imageSrc: "/assets/images/ecommerce/jpg/1.jpg",
           name: 'SomeThing Phone',
-          price: '$1,299.00',
+          unitPrice: 1.299,
           color: 'Metallic Blue',
           text: '6gb Ram',
-          class: '',
+          modificationAlert:false,
+          productId:1,
+          quantity:4,
+          totalPrice:4,
+          uuid:'sss'
         },
         {
           id: 2,
-          src: "/assets/images/ecommerce/jpg/3.jpg",
+          imageSrc: "/assets/images/ecommerce/jpg/3.jpg",
           name: 'Stop Watch',
-          price: '$179.29',
+          unitPrice: 179.29,
           color: 'Analog',
-          text: data,
-          class: '',
+          text: '',
+          modificationAlert:false,
+          productId:1,
+          quantity:4,
+          totalPrice:4,
+          uuid:'sss'
         },
         {
           id: 3,
-          src: "/assets/images/ecommerce/jpg/5.jpg",
+          imageSrc: "/assets/images/ecommerce/jpg/5.jpg",
           name: 'Photo Frame',
-          price: '$29.00',
+          unitPrice: 29.00,
           color: 'Decorative',
           text: '',
-          class: '',
+          modificationAlert:false,
+          productId:1,
+          quantity:4,
+          totalPrice:4,
+          uuid:'sss'
         },
         {
           id: 4,
-          src: "/assets/images/ecommerce/jpg/4.jpg",
+          imageSrc: "/assets/images/ecommerce/jpg/4.jpg",
           name: 'Kikon Camera',
-          price: '$4,999.00',
+          unitPrice: 4.999,
           color: 'Black',
           text: '50MM',
-          class: '',
+          modificationAlert:false,
+          productId:1,
+          quantity:4,
+          totalPrice:4,
+          uuid:'sss'
         },
         {
           id: 5,
-          src: "/assets/images/ecommerce/jpg/6.jpg",
+          imageSrc: "/assets/images/ecommerce/jpg/6.jpg",
           name: 'Canvas Shoes',
-          price: '$129.00',
+          unitPrice: 129.00,
           color: 'Gray',
           text: 'Sports',
-          class: 'border-b-0',
+          modificationAlert:false,
+          productId:1,
+          quantity:4,
+          totalPrice:4,
+          uuid:'sss'
         },
       ];
     
@@ -104,11 +125,11 @@ const CartDropdown = () => {
                     <DropdownMenuSeparator />
                     <ul className="mb-0 list-none" id="header-cart-items-scroll">
                         {cartItems.map((idx) => (
-                            <li className={`ti-dropdown-item border-b dark:border-defaultborder/10 border-defaultborder ${idx.class}`} key={Math.random()}>
+                            <li className={`ti-dropdown-item border-b dark:border-defaultborder/10 border-defaultborder`} key={Math.random()}>
                                 <div className="flex items-start cart-dropdown-item">
                                     <Image
                                         alt="img"
-                                        src={`${path}${idx.src}`}
+                                        src={`${path}${idx.imageSrc}`}
                                         width={700}
                                         height={475}
                                         sizes="100vw"
@@ -123,7 +144,7 @@ const CartDropdown = () => {
 
                                             <div className="inline-flex">
                                                 <span className="text-black mb-1 dark:text-white !font-medium">
-                                                    {idx.price}
+                                                    {idx.unitPrice}
                                                 </span>
                                                 <Link aria-label="anchor" href="#!" className="header-cart-remove ltr:float-right rtl:float-left dropdown-item-close" onClick={() => handleRemove(idx.id)}><i
                                                 className="ti ti-trash"></i></Link>

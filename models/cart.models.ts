@@ -1,5 +1,9 @@
-interface CartItem{
+export interface CartItem{
     id:number;
+    name:string;
+    text:string;
+    imageSrc: string;
+    color:string;
     modificationAlert:boolean;
     quantity:number;
     unitPrice:number;
@@ -8,7 +12,7 @@ interface CartItem{
     uuid:string;
 }
 
-interface Cart{
+export interface Cart{
     id:number;
     modificationAlert:boolean;
     totalPrice:number;
@@ -18,16 +22,16 @@ interface Cart{
     cartItems:CartItem[];
 }
 
-interface AddToCartRequest{
+export interface AddToCartRequest{
     productId:number;
     quantity:number;
 }
 
-interface UpdateQuantityRequest{
+export interface UpdateQuantityRequest{
     cartItemId:number;
     quantity:number;
 }
 
-interface DeleteCartItemRequest{
+export interface DeleteCartItemRequest{
     cartItemId:number;
 }
