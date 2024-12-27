@@ -245,7 +245,7 @@ const Header:FC<Props> = ({path})=> {
               </div>
               <SelectLanguage />
               <ThemeToggler themeStoreState={themeState}/>
-              <CartDropdown  path={path}/>
+              <CartDropdown />
               <NotificationsDropdown />
               <FullscreenToggler />
               <ProfileDropdown />

@@ -2,6 +2,7 @@
 
 import { SimilarProduct } from '@/models/product.models';
 import { useAppSelector } from '@/shared/redux/hooks';
+import Image from 'next/image';
 import Link from 'next/link';
 import {FC} from 'react'
 
