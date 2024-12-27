@@ -4,9 +4,14 @@ import Link from "next/link"
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { useAppSelector } from "@/shared/redux/hooks";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/shared/shadcn/components/ui/dropdown-menu";
+import { 
+    DropdownMenu, 
+    DropdownMenuContent, 
+    DropdownMenuLabel, 
+    DropdownMenuSeparator, 
+    DropdownMenuTrigger 
+} from "@/shared/shadcn/components/ui/dropdown-menu";
 import { CartItem } from "@/models/cart.models";
-import { useVirtualizer } from '@tanstack/react-virtual';
 
 
 const CartDropdown = () => {
@@ -138,13 +143,6 @@ const CartDropdown = () => {
     const [cartItems, setCartItems] = useState([...cartProduct]);
     const [cartItemCount, setCartItemCount] = useState(cartProduct.length);
 
-    const virtualizer = useVirtualizer({
-        count: cartItemCount,
-        getScrollElement: () => parentRef.current,
-        estimateSize: () => 35,
-    });
-    const virtualItems = virtualizer.getVirtualItems();
-    const totalSize = virtualizer.getTotalSize();
 
     const handleRemove = (itemId:number) => {
         const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
@@ -184,15 +182,14 @@ const CartDropdown = () => {
                         </div>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <ul className={`mb-0 list-none overflow-y-auto h-[${totalSize}px]`} id="header-cart-items-scroll">
-                        {virtualItems.map((virtualItem) => {
-                            const listItem = cartItems[virtualItem.index];
+                    <ul className={`mb-0 list-none overflow-y-auto `} id="header-cart-items-scroll">
+                        {cartItems.map((item) => {
                             return (
-                                <li className={`ti-dropdown-item border-b dark:border-defaultborder/10 border-defaultborder h-[${virtualItem.size}px] translate-y-[${virtualItem.start}px]`} key={listItem.id}>
+                                <li className={`ti-dropdown-item border-b dark:border-defaultborder/10 border-defaultborder`} key={item.id}>
                                     <div className="flex items-start cart-dropdown-item">
                                         <Image
                                             alt="img"
-                                            src={`${path}${listItem.imageSrc}`}
+                                            src={`${path}${item.imageSrc}`}
                                             width={700}
                                             height={475}
                                             sizes="100vw"
@@ -202,21 +199,21 @@ const CartDropdown = () => {
                                         <div className="grow">
                                             <div className="flex items-start justify-between mb-0">
                                                 <div className="mb-0 !text-[0.8125rem] text-[#232323] font-semibold dark:text-[#8c9097] dark:text-white/50">
-                                                    <Link href="#!">{listItem.name}</Link>
+                                                    <Link href="#!">{item.name}</Link>
                                                 </div>
     
                                                 <div className="inline-flex">
                                                     <span className="text-black mb-1 dark:text-white !font-medium">
-                                                        {listItem.unitPrice}
+                                                        {item.unitPrice}
                                                     </span>
-                                                    <Link aria-label="anchor" href="#!" className="header-cart-remove ltr:float-right rtl:float-left dropdown-item-close" onClick={() => handleRemove(listItem.id)}><i
+                                                    <Link aria-label="anchor" href="#!" className="header-cart-remove ltr:float-right rtl:float-left dropdown-item-close" onClick={() => handleRemove(item.id)}><i
                                                     className="ti ti-trash"></i></Link>
                                                 </div>
                                             </div>
                                             <div className="flex items-start justify-between min-w-fit">
                                                 <ul className="flex header-product-item dark:text-white/50">
-                                                    <li>{listItem.color}</li>
-                                                    <li>{listItem.text}</li>
+                                                    <li>{item.color}</li>
+                                                    <li>{item.text}</li>
                                                 </ul>
                                             </div>
                                         </div>
