@@ -2,10 +2,11 @@
 
 import Link from "next/link"
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useAppSelector } from "@/shared/redux/hooks";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/shared/shadcn/components/ui/dropdown-menu";
 import { CartItem } from "@/models/cart.models";
+import { useVirtualizer } from '@tanstack/react-virtual';
 
 
 const CartDropdown = () => {
@@ -81,7 +82,7 @@ const CartDropdown = () => {
           uuid:'sss'
         },
         {
-            id: 5,
+            id: 6,
             imageSrc: "/assets/images/ecommerce/jpg/6.jpg",
             name: 'Canvas Shoes',
             unitPrice: 129.00,
@@ -94,7 +95,7 @@ const CartDropdown = () => {
             uuid:'sss'
           },
           {
-            id: 5,
+            id: 7,
             imageSrc: "/assets/images/ecommerce/jpg/6.jpg",
             name: 'Canvas Shoes',
             unitPrice: 129.00,
@@ -107,7 +108,7 @@ const CartDropdown = () => {
             uuid:'sss'
           },
           {
-            id: 5,
+            id: 8,
             imageSrc: "/assets/images/ecommerce/jpg/6.jpg",
             name: 'Canvas Shoes',
             unitPrice: 129.00,
@@ -120,7 +121,7 @@ const CartDropdown = () => {
             uuid:'sss'
           },
           {
-            id: 5,
+            id: 9,
             imageSrc: "/assets/images/ecommerce/jpg/6.jpg",
             name: 'Canvas Shoes',
             unitPrice: 129.00,
@@ -133,9 +134,17 @@ const CartDropdown = () => {
             uuid:'sss'
           },
       ];
-    
+    const parentRef = useRef<HTMLDivElement>(null)
     const [cartItems, setCartItems] = useState([...cartProduct]);
     const [cartItemCount, setCartItemCount] = useState(cartProduct.length);
+
+    const virtualizer = useVirtualizer({
+        count: cartItemCount,
+        getScrollElement: () => parentRef.current,
+        estimateSize: () => 35,
+    });
+    const virtualItems = virtualizer.getVirtualItems();
+    const totalSize = virtualizer.getTotalSize();
 
     const handleRemove = (itemId:number) => {
         const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
@@ -144,7 +153,7 @@ const CartDropdown = () => {
       };
 
     return (
-        <div className="header-element cart-dropdown hs-dropdown ti-dropdown md:!block !hidden py-[1rem] md:px-[0.65rem] px-2 
+        <div ref={parentRef} className="header-element cart-dropdown hs-dropdown ti-dropdown md:!block !hidden py-[1rem] md:px-[0.65rem] px-2 
             [--placement:bottom-right]">
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -175,43 +184,46 @@ const CartDropdown = () => {
                         </div>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <ul className="mb-0 list-none" id="header-cart-items-scroll">
-                        {cartItems.map((idx) => (
-                            <li className={`ti-dropdown-item border-b dark:border-defaultborder/10 border-defaultborder`} key={Math.random()}>
-                                <div className="flex items-start cart-dropdown-item">
-                                    <Image
-                                        alt="img"
-                                        src={`${path}${idx.imageSrc}`}
-                                        width={700}
-                                        height={475}
-                                        sizes="100vw"
-                                        className="!h-[1.75rem] !w-[1.75rem] leading-[1.75rem] text-[0.65rem] rounded-[50%] br-5 me-3"
-                                    />
-
-                                    <div className="grow">
-                                        <div className="flex items-start justify-between mb-0">
-                                            <div className="mb-0 !text-[0.8125rem] text-[#232323] font-semibold dark:text-[#8c9097] dark:text-white/50">
-                                                <Link href="#!">{idx.name}</Link>
+                    <ul className={`mb-0 list-none overflow-y-auto h-[${totalSize}px]`} id="header-cart-items-scroll">
+                        {virtualItems.map((virtualItem) => {
+                            const listItem = cartItems[virtualItem.index];
+                            return (
+                                <li className={`ti-dropdown-item border-b dark:border-defaultborder/10 border-defaultborder h-[${virtualItem.size}px] translate-y-[${virtualItem.start}px]`} key={listItem.id}>
+                                    <div className="flex items-start cart-dropdown-item">
+                                        <Image
+                                            alt="img"
+                                            src={`${path}${listItem.imageSrc}`}
+                                            width={700}
+                                            height={475}
+                                            sizes="100vw"
+                                            className="!h-[1.75rem] !w-[1.75rem] leading-[1.75rem] text-[0.65rem] rounded-[50%] br-5 me-3"
+                                        />
+    
+                                        <div className="grow">
+                                            <div className="flex items-start justify-between mb-0">
+                                                <div className="mb-0 !text-[0.8125rem] text-[#232323] font-semibold dark:text-[#8c9097] dark:text-white/50">
+                                                    <Link href="#!">{listItem.name}</Link>
+                                                </div>
+    
+                                                <div className="inline-flex">
+                                                    <span className="text-black mb-1 dark:text-white !font-medium">
+                                                        {listItem.unitPrice}
+                                                    </span>
+                                                    <Link aria-label="anchor" href="#!" className="header-cart-remove ltr:float-right rtl:float-left dropdown-item-close" onClick={() => handleRemove(listItem.id)}><i
+                                                    className="ti ti-trash"></i></Link>
+                                                </div>
                                             </div>
-
-                                            <div className="inline-flex">
-                                                <span className="text-black mb-1 dark:text-white !font-medium">
-                                                    {idx.unitPrice}
-                                                </span>
-                                                <Link aria-label="anchor" href="#!" className="header-cart-remove ltr:float-right rtl:float-left dropdown-item-close" onClick={() => handleRemove(idx.id)}><i
-                                                className="ti ti-trash"></i></Link>
+                                            <div className="flex items-start justify-between min-w-fit">
+                                                <ul className="flex header-product-item dark:text-white/50">
+                                                    <li>{listItem.color}</li>
+                                                    <li>{listItem.text}</li>
+                                                </ul>
                                             </div>
-                                        </div>
-                                        <div className="flex items-start justify-between min-w-fit">
-                                            <ul className="flex header-product-item dark:text-white/50">
-                                                <li>{idx.color}</li>
-                                                <li>{idx.text}</li>
-                                            </ul>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        ))}
+                                </li>
+                            )
+                        })}
                     </ul>
                     <div className={`p-3 empty-header-item border-t ${cartItemCount === 0 ? 'hidden' : 'block'}`}>
                         <div className="grid">
