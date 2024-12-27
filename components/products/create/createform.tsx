@@ -8,7 +8,7 @@ import DatePicker from 'react-datepicker';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import { useState } from 'react';
-import { Addproduct, Addproduct1, Addproduct2, Addproduct3, Addproduct4, Addproduct5, Addproduct6, Addproduct7 } from '../search/product-data';
+
 import { FilePondFile } from 'filepond';
 import { ActualFileObject } from 'filepond';
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
@@ -43,7 +43,7 @@ const CreateForm = () => {
                         </label>
                         <div className="col-span-12 xl:col-span-6">
                             <label htmlFor="product-category-add" className="form-label">Category</label>
-                            <Select 
+                            {/* <Select 
                                 id="product-category-add"  
                                 name="product-category-add" 
                                 options={Addproduct} 
@@ -52,7 +52,7 @@ const CreateForm = () => {
                                 menuPlacement='auto' 
                                 classNamePrefix="Select2" 
                                 placeholder="Category"
-                            />
+                            /> */}
                         </div>
                         <div className="col-span-12 xl:col-span-6">
                             <label 
@@ -60,7 +60,7 @@ const CreateForm = () => {
                                 className="form-label">
                                 Gender
                             </label>
-                            <Select 
+                            {/* <Select 
                                 id="product-gender-add"
                                 name="product-gender-add" 
                                 options={Addproduct1} 
@@ -69,7 +69,7 @@ const CreateForm = () => {
                                 menuPlacement='auto' 
                                 classNamePrefix="Select2" 
                                 placeholder="Select"
-                            />
+                            /> */}
                         </div>
                         <div className="col-span-12 xl:col-span-6">
                             <label 
@@ -77,7 +77,7 @@ const CreateForm = () => {
                                 className="form-label">
                                 Size
                             </label>
-                            <Select 
+                            {/* <Select 
                                 id="product-size-add" 
                                 name="product-size-add" 
                                 options={Addproduct2} 
@@ -86,7 +86,7 @@ const CreateForm = () => {
                                 menuPlacement='auto' 
                                 classNamePrefix="Select2" 
                                 placeholder="Select"
-                            />
+                            /> */}
                         </div>
                         <div className="col-span-12 xl:col-span-6">
                             <label 
@@ -94,7 +94,7 @@ const CreateForm = () => {
                                 className="form-label">
                                 Brand
                             </label>
-                            <Select 
+                            {/* <Select 
                                 id="product-brand-add"
                                 name="product-brand-add" 
                                 options={Addproduct3} 
@@ -103,7 +103,7 @@ const CreateForm = () => {
                                 menuPlacement='auto' 
                                 classNamePrefix="Select2" 
                                 placeholder="Select" 
-                            />
+                            /> */}
                         </div>
                         <div className="col-span-12 xl:col-span-6 color-selection">
                             <label 
@@ -111,7 +111,7 @@ const CreateForm = () => {
                                 className="form-label">
                                 Colors
                             </label>
-                            <Select 
+                            {/* <Select 
                                 id="product-color-add"
                                 isMulti name="colors" 
                                 options={Addproduct4} 
@@ -120,7 +120,7 @@ const CreateForm = () => {
                                 menuPlacement='auto' 
                                 classNamePrefix="Select2" 
                                 placeholder="Select"
-                            />
+                            /> */}
                         </div>
                         <div className="col-span-12 xl:col-span-6">
                             <label 
@@ -270,7 +270,7 @@ const CreateForm = () => {
                         </div>
                         <div className="col-span-12 xl:col-span-6">
                             <label htmlFor="product-status-add" className="form-label">Published Status</label>
-                            <Select 
+                            {/* <Select 
                                 name="product-status-add" 
                                 options={Addproduct5} 
                                 className="w-full !rounded-md" 
@@ -279,11 +279,11 @@ const CreateForm = () => {
                                 classNamePrefix="Select2" 
                                 placeholder="Select" 
                                 id="product-status-add"
-                            />
+                            /> */}
                         </div>
                         <div className="col-span-12 xl:col-span-6">
                             <label htmlFor="product-tags" className="form-label">Product Tags</label>
-                            <Select 
+                            {/* <Select 
                                 isMulti 
                                 name="product-tags" 
                                 options={Addproduct6} 
@@ -293,11 +293,11 @@ const CreateForm = () => {
                                 menuPlacement='auto' 
                                 classNamePrefix="Select2" 
                                 placeholder="Select"
-                            />
+                            /> */}
                         </div>
                         <div className="col-span-12 xl:col-span-12">
                             <label htmlFor="product-status-add1" className="form-label">Availability</label>
-                            <Select 
+                            {/* <Select 
                                 name="product-status-add1" 
                                 options={Addproduct7} 
                                 id="product-status-add1"
@@ -306,7 +306,7 @@ const CreateForm = () => {
                                 menuPlacement='auto' 
                                 classNamePrefix="Select2" 
                                 placeholder="Select"
-                            />
+                            /> */}
                         </div>
                     </div>
                 </div>
