@@ -91,7 +91,7 @@ const NotificationsDropdown = () => {
                         </ul>
                         <div className={`p-4 empty-header-item1 border-t mt-2 ${notifications.length === 0 ? 'hidden' : 'block'}`}>
                             <div className="grid">
-                                <Link href="#!" className="ti-btn ti-btn-primary-full !m-0 w-full p-2">View All</Link>
+                                <Link href="#!" className="ti-btn ti-btn-success-full !m-0 w-full p-2">View All</Link>
                             </div>
                         </div>
                         <div className={`p-[3rem] empty-item1 ${notifications.length === 0 ? 'block' : 'hidden'}`}>
