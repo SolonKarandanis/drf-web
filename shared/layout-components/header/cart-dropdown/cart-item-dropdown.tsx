@@ -16,7 +16,7 @@ const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
     const path = configState.baseUrl
     
     return (
-        <li className={`ti-dropdown-item border-b dark:border-defaultborder/10 border-defaultborder`} key={item.id}>
+        <li className={`ti-dropdown-item border-b dark:border-defaultborder/10 border-defaultborder hover:bg-violet-300`} key={item.id}>
             <div className="flex items-start cart-dropdown-item">
                 <Image
                     alt="img"

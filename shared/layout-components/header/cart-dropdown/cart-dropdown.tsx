@@ -134,7 +134,6 @@ const CartDropdown = () => {
             uuid:'sss'
           },
       ];
-    const parentRef = useRef<HTMLDivElement>(null)
     const [cartItems, setCartItems] = useState([...cartProduct]);
     const [cartItemCount, setCartItemCount] = useState(cartProduct.length);
 
@@ -146,7 +145,7 @@ const CartDropdown = () => {
       };
 
     return (
-        <div ref={parentRef} className="header-element cart-dropdown hs-dropdown ti-dropdown md:!block !hidden py-[1rem] md:px-[0.65rem] px-2 
+        <div className="header-element cart-dropdown hs-dropdown ti-dropdown md:!block !hidden py-[1rem] md:px-[0.65rem] px-2 
             [--placement:bottom-right]">
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -197,7 +196,9 @@ const CartDropdown = () => {
                             <h6 className="font-bold mb-1 mt-3 text-[1rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">Your Cart is Empty</h6>
                             <span className="mb-3 !font-normal text-[0.8125rem] block text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">Add some items to make me happy :)</span>
                             <Link href="#!" className="ti-btn ti-btn-success btn-wave ti-btn-wave btn-sm m-1 !text-[0.75rem] !py-[0.25rem] !px-[0.5rem]"
-                                data-abc="true">continue shopping <i className="bi bi-arrow-right ms-1"></i></Link>
+                                data-abc="true">
+                                continue shopping <i className="bi bi-arrow-right ms-1"></i>
+                            </Link>
                         </div>
                     </div>
                 </DropdownMenuContent>

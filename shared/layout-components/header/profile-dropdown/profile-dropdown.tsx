@@ -61,38 +61,38 @@ const ProfileDropdown = ()=> {
                         <DropdownMenuLabel className='py-2'>My Account</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <ul className="text-defaulttextcolor font-medium dark:text-[#8c9097] dark:text-white/50">
-                            <li className='hover:bg-slate-400'>
+                            <li className='hover:bg-violet-300'>
                                 <Link className="w-full ti-dropdown-item !text-[0.8125rem] !gap-x-0  !p-[0.65rem] !inline-flex" href="#!">
                                     <i className="ti ti-user-circle text-[1.125rem] me-2 opacity-[0.7]"></i>Profile
                                 </Link>
                             </li>
-                            <li className='hover:bg-slate-400'>
+                            <li className='hover:bg-violet-300'>
                                 <Link className="w-full ti-dropdown-item !text-[0.8125rem] !gap-x-0  !p-[0.65rem] !inline-flex " href="#!">
                                     <i className="ti ti-inbox text-[1.125rem] me-2 opacity-[0.7]"></i>Inbox 
                                     <span className="!py-1 !px-[0.45rem] !font-semibold !rounded-sm text-success text-[0.75em] bg-success/10 ms-auto">25</span>
                                 </Link>
                             </li>
-                            <li className='hover:bg-slate-400'>
+                            <li className='hover:bg-violet-300'>
                                 <Link className="w-full ti-dropdown-item !text-[0.8125rem] !gap-x-0 !p-[0.65rem] !inline-flex" href="#!">
                                     <i className="ti ti-clipboard-check text-[1.125rem] me-2 opacity-[0.7]"></i>Task Manager
                                 </Link>
                             </li>
-                            <li className='hover:bg-slate-400'>
+                            <li className='hover:bg-violet-300'>
                                 <Link className="w-full ti-dropdown-item !text-[0.8125rem] !gap-x-0 !p-[0.65rem] !inline-flex" href="#!">
                                     <i className="ti ti-adjustments-horizontal text-[1.125rem] me-2 opacity-[0.7]"></i>Settings
                                 </Link>
                             </li>
-                            <li className='hover:bg-slate-400'>
+                            <li className='hover:bg-violet-300'>
                                 <Link className="w-full ti-dropdown-item !text-[0.8125rem] !gap-x-0 !p-[0.65rem] !inline-flex " href="#!">
                                     <i className="ti ti-wallet text-[1.125rem] me-2 opacity-[0.7]"></i>Bal: $7,12,950
                                 </Link>
                             </li>
-                            <li className='hover:bg-slate-400'>
+                            <li className='hover:bg-violet-300'>
                                 <Link className="w-full ti-dropdown-item !text-[0.8125rem] !p-[0.65rem] !gap-x-0 !inline-flex" href="#!">
                                     <i className="ti ti-headset text-[1.125rem] me-2 opacity-[0.7]"></i>Support
                                 </Link>
                             </li>
-                            <li className='hover:bg-slate-400'>
+                            <li className='hover:bg-violet-300'>
                                 <Link className="w-full ti-dropdown-item !text-[0.8125rem] !p-[0.65rem] !gap-x-0 !inline-flex" href="/api/auth/signout?callbackUrl=/">
                                     <i className="ti ti-logout text-[1.125rem] me-2 opacity-[0.7]"></i>Log Out
                                 </Link>
