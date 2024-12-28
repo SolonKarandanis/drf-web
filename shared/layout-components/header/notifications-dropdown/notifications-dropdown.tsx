@@ -44,7 +44,7 @@ const NotificationsDropdown = () => {
                         <span
                             className="animate-slow-ping absolute inline-flex -top-[2px] -start-[2px] h-full w-full rounded-full bg-secondary/40 opacity-75"></span>
                         <span
-                            className="relative inline-flex justify-center items-center rounded-full  h-[14.7px] w-[14px] bg-secondary text-[0.625rem] text-white"
+                            className="relative inline-flex justify-center items-center rounded-full  h-[14.7px] w-[14px] bg-secondary text-[0.625rem] text-white bg-sky-500"
                             id="notification-icon-badge">{notifications.length}
                         </span>
                     </span>
@@ -57,7 +57,7 @@ const NotificationsDropdown = () => {
                             dark:text-white/50">
                                 Notifications
                             </p>
-                            <span className="text-[0.75em] py-[0.25rem/2] px-[0.45rem] font-[600] rounded-sm bg-secondary/10 text-secondary"
+                            <span className="text-[0.75em] py-[0.25rem/2] px-[0.45rem] font-[600] rounded-sm bg-secondary/10 text-secondary bg-sky-500"
                                 id="notifiation-data">{`${notifications.length} Unread`}</span>
                         </div>
                     </DropdownMenuLabel>
