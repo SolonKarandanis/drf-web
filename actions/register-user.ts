@@ -1,17 +1,16 @@
 "use server";
-import * as z from "zod";
-import { RegisterSchema } from '@/schemas/auth.schemas';
+
+import { getRegisterUserSchema, RegisterUserSchema } from '@/schemas/auth.schemas';
 import { objectToArrayOfObjects } from "@/utils/functions";
 import { ClientValidationError, BackendValidationError } from "@/models/error.models";
 import { CreateUserRequest } from "@/models/user.models";
 import { baseUrl } from "@/utils/constants";
 
 
-type RegisterSchema = z.infer<typeof RegisterSchema>;
 
 
-export async function registerUser(data:RegisterSchema){
-    const result = RegisterSchema.safeParse(data);
+export async function registerUser(data:RegisterUserSchema){
+    const result = getRegisterUserSchema().safeParse(data);
     if (!result.success){
         const errorMessages = result.error.issues.reduce((prev, issue) => {
             return (prev += issue.message);
