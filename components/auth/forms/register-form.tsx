@@ -78,7 +78,7 @@ const RegisterForm = () => {
                 const {status, data} = error;
                 Object.values(data).forEach(dataValue =>{
                     for (const [key, value] of Object.entries(dataValue)) {
-                        toast.error(`(${status}) ${value}`);
+                        toast.error(`(${status}) [${key}] ${value}`);
                     }
                     
                 })

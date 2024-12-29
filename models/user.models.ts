@@ -55,7 +55,7 @@ export interface ChangePasswordRequest{
 
 export interface CreateUserRequest extends BaseUserModel{
     password:string;
-    password2:string;
+    confirmPassword:string;
     role:string;
 }
 

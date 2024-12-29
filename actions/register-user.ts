@@ -29,7 +29,7 @@ export async function registerUser(data:RegisterUserSchema){
         role,
         password,
         username,
-        password2:confirmPassword
+        confirmPassword
     }
     const response = await fetch(`${baseUrl}/auth/users/create/`, {
       method: "POST",
