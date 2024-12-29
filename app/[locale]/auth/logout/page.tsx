@@ -1,4 +1,5 @@
-import LgoutButton from "@/components/auth/logout-button"
+import CancelLogoutButton from "@/components/auth/cancel-logout-button"
+import LogoutButton from "@/components/auth/logout-button"
 
 
 const LogoutPage = () => {
@@ -17,12 +18,8 @@ const LogoutPage = () => {
                 Are you sure you would like to sign out of your account?
             </p>
             <div className="flex justify-center mt-6 gap-x-4">
-                <LgoutButton />
-                <button type="button" className="py-2.5 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent 
-                    font-semibold bg-sky-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 
-                    transition-all text-sm">
-                    Cancel
-                </button>
+                <LogoutButton />
+                <CancelLogoutButton />
             </div>
         </div>
     </div>
