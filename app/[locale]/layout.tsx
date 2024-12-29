@@ -37,9 +37,7 @@ const RootLayout:FC<Props>= async ({children,params:{locale}}) => {
               {/* <Setup /> */}
               <NextIntlClientProvider messages={messages}>
                 <ProgressBar className="fixed top-0 z-50 h-1 bg-sky-500" >
-                  {/* <RootStyleRegistry> */}
                     {children}
-                  {/* </RootStyleRegistry> */}
                 </ProgressBar>
               </NextIntlClientProvider>
             </ToastProvider>
