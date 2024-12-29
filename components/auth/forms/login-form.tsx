@@ -38,13 +38,11 @@ const LoginForm = () => {
             callbackUrl:'/'
         })
         .then((response: SignInResponse| undefined) =>{
-            console.log(response)
             if(response && response.ok){
                 router.push(response.url!);
             }
             if(response && response.status && response.error){
                 toast.error(`(${response.status}) ${response.error}`);
-                console.log('first')
             }
         })
     }
