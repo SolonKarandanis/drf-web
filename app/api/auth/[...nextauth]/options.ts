@@ -24,7 +24,7 @@ export const authOptions: NextAuthOptions ={
     },
     pages:{
         signIn: `/en/auth/login/`,
-        signOut: '/en/auth/logout/'
+        signOut: '/en/auth/logout/',
     },
     providers:[
         CredentialsProvider({

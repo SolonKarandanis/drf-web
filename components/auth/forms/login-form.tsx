@@ -8,11 +8,14 @@ import CForm from "@/shared/components/form/cform";
 import CFormInput from "@/shared/components/form-input/cform-input";
 import CButton from "@/shared/components/button/cbutton";
 import { useTranslations } from "next-intl";
-import {signIn} from "next-auth/react"
+import {signIn, SignInResponse} from "next-auth/react"
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 
 
 const LoginForm = () => {
+    const router = useRouter()
     const t = useTranslations();
     const formT = useTranslations("USERS.VALIDATION");
     const lform='LOGIN.FORM';
@@ -31,8 +34,18 @@ const LoginForm = () => {
         signIn("credentials",{
             username,
             password,
-            redirect:true,
+            redirect:false,
             callbackUrl:'/'
+        })
+        .then((response: SignInResponse| undefined) =>{
+            console.log(response)
+            if(response && response.ok){
+                router.push(response.url!);
+            }
+            if(response && response.status && response.error){
+                toast.error(`(${response.status}) ${response.error}`);
+                console.log('first')
+            }
         })
     }
 
