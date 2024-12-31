@@ -50,8 +50,9 @@ export interface UserGroup{
 }
 
 export interface ChangePasswordRequest{
-    current_password: string;
-    new_password: string;
+    email: string;
+    newPassword: string;
+    confirmPassword:string;
 }
 
 export interface CreateUserRequest extends BaseUserModel{
