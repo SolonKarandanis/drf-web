@@ -32,13 +32,12 @@ const ChangePassword = () => {
     });
 
     const onSubmit: SubmitHandler<ResetPasswordSchema> = async (data) =>{
-        console.log(data)
         const request:ChangePasswordRequest={...data};
-        // handleChangePasswordMutation(request);
+        handleChangePasswordMutation(request);
     }
 
     return (
-        <section className="w-full max-w-full pl-1 xl:w-6/12">
+        <section className="w-full max-w-full pl-1">
             <div className="relative flex flex-col h-full min-w-0 break-words bg-white border-0 dark:bg-gray-900 shadow-soft-xl rounded-2xl bg-clip-border">
                 <div className="flex-auto p-4">
                     <Form {...form} >
@@ -97,7 +96,7 @@ const ChangePassword = () => {
                                     </FormLabel>
                                     <FormControl>
                                         <Input
-                                            type="confirm-password" 
+                                            type="password" 
                                             placeholder="••••••••" 
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 
                                                 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
