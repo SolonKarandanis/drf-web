@@ -109,7 +109,7 @@ const ChangePassword = () => {
                                     <ButtonLoading /> : 
                                     t(`GLOBAL.BUTTONS.search`)
                                 } */}
-                                Reset password
+                               {t("USERS.DETAILS.BUTTONS.reset-password")}
                             </Button>
                         </form>
                     </Form>
