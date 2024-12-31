@@ -256,7 +256,9 @@
             "SUCCESS": {
                 "update-user": "Successfully Updated user",
                 "delete-user-socials":"Successfully deleted  all user socials",
-                "delete-user-social":"Successfully deleted user social"
+                "delete-user-social":"Successfully deleted user social",
+                "change-user-password":"Successfully updated user's password",
+                "update-user-status":"Successfully updated user's status"
             } 
         },
         "VALIDATION":{

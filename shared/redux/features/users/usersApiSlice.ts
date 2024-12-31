@@ -74,7 +74,7 @@ const usersApiSlice = apiSlice.injectEndpoints({
 				body: request,
 			}),
 		}),
-		changeAccountStatus: builder.mutation<void,{userUuid:string, action:UserAccountActions}>({
+		changeAccountStatus: builder.mutation<UserAcount,{userUuid:string, action:UserAccountActions}>({
 			query: ({userUuid,action}) => {
 				let actionUrl = `${ApiControllers.USERS}`
 				switch(action){

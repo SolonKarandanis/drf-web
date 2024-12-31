@@ -1,8 +1,8 @@
 import { handleError } from "@/lib/functions";
 import { ErrorResponse } from "@/models/error.models";
 import { ImageModel, UploadProfileImageMutation } from "@/models/image.models";
-import { UpdateBioRequest, UpdateContactInfoRequest, UserAcount } from "@/models/user.models";
-import { useUpdateContanctInfoMutation, useUpdateUserBioMutation, useUploadUserImageMutation } from "@/shared/redux/features/users/usersApiSlice";
+import { ChangePasswordRequest, UpdateBioRequest, UpdateContactInfoRequest, UserAcount } from "@/models/user.models";
+import { useChangeAccountStatusMutation, useResetPasswordMutation, useUpdateContanctInfoMutation, useUpdateUserBioMutation, useUploadUserImageMutation } from "@/shared/redux/features/users/usersApiSlice";
 import { setProfileImage, setSelectedUser, userBioSelector } from "@/shared/redux/features/users/usersSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useTranslations } from "next-intl";
@@ -18,6 +18,8 @@ export function useMutateUserDetails(){
     const [updateContactInfo, { isLoading:contactInfoLoading }] = useUpdateContanctInfoMutation();
     const [updateBio, { isLoading:bioLoading }] = useUpdateUserBioMutation();
     const [upload, { isLoading:pictureLoading }] = useUploadUserImageMutation();
+    const [changePassword, { isLoading:changePasswordLoading }] = useResetPasswordMutation();
+    const [changeUserStatus, { isLoading:changeAccountStatusLoading }] = useChangeAccountStatusMutation();
 
     const handleUpdateContanctInfoMutation = (userUuid:string, request:UpdateContactInfoRequest)=>{
         updateContactInfo({userUuid,request})
@@ -57,7 +59,17 @@ export function useMutateUserDetails(){
             });
     };
 
-    const mutationLoading = contactInfoLoading || bioLoading || pictureLoading;
+    const handleChangePasswordMutation = (request:ChangePasswordRequest)=>{
+        changePassword(request)
+            .then(()=>{
+                toast.success(t("USERS.DETAILS.SUCCESS.change-user-password"));
+            })
+            .catch((error:ErrorResponse) => {
+                handleError(error);
+            });
+    }
+
+    const mutationLoading = contactInfoLoading || bioLoading || pictureLoading || changePasswordLoading;
 
     const bio = useAppSelector(userBioSelector);
 
@@ -69,6 +81,7 @@ export function useMutateUserDetails(){
         handleUpdateContanctInfoMutation,
         handleUpdateBioMutation,
         handleUploadProfilePictureMutation,
+        handleChangePasswordMutation,
         bio,
     }
 }
