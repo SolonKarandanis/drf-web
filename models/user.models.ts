@@ -87,4 +87,8 @@ export interface UpdateContactInfoRequest{
     phone?:string;
 }
 
+export interface ChangeUserStatusRequest{
+    userId:string;
+}
+
 export type UserAccountActions = 'ACTIVATE'| 'DEACTIVATE' | 'DELETE'

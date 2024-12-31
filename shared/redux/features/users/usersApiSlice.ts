@@ -1,7 +1,7 @@
 import { UserSearchRequest, UserSearchResponse } from "@/models/search.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
-import { ChangePasswordRequest, UpdateBioRequest, UpdateContactInfoRequest, UserAccountActions, UserAcount, UserGroup, UserModel } from "@/models/user.models";
+import { ChangePasswordRequest, ChangeUserStatusRequest, UpdateBioRequest, UpdateContactInfoRequest, UserAccountActions, UserAcount, UserGroup, UserModel } from "@/models/user.models";
 import { ImageModel, UploadProfileImageMutation } from "@/models/image.models";
 
 const usersApiSlice = apiSlice.injectEndpoints({
@@ -50,7 +50,6 @@ const usersApiSlice = apiSlice.injectEndpoints({
 		}),
 		updateUserBio:builder.mutation<UserAcount,{userUuid:string, request:UpdateBioRequest}>({
 			query:({userUuid,request})=>{
-				const {bio} = request;
 				return {
 					url:`${ApiControllers.USERS}/${userUuid}/update-bio/`,
 					method: 'PUT',
@@ -74,8 +73,8 @@ const usersApiSlice = apiSlice.injectEndpoints({
 				body: request,
 			}),
 		}),
-		changeAccountStatus: builder.mutation<UserAcount,{userUuid:string, action:UserAccountActions}>({
-			query: ({userUuid,action}) => {
+		changeAccountStatus: builder.mutation<UserAcount,{request:ChangeUserStatusRequest, action:UserAccountActions}>({
+			query: ({request,action}) => {
 				let actionUrl = `${ApiControllers.USERS}`
 				switch(action){
 					case "ACTIVATE":{
@@ -94,7 +93,7 @@ const usersApiSlice = apiSlice.injectEndpoints({
 				return{
 					url: `${actionUrl}`,
 					method: 'PUT',
-					body: userUuid,
+					body: request,
 				}
 			},
 		}),

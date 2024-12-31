@@ -1,7 +1,7 @@
 import { handleError } from "@/lib/functions";
 import { ErrorResponse } from "@/models/error.models";
 import { ImageModel, UploadProfileImageMutation } from "@/models/image.models";
-import { ChangePasswordRequest, UpdateBioRequest, UpdateContactInfoRequest, UserAcount } from "@/models/user.models";
+import { ChangePasswordRequest, ChangeUserStatusRequest, UpdateBioRequest, UpdateContactInfoRequest, UserAccountActions, UserAcount } from "@/models/user.models";
 import { useChangeAccountStatusMutation, useResetPasswordMutation, useUpdateContanctInfoMutation, useUpdateUserBioMutation, useUploadUserImageMutation } from "@/shared/redux/features/users/usersApiSlice";
 import { setProfileImage, setSelectedUser, userBioSelector } from "@/shared/redux/features/users/usersSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
@@ -61,6 +61,7 @@ export function useMutateUserDetails(){
 
     const handleChangePasswordMutation = (request:ChangePasswordRequest)=>{
         changePassword(request)
+            .unwrap()
             .then(()=>{
                 toast.success(t("USERS.DETAILS.SUCCESS.change-user-password"));
             })
@@ -69,7 +70,23 @@ export function useMutateUserDetails(){
             });
     }
 
-    const mutationLoading = contactInfoLoading || bioLoading || pictureLoading || changePasswordLoading;
+    const handleChangeStatusMutation = (userUuid:string, action:UserAccountActions)=>{
+        const request:ChangeUserStatusRequest={
+            userId:userUuid
+        };
+
+        changeUserStatus({request,action})
+            .unwrap()
+            .then((response:UserAcount)=>{
+                dispatch(setSelectedUser(response));
+                toast.success(t("USERS.DETAILS.SUCCESS.update-user-status"));
+            })
+            .catch((error:ErrorResponse) => {
+                handleError(error);
+            });
+    }
+
+    const mutationLoading = contactInfoLoading || bioLoading || pictureLoading || changePasswordLoading || changeAccountStatusLoading;
 
     const bio = useAppSelector(userBioSelector);
 
@@ -82,6 +99,7 @@ export function useMutateUserDetails(){
         handleUpdateBioMutation,
         handleUploadProfilePictureMutation,
         handleChangePasswordMutation,
+        handleChangeStatusMutation,
         bio,
     }
 }
