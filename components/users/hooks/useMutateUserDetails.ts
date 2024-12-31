@@ -1,9 +1,22 @@
 import { handleError } from "@/lib/functions";
 import { ErrorResponse } from "@/models/error.models";
 import { ImageModel, UploadProfileImageMutation } from "@/models/image.models";
-import { ChangePasswordRequest, ChangeUserStatusRequest, UpdateBioRequest, UpdateContactInfoRequest, UserAccountActions, UserAcount } from "@/models/user.models";
-import { useChangeAccountStatusMutation, useResetPasswordMutation, useUpdateContanctInfoMutation, useUpdateUserBioMutation, useUploadUserImageMutation } from "@/shared/redux/features/users/usersApiSlice";
-import { setProfileImage, setSelectedUser, userBioSelector } from "@/shared/redux/features/users/usersSlice";
+import { 
+    ChangePasswordRequest, 
+    ChangeUserStatusRequest, 
+    UpdateBioRequest, 
+    UpdateContactInfoRequest, 
+    UserAccountActions, 
+    UserAcount 
+} from "@/models/user.models";
+import { 
+    useChangeAccountStatusMutation, 
+    useResetPasswordMutation, 
+    useUpdateContanctInfoMutation, 
+    useUpdateUserBioMutation, 
+    useUploadUserImageMutation 
+} from "@/shared/redux/features/users/usersApiSlice";
+import { selectedUserSelector, setProfileImage, setSelectedUser } from "@/shared/redux/features/users/usersSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -88,7 +101,7 @@ export function useMutateUserDetails(){
 
     const mutationLoading = contactInfoLoading || bioLoading || pictureLoading || changePasswordLoading || changeAccountStatusLoading;
 
-    const bio = useAppSelector(userBioSelector);
+    const user = useAppSelector(selectedUserSelector);
 
 
     return {
@@ -100,6 +113,6 @@ export function useMutateUserDetails(){
         handleUploadProfilePictureMutation,
         handleChangePasswordMutation,
         handleChangeStatusMutation,
-        bio,
+        user,
     }
 }

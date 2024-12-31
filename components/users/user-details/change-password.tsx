@@ -7,17 +7,25 @@ import { Input } from "@/shared/shadcn/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useMutateUserDetails } from "../hooks/useMutateUserDetails";
+import { ChangePasswordRequest } from "@/models/user.models";
+import ButtonLoading from "@/shared/components/button-loading/button-loading";
 
 
 
 const ChangePassword = () => {
     const t = useTranslations();
     const formT = useTranslations("USERS.VALIDATION");
+    const {
+        mutationLoading,
+        handleChangePasswordMutation,
+        user,
+    } = useMutateUserDetails();
 
     const form = useForm<ResetPasswordSchema>({
         resolver: zodResolver(getResetPasswordSchema(formT)),
         defaultValues: {
-            email: "",
+            email: user?.email,
             newPassword: "",
             confirmPassword: "",
         },
@@ -25,6 +33,8 @@ const ChangePassword = () => {
 
     const onSubmit: SubmitHandler<ResetPasswordSchema> = async (data) =>{
         console.log(data)
+        const request:ChangePasswordRequest={...data};
+        // handleChangePasswordMutation(request);
     }
 
     return (
@@ -46,7 +56,7 @@ const ChangePassword = () => {
                                     <FormControl>
                                         <Input
                                             type="email" 
-                                            placeholder="name@company.com"
+                                            disabled
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 
                                                 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
                                                 dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -103,13 +113,12 @@ const ChangePassword = () => {
                                 className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none 
                                     focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 
                                     dark:focus:ring-primary-800"
-                                // disabled={isLoading}
+                                disabled={mutationLoading}
                                 >
-                                {/* {isLoading ? 
+                                {mutationLoading ? 
                                     <ButtonLoading /> : 
-                                    t(`GLOBAL.BUTTONS.search`)
-                                } */}
-                               {t("USERS.DETAILS.BUTTONS.reset-password")}
+                                    t("USERS.DETAILS.BUTTONS.reset-password")
+                                }
                             </Button>
                         </form>
                     </Form>

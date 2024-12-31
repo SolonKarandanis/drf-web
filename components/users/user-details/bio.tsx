@@ -30,7 +30,7 @@ const Bio:FC<Props> = ({
         setIsEdit,
         mutationLoading,
         handleUpdateBioMutation,
-        bio,
+        user,
     } = useMutateUserDetails();
 
 
@@ -40,7 +40,7 @@ const Bio:FC<Props> = ({
     const form = useForm<Inputs>({
         resolver: zodResolver(UpdateUserBioSchema),
         defaultValues:{
-            bio:bio
+            bio:user!.bio
         }
     })
 
@@ -95,7 +95,7 @@ const Bio:FC<Props> = ({
             )}
             {!isLoading && !isEdit && (
                 <p className="text-[0.75rem] text-[#8c9097] dark:text-white/50 opacity-[0.7] mb-0 mt-3">
-                    {bio}
+                    {user?.bio}
                 </p>
             ) }
           </div>
