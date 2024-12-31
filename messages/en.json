@@ -230,7 +230,14 @@
                 "city":"City",
                 "state":"State",
                 "country":"Country",
-                "zip":"Zip code"
+                "zip":"Zip code",
+                "settings":"Settings",
+                "change-password":"Change Password",
+                "status":"Status"
+            },
+            "FORM":{
+                "new-password":"New Password",
+                "confirm-password":"Confirm Password"
             },
             "UPLOAD-PROFILE":{
                 "title":"Upload picture",
@@ -243,7 +250,8 @@
                 "upload-profile-picture":"Upload a profile Picture",
                 "upload":"Upload",
                 "reset":"Reset",
-                "delete-all":"Delete All"
+                "delete-all":"Delete All",
+                "reset-password":"Reset Password"
             },
             "SUCCESS": {
                 "update-user": "Successfully Updated user",
