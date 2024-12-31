@@ -21,6 +21,7 @@ export interface UserModel extends BaseUserModel {
     isActive:boolean;
     isVerified:boolean;
     status: UserStatus;
+    statusLabel:string;
     bio:string;
     details?:UserDetails;
 }
