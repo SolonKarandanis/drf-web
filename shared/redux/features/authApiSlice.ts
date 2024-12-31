@@ -38,12 +38,12 @@ const authApiSlice = apiSlice.injectEndpoints({
 				lastName,
 				email,
 				password,
-				password2,
+				confirmPassword,
 			}:CreateUserRequest) => {
 				return {
 					url: `${ApiControllers.USERS}/create/`,
 					method: 'POST',
-					body: { username,firstName, lastName, email, password, password2 },
+					body: { username,firstName, lastName, email, password, confirmPassword },
 				}
 			},
 		}),
@@ -63,13 +63,6 @@ const authApiSlice = apiSlice.injectEndpoints({
 				body: { uid, token },
 			}),
 		}),
-        resetPassword: builder.mutation({
-			query: email => ({
-				url: '/users/reset_password/',
-				method: 'POST',
-				body: { email },
-			}),
-		}),
 		resetPasswordConfirm: builder.mutation({
 			query: ({ uid, token, new_password, re_new_password }) => ({
 				url: '/users/reset_password_confirm/',
@@ -86,6 +79,5 @@ export const {
 	useRegisterUserMutation,
 	useVerifyMutation,
 	useActivationMutation,
-	useResetPasswordMutation,
 	useResetPasswordConfirmMutation,
 } = authApiSlice;

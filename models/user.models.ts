@@ -86,3 +86,5 @@ export interface UpdateContactInfoRequest{
     zip?:string;
     phone?:string;
 }
+
+export type UserAccountActions = 'ACTIVATE'| 'DEACTIVATE' | 'DELETE'

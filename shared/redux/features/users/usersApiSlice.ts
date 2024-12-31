@@ -1,7 +1,7 @@
 import { UserSearchRequest, UserSearchResponse } from "@/models/search.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
-import { UpdateBioRequest, UpdateContactInfoRequest, UserAcount, UserGroup, UserModel } from "@/models/user.models";
+import { ChangePasswordRequest, UpdateBioRequest, UpdateContactInfoRequest, UserAccountActions, UserAcount, UserGroup, UserModel } from "@/models/user.models";
 import { ImageModel, UploadProfileImageMutation } from "@/models/image.models";
 
 const usersApiSlice = apiSlice.injectEndpoints({
@@ -15,7 +15,7 @@ const usersApiSlice = apiSlice.injectEndpoints({
         searchUsers: builder.mutation<UserSearchResponse,UserSearchRequest>({
 			query: ( searchRequest:UserSearchRequest)=>{
 				return {
-					url: `${ApiControllers.USERS}/search`,
+					url: `${ApiControllers.USERS}/search/`,
 					method: 'POST',
 					body: searchRequest ,
 				}
@@ -66,7 +66,38 @@ const usersApiSlice = apiSlice.injectEndpoints({
 					body: request ,
 				}
 			}
-		})
+		}),
+		resetPassword: builder.mutation<void,ChangePasswordRequest>({
+			query: (request) => ({
+				url: `${ApiControllers.USERS}/reset-password/`,
+				method: 'PUT',
+				body: request,
+			}),
+		}),
+		changeAccountStatus: builder.mutation<void,{userUuid:string, action:UserAccountActions}>({
+			query: ({userUuid,action}) => {
+				let actionUrl = `${ApiControllers.USERS}`
+				switch(action){
+					case "ACTIVATE":{
+						actionUrl = `${actionUrl}/activate/`
+						break;
+					}
+					case "DEACTIVATE":{
+						actionUrl = `${actionUrl}/deactivate/`
+						break;
+					}
+					case "DELETE":{
+						actionUrl = `${actionUrl}/delete/`
+						break;
+					}
+				}
+				return{
+					url: `${actionUrl}`,
+					method: 'PUT',
+					body: userUuid,
+				}
+			},
+		}),
     }),
     // @ts-ignore
 	overrideExisting: module.hot?.status() === "apply",
@@ -82,4 +113,6 @@ export const {
 	useUploadUserImageMutation,
 	useUpdateUserBioMutation,
 	useUpdateContanctInfoMutation,
+	useResetPasswordMutation,
+	useChangeAccountStatusMutation,
 } = usersApiSlice;
