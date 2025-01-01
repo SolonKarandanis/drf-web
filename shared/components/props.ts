@@ -4,6 +4,7 @@ import {
     SelectHTMLAttributes,
     TableHTMLAttributes,
 } from "react";
+import { UseControllerProps } from "react-hook-form";
 import { Column } from "react-table";
 
 export interface RegisterProps {
@@ -27,6 +28,16 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
     className?:string,
     sectionClassName?:string,
     props?:RegisterProps,
+    error?:string,
+}
+
+type AllInputProps = UseControllerProps & InputHTMLAttributes<HTMLInputElement>;
+
+export interface FormInputProps extends AllInputProps{
+    type:string,
+    required?:boolean,
+    className?:string,
+    sectionClassName?:string,
     error?:string,
 }
 

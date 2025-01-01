@@ -6,11 +6,9 @@ interface Props{
 
 const CFormError:FC<Props> = ({error}) => {
   return (
-    <div className='fv-plugins-message-container'>
-        <span role="alert" className='mt-2 text-sm text-red-600'>
-            {error}
-        </span>
-    </div>
+    <p className="mt-2 text-sm text-rose-600 dark:text-rose-500">
+      {error}
+    </p>
   )
 }
 

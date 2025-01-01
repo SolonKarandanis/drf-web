@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 import {signIn, SignInResponse} from "next-auth/react"
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import FormInput from "@/shared/components/input/input";
 
 
 
@@ -20,7 +21,7 @@ const LoginForm = () => {
     const formT = useTranslations("USERS.VALIDATION");
     const lform='LOGIN.FORM';
     
-    const {register,handleSubmit,formState: { errors ,isSubmitting, isValid },} = useForm<LoginSchema>({
+    const {register,control,handleSubmit,formState: { errors ,isSubmitting, isValid },} = useForm<LoginSchema>({
         resolver: zodResolver(getLoginSchema(formT)),
         defaultValues: {
           username: "",
@@ -52,6 +53,17 @@ const LoginForm = () => {
         <>
             <CForm onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid grid-cols-12 gap-y-4">
+                    {/* <FormInput 
+                        control={control}
+                        type='text'
+                        required={true}
+                        name='username'
+                        placeholder={t(`${lform}.LABELS.username`)}
+                        autoComplete="username"
+                        sectionClassName="col-span-12 xl:col-span-12"
+                        error={errors.username?.message}>
+                            {t(`${lform}.LABELS.username`)}
+                    </FormInput> */}
                     <CFormInput 
                         type='text'
                         required={true}
@@ -95,7 +107,7 @@ const LoginForm = () => {
                             intent="violet" 
                             size="md" 
                             type="submit"
-                            isDisabled={isSubmitting || !isValid}>                    
+                            >                    
                                 {t(`${lform}.BUTTONS.sign-in`)}
                         </CButton>
                         {/* <Link href="/components/dashboards/crm/" className="ti-btn ti-btn-primary !bg-primary !text-white !font-medium">Sign In</Link> */}
