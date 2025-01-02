@@ -1,6 +1,6 @@
 import {FC} from 'react'
-import CFormInput from '@/shared/components/form-input/form-input'
-import CFormSelect from "@/shared/components/form-select/form-select";
+import FormInput from '@/shared/components/form-input/form-input'
+import FormSelect from "@/shared/components/form-select/form-select";
 import { AddressInfoProps } from './props';
 
 const AddressInfo:FC<AddressInfoProps> = ({register,errors,countries})=> {
@@ -13,7 +13,7 @@ const AddressInfo:FC<AddressInfoProps> = ({register,errors,countries})=> {
             Address where you can receive products.
         </p>
         <div className='grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6'>
-            <CFormSelect
+            <FormSelect
                 data-testid="select-country"
                 name="country"
                 options={countries}
@@ -24,8 +24,8 @@ const AddressInfo:FC<AddressInfoProps> = ({register,errors,countries})=> {
                 autoComplete='country-name'
                 error={errors.country?.message}>
                 Country
-            </CFormSelect>
-            <CFormInput
+            </FormSelect>
+            <FormInput
                 data-testid="input-street"
                 type='text'
                 required={true}
@@ -37,8 +37,8 @@ const AddressInfo:FC<AddressInfoProps> = ({register,errors,countries})=> {
                 props={register("street")}
                 error={errors.street?.message}>
                     Street address
-            </CFormInput>
-            <CFormInput
+            </FormInput>
+            <FormInput
                 data-testid="input-city"
                 type='text'
                 required={true}
@@ -49,8 +49,8 @@ const AddressInfo:FC<AddressInfoProps> = ({register,errors,countries})=> {
                 props={register("city")}
                 error={errors.city?.message}>
                     City
-            </CFormInput>
-            <CFormInput
+            </FormInput>
+            <FormInput
                 data-testid="input-state"
                 type='text'
                 required={true}
@@ -61,8 +61,8 @@ const AddressInfo:FC<AddressInfoProps> = ({register,errors,countries})=> {
                 props={register("state")}
                 error={errors.state?.message}>
                     State/Province
-            </CFormInput>
-            <CFormInput
+            </FormInput>
+            <FormInput
                 data-testid="input-zip"
                 type='text'
                 required={true}
@@ -74,7 +74,7 @@ const AddressInfo:FC<AddressInfoProps> = ({register,errors,countries})=> {
                 props={register("zip")}
                 error={errors.zip?.message}>
                     ZIP/Postal code
-            </CFormInput>
+            </FormInput>
         </div>
     </>
   )

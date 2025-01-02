@@ -1,7 +1,6 @@
-import CFormInput from '@/shared/components/form-input/form-input'
+import FormInput from '@/shared/components/form-input/form-input'
 import {FC} from 'react'
 import { SectionProps } from './props';
-import FileDrop from '@/shared/components/file-drop/file-drop';
 
 const PersonalInfo:FC<SectionProps> = ({register,errors}) => {
     const profileImageRef = register("profileImage");
@@ -14,7 +13,7 @@ const PersonalInfo:FC<SectionProps> = ({register,errors}) => {
                 Provide your personal details.
             </p>
             <div className='grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6'>
-                <CFormInput
+                <FormInput
                     data-testid="input-firstName"
                     type='text'
                     required={true}
@@ -26,8 +25,8 @@ const PersonalInfo:FC<SectionProps> = ({register,errors}) => {
                     props={register("firstName")}
                     error={errors.firstName?.message}>
                         First Name
-                </CFormInput>
-                <CFormInput
+                </FormInput>
+                <FormInput
                     data-testid="input-lastName"
                     type='text'
                     required={true}
@@ -39,8 +38,8 @@ const PersonalInfo:FC<SectionProps> = ({register,errors}) => {
                     props={register("lastName")}
                     error={errors.lastName?.message}>
                         Last name
-                </CFormInput>
-                <CFormInput
+                </FormInput>
+                <FormInput
                     data-testid="input-email"
                     type='email'
                     required={true}
@@ -52,7 +51,7 @@ const PersonalInfo:FC<SectionProps> = ({register,errors}) => {
                     props={register("email")}
                     error={errors.email?.message}>
                         Email address
-                </CFormInput>
+                </FormInput>
                 {/* <FileDrop
                     type="file"
                     sectionClassName="sm:col-span-3"

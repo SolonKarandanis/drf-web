@@ -1,7 +1,7 @@
 import {FC} from 'react'
-import CFormInput from '@/shared/components/form-input/form-input'
+import FormInput from '@/shared/components/form-input/form-input'
 import { CredentialsProps } from './props';
-import CFormSelect from '@/shared/components/form-select/form-select';
+import FormSelect from '@/shared/components/form-select/form-select';
 
 const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
   return (
@@ -13,7 +13,7 @@ const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
             Create Users Login Credentials
         </p>
         <div className='grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6'>
-            <CFormSelect
+            <FormSelect
                 data-testid="select-role"
                 name="role"
                 options={roles}
@@ -24,8 +24,8 @@ const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
                 autoComplete='role-name'
                 error={errors.role?.message}>
                     Role
-            </CFormSelect>
-            <CFormInput
+            </FormSelect>
+            <FormInput
                 data-testid="input-username"
                 type='text'
                 required={true}
@@ -37,8 +37,8 @@ const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
                 props={register("username")}
                 error={errors.username?.message}>
                     Username
-            </CFormInput>
-            <CFormInput
+            </FormInput>
+            <FormInput
                 data-testid="input-password"
                 type='password'
                 required={true}
@@ -50,8 +50,8 @@ const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
                 props={register("password")}
                 error={errors.password?.message}>
                     Password
-            </CFormInput>
-            <CFormInput
+            </FormInput>
+            <FormInput
                 data-testid="input-confirmpassword"
                 type='password'
                 required={true}
@@ -63,7 +63,7 @@ const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
                 props={register("confirmPassword")}
                 error={errors.confirmPassword?.message}>
                     Confirm Password
-            </CFormInput>
+            </FormInput>
         </div>
     </>
   )
