@@ -2,10 +2,18 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/shadcn/components/ui/tabs';
 import Settings from './settings';
 import ChangePassword from './change-password';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/options';
+import { FC } from 'react';
 
+interface Props{
+    uuid:string;
+}
 
-const Account = () => {
-
+const Account:FC<Props> = async ({uuid}) => {
+    const session = await getServerSession(authOptions);
+    const loggedInUser= session!.user!;
+    const canEditUser = uuid ===loggedInUser.uuid;
     return (
         <div className="col-span-12 xl:col-span-12">
             <div className="box">

@@ -33,8 +33,7 @@ interface Props{
 const UserDetailsPage:FC<Props> = async ({params:{uuid}}) => {
   const session = await getServerSession(authOptions);
   const loggedInUser= session!.user!;
-  const access = loggedInUser.access;
-  const canEditUser = uuid ===loggedInUser.uuid;
+  
   return (
     <>
       <PageHeader 
@@ -42,13 +41,13 @@ const UserDetailsPage:FC<Props> = async ({params:{uuid}}) => {
         <div className="grid grid-cols-12 gap-x-6">
           <div className="col-span-12 xxl:col-span-4 xl:col-span-12">
             <div className="overflow-hidden box">
-              <UserDetails userUuid={uuid}  canEditUser={canEditUser}/>
+              <UserDetails uuid={uuid} />
             </div>
           </div>
           <div className="col-span-12 xxl:col-span-8 xl:col-span-12">
             <div className="grid grid-cols-12 gap-x-6">
               <Suspense fallback={<>LOADING</>}>
-                <Account />
+                <Account uuid={uuid}/>
                 <RecentInvoices />
                 <RecentActivity />
                 {/* <PreviousOrders /> */}

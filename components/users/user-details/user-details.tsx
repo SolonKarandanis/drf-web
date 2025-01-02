@@ -5,11 +5,11 @@ import SocialNetworks from "./social-networks";
 import Profile from "./profile";
 import { getUserGroups } from "@/utils/user-utils";
 import ContactInformation from "./contanct-information";
-import { useAppSelector } from "@/shared/redux/hooks";
 import ProfileLoading from "./profile-loading";
 import { useTranslations } from "next-intl";
 import Bio from "./bio";
 import { useGetUserDetails } from "../hooks/useGetUserDetails";
+import { useSession } from "next-auth/react";
 
 
 const Skillsdata = [
@@ -29,27 +29,24 @@ const Skillsdata = [
 
 
 interface Props{
-  userUuid:string;
-  canEditUser:boolean;
+  uuid:string;
 }
 
-const UserDetails:FC<Props> =  ({userUuid,canEditUser}) => {
-  const configState = useAppSelector((state) => state.config);
+const UserDetails:FC<Props> =  ({uuid}) => {
+  const {data} = useSession();
+  const loggedInUser = data?.user;
   const t = useTranslations();
   const {
     imageData,
     userData
-  } = useGetUserDetails(userUuid);
-
-  
-  const path = configState.baseUrl;
-  const isLoading = true
+  } = useGetUserDetails(uuid);
 
   if(userData.isError){
     return <>{t("GLOBAL.FETCH-ERROR")}</>
   }
 
-  if(userData.data){
+  if(userData.data && loggedInUser){
+    const isUserMe = uuid ===loggedInUser.uuid;
     const user = userData.data;
     const groupNames =getUserGroups(user);
     const roles = groupNames.join(', ');
@@ -73,7 +70,7 @@ const UserDetails:FC<Props> =  ({userUuid,canEditUser}) => {
         }
         <Bio 
           isLoading={userData.isLoading}
-          canEditUser={canEditUser}/>
+          canEditUser={isUserMe}/>
        
         <ContactInformation 
           email={user.email}
@@ -84,9 +81,9 @@ const UserDetails:FC<Props> =  ({userUuid,canEditUser}) => {
           state={details?.state}
           zipCode={details?.zip}
           isLoading={userData.isLoading}
-          canEditUser={canEditUser}/>
+          canEditUser={isUserMe}/>
           
-        <SocialNetworks canEditUser={canEditUser}/>
+        <SocialNetworks canEditUser={isUserMe}/>
         <div className="p-6 border-b border-dashed dark:border-defaultborder/10">
           <p className="text-[.9375rem] mb-2 me-6 font-semibold">Skills :</p>
           <div>
