@@ -17,6 +17,7 @@ const FormInput:FC<PropsWithChildren<InputProps>>  = ({
     sectionClassName='',
     props,
     error,
+    disabled,
     ...rest
 }) => {
     const [showPassword, setShowPassword] = useState(false);
@@ -34,6 +35,10 @@ const FormInput:FC<PropsWithChildren<InputProps>>  = ({
         dark:focus:ring-blue-500 dark:focus:border-blue-500
     `;
 
+    const disabledCss =" cursor-not-allowed ";
+
+    const inputCss = disabled ? `${defaultInputStyles} ${disabledCss}`: `${defaultInputStyles}`
+
 
     const inputHtml = type ==='password' ? (
         <input 
@@ -41,7 +46,7 @@ const FormInput:FC<PropsWithChildren<InputProps>>  = ({
             name={name} 
             size={30}
             type={(showPassword) ? 'text' : "password"}
-            className={twMerge(defaultInputStyles,className)}
+            className={twMerge(inputCss,className)}
             aria-invalid={error ? "true" : "false"}
             {...(props ?? {})}
             {...rest}/>
@@ -52,7 +57,7 @@ const FormInput:FC<PropsWithChildren<InputProps>>  = ({
             name={name} 
             size={30}
             type={type}
-            className={twMerge(defaultInputStyles,className)}
+            className={twMerge(inputCss,className)}
             aria-invalid={error ? "true" : "false"}
             {...(props ?? {})}
             {...rest}/>
