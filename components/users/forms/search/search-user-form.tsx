@@ -7,18 +7,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { UserSearchSchema } from "@/schemas/search.schemas";
 import {
   Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
 } from "@/shared/shadcn/components/ui/form";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/shared/shadcn/components/ui/select"
 import { useAppDispatch } from "@/shared/redux/hooks";
 import { UserSearchRequest } from '@/models/search.models';
 import { UserStatus } from '@/models/user.models';
@@ -65,7 +54,14 @@ const SearchUserForm:FC<Props> = ({}) => {
                 value:group.id,
                 label:group.name
             } as Options
-        })
+    })
+
+    const statusOptions:Options[] = [
+        {value:'ACTIVE',label:t("USERS.SEARCH.FORM.LABELS.status-active")},
+        {value:'UNVERIFIED',label:t("USERS.SEARCH.FORM.LABELS.status-unverified")},
+        {value:'DEACTIVATED',label:t("USERS.SEARCH.FORM.LABELS.status-deactivated")},
+        {value:'DELETED',label:t("USERS.SEARCH.FORM.LABELS.status-deleted")}
+    ]
     
     const form = useForm<Inputs>({
         resolver: zodResolver(UserSearchSchema),
@@ -142,85 +138,25 @@ const SearchUserForm:FC<Props> = ({}) => {
                         </FormInput>
                     </div>
                     <div className="">
-                        <FormField
-                            control={form.control}
-                            name="role"
-                            render={({ field }) => (
-                            <FormItem data-testid="role">
-                                <FormLabel>{t("USERS.SEARCH.FORM.LABELS.role")}</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue="" >
-                                    <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select a role" />
-                                        </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        {userGroups.map((group)=>(
-                                            <SelectItem 
-                                                key={group.id}
-                                                value={String(group.id)}>
-                                                {group.name}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectContent> 
-                                </Select>
-                            </FormItem>
-                            )}
-                        />
-                        {errors.role? (
-                            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                                {errors.role?.message}
-                            </p>
-                        ): null}
-
-                        <FormField
-                            control={form.control}
-                            name="status"
-                            render={({ field }) => (
-                            <FormItem data-testid="status">
-                                <FormLabel>{t("USERS.SEARCH.FORM.LABELS.status")}</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue="">
-                                    <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select status" />
-                                        </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="ACTIVE">
-                                            {t("USERS.SEARCH.FORM.LABELS.status-active")}
-                                        </SelectItem>
-                                        <SelectItem value="UNVERIFIED">
-                                            {t("USERS.SEARCH.FORM.LABELS.status-unverified")}
-                                        </SelectItem>
-                                        <SelectItem value="DEACTIVATED">
-                                            {t("USERS.SEARCH.FORM.LABELS.status-deactivated")}
-                                        </SelectItem>
-                                        <SelectItem value="DELETED">
-                                            {t("USERS.SEARCH.FORM.LABELS.status-deleted")}
-                                        </SelectItem>
-                                    </SelectContent> 
-                                </Select>
-                            </FormItem>
-                            )}
-                        />
-                        {errors.status? (
-                            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                                {errors.status?.message}
-                            </p>
-                        ): null}
-
                         <FormSelect 
                             name="role"
                             options={groupOptions}
-                            required={true}
                             inputProps={form.register("role")}
-                            className="text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                            sectionClassName="col-span-12 xl:col-span-12"
+                            sectionClassName="mb-2"
                             autoComplete='role-name'
                             error={errors.role?.message}>
+                                {t("USERS.SEARCH.FORM.LABELS.role")}
+                        </FormSelect>
+                        <FormSelect 
+                            name="status"
+                            options={statusOptions}
+                            required={true}
+                            inputProps={form.register("status")}
+                            sectionClassName="mb-2"
+                            autoComplete='role-status'
+                            error={errors.status?.message}>
                                 {t("USERS.SEARCH.FORM.LABELS.status")}
                         </FormSelect>
-                    
                     </div>
                 </div>
                 <div className='pt-5 mt-8' data-testid="buttons">

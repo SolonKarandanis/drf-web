@@ -21,7 +21,7 @@ const FormInput:FC<PropsWithChildren<InputProps>>  = ({
 }) => {
     const [showPassword, setShowPassword] = useState(false);
     const requiredCss = required? 'required' : '';
-    const labelCss = `text-sm font-semibold text-default mb-1 text-gray-900 dark:text-white ${requiredCss}`;
+    const labelCss = `text-sm font-medium text-default mb-2 text-gray-900 dark:text-white ${requiredCss}`;
     const labelErrorCss = error? "text-rose-700 dark:text-rose-500":"";
     const labelHtml = (
         <label htmlFor={name} className={twMerge(labelCss,labelErrorCss)}>

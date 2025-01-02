@@ -18,12 +18,12 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
     ...rest
 }) => {
     const labelHtml = required? (
-        <label htmlFor={name} className="block text-sm font-medium leading-6 text-gray-900">
+        <label htmlFor={name} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
             <span className='required'>{children}</span>
         </label>
     ):(
         
-        <label htmlFor={name} className="block text-sm font-medium leading-6 text-gray-900">
+        <label htmlFor={name} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
             {children}
         </label>
     )
@@ -33,10 +33,12 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
             {labelHtml}
             <div className='mt-2'>
                 <select 
-                    className={twMerge('block w-full rounded-md border-0 py-1.5',className)}
-                    
+                    className={
+                        twMerge('bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',className)
+                    }
                     {...(inputProps ?? {})}
                     {...rest}>
+                    <option>Select a value...</option>
                     {options.map((option) =>(
                         <option key={option.value} value={option.value}>{option.label}</option>
                     ))}
