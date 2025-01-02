@@ -3,7 +3,7 @@
 import { DragEvent, useState, forwardRef } from "react";
 import { InputProps } from "../props";
 import { twMerge } from "tailwind-merge";
-import CFormError from "../form-error/cform-error";
+import CFormError from "../form-error/form-error";
 
 const FileDrop =forwardRef<HTMLInputElement, InputProps>(
   ({ 

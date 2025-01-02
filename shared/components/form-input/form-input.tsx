@@ -2,13 +2,13 @@
 
 import { FC, useState,PropsWithChildren } from 'react'
 import { twMerge } from "tailwind-merge";
-import CFormError from '@/shared/components/form-error/cform-error'
 import { InputProps } from '../props';
+import FormError from '@/shared/components/form-error/form-error';
 
 
 
 
-const CFormInput:FC<PropsWithChildren<InputProps>>  = ({
+const FormInput:FC<PropsWithChildren<InputProps>>  = ({
     name,
     children,
     type='text',
@@ -21,11 +21,19 @@ const CFormInput:FC<PropsWithChildren<InputProps>>  = ({
 }) => {
     const [showPassword, setShowPassword] = useState(false);
     const requiredCss = required? 'required' : '';
+    const labelCss = `text-sm font-semibold text-default ${requiredCss}`;
+    const labelErrorCss = error? "text-rose-700 dark:text-rose-500":"";
     const labelHtml = (
-        <label htmlFor={name} className={`form-label text-default ${requiredCss}`}>
+        <label htmlFor={name} className={twMerge(labelCss,labelErrorCss)}>
             {children}
         </label>
     )
+
+    const defaultInputStyles = `bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
+        block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+        dark:focus:ring-blue-500 dark:focus:border-blue-500
+    `;
+
 
     const inputHtml = type ==='password' ? (
         <input 
@@ -33,7 +41,7 @@ const CFormInput:FC<PropsWithChildren<InputProps>>  = ({
             name={name} 
             size={30}
             type={(showPassword) ? 'text' : "password"}
-            className={twMerge('form-control',className)}
+            className={twMerge(defaultInputStyles,className)}
             aria-invalid={error ? "true" : "false"}
             {...(props ?? {})}
             {...rest}/>
@@ -44,13 +52,13 @@ const CFormInput:FC<PropsWithChildren<InputProps>>  = ({
             name={name} 
             size={30}
             type={type}
-            className={twMerge('form-control',className)}
+            className={twMerge(defaultInputStyles,className)}
             aria-invalid={error ? "true" : "false"}
             {...(props ?? {})}
             {...rest}/>
     );
 
-    const errorHtml = error ? (<CFormError error={error} />) : null;
+    const errorHtml = error ? (<FormError error={error} />) : null;
 
     const showPasswordButtonHtml = (
         <button onClick={()=>setShowPassword(!showPassword)}  aria-label="button" 
@@ -66,8 +74,8 @@ const CFormInput:FC<PropsWithChildren<InputProps>>  = ({
             <div className="input-group">
                 {inputHtml}
                 {showPasswordButtonHtml}
-                {errorHtml}
             </div>
+            {errorHtml}
         </>
     ):
     (
@@ -86,4 +94,4 @@ const CFormInput:FC<PropsWithChildren<InputProps>>  = ({
     )
 }
 
-export default CFormInput
+export default FormInput

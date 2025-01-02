@@ -31,15 +31,6 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
     error?:string,
 }
 
-type AllInputProps = UseControllerProps & InputHTMLAttributes<HTMLInputElement>;
-
-export interface FormInputProps extends AllInputProps{
-    type:string,
-    required?:boolean,
-    className?:string,
-    sectionClassName?:string,
-    error?:string,
-}
 
 export interface Options{
     label:string,

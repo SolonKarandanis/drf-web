@@ -6,7 +6,7 @@ import * as z from "zod";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import CFormInput from '@/shared/components/form-input/cform-input';
+import CFormInput from '@/shared/components/form-input/form-input';
 import CButton from '@/shared/components/button/cbutton';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';

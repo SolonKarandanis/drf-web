@@ -2,7 +2,7 @@
 
 import {FC,PropsWithChildren} from 'react'
 import { twMerge } from "tailwind-merge";
-import CFormError from '@/shared/components/form-error/cform-error'
+import CFormError from '@/shared/components/form-error/form-error'
 import { SelectProps } from '../props'
 
 

@@ -9,7 +9,7 @@ import { ForgotPasswordSchema,getForgotPasswordSchema } from '@/schemas/auth.sch
 import { useEffect, useState } from "react";
 import { passwordStrength } from "check-password-strength";
 import PasswordStrength from '@/shared/components/password-strength/password-strength';
-import CFormInput from "@/shared/components/form-input/cform-input";
+import CFormInput from "@/shared/components/form-input/form-input";
 import CButton from "@/shared/components/button/cbutton";
 
 

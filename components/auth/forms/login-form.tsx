@@ -5,13 +5,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { getLoginSchema, LoginSchema } from "@/schemas/auth.schemas";
 import CForm from "@/shared/components/form/cform";
-import CFormInput from "@/shared/components/form-input/cform-input";
 import CButton from "@/shared/components/button/cbutton";
 import { useTranslations } from "next-intl";
 import {signIn, SignInResponse} from "next-auth/react"
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import FormInput from "@/shared/components/input/input";
+import FormInput from "@/shared/components/form-input/form-input";
 
 
 
@@ -38,7 +37,7 @@ const LoginForm = () => {
             redirect:false,
             callbackUrl:'/'
         })
-        .then((response: SignInResponse| undefined) =>{
+        .then((response: SignInResponse| undefined) =>{http://localhost:3000/en/auth/login/
             if(response && response.ok){
                 router.push(response.url!);
             }
@@ -52,19 +51,8 @@ const LoginForm = () => {
     return (
         <>
             <CForm onSubmit={handleSubmit(onSubmit)}>
-                <div className="grid grid-cols-12 gap-y-4">
-                    {/* <FormInput 
-                        control={control}
-                        type='text'
-                        required={true}
-                        name='username'
-                        placeholder={t(`${lform}.LABELS.username`)}
-                        autoComplete="username"
-                        sectionClassName="col-span-12 xl:col-span-12"
-                        error={errors.username?.message}>
-                            {t(`${lform}.LABELS.username`)}
-                    </FormInput> */}
-                    <CFormInput 
+                <div className="grid grid-cols-12 gap-y-4">                 
+                    <FormInput 
                         type='text'
                         required={true}
                         name='username' 
@@ -75,8 +63,8 @@ const LoginForm = () => {
                         props={register("username")}
                         error={errors.username?.message}>
                             {t(`${lform}.LABELS.username`)}
-                    </CFormInput>
-                    <CFormInput 
+                    </FormInput>
+                    <FormInput 
                         type='password'
                         required={true}
                         name='password' 
@@ -91,7 +79,7 @@ const LoginForm = () => {
                                 className="ml-1 ltr:float-right rtl:float-left text-danger">
                                 {t(`${lform}.LABELS.forget-password`)}
                             </Link>
-                    </CFormInput>
+                    </FormInput>
                     <div className="col-span-12 mb-2 xl:col-span-12">
                         <div className="mt-2">
                             <div className="form-check !ps-0">

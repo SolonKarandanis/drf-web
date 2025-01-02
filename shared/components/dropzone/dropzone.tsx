@@ -3,7 +3,7 @@
 import  { ChangeEvent, FC,PropsWithChildren } from 'react'
 import Image from "next/image";
 import { RegisterProps } from '../props';
-import CFormError from '../form-error/cform-error';
+import CFormError from '../form-error/form-error';
 
 interface Props{
     handleUploadFile:(event:ChangeEvent<HTMLInputElement>)=>void;

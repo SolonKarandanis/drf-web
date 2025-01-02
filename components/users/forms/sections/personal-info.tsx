@@ -1,4 +1,4 @@
-import CFormInput from '@/shared/components/form-input/cform-input'
+import CFormInput from '@/shared/components/form-input/form-input'
 import {FC} from 'react'
 import { SectionProps } from './props';
 import FileDrop from '@/shared/components/file-drop/file-drop';

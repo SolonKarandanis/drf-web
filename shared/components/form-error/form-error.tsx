@@ -4,7 +4,7 @@ interface Props{
     error?:string
 }
 
-const CFormError:FC<Props> = ({error}) => {
+const FormError:FC<Props> = ({error}) => {
   return (
     <p className="mt-2 text-sm text-rose-600 dark:text-rose-500">
       {error}
@@ -12,4 +12,4 @@ const CFormError:FC<Props> = ({error}) => {
   )
 }
 
-export default CFormError
+export default FormError
