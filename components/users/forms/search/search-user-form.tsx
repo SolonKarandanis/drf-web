@@ -5,8 +5,6 @@ import * as z from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { UserSearchSchema } from "@/schemas/search.schemas";
-import { Button } from "@/shared/shadcn/components/ui/button";
-import { Input } from "@/shared/shadcn/components/ui/input";
 import {
   Form,
   FormControl,
@@ -31,9 +29,12 @@ import {
     initialRequest, 
 } from '@/shared/redux/features/users/usersSlice';
 import { useTranslations } from 'next-intl';
-import ButtonLoading from '@/shared/components/button-loading/button-loading';
 import { useGetUserSearchResults } from '../../hooks/useGetUserSearchResults';
 import { useGetUserGroups } from '../../hooks/useGetUserGroups';
+import FormInput from '@/shared/components/form-input/form-input';
+import FormButton from '@/shared/components/button/form-button';
+import FormSelect from '@/shared/components/form-select/form-select';
+import { Options } from '@/shared/components/props';
 
 
 type Inputs = z.infer<typeof UserSearchSchema>
@@ -58,6 +59,13 @@ const SearchUserForm:FC<Props> = ({}) => {
     const dispatch = useAppDispatch();
 
     const paging = searchRequest.paging
+
+    const groupOptions = userGroups.map((group)=> {
+            return {
+                value:group.id,
+                label:group.name
+            } as Options
+        })
     
     const form = useForm<Inputs>({
         resolver: zodResolver(UserSearchSchema),
@@ -99,48 +107,39 @@ const SearchUserForm:FC<Props> = ({}) => {
                 data-testid="form">
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-10">
                     <div className="grid grid-cols-1">
-                        <FormField
-                            control={form.control}
-                            name="username"
-                            render={({ field }) => (
-                            <FormItem data-testid="username">
-                                <FormLabel>{t("USERS.SEARCH.FORM.LABELS.username")}</FormLabel>
-                                <FormControl>
-                                    <Input 
-                                        data-testid="input-username"
-                                        {...field} />
-                                </FormControl>
-                            </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="name"
-                            render={({ field }) => (
-                            <FormItem data-testid="name">
-                                <FormLabel>{t("USERS.SEARCH.FORM.LABELS.name")}</FormLabel>
-                                <FormControl>
-                                    <Input 
-                                        data-testid="input-name" 
-                                        {...field} />
-                                </FormControl>
-                            </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="email"
-                            render={({ field }) => (
-                            <FormItem data-testid="email">
-                                <FormLabel>{t("USERS.SEARCH.FORM.LABELS.email")}</FormLabel>
-                                <FormControl>
-                                    <Input 
-                                        data-testid="input-email" 
-                                        {...field} />
-                                </FormControl>
-                            </FormItem>
-                            )}
-                        />
+                        <FormInput 
+                            type='text'
+                            required={true}
+                            name='username' 
+                            placeholder={t(`USERS.SEARCH.FORM.LABELS.username`)}
+                            className={"w-full !rounded-md"}
+                            sectionClassName="mb-2"
+                            props={form.register("username")}
+                            error={errors.username?.message}>
+                            {t(`USERS.SEARCH.FORM.LABELS.username`)}
+                        </FormInput>
+                        <FormInput 
+                            type='text'
+                            required={true}
+                            name='name' 
+                            placeholder={t(`USERS.SEARCH.FORM.LABELS.name`)}
+                            className={"w-full !rounded-md"}
+                            sectionClassName="mb-2"
+                            props={form.register("name")}
+                            error={errors.name?.message}>
+                            {t(`USERS.SEARCH.FORM.LABELS.name`)}
+                        </FormInput>
+                        <FormInput 
+                            type='text'
+                            required={true}
+                            name='email' 
+                            placeholder={t(`USERS.SEARCH.FORM.LABELS.email`)}
+                            className={"w-full !rounded-md"}
+                            sectionClassName="mb-2"
+                            props={form.register("email")}
+                            error={errors.email?.message}>
+                            {t(`USERS.SEARCH.FORM.LABELS.email`)}
+                        </FormInput>
                     </div>
                     <div className="">
                         <FormField
@@ -209,28 +208,39 @@ const SearchUserForm:FC<Props> = ({}) => {
                                 {errors.status?.message}
                             </p>
                         ): null}
+
+                        <FormSelect 
+                            name="role"
+                            options={groupOptions}
+                            required={true}
+                            inputProps={form.register("role")}
+                            className="text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                            sectionClassName="col-span-12 xl:col-span-12"
+                            autoComplete='role-name'
+                            error={errors.role?.message}>
+                                {t("USERS.SEARCH.FORM.LABELS.status")}
+                        </FormSelect>
                     
                     </div>
                 </div>
                 <div className='pt-5 mt-8' data-testid="buttons">
                     <div className='flex justify-between'>
-                        <Button 
-                            type="submit" 
-                            variant="outline"
-                            disabled={isLoading}>
-                            {isLoading ? 
-                                <ButtonLoading /> : 
-                                t(`GLOBAL.BUTTONS.search`)
-                            }
-                            
-                        </Button>
-                        <Button 
-                            type="reset" 
-                            variant="destructive"
-                            disabled={isLoading}
+                        <FormButton 
+                            intent="info" 
+                            size="md" 
+                            type="submit"
+                            isLoading={isLoading}
+                            isDisabled={isLoading}>
+                                {t(`GLOBAL.BUTTONS.search`)}
+                        </FormButton>
+                        <FormButton 
+                            intent="danger" 
+                            size="md" 
+                            type="reset"
+                            isDisabled={isLoading}
                             onClick={clear}>
-                            {t(`GLOBAL.BUTTONS.reset`)}
-                        </Button>
+                                {t(`GLOBAL.BUTTONS.reset`)}
+                        </FormButton>
                     </div>
                 </div>
             </form>

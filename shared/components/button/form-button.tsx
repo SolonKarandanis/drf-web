@@ -3,18 +3,17 @@
 import {ButtonHTMLAttributes, FC, ReactElement,PropsWithChildren} from 'react';
 import {cva,VariantProps} from 'class-variance-authority';
 import { twMerge } from "tailwind-merge";
-import { useFormStatus } from 'react-dom';
 import ButtonLoading from '../button-loading/button-loading';
 
-const buttonVariants = cva('ti-btn ti-btn-wave',{
+const buttonVariants = cva('focus:outline-none text-white focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2',{
   variants:{
     intent:{
       primary:'ti-btn-primary ti-btn-primary-full',
       secondary:'ti-btn-secondary ti-btn-secondary-full',
-      success:'ti-btn-success ti-btn-success-full',
-      info:'ti-btn-info ti-btn-info-full',
-      warning:'ti-btn-warning ti-btn-warning-full',
-      danger:'ti-btn-warning ti-btn-danger-full',
+      success:'bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:ring-lime-300 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800',
+      info:'bg-primary-600 hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800',
+      warning:'bg-amber-400 hover:bg-amber-500 focus:ring-4 focus:ring-amber-300 dark:focus:ring-amber-900',
+      danger:'bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:ring-rose-300 font-medium dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-900',
       light:'ti-btn-warning ti-btn-light',
       dark:'ti-btn-warning ti-btn-dark',
       violet:'bg-violet-500 text-white',
@@ -65,9 +64,6 @@ const FormButton:FC<PropsWithChildren<ButtonProps>> = ({
     children,
     ...rest 
 }) => {
-
-    const { pending, data, method, action } = useFormStatus();
-    const isSubmitting = pending || isLoading;
     const iconHtml = icon ? (<span data-testid="Button.Icon" className="mr-3">{icon}</span>) : null;
     return (
         <button 
@@ -84,7 +80,7 @@ const FormButton:FC<PropsWithChildren<ButtonProps>> = ({
                 {iconPosition === 'right' && (<>{children} {iconHtml}</>)}
                 </span>
               }
-              { isSubmitting && <ButtonLoading />}
+              { isLoading && <ButtonLoading />}
         </button>
     );
 }
