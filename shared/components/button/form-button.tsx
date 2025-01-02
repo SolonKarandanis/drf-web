@@ -53,7 +53,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
 }
 
 
-const CButton:FC<PropsWithChildren<ButtonProps>> = ({ 
+const FormButton:FC<PropsWithChildren<ButtonProps>> = ({ 
     className='',
     intent,
     size,
@@ -89,4 +89,4 @@ const CButton:FC<PropsWithChildren<ButtonProps>> = ({
     );
 }
 
-export default CButton
+export default FormButton

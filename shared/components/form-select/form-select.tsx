@@ -2,11 +2,11 @@
 
 import {FC,PropsWithChildren} from 'react'
 import { twMerge } from "tailwind-merge";
-import CFormError from '@/shared/components/form-error/form-error'
+import FormError from '@/shared/components/form-error/form-error'
 import { SelectProps } from '../props'
 
 
-const CFormSelect:FC<PropsWithChildren<SelectProps>> = ({
+const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
     name,
     options,
     required=false,
@@ -42,11 +42,11 @@ const CFormSelect:FC<PropsWithChildren<SelectProps>> = ({
                     ))}
                 </select>
                 {
-                    error ? (<CFormError error={error} />) : null
+                    error ? (<FormError error={error} />) : null
                 }
             </div>
         </section>
     )
 }
 
-export default CFormSelect
+export default FormSelect

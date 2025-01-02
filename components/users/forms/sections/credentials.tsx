@@ -1,7 +1,7 @@
 import {FC} from 'react'
 import CFormInput from '@/shared/components/form-input/form-input'
 import { CredentialsProps } from './props';
-import CFormSelect from '@/shared/components/form-select/cform-select';
+import CFormSelect from '@/shared/components/form-select/form-select';
 
 const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
   return (

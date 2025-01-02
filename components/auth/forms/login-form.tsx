@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { getLoginSchema, LoginSchema } from "@/schemas/auth.schemas";
 import CForm from "@/shared/components/form/cform";
-import CButton from "@/shared/components/button/cbutton";
+import FormButton from "@/shared/components/button/form-button";
 import { useTranslations } from "next-intl";
 import {signIn, SignInResponse} from "next-auth/react"
 import { useRouter } from "next/navigation";
@@ -91,13 +91,13 @@ const LoginForm = () => {
                         </div>
                     </div>
                     <div className="grid col-span-12 mt-2 xl:col-span-12">
-                        <CButton 
+                        <FormButton 
                             intent="violet" 
                             size="md" 
                             type="submit"
-                            >                    
+                            isDisabled={isSubmitting || !isValid}>                    
                                 {t(`${lform}.BUTTONS.sign-in`)}
-                        </CButton>
+                        </FormButton>
                         {/* <Link href="/components/dashboards/crm/" className="ti-btn ti-btn-primary !bg-primary !text-white !font-medium">Sign In</Link> */}
                     </div>
                 </div>

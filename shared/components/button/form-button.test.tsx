@@ -1,39 +1,39 @@
 import React from 'react'
 import { render, screen,fireEvent } from "@testing-library/react";
 import '@testing-library/jest-dom'
-import CButton from './cbutton';
+import FormButton from './form-button';
 import { MdClear } from "react-icons/md";
 
 describe('<Button />',()=>{
     it('1. On initial render the button is enabled',async () => {
         render(
-        <CButton intent='primary' 
+        <FormButton intent='primary' 
             type="submit"
-            className='btn btn-shadow btn-lg w-40'>
+            className='w-40 btn btn-shadow btn-lg'>
             Search
-        </CButton>)
+        </FormButton>)
         expect(await screen.findByRole('button')).toBeEnabled();
     })
 
     it('2. The button has text content',async () =>{
         render(
-        <CButton intent='primary' 
+        <FormButton intent='primary' 
             type="submit"
-            className='btn btn-shadow btn-lg w-40'>
+            className='w-40 btn btn-shadow btn-lg'>
             Search
-        </CButton> 
+        </FormButton> 
         )
         expect(await screen.findByRole('button')).toHaveTextContent('Search');
     })
 
     it('3. The button is in loading state',async () =>{
         render(
-        <CButton intent='primary' 
+        <FormButton intent='primary' 
             type="submit"
-            className='btn btn-shadow btn-lg w-40'
+            className='w-40 btn btn-shadow btn-lg'
             isLoading={true}>
             Search
-        </CButton>  
+        </FormButton>  
         )
         
         expect(screen.getByTestId('Button.Spinner')).toBeInTheDocument()
@@ -45,12 +45,12 @@ describe('<Button />',()=>{
     it('4. calls the onClick callback handler',async () =>{
         const onClick = jest.fn()
         render(
-            <CButton intent='primary' 
+            <FormButton intent='primary' 
                 type="submit"
-                className='btn btn-shadow btn-lg w-40'
+                className='w-40 btn btn-shadow btn-lg'
                 onClick={onClick}>
                 Search
-            </CButton> 
+            </FormButton> 
         )
         fireEvent.click(await screen.findByRole('button'),{
             target: { value: 'JavaScript' },
@@ -61,13 +61,13 @@ describe('<Button />',()=>{
     it('5. It renders an Icon', async ()=>{
 
         render(
-            <CButton intent='danger' 
+            <FormButton intent='danger' 
                 type="submit"
-                className='btn btn-shadow btn-lg w-40'
+                className='w-40 btn btn-shadow btn-lg'
                 icon={<MdClear />}
                 >
                 Clear
-            </CButton> 
+            </FormButton> 
         )
         expect(screen.getByTestId('Button.Icon')).toBeInTheDocument()
 

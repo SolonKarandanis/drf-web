@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen,fireEvent } from "@testing-library/react";
 import '@testing-library/jest-dom' 
 
-import CFormSelect  from "./cform-select";
+import FormSelect  from "./form-select";
 
 const animals = [
     { value: "dog", label: "Dog" },
@@ -21,12 +21,12 @@ const animals = [
 describe('<Select />',() =>{
     it("1. Should render with default value selected", () => {
         render(
-        <CFormSelect 
+        <FormSelect 
             name='animals' 
             options={animals} 
             defaultValue={"cat"} >
             Animals
-        </CFormSelect>);
+        </FormSelect>);
      
         expect(screen.getByRole("combobox")).toHaveValue("cat");
         expect((screen.getByRole("option", { name: "Cat" }) as HTMLOptionElement).selected).toBe(true);
@@ -34,12 +34,12 @@ describe('<Select />',() =>{
 
     it("2. Should select correct value on change", async () => {
         render(
-            <CFormSelect 
+            <FormSelect 
                 name='animals' 
                 options={animals} 
                 defaultValue={"cat"} >
                     Animals
-            </CFormSelect>
+            </FormSelect>
         )
      
         fireEvent.change(screen.getByRole("combobox"),{

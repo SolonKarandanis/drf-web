@@ -9,8 +9,8 @@ import { ForgotPasswordSchema,getForgotPasswordSchema } from '@/schemas/auth.sch
 import { useEffect, useState } from "react";
 import { passwordStrength } from "check-password-strength";
 import PasswordStrength from '@/shared/components/password-strength/password-strength';
-import CFormInput from "@/shared/components/form-input/form-input";
-import CButton from "@/shared/components/button/cbutton";
+import FormInput from "@/shared/components/form-input/form-input";
+import FormButton from "@/shared/components/button/form-button";
 
 
 
@@ -43,7 +43,7 @@ const ForgotPasswordForm = () => {
     <>
       <CForm onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-12 gap-y-4">
-          <CFormInput 
+          <FormInput 
               type='email'
               required={true}
               name='email' 
@@ -53,8 +53,8 @@ const ForgotPasswordForm = () => {
               props={register("email")}
               error={errors.email?.message}>
                   {t("LABELS.email")}
-          </CFormInput>
-          <CFormInput
+          </FormInput>
+          <FormInput
               type='password'
               required={true}
               name='newPassword' 
@@ -65,9 +65,9 @@ const ForgotPasswordForm = () => {
               props={register("newPassword")}
               error={errors.newPassword?.message}>
                   {t("LABELS.password")}
-          </CFormInput>
+          </FormInput>
           <PasswordStrength passStrength={passStrength} />
-          <CFormInput 
+          <FormInput 
               type='password'
               required={true}
               name='confirmpassword' 
@@ -78,14 +78,14 @@ const ForgotPasswordForm = () => {
               props={register("confirmPassword")}
               error={errors.confirmPassword?.message}>
                   {t("LABELS.confirm-password")}
-          </CFormInput>
+          </FormInput>
           <div className="grid col-span-12 mt-2 xl:col-span-12">
-              <CButton 
+              <FormButton 
                   intent="violet" 
                   size="md" 
                   type="submit">
                   {t("BUTTONS.create-new-password")}
-              </CButton>
+              </FormButton>
           </div>
         </div>
       </CForm>

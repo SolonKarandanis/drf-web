@@ -6,12 +6,12 @@ import * as z from "zod";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import CFormInput from '@/shared/components/form-input/form-input';
-import CButton from '@/shared/components/button/cbutton';
+import FormInput from '@/shared/components/form-input/form-input';
+import FormButton from '@/shared/components/button/form-button';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
-import CFormSelect from '@/shared/components/form-select/cform-select';
+import FormSelect from '@/shared/components/form-select/form-select';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { passwordStrength } from "check-password-strength";
@@ -100,7 +100,7 @@ const RegisterForm = () => {
     <>
         <CForm onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-12 gap-y-4">
-                <CFormInput 
+                <FormInput 
                     type='text'
                     required={true}
                     name='firstName' 
@@ -110,8 +110,8 @@ const RegisterForm = () => {
                     props={register("firstName")}
                     error={errors.firstName?.message}>
                        {t(`${rform}.LABELS.first-name`)}
-                </CFormInput>
-                <CFormInput 
+                </FormInput>
+                <FormInput 
                     type='text'
                     required={true}
                     name='lastname' 
@@ -121,8 +121,8 @@ const RegisterForm = () => {
                     props={register("lastName")}
                     error={errors.lastName?.message}>
                         {t(`${rform}.LABELS.last-name`)}
-                </CFormInput>
-                <CFormInput 
+                </FormInput>
+                <FormInput 
                     type='email'
                     required={true}
                     name='email' 
@@ -132,8 +132,8 @@ const RegisterForm = () => {
                     props={register("email")}
                     error={errors.email?.message}>
                         {t(`${rform}.LABELS.email`)}
-                </CFormInput>
-                <CFormSelect 
+                </FormInput>
+                <FormSelect 
                     name="role"
                     options={userGroups}
                     required={true}
@@ -143,8 +143,8 @@ const RegisterForm = () => {
                     autoComplete='role-name'
                     error={errors.role?.message}>
                         {t(`${rform}.LABELS.role`)}
-                </CFormSelect>
-                <CFormInput 
+                </FormSelect>
+                <FormInput 
                     type='text'
                     required={true}
                     name='username' 
@@ -155,8 +155,8 @@ const RegisterForm = () => {
                     props={register("username")}
                     error={errors.username?.message}>
                         {t(`${rform}.LABELS.username`)}
-                </CFormInput>
-                <CFormInput
+                </FormInput>
+                <FormInput
                     type='password'
                     required={true}
                     name='password' 
@@ -167,9 +167,9 @@ const RegisterForm = () => {
                     props={register("password")}
                     error={errors.password?.message}>
                         {t(`${rform}.LABELS.password`)}
-                </CFormInput>
+                </FormInput>
                 <PasswordStrength passStrength={passStrength} />
-                <CFormInput 
+                <FormInput 
                     type='password'
                     required={true}
                     name='confirmpassword' 
@@ -180,7 +180,7 @@ const RegisterForm = () => {
                     props={register("confirmPassword")}
                     error={errors.confirmPassword?.message}>
                         {t(`${rform}.LABELS.confirm-password`)}
-                </CFormInput>
+                </FormInput>
                 <div className="col-span-12 xl:col-span-12">
                     <div className="form-check !flex !ps-0">
                         <input className="form-check-input me-1" type="checkbox" value="" id="defaultCheck1"/>
@@ -193,13 +193,13 @@ const RegisterForm = () => {
                     </div>
                 </div>
                 <div className="grid col-span-12 mt-2 xl:col-span-12">
-                    <CButton 
+                    <FormButton 
                         intent="violet" 
                         size="md" 
                         type="submit"
                         isDisabled={isSubmitting || !isValid}>
                             {t(`${rform}.BUTTONS.create-account`)}
-                    </CButton>
+                    </FormButton>
                 </div>
             </div>
         </CForm>

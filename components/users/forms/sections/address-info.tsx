@@ -1,6 +1,6 @@
 import {FC} from 'react'
 import CFormInput from '@/shared/components/form-input/form-input'
-import CFormSelect from "@/shared/components/form-select/cform-select";
+import CFormSelect from "@/shared/components/form-select/form-select";
 import { AddressInfoProps } from './props';
 
 const AddressInfo:FC<AddressInfoProps> = ({register,errors,countries})=> {
