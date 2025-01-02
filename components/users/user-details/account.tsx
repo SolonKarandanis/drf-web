@@ -31,6 +31,7 @@ const Account:FC<Props> = async ({uuid}) => {
                                     Settings
                                 </TabsTrigger>
                                 <TabsTrigger 
+                                    disabled={!canEditUser}
                                     value="change-password">
                                     Change Password
                                 </TabsTrigger>
