@@ -78,6 +78,11 @@ export interface Category{
     slug:string;
 }
 
+export interface AttributeOption{
+    id:number;
+    name:string;
+}
+
 export interface CreateProductRequest extends BaseProduct{
 
 }

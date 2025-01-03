@@ -1,6 +1,9 @@
 import { 
+    AttributeOption,
+    Brand,
     BrandsWithTotals, 
     CategoriesWithTotals, 
+    Category, 
     CreateProductRequest, 
     DiscountsWithTotals, 
     PostProductCommentRequest, 
@@ -49,24 +52,59 @@ const productsApiSlice = apiSlice.injectEndpoints({
 				}
 			}
         }),
-        getCategoriesWithTotals:builder.query<CategoriesWithTotals[],void>({
+        getAllCategories:builder.query<Category[],void>({
             query:() =>{
 				return {
 					url:`${ApiControllers.PRODUCTS}/categories/`,
 				}
 			}
         }),
-        getBrandsWithTotals:builder.query<BrandsWithTotals[],void>({
+        getAllBrands:builder.query<Brand[],void>({
             query:() =>{
 				return {
 					url:`${ApiControllers.PRODUCTS}/brands/`,
 				}
 			}
         }),
-        getSizesWithTotals:builder.query<SizesWithTotals[],void>({
+        getAllSizes:builder.query<AttributeOption[],void>({
             query:() =>{
 				return {
 					url:`${ApiControllers.PRODUCTS}/sizes/`,
+				}
+			}
+        }),
+        getAllColours:builder.query<AttributeOption[],void>({
+            query:() =>{
+				return {
+					url:`${ApiControllers.PRODUCTS}/colours/`,
+				}
+			}
+        }),
+        getAllGenders:builder.query<AttributeOption[],void>({
+            query:() =>{
+				return {
+					url:`${ApiControllers.PRODUCTS}/genders/`,
+				}
+			}
+        }),
+        getCategoriesWithTotals:builder.query<CategoriesWithTotals[],void>({
+            query:() =>{
+				return {
+					url:`${ApiControllers.PRODUCTS}/categories/totals/`,
+				}
+			}
+        }),
+        getBrandsWithTotals:builder.query<BrandsWithTotals[],void>({
+            query:() =>{
+				return {
+					url:`${ApiControllers.PRODUCTS}/brands/totals/`,
+				}
+			}
+        }),
+        getSizesWithTotals:builder.query<SizesWithTotals[],void>({
+            query:() =>{
+				return {
+					url:`${ApiControllers.PRODUCTS}/sizes/totals/`,
 				}
 			}
         }),
