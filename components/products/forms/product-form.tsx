@@ -14,6 +14,9 @@ import { ActualFileObject } from 'filepond';
 import FormButton from '@/shared/components/button/form-button';
 import { useTranslations } from 'next-intl';
 import { useGetProductMisc } from '../hooks/useGetProductMisc';
+import { Options } from '@/shared/components/props';
+import FormSelect from '@/shared/components/form-select/form-select';
+
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 const ProductForm = () => {
@@ -36,6 +39,41 @@ const ProductForm = () => {
         gendersLoading,
         gendersIsError
     } = useGetProductMisc();
+
+    const categoriesOptions = categories.map((category)=> {
+        return {
+            value:category.id,
+            label:category.name
+        } as Options
+    });
+
+    const brandsOptions = brands.map((brand)=> {
+        return {
+            value:brand.id,
+            label:brand.name
+        } as Options
+    });
+
+    const sizesOptions = sizes.map((size)=> {
+        return {
+            value:size.id,
+            label:size.name
+        } as Options
+    });
+
+    const coloursOptions = colours.map((color)=> {
+        return {
+            value:color.id,
+            label:color.name
+        } as Options
+    });
+
+    const gendersOptions = genders.map((gender)=> {
+        return {
+            value:gender.id,
+            label:gender.name
+        } as Options
+    });
 
 
     const [files, setFiles] = useState<ActualFileObject[]>([]);
@@ -68,16 +106,25 @@ const ProductForm = () => {
                             </label>
                             <div className="col-span-12 xl:col-span-6">
                                 <label htmlFor="product-category-add" className="form-label">Category</label>
-                                {/* <Select 
+                                <Select 
                                     id="product-category-add"  
                                     name="product-category-add" 
-                                    options={Addproduct} 
+                                    options={categoriesOptions} 
                                     className="w-full !rounded-md" 
                                     isSearchable
                                     menuPlacement='auto' 
                                     classNamePrefix="Select2" 
                                     placeholder="Category"
-                                /> */}
+                                    
+                                />
+                                {/* <FormSelect 
+                                    name="category"
+                                    options={categoriesOptions}
+                                    sectionClassName="mb-2"
+                                    autoComplete='role-name'
+                                   >
+                                    Category
+                                </FormSelect> */}
                             </div>
                             <div className="col-span-12 xl:col-span-6">
                                 <label 
@@ -85,16 +132,16 @@ const ProductForm = () => {
                                     className="form-label">
                                     Gender
                                 </label>
-                                {/* <Select 
+                                 <Select 
                                     id="product-gender-add"
                                     name="product-gender-add" 
-                                    options={Addproduct1} 
+                                    options={gendersOptions} 
                                     className="w-full !rounded-md" 
                                     isSearchable
                                     menuPlacement='auto' 
                                     classNamePrefix="Select2" 
                                     placeholder="Select"
-                                /> */}
+                                />
                             </div>
                             <div className="col-span-12 xl:col-span-6">
                                 <label 
@@ -102,16 +149,16 @@ const ProductForm = () => {
                                     className="form-label">
                                     Size
                                 </label>
-                                {/* <Select 
+                                <Select 
                                     id="product-size-add" 
                                     name="product-size-add" 
-                                    options={Addproduct2} 
+                                    options={sizesOptions} 
                                     className="w-full !rounded-md" 
                                     isSearchable
                                     menuPlacement='auto' 
                                     classNamePrefix="Select2" 
                                     placeholder="Select"
-                                /> */}
+                                />
                             </div>
                             <div className="col-span-12 xl:col-span-6">
                                 <label 
@@ -119,16 +166,16 @@ const ProductForm = () => {
                                     className="form-label">
                                     Brand
                                 </label>
-                                {/* <Select 
+                                <Select 
                                     id="product-brand-add"
                                     name="product-brand-add" 
-                                    options={Addproduct3} 
+                                    options={brandsOptions} 
                                     className="w-full !rounded-md" 
                                     isSearchable
                                     menuPlacement='auto' 
                                     classNamePrefix="Select2" 
                                     placeholder="Select" 
-                                /> */}
+                                />
                             </div>
                             <div className="col-span-12 xl:col-span-6 color-selection">
                                 <label 
@@ -136,16 +183,16 @@ const ProductForm = () => {
                                     className="form-label">
                                     Colors
                                 </label>
-                                {/* <Select 
+                                <Select 
                                     id="product-color-add"
                                     isMulti name="colors" 
-                                    options={Addproduct4} 
+                                    options={coloursOptions} 
                                     className="w-full !rounded-md" 
                                     isSearchable 
                                     menuPlacement='auto' 
                                     classNamePrefix="Select2" 
                                     placeholder="Select"
-                                /> */}
+                                />
                             </div>
                             <div className="col-span-12 xl:col-span-6">
                                 <label 

@@ -1,4 +1,4 @@
-import ProductForm from "@/components/products/forms/productform";
+import ProductForm from "@/components/products/forms/product-form";
 import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 import { Metadata } from "next";
 import { useTranslations } from "next-intl";

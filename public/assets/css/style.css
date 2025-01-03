@@ -13178,7 +13178,7 @@ caption {
 }
 
 .Select2__option:hover {
-  @apply text-[#fff] bg-primary !important;
+  @apply text-[#fff] bg-slate-700 dark:bg-slate-400 !important;
 }
 
 .Select2__input-container, .Select2__single-value {
@@ -13195,7 +13195,7 @@ caption {
 .Select2__menu li .Select2__option--is-selected,
 .Select2__menu .Select2__single-value.active,
 .Select2__menu .Select2__single-value .Select2__option--is-selected {
-  @apply text-[#fff] bg-primary !important;
+  @apply text-[#fff] bg-success !important;
 }
 
 .Select2__menu {
@@ -13203,7 +13203,7 @@ caption {
 }
 
 .Select2__multi-value {
-  @apply bg-primary text-[#fff] !important;
+  @apply bg-success text-[#fff] !important;
 }
 
 .Select2__multi-value__label {
