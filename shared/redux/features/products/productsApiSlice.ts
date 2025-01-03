@@ -159,5 +159,10 @@ export const {
     useCreateProductMutation,
     useUpdateProductMutation,
     usePostProductCommentMutation,
-    useSearchProductsMutation
+    useSearchProductsMutation,
+    useLazyGetAllCategoriesQuery,
+    useLazyGetAllBrandsQuery,
+    useLazyGetAllSizesQuery,
+    useLazyGetAllColoursQuery,
+    useLazyGetAllGendersQuery,
 } = productsApiSlice;

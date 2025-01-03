@@ -12,9 +12,32 @@ import { useState } from 'react';
 import { FilePondFile } from 'filepond';
 import { ActualFileObject } from 'filepond';
 import FormButton from '@/shared/components/button/form-button';
+import { useTranslations } from 'next-intl';
+import { useGetProductMisc } from '../hooks/useGetProductMisc';
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 const ProductForm = () => {
+    const t = useTranslations();
+    const formT = useTranslations("USERS.VALIDATION");
+    const {
+        categories,
+        categoriesLoading,
+        categoriesIsError,
+        brands,
+        brandsLoading,
+        brandsIsError,
+        sizes,
+        sizesLoading,
+        sizesIsError,
+        colours,
+        coloursLoading,
+        coloursIsError,
+        genders,
+        gendersLoading,
+        gendersIsError
+    } = useGetProductMisc();
+
+
     const [files, setFiles] = useState<ActualFileObject[]>([]);
     const [files1, setFiles1] = useState<ActualFileObject[]>([]);
 

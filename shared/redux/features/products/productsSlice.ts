@@ -8,7 +8,8 @@ import {
     ProductDetails,
     Brand,
     SimilarProduct,
-    Category
+    Category,
+    AttributeOption
 } from '@/models/product.models';
 import { ProductSearchResponse } from '@/models/search.models';
 import { createSelector, createSlice } from '@reduxjs/toolkit';
@@ -32,6 +33,11 @@ export interface ProductState {
     selectedProductBrand:Brand|null;
     selectedProductCategories:Category[];
     selectedProductSimilarProducts:SimilarProduct[];
+    allCategories:Category[];
+    allBrands:Brand[];
+    allSizes:AttributeOption[];
+    allColours:AttributeOption[];
+    allGenders:AttributeOption[];
     categoriesWithTotals:CategoriesWithTotals[];
     brandsWithTotals:BrandsWithTotals[];
     sizesWithTotals:SizesWithTotals[];
@@ -52,6 +58,11 @@ const initialState = {
     selectedProductSimilarProducts:[],
     selectedProductBrand:null,
     selectedProductCategories:[],
+    allCategories:[],
+    allBrands:[],
+    allSizes:[],
+    allColours:[],
+    allGenders:[],
     categoriesWithTotals: [],
     brandsWithTotals: [],
     sizesWithTotals: [],
@@ -113,6 +124,21 @@ const productSlice = createSlice({
         setDiscountsWithTotals:(state, action:PayloadAction<DiscountsWithTotals[]>) =>{
             state.discountsWithTotals=action.payload;
         },
+        setCategories:(state, action:PayloadAction<Category[]>) =>{
+            state.allCategories=action.payload;
+        },
+        setBrands:(state, action:PayloadAction<Brand[]>) =>{
+            state.allBrands=action.payload;
+        },
+        setSizes:(state, action:PayloadAction<AttributeOption[]>) =>{
+            state.allSizes=action.payload;
+        },
+        setColours:(state, action:PayloadAction<AttributeOption[]>) =>{
+            state.allColours=action.payload;
+        },
+        setGenders:(state, action:PayloadAction<AttributeOption[]>) =>{
+            state.allGenders=action.payload;
+        },
     }
 });
 
@@ -126,7 +152,12 @@ export const {
     setCategoriesWithTotals,
     setBrandsWithTotals,
     setSizesWithTotals,
-    setDiscountsWithTotals
+    setDiscountsWithTotals,
+    setCategories,
+    setBrands,
+    setColours,
+    setGenders,
+    setSizes,
 } = productSlice.actions;
 
 export default productSlice.reducer;
@@ -206,6 +237,17 @@ export const productsDiscountsTotalsFirstThreeSelector = createSelector([product
 
 export const productsDiscountsTotalsRestSelector = createSelector([productsDiscountsTotalsSelector],(discounts)=>  
     discounts.slice(3));
+
+
+export const allCategoriesSelector = createSelector([products],(products)=>  products.allCategories);
+
+export const allBrandsSelector = createSelector([products],(products)=>  products.allBrands);
+
+export const allSizesSelector = createSelector([products],(products)=>  products.allSizes);
+
+export const allColoursSelector = createSelector([products],(products)=>  products.allColours);
+
+export const allGendersSelector = createSelector([products],(products)=>  products.allGenders);
 
 // export const pokemonSlice = createSlice({
 //     name: "pokemon",
