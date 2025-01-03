@@ -11,6 +11,7 @@ import { useState } from 'react';
 
 import { FilePondFile } from 'filepond';
 import { ActualFileObject } from 'filepond';
+import FormButton from '@/shared/components/button/form-button';
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 const ProductForm = () => {
@@ -314,16 +315,20 @@ const ProductForm = () => {
                 </div>
             </div>
             <div className="justify-end px-6 py-4 border-t border-dashed dark:border-defaultborder/10 sm:flex">
-                <button 
-                    type="button" 
-                    className="ti-btn ti-btn-primary !font-medium m-1">
+                <FormButton 
+                    intent="info" 
+                    size="md" 
+                    type="submit"
+                    className="px-5 py-3 mt-2">
                     Add Product<i className="bi bi-plus-lg ms-2"></i>
-                </button>
-                <button 
-                    type="button" 
-                    className="ti-btn ti-btn-success !font-medium m-1">
+                </FormButton>
+                <FormButton 
+                    intent="success" 
+                    size="md" 
+                    type="submit"
+                    className="px-5 py-3 mt-2">
                     Save Product<i className="bi bi-download ms-2"></i>
-                </button>
+                </FormButton>
             </div>
         </div>
     )
