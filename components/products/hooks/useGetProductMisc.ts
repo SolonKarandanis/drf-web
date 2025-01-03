@@ -36,29 +36,29 @@ export function useGetProductMisc(){
     const genders:AttributeOption[]= useAppSelector(allGendersSelector);
 
     useEffect(()=>{
-        // getCategories()
-        //     .unwrap()
-        //     .then((result) =>dispatch(setCategories(result)))
-        //     .catch((error)=>{
-        //     })
+        getCategories()
+            .unwrap()
+            .then((result) =>dispatch(setCategories(result)))
+            .catch((error)=>{
+            })
 
-        // getBrands()
-        //     .unwrap()
-        //     .then((result) =>dispatch(setBrands(result)))
-        //     .catch((error)=>{
-        //     })
+        getBrands()
+            .unwrap()
+            .then((result) =>dispatch(setBrands(result)))
+            .catch((error)=>{
+            })
 
-        // getSizes()
-        //     .unwrap()
-        //     .then((result) =>dispatch(setSizes(result)))
-        //     .catch((error)=>{
-        //     })
+        getSizes()
+            .unwrap()
+            .then((result) =>dispatch(setSizes(result)))
+            .catch((error)=>{
+            })
 
-        // getColours()
-        //     .unwrap()
-        //     .then((result) =>dispatch(setColours(result)))
-        //     .catch((error)=>{
-        //     })
+        getColours()
+            .unwrap()
+            .then((result) =>dispatch(setColours(result)))
+            .catch((error)=>{
+            })
 
         getGenders()
             .unwrap()
