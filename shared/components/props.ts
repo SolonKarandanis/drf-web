@@ -4,7 +4,7 @@ import {
     SelectHTMLAttributes,
     TableHTMLAttributes,
 } from "react";
-import { UseControllerProps } from "react-hook-form";
+import { Props } from "react-select";
 import { Column } from "react-table";
 
 export interface RegisterProps {
@@ -37,7 +37,7 @@ export interface Options{
     value:string|number,
 }
 
-export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement>{
+export interface SelectProps extends Props{
     name:string,
     options:Options[],
     required?:boolean,

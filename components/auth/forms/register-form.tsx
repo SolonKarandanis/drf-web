@@ -133,7 +133,7 @@ const RegisterForm = () => {
                     error={errors.email?.message}>
                         {t(`${rform}.LABELS.email`)}
                 </FormInput>
-                <FormSelect 
+                {/* <FormSelect 
                     name="role"
                     options={userGroups}
                     required={true}
@@ -143,7 +143,7 @@ const RegisterForm = () => {
                     autoComplete='role-name'
                     error={errors.role?.message}>
                         {t(`${rform}.LABELS.role`)}
-                </FormSelect>
+                </FormSelect> */}
                 <FormInput 
                     type='text'
                     required={true}
