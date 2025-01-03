@@ -1,4 +1,4 @@
-import CreateForm from "@/components/products/create/createform";
+import ProductForm from "@/components/products/forms/productform";
 import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 import { Metadata } from "next";
 import { useTranslations } from "next-intl";
@@ -28,19 +28,7 @@ const CreateProductPage =() =>{
                     <div className="box">
                         <div className="box-body add-products !p-0">
                             <div className="p-6">
-                                <CreateForm />
-                                <div className="justify-end px-6 py-4 border-t border-dashed dark:border-defaultborder/10 sm:flex">
-                                    <button 
-                                        type="button" 
-                                        className="ti-btn ti-btn-primary !font-medium m-1">
-                                        Add Product<i className="bi bi-plus-lg ms-2"></i>
-                                    </button>
-                                    <button 
-                                        type="button" 
-                                        className="ti-btn ti-btn-success !font-medium m-1">
-                                        Save Product<i className="bi bi-download ms-2"></i>
-                                    </button>
-                                </div>
+                                <ProductForm />
                             </div>
                         </div>
                     </div>
