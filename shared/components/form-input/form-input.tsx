@@ -24,11 +24,11 @@ const FormInput:FC<PropsWithChildren<InputProps>>  = ({
     const requiredCss = required? 'required' : '';
     const labelCss = `text-sm font-medium text-default mb-2 text-gray-900 dark:text-white ${requiredCss}`;
     const labelErrorCss = error? "text-rose-700 dark:text-rose-500":"";
-    const labelHtml = (
+    const labelHtml = children ? (
         <label htmlFor={name} className={twMerge(labelCss,labelErrorCss)}>
             {children}
         </label>
-    )
+    ):null
 
     const defaultInputStyles = `bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
         block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white

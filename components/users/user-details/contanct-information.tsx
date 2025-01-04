@@ -14,6 +14,7 @@ import {  userLocationSelector } from '@/shared/redux/features/users/usersSlice'
 import { useTranslations } from 'next-intl';
 import { useMutateUserDetails } from '../hooks/useMutateUserDetails';
 import { UpldateUserContactInfoSchema } from '@/schemas/user.schemas';
+import FormInput from '@/shared/components/form-input/form-input';
 
 
 type Inputs = z.infer<typeof UpldateUserContactInfoSchema>
@@ -105,15 +106,15 @@ const ContactInformation:FC<Props> = ({
                                 </div>
                             )}
                             {!isLoading && isEdit && (
-                                <section className="col-span-12 mb-3 xl:col-span-12">
-                                    <input 
-                                        {...form.register("email")}
-                                        size={20}
-                                        disabled={mutationLoading}
-                                        type="email"
-                                        placeholder={t("USERS.DETAILS.LABELS.email")}
-                                        className="form-control w-full !rounded-md"/>
-                                </section>
+                                <FormInput 
+                                    type='email'
+                                    name='email' 
+                                    placeholder={t("USERS.DETAILS.LABELS.email")}
+                                    className="form-control w-full !rounded-md"
+                                    sectionClassName="col-span-12 mb-3 xl:col-span-12"
+                                    props={form.register("email")}
+                                    disabled={mutationLoading}>
+                                </FormInput>
                             ) }
                             {!isLoading && !isEdit && (
                                 <>
@@ -131,15 +132,16 @@ const ContactInformation:FC<Props> = ({
                                 </div>
                             )}
                             {!isLoading && isEdit && (
-                                <section className="col-span-12 mb-3 xl:col-span-12">
-                                    <input 
-                                        {...form.register("phone")}
-                                        disabled={mutationLoading}
-                                        size={20}
-                                        type="tel"
-                                        placeholder={t("USERS.DETAILS.LABELS.phone")}
-                                        className="form-control w-full !rounded-md"/>
-                                </section>
+                                <FormInput 
+                                    type='tel'
+                                    name='phone' 
+                                    placeholder={t("USERS.DETAILS.LABELS.phone")}
+                                    className="form-control w-full !rounded-md"
+                                    sectionClassName="col-span-12 mb-3 xl:col-span-12"
+                                    props={form.register("phone")}
+                                    disabled={mutationLoading}
+                                    size={20}>
+                                </FormInput>
                             ) }
                             {!isLoading && !isEdit && (
                                 <>
