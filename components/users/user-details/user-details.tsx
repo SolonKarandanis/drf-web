@@ -37,25 +37,24 @@ const UserDetails:FC<Props> =  ({uuid}) => {
   const loggedInUser = data?.user;
   const t = useTranslations();
   const {
-    imageData,
-    userData
+    isError,
+    isLoading,
+    user
   } = useGetUserDetails(uuid);
 
-  if(userData.isError){
+  if(isError){
     return <>{t("GLOBAL.FETCH-ERROR")}</>
   }
 
-  if(userData.data && loggedInUser){
+  if(user && loggedInUser){
     const isUserMe = uuid ===loggedInUser.uuid;
-    const user = userData.data;
     const groupNames =getUserGroups(user);
     const roles = groupNames.join(', ');
     const details = user.details;
-    const image = imageData.data;
 
     return (
       <div className="box-body !p-0">
-        {userData.isLoading? 
+        {isLoading? 
           (
             <ProfileLoading/>
           ):
@@ -69,7 +68,7 @@ const UserDetails:FC<Props> =  ({uuid}) => {
           )
         }
         <Bio 
-          isLoading={userData.isLoading}
+          isLoading={isLoading}
           canEditUser={isUserMe}/>
        
         <ContactInformation 
@@ -80,7 +79,7 @@ const UserDetails:FC<Props> =  ({uuid}) => {
           country={details?.country}
           state={details?.state}
           zipCode={details?.zip}
-          isLoading={userData.isLoading}
+          isLoading={isLoading}
           canEditUser={isUserMe}/>
           
         <SocialNetworks canEditUser={isUserMe}/>

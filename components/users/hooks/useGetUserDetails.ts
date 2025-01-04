@@ -1,6 +1,12 @@
 import { useLazyGetUserImageQuery, useLazyGetUserQuery } from "@/shared/redux/features/users/usersApiSlice";
-import { resetProfileImage, setProfileImage, setSelectedUser } from "@/shared/redux/features/users/usersSlice";
-import { useAppDispatch } from "@/shared/redux/hooks";
+import { 
+  resetProfileImage, 
+  userProfileImageSelector, 
+  selectedUserSelector, 
+  setProfileImage, 
+  setSelectedUser 
+} from "@/shared/redux/features/users/usersSlice";
+import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useEffect } from "react";
 
 export function useGetUserDetails(uuid:string){
@@ -24,9 +30,14 @@ export function useGetUserDetails(uuid:string){
           })
     },[])
 
+    const user = useAppSelector(selectedUserSelector);
+    const profileImage = useAppSelector(userProfileImageSelector);
+
     return {
-        userData,
-        imageData
+      user,
+      profileImage,
+      isError:userData.isError,
+      isLoading:userData.isLoading,
     }
 
 }

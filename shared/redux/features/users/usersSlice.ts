@@ -138,6 +138,8 @@ const users = (state: RootState) => state.users
 
 export const selectedUserSelector = createSelector([users],(users)=>  users.selectedUser);
 
+export const selectedUserDetailsSelector = createSelector([selectedUserSelector],(user)=>  user?.details);
+
 export const usersSearchResultsSelector = createSelector([users],(users)=>  users.users);
 
 export const userLocationSelector = createSelector([selectedUserSelector], (selectedUser) => {
