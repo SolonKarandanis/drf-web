@@ -133,17 +133,14 @@ const RegisterForm = () => {
                     error={errors.email?.message}>
                         {t(`${rform}.LABELS.email`)}
                 </FormInput>
-                {/* <FormSelect 
+                <FormSelect 
                     name="role"
                     options={userGroups}
                     required={true}
-                    inputProps={register("role")}
-                    className="text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:max-w-xs sm:text-sm sm:leading-6"
                     sectionClassName="col-span-12 xl:col-span-12"
-                    autoComplete='role-name'
                     error={errors.role?.message}>
                         {t(`${rform}.LABELS.role`)}
-                </FormSelect> */}
+                </FormSelect>
                 <FormInput 
                     type='text'
                     required={true}

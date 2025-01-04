@@ -41,9 +41,7 @@ export interface SelectProps extends Props{
     name:string,
     options:Options[],
     required?:boolean,
-    className?:string,
     sectionClassName?:string,
-    inputProps?:RegisterProps,
     error?:string,
 }
 

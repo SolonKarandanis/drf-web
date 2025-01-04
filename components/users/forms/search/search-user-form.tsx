@@ -141,9 +141,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                         <FormSelect 
                             name="role"
                             options={groupOptions}
-                            inputProps={form.register("role")}
                             sectionClassName="mb-2"
-                            autoComplete='role-name'
                             error={errors.role?.message}>
                                 {t("USERS.SEARCH.FORM.LABELS.role")}
                         </FormSelect>
@@ -151,9 +149,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                             name="status"
                             options={statusOptions}
                             required={true}
-                            inputProps={form.register("status")}
                             sectionClassName="mb-2"
-                            autoComplete='role-status'
                             error={errors.status?.message}>
                                 {t("USERS.SEARCH.FORM.LABELS.status")}
                         </FormSelect>
