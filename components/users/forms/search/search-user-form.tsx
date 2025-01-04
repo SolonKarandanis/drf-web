@@ -3,7 +3,7 @@
 import {FC} from 'react'
 import * as z from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 import { UserSearchSchema } from "@/schemas/search.schemas";
 import {
   Form,
@@ -138,21 +138,35 @@ const SearchUserForm:FC<Props> = ({}) => {
                         </FormInput>
                     </div>
                     <div className="">
-                        {/* <FormSelect 
+                        <Controller
                             name="role"
-                            options={groupOptions}
-                            sectionClassName="mb-2"
-                            error={errors.role?.message}>
-                                {t("USERS.SEARCH.FORM.LABELS.role")}
-                        </FormSelect>
-                        <FormSelect 
+                            control={form.control}
+                            render={({ field }) => (
+                                <FormSelect 
+                                    name="role"
+                                    options={groupOptions}
+                                    sectionClassName="mb-2"
+                                    onChange={(( option ) => field.onChange(option!.value))}
+                                    error={errors.role?.message}>
+                                        {t("USERS.SEARCH.FORM.LABELS.role")}
+                                </FormSelect>
+                            )}
+                        />
+                        <Controller
                             name="status"
-                            options={statusOptions}
-                            required={true}
-                            sectionClassName="mb-2"
-                            error={errors.status?.message}>
-                                {t("USERS.SEARCH.FORM.LABELS.status")}
-                        </FormSelect> */}
+                            control={form.control}
+                            render={({ field }) => (
+                                <FormSelect 
+                                    name="status"
+                                    options={statusOptions}
+                                    required={true}
+                                    sectionClassName="mb-2"
+                                    onChange={(( option ) => field.onChange(option!.value))}
+                                    error={errors.status?.message}>
+                                        {t("USERS.SEARCH.FORM.LABELS.status")}
+                                </FormSelect>
+                            )}
+                        />
                     </div>
                 </div>
                 <div className='pt-5 mt-8' data-testid="buttons">
