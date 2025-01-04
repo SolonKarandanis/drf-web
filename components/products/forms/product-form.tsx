@@ -185,7 +185,8 @@ const ProductForm = () => {
                                 </label>
                                 <Select 
                                     id="product-color-add"
-                                    isMulti name="colors" 
+                                    isMulti 
+                                    name="colors" 
                                     options={coloursOptions} 
                                     className="w-full !rounded-md" 
                                     isSearchable 

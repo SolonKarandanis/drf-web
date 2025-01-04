@@ -22,7 +22,7 @@ export function getBaseAuthSchema(
         password: z.string().min(6, {
             message: t?.("min-password"),
         }),
-        role:z.string(),
+        role:z.number(),
     });
 } 
 

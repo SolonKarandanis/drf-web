@@ -138,7 +138,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                         </FormInput>
                     </div>
                     <div className="">
-                        <FormSelect 
+                        {/* <FormSelect 
                             name="role"
                             options={groupOptions}
                             sectionClassName="mb-2"
@@ -152,7 +152,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                             sectionClassName="mb-2"
                             error={errors.status?.message}>
                                 {t("USERS.SEARCH.FORM.LABELS.status")}
-                        </FormSelect>
+                        </FormSelect> */}
                     </div>
                 </div>
                 <div className='pt-5 mt-8' data-testid="buttons">

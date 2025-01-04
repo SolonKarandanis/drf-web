@@ -2,8 +2,7 @@
 
 import { RegisterUserSchema,getRegisterUserSchema } from '@/schemas/auth.schemas';
 import CForm from '@/shared/components/form/cform'
-import * as z from "zod";
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import FormInput from '@/shared/components/form-input/form-input';
@@ -47,14 +46,15 @@ const RegisterForm = () => {
     const {
         register,
         handleSubmit,
+        control,
         formState: { errors,isSubmitting, isValid },
-        watch
+        watch,
     } = useForm<RegisterUserSchema>({
         resolver: zodResolver(getRegisterUserSchema(formT)),
         defaultValues: {
             firstName:"",
             lastName:"",
-            role:"",
+            role:2,
             email:"",
             username: "",
             password: "",
@@ -133,14 +133,21 @@ const RegisterForm = () => {
                     error={errors.email?.message}>
                         {t(`${rform}.LABELS.email`)}
                 </FormInput>
-                <FormSelect 
+                <Controller
                     name="role"
-                    options={userGroups}
-                    required={true}
-                    sectionClassName="col-span-12 xl:col-span-12"
-                    error={errors.role?.message}>
-                        {t(`${rform}.LABELS.role`)}
-                </FormSelect>
+                    control={control}
+                    render={({ field }) => (
+                        <FormSelect 
+                            name="role"
+                            options={userGroups}
+                            required={true}
+                            sectionClassName="col-span-12 xl:col-span-12"
+                            onChange={(( option ) => field.onChange(option!.value))}
+                            error={errors.role?.message}>
+                                {t(`${rform}.LABELS.role`)}
+                        </FormSelect>
+                    )}
+                />          
                 <FormInput 
                     type='text'
                     required={true}

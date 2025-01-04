@@ -43,6 +43,7 @@ export interface SelectProps extends Props{
     required?:boolean,
     sectionClassName?:string,
     error?:string,
+    onChange: (event:any) => unknown;
 }
 
 export interface TableProps extends TableHTMLAttributes<HTMLTableElement>{
