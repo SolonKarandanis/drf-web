@@ -296,6 +296,19 @@
                 "currentpage":"Δημιουργία Προϊόντος",
                 "activepage":"Προϊόντα",
                 "mainpage":"Δημιουργία Προϊόντος"
+            },
+            "LABELS":{
+                "product-name":"Όνομα προϊόντος",
+                "product-sku":"SKU προϊόντος",
+                "category":"Κατηγορία",
+                "gender":"Φύλο",
+                "size":"Μέγεθος",
+                "brand":"Μάρκα",
+                "color":"Χρώμα"
+            },
+            "BUTTONS":{
+                "add-product":"Προσθήκη προϊόντος",
+                "update-product":"Ενημέρωση προϊόντος"
             }
         },
         "DETAILS":{

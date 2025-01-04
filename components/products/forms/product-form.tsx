@@ -16,12 +16,16 @@ import { useTranslations } from 'next-intl';
 import { useGetProductMisc } from '../hooks/useGetProductMisc';
 import { Options } from '@/shared/components/props';
 import FormSelect from '@/shared/components/form-select/form-select';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { getSaveProductSchema, SaveProductSchema } from '@/schemas/product.schemas';
+import { zodResolver } from '@hookform/resolvers/zod';
+import FormInput from '@/shared/components/form-input/form-input';
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 const ProductForm = () => {
-    const t = useTranslations();
-    const formT = useTranslations("USERS.VALIDATION");
+    const t = useTranslations("PRODUCTS.CREATE");
+    const formT = useTranslations("PRODUCTS.VALIDATION");
     const {
         categories,
         categoriesLoading,
@@ -86,16 +90,60 @@ const ProductForm = () => {
             setStartDate(date);
         }
     };
+
+    const form = useForm<SaveProductSchema>({
+        resolver: zodResolver(getSaveProductSchema(formT)),
+        defaultValues:{
+            name:'',
+            sku:'',
+            brand:undefined,
+            gender:undefined,
+            category:undefined,
+            colors:[],
+            sizes:[]
+        }
+    })
+
+    const {errors} = form.formState
+
+    const onSubmit: SubmitHandler<SaveProductSchema> = async (data) =>{
+        console.log(data)
+    }
+
     return (
-        <div className="p-6">
+        <form className="p-6">
             <div className="grid grid-cols-12 md:gap-x-[3rem] gap-0">
                 <div className="col-span-12 xxl:col-span-6 xl:col-span-12 lg:col-span-12 md:col-span-6">
                     <div className="grid grid-cols-12 gap-4">
                         <div className="col-span-12 xl:col-span-12">
-                            <label htmlFor="product-name-add" className="form-label">
+                            <FormInput 
+                                type='text'
+                                required={true}
+                                name='name'
+                                autoComplete="product-name" 
+                                placeholder={t(`LABELS.product-name`)}
+                                className={"w-full !rounded-md"}
+                                sectionClassName="mb-2"
+                                props={form.register("name")}
+                                error={errors.name?.message}>
+                                {t(`LABELS.product-name`)}
+                            </FormInput>
+                            <FormInput 
+                                type='text'
+                                required={true}
+                                name='sku'
+                                autoComplete="product-sku" 
+                                placeholder={t(`LABELS.product-sku`)}
+                                className={"w-full !rounded-md"}
+                                sectionClassName="mb-2"
+                                props={form.register("sku")}
+                                error={errors.sku?.message}>
+                                {t(`LABELS.product-sku`)}
+                            </FormInput>
+                            {/* <label htmlFor="product-name-add" className="form-label">
                                 Product Name
-                            </label>
-                            <input type="text" 
+                            </label> */}
+                            {/* <input type="text" 
                                 className="form-control w-full !rounded-md" 
                                 id="product-name-add" 
                                 placeholder="Name" />
@@ -103,7 +151,7 @@ const ProductForm = () => {
                                 className="form-label mt-1 text-[0.75rem] opacity-[0.5] 
                                     !text-[#8c9097] dark:text-white/50 !mb-0">
                                     *Product Name should not exceed 30 characters
-                            </label>
+                            </label> */}
                             <div className="col-span-12 xl:col-span-6">
                                 <label htmlFor="product-category-add" className="form-label">Category</label>
                                 <Select 
@@ -391,17 +439,17 @@ const ProductForm = () => {
                     size="md" 
                     type="submit"
                     className="px-5 py-3 mt-2">
-                    Add Product<i className="bi bi-plus-lg ms-2"></i>
+                   {t(`BUTTONS.add-product`)}<i className="bi bi-plus-lg ms-2"></i>
                 </FormButton>
                 <FormButton 
                     intent="success" 
                     size="md" 
                     type="submit"
                     className="px-5 py-3 mt-2">
-                    Save Product<i className="bi bi-download ms-2"></i>
+                   {t(`BUTTONS.update-product`)}<i className="bi bi-download ms-2"></i>
                 </FormButton>
             </div>
-        </div>
+        </form>
     )
 }
 

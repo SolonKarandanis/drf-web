@@ -296,6 +296,19 @@
                 "currentpage":"Create Product",
                 "activepage":"Products",
                 "mainpage":"Create Product"
+            },
+            "LABELS":{
+                "product-name":"Product name",
+                "product-sku":"Product SKU",
+                "category":"Category",
+                "gender":"Gender",
+                "size":"Size",
+                "brand":"Brand",
+                "color":"Color"
+            },
+            "BUTTONS":{
+                "add-product":"Add Product",
+                "update-product":"Update Product"
             }
         },
         "DETAILS":{
