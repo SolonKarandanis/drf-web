@@ -304,6 +304,18 @@
                 "activepage":"Προϊόντα",
                 "mainpage":"Λεπτομέρειες προϊόντος"
             }
+        },
+        "VALIDATION":{
+            "required-name":"Το Όνομα είναι υποχρεωτικό",
+            "required-sku":"Το Sku είναι υποχρεωτικό",
+            "required-category":"Η κατηγορία είναι υποχρεωτική",
+            "required-gender":"Το φύλο είναι υποχρεωτικό",
+            "required-sizes":"Απαιτείται τουλάχιστον ένα μέγεθος",
+            "required-brand":"Η μάρκα είναι υποχρεωτική",
+            "required-colors":"Απαιτείται τουλάχιστον ένα χρώμα",
+            "required-cost":"Το κόστος είναι υποχρεωτικό",
+            "required-publish-status":"Η Κατάσταση δημοσίευσης είναι υποχρεωτική",
+            "required-availability-status":"Η Κατάσταση διαθεσιμότητας είναι υποχρεωτική"
         }
     }
 }

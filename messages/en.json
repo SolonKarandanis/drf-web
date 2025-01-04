@@ -304,6 +304,18 @@
                 "activepage":"Products",
                 "mainpage":"Product Details"
             }
+        },
+        "VALIDATION":{
+            "required-name":"Name is required",
+            "required-sku":"Sku is required",
+            "required-category":"Category is required",
+            "required-gender":"Gender is required",
+            "required-sizes":"At least one size is required",
+            "required-brand":"Brand is required",
+            "required-colors":"At least one color is required",
+            "required-cost":"Cost is required",
+            "required-publish-status":"Publish Status is required",
+            "required-availability-status":"Availability Status is required"
         }
     }
 }
