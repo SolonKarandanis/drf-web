@@ -9,17 +9,15 @@ import FormInput from '@/shared/components/form-input/form-input';
 import FormButton from '@/shared/components/button/form-button';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-import { useAppDispatch, useAppSelector } from '@/shared/redux/hooks';
 import FormSelect from '@/shared/components/form-select/form-select';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { passwordStrength } from "check-password-strength";
 import PasswordStrength from '@/shared/components/password-strength/password-strength';
 import { ValidationError } from '@/models/error.models';
-import { useLazyGetAllGroupsQuery } from '@/shared/redux/features/users/usersApiSlice';
 import { registerUser } from '@/actions/register-user';
-import { setUserGroups } from '@/shared/redux/features/users/usersSlice';
 import { Options } from '@/shared/components/props';
+import { useGetUserGroups } from '@/components/users/hooks/useGetUserGroups';
 
 
 const RegisterForm = () => {
@@ -27,21 +25,16 @@ const RegisterForm = () => {
     const formT = useTranslations("USERS.VALIDATION");
     const rform='REGISTER.FORM';
     const router = useRouter();
-    const [getAllGroups] = useLazyGetAllGroupsQuery();
-    const dispatch = useAppDispatch();
-    const usersState = useAppSelector((state) => state.users);
-    const userGroups = usersState.userGroups.map((group)=> {
+    const {
+        userGroups
+    } = useGetUserGroups();
+    const userGroupsOptions = userGroups.map((group)=> {
         return {
             value:group.id,
             label:group.name
         } as Options
     })
 
-    useEffect(()=>{
-        getAllGroups()
-            .unwrap()
-            .then((groups) => dispatch(setUserGroups(groups)))
-    },[])
     
     const {
         register,
@@ -139,7 +132,7 @@ const RegisterForm = () => {
                     render={({ field }) => (
                         <FormSelect 
                             name="role"
-                            options={userGroups}
+                            options={userGroupsOptions}
                             required={true}
                             sectionClassName="col-span-12 xl:col-span-12"
                             onChange={(( option ) => field.onChange(option!.value))}
