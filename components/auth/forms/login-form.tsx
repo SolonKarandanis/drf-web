@@ -19,8 +19,9 @@ const LoginForm = () => {
     const t = useTranslations();
     const formT = useTranslations("USERS.VALIDATION");
     const lform='LOGIN.FORM';
+    let loading = false;
     
-    const {register,control,handleSubmit,formState: { errors ,isSubmitting, isValid },} = useForm<LoginSchema>({
+    const {register,control,handleSubmit,formState: { errors , isValid },} = useForm<LoginSchema>({
         resolver: zodResolver(getLoginSchema(formT)),
         defaultValues: {
           username: "",
@@ -31,13 +32,15 @@ const LoginForm = () => {
 
     const onSubmit:SubmitHandler<LoginSchema> = async (values: LoginSchema) =>{
         const {username,password} = values;
+        loading=true
         signIn("credentials",{
             username,
             password,
             redirect:false,
             callbackUrl:'/'
         })
-        .then((response: SignInResponse| undefined) =>{http://localhost:3000/en/auth/login/
+        .then((response: SignInResponse| undefined) =>{
+            loading=false
             if(response && response.ok){
                 router.push(response.url!);
             }
@@ -95,7 +98,8 @@ const LoginForm = () => {
                             intent="violet" 
                             size="md" 
                             type="submit"
-                            isDisabled={isSubmitting || !isValid}>                    
+                            isLoading={loading}
+                            isDisabled={loading || !isValid}>                    
                                 {t(`${lform}.BUTTONS.sign-in`)}
                         </FormButton>
                         {/* <Link href="/components/dashboards/crm/" className="ti-btn ti-btn-primary !bg-primary !text-white !font-medium">Sign In</Link> */}

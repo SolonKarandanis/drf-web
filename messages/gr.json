@@ -98,7 +98,8 @@
             "loading-data-wait": "Loading data, please wait",
             "remove-item-from-list": "Click to remove {{itemType}}",
             "add-at-least-one-xx-in-list": "Add at least one {{itemType}}",
-            "searching": "Searching..."
+            "searching": "Searching...",
+            "select-value":"Επιλέξτε μια τιμή"
         } 
     },
     "LOGIN":{

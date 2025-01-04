@@ -5,6 +5,7 @@ import FormError from '@/shared/components/form-error/form-error'
 import { SelectProps } from '../props'
 import { twMerge } from 'tailwind-merge';
 import Select from 'react-select';
+import { useTranslations } from 'next-intl';
 
 
 const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
@@ -14,11 +15,12 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
     sectionClassName,
     error,
     children,
-    placeholder='Select',
+    placeholder,
     isMulti=false,
     isSearchable=false,
     onChange,
 }) => {
+    const t = useTranslations();
     const labelCss = `${twMerge('block mb-2 text-sm font-medium text-gray-900 dark:text-white')}`;
     const labelHtml = required? (
         <label htmlFor={name} className={labelCss}>
@@ -31,6 +33,7 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
         </label>
     )
 
+    const placeholderValue = placeholder? placeholder : t('GLOBAL.LABELS.select-value');
     
     return (
         <section className={sectionClassName}>
@@ -38,7 +41,7 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
             <div className='mt-2'>
                 <Select
                     required={required}
-                    placeholder={placeholder}
+                    placeholder={placeholderValue}
                     options={options}
                     classNamePrefix="Select2"
                     isMulti={isMulti}
