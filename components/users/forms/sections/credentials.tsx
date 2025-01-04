@@ -2,8 +2,9 @@ import {FC} from 'react'
 import FormInput from '@/shared/components/form-input/form-input'
 import { CredentialsProps } from './props';
 import FormSelect from '@/shared/components/form-select/form-select';
+import { Controller } from 'react-hook-form';
 
-const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
+const Credentials:FC<CredentialsProps> = ({control,register,errors,roles}) => {
   return (
     <>
         <h2 className='text-base font-semibold leading-7 text-gray-900'>
@@ -13,18 +14,20 @@ const Credentials:FC<CredentialsProps> = ({register,errors,roles}) => {
             Create Users Login Credentials
         </p>
         <div className='grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6'>
-            <FormSelect
-                data-testid="select-role"
+            <Controller
                 name="role"
-                options={roles}
-                required={true}
-                inputProps={register("role")}
-                className="text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                sectionClassName="sm:col-span-3"
-                autoComplete='role-name'
-                error={errors.role?.message}>
-                    Role
-            </FormSelect>
+                control={control}
+                render={({ field }) => (
+                    <FormSelect 
+                        name="role"
+                        options={roles}
+                        sectionClassName="sm:col-span-3"
+                        onChange={(( option ) => field.onChange(option!.value))}
+                        error={errors.role?.message}>
+                            Role
+                    </FormSelect>
+                )}
+            />
             <FormInput
                 data-testid="input-username"
                 type='text'

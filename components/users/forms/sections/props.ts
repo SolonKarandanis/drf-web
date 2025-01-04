@@ -1,6 +1,21 @@
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { FieldErrors, UseFormRegister,Control } from "react-hook-form";
 
 export interface SectionProps{
+    control:Control<{
+        email: string;
+        firstName: string;
+        lastName: string;
+        country: string;
+        street: string;
+        city: string;
+        state: string;
+        zip: string;
+        username: string;
+        password: string;
+        confirmPassword: string;
+        profileImage?: File | undefined;
+        role: number;
+    }>,
     register: UseFormRegister<{
         email: string;
         firstName: string;
@@ -14,7 +29,7 @@ export interface SectionProps{
         password: string;
         confirmPassword: string;
         profileImage?: File | undefined;
-        role: string;
+        role: number;
     }>;
     errors: FieldErrors<{
         email: string;
@@ -29,7 +44,7 @@ export interface SectionProps{
         password: string;
         confirmPassword: string;
         profileImage?: File | undefined;
-        role: string;
+        role: number;
     }>;
 }
 

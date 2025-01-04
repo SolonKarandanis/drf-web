@@ -79,9 +79,9 @@ const CreateUserForm = () => {
     const {
         register,
         handleSubmit,
-        watch,
         reset,
         trigger,
+        control,
         formState: { errors,isDirty }
     } = useForm<CreateUserSchema>({
         resolver: zodResolver(getCreateUserSchema(formT))
@@ -134,7 +134,7 @@ const CreateUserForm = () => {
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ duration: 0.3, ease: 'easeInOut' }}
                     >
-                        <PersonalInfo register={register} errors={errors} />
+                        <PersonalInfo control={control} register={register} errors={errors} />
                     </motion.div>
                 )}
                 {currentStep === 1 && (
@@ -143,7 +143,7 @@ const CreateUserForm = () => {
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ duration: 0.3, ease: 'easeInOut' }}
                     >
-                        <AddressInfo register={register} errors={errors} countries={countries} />
+                        <AddressInfo control={control} register={register} errors={errors} countries={countries} />
                     </motion.div>
                 )}
                 {currentStep === 2 && (
@@ -152,7 +152,7 @@ const CreateUserForm = () => {
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ duration: 0.3, ease: 'easeInOut' }}
                     >
-                        <Credentials register={register} errors={errors} roles={roles} />
+                        <Credentials control={control} register={register} errors={errors} roles={roles} />
                     </motion.div>
                 )}
                 {currentStep === 3 && (

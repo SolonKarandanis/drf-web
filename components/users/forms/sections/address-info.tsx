@@ -2,8 +2,9 @@ import {FC} from 'react'
 import FormInput from '@/shared/components/form-input/form-input'
 import FormSelect from "@/shared/components/form-select/form-select";
 import { AddressInfoProps } from './props';
+import { Controller } from 'react-hook-form';
 
-const AddressInfo:FC<AddressInfoProps> = ({register,errors,countries})=> {
+const AddressInfo:FC<AddressInfoProps> = ({control,register,errors,countries})=> {
   return (
     <>
         <h2 className='text-base font-semibold leading-7 text-gray-900'>
@@ -13,18 +14,20 @@ const AddressInfo:FC<AddressInfoProps> = ({register,errors,countries})=> {
             Address where you can receive products.
         </p>
         <div className='grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6'>
-            <FormSelect
-                data-testid="select-country"
+            <Controller
                 name="country"
-                options={countries}
-                required={true}
-                inputProps={register("country")}
-                className="text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                sectionClassName="sm:col-span-3"
-                autoComplete='country-name'
-                error={errors.country?.message}>
-                Country
-            </FormSelect>
+                control={control}
+                render={({ field }) => (
+                    <FormSelect 
+                        name="role"
+                        options={countries}
+                        sectionClassName="sm:col-span-3"
+                        onChange={(( option ) => field.onChange(option!.value))}
+                        error={errors.country?.message}>
+                            Country
+                    </FormSelect>
+                )}
+            />
             <FormInput
                 data-testid="input-street"
                 type='text'

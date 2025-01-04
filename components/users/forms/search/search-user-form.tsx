@@ -137,7 +137,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                             {t(`USERS.SEARCH.FORM.LABELS.email`)}
                         </FormInput>
                     </div>
-                    <div className="">
+                    <div>
                         <Controller
                             name="role"
                             control={form.control}
