@@ -42,9 +42,17 @@ const ProductForm = () => {
         gendersOptions,
         gendersLoading,
         gendersIsError,
-        publishStatusOptions,
-        availabilityStatusOptions,
     } = useGetProductMisc();
+
+    const publishStatusOptions: Options[] = [
+        {value:'product.status.published',label:t(`LABELS.published`)},
+        {value:'product.status.scheduled',label:t(`LABELS.scheduled`)}
+    ];
+
+    const availabilityStatusOptions: Options[] = [
+        {value:'product.availability.in.stock',label:t(`LABELS.in-stock`)},
+        {value:'product.availability.out.of.stock',label:t(`LABELS.out-of-stock`)}
+    ];
 
     const [files, setFiles] = useState<ActualFileObject[]>([]);
     const [files1, setFiles1] = useState<ActualFileObject[]>([]);

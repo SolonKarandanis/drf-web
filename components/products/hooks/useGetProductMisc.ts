@@ -71,15 +71,6 @@ export function useGetProductMisc(){
         } as Options
     });
 
-    const publishStatusOptions: Options[] = [
-        {value:'product.status.published',label:'Published'},
-        {value:'product.status.scheduled',label:'Scheduled'}
-    ];
-
-    const availabilityStatusOptions: Options[] = [
-        {value:'product.availability.in.stock',label:'In Stock'},
-        {value:'product.availability.out.of.stock',label:'Out of Stock'}
-    ];
 
     useEffect(()=>{
         getCategories()
@@ -124,8 +115,6 @@ export function useGetProductMisc(){
         coloursOptions,
         genders,
         gendersOptions,
-        publishStatusOptions,
-        availabilityStatusOptions,
         categoriesLoading:categoryState.isLoading,
         categoriesIsError:categoryState.isError,
         brandsLoading:brandState.isLoading,

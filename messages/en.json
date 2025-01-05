@@ -307,7 +307,11 @@
                 "brand":"Brand",
                 "color":"Color",
                 "publish-status":"Publish Status",
-                "availability-status":"Availability Status"
+                "availability-status":"Availability Status",
+                "published":"Published",
+                "scheduled":"Scheduled",
+                "in-stock":"In Stock",
+                "out-of-stock":"Out of Stock"
             },
             "PLACEHOLDERS":{
                 "product-name":"*Product Name should not exceed 30 characters",
