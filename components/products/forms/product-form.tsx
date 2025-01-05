@@ -27,58 +27,24 @@ const ProductForm = () => {
     const t = useTranslations("PRODUCTS.CREATE");
     const formT = useTranslations("PRODUCTS.VALIDATION");
     const {
-        categories,
+        categoriesOptions,
         categoriesLoading,
         categoriesIsError,
-        brands,
+        brandsOptions,
         brandsLoading,
         brandsIsError,
-        sizes,
+        sizesOptions,
         sizesLoading,
         sizesIsError,
-        colours,
+        coloursOptions,
         coloursLoading,
         coloursIsError,
-        genders,
+        gendersOptions,
         gendersLoading,
-        gendersIsError
+        gendersIsError,
+        publishStatusOptions,
+        availabilityStatusOptions,
     } = useGetProductMisc();
-
-    const categoriesOptions = categories.map((category)=> {
-        return {
-            value:category.id,
-            label:category.name
-        } as Options
-    });
-
-    const brandsOptions = brands.map((brand)=> {
-        return {
-            value:brand.id,
-            label:brand.name
-        } as Options
-    });
-
-    const sizesOptions = sizes.map((size)=> {
-        return {
-            value:size.id,
-            label:size.name
-        } as Options
-    });
-
-    const coloursOptions = colours.map((color)=> {
-        return {
-            value:color.id,
-            label:color.name
-        } as Options
-    });
-
-    const gendersOptions = genders.map((gender)=> {
-        return {
-            value:gender.id,
-            label:gender.name
-        } as Options
-    });
-
 
     const [files, setFiles] = useState<ActualFileObject[]>([]);
     const [files1, setFiles1] = useState<ActualFileObject[]>([]);
@@ -99,6 +65,8 @@ const ProductForm = () => {
             brand:undefined,
             gender:undefined,
             category:undefined,
+            publishStatus:undefined,
+            availabilityStatus:undefined,
             colors:[],
             sizes:[]
         }
@@ -214,6 +182,7 @@ const ProductForm = () => {
                                         options={coloursOptions}
                                         required={true}
                                         isSearchable={true}
+                                        isMulti={true}
                                         sectionClassName="col-span-12 xl:col-span-6"
                                         onChange={(( option ) => field.onChange(option!.value))}
                                         error={errors.colors?.message}>
@@ -368,32 +337,38 @@ const ProductForm = () => {
                                     dateFormat="h:mm aa"
                                 />
                             </div>
-                            <div className="col-span-12 xl:col-span-6">
-                                <label htmlFor="product-status-add" className="form-label">Published Status</label>
-                                {/* <Select 
-                                    name="product-status-add" 
-                                    options={Addproduct5} 
-                                    className="w-full !rounded-md" 
-                                    isSearchable
-                                    menuPlacement='auto' 
-                                    classNamePrefix="Select2" 
-                                    placeholder="Select" 
-                                    id="product-status-add"
-                                /> */}
-                            </div>
-                            <div className="col-span-12 xl:col-span-12">
-                                <label htmlFor="product-status-add1" className="form-label">Availability</label>
-                                {/* <Select 
-                                    name="product-status-add1" 
-                                    options={Addproduct7} 
-                                    id="product-status-add1"
-                                    className="w-full !rounded-md" 
-                                    isSearchable
-                                    menuPlacement='auto' 
-                                    classNamePrefix="Select2" 
-                                    placeholder="Select"
-                                /> */}
-                            </div>
+                            <Controller
+                                name="publishStatus"
+                                control={form.control}
+                                render={({ field }) => (
+                                    <FormSelect 
+                                        name="publishStatus"
+                                        options={publishStatusOptions}
+                                        required={true}
+                                        isSearchable={true}
+                                        sectionClassName="col-span-12 xl:col-span-6"
+                                        onChange={(( option ) => field.onChange(option!.value))}
+                                        error={errors.publishStatus?.message}>
+                                            {t(`LABELS.publish-status`)}
+                                    </FormSelect>
+                                )}
+                            />
+                            <Controller
+                                name="availabilityStatus"
+                                control={form.control}
+                                render={({ field }) => (
+                                    <FormSelect 
+                                        name="availabilityStatus"
+                                        options={availabilityStatusOptions}
+                                        required={true}
+                                        isSearchable={true}
+                                        sectionClassName="col-span-12 xl:col-span-6"
+                                        onChange={(( option ) => field.onChange(option!.value))}
+                                        error={errors.availabilityStatus?.message}>
+                                            {t(`LABELS.availability-status`)}
+                                    </FormSelect>
+                                )}
+                            />
                         </div>
                     </div>
                 </div>

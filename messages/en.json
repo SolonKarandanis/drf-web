@@ -305,7 +305,9 @@
                 "gender":"Gender",
                 "size":"Size",
                 "brand":"Brand",
-                "color":"Color"
+                "color":"Color",
+                "publish-status":"Publish Status",
+                "availability-status":"Availability Status"
             },
             "PLACEHOLDERS":{
                 "product-name":"*Product Name should not exceed 30 characters",

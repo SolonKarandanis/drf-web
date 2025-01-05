@@ -20,6 +20,7 @@ import {
 } from "@/shared/redux/features/products/productsSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useEffect } from "react";
+import { Options } from '@/shared/components/props';
 
 export function useGetProductMisc(){
     const [getCategories,categoryState] = useLazyGetAllCategoriesQuery();
@@ -34,6 +35,51 @@ export function useGetProductMisc(){
     const sizes:AttributeOption[]= useAppSelector(allSizesSelector);
     const colours:AttributeOption[]= useAppSelector(allColoursSelector);
     const genders:AttributeOption[]= useAppSelector(allGendersSelector);
+
+    const categoriesOptions = categories.map((category)=> {
+        return {
+            value:category.id,
+            label:category.name
+        } as Options
+    });
+
+    const brandsOptions = brands.map((brand)=> {
+        return {
+            value:brand.id,
+            label:brand.name
+        } as Options
+    });
+
+    const sizesOptions = sizes.map((size)=> {
+        return {
+            value:size.id,
+            label:size.name
+        } as Options
+    });
+
+    const coloursOptions = colours.map((color)=> {
+        return {
+            value:color.id,
+            label:color.name
+        } as Options
+    });
+
+    const gendersOptions = genders.map((gender)=> {
+        return {
+            value:gender.id,
+            label:gender.name
+        } as Options
+    });
+
+    const publishStatusOptions: Options[] = [
+        {value:'product.status.published',label:'Published'},
+        {value:'product.status.scheduled',label:'Scheduled'}
+    ];
+
+    const availabilityStatusOptions: Options[] = [
+        {value:'product.availability.in.stock',label:'In Stock'},
+        {value:'product.availability.out.of.stock',label:'Out of Stock'}
+    ];
 
     useEffect(()=>{
         getCategories()
@@ -69,10 +115,17 @@ export function useGetProductMisc(){
     
     return{
         categories,
+        categoriesOptions,
         brands,
+        brandsOptions,
         sizes,
+        sizesOptions,
         colours,
+        coloursOptions,
         genders,
+        gendersOptions,
+        publishStatusOptions,
+        availabilityStatusOptions,
         categoriesLoading:categoryState.isLoading,
         categoriesIsError:categoryState.isError,
         brandsLoading:brandState.isLoading,

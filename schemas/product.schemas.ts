@@ -28,6 +28,12 @@ export function getSaveProductSchema(
         colors:z.array(z.number()).min(1,{
             message: t?.("required-colors"),
         }),
+        publishStatus:z.string({
+            message: t?.("required-publish-status"),
+        }),
+        availabilityStatus:z.string({
+            message: t?.("required-availability-status"),
+        }),
     });
 } 
 
