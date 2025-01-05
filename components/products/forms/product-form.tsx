@@ -16,7 +16,7 @@ import { useTranslations } from 'next-intl';
 import { useGetProductMisc } from '../hooks/useGetProductMisc';
 import { Options } from '@/shared/components/props';
 import FormSelect from '@/shared/components/form-select/form-select';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { getSaveProductSchema, SaveProductSchema } from '@/schemas/product.schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormInput from '@/shared/components/form-input/form-input';
@@ -121,7 +121,7 @@ const ProductForm = () => {
                                 required={true}
                                 name='name'
                                 autoComplete="product-name" 
-                                placeholder={t(`LABELS.product-name`)}
+                                placeholder={t(`PLACEHOLDERS.product-name`)}
                                 className={"w-full !rounded-md"}
                                 sectionClassName="mb-2"
                                 props={form.register("name")}
@@ -140,109 +140,88 @@ const ProductForm = () => {
                                 error={errors.sku?.message}>
                                 {t(`LABELS.product-sku`)}
                             </FormInput>
-                            {/* <label htmlFor="product-name-add" className="form-label">
-                                Product Name
-                            </label> */}
-                            {/* <input type="text" 
-                                className="form-control w-full !rounded-md" 
-                                id="product-name-add" 
-                                placeholder="Name" />
-                            <label htmlFor="product-name-add" 
-                                className="form-label mt-1 text-[0.75rem] opacity-[0.5] 
-                                    !text-[#8c9097] dark:text-white/50 !mb-0">
-                                    *Product Name should not exceed 30 characters
-                            </label> */}
-                            <div className="col-span-12 xl:col-span-6">
-                                <label htmlFor="product-category-add" className="form-label">Category</label>
-                                <Select 
-                                    id="product-category-add"  
-                                    name="product-category-add" 
-                                    options={categoriesOptions} 
-                                    className="w-full !rounded-md" 
-                                    isSearchable
-                                    menuPlacement='auto' 
-                                    classNamePrefix="Select2" 
-                                    placeholder="Category"
-                                    
-                                />
-                                {/* <FormSelect 
-                                    name="category"
-                                    options={categoriesOptions}
-                                    sectionClassName="mb-2"
-                                    autoComplete='role-name'
-                                   >
-                                    Category
-                                </FormSelect> */}
-                            </div>
-                            <div className="col-span-12 xl:col-span-6">
-                                <label 
-                                    htmlFor="product-gender-add" 
-                                    className="form-label">
-                                    Gender
-                                </label>
-                                 <Select 
-                                    id="product-gender-add"
-                                    name="product-gender-add" 
-                                    options={gendersOptions} 
-                                    className="w-full !rounded-md" 
-                                    isSearchable
-                                    menuPlacement='auto' 
-                                    classNamePrefix="Select2" 
-                                    placeholder="Select"
-                                />
-                            </div>
-                            <div className="col-span-12 xl:col-span-6">
-                                <label 
-                                    htmlFor="product-size-add" 
-                                    className="form-label">
-                                    Size
-                                </label>
-                                <Select 
-                                    id="product-size-add" 
-                                    name="product-size-add" 
-                                    options={sizesOptions} 
-                                    className="w-full !rounded-md" 
-                                    isSearchable
-                                    menuPlacement='auto' 
-                                    classNamePrefix="Select2" 
-                                    placeholder="Select"
-                                />
-                            </div>
-                            <div className="col-span-12 xl:col-span-6">
-                                <label 
-                                    htmlFor="product-brand-add" 
-                                    className="form-label">
-                                    Brand
-                                </label>
-                                <Select 
-                                    id="product-brand-add"
-                                    name="product-brand-add" 
-                                    options={brandsOptions} 
-                                    className="w-full !rounded-md" 
-                                    isSearchable
-                                    menuPlacement='auto' 
-                                    classNamePrefix="Select2" 
-                                    placeholder="Select" 
-                                />
-                            </div>
-                            <div className="col-span-12 xl:col-span-6 color-selection">
-                                <label 
-                                    htmlFor="product-color-add" 
-                                    className="form-label">
-                                    Colors
-                                </label>
-                                <Select 
-                                    id="product-color-add"
-                                    isMulti 
-                                    name="colors" 
-                                    options={coloursOptions} 
-                                    className="w-full !rounded-md" 
-                                    isSearchable 
-                                    menuPlacement='auto' 
-                                    classNamePrefix="Select2" 
-                                    placeholder="Select"
-                                />
-                            </div>
+                            <Controller
+                                name="category"
+                                control={form.control}
+                                render={({ field }) => (
+                                    <FormSelect 
+                                        name="category"
+                                        options={categoriesOptions}
+                                        required={true}
+                                        isSearchable={true}
+                                        sectionClassName="col-span-12 xl:col-span-6"
+                                        onChange={(( option ) => field.onChange(option!.value))}
+                                        error={errors.category?.message}>
+                                            {t(`LABELS.category`)}
+                                    </FormSelect>
+                                )}
+                            />
+                            <Controller
+                                name="gender"
+                                control={form.control}
+                                render={({ field }) => (
+                                    <FormSelect 
+                                        name="gender"
+                                        options={gendersOptions}
+                                        required={true}
+                                        isSearchable={true}
+                                        sectionClassName="col-span-12 xl:col-span-6"
+                                        onChange={(( option ) => field.onChange(option!.value))}
+                                        error={errors.category?.message}>
+                                            {t(`LABELS.gender`)}
+                                    </FormSelect>
+                                )}
+                            />
+                            <Controller
+                                name="sizes"
+                                control={form.control}
+                                render={({ field }) => (
+                                    <FormSelect 
+                                        name="sizes"
+                                        isMulti={true}
+                                        required={true}
+                                        isSearchable={true}
+                                        options={sizesOptions}
+                                        sectionClassName="col-span-12 xl:col-span-6"
+                                        onChange={(( option ) => field.onChange(option!.value))}
+                                        error={errors.sizes?.message}>
+                                            {t(`LABELS.size`)}
+                                    </FormSelect>
+                                )}
+                            />
+                            <Controller
+                                name="brand"
+                                control={form.control}
+                                render={({ field }) => (
+                                    <FormSelect 
+                                        name="brand"
+                                        options={brandsOptions}
+                                        required={true}
+                                        isSearchable={true}
+                                        sectionClassName="col-span-12 xl:col-span-6"
+                                        onChange={(( option ) => field.onChange(option!.value))}
+                                        error={errors.brand?.message}>
+                                            {t(`LABELS.brand`)}
+                                    </FormSelect>
+                                )}
+                            />
+                            <Controller
+                                name="colors"
+                                control={form.control}
+                                render={({ field }) => (
+                                    <FormSelect 
+                                        name="colors"
+                                        options={coloursOptions}
+                                        required={true}
+                                        isSearchable={true}
+                                        sectionClassName="col-span-12 xl:col-span-6"
+                                        onChange={(( option ) => field.onChange(option!.value))}
+                                        error={errors.colors?.message}>
+                                            {t(`LABELS.color`)}
+                                    </FormSelect>
+                                )}
+                            />
+                            
                             <div className="col-span-12 xl:col-span-6">
                                 <label 
                                     htmlFor="product-cost-add" 
@@ -400,20 +379,6 @@ const ProductForm = () => {
                                     classNamePrefix="Select2" 
                                     placeholder="Select" 
                                     id="product-status-add"
-                                /> */}
-                            </div>
-                            <div className="col-span-12 xl:col-span-6">
-                                <label htmlFor="product-tags" className="form-label">Product Tags</label>
-                                {/* <Select 
-                                    isMulti 
-                                    name="product-tags" 
-                                    options={Addproduct6} 
-                                    defaultValue={[Addproduct6[0], Addproduct6[3]]}
-                                    className="w-full !rounded-md" 
-                                    isSearchable id="product-tags"
-                                    menuPlacement='auto' 
-                                    classNamePrefix="Select2" 
-                                    placeholder="Select"
                                 /> */}
                             </div>
                             <div className="col-span-12 xl:col-span-12">

@@ -300,11 +300,16 @@
             "LABELS":{
                 "product-name":"Product name",
                 "product-sku":"Product SKU",
+                "product-description":"Description",
                 "category":"Category",
                 "gender":"Gender",
                 "size":"Size",
                 "brand":"Brand",
                 "color":"Color"
+            },
+            "PLACEHOLDERS":{
+                "product-name":"*Product Name should not exceed 30 characters",
+                "product-description":"*Description should not exceed 500 letters"
             },
             "BUTTONS":{
                 "add-product":"Add Product",

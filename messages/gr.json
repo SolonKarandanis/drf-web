@@ -300,11 +300,16 @@
             "LABELS":{
                 "product-name":"Όνομα προϊόντος",
                 "product-sku":"SKU προϊόντος",
+                "product-description":"Περιγραφή",
                 "category":"Κατηγορία",
                 "gender":"Φύλο",
                 "size":"Μέγεθος",
                 "brand":"Μάρκα",
                 "color":"Χρώμα"
+            },
+            "PLACEHOLDERS":{
+                "product-name":"*Το όνομα προϊόντος δεν πρέπει να υπερβαίνει τους 30 χαρακτήρες",
+                "product-description":"*Η περιγραφή δεν πρέπει να υπερβαίνει τα 500 γράμματα"
             },
             "BUTTONS":{
                 "add-product":"Προσθήκη προϊόντος",

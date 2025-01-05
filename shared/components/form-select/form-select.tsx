@@ -46,6 +46,7 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
                     classNamePrefix="Select2"
                     isMulti={isMulti}
                     isSearchable={isSearchable}
+                    menuPlacement='auto'
                     onChange={onChange}
                 />
             </div>
