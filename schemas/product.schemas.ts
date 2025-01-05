@@ -3,6 +3,10 @@ import { type TranslationValues } from "next-intl";
 
 type Messages = keyof IntlMessages["PRODUCTS"]["VALIDATION"];
 
+const numberSchema = z.object({
+    code: z.number()
+});
+
 export function getSaveProductSchema(
     t?: (key: Messages, object?: TranslationValues | undefined) => string
 ){
@@ -10,7 +14,7 @@ export function getSaveProductSchema(
         name: z.string().min(1,{
             message: t?.("required-name"),
         }),
-        sku: z.string().email({
+        sku: z.string({
             message: t?.("required-sku"),
         }),
         category:z.number({
@@ -22,12 +26,8 @@ export function getSaveProductSchema(
         brand:z.number({
             message: t?.("required-brand"),
         }),
-        sizes:z.array(z.number()).min(1,{
-            message: t?.("required-sizes"),
-        }),
-        colors:z.array(z.number()).min(1,{
-            message: t?.("required-colors"),
-        }),
+        sizes:z.array(numberSchema).min(1, t?.("required-sizes")),
+        colors:z.array(numberSchema).min(1,t?.("required-colors")),
         publishStatus:z.string({
             message: t?.("required-publish-status"),
         }),

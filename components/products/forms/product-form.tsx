@@ -65,7 +65,12 @@ const ProductForm = () => {
         }
     };
 
-    const form = useForm<SaveProductSchema>({
+    const {
+        register,
+        control,
+        handleSubmit,
+        formState
+    } = useForm<SaveProductSchema>({
         resolver: zodResolver(getSaveProductSchema(formT)),
         defaultValues:{
             name:'',
@@ -80,7 +85,7 @@ const ProductForm = () => {
         }
     })
 
-    const {errors} = form.formState
+    const {errors} = formState
 
     const onSubmit: SubmitHandler<SaveProductSchema> = async (data) =>{
         console.log(data)
@@ -100,7 +105,7 @@ const ProductForm = () => {
                                 placeholder={t(`PLACEHOLDERS.product-name`)}
                                 className={"w-full !rounded-md"}
                                 sectionClassName="mb-2"
-                                props={form.register("name")}
+                                props={register("name")}
                                 error={errors.name?.message}>
                                 {t(`LABELS.product-name`)}
                             </FormInput>
@@ -112,13 +117,13 @@ const ProductForm = () => {
                                 placeholder={t(`LABELS.product-sku`)}
                                 className={"w-full !rounded-md"}
                                 sectionClassName="mb-2"
-                                props={form.register("sku")}
+                                props={register("sku")}
                                 error={errors.sku?.message}>
                                 {t(`LABELS.product-sku`)}
                             </FormInput>
                             <Controller
                                 name="category"
-                                control={form.control}
+                                control={control}
                                 render={({ field }) => (
                                     <FormSelect 
                                         name="category"
@@ -134,7 +139,7 @@ const ProductForm = () => {
                             />
                             <Controller
                                 name="gender"
-                                control={form.control}
+                                control={control}
                                 render={({ field }) => (
                                     <FormSelect 
                                         name="gender"
@@ -143,14 +148,14 @@ const ProductForm = () => {
                                         isSearchable={true}
                                         sectionClassName="col-span-12 xl:col-span-6"
                                         onChange={(( option ) => field.onChange(option!.value))}
-                                        error={errors.category?.message}>
+                                        error={errors.gender?.message}>
                                             {t(`LABELS.gender`)}
                                     </FormSelect>
                                 )}
                             />
                             <Controller
                                 name="sizes"
-                                control={form.control}
+                                control={control}
                                 render={({ field }) => (
                                     <FormSelect 
                                         name="sizes"
@@ -167,7 +172,7 @@ const ProductForm = () => {
                             />
                             <Controller
                                 name="brand"
-                                control={form.control}
+                                control={control}
                                 render={({ field }) => (
                                     <FormSelect 
                                         name="brand"
@@ -183,7 +188,7 @@ const ProductForm = () => {
                             />
                             <Controller
                                 name="colors"
-                                control={form.control}
+                                control={control}
                                 render={({ field }) => (
                                     <FormSelect 
                                         name="colors"
@@ -347,7 +352,7 @@ const ProductForm = () => {
                             </div>
                             <Controller
                                 name="publishStatus"
-                                control={form.control}
+                                control={control}
                                 render={({ field }) => (
                                     <FormSelect 
                                         name="publishStatus"
@@ -363,7 +368,7 @@ const ProductForm = () => {
                             />
                             <Controller
                                 name="availabilityStatus"
-                                control={form.control}
+                                control={control}
                                 render={({ field }) => (
                                     <FormSelect 
                                         name="availabilityStatus"
@@ -386,14 +391,16 @@ const ProductForm = () => {
                     intent="info" 
                     size="md" 
                     type="submit"
-                    className="px-5 py-3 mt-2">
+                    className="px-5 py-3 mt-2"
+                    onClick={handleSubmit(onSubmit)}>
                    {t(`BUTTONS.add-product`)}<i className="bi bi-plus-lg ms-2"></i>
                 </FormButton>
                 <FormButton 
                     intent="success" 
                     size="md" 
                     type="submit"
-                    className="px-5 py-3 mt-2">
+                    className="px-5 py-3 mt-2"
+                    onClick={handleSubmit(onSubmit)}>
                    {t(`BUTTONS.update-product`)}<i className="bi bi-download ms-2"></i>
                 </FormButton>
             </div>
