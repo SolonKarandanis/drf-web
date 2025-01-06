@@ -34,7 +34,18 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
         <label htmlFor={name} className={labelCss}>
             {children}
         </label>
-    )
+    );
+
+    if(loading){
+        return (
+          <section className={sectionClassName}>
+            {labelHtml}
+            <div role="status" className="w-full animate-pulse dark:border-gray-700">
+              <div className="h-8 bg-gray-400  dark:bg-gray-700 mb-2.5"></div>
+            </div>
+          </section>
+        )
+    }
 
     const placeholderValue = placeholder? placeholder : t('GLOBAL.LABELS.select-value');
 

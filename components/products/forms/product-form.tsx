@@ -75,9 +75,9 @@ const ProductForm:FC<Props> = ({uuid}) => {
     let defaultValues={
         title:'',
         sku:'',
-        brand:undefined,
+        brand:0,
         gender:undefined,
-        category:undefined,
+        category:0,
         publishStatus:undefined,
         availabilityStatus:undefined,
         inventory:0,
@@ -89,12 +89,12 @@ const ProductForm:FC<Props> = ({uuid}) => {
         sizes:[] 
     }
 
-    if(!isLoading && isExecuted && product){
+    if(!isLoading && isExecuted && product && productBrands){
         defaultValues={
             title:product.title,
             sku:product.sku,
-            brand:undefined,
-            category:undefined,
+            brand:productBrands.id,
+            category:productCategories[0].id,
             publishStatus:undefined,
             availabilityStatus:undefined,
             inventory:product.inventory,
