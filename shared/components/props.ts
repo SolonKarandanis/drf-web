@@ -38,12 +38,11 @@ export interface Options{
 }
 
 export interface SelectProps extends Props{
-    name:string,
     options:Options[],
     required?:boolean,
     sectionClassName?:string,
     error?:string,
-    onChange: (event:any) => unknown;
+    field:any,
 }
 
 export interface TableProps extends TableHTMLAttributes<HTMLTableElement>{

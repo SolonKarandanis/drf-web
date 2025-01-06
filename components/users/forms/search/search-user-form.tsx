@@ -146,7 +146,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                                     name="role"
                                     options={groupOptions}
                                     sectionClassName="mb-2"
-                                    onChange={(( option ) => field.onChange(option!.value))}
+                                    field={field}
                                     error={errors.role?.message}>
                                         {t("USERS.SEARCH.FORM.LABELS.role")}
                                 </FormSelect>
@@ -161,7 +161,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                                     options={statusOptions}
                                     required={true}
                                     sectionClassName="mb-2"
-                                    onChange={(( option ) => field.onChange(option!.value))}
+                                    field={field}
                                     error={errors.status?.message}>
                                         {t("USERS.SEARCH.FORM.LABELS.status")}
                                 </FormSelect>

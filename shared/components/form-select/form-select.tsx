@@ -9,7 +9,6 @@ import { useTranslations } from 'next-intl';
 
 
 const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
-    name,
     options,
     required=false,
     sectionClassName,
@@ -18,8 +17,10 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
     placeholder,
     isMulti=false,
     isSearchable=false,
-    onChange,
+    field,
 }) => {
+    const {onChange, value, name, ref} = field;
+    
     const t = useTranslations();
     const labelErrorCss = error? "text-rose-700 dark:text-rose-500":"";
     const labelCss = `${twMerge('block mb-2 text-sm font-medium text-gray-900 dark:text-white',labelErrorCss)}`;
@@ -35,12 +36,16 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
     )
 
     const placeholderValue = placeholder? placeholder : t('GLOBAL.LABELS.select-value');
+
+    
     
     return (
         <section className={sectionClassName}>
             {labelHtml}
             <div className='mt-2'>
                 <Select
+                    ref={ref}
+                    name={name}
                     required={required}
                     placeholder={placeholderValue}
                     options={options}
@@ -48,7 +53,8 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
                     isMulti={isMulti}
                     isSearchable={isSearchable}
                     menuPlacement='auto'
-                    onChange={onChange}
+                    value={options.find(c => c.value === value)}
+                    onChange={(e: any) => e.value ? onChange(e.value) : onChange(e.map((c: any) => c.value))}
                 />
             </div>
             {

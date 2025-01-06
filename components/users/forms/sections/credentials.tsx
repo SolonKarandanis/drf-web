@@ -22,7 +22,7 @@ const Credentials:FC<CredentialsProps> = ({control,register,errors,roles}) => {
                         name="role"
                         options={roles}
                         sectionClassName="sm:col-span-3"
-                        onChange={(( option ) => field.onChange(option!.value))}
+                        field={field}
                         error={errors.role?.message}>
                             Role
                     </FormSelect>

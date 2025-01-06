@@ -14,7 +14,7 @@ export function getSaveProductSchema(
         name: z.string().min(1,{
             message: t?.("required-name"),
         }),
-        sku: z.string({
+        sku: z.string().min(1,{
             message: t?.("required-sku"),
         }),
         category:z.number({
@@ -26,8 +26,14 @@ export function getSaveProductSchema(
         brand:z.number({
             message: t?.("required-brand"),
         }),
-        sizes:z.array(numberSchema).min(1, t?.("required-sizes")),
-        colors:z.array(numberSchema).min(1,t?.("required-colors")),
+        // sizes:z.array(z.number()).nonempty({
+        //     message:t?.("required-sizes")
+        // }),
+        // colors:z.array(z.number().optional()).min(1,{
+        //     message:t?.("required-colors")
+        // }),
+        sizes:z.array(z.number()).optional(),
+        colors:z.array(z.number()).optional(),
         publishStatus:z.string({
             message: t?.("required-publish-status"),
         }),

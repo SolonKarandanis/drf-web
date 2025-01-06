@@ -135,7 +135,7 @@ const RegisterForm = () => {
                             options={userGroupsOptions}
                             required={true}
                             sectionClassName="col-span-12 xl:col-span-12"
-                            onChange={(( option ) => field.onChange(option!.value))}
+                            field={field}
                             error={errors.role?.message}>
                                 {t(`${rform}.LABELS.role`)}
                         </FormSelect>

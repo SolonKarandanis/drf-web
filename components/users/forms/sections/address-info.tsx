@@ -22,7 +22,7 @@ const AddressInfo:FC<AddressInfoProps> = ({control,register,errors,countries})=>
                         name="role"
                         options={countries}
                         sectionClassName="sm:col-span-3"
-                        onChange={(( option ) => field.onChange(option!.value))}
+                        field={field}
                         error={errors.country?.message}>
                             Country
                     </FormSelect>

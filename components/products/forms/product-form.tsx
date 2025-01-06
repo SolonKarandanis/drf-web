@@ -73,8 +73,8 @@ const ProductForm = () => {
     } = useForm<SaveProductSchema>({
         resolver: zodResolver(getSaveProductSchema(formT)),
         defaultValues:{
-            name:'',
-            sku:'',
+            name:undefined,
+            sku:undefined,
             brand:undefined,
             gender:undefined,
             category:undefined,
@@ -131,7 +131,7 @@ const ProductForm = () => {
                                         required={true}
                                         isSearchable={true}
                                         sectionClassName="col-span-12 xl:col-span-6 mb-2"
-                                        onChange={(( option ) => field.onChange(option!.value))}
+                                        field={field}
                                         error={errors.category?.message}>
                                             {t(`LABELS.category`)}
                                     </FormSelect>
@@ -147,7 +147,7 @@ const ProductForm = () => {
                                         required={true}
                                         isSearchable={true}
                                         sectionClassName="col-span-12 xl:col-span-6 mb-2"
-                                        onChange={(( option ) => field.onChange(option!.value))}
+                                        field={field}
                                         error={errors.gender?.message}>
                                             {t(`LABELS.gender`)}
                                     </FormSelect>
@@ -160,11 +160,10 @@ const ProductForm = () => {
                                     <FormSelect 
                                         name="sizes"
                                         isMulti={true}
-                                        required={true}
                                         isSearchable={true}
                                         options={sizesOptions}
                                         sectionClassName="col-span-12 xl:col-span-6 mb-2"
-                                        onChange={(( option ) => field.onChange(option!.value))}
+                                        field={field}
                                         error={errors.sizes?.message}>
                                             {t(`LABELS.size`)}
                                     </FormSelect>
@@ -180,7 +179,7 @@ const ProductForm = () => {
                                         required={true}
                                         isSearchable={true}
                                         sectionClassName="col-span-12 xl:col-span-6 mb-2"
-                                        onChange={(( option ) => field.onChange(option!.value))}
+                                        field={field}
                                         error={errors.brand?.message}>
                                             {t(`LABELS.brand`)}
                                     </FormSelect>
@@ -193,11 +192,10 @@ const ProductForm = () => {
                                     <FormSelect 
                                         name="colors"
                                         options={coloursOptions}
-                                        required={true}
                                         isSearchable={true}
                                         isMulti={true}
                                         sectionClassName="col-span-12 xl:col-span-6 mb-2"
-                                        onChange={(( option ) => field.onChange(option!.value))}
+                                        field={field}
                                         error={errors.colors?.message}>
                                             {t(`LABELS.color`)}
                                     </FormSelect>
@@ -360,7 +358,7 @@ const ProductForm = () => {
                                         required={true}
                                         isSearchable={true}
                                         sectionClassName="col-span-12 xl:col-span-6"
-                                        onChange={(( option ) => field.onChange(option!.value))}
+                                        field={field}
                                         error={errors.publishStatus?.message}>
                                             {t(`LABELS.publish-status`)}
                                     </FormSelect>
@@ -376,7 +374,7 @@ const ProductForm = () => {
                                         required={true}
                                         isSearchable={true}
                                         sectionClassName="col-span-12 xl:col-span-6"
-                                        onChange={(( option ) => field.onChange(option!.value))}
+                                        field={field}
                                         error={errors.availabilityStatus?.message}>
                                             {t(`LABELS.availability-status`)}
                                     </FormSelect>
