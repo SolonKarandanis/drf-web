@@ -25,10 +25,10 @@ import FormTextArea from '@/shared/components/form-textarea/form-textarea';
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 interface Props{
-    isEdit?:boolean
+    uuid?:string;
 }
 
-const ProductForm:FC<Props> = ({isEdit}) => {
+const ProductForm:FC<Props> = ({uuid}) => {
     const t = useTranslations("PRODUCTS.CREATE");
     const formT = useTranslations("PRODUCTS.VALIDATION");
     const {
@@ -87,7 +87,7 @@ const ProductForm:FC<Props> = ({isEdit}) => {
         sizes:[] 
     }
 
-    if(isEdit){
+    if(uuid){
 
     }
 

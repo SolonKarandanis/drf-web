@@ -13,6 +13,7 @@ import { useParams } from 'next/navigation';
 import { UpdateBioRequest } from '@/models/user.models';
 import { useMutateUserDetails } from '../hooks/useMutateUserDetails';
 import { UpdateUserBioSchema } from '@/schemas/user.schemas';
+import FormTextArea from '@/shared/components/form-textarea/form-textarea';
 
 type Inputs = z.infer<typeof UpdateUserBioSchema>
 interface Props{
@@ -82,14 +83,11 @@ const Bio:FC<Props> = ({
             {!isLoading && isEdit && (
                 <Form {...form} >
                     <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
-                        <section className="col-span-12 mt-3 mb-0 xl:col-span-12">
-                            <textarea 
-                                {...form.register("bio")}
-                                rows={4} 
-                                cols={50} 
-                                disabled={mutationLoading}
-                                className="form-control w-full !rounded-md"/>
-                        </section>
+                        <FormTextArea
+                            name="bio"
+                            props={form.register("bio")}
+                            sectionClassName="col-span-12 mt-3 mb-0 xl:col-span-12">
+                        </FormTextArea>
                     </form>
                 </Form>
             )}
