@@ -73,7 +73,7 @@ const ProductForm = () => {
     } = useForm<SaveProductSchema>({
         resolver: zodResolver(getSaveProductSchema(formT)),
         defaultValues:{
-            name:undefined,
+            title:undefined,
             sku:undefined,
             brand:undefined,
             gender:undefined,
@@ -100,13 +100,13 @@ const ProductForm = () => {
                             <FormInput 
                                 type='text'
                                 required={true}
-                                name='name'
+                                name='title'
                                 autoComplete="product-name" 
                                 placeholder={t(`PLACEHOLDERS.product-name`)}
                                 className={"w-full !rounded-md"}
                                 sectionClassName="mb-2 col-span-12 xl:col-span-6"
-                                props={register("name")}
-                                error={errors.name?.message}>
+                                props={register("title")}
+                                error={errors.title?.message}>
                                 {t(`LABELS.product-name`)}
                             </FormInput>
                             <FormInput 
@@ -201,6 +201,58 @@ const ProductForm = () => {
                                     </FormSelect>
                                 )}
                             />
+                            <div className="col-span-12 xl:col-span-12">
+                                <label 
+                                    htmlFor="product-description-add" 
+                                    className="form-label">
+                                    Product Description
+                                </label>
+                                <textarea 
+                                    className="form-control w-full !rounded-md" 
+                                    id="product-description-add" rows={2}></textarea>
+                                <label 
+                                    htmlFor="product-description-add" 
+                                    className="form-label mt-1 text-[0.75rem] opacity-[0.5] 
+                                    !text-[#8c9097] dark:text-white/50 mb-0">
+                                    *Description should not exceed 500 letters
+                                </label>
+                            </div>
+                            <div className="col-span-12 xl:col-span-12">
+                                <label 
+                                    htmlFor="product-description-add" 
+                                    className="form-label">
+                                    Product Description
+                                </label>
+                                <textarea 
+                                    className="form-control w-full !rounded-md" 
+                                    id="product-description-add" rows={2}></textarea>
+                                <label 
+                                    htmlFor="product-description-add" 
+                                    className="form-label mt-1 text-[0.75rem] opacity-[0.5] 
+                                    !text-[#8c9097] dark:text-white/50 mb-0">
+                                    *Description should not exceed 500 letters
+                                </label>
+                            </div>
+                            <div className="col-span-12 xl:col-span-12">
+                                <label 
+                                    htmlFor="product-description-add" 
+                                    className="form-label">
+                                    Product Description
+                                </label>
+                                <textarea 
+                                    className="form-control w-full !rounded-md" 
+                                    id="product-description-add" rows={2}></textarea>
+                                <label 
+                                    htmlFor="product-description-add" 
+                                    className="form-label mt-1 text-[0.75rem] opacity-[0.5] 
+                                    !text-[#8c9097] dark:text-white/50 mb-0">
+                                    *Description should not exceed 500 letters
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-span-12 xxl:col-span-6 xl:col-span-12 lg:col-span-12 md:col-span-6">
+                        <div className="grid grid-cols-12 gap-4">
                             <FormInput 
                                 type='number'
                                 required={true}
@@ -224,70 +276,6 @@ const ProductForm = () => {
                                 error={errors.price?.message}>
                                 {t(`LABELS.price`)}
                             </FormInput>
-                        </div>
-                    </div>
-                    <div className="col-span-12 xxl:col-span-6 xl:col-span-12 lg:col-span-12 md:col-span-6">
-                        <div className="grid grid-cols-12 gap-4">
-                            <div className="col-span-12 xl:col-span-4">
-                                <label 
-                                    htmlFor="product-actual-price" 
-                                    className="form-label">
-                                    Actual Price
-                                </label>
-                                <input 
-                                    type="text" 
-                                    className="form-control w-full !rounded-md" 
-                                    id="product-actual-price" 
-                                    placeholder="Actual Price" />
-                            </div>
-                            <div className="col-span-12 xl:col-span-4">
-                                <label 
-                                    htmlFor="product-dealer-price" 
-                                    className="form-label">
-                                    Dealer Price
-                                </label>
-                                <input 
-                                    type="text" 
-                                    className="form-control w-full !rounded-md" 
-                                    id="product-dealer-price" 
-                                    placeholder="Dealer Price" />
-                            </div>
-                            <div className="col-span-12 xl:col-span-4">
-                                <label 
-                                    htmlFor="product-discount" 
-                                    className="form-label">
-                                    Discount
-                                </label>
-                                <input 
-                                    type="text" 
-                                    className="form-control w-full !rounded-md" 
-                                    id="product-discount" 
-                                    placeholder="Discount in %" />
-                            </div>
-                            <div className="col-span-12 xl:col-span-6">
-                                <label 
-                                    htmlFor="product-type" 
-                                    className="form-label">
-                                    Product Type
-                                </label>
-                                <input 
-                                    type="text" 
-                                    className="form-control w-full !rounded-md" 
-                                    id="product-type" 
-                                    placeholder="Type" />
-                            </div>
-                            <div className="col-span-12 xl:col-span-6">
-                                <label 
-                                    htmlFor="product-discount" 
-                                    className="form-label">
-                                    Item Weight
-                                </label>
-                                <input 
-                                    type="text" 
-                                    className="form-control w-full !rounded-md" 
-                                    id="product-discount1" 
-                                    placeholder="Weight in gms" />
-                            </div>
                             <div className="col-span-12 xl:col-span-12 product-documents-container">
                                 <p className="font-semibold mb-2 text-[0.875rem]">Product Images :</p>
                             <FilePond 

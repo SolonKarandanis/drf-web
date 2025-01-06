@@ -11,7 +11,7 @@ export function getSaveProductSchema(
     t?: (key: Messages, object?: TranslationValues | undefined) => string
 ){
     return z.object({
-        name: z.string().min(1,{
+        title: z.string().min(1,{
             message: t?.("required-name"),
         }),
         sku: z.string().min(1,{

@@ -4,6 +4,7 @@ import { FC, useState,PropsWithChildren } from 'react'
 import { twMerge } from "tailwind-merge";
 import { InputProps } from '../props';
 import FormError from '@/shared/components/form-error/form-error';
+import FormLabel from '../form-label/form-label';
 
 
 
@@ -21,13 +22,14 @@ const FormInput:FC<PropsWithChildren<InputProps>>  = ({
     ...rest
 }) => {
     const [showPassword, setShowPassword] = useState(false);
-    const requiredCss = required? 'required' : '';
-    const labelCss = `text-sm font-medium text-default mb-2 text-gray-900 dark:text-white ${requiredCss}`;
-    const labelErrorCss = error? "text-rose-700 dark:text-rose-500":"";
+    const hasError = error? true:false;
     const labelHtml = children ? (
-        <label htmlFor={name} className={twMerge(labelCss,labelErrorCss)}>
+        <FormLabel 
+            name={name}
+            required={required}
+            hasError={hasError}>
             {children}
-        </label>
+        </FormLabel>
     ):null
 
     const defaultInputStyles = `bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
