@@ -19,7 +19,6 @@ const AddressInfo:FC<AddressInfoProps> = ({control,register,errors,countries})=>
                 control={control}
                 render={({ field }) => (
                     <FormSelect 
-                        name="role"
                         options={countries}
                         sectionClassName="sm:col-span-3"
                         field={field}

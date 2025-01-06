@@ -19,7 +19,6 @@ const Credentials:FC<CredentialsProps> = ({control,register,errors,roles}) => {
                 control={control}
                 render={({ field }) => (
                     <FormSelect 
-                        name="role"
                         options={roles}
                         sectionClassName="sm:col-span-3"
                         field={field}

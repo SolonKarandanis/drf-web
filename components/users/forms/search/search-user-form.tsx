@@ -143,7 +143,6 @@ const SearchUserForm:FC<Props> = ({}) => {
                             control={form.control}
                             render={({ field }) => (
                                 <FormSelect 
-                                    name="role"
                                     options={groupOptions}
                                     sectionClassName="mb-2"
                                     field={field}
@@ -157,7 +156,6 @@ const SearchUserForm:FC<Props> = ({}) => {
                             control={form.control}
                             render={({ field }) => (
                                 <FormSelect 
-                                    name="status"
                                     options={statusOptions}
                                     required={true}
                                     sectionClassName="mb-2"

@@ -131,7 +131,6 @@ const RegisterForm = () => {
                     control={control}
                     render={({ field }) => (
                         <FormSelect 
-                            name="role"
                             options={userGroupsOptions}
                             required={true}
                             sectionClassName="col-span-12 xl:col-span-12"
