@@ -7,7 +7,7 @@ const Select = dynamic(() => import("react-select"), { ssr: false });
 import DatePicker from 'react-datepicker';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 
 import { FilePondFile } from 'filepond';
 import { ActualFileObject } from 'filepond';
@@ -24,7 +24,11 @@ import FormTextArea from '@/shared/components/form-textarea/form-textarea';
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
-const ProductForm = () => {
+interface Props{
+    isEdit?:boolean
+}
+
+const ProductForm:FC<Props> = ({isEdit}) => {
     const t = useTranslations("PRODUCTS.CREATE");
     const formT = useTranslations("PRODUCTS.VALIDATION");
     const {
@@ -66,6 +70,27 @@ const ProductForm = () => {
         }
     };
 
+    let defaultValues={
+        title:undefined,
+        sku:undefined,
+        brand:undefined,
+        gender:undefined,
+        category:undefined,
+        publishStatus:undefined,
+        availabilityStatus:undefined,
+        inventory:undefined,
+        price:undefined,
+        content:undefined,
+        fabricDetails:undefined,
+        careInstructions:undefined,
+        colors:[],
+        sizes:[] 
+    }
+
+    if(isEdit){
+
+    }
+
     const {
         register,
         control,
@@ -73,22 +98,7 @@ const ProductForm = () => {
         formState
     } = useForm<SaveProductSchema>({
         resolver: zodResolver(getSaveProductSchema(formT)),
-        defaultValues:{
-            title:undefined,
-            sku:undefined,
-            brand:undefined,
-            gender:undefined,
-            category:undefined,
-            publishStatus:undefined,
-            availabilityStatus:undefined,
-            inventory:undefined,
-            price:undefined,
-            content:undefined,
-            fabricDetails:undefined,
-            careInstructions:undefined,
-            colors:[],
-            sizes:[]
-        }
+        defaultValues
     })
 
     const {errors} = formState
