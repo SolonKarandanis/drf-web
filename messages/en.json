@@ -291,6 +291,13 @@
                 "sizes":"SIZES"
             }
         },
+        "EDIT":{
+            "PAGE":{
+                "currentpage":"Edit Product",
+                "activepage":"Products",
+                "mainpage":"Edit Product"
+            }
+        },
         "CREATE":{
             "PAGE":{
                 "currentpage":"Create Product",

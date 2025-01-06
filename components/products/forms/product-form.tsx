@@ -2,7 +2,6 @@
 
 import { FilePond, registerPlugin } from 'react-filepond';
 import dynamic from 'next/dynamic';
-const Select = dynamic(() => import("react-select"), { ssr: false });
  // @ts-ignore
 import DatePicker from 'react-datepicker';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
@@ -21,6 +20,7 @@ import { getSaveProductSchema, SaveProductSchema } from '@/schemas/product.schem
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormInput from '@/shared/components/form-input/form-input';
 import FormTextArea from '@/shared/components/form-textarea/form-textarea';
+import { useGetProductDetails } from '../hooks/useGetProductDetails';
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
@@ -33,20 +33,12 @@ const ProductForm:FC<Props> = ({uuid}) => {
     const formT = useTranslations("PRODUCTS.VALIDATION");
     const {
         categoriesOptions,
-        categoriesLoading,
-        categoriesIsError,
         brandsOptions,
-        brandsLoading,
-        brandsIsError,
         sizesOptions,
-        sizesLoading,
-        sizesIsError,
         coloursOptions,
-        coloursLoading,
-        coloursIsError,
         gendersOptions,
-        gendersLoading,
-        gendersIsError,
+        isLoading,
+        isError
     } = useGetProductMisc();
 
     const publishStatusOptions: Options[] = [
@@ -71,24 +63,50 @@ const ProductForm:FC<Props> = ({uuid}) => {
     };
 
     let defaultValues={
-        title:undefined,
-        sku:undefined,
+        title:'',
+        sku:'',
         brand:undefined,
         gender:undefined,
         category:undefined,
         publishStatus:undefined,
         availabilityStatus:undefined,
-        inventory:undefined,
-        price:undefined,
-        content:undefined,
-        fabricDetails:undefined,
-        careInstructions:undefined,
+        inventory:0,
+        price:0,
+        content:'',
+        fabricDetails:'',
+        careInstructions:'',
         colors:[],
         sizes:[] 
     }
 
     if(uuid){
+        const {
+            isError,
+            isLoading,
+            product,
+            productBrands,
+            productCategories,
+            productOwner
+        } = useGetProductDetails(uuid);
 
+        if(!isLoading && product){
+            defaultValues={
+                title:product.title,
+                sku:product.sku,
+                brand:undefined,
+                category:undefined,
+                publishStatus:undefined,
+                availabilityStatus:undefined,
+                inventory:product.inventory,
+                price:product.price,
+                content:product.content,
+                fabricDetails:product.fabricDetails,
+                careInstructions:product.careInstructions,
+                gender:undefined,
+                colors:[],
+                sizes:[] 
+            }
+        }
     }
 
     const {

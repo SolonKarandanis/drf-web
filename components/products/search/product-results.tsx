@@ -42,7 +42,7 @@ const ProductResults = () => {
                             </Card.IconSection.Icon>
                             <Card.IconSection.Icon 
                                 className="view" 
-                                href={`/products/${item.uuid}`}>
+                                href={`/products/${item.uuid}/edit`}>
                                 <i className="ri-eye-line"></i>
                             </Card.IconSection.Icon>
                         </Card.IconSection>

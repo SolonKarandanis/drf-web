@@ -22,7 +22,7 @@ interface Props{
 }
 
 const EditProductPage:FC<Props>  = ({params:{uuid}}) =>{
-    const t = useTranslations("PRODUCTS.CREATE.PAGE");
+    const t = useTranslations("PRODUCTS.EDIT.PAGE");
 
     return (
         <>

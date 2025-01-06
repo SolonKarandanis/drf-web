@@ -291,6 +291,13 @@
                 "sizes":"ΜΕΓΕΘΗ"
             }
         },
+        "EDIT":{
+            "PAGE":{
+                "currentpage":"Επεξεργασία προϊόντος",
+                "activepage":"Products",
+                "mainpage":"Επεξεργασία προϊόντος"
+            }
+        },
         "CREATE":{
             "PAGE":{
                 "currentpage":"Δημιουργία Προϊόντος",

@@ -103,6 +103,10 @@ export function useGetProductMisc(){
             .catch((error)=>{
             })
     },[])
+
+    const isLoading = categoryState.isLoading || brandState.isLoading || sizeState.isLoading || colourState.isLoading || genderState.isLoading;
+
+    const isError = categoryState.isError || brandState.isError || sizeState.isError || colourState.isError || genderState.isError;
     
     return{
         categories,
@@ -115,16 +119,8 @@ export function useGetProductMisc(){
         coloursOptions,
         genders,
         gendersOptions,
-        categoriesLoading:categoryState.isLoading,
-        categoriesIsError:categoryState.isError,
-        brandsLoading:brandState.isLoading,
-        brandsIsError:brandState.isError,
-        sizesLoading:sizeState.isLoading,
-        sizesIsError:sizeState.isError,
-        coloursLoading:colourState.isLoading,
-        coloursIsError:colourState.isError,
-        gendersLoading:genderState.isLoading,
-        gendersIsError:genderState.isError,
+        isLoading,
+        isError
     }
 
 }
