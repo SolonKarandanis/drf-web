@@ -41,6 +41,16 @@ const ProductForm:FC<Props> = ({uuid}) => {
         isError
     } = useGetProductMisc();
 
+    const {
+        isError:isProductError,
+        isLoading:isProductLoading,
+        isExecuted,
+        product,
+        productBrands,
+        productCategories,
+        productOwner
+    } = useGetProductDetails(uuid);
+
     const publishStatusOptions: Options[] = [
         {value:'product.status.published',label:t(`LABELS.published`)},
         {value:'product.status.scheduled',label:t(`LABELS.scheduled`)}
@@ -79,33 +89,22 @@ const ProductForm:FC<Props> = ({uuid}) => {
         sizes:[] 
     }
 
-    if(uuid){
-        const {
-            isError,
-            isLoading,
-            product,
-            productBrands,
-            productCategories,
-            productOwner
-        } = useGetProductDetails(uuid);
-
-        if(!isLoading && product){
-            defaultValues={
-                title:product.title,
-                sku:product.sku,
-                brand:undefined,
-                category:undefined,
-                publishStatus:undefined,
-                availabilityStatus:undefined,
-                inventory:product.inventory,
-                price:product.price,
-                content:product.content,
-                fabricDetails:product.fabricDetails,
-                careInstructions:product.careInstructions,
-                gender:undefined,
-                colors:[],
-                sizes:[] 
-            }
+    if(!isLoading && isExecuted && product){
+        defaultValues={
+            title:product.title,
+            sku:product.sku,
+            brand:undefined,
+            category:undefined,
+            publishStatus:undefined,
+            availabilityStatus:undefined,
+            inventory:product.inventory,
+            price:product.price,
+            content:product.content,
+            fabricDetails:product.fabricDetails,
+            careInstructions:product.careInstructions,
+            gender:undefined,
+            colors:[],
+            sizes:[] 
         }
     }
 
@@ -140,7 +139,8 @@ const ProductForm:FC<Props> = ({uuid}) => {
                                 className={"w-full !rounded-md"}
                                 sectionClassName="mb-2 col-span-12 xl:col-span-6"
                                 props={register("title")}
-                                error={errors.title?.message}>
+                                error={errors.title?.message}
+                                loading={isProductLoading}>
                                 {t(`LABELS.product-name`)}
                             </FormInput>
                             <FormInput 
@@ -152,7 +152,8 @@ const ProductForm:FC<Props> = ({uuid}) => {
                                 className={"w-full !rounded-md"}
                                 sectionClassName="mb-2 col-span-12 xl:col-span-6"
                                 props={register("sku")}
-                                error={errors.sku?.message}>
+                                error={errors.sku?.message}
+                                loading={isProductLoading}>
                                 {t(`LABELS.product-sku`)}
                             </FormInput>
                             <Controller
@@ -166,7 +167,8 @@ const ProductForm:FC<Props> = ({uuid}) => {
                                         isSearchable={true}
                                         sectionClassName="col-span-12 xl:col-span-6 mb-2"
                                         field={field}
-                                        error={errors.category?.message}>
+                                        error={errors.category?.message}
+                                        loading={isLoading || isProductLoading}>
                                             {t(`LABELS.category`)}
                                     </FormSelect>
                                 )}
@@ -182,7 +184,8 @@ const ProductForm:FC<Props> = ({uuid}) => {
                                         isSearchable={true}
                                         sectionClassName="col-span-12 xl:col-span-6 mb-2"
                                         field={field}
-                                        error={errors.gender?.message}>
+                                        error={errors.gender?.message}
+                                        loading={isLoading || isProductLoading}>
                                             {t(`LABELS.gender`)}
                                     </FormSelect>
                                 )}
@@ -198,7 +201,8 @@ const ProductForm:FC<Props> = ({uuid}) => {
                                         options={sizesOptions}
                                         sectionClassName="col-span-12 xl:col-span-6 mb-2"
                                         field={field}
-                                        error={errors.sizes?.message}>
+                                        error={errors.sizes?.message}
+                                        loading={isLoading || isProductLoading}>
                                             {t(`LABELS.size`)}
                                     </FormSelect>
                                 )}
@@ -214,7 +218,8 @@ const ProductForm:FC<Props> = ({uuid}) => {
                                         isSearchable={true}
                                         sectionClassName="col-span-12 xl:col-span-6 mb-2"
                                         field={field}
-                                        error={errors.brand?.message}>
+                                        error={errors.brand?.message}
+                                        loading={isLoading || isProductLoading}>
                                             {t(`LABELS.brand`)}
                                     </FormSelect>
                                 )}
@@ -230,7 +235,8 @@ const ProductForm:FC<Props> = ({uuid}) => {
                                         isMulti={true}
                                         sectionClassName="col-span-12 xl:col-span-6 mb-2"
                                         field={field}
-                                        error={errors.colors?.message}>
+                                        error={errors.colors?.message}
+                                        loading={isLoading || isProductLoading}>
                                             {t(`LABELS.color`)}
                                     </FormSelect>
                                 )}
@@ -240,7 +246,8 @@ const ProductForm:FC<Props> = ({uuid}) => {
                                 placeholder={t(`PLACEHOLDERS.product-description`)}
                                 props={register("content")}
                                 error={errors.content?.message}
-                                sectionClassName="col-span-12 xl:col-span-12 mb-2">
+                                sectionClassName="col-span-12 xl:col-span-12 mb-2"
+                                loading={isProductLoading}>
                                 {t(`LABELS.product-description`)}
                             </FormTextArea>
                             <FormTextArea
@@ -248,7 +255,8 @@ const ProductForm:FC<Props> = ({uuid}) => {
                                 placeholder={t(`LABELS.fabric-details`)}
                                 props={register("fabricDetails")}
                                 error={errors.fabricDetails?.message}
-                                sectionClassName="col-span-12 xl:col-span-12 mb-2">
+                                sectionClassName="col-span-12 xl:col-span-12 mb-2"
+                                loading={isProductLoading}>
                                 {t(`LABELS.fabric-details`)}
                             </FormTextArea>
                             <FormTextArea
@@ -256,7 +264,8 @@ const ProductForm:FC<Props> = ({uuid}) => {
                                 placeholder={t(`LABELS.care-instructions`)}
                                 props={register("careInstructions")}
                                 error={errors.careInstructions?.message}
-                                sectionClassName="col-span-12 xl:col-span-12 mb-2">
+                                sectionClassName="col-span-12 xl:col-span-12 mb-2"
+                                loading={isProductLoading}>
                                 {t(`LABELS.care-instructions`)}
                             </FormTextArea>
                         </div>
@@ -272,7 +281,8 @@ const ProductForm:FC<Props> = ({uuid}) => {
                                 className={"w-full !rounded-md"}
                                 sectionClassName="mb-2 col-span-12 xl:col-span-6"
                                 props={register("inventory")}
-                                error={errors.inventory?.message}>
+                                error={errors.inventory?.message}
+                                loading={isProductLoading}>
                                 {t(`LABELS.inventory`)}
                             </FormInput>
                             <FormInput 
@@ -283,7 +293,8 @@ const ProductForm:FC<Props> = ({uuid}) => {
                                 className={"w-full !rounded-md"}
                                 sectionClassName="mb-2 col-span-12 xl:col-span-6"
                                 props={register("price")}
-                                error={errors.price?.message}>
+                                error={errors.price?.message}
+                                loading={isProductLoading}>
                                 {t(`LABELS.price`)}
                             </FormInput>
                             <div className="col-span-12 xl:col-span-12 product-documents-container">
@@ -345,7 +356,8 @@ const ProductForm:FC<Props> = ({uuid}) => {
                                         isSearchable={true}
                                         sectionClassName="col-span-12 xl:col-span-6"
                                         field={field}
-                                        error={errors.publishStatus?.message}>
+                                        error={errors.publishStatus?.message}
+                                        loading={isLoading || isProductLoading}>
                                             {t(`LABELS.publish-status`)}
                                     </FormSelect>
                                 )}
@@ -361,7 +373,8 @@ const ProductForm:FC<Props> = ({uuid}) => {
                                         isSearchable={true}
                                         sectionClassName="col-span-12 xl:col-span-6"
                                         field={field}
-                                        error={errors.availabilityStatus?.message}>
+                                        error={errors.availabilityStatus?.message}
+                                        loading={isLoading || isProductLoading}>
                                             {t(`LABELS.availability-status`)}
                                     </FormSelect>
                                 )}

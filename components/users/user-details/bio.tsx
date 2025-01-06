@@ -73,19 +73,13 @@ const Bio:FC<Props> = ({
                     <UserEditButton onClick={handleEditButtonClick} />
                 )}
             </section>
-            {isLoading && (
-                <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
-                    <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                    <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                    <div className="h-2 bg-gray-400 rounded-full dark:bg-gray-700"></div>
-                </div>
-            )}
-            {!isLoading && isEdit && (
+            {isEdit && (
                 <Form {...form} >
                     <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
                         <FormTextArea
                             name="bio"
                             props={form.register("bio")}
+                            loading={isLoading}
                             sectionClassName="col-span-12 mt-3 mb-0 xl:col-span-12">
                         </FormTextArea>
                     </form>

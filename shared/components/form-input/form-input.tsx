@@ -33,6 +33,17 @@ const FormInput:FC<PropsWithChildren<InputProps>>  = ({
         </FormLabel>
     ):null
 
+    if(loading){
+        return (
+          <section className={sectionClassName}>
+            {labelHtml}
+            <div role="status" className="w-full animate-pulse dark:border-gray-700">
+              <div className="h-10 bg-gray-400  dark:bg-gray-700 mb-2.5"></div>
+            </div>
+          </section>
+        )
+      }
+
     const defaultInputStyles = `bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
         block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
         dark:focus:ring-blue-500 dark:focus:border-blue-500
@@ -93,7 +104,6 @@ const FormInput:FC<PropsWithChildren<InputProps>>  = ({
             {errorHtml}
         </>
     );
-
 
     return (
         <section className={sectionClassName}>
