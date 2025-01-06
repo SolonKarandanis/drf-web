@@ -1,7 +1,6 @@
 import { 
     InputHTMLAttributes,  
     RefCallback,
-    SelectHTMLAttributes,
     TableHTMLAttributes,
     TextareaHTMLAttributes,
 } from "react";
@@ -11,7 +10,7 @@ import { Column } from "react-table";
 export interface RegisterProps {
     onChange: (event:any) => unknown;
     onBlur: (event:any) => unknown;
-    ref: RefCallback<HTMLInputElement |HTMLSelectElement >;
+    ref: RefCallback<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
     name?: string;
     min?: string | number;
     max?: string | number;
@@ -30,6 +29,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
     sectionClassName?:string,
     props?:RegisterProps,
     error?:string,
+    loading?:boolean,
 }
 
 
@@ -44,6 +44,7 @@ export interface SelectProps extends Props{
     sectionClassName?:string,
     error?:string,
     field:any,
+    loading?:boolean,
 }
 
 export interface TableProps extends TableHTMLAttributes<HTMLTableElement>{
@@ -53,10 +54,10 @@ export interface TableProps extends TableHTMLAttributes<HTMLTableElement>{
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement>{
     name:string,
-    type:string,
     required?:boolean,
     className?:string,
     sectionClassName?:string,
     props?:RegisterProps,
     error?:string,
+    loading?:boolean,
 }

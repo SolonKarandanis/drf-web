@@ -14,6 +14,7 @@ const FormInput:FC<PropsWithChildren<InputProps>>  = ({
     children,
     type='text',
     required=false,
+    loading=false,
     className='',
     sectionClassName='',
     props,

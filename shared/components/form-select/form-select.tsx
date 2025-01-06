@@ -11,6 +11,7 @@ import { useTranslations } from 'next-intl';
 const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
     options,
     required=false,
+    loading=false,
     sectionClassName,
     error,
     children,

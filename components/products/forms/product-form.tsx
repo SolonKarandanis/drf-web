@@ -20,6 +20,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { getSaveProductSchema, SaveProductSchema } from '@/schemas/product.schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormInput from '@/shared/components/form-input/form-input';
+import FormTextArea from '@/shared/components/form-textarea/form-textarea';
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
@@ -80,6 +81,11 @@ const ProductForm = () => {
             category:undefined,
             publishStatus:undefined,
             availabilityStatus:undefined,
+            inventory:undefined,
+            price:undefined,
+            content:undefined,
+            fabricDetails:undefined,
+            careInstructions:undefined,
             colors:[],
             sizes:[]
         }
@@ -201,54 +207,30 @@ const ProductForm = () => {
                                     </FormSelect>
                                 )}
                             />
-                            <div className="col-span-12 xl:col-span-12">
-                                <label 
-                                    htmlFor="product-description-add" 
-                                    className="form-label">
-                                    Product Description
-                                </label>
-                                <textarea 
-                                    className="form-control w-full !rounded-md" 
-                                    id="product-description-add" rows={2}></textarea>
-                                <label 
-                                    htmlFor="product-description-add" 
-                                    className="form-label mt-1 text-[0.75rem] opacity-[0.5] 
-                                    !text-[#8c9097] dark:text-white/50 mb-0">
-                                    *Description should not exceed 500 letters
-                                </label>
-                            </div>
-                            <div className="col-span-12 xl:col-span-12">
-                                <label 
-                                    htmlFor="product-description-add" 
-                                    className="form-label">
-                                    Product Description
-                                </label>
-                                <textarea 
-                                    className="form-control w-full !rounded-md" 
-                                    id="product-description-add" rows={2}></textarea>
-                                <label 
-                                    htmlFor="product-description-add" 
-                                    className="form-label mt-1 text-[0.75rem] opacity-[0.5] 
-                                    !text-[#8c9097] dark:text-white/50 mb-0">
-                                    *Description should not exceed 500 letters
-                                </label>
-                            </div>
-                            <div className="col-span-12 xl:col-span-12">
-                                <label 
-                                    htmlFor="product-description-add" 
-                                    className="form-label">
-                                    Product Description
-                                </label>
-                                <textarea 
-                                    className="form-control w-full !rounded-md" 
-                                    id="product-description-add" rows={2}></textarea>
-                                <label 
-                                    htmlFor="product-description-add" 
-                                    className="form-label mt-1 text-[0.75rem] opacity-[0.5] 
-                                    !text-[#8c9097] dark:text-white/50 mb-0">
-                                    *Description should not exceed 500 letters
-                                </label>
-                            </div>
+                            <FormTextArea
+                                name="content"
+                                placeholder={t(`PLACEHOLDERS.product-description`)}
+                                props={register("content")}
+                                error={errors.content?.message}
+                                sectionClassName="col-span-12 xl:col-span-12 mb-2">
+                                {t(`LABELS.product-description`)}
+                            </FormTextArea>
+                            <FormTextArea
+                                name="fabricDetails"
+                                placeholder={t(`LABELS.fabric-details`)}
+                                props={register("fabricDetails")}
+                                error={errors.fabricDetails?.message}
+                                sectionClassName="col-span-12 xl:col-span-12 mb-2">
+                                {t(`LABELS.fabric-details`)}
+                            </FormTextArea>
+                            <FormTextArea
+                                name="careInstructions"
+                                placeholder={t(`LABELS.care-instructions`)}
+                                props={register("careInstructions")}
+                                error={errors.careInstructions?.message}
+                                sectionClassName="col-span-12 xl:col-span-12 mb-2">
+                                {t(`LABELS.care-instructions`)}
+                            </FormTextArea>
                         </div>
                     </div>
                     <div className="col-span-12 xxl:col-span-6 xl:col-span-12 lg:col-span-12 md:col-span-6">
