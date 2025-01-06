@@ -311,7 +311,11 @@
                 "published":"Published",
                 "scheduled":"Scheduled",
                 "in-stock":"In Stock",
-                "out-of-stock":"Out of Stock"
+                "out-of-stock":"Out of Stock",
+                "inventory":"Inventory",
+                "price":"Price",
+                "fabric-details":"Fabric Details",
+                "care-instructions":"Care Instructions"
             },
             "PLACEHOLDERS":{
                 "product-name":"*Product Name should not exceed 30 characters",
@@ -337,9 +341,13 @@
             "required-sizes":"At least one size is required",
             "required-brand":"Brand is required",
             "required-colors":"At least one color is required",
-            "required-cost":"Cost is required",
+            "required-price":"Price is required",
+            "required-inventory":"Inventory is required",
             "required-publish-status":"Publish Status is required",
-            "required-availability-status":"Availability Status is required"
+            "required-availability-status":"Availability Status is required",
+            "integer-inventory":"Inventory value must be an integer",
+            "positive-inventory":"Inventory must be a positive value",
+            "positive-price":"Price must be a positive value"
         }
     }
 }

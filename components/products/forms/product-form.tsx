@@ -201,41 +201,29 @@ const ProductForm = () => {
                                     </FormSelect>
                                 )}
                             />
-                            
-                            <div className="col-span-12 xl:col-span-6">
-                                <label 
-                                    htmlFor="product-cost-add" 
-                                    className="form-label">
-                                    Enter Cost
-                                </label>
-                                <input 
-                                    type="text" 
-                                    className="form-control w-full !rounded-md" 
-                                    id="product-cost-add" 
-                                    placeholder="Cost" />
-                                <label 
-                                    htmlFor="product-cost-add" 
-                                    className="form-label mt-1 text-[0.75rem] opacity-[0.5] 
-                                    !text-[#8c9097] dark:text-white/50 mb-0">
-                                    *Mention final price of the product
-                                </label>
-                            </div>
-                            <div className="col-span-12 xl:col-span-12">
-                                <label 
-                                    htmlFor="product-description-add" 
-                                    className="form-label">
-                                    Product Description
-                                </label>
-                                <textarea 
-                                    className="form-control w-full !rounded-md" 
-                                    id="product-description-add" rows={2}></textarea>
-                                <label 
-                                    htmlFor="product-description-add" 
-                                    className="form-label mt-1 text-[0.75rem] opacity-[0.5] 
-                                    !text-[#8c9097] dark:text-white/50 mb-0">
-                                    *Description should not exceed 500 letters
-                                </label>
-                            </div>
+                            <FormInput 
+                                type='number'
+                                required={true}
+                                name='inventory'
+                                autoComplete="product-sku" 
+                                placeholder={t(`LABELS.inventory`)}
+                                className={"w-full !rounded-md"}
+                                sectionClassName="mb-2 col-span-12 xl:col-span-6"
+                                props={register("inventory")}
+                                error={errors.inventory?.message}>
+                                {t(`LABELS.inventory`)}
+                            </FormInput>
+                            <FormInput 
+                                type='number'
+                                name='price'
+                                autoComplete="product-price" 
+                                placeholder={t(`LABELS.price`)}
+                                className={"w-full !rounded-md"}
+                                sectionClassName="mb-2 col-span-12 xl:col-span-6"
+                                props={register("price")}
+                                error={errors.price?.message}>
+                                {t(`LABELS.price`)}
+                            </FormInput>
                         </div>
                     </div>
                     <div className="col-span-12 xxl:col-span-6 xl:col-span-12 lg:col-span-12 md:col-span-6">
