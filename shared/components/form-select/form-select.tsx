@@ -21,7 +21,8 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
     onChange,
 }) => {
     const t = useTranslations();
-    const labelCss = `${twMerge('block mb-2 text-sm font-medium text-gray-900 dark:text-white')}`;
+    const labelErrorCss = error? "text-rose-700 dark:text-rose-500":"";
+    const labelCss = `${twMerge('block mb-2 text-sm font-medium text-gray-900 dark:text-white',labelErrorCss)}`;
     const labelHtml = required? (
         <label htmlFor={name} className={labelCss}>
             <span className='required'>{children}</span>

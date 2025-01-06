@@ -4,7 +4,7 @@ import { type TranslationValues } from "next-intl";
 type Messages = keyof IntlMessages["PRODUCTS"]["VALIDATION"];
 
 const numberSchema = z.object({
-    code: z.number()
+    code: z.number().optional()
 });
 
 export function getSaveProductSchema(

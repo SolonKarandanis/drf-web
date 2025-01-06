@@ -104,7 +104,7 @@ const ProductForm = () => {
                                 autoComplete="product-name" 
                                 placeholder={t(`PLACEHOLDERS.product-name`)}
                                 className={"w-full !rounded-md"}
-                                sectionClassName="mb-2"
+                                sectionClassName="mb-2 col-span-12 xl:col-span-6"
                                 props={register("name")}
                                 error={errors.name?.message}>
                                 {t(`LABELS.product-name`)}
@@ -116,7 +116,7 @@ const ProductForm = () => {
                                 autoComplete="product-sku" 
                                 placeholder={t(`LABELS.product-sku`)}
                                 className={"w-full !rounded-md"}
-                                sectionClassName="mb-2"
+                                sectionClassName="mb-2 col-span-12 xl:col-span-6"
                                 props={register("sku")}
                                 error={errors.sku?.message}>
                                 {t(`LABELS.product-sku`)}
@@ -130,7 +130,7 @@ const ProductForm = () => {
                                         options={categoriesOptions}
                                         required={true}
                                         isSearchable={true}
-                                        sectionClassName="col-span-12 xl:col-span-6"
+                                        sectionClassName="col-span-12 xl:col-span-6 mb-2"
                                         onChange={(( option ) => field.onChange(option!.value))}
                                         error={errors.category?.message}>
                                             {t(`LABELS.category`)}
@@ -146,7 +146,7 @@ const ProductForm = () => {
                                         options={gendersOptions}
                                         required={true}
                                         isSearchable={true}
-                                        sectionClassName="col-span-12 xl:col-span-6"
+                                        sectionClassName="col-span-12 xl:col-span-6 mb-2"
                                         onChange={(( option ) => field.onChange(option!.value))}
                                         error={errors.gender?.message}>
                                             {t(`LABELS.gender`)}
@@ -163,7 +163,7 @@ const ProductForm = () => {
                                         required={true}
                                         isSearchable={true}
                                         options={sizesOptions}
-                                        sectionClassName="col-span-12 xl:col-span-6"
+                                        sectionClassName="col-span-12 xl:col-span-6 mb-2"
                                         onChange={(( option ) => field.onChange(option!.value))}
                                         error={errors.sizes?.message}>
                                             {t(`LABELS.size`)}
@@ -179,7 +179,7 @@ const ProductForm = () => {
                                         options={brandsOptions}
                                         required={true}
                                         isSearchable={true}
-                                        sectionClassName="col-span-12 xl:col-span-6"
+                                        sectionClassName="col-span-12 xl:col-span-6 mb-2"
                                         onChange={(( option ) => field.onChange(option!.value))}
                                         error={errors.brand?.message}>
                                             {t(`LABELS.brand`)}
@@ -196,7 +196,7 @@ const ProductForm = () => {
                                         required={true}
                                         isSearchable={true}
                                         isMulti={true}
-                                        sectionClassName="col-span-12 xl:col-span-6"
+                                        sectionClassName="col-span-12 xl:col-span-6 mb-2"
                                         onChange={(( option ) => field.onChange(option!.value))}
                                         error={errors.colors?.message}>
                                             {t(`LABELS.color`)}
