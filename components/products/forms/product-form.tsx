@@ -25,10 +25,10 @@ import { useGetProductDetails } from '../hooks/useGetProductDetails';
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 interface Props{
-    uuid?:string;
+    defaultValues:any
 }
 
-const ProductForm:FC<Props> = ({uuid}) => {
+const ProductForm:FC<Props> = ({defaultValues}) => {
     const t = useTranslations("PRODUCTS.CREATE");
     const formT = useTranslations("PRODUCTS.VALIDATION");
     
@@ -65,55 +65,38 @@ const ProductForm:FC<Props> = ({uuid}) => {
         }
     };
 
-    let defaultValues={
-        title:'',
-        sku:'',
-        brand:0,
-        gender:undefined,
-        category:0,
-        publishStatus:'',
-        availabilityStatus:'',
-        inventory:0,
-        price:0,
-        content:'',
-        fabricDetails:'',
-        careInstructions:'',
-        colors:[],
-        sizes:[] 
-    }
-
     let isProductLoading=false;
 
-    if(uuid){
-        const {
-            isError,
-            isLoading,
-            product,
-            productBrands,
-            productCategories,
-            productOwner
-        } = useGetProductDetails(uuid);
-        isProductLoading = isLoading;
+    // if(uuid){
+    //     const {
+    //         isError,
+    //         isLoading,
+    //         product,
+    //         productBrands,
+    //         productCategories,
+    //         productOwner
+    //     } = useGetProductDetails(uuid);
+    //     isProductLoading = isLoading;
 
-        if(!isLoading && product && productBrands){
-            defaultValues={
-                title:product.title,
-                sku:product.sku,
-                brand:productBrands.id,
-                category:productCategories[0].id,
-                publishStatus:product.publishStatus,
-                availabilityStatus:product.availabilityStatus,
-                inventory:product.inventory,
-                price:product.price,
-                content:product.content,
-                fabricDetails:product.fabricDetails,
-                careInstructions:product.careInstructions,
-                gender:undefined,
-                colors:[],
-                sizes:[] 
-            }
-        }
-    }
+    //     if(!isLoading && product && productBrands){
+    //         defaultValues={
+    //             title:product.title,
+    //             sku:product.sku,
+    //             brand:productBrands.id,
+    //             category:productCategories[0].id,
+    //             publishStatus:product.publishStatus,
+    //             availabilityStatus:product.availabilityStatus,
+    //             inventory:product.inventory,
+    //             price:product.price,
+    //             content:product.content,
+    //             fabricDetails:product.fabricDetails,
+    //             careInstructions:product.careInstructions,
+    //             gender:undefined,
+    //             colors:[],
+    //             sizes:[] 
+    //         }
+    //     }
+    // }
 
     const {
         register,

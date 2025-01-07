@@ -1,4 +1,4 @@
-import ProductForm from "@/components/products/forms/product-form";
+import CreateProductWrapper from "@/components/products/create/create-product-wrapper";
 import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 import { Metadata } from "next";
 import { useTranslations } from "next-intl";
@@ -28,7 +28,7 @@ const CreateProductPage =() =>{
                     <div className="box">
                         <div className="box-body add-products !p-0">
                             <div className="p-6">
-                                <ProductForm />
+                                <CreateProductWrapper />
                             </div>
                         </div>
                     </div>
