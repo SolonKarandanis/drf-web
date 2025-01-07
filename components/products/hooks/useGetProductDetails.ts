@@ -19,7 +19,7 @@ import { useEffect } from "react";
 
 export function useGetProductDetails(uuid:string){
     const [getProduct,{isError:isProductError,isLoading:isProductLoading,data:productData}] = useLazyGetProductDetailsQuery();
-    const [getProductAttributes,{isError:isProductAttributeError,isLoading:isProductAttributeLoading,data:productAttributeData}] = useLazyGetProductAttributesByIdQuery();
+    const [getProductAttributes,{isError:isProductAttributesError,isLoading:isProductAttributesLoading,data:productAttributesData}] = useLazyGetProductAttributesByIdQuery();
     const dispatch = useAppDispatch();
     const product:BaseProductDetails|null= useAppSelector(selectedProductSelector);
     const productOwner:UserPublic|null= useAppSelector(selectedProductOwnerSelector);
@@ -46,6 +46,10 @@ export function useGetProductDetails(uuid:string){
             })
 
     },[]);
+
+    const sizesSelectedValues = productAttributesData?.sizes.map(size=>size.attributeOptionId);
+    const colorsSelectedValues = productAttributesData?.colors.map(color=>color.attributeOptionId);
+    const genderSelectedValues = productAttributesData?.genders.map(gender=>gender.attributeOptionId);
  
 
 
@@ -60,5 +64,10 @@ export function useGetProductDetails(uuid:string){
         isProductError,
         isProductLoading,
         productData,
+        isProductAttributesLoading,
+        isProductAttributesError,
+        sizesSelectedValues,
+        colorsSelectedValues,
+        genderSelectedValues
     }
 }

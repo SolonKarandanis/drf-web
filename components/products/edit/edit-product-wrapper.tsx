@@ -13,9 +13,14 @@ const EditProductWrapper:FC<Props> = ({uuid}) => {
         isProductError,
         isProductLoading,
         productData,
+        isProductAttributesLoading,
+        sizesSelectedValues,
+        colorsSelectedValues,
+        genderSelectedValues,
     } = useGetProductDetails(uuid);
 
-    if(!isProductLoading && productData){
+    if(!isProductLoading && !isProductAttributesLoading 
+        && productData && genderSelectedValues && colorsSelectedValues && sizesSelectedValues){
         const defaultFormValues={
             title:productData.title,
             sku:productData.sku,
@@ -28,11 +33,10 @@ const EditProductWrapper:FC<Props> = ({uuid}) => {
             content:productData.content,
             fabricDetails:productData.fabricDetails,
             careInstructions:productData.careInstructions,
-            gender:undefined,
-            colors:[],
-            sizes:[] 
+            gender:genderSelectedValues[0],
+            colors:colorsSelectedValues,
+            sizes:sizesSelectedValues 
         };
-
         return (
             <ProductForm
                 key={1}
