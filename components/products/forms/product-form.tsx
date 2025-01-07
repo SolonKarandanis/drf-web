@@ -24,12 +24,29 @@ import FormTextArea from '@/shared/components/form-textarea/form-textarea';
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 interface Props{
-    defaultValues:any;
+    defaultValues?:any;
     isProductLoading?:boolean;
 }
 
+const defaultFormValues={
+    title:'',
+    sku:'',
+    brand:0,
+    gender:undefined,
+    category:0,
+    publishStatus:'',
+    availabilityStatus:'',
+    inventory:0,
+    price:0,
+    content:'',
+    fabricDetails:'',
+    careInstructions:'',
+    colors:[],
+    sizes:[] 
+}
+
 const ProductForm:FC<Props> = ({
-    defaultValues, 
+    defaultValues=defaultFormValues, 
     isProductLoading=false
 }) => {
     const t = useTranslations("PRODUCTS.CREATE");

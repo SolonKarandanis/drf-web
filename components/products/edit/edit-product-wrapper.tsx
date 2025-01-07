@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react"
+import { FC, useCallback, useState } from "react"
 import { useGetProductDetails } from "../hooks/useGetProductDetails";
 import ProductForm from "../forms/product-form";
 
@@ -9,57 +9,47 @@ interface Props{
 }
 
 const EditProductWrapper:FC<Props> = ({uuid}) => {
-        const {
-            isError,
-            isLoading,
-            product,
-            productBrands,
-            productCategories,
-            productOwner
-        } = useGetProductDetails(uuid);
+    const {
+        isError,
+        isLoading,
+        data,
+    } = useGetProductDetails(uuid);
+    const [, updateState] = useState<object>();
+    const forceUpdate = useCallback(() => updateState({}), []);
 
-        let defaultFormValues={
-            title:'',
-            sku:'',
-            brand:0,
+    if(!isLoading && data){
+        const defaultFormValues={
+            title:data.title,
+            sku:data.sku,
+            brand:data.brand.id,
+            category:data.categories[0].id,
+            publishStatus:data.publishStatus,
+            availabilityStatus:data.availabilityStatus,
+            inventory:data.inventory,
+            price:data.price,
+            content:data.content,
+            fabricDetails:data.fabricDetails,
+            careInstructions:data.careInstructions,
             gender:undefined,
-            category:0,
-            publishStatus:'',
-            availabilityStatus:'',
-            inventory:0,
-            price:0,
-            content:'',
-            fabricDetails:'',
-            careInstructions:'',
             colors:[],
             sizes:[] 
-        }
+        };
 
-        if(!isLoading && product && productBrands){
-            defaultFormValues={
-                title:product.title,
-                sku:product.sku,
-                brand:productBrands.id,
-                category:productCategories[0].id,
-                publishStatus:product.publishStatus,
-                availabilityStatus:product.availabilityStatus,
-                inventory:product.inventory,
-                price:product.price,
-                content:product.content,
-                fabricDetails:product.fabricDetails,
-                careInstructions:product.careInstructions,
-                gender:undefined,
-                colors:[],
-                sizes:[] 
-            };
+        return (
+            <ProductForm
+                key={1}
+                defaultValues={defaultFormValues}
+                isProductLoading={isLoading}/>
+        )  
+    }
 
-            return (
-                <ProductForm 
-                    defaultValues={defaultFormValues}
-                    isProductLoading={isLoading}/>
-            )
-        }
-        
+    return (
+        <ProductForm 
+            key={2}
+            isProductLoading={isLoading}/>
+    )  
+
+   
 }
 
 export default EditProductWrapper
