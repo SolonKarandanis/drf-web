@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useCallback, useState } from "react"
+import { FC} from "react"
 import { useGetProductDetails } from "../hooks/useGetProductDetails";
 import ProductForm from "../forms/product-form";
 
@@ -14,8 +14,6 @@ const EditProductWrapper:FC<Props> = ({uuid}) => {
         isLoading,
         data,
     } = useGetProductDetails(uuid);
-    const [, updateState] = useState<object>();
-    const forceUpdate = useCallback(() => updateState({}), []);
 
     if(!isLoading && data){
         const defaultFormValues={
