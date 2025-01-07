@@ -1,4 +1,4 @@
-import ProductForm from "@/components/products/forms/product-form";
+import EditProductWrapper from "@/components/products/edit/edit-product-wrapper";
 import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 import { Metadata } from "next";
 import { useTranslations } from "next-intl";
@@ -35,7 +35,7 @@ const EditProductPage:FC<Props>  = ({params:{uuid}}) =>{
                     <div className="box">
                         <div className="box-body add-products !p-0">
                             <div className="p-6">
-                                <ProductForm  uuid={uuid} />
+                                <EditProductWrapper  uuid={uuid} />
                             </div>
                         </div>
                     </div>

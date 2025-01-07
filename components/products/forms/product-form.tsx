@@ -20,15 +20,18 @@ import { getSaveProductSchema, SaveProductSchema } from '@/schemas/product.schem
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormInput from '@/shared/components/form-input/form-input';
 import FormTextArea from '@/shared/components/form-textarea/form-textarea';
-import { useGetProductDetails } from '../hooks/useGetProductDetails';
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 interface Props{
-    defaultValues:any
+    defaultValues:any;
+    isProductLoading?:boolean;
 }
 
-const ProductForm:FC<Props> = ({defaultValues}) => {
+const ProductForm:FC<Props> = ({
+    defaultValues, 
+    isProductLoading=false
+}) => {
     const t = useTranslations("PRODUCTS.CREATE");
     const formT = useTranslations("PRODUCTS.VALIDATION");
     
@@ -41,8 +44,6 @@ const ProductForm:FC<Props> = ({defaultValues}) => {
         isLoading,
         isError
     } = useGetProductMisc();
-
-    
 
     const publishStatusOptions: Options[] = [
         {value:'product.status.published',label:t(`LABELS.published`)},
@@ -64,39 +65,6 @@ const ProductForm:FC<Props> = ({defaultValues}) => {
             setStartDate(date);
         }
     };
-
-    let isProductLoading=false;
-
-    // if(uuid){
-    //     const {
-    //         isError,
-    //         isLoading,
-    //         product,
-    //         productBrands,
-    //         productCategories,
-    //         productOwner
-    //     } = useGetProductDetails(uuid);
-    //     isProductLoading = isLoading;
-
-    //     if(!isLoading && product && productBrands){
-    //         defaultValues={
-    //             title:product.title,
-    //             sku:product.sku,
-    //             brand:productBrands.id,
-    //             category:productCategories[0].id,
-    //             publishStatus:product.publishStatus,
-    //             availabilityStatus:product.availabilityStatus,
-    //             inventory:product.inventory,
-    //             price:product.price,
-    //             content:product.content,
-    //             fabricDetails:product.fabricDetails,
-    //             careInstructions:product.careInstructions,
-    //             gender:undefined,
-    //             colors:[],
-    //             sizes:[] 
-    //         }
-    //     }
-    // }
 
     const {
         register,
