@@ -116,3 +116,16 @@ export interface  SizesWithTotals extends BaseTotals{
 export interface  DiscountsWithTotals extends BaseTotals{
     
 }
+
+export interface ProductAttributesValues{
+    id:number;
+    productId:number;
+    attributeId:number;
+    attributeOptionId:number;
+}
+
+export interface ProductAttributes{
+    colors:ProductAttributesValues[];
+    sizes:ProductAttributesValues[];
+    genders:ProductAttributesValues[];
+}

@@ -1,7 +1,7 @@
 import { Comment } from "@/models/comment.models";
 import { BaseProductDetails, Brand, Category } from "@/models/product.models";
 import { UserPublic } from "@/models/user.models";
-import { useLazyGetProductDetailsQuery } from "@/shared/redux/features/products/productsApiSlice";
+import { useLazyGetProductAttributesByIdQuery, useLazyGetProductDetailsQuery } from "@/shared/redux/features/products/productsApiSlice";
 import { 
     resetSelectedProduct, 
     selectedProductBrandSelector, 
@@ -11,13 +11,15 @@ import {
     selectedProductSalePriceDecimalPartSelector, 
     selectedProductSalePriceIntegerPartSelector, 
     selectedProductSelector, 
-    setSelectedProduct 
+    setSelectedProduct, 
+    setSelectedProductAttributes
 } from "@/shared/redux/features/products/productsSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useEffect } from "react";
 
 export function useGetProductDetails(uuid:string){
-    const [getProduct,{isError,isLoading,data}] = useLazyGetProductDetailsQuery();
+    const [getProduct,{isError:isProductError,isLoading:isProductLoading,data:productData}] = useLazyGetProductDetailsQuery();
+    const [getProductAttributes,{isError:isProductAttributeError,isLoading:isProductAttributeLoading,data:productAttributeData}] = useLazyGetProductAttributesByIdQuery();
     const dispatch = useAppDispatch();
     const product:BaseProductDetails|null= useAppSelector(selectedProductSelector);
     const productOwner:UserPublic|null= useAppSelector(selectedProductOwnerSelector);
@@ -29,13 +31,20 @@ export function useGetProductDetails(uuid:string){
 
     useEffect(()=>{
         getProduct(uuid)
-        .unwrap()
-        .then((products) =>{
-            dispatch(setSelectedProduct(products));
-        })
-        .catch((error)=>{
-            dispatch(resetSelectedProduct());
-        })
+            .unwrap()
+            .then((products) =>{
+                dispatch(setSelectedProduct(products));
+            })
+            .catch((error)=>{
+                dispatch(resetSelectedProduct());
+            });
+
+        getProductAttributes(uuid)
+            .unwrap()
+            .then((attributes) =>{
+                dispatch(setSelectedProductAttributes(attributes));
+            })
+
     },[]);
  
 
@@ -48,8 +57,8 @@ export function useGetProductDetails(uuid:string){
         productComments,
         productBrands,
         productCategories,
-        isError,
-        isLoading,
-        data,
+        isProductError,
+        isProductLoading,
+        productData,
     }
 }

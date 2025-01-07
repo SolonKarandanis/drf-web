@@ -7,6 +7,7 @@ import {
     CreateProductRequest, 
     DiscountsWithTotals, 
     PostProductCommentRequest, 
+    ProductAttributes, 
     ProductDetails, 
     SimilarProduct, 
     SimilarProductRequest, 
@@ -39,6 +40,14 @@ const productsApiSlice = apiSlice.injectEndpoints({
 			query: (uuid:string) => {
                 return {
                     url:`${ApiControllers.PRODUCTS}/${uuid}/similar-products/`,
+                    method:'GET',
+                }
+            }
+		}),
+        getProductAttributesById: builder.query<ProductAttributes, string>({
+			query: (uuid:string) => {
+                return {
+                    url:`${ApiControllers.PRODUCTS}/${uuid}/attributes/`,
                     method:'GET',
                 }
             }
@@ -156,6 +165,7 @@ export const {
     useLazyGetProductDetailsQuery,
     useLazyGetProductImagesQuery,
     useLazyGetSimilarProductsByIdQuery,
+    useLazyGetProductAttributesByIdQuery,
     useCreateProductMutation,
     useUpdateProductMutation,
     usePostProductCommentMutation,

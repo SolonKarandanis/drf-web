@@ -9,7 +9,8 @@ import {
     Brand,
     SimilarProduct,
     Category,
-    AttributeOption
+    AttributeOption,
+    ProductAttributes
 } from '@/models/product.models';
 import { ProductSearchResponse } from '@/models/search.models';
 import { createSelector, createSlice } from '@reduxjs/toolkit';
@@ -33,6 +34,7 @@ export interface ProductState {
     selectedProductBrand:Brand|null;
     selectedProductCategories:Category[];
     selectedProductSimilarProducts:SimilarProduct[];
+    selectedProductAttributes:ProductAttributes | null;
     allCategories:Category[];
     allBrands:Brand[];
     allSizes:AttributeOption[];
@@ -58,6 +60,7 @@ const initialState = {
     selectedProductSimilarProducts:[],
     selectedProductBrand:null,
     selectedProductCategories:[],
+    selectedProductAttributes:null,
     allCategories:[],
     allBrands:[],
     allSizes:[],
@@ -102,6 +105,9 @@ const productSlice = createSlice({
         },
         setSelectedProductSimilarProducts: (state,action:PayloadAction<SimilarProduct[]>)=>{
             state.selectedProductSimilarProducts=action.payload;
+        },
+        setSelectedProductAttributes: (state,action:PayloadAction<ProductAttributes>)=>{
+            state.selectedProductAttributes=action.payload;
         },
         resetSelectedProduct:(state)=>{
             state.selectedProduct=null;
@@ -148,6 +154,7 @@ export const {
     setSelectedProduct,
     setSelectedProductImages,
     setSelectedProductSimilarProducts,
+    setSelectedProductAttributes,
     resetSelectedProduct,
     setCategoriesWithTotals,
     setBrandsWithTotals,
@@ -248,6 +255,14 @@ export const allSizesSelector = createSelector([products],(products)=>  products
 export const allColoursSelector = createSelector([products],(products)=>  products.allColours);
 
 export const allGendersSelector = createSelector([products],(products)=>  products.allGenders);
+
+export const selectedProductAttributesSelector = createSelector([products],(products)=>  products.selectedProductAttributes);
+
+export const selectedProductColorsSelector = createSelector([selectedProductAttributesSelector],(attributes)=>  attributes?.colors);
+
+export const selectedProductSizesSelector = createSelector([selectedProductAttributesSelector],(attributes)=>  attributes?.sizes);
+
+export const selectedProductGendersSelector = createSelector([selectedProductAttributesSelector],(attributes)=>  attributes?.genders);
 
 // export const pokemonSlice = createSlice({
 //     name: "pokemon",

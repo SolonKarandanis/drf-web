@@ -10,24 +10,24 @@ interface Props{
 
 const EditProductWrapper:FC<Props> = ({uuid}) => {
     const {
-        isError,
-        isLoading,
-        data,
+        isProductError,
+        isProductLoading,
+        productData,
     } = useGetProductDetails(uuid);
 
-    if(!isLoading && data){
+    if(!isProductLoading && productData){
         const defaultFormValues={
-            title:data.title,
-            sku:data.sku,
-            brand:data.brand.id,
-            category:data.categories[0].id,
-            publishStatus:data.publishStatus,
-            availabilityStatus:data.availabilityStatus,
-            inventory:data.inventory,
-            price:data.price,
-            content:data.content,
-            fabricDetails:data.fabricDetails,
-            careInstructions:data.careInstructions,
+            title:productData.title,
+            sku:productData.sku,
+            brand:productData.brand.id,
+            category:productData.categories[0].id,
+            publishStatus:productData.publishStatus,
+            availabilityStatus:productData.availabilityStatus,
+            inventory:productData.inventory,
+            price:productData.price,
+            content:productData.content,
+            fabricDetails:productData.fabricDetails,
+            careInstructions:productData.careInstructions,
             gender:undefined,
             colors:[],
             sizes:[] 
@@ -37,14 +37,14 @@ const EditProductWrapper:FC<Props> = ({uuid}) => {
             <ProductForm
                 key={1}
                 defaultValues={defaultFormValues}
-                isProductLoading={isLoading}/>
+                isProductLoading={isProductLoading}/>
         )  
     }
 
     return (
         <ProductForm 
             key={2}
-            isProductLoading={isLoading}/>
+            isProductLoading={isProductLoading}/>
     )  
 
    
