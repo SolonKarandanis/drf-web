@@ -16,7 +16,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useEffect } from "react";
 
-export function useGetProductDetails(uuid:string|undefined){
+export function useGetProductDetails(uuid:string){
     const [getProduct,{isError,isLoading}] = useLazyGetProductDetailsQuery();
     const dispatch = useAppDispatch();
     const product:BaseProductDetails|null= useAppSelector(selectedProductSelector);
@@ -27,22 +27,18 @@ export function useGetProductDetails(uuid:string|undefined){
     const productSalePriceIntegerPart:number = useAppSelector(selectedProductSalePriceIntegerPartSelector);
     const productSalePriceDecimalPart:string = useAppSelector(selectedProductSalePriceDecimalPartSelector);
 
-    let isExecuted = false;
+    useEffect(()=>{
+        getProduct(uuid)
+        .unwrap()
+        .then((products) =>{
+            dispatch(setSelectedProduct(products));
+        })
+        .catch((error)=>{
+            dispatch(resetSelectedProduct());
+        })
+    },[]);
  
 
-    if(uuid){
-        isExecuted=true
-        useEffect(()=>{
-            getProduct(uuid)
-            .unwrap()
-            .then((products) =>{
-                dispatch(setSelectedProduct(products));
-            })
-            .catch((error)=>{
-                dispatch(resetSelectedProduct());
-            })
-        },[]);
-    }
 
     return {
         product,
@@ -54,6 +50,5 @@ export function useGetProductDetails(uuid:string|undefined){
         productCategories,
         isError,
         isLoading,
-        isExecuted
     }
 }

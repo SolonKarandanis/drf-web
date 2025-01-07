@@ -42,15 +42,7 @@ const ProductForm:FC<Props> = ({uuid}) => {
         isError
     } = useGetProductMisc();
 
-    const {
-        isError:isProductError,
-        isLoading:isProductLoading,
-        isExecuted,
-        product,
-        productBrands,
-        productCategories,
-        productOwner
-    } = useGetProductDetails(uuid);
+    
 
     const publishStatusOptions: Options[] = [
         {value:'product.status.published',label:t(`LABELS.published`)},
@@ -90,22 +82,36 @@ const ProductForm:FC<Props> = ({uuid}) => {
         sizes:[] 
     }
 
-    if(!isLoading && isExecuted && product && productBrands){
-        defaultValues={
-            title:product.title,
-            sku:product.sku,
-            brand:productBrands.id,
-            category:productCategories[0].id,
-            publishStatus:product.publishStatus,
-            availabilityStatus:product.availabilityStatus,
-            inventory:product.inventory,
-            price:product.price,
-            content:product.content,
-            fabricDetails:product.fabricDetails,
-            careInstructions:product.careInstructions,
-            gender:undefined,
-            colors:[],
-            sizes:[] 
+    let isProductLoading=false;
+
+    if(uuid){
+        const {
+            isError,
+            isLoading,
+            product,
+            productBrands,
+            productCategories,
+            productOwner
+        } = useGetProductDetails(uuid);
+        isProductLoading = isLoading;
+
+        if(!isLoading && product && productBrands){
+            defaultValues={
+                title:product.title,
+                sku:product.sku,
+                brand:productBrands.id,
+                category:productCategories[0].id,
+                publishStatus:product.publishStatus,
+                availabilityStatus:product.availabilityStatus,
+                inventory:product.inventory,
+                price:product.price,
+                content:product.content,
+                fabricDetails:product.fabricDetails,
+                careInstructions:product.careInstructions,
+                gender:undefined,
+                colors:[],
+                sizes:[] 
+            }
         }
     }
 
