@@ -176,6 +176,7 @@ const ProductForm:FC<Props> = ({
                                         options={sizesOptions}
                                         sectionClassName="col-span-12 xl:col-span-6 mb-2"
                                         field={field}
+                                        defaultValues={defaultValues.sizes}
                                         error={errors.sizes?.message}
                                         loading={isLoading || isProductLoading}>
                                             {t(`LABELS.size`)}
@@ -210,6 +211,7 @@ const ProductForm:FC<Props> = ({
                                         isMulti={true}
                                         sectionClassName="col-span-12 xl:col-span-6 mb-2"
                                         field={field}
+                                        defaultValues={defaultValues.colors}
                                         error={errors.colors?.message}
                                         loading={isLoading || isProductLoading}>
                                             {t(`LABELS.color`)}

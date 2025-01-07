@@ -2,7 +2,7 @@
 
 import {FC,PropsWithChildren} from 'react'
 import FormError from '@/shared/components/form-error/form-error'
-import { SelectProps } from '../props'
+import { Options, SelectProps } from '../props'
 import { twMerge } from 'tailwind-merge';
 import Select from 'react-select';
 import { useTranslations } from 'next-intl';
@@ -18,6 +18,7 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
     placeholder,
     isMulti=false,
     isSearchable=false,
+    defaultValues,
     field,
 }) => {
     const {onChange, value, name, ref} = field;
@@ -49,6 +50,16 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
 
     const placeholderValue = placeholder? placeholder : t('GLOBAL.LABELS.select-value');
 
+    const defaultVals:Options[] = [];
+
+    if(defaultValues){
+        for (const val of defaultValues){
+            const value =options.find(c => c.value === val)!;
+            defaultVals.push(value);
+        }
+    }
+   
+
     
     
     return (
@@ -65,6 +76,7 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
                     isMulti={isMulti}
                     isSearchable={isSearchable}
                     menuPlacement='auto'
+                    defaultValue={defaultVals}
                     value={options.find(c => c.value === value)}
                     onChange={(e: any) => e.value ? onChange(e.value) : onChange(e.map((c: any) => c.value))}
                 />
