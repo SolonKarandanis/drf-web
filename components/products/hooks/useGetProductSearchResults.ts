@@ -24,7 +24,7 @@ export function useGetProductSearchResults(){
     const searchProducts = useCallback((request:ProductSearchRequest)=>{
         search(request)
             .unwrap()
-            .then((response:ProductSearchResponse) => {
+            .then((response:ProductSearchResponse) => {          
                 dispatch(setProducts(response));
             })
             .catch((error:ErrorResponse) => {

@@ -83,6 +83,7 @@ const usersSlice = createSlice({
             state.request.paging =payload
         },
         setSelectedUser: (state,action:PayloadAction<UserAcount>)=>{
+            state.selectedUser =null;
             state.selectedUser = action.payload;
         },
         setProfileImage:(state,action:PayloadAction<ImageModel>)=>{

@@ -28,6 +28,7 @@ export function useGetProductDetails(uuid:string|undefined){
     const productSalePriceDecimalPart:string = useAppSelector(selectedProductSalePriceDecimalPartSelector);
 
     let isExecuted = false;
+ 
 
     if(uuid){
         isExecuted=true
@@ -35,12 +36,12 @@ export function useGetProductDetails(uuid:string|undefined){
             getProduct(uuid)
             .unwrap()
             .then((products) =>{
-                dispatch(setSelectedProduct(products))
+                dispatch(setSelectedProduct(products));
             })
             .catch((error)=>{
-                dispatch(resetSelectedProduct())
+                dispatch(resetSelectedProduct());
             })
-        },[])
+        },[]);
     }
 
     return {

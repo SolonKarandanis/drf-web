@@ -31,6 +31,7 @@ interface Props{
 const ProductForm:FC<Props> = ({uuid}) => {
     const t = useTranslations("PRODUCTS.CREATE");
     const formT = useTranslations("PRODUCTS.VALIDATION");
+    
     const {
         categoriesOptions,
         brandsOptions,
