@@ -62,3 +62,12 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
     error?:string,
     loading?:boolean,
 }
+
+export interface DateInputProps{
+    name:string,
+    required?:boolean,
+    sectionClassName?:string,
+    error?:string,
+    field:any,
+    loading?:boolean,
+}
