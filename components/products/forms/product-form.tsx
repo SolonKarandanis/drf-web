@@ -1,15 +1,12 @@
 "use client"
 
 import { FilePond, registerPlugin } from 'react-filepond';
-import dynamic from 'next/dynamic';
  // @ts-ignore
 import DatePicker from 'react-datepicker';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import { FC, useState } from 'react';
-
-import { FilePondFile } from 'filepond';
-import { ActualFileObject } from 'filepond';
+import { ActualFileObject, FilePondFile } from 'filepond';
 import FormButton from '@/shared/components/button/form-button';
 import { useTranslations } from 'next-intl';
 import { useGetProductMisc } from '../hooks/useGetProductMisc';
@@ -73,7 +70,6 @@ const ProductForm:FC<Props> = ({
     ];
 
     const [files, setFiles] = useState<ActualFileObject[]>([]);
-    const [files1, setFiles1] = useState<ActualFileObject[]>([]);
 
     const [startDate, setStartDate] = useState<Date>(new Date());
     const handleDateChange = (date:Date) => {
@@ -294,20 +290,18 @@ const ProductForm:FC<Props> = ({
                             </div>
                             
                             <div className="col-span-12 xl:col-span-6">
-                                <label htmlFor="publish-date" className="form-label">Publish Date</label>
-                                <DatePicker selected={startDate} onChange={handleDateChange} />
-                            </div>
-                            <div className="col-span-12 xl:col-span-6">
-                                <label htmlFor="publish-time" className="form-label">Publish Time</label>
+                                <label htmlFor="publish-date" className="form-label">{t(`LABELS.publish-date`)}</label>
                                 <DatePicker
-                                    selected={startDate}
-                                    onChange={handleDateChange}
+                                    showIcon
+                                    toggleCalendarOnIconClick
+                                    isClearable
                                     showTimeSelect
-                                    showTimeSelectOnly
                                     timeIntervals={15}
                                     timeCaption="Time"
-                                    dateFormat="h:mm aa"
-                                />
+                                    dateFormat="yyyy/MM/dd HH:mm"
+                                    minDate={new Date()}
+                                    selected={startDate} 
+                                    onChange={handleDateChange} />
                             </div>
                             <Controller
                                 name="publishStatus"

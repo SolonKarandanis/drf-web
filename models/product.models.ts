@@ -20,6 +20,7 @@ export interface BaseProduct{
     careInstructions:string;
     price:number;
     inventory:number;
+    publishedDate:string;
     publishStatus:ProductPublishedStatus;
     publishStatusLabel:string;
     availabilityStatus: ProductAvailabilityStatus
