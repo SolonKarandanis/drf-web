@@ -1,10 +1,8 @@
 import { AttributeOption, Brand, Category } from "@/models/product.models";
 import { 
+    useLazyGetAllAttributesQuery,
     useLazyGetAllBrandsQuery, 
     useLazyGetAllCategoriesQuery, 
-    useLazyGetAllColoursQuery, 
-    useLazyGetAllGendersQuery, 
-    useLazyGetAllSizesQuery
 } from "@/shared/redux/features/products/productsApiSlice";
 import { 
     allBrandsSelector, 
@@ -12,6 +10,7 @@ import {
     allColoursSelector, 
     allGendersSelector, 
     allSizesSelector, 
+    setAtributes, 
     setBrands, 
     setCategories,
     setColours,
@@ -25,9 +24,7 @@ import { Options } from '@/shared/components/props';
 export function useGetProductMisc(){
     const [getCategories,categoryState] = useLazyGetAllCategoriesQuery();
     const [getBrands,brandState] = useLazyGetAllBrandsQuery();
-    const [getSizes,sizeState] = useLazyGetAllSizesQuery();
-    const [getColours,colourState] = useLazyGetAllColoursQuery();
-    const [getGenders,genderState] = useLazyGetAllGendersQuery();
+    const [getAttributes,attributeState] = useLazyGetAllAttributesQuery();
 
     const dispatch = useAppDispatch();
     const categories:Category[]= useAppSelector(allCategoriesSelector);
@@ -85,28 +82,16 @@ export function useGetProductMisc(){
             .catch((error)=>{
             })
 
-        getSizes()
+        getAttributes()
             .unwrap()
-            .then((result) =>dispatch(setSizes(result)))
-            .catch((error)=>{
-            })
-
-        getColours()
-            .unwrap()
-            .then((result) =>dispatch(setColours(result)))
-            .catch((error)=>{
-            })
-
-        getGenders()
-            .unwrap()
-            .then((result) =>dispatch(setGenders(result)))
+            .then((result) =>dispatch(setAtributes(result)))
             .catch((error)=>{
             })
     },[])
 
-    const isLoading = categoryState.isLoading || brandState.isLoading || sizeState.isLoading || colourState.isLoading || genderState.isLoading;
+    const isLoading = categoryState.isLoading || brandState.isLoading || attributeState.isLoading;
 
-    const isError = categoryState.isError || brandState.isError || sizeState.isError || colourState.isError || genderState.isError;
+    const isError = categoryState.isError || brandState.isError || attributeState.isError;
     
     return{
         categories,

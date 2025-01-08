@@ -129,3 +129,9 @@ export interface ProductAttributes{
     sizes:ProductAttributesValues[];
     genders:ProductAttributesValues[];
 }
+
+export interface AllAttributeOptions{
+    colors:AttributeOption[];
+    sizes:AttributeOption[];
+    genders:AttributeOption[];
+}

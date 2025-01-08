@@ -1,4 +1,5 @@
 import { 
+    AllAttributeOptions,
     AttributeOption,
     Brand,
     BrandsWithTotals, 
@@ -65,6 +66,13 @@ const productsApiSlice = apiSlice.injectEndpoints({
             query:() =>{
 				return {
 					url:`${ApiControllers.PRODUCTS}/categories/`,
+				}
+			}
+        }),
+        getAllAttributes:builder.query<AllAttributeOptions,void>({
+            query:() =>{
+				return {
+					url:`${ApiControllers.PRODUCTS}/all-attributes/`,
 				}
 			}
         }),
@@ -171,6 +179,7 @@ export const {
     usePostProductCommentMutation,
     useSearchProductsMutation,
     useLazyGetAllCategoriesQuery,
+    useLazyGetAllAttributesQuery,
     useLazyGetAllBrandsQuery,
     useLazyGetAllSizesQuery,
     useLazyGetAllColoursQuery,

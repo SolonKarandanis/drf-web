@@ -10,7 +10,8 @@ import {
     SimilarProduct,
     Category,
     AttributeOption,
-    ProductAttributes
+    ProductAttributes,
+    AllAttributeOptions
 } from '@/models/product.models';
 import { ProductSearchResponse } from '@/models/search.models';
 import { createSelector, createSlice } from '@reduxjs/toolkit';
@@ -133,6 +134,12 @@ const productSlice = createSlice({
         setCategories:(state, action:PayloadAction<Category[]>) =>{
             state.allCategories=action.payload;
         },
+        setAtributes:(state, action:PayloadAction<AllAttributeOptions>) =>{
+            const {colors,genders,sizes} =action.payload;
+            state.allSizes=sizes;
+            state.allColours=colors;
+            state.allGenders=genders
+        },
         setBrands:(state, action:PayloadAction<Brand[]>) =>{
             state.allBrands=action.payload;
         },
@@ -165,6 +172,7 @@ export const {
     setColours,
     setGenders,
     setSizes,
+    setAtributes,
 } = productSlice.actions;
 
 export default productSlice.reducer;
