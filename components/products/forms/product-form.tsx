@@ -17,6 +17,7 @@ import { getSaveProductSchema, SaveProductSchema } from '@/schemas/product.schem
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormInput from '@/shared/components/form-input/form-input';
 import FormTextArea from '@/shared/components/form-textarea/form-textarea';
+import FormDate from '@/shared/components/form-date/form-date';
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
@@ -31,6 +32,7 @@ const defaultFormValues={
     brand:0,
     gender:undefined,
     category:0,
+    publishDate: new Date(),
     publishStatus:'',
     availabilityStatus:'',
     inventory:0,
@@ -253,7 +255,7 @@ const ProductForm:FC<Props> = ({
                                 placeholder={t(`LABELS.inventory`)}
                                 className={"w-full !rounded-md"}
                                 sectionClassName="mb-2 col-span-12 xl:col-span-6"
-                                props={register("inventory")}
+                                props={register("inventory",{valueAsNumber:true})}
                                 error={errors.inventory?.message}
                                 loading={isProductLoading}>
                                 {t(`LABELS.inventory`)}
@@ -265,7 +267,7 @@ const ProductForm:FC<Props> = ({
                                 placeholder={t(`LABELS.price`)}
                                 className={"w-full !rounded-md"}
                                 sectionClassName="mb-2 col-span-12 xl:col-span-6"
-                                props={register("price")}
+                                props={register("price",{valueAsNumber:true})}
                                 error={errors.price?.message}
                                 loading={isProductLoading}>
                                 {t(`LABELS.price`)}
@@ -288,6 +290,18 @@ const ProductForm:FC<Props> = ({
                                     name="filepond"
                                     labelIdle='Drag & Drop your files or <span className="filepond--label-action">Browse</span>' />
                             </div>
+                            <Controller
+                                control={control}
+                                name='publishDate'
+                                render={({ field }) => (
+                                    <FormDate
+                                        name='publishDate'
+                                        field={field}
+                                        sectionClassName='col-span-12 xl:col-span-6'>
+                                        {t(`LABELS.publish-date`)}
+                                    </FormDate>
+                                )}
+                            />
                             
                             <div className="col-span-12 xl:col-span-6">
                                 <label htmlFor="publish-date" className="form-label">{t(`LABELS.publish-date`)}</label>

@@ -26,6 +26,7 @@ const EditProductWrapper:FC<Props> = ({uuid}) => {
             sku:productData.sku,
             brand:productData.brand.id,
             category:productData.categories[0].id,
+            publishDate: productData.publishedDate,
             publishStatus:productData.publishStatus,
             availabilityStatus:productData.availabilityStatus,
             inventory:productData.inventory,

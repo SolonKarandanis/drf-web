@@ -70,4 +70,5 @@ export interface DateInputProps{
     error?:string,
     field:any,
     loading?:boolean,
+    minDate?:Date
 }
