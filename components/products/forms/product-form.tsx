@@ -274,38 +274,25 @@ const ProductForm:FC<Props> = ({
                                 loading={isProductLoading}>
                                 {t(`LABELS.price`)}
                             </FormInput>
+                            <label className="form-label opacity-[0.5] mt-4 xl:col-span-12 col-span-12">{t(`PLACEHOLDERS.product-images`)}</label>
                             <div className="col-span-12 xl:col-span-12 product-documents-container">
-                                <p className="font-semibold mb-2 text-[0.875rem]">Product Images :</p>
-                            <FilePond 
-                                className="basic-filepond" 
-                                accepted-file-types={["application/pdf", "image/png", "image/jpeg", "image/gif"]}
-                                server="/api" 
-                                allowReorder={true} 
-                                files={files} 
-                                onupdatefiles={fileItems => {
-                                    setFiles(fileItems.map(fileItem => fileItem.file));
-                                }}
-                                allowMultiple={false} 
-                                allowImagePreview={true} 
-                                maxFiles={10} 
-                                name="filepond"
-                                labelIdle='Drag & Drop your files or <span className="filepond--label-action">Browse</span>' />
-                            </div>
-                            <label className="form-label opacity-[0.5] mt-4 xl:col-span-12 col-span-12">Minimum 0f 6 images are need to be uploaded,make sure the image size match the proper background size and all images should be uniformly maintained with width and height to the image container,image size should not exceed 2MB,once uploaded to change the image you need to wait minimum of 24hrs. </label>
-                            <div className="col-span-12 xl:col-span-12 product-documents-container">
-                                <p className="font-semibold mb-2 text-[0.875rem]">Warrenty Documents :</p>
-                                <FilePond className="w-full product-documents"
-                                    files={files1}
+                                <p className="font-semibold mb-2 text-[0.875rem]">{t(`LABELS.product-images`)}</p>
+                                <FilePond 
+                                    className="basic-filepond" 
+                                    accepted-file-types={["application/pdf", "image/png", "image/jpeg", "image/gif"]}
+                                    server="/api" 
+                                    allowReorder={true} 
+                                    files={files} 
                                     onupdatefiles={fileItems => {
-                                        setFiles1(fileItems.map(fileItem => fileItem.file));
+                                        setFiles(fileItems.map(fileItem => fileItem.file));
                                     }}
-                                    allowMultiple={true}
-                                    // maxFiles={6}
-                                    server="/api"
-                                    name="files"
-                                    labelIdle='Drag & Drop your file here or click '
-                                />
+                                    allowMultiple={false} 
+                                    allowImagePreview={true} 
+                                    maxFiles={10} 
+                                    name="filepond"
+                                    labelIdle='Drag & Drop your files or <span className="filepond--label-action">Browse</span>' />
                             </div>
+                            
                             <div className="col-span-12 xl:col-span-6">
                                 <label htmlFor="publish-date" className="form-label">Publish Date</label>
                                 <DatePicker selected={startDate} onChange={handleDateChange} />

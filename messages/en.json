@@ -322,11 +322,14 @@
                 "inventory":"Inventory",
                 "price":"Price",
                 "fabric-details":"Fabric Details",
-                "care-instructions":"Care Instructions"
+                "care-instructions":"Care Instructions",
+                "publish-date":"Publish Date",
+                "product-images":"Product Images"
             },
             "PLACEHOLDERS":{
                 "product-name":"*Product Name should not exceed 30 characters",
-                "product-description":"*Description should not exceed 500 letters"
+                "product-description":"*Description should not exceed 500 letters",
+                "product-images":"*Minimum 0f 6 images are need to be uploaded,make sure the image size match the proper background size and all images should be uniformly maintained with width and height to the image container,image size should not exceed 2MB."
             },
             "BUTTONS":{
                 "add-product":"Add Product",
