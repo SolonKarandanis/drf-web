@@ -71,4 +71,5 @@ export interface DateInputProps{
     field:any,
     loading?:boolean,
     minDate?:Date
+    disabled?:boolean,
 }

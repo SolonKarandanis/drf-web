@@ -26,7 +26,7 @@ const EditProductWrapper:FC<Props> = ({uuid}) => {
             sku:productData.sku,
             brand:productData.brand.id,
             category:productData.categories[0].id,
-            publishDate: productData.publishedDate,
+            publishDate: new Date(productData.publishedDate),
             publishStatus:productData.publishStatus,
             availabilityStatus:productData.availabilityStatus,
             inventory:productData.inventory,
@@ -42,7 +42,8 @@ const EditProductWrapper:FC<Props> = ({uuid}) => {
             <ProductForm
                 key={1}
                 defaultValues={defaultFormValues}
-                isProductLoading={isProductLoading}/>
+                isProductLoading={isProductLoading}
+                isEdit={true}/>
         )  
     }
 

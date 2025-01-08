@@ -13372,11 +13372,11 @@ caption {
 }
 
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
-  @apply bg-primary !important;
+  @apply bg-success !important;
 }
 
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected:hover {
-  @apply bg-primary !important;
+  @apply bg-gray-400  dark:bg-gray-700 !important;
 }
 
 .react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name {
@@ -13385,7 +13385,7 @@ caption {
 
 .react-datepicker__day--keyboard-selected, .react-datepicker__month-text--keyboard-selected, .react-datepicker__quarter-text--keyboard-selected, .react-datepicker__year-text--keyboard-selected,
 .react-datepicker__day:hover, .react-datepicker__month-text:hover, .react-datepicker__quarter-text:hover, .react-datepicker__year-text:hover {
-  @apply bg-primary text-white !important;
+  @apply bg-gray-400  dark:bg-gray-700 text-gray-900 cursor-pointer !important;
 }
 
 .sun-editor-editable {
@@ -13393,7 +13393,7 @@ caption {
 }
 
 .react-datepicker__day--selected {
-  @apply bg-primary text-white !important;
+  @apply bg-success text-white !important;
 }
 
 .react-datepicker__day.react-datepicker__day--selected {

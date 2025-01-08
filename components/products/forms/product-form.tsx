@@ -1,8 +1,6 @@
 "use client"
 
 import { FilePond, registerPlugin } from 'react-filepond';
- // @ts-ignore
-import DatePicker from 'react-datepicker';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import { FC, useState } from 'react';
@@ -24,6 +22,7 @@ registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 interface Props{
     defaultValues?:any;
     isProductLoading?:boolean;
+    isEdit?:boolean;
 }
 
 const defaultFormValues={
@@ -46,7 +45,8 @@ const defaultFormValues={
 
 const ProductForm:FC<Props> = ({
     defaultValues=defaultFormValues, 
-    isProductLoading=false
+    isProductLoading=false,
+    isEdit=false,
 }) => {
     const t = useTranslations("PRODUCTS.CREATE");
     const formT = useTranslations("PRODUCTS.VALIDATION");
@@ -295,28 +295,15 @@ const ProductForm:FC<Props> = ({
                                 name='publishDate'
                                 render={({ field }) => (
                                     <FormDate
+                                        disabled={isEdit}
+                                        loading={isProductLoading}
                                         name='publishDate'
                                         field={field}
-                                        sectionClassName='col-span-12 xl:col-span-6'>
+                                        sectionClassName='col-span-12 xl:col-span-4'>
                                         {t(`LABELS.publish-date`)}
                                     </FormDate>
                                 )}
                             />
-                            
-                            <div className="col-span-12 xl:col-span-6">
-                                <label htmlFor="publish-date" className="form-label">{t(`LABELS.publish-date`)}</label>
-                                <DatePicker
-                                    showIcon
-                                    toggleCalendarOnIconClick
-                                    isClearable
-                                    showTimeSelect
-                                    timeIntervals={15}
-                                    timeCaption="Time"
-                                    dateFormat="yyyy/MM/dd HH:mm"
-                                    minDate={new Date()}
-                                    selected={startDate} 
-                                    onChange={handleDateChange} />
-                            </div>
                             <Controller
                                 name="publishStatus"
                                 control={control}
@@ -326,7 +313,7 @@ const ProductForm:FC<Props> = ({
                                         options={publishStatusOptions}
                                         required={true}
                                         isSearchable={true}
-                                        sectionClassName="col-span-12 xl:col-span-6"
+                                        sectionClassName="col-span-12 xl:col-span-4"
                                         field={field}
                                         error={errors.publishStatus?.message}
                                         loading={isLoading || isProductLoading}>
@@ -343,7 +330,7 @@ const ProductForm:FC<Props> = ({
                                         options={availabilityStatusOptions}
                                         required={true}
                                         isSearchable={true}
-                                        sectionClassName="col-span-12 xl:col-span-6"
+                                        sectionClassName="col-span-12 xl:col-span-4"
                                         field={field}
                                         error={errors.availabilityStatus?.message}
                                         loading={isLoading || isProductLoading}>

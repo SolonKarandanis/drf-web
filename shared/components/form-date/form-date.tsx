@@ -1,6 +1,6 @@
 "use client";
 
-import {FC, PropsWithChildren, useState} from 'react'
+import {FC, PropsWithChildren} from 'react'
  // @ts-ignore
 import DatePicker from 'react-datepicker';
 import { DateInputProps } from '../props';
@@ -14,20 +14,12 @@ const FormDate:FC<PropsWithChildren<DateInputProps>> = ({
     field,
     required=false,
     loading=false,
+    disabled=false,
     error,
     sectionClassName,
     minDate =new Date(),
     children
 }) => {
-
-    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-    const handleDateChange = (date:Date) => {
-        // Ensure date is defined before setting it
-        if (date) {
-            setSelectedDate(date);
-        }
-    };
-
     const hasError = error? true:false;
     const labelHtml = children ? (
         <FormLabel 
@@ -49,11 +41,11 @@ const FormDate:FC<PropsWithChildren<DateInputProps>> = ({
         )
     }
 
-
     const errorHtml = error ? (<FormError error={error} />) : null;
 
     const dateHtml = (
         <DatePicker
+            disabled ={disabled}
             showIcon
             icon={<CiCalendarDate />}
             toggleCalendarOnIconClick
@@ -64,7 +56,8 @@ const FormDate:FC<PropsWithChildren<DateInputProps>> = ({
             dateFormat="yyyy/MM/dd HH:mm"
             minDate={minDate}
             selected={field.value} 
-            onChange={(date:Date) => field.onChange(date)} />
+            onChange={(date:Date) => field.onChange(date)} 
+            />
     );
 
     return (
