@@ -87,11 +87,6 @@ const ProductForm:FC<Props> = ({
         console.log(data)
     }
 
-    const f =()=>{
-        console.log(formState)
-        console.log(errors);
-    }
-
     return (
         <form className="p-6">
             <div className="grid grid-cols-12 md:gap-x-[3rem] gap-0">
@@ -262,7 +257,7 @@ const ProductForm:FC<Props> = ({
                     size="md" 
                     type="button"
                     className="px-5 py-3 mt-2"
-                    onClick={f}>
+                    onClick={handleSubmit(onSubmit)}>
                    {t(`BUTTONS.add-product`)}<i className="bi bi-plus-lg ms-2"></i>
                 </FormButton>
                 <FormButton 
