@@ -1,5 +1,6 @@
 import * as z from "zod";
 import { type TranslationValues } from "next-intl";
+import { ProductAvailabilityStatus, ProductPublishedStatus } from "@/models/product.models";
 
 type Messages = keyof IntlMessages["PRODUCTS"]["VALIDATION"];
 
@@ -31,12 +32,16 @@ export function getSaveProductSchema(
         colors:z.array(z.number()).min(1,{
             message:t?.("required-colors")
         }),
-        publishDate: z.date()
-            .min(new Date()),
-        publishStatus:z.string({
+        publishDate: z.date({
+            message:t?.("required-publish-date")
+        })
+            .min(new Date(),{
+                message:t?.("min-publish-date")
+            }),
+        publishStatus:z.nativeEnum(ProductPublishedStatus,{
             message: t?.("required-publish-status"),
         }),
-        availabilityStatus:z.string({
+        availabilityStatus:z.nativeEnum(ProductAvailabilityStatus,{
             message: t?.("required-availability-status"),
         }),
         inventory: z.number({
