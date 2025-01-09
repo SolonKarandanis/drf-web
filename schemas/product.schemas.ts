@@ -29,7 +29,7 @@ export function getSaveProductSchema(
         sizes:z.array(z.number()).nonempty({
             message:t?.("required-sizes")
         }),
-        colors:z.array(z.number()).min(1,{
+        colors:z.array(z.number()).nonempty({
             message:t?.("required-colors")
         }),
         publishDate: z.date({

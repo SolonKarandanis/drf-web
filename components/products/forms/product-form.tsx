@@ -28,9 +28,9 @@ interface Props{
 const defaultFormValues={
     title:'',
     sku:'',
-    brand:0,
+    brand:undefined,
     gender:undefined,
-    category:0,
+    category:undefined,
     publishDate: new Date(),
     publishStatus:'',
     availabilityStatus:'',
@@ -170,6 +170,7 @@ const ProductForm:FC<Props> = ({
                                     <FormSelect 
                                         name="sizes"
                                         isMulti={true}
+                                        required={true}
                                         isSearchable={true}
                                         options={sizesOptions}
                                         sectionClassName="col-span-12 xl:col-span-6 mb-2"
