@@ -34,10 +34,7 @@ export function getSaveProductSchema(
         }),
         publishDate: z.date({
             message:t?.("required-publish-date")
-        })
-            .min(new Date(),{
-                message:t?.("min-publish-date")
-            }),
+        }),
         publishStatus:z.nativeEnum(ProductPublishedStatus,{
             message: t?.("required-publish-status"),
         }),

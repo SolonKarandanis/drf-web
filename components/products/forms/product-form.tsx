@@ -7,7 +7,6 @@ import { FC, useState } from 'react';
 import { ActualFileObject, FilePondFile } from 'filepond';
 import FormButton from '@/shared/components/button/form-button';
 import { useTranslations } from 'next-intl';
-import { useGetProductMisc } from '../hooks/useGetProductMisc';
 import { Options } from '@/shared/components/props';
 import FormSelect from '@/shared/components/form-select/form-select';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -16,6 +15,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import FormInput from '@/shared/components/form-input/form-input';
 import FormTextArea from '@/shared/components/form-textarea/form-textarea';
 import FormDate from '@/shared/components/form-date/form-date';
+import AttributesSection from './sections/attributes-section';
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
@@ -39,8 +39,8 @@ const defaultFormValues={
     content:'',
     fabricDetails:'',
     careInstructions:'',
-    colors:[],
-    sizes:[] 
+    colors:undefined,
+    sizes:undefined 
 }
 
 const ProductForm:FC<Props> = ({
@@ -51,16 +51,6 @@ const ProductForm:FC<Props> = ({
     const t = useTranslations("PRODUCTS.CREATE");
     const formT = useTranslations("PRODUCTS.VALIDATION");
     
-    const {
-        categoriesOptions,
-        brandsOptions,
-        sizesOptions,
-        coloursOptions,
-        gendersOptions,
-        isLoading,
-        isError
-    } = useGetProductMisc();
-
     const publishStatusOptions: Options[] = [
         {value:'product.status.published',label:t(`LABELS.published`)},
         {value:'product.status.scheduled',label:t(`LABELS.scheduled`)}
@@ -97,6 +87,11 @@ const ProductForm:FC<Props> = ({
         console.log(data)
     }
 
+    const f =()=>{
+        console.log(formState)
+        console.log(errors);
+    }
+
     return (
         <form className="p-6">
             <div className="grid grid-cols-12 md:gap-x-[3rem] gap-0">
@@ -129,94 +124,6 @@ const ProductForm:FC<Props> = ({
                                 loading={isProductLoading}>
                                 {t(`LABELS.product-sku`)}
                             </FormInput>
-                            <Controller
-                                name="category"
-                                control={control}
-                                render={({ field }) => (
-                                    <FormSelect 
-                                        name="category"
-                                        options={categoriesOptions}
-                                        required={true}
-                                        isSearchable={true}
-                                        sectionClassName="col-span-12 xl:col-span-6 mb-2"
-                                        field={field}
-                                        error={errors.category?.message}
-                                        loading={isLoading || isProductLoading}>
-                                            {t(`LABELS.category`)}
-                                    </FormSelect>
-                                )}
-                            />
-                            <Controller
-                                name="gender"
-                                control={control}
-                                render={({ field }) => (
-                                    <FormSelect 
-                                        name="gender"
-                                        options={gendersOptions}
-                                        required={true}
-                                        isSearchable={true}
-                                        sectionClassName="col-span-12 xl:col-span-6 mb-2"
-                                        field={field}
-                                        error={errors.gender?.message}
-                                        loading={isLoading || isProductLoading}>
-                                            {t(`LABELS.gender`)}
-                                    </FormSelect>
-                                )}
-                            />
-                            <Controller
-                                name="sizes"
-                                control={control}
-                                render={({ field }) => (
-                                    <FormSelect 
-                                        name="sizes"
-                                        isMulti={true}
-                                        required={true}
-                                        isSearchable={true}
-                                        options={sizesOptions}
-                                        sectionClassName="col-span-12 xl:col-span-6 mb-2"
-                                        field={field}
-                                        defaultValues={defaultValues.sizes}
-                                        error={errors.sizes?.message}
-                                        loading={isLoading || isProductLoading}>
-                                            {t(`LABELS.size`)}
-                                    </FormSelect>
-                                )}
-                            />
-                            <Controller
-                                name="brand"
-                                control={control}
-                                render={({ field }) => (
-                                    <FormSelect 
-                                        name="brand"
-                                        options={brandsOptions}
-                                        required={true}
-                                        isSearchable={true}
-                                        sectionClassName="col-span-12 xl:col-span-6 mb-2"
-                                        field={field}
-                                        error={errors.brand?.message}
-                                        loading={isLoading || isProductLoading}>
-                                            {t(`LABELS.brand`)}
-                                    </FormSelect>
-                                )}
-                            />
-                            <Controller
-                                name="colors"
-                                control={control}
-                                render={({ field }) => (
-                                    <FormSelect 
-                                        name="colors"
-                                        options={coloursOptions}
-                                        isSearchable={true}
-                                        isMulti={true}
-                                        sectionClassName="col-span-12 xl:col-span-6 mb-2"
-                                        field={field}
-                                        defaultValues={defaultValues.colors}
-                                        error={errors.colors?.message}
-                                        loading={isLoading || isProductLoading}>
-                                            {t(`LABELS.color`)}
-                                    </FormSelect>
-                                )}
-                            />
                             <FormTextArea
                                 name="content"
                                 placeholder={t(`PLACEHOLDERS.product-description`)}
@@ -244,6 +151,12 @@ const ProductForm:FC<Props> = ({
                                 loading={isProductLoading}>
                                 {t(`LABELS.care-instructions`)}
                             </FormTextArea>
+                            <AttributesSection
+                                control={control}
+                                errors={errors}
+                                isProductLoading={isProductLoading}
+                                defaultValues={defaultValues}
+                            />
                         </div>
                     </div>
                     <div className="col-span-12 xxl:col-span-6 xl:col-span-12 lg:col-span-12 md:col-span-6">
@@ -317,7 +230,7 @@ const ProductForm:FC<Props> = ({
                                         sectionClassName="col-span-12 xl:col-span-4"
                                         field={field}
                                         error={errors.publishStatus?.message}
-                                        loading={isLoading || isProductLoading}>
+                                        loading={isProductLoading}>
                                             {t(`LABELS.publish-status`)}
                                     </FormSelect>
                                 )}
@@ -334,7 +247,7 @@ const ProductForm:FC<Props> = ({
                                         sectionClassName="col-span-12 xl:col-span-4"
                                         field={field}
                                         error={errors.availabilityStatus?.message}
-                                        loading={isLoading || isProductLoading}>
+                                        loading={isProductLoading}>
                                             {t(`LABELS.availability-status`)}
                                     </FormSelect>
                                 )}
@@ -347,9 +260,9 @@ const ProductForm:FC<Props> = ({
                 <FormButton 
                     intent="info" 
                     size="md" 
-                    type="submit"
+                    type="button"
                     className="px-5 py-3 mt-2"
-                    onClick={handleSubmit(onSubmit)}>
+                    onClick={f}>
                    {t(`BUTTONS.add-product`)}<i className="bi bi-plus-lg ms-2"></i>
                 </FormButton>
                 <FormButton 
