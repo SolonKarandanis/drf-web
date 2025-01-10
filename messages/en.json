@@ -360,6 +360,14 @@
             "integer-inventory":"Inventory value must be an integer",
             "positive-inventory":"Inventory must be a positive value",
             "positive-price":"Price must be a positive value"
+        },
+        "SUCCESS": {
+            "update-product": "Successfully updated product",
+            "create-product":"Successfully created product"
+        },
+        "ERRORS": {
+            "update-product": "Something went wrong with the product update",
+            "create-product": "Something went wrong with the product creation"
         }
     }
 }

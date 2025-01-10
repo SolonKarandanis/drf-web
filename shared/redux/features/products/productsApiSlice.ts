@@ -5,6 +5,7 @@ import {
     BrandsWithTotals, 
     CategoriesWithTotals, 
     Category, 
+    CreatedProductResponse, 
     CreateProductRequest, 
     DiscountsWithTotals, 
     PostProductCommentRequest, 
@@ -141,9 +142,8 @@ const productsApiSlice = apiSlice.injectEndpoints({
 				}
             }
         }),
-        createProduct:builder.mutation<ProductDetails,CreateProductRequest>({
+        createProduct:builder.mutation<CreatedProductResponse,CreateProductRequest>({
             query: ( request:CreateProductRequest)=>{
-                
                 return {
 					url: `${ApiControllers.PRODUCTS}/create/`,
 					method: 'POST',

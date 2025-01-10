@@ -22,9 +22,7 @@ export interface BaseProduct{
     inventory:number;
     publishedDate:string;
     publishStatus:ProductPublishedStatus;
-    publishStatusLabel:string;
     availabilityStatus: ProductAvailabilityStatus
-    availabilityStatusLabel:string;
 }
 
 export interface Products extends BaseProduct{
@@ -40,6 +38,8 @@ export interface BaseProductDetails extends BaseProduct{
     salePrice:number;
     averageRating:number;
     numberOfRatings:number;
+    publishStatusLabel:string;
+    availabilityStatusLabel:string;
     uuid:string;
 }
 
@@ -85,10 +85,18 @@ export interface AttributeOption{
 }
 
 export interface CreateProductRequest extends BaseProduct{
-
+    categories:number;
+    brand:number;
+    sizes:number[];
+    colors:number[];
+    gender:number;
 }
 
 export interface UpdateProductRequest extends BaseProduct{
+}
+
+export interface CreatedProductResponse{
+    productId:string;
 }
 
 export interface PostProductCommentRequest{
