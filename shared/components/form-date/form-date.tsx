@@ -50,10 +50,7 @@ const FormDate:FC<PropsWithChildren<DateInputProps>> = ({
             icon={<CiCalendarDate />}
             toggleCalendarOnIconClick
             isClearable
-            showTimeSelect
-            timeIntervals={15}
-            timeCaption="Time"
-            dateFormat="yyyy/MM/dd HH:mm"
+            dateFormat="yyyy/MM/dd"
             minDate={minDate}
             selected={field.value} 
             onChange={(date:Date) => field.onChange(date)} 

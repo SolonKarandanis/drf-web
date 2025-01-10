@@ -16,6 +16,8 @@ import FormInput from '@/shared/components/form-input/form-input';
 import FormTextArea from '@/shared/components/form-textarea/form-textarea';
 import FormDate from '@/shared/components/form-date/form-date';
 import AttributesSection from './sections/attributes-section';
+import { useMutateProduct } from '../hooks/useMutateProduct';
+import { CreateProductRequest } from '@/models/product.models';
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
@@ -50,6 +52,11 @@ const ProductForm:FC<Props> = ({
 }) => {
     const t = useTranslations("PRODUCTS.CREATE");
     const formT = useTranslations("PRODUCTS.VALIDATION");
+    const {
+       mutationLoading,
+       handleCreateProductRequest,
+       handleUpdateProduct,
+    } = useMutateProduct();
     
     const publishStatusOptions: Options[] = [
         {value:'product.status.published',label:t(`LABELS.published`)},
@@ -63,14 +70,6 @@ const ProductForm:FC<Props> = ({
 
     const [files, setFiles] = useState<ActualFileObject[]>([]);
 
-    const [startDate, setStartDate] = useState<Date>(new Date());
-    const handleDateChange = (date:Date) => {
-        // Ensure date is defined before setting it
-        if (date) {
-            setStartDate(date);
-        }
-    };
-
     const {
         register,
         control,
@@ -83,7 +82,18 @@ const ProductForm:FC<Props> = ({
 
     const {errors} = formState
 
-    const onSubmit: SubmitHandler<SaveProductSchema> = async (data) =>{
+    const onCreate: SubmitHandler<SaveProductSchema> = async (data) =>{
+        const {category,publishDate, ...rest} = data;
+        const request:CreateProductRequest={
+            categories:[category],
+            publishedDate: publishDate.toLocaleDateString(),
+            ...rest
+        }
+        console.log(request);
+        handleCreateProductRequest(request);
+    }
+
+    const onUpdate: SubmitHandler<SaveProductSchema> = async (data) =>{
         console.log(data)
     }
 
@@ -257,7 +267,7 @@ const ProductForm:FC<Props> = ({
                     size="md" 
                     type="button"
                     className="px-5 py-3 mt-2"
-                    onClick={handleSubmit(onSubmit)}>
+                    onClick={handleSubmit(onCreate)}>
                    {t(`BUTTONS.add-product`)}<i className="bi bi-plus-lg ms-2"></i>
                 </FormButton>
                 <FormButton 
@@ -265,7 +275,7 @@ const ProductForm:FC<Props> = ({
                     size="md" 
                     type="submit"
                     className="px-5 py-3 mt-2"
-                    onClick={handleSubmit(onSubmit)}>
+                    onClick={handleSubmit(onUpdate)}>
                    {t(`BUTTONS.update-product`)}<i className="bi bi-download ms-2"></i>
                 </FormButton>
             </div>

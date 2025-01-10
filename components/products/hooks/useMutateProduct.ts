@@ -1,7 +1,7 @@
 import { ErrorResponse } from "@/models/error.models";
 import { CreatedProductResponse, CreateProductRequest, UpdateProductRequest } from "@/models/product.models";
 import { useCreateProductMutation, useUpdateProductMutation } from "@/shared/redux/features/products/productsApiSlice";
-import { useAppDispatch } from "@/shared/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
@@ -29,7 +29,9 @@ export function useMutateProduct(){
 
     }
 
-    const mutationLoading = createProductLoading || updateProductLoading
+    const mutationLoading = createProductLoading || updateProductLoading;
+
+    // const user = useAppSelector(selectedUserSelector);
 
     return {
         mutationLoading,

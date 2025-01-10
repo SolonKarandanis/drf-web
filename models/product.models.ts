@@ -15,9 +15,9 @@ export enum ProductAvailabilityStatus{
 export interface BaseProduct{
     sku:string;
     title:string;
-    content:string;
-    fabricDetails:string;
-    careInstructions:string;
+    content?:string;
+    fabricDetails?:string;
+    careInstructions?:string;
     price:number;
     inventory:number;
     publishedDate:string;
@@ -85,7 +85,7 @@ export interface AttributeOption{
 }
 
 export interface CreateProductRequest extends BaseProduct{
-    categories:number;
+    categories:number[];
     brand:number;
     sizes:number[];
     colors:number[];
