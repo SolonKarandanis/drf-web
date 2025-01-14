@@ -1,12 +1,13 @@
 import * as z from "zod";
 import { type TranslationValues } from "next-intl";
 import { ProductAvailabilityStatus, ProductPublishedStatus } from "@/models/product.models";
-import { profileImage } from "./image.schemas";
+import { getProfileImage, ImageMessages, profileImage } from "./image.schemas";
 
 type Messages = keyof IntlMessages["PRODUCTS"]["VALIDATION"];
 
 export function getSaveProductSchema(
-    t?: (key: Messages, object?: TranslationValues | undefined) => string
+    t?: (key: Messages, object?: TranslationValues | undefined) => string,
+    imageT?: (key: ImageMessages, object?: TranslationValues | undefined) => string,
 ){
     return z.object({
         title: z.string().min(1,{
@@ -57,7 +58,7 @@ export function getSaveProductSchema(
             .positive({
                 message:t?.("positive-price")
             }),
-        profileImage: profileImage
+        profileImage: getProfileImage(imageT)
     });
 } 
 

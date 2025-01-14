@@ -1,9 +1,17 @@
 import * as z from "zod";
-import { profileImage } from "./image.schemas";
+import { getProfileImage, ImageMessages, } from "./image.schemas";
+import { TranslationValues } from "next-intl";
 
-export const UploadProfileImageSchema = z.object({
-    profileImage: profileImage
-});
+export function getUploadProfileImageSchema(
+    t?: (key: ImageMessages, object?: TranslationValues | undefined) => string
+){
+    return z.object({
+        profileImage: getProfileImage(t)
+    });
+}
+
+export type UploadProfileImageSchema = z.infer<ReturnType<typeof getUploadProfileImageSchema>>;
+
 
 export const UpdateUserBioSchema = z.object({
     bio:z.string().optional()

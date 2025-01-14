@@ -5,7 +5,7 @@ import {useAppSelector } from '@/shared/redux/hooks';
 import * as z from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { UploadProfileImageSchema } from '@/schemas/user.schemas';
+import { UploadProfileImageSchema, getUploadProfileImageSchema } from '@/schemas/user.schemas';
 import Dropzone from '@/shared/components/dropzone/dropzone';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { useTranslations } from 'next-intl';
@@ -15,11 +15,10 @@ import {  userUuidSelector } from '@/shared/redux/features/users/usersSlice';
 import { UploadProfileImageMutation } from '@/models/image.models';
 import { useMutateUserDetails } from '../hooks/useMutateUserDetails';
 
-type Inputs = z.infer<typeof UploadProfileImageSchema>
 
 const UploadPicture = () => {
     const t = useTranslations();
-    const formT = useTranslations("USERS.VALIDATION");
+    const formT = useTranslations("GLOBAL.VALIDATION.IMAGES");
     const {
       mutationLoading,
       handleUploadProfilePictureMutation
@@ -33,14 +32,14 @@ const UploadPicture = () => {
       setValue("profileImage",fileUpload);
     }
 
-    const {register,handleSubmit,formState: { errors ,isSubmitting },setValue, watch} = useForm<Inputs>({
-      resolver: zodResolver(UploadProfileImageSchema),
+    const {register,handleSubmit,formState: { errors ,isSubmitting },setValue, watch} = useForm<UploadProfileImageSchema>({
+      resolver: zodResolver(getUploadProfileImageSchema(formT)),
       defaultValues:{
           profileImage:null
       }
     })
   
-    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const onSubmit: SubmitHandler<UploadProfileImageSchema> = async (data) => {
       if(userUuid && data){
         const {profileImage } =data;
         const uploadPofileImageRequest:UploadProfileImageMutation ={

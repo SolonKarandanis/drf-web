@@ -52,6 +52,7 @@ const ProductForm:FC<Props> = ({
 }) => {
     const t = useTranslations("PRODUCTS.CREATE");
     const formT = useTranslations("PRODUCTS.VALIDATION");
+    const imageT = useTranslations("GLOBAL.VALIDATION.IMAGES");
     const {
        mutationLoading,
        handleCreateProductRequest,

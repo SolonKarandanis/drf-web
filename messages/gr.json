@@ -104,7 +104,7 @@
         "VALIDATION":{
             "IMAGES":{
                 "file-size":"Το αρχείο δεν πρέπει να είναι μεγαλύτερο από {max_size}. Bytes: {file_size}",
-                "file-type":"Το αρχείο πρέπει να είναι ένα από {accepted_types} όμως ήταν {type}"
+                "file-type":"Το αρχείο πρέπει να είναι ένα από τα [{accepted_types}] όμως ήταν {type}"
             }
         }
     },

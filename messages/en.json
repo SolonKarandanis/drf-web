@@ -104,7 +104,7 @@
         "VALIDATION":{
             "IMAGES":{
                 "file-size":"The file must not be larger than {max_size}. Bytes: {file_size}",
-                "file-type":"File must be one of {accepted_types} but was {type}"
+                "file-type":"File must be one of [{accepted_types}] but was {type}"
             }
         }
     },
