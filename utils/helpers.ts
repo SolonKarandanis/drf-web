@@ -1,4 +1,5 @@
 import { ErrorData } from "@/models/error.models";
+import { LoginResponse } from "@/models/user.models";
 
 function isNonNull<T>(value: T | null | undefined): value is T {
     return value !== null && typeof value !== "undefined";

@@ -100,7 +100,13 @@
             "add-at-least-one-xx-in-list": "Add at least one {{itemType}}",
             "searching": "Searching...",
             "select-value":"Select a value"
-        } 
+        },
+        "VALIDATION":{
+            "IMAGES":{
+                "file-size":"The file must not be larger than {max_size}. Bytes: {file_size}",
+                "file-type":"File must be one of {accepted_types} but was {type}"
+            }
+        }
     },
     "LOGIN":{
         "PAGE":{
