@@ -77,7 +77,7 @@ const ProductForm:FC<Props> = ({
         handleSubmit,
         formState
     } = useForm<SaveProductSchema>({
-        resolver: zodResolver(getSaveProductSchema(formT)),
+        resolver: zodResolver(getSaveProductSchema(formT,imageT)),
         defaultValues
     })
 
@@ -91,7 +91,7 @@ const ProductForm:FC<Props> = ({
             ...rest
         }
         console.log(request);
-        handleCreateProductRequest(request);
+        // handleCreateProductRequest(request);
     }
 
     const onUpdate: SubmitHandler<SaveProductSchema> = async (data) =>{

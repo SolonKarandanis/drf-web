@@ -1,7 +1,7 @@
 import * as z from "zod";
 import { type TranslationValues } from "next-intl";
 import { ProductAvailabilityStatus, ProductPublishedStatus } from "@/models/product.models";
-import { getProfileImage, ImageMessages, profileImage } from "./image.schemas";
+import { getProfileImage, ImageMessages } from "./image.schemas";
 
 type Messages = keyof IntlMessages["PRODUCTS"]["VALIDATION"];
 
@@ -58,7 +58,7 @@ export function getSaveProductSchema(
             .positive({
                 message:t?.("positive-price")
             }),
-        profileImage: getProfileImage(imageT)
+        images: getProfileImage(imageT)
     });
 } 
 
