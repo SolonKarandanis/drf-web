@@ -1,10 +1,6 @@
 "use client"
 
-import { FilePond, registerPlugin } from 'react-filepond';
-import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-import { FC, useState } from 'react';
-import { ActualFileObject, FilePondFile } from 'filepond';
+import { FC } from 'react';
 import FormButton from '@/shared/components/button/form-button';
 import { useTranslations } from 'next-intl';
 import { Options } from '@/shared/components/props';
@@ -18,8 +14,8 @@ import FormDate from '@/shared/components/form-date/form-date';
 import AttributesSection from './sections/attributes-section';
 import { useMutateProduct } from '../hooks/useMutateProduct';
 import { CreateProductRequest } from '@/models/product.models';
+import FileUpload from '@/shared/components/file-upload/file-upload';
 
-registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 interface Props{
     defaultValues?:any;
@@ -68,8 +64,6 @@ const ProductForm:FC<Props> = ({
         {value:'product.availability.in.stock',label:t(`LABELS.in-stock`)},
         {value:'product.availability.out.of.stock',label:t(`LABELS.out-of-stock`)}
     ];
-
-    const [files, setFiles] = useState<ActualFileObject[]>([]);
 
     const {
         register,
@@ -192,24 +186,18 @@ const ProductForm:FC<Props> = ({
                                 loading={isProductLoading}>
                                 {t(`LABELS.price`)}
                             </FormInput>
-                            <label className="form-label opacity-[0.5] mt-4 xl:col-span-12 col-span-12">{t(`PLACEHOLDERS.product-images`)}</label>
-                            <div className="col-span-12 xl:col-span-12 product-documents-container">
-                                <p className="font-semibold mb-2 text-[0.875rem]">{t(`LABELS.product-images`)}</p>
-                                <FilePond 
-                                    className="basic-filepond" 
-                                    accepted-file-types={["application/pdf", "image/png", "image/jpeg", "image/gif"]}
-                                    server="/api" 
-                                    allowReorder={true} 
-                                    files={files} 
-                                    onupdatefiles={fileItems => {
-                                        setFiles(fileItems.map(fileItem => fileItem.file));
-                                    }}
-                                    allowMultiple={false} 
-                                    allowImagePreview={true} 
-                                    maxFiles={10} 
-                                    name="filepond"
-                                    labelIdle='Drag & Drop your files or <span className="filepond--label-action">Browse</span>' />
-                            </div>
+                            <Controller
+                                name="images"
+                                control={control}
+                                render={({ field }) => (
+                                    <FileUpload
+                                        sectionClassName="col-span-12 xl:col-span-12 product-documents-container"
+                                        field={field}
+                                        labelIdle={t(`PLACEHOLDERS.product-images`)}>
+                                        {t(`LABELS.product-images`)}
+                                    </FileUpload>
+                                )}
+                            />
                             <Controller
                                 control={control}
                                 name='publishDate'

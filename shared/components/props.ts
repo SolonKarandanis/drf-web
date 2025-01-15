@@ -73,3 +73,13 @@ export interface DateInputProps{
     minDate?:Date
     disabled?:boolean,
 }
+
+export interface FileInputProps{
+    labelIdle:string,
+    required?:boolean,
+    sectionClassName?:string,
+    error?:string,
+    field:any,
+    loading?:boolean,
+    disabled?:boolean,
+}
