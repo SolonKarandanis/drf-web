@@ -90,6 +90,7 @@ export interface CreateProductRequest extends BaseProduct{
     sizes:number[];
     colors:number[];
     gender:number;
+    images:File[] | null;
 }
 
 export interface UpdateProductRequest extends BaseProduct{

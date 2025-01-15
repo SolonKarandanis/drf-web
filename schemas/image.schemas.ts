@@ -7,7 +7,7 @@ export type ImageMessages = keyof IntlMessages["GLOBAL"]["VALIDATION"]["IMAGES"]
 export function getProfileImage(
     t?: (key: ImageMessages, object?: TranslationValues | undefined) => string
 ){
-    return z.instanceof(File).nullable().superRefine((file, ctx) =>{
+    return z.instanceof(File).superRefine((file, ctx) =>{
         if(file){
             // First, add an issue if the mime type is wrong.
             if (!ACCEPTED_IMAGE_TYPES.includes(file.type)) {
