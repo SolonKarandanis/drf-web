@@ -82,4 +82,6 @@ export interface FileInputProps{
     field:any,
     loading?:boolean,
     disabled?:boolean,
+    maxFiles?:number;
+    allowMultiple?:boolean;
 }

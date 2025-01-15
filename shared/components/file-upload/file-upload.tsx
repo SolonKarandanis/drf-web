@@ -1,10 +1,9 @@
 "use client"
 
-import {FC, PropsWithChildren, useState} from 'react'
+import {FC, PropsWithChildren} from 'react'
 import { FilePond, registerPlugin } from 'react-filepond';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-import { ActualFileObject } from 'filepond';
 import { FileInputProps } from '../props';
 import { ACCEPTED_IMAGE_TYPES } from '@/utils/constants';
 import FormLabel from '../form-label/form-label';
@@ -15,15 +14,16 @@ registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 const FileUpload:FC<PropsWithChildren<FileInputProps>> = ({
     labelIdle,
+    field,
     required=false,
     loading=false,
     disabled=false,
+    allowMultiple=false,
+    maxFiles=1,
     error,
     sectionClassName,
     children
 }) => {
-    const [files, setFiles] = useState<ActualFileObject[]>([]);
-
     const hasError = error? true:false;
     const labelHtml = children ? (
         <FormLabel 
@@ -52,14 +52,14 @@ const FileUpload:FC<PropsWithChildren<FileInputProps>> = ({
             className="basic-filepond" 
             accepted-file-types={ACCEPTED_IMAGE_TYPES}
             allowReorder={true} 
-            files={files} 
-            onupdatefiles={fileItems => {
-                setFiles(fileItems.map(fileItem => fileItem.file));
-            }}
-            allowMultiple={false} 
+            files={field.value}
+            onupdatefiles={field.onChange}
+            allowMultiple={allowMultiple} 
             allowImagePreview={true} 
-            maxFiles={10} 
-            labelIdle={labelIdle} />
+            maxFiles={maxFiles} 
+            labelIdle={labelIdle}
+            disabled={disabled}
+            required={required}/>
     );
 
     return (

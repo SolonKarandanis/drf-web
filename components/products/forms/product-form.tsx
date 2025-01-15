@@ -193,7 +193,11 @@ const ProductForm:FC<Props> = ({
                                     <FileUpload
                                         sectionClassName="col-span-12 xl:col-span-12 product-documents-container"
                                         field={field}
-                                        labelIdle={t(`PLACEHOLDERS.product-images`)}>
+                                        labelIdle={t(`PLACEHOLDERS.product-images`)}
+                                        allowMultiple={true}
+                                        maxFiles={10}
+                                        loading={isProductLoading}
+                                        error={errors.images?.message}>
                                         {t(`LABELS.product-images`)}
                                     </FileUpload>
                                 )}
