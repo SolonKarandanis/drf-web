@@ -85,8 +85,7 @@ const ProductForm:FC<Props> = ({
             publishedDate: publishDate.toLocaleDateString(),
             ...rest
         }
-        console.log(request);
-        // handleCreateProductRequest(request);
+        handleCreateProductRequest(request);
     }
 
     const onUpdate: SubmitHandler<SaveProductSchema> = async (data) =>{

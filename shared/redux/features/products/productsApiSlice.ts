@@ -144,10 +144,35 @@ const productsApiSlice = apiSlice.injectEndpoints({
         }),
         createProduct:builder.mutation<CreatedProductResponse,CreateProductRequest>({
             query: ( request:CreateProductRequest)=>{
+                const {
+                    images,
+                    availabilityStatus,
+                    brand,
+                    categories,
+                    colors,
+                    gender,
+                    inventory,
+                    price,
+                    publishStatus,
+                    publishedDate,
+                    sizes,
+                    sku,
+                    title,
+                    careInstructions,
+                    content,
+                    fabricDetails
+                } = request;
+                const formData = new FormData();
+                formData.append('availabilityStatus',availabilityStatus);
+				// formData.append('brand',brand);
+                for (const image of images){
+                    formData.append('images',image);
+                }
+				
                 return {
 					url: `${ApiControllers.PRODUCTS}/create/`,
 					method: 'POST',
-					body: request ,
+					body: formData ,
 				}
             }
         }),
@@ -164,6 +189,10 @@ const productsApiSlice = apiSlice.injectEndpoints({
      // @ts-ignore
 	overrideExisting: module.hot?.status() === "apply",
 });
+
+const toFormData=()=>{
+    
+}
 
 export const {
     useLazyGetBrandsWithTotalsQuery,
