@@ -4,6 +4,7 @@ import {
     TableHTMLAttributes,
     TextareaHTMLAttributes,
 } from "react";
+import { ControllerRenderProps, UseFormSetValue } from "react-hook-form";
 import { Props } from "react-select";
 import { Column } from "react-table";
 
@@ -43,7 +44,7 @@ export interface SelectProps extends Props{
     required?:boolean,
     sectionClassName?:string,
     error?:string,
-    field:any,
+    field:ControllerRenderProps<any>,
     loading?:boolean,
     defaultValues?:number[]
 }
@@ -68,7 +69,7 @@ export interface DateInputProps{
     required?:boolean,
     sectionClassName?:string,
     error?:string,
-    field:any,
+    field:ControllerRenderProps<any>,
     loading?:boolean,
     minDate?:Date
     disabled?:boolean,
@@ -79,9 +80,10 @@ export interface FileInputProps{
     required?:boolean,
     sectionClassName?:string,
     error?:string,
-    field:any,
+    field:ControllerRenderProps<any>,
     loading?:boolean,
     disabled?:boolean,
     maxFiles?:number;
     allowMultiple?:boolean;
+    setValue:UseFormSetValue<any>;
 }

@@ -69,14 +69,15 @@ const ProductForm:FC<Props> = ({
         register,
         control,
         handleSubmit,
-        formState
+        formState,
+        setValue,
+        getValues
     } = useForm<SaveProductSchema>({
         resolver: zodResolver(getSaveProductSchema(formT,imageT)),
         defaultValues
     })
 
     const {errors} = formState
-
     const onCreate: SubmitHandler<SaveProductSchema> = async (data) =>{
         const {category,publishDate, ...rest} = data;
         const request:CreateProductRequest={
@@ -197,7 +198,8 @@ const ProductForm:FC<Props> = ({
                                         allowMultiple={true}
                                         maxFiles={10}
                                         loading={isProductLoading}
-                                        error={errors.images?.message}>
+                                        error={errors.images?.message}
+                                        setValue={setValue}>
                                         {t(`LABELS.product-images`)}
                                     </FileUpload>
                                 )}
@@ -211,7 +213,8 @@ const ProductForm:FC<Props> = ({
                                         loading={isProductLoading}
                                         name='publishDate'
                                         field={field}
-                                        sectionClassName='col-span-12 xl:col-span-4'>
+                                        sectionClassName='col-span-12 xl:col-span-4'
+                                        error={errors.publishDate?.message}>
                                         {t(`LABELS.publish-date`)}
                                     </FormDate>
                                 )}

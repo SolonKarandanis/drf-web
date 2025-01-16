@@ -362,6 +362,7 @@
             "required-publish-status":"Publish Status is required",
             "required-availability-status":"Availability Status is required",
             "required-publish-date":"Publish Date is required",
+            "required-images":"Product images are required",
             "min-publish-date":"The Publish Date cannot be before today",
             "integer-inventory":"Inventory value must be an integer",
             "positive-inventory":"Inventory must be a positive value",

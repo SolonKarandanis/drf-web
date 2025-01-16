@@ -58,7 +58,9 @@ export function getSaveProductSchema(
             .positive({
                 message:t?.("positive-price")
             }),
-        images: z.array(getProfileImage(imageT)).nullable()
+        images: z.array(getProfileImage(imageT)).nonempty({
+            message:t?.("required-images")
+        })
     });
 } 
 

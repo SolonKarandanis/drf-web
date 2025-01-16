@@ -1,6 +1,6 @@
 "use client"
 
-import {FC, PropsWithChildren, useState} from 'react'
+import {FC, PropsWithChildren, useEffect, useState} from 'react'
 import { FilePond, registerPlugin } from 'react-filepond';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
@@ -9,7 +9,7 @@ import { FileInputProps } from '../props';
 import { ACCEPTED_IMAGE_TYPES } from '@/utils/constants';
 import FormLabel from '../form-label/form-label';
 import FormError from '../form-error/form-error';
-import { ActualFileObject } from 'filepond';
+import { ActualFileObject, FilePondFile } from 'filepond';
 
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
@@ -24,9 +24,15 @@ const FileUpload:FC<PropsWithChildren<FileInputProps>> = ({
     maxFiles=1,
     error,
     sectionClassName,
+    setValue,
     children
 }) => {
     const [files, setFiles] = useState<ActualFileObject[]>([]);
+
+    // useEffect(()=>{
+    //     setFiles(field.value);
+    // },[]);
+    
     const hasError = error? true:false;
     const labelHtml = children ? (
         <FormLabel 
@@ -47,6 +53,26 @@ const FileUpload:FC<PropsWithChildren<FileInputProps>> = ({
           </section>
         )
     }
+
+    const onUpdateFiles =  (fileItems: FilePondFile[]) =>{
+        setFiles(fileItems.map(fileItem => fileItem.file));
+        convertToFiles(fileItems)
+            .then((files)=>{
+                setValue(field.name,files);
+            })
+    }
+
+    const convertToFiles =  async (filePondFiles:FilePondFile[]): Promise<File[]> =>{
+        const files : File[]=[];
+        for(const filePondFile of filePondFiles){
+            const bytes =  await filePondFile.file.arrayBuffer();
+            const name =filePondFile.file.name;
+            const type =filePondFile.file.type;
+            const blob = new Blob([bytes]);
+            files.push(new File([blob],name,{type}));
+        }
+        return files;
+    }
     
     const errorHtml = error ? (<FormError error={error} />) : null;
 
@@ -58,9 +84,7 @@ const FileUpload:FC<PropsWithChildren<FileInputProps>> = ({
             // files={field.value}
             // onupdatefiles={field.onChange}
             files={files} 
-            onupdatefiles={fileItems => {
-                setFiles(fileItems.map(fileItem => fileItem.file));
-            }}
+            onupdatefiles={(fileItems)=>onUpdateFiles(fileItems)}
             allowMultiple={allowMultiple} 
             allowImagePreview={true} 
             maxFiles={maxFiles} 
