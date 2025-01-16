@@ -6,7 +6,7 @@ export function getUploadProfileImageSchema(
     t?: (key: ImageMessages, object?: TranslationValues | undefined) => string
 ){
     return z.object({
-        profileImage: getProfileImage(t)
+        profileImage: getProfileImage(t).nullable()
     });
 }
 

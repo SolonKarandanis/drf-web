@@ -3,7 +3,7 @@
 import  { ChangeEvent, FC,PropsWithChildren } from 'react'
 import Image from "next/image";
 import { RegisterProps } from '../props';
-import CFormError from '../form-error/form-error';
+import FormError from '../form-error/form-error';
 
 interface Props{
     handleUploadFile:(event:ChangeEvent<HTMLInputElement>)=>void;
@@ -21,7 +21,7 @@ const Dropzone:FC<PropsWithChildren<Props>> = ({
     error,
     file
 }) => {
-    const errorHtml = error ? (<CFormError error={error} />) : null;
+    const errorHtml = error ? (<FormError error={error} />) : null;
     return (
         <div id="image-preview" 
             className="items-center max-w-sm p-6 mx-auto mb-4 text-center bg-gray-100 border-2 border-gray-400 border-dashed rounded-lg cursor-pointer">
