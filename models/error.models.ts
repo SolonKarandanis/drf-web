@@ -1,6 +1,6 @@
 export interface ErrorResponse{
     status:number;
-    data:string;
+    data:ValidationErrorData;
 }
 
 export interface ErrorData{

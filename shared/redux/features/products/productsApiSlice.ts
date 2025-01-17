@@ -8,6 +8,7 @@ import {
     CreatedProductResponse, 
     CreateProductRequest, 
     DiscountsWithTotals, 
+    MutateProductRequest, 
     PostProductCommentRequest, 
     ProductAttributes, 
     ProductDetails, 
@@ -144,31 +145,7 @@ const productsApiSlice = apiSlice.injectEndpoints({
         }),
         createProduct:builder.mutation<CreatedProductResponse,CreateProductRequest>({
             query: ( request:CreateProductRequest)=>{
-                const {
-                    images,
-                    availabilityStatus,
-                    brand,
-                    categories,
-                    colors,
-                    gender,
-                    inventory,
-                    price,
-                    publishStatus,
-                    publishedDate,
-                    sizes,
-                    sku,
-                    title,
-                    careInstructions,
-                    content,
-                    fabricDetails
-                } = request;
-                const formData = new FormData();
-                formData.append('availabilityStatus',availabilityStatus);
-				// formData.append('brand',brand);
-                for (const image of images){
-                    formData.append('images',image);
-                }
-				
+                const formData = toFormData(request);
                 return {
 					url: `${ApiControllers.PRODUCTS}/create/`,
 					method: 'POST',
@@ -190,8 +167,61 @@ const productsApiSlice = apiSlice.injectEndpoints({
 	overrideExisting: module.hot?.status() === "apply",
 });
 
-const toFormData=()=>{
+const toFormData=(request: MutateProductRequest): FormData=>{
+    const {
+        images,
+        availabilityStatus,
+        brand,
+        categories,
+        colors,
+        gender,
+        inventory,
+        price,
+        publishStatus,
+        publishedDate,
+        sizes,
+        sku,
+        title,
+        careInstructions,
+        content,
+        fabricDetails
+    } = request;
+    const formData = new FormData();
+    formData.append('availabilityStatus',availabilityStatus);
+    formData.append('brand',String(brand));
+    formData.append('gender',String(gender));
+    formData.append('inventory',String(inventory));
+    formData.append('price',String(price));
+    formData.append('publishStatus',publishStatus);
+    formData.append('publishedDate',publishedDate);
+    formData.append('sku',sku);
+    formData.append('title',title);
+    if(content){
+        formData.append('content',content);
+    }
+    if(careInstructions){
+        formData.append('careInstructions',careInstructions);
+    }
+    if(fabricDetails){
+        formData.append('fabricDetails',fabricDetails);
+    }
     
+    for (const category of categories){
+        formData.append('categories',String(category));
+    }
+
+    for (const color of colors){
+        formData.append('colors',String(color));
+    }
+
+    for (const size of sizes){
+        formData.append('sizes',String(size));
+    }
+    
+    for (const image of images){
+        formData.append('images',image);
+    }
+    return formData;
 }
 
 export const {

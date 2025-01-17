@@ -84,7 +84,7 @@ export interface AttributeOption{
     name:string;
 }
 
-export interface CreateProductRequest extends BaseProduct{
+export interface MutateProductRequest extends BaseProduct{
     categories:number[];
     brand:number;
     sizes:number[];
@@ -93,7 +93,11 @@ export interface CreateProductRequest extends BaseProduct{
     images:File[];
 }
 
-export interface UpdateProductRequest extends BaseProduct{
+export interface CreateProductRequest extends MutateProductRequest{
+   
+}
+
+export interface UpdateProductRequest extends MutateProductRequest{
 }
 
 export interface CreatedProductResponse{

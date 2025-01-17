@@ -1,3 +1,4 @@
+import { handleError } from "@/lib/functions";
 import { ErrorResponse } from "@/models/error.models";
 import { CreatedProductResponse, CreateProductRequest, UpdateProductRequest } from "@/models/product.models";
 import { useCreateProductMutation, useUpdateProductMutation } from "@/shared/redux/features/products/productsApiSlice";
@@ -18,10 +19,11 @@ export function useMutateProduct(){
             .unwrap()
             .then((response:CreatedProductResponse)=>{
                 toast.success(t("PRODUCTS.SUCCESS.create-product"));
-                router.push(`/products/${response.productId}`);
+                // router.push(`/products/${response.productId}`);
             })
             .catch((error:ErrorResponse)=>{
                 toast.error(t("PRODUCTS.ERRORS.create-product"));
+                handleError(error);
             })
     }
 
