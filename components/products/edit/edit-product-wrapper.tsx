@@ -19,8 +19,11 @@ const EditProductWrapper:FC<Props> = ({uuid}) => {
         genderSelectedValues,
     } = useGetProductDetails(uuid);
 
+ 
+
     if(!isProductLoading && !isProductAttributesLoading 
         && productData && genderSelectedValues && colorsSelectedValues && sizesSelectedValues){
+
         const defaultFormValues={
             title:productData.title,
             sku:productData.sku,
@@ -38,6 +41,7 @@ const EditProductWrapper:FC<Props> = ({uuid}) => {
             colors:colorsSelectedValues,
             sizes:sizesSelectedValues 
         };
+
         return (
             <ProductForm
                 key={1}

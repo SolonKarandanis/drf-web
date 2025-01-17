@@ -38,7 +38,8 @@ const defaultFormValues={
     fabricDetails:'',
     careInstructions:'',
     colors:undefined,
-    sizes:undefined 
+    sizes:undefined,
+    images:[]
 }
 
 const ProductForm:FC<Props> = ({
