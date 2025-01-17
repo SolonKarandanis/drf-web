@@ -19,7 +19,7 @@ export function useMutateProduct(){
             .unwrap()
             .then((response:CreatedProductResponse)=>{
                 toast.success(t("PRODUCTS.SUCCESS.create-product"));
-                // router.push(`/products/${response.productId}`);
+                router.push(`/products/${response.productId}`);
             })
             .catch((error:ErrorResponse)=>{
                 toast.error(t("PRODUCTS.ERRORS.create-product"));
