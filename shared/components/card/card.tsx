@@ -41,7 +41,7 @@ function Image({href,src,className,...props}: CardImageProps) {
         <Link href={href} 
             className="product-image">
             <img src={src} 
-                className="mb-3 rounded-md card-img"
+                className="mb-3 rounded-md card-img max-h-[350px]"
                 alt="..." 
                 {...props}/>
         </Link>
