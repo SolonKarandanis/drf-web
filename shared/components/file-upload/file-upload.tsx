@@ -77,8 +77,6 @@ const FileUpload:FC<PropsWithChildren<FileInputProps>> = ({
             className="basic-filepond" 
             accepted-file-types={ACCEPTED_IMAGE_TYPES}
             allowReorder={true}
-            // files={field.value}
-            // onupdatefiles={field.onChange}
             files={files} 
             onupdatefiles={(fileItems)=>onUpdateFiles(fileItems)}
             allowMultiple={allowMultiple} 
