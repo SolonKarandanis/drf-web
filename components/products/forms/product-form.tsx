@@ -258,22 +258,30 @@ const ProductForm:FC<Props> = ({
                 </div>
             </div>
             <div className="justify-end px-6 py-4 border-t border-dashed dark:border-defaultborder/10 sm:flex">
-                <FormButton 
-                    intent="info" 
-                    size="md" 
-                    type="button"
-                    className="px-5 py-3 mt-2"
-                    onClick={handleSubmit(onCreate)}>
-                   {t(`BUTTONS.add-product`)}<i className="bi bi-plus-lg ms-2"></i>
-                </FormButton>
-                <FormButton 
-                    intent="success" 
-                    size="md" 
-                    type="submit"
-                    className="px-5 py-3 mt-2"
-                    onClick={handleSubmit(onUpdate)}>
-                   {t(`BUTTONS.update-product`)}<i className="bi bi-download ms-2"></i>
-                </FormButton>
+                {!isEdit &&(
+                    <FormButton 
+                        intent="info" 
+                        size="md" 
+                        type="button"
+                        className="px-5 py-3 mt-2"
+                        onClick={handleSubmit(onCreate)}
+                        isLoading={mutationLoading}
+                        disabled={mutationLoading}>
+                    {t(`BUTTONS.add-product`)}<i className="bi bi-plus-lg ms-2"></i>
+                    </FormButton>
+                )}
+                {isEdit && (
+                    <FormButton 
+                        intent="success" 
+                        size="md" 
+                        type="submit"
+                        className="px-5 py-3 mt-2"
+                        onClick={handleSubmit(onUpdate)}
+                        isLoading={mutationLoading}
+                        disabled={mutationLoading}>
+                    {t(`BUTTONS.update-product`)}<i className="bi bi-download ms-2"></i>
+                    </FormButton>
+                )}
             </div>
         </form>
     )

@@ -28,10 +28,6 @@ const FileUpload:FC<PropsWithChildren<FileInputProps>> = ({
     children
 }) => {
     const [files, setFiles] = useState<ActualFileObject[]>([]);
-
-    // useEffect(()=>{
-    //     setFiles(field.value);
-    // },[]);
     
     const hasError = error? true:false;
     const labelHtml = children ? (
