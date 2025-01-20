@@ -43,7 +43,6 @@ const LoginForm = () => {
         .then((response: SignInResponse| undefined) =>{
             setSigninLoading(false);
             if(response && response.ok){
-                console.log(response);
                 router.push(response.url!);
             }
             if(response && response.status && response.error){
