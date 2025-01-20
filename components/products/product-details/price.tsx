@@ -34,7 +34,7 @@ const Price:FC<Props> = ({
                     </span>
                 </p>
                 <p className="mb-0 text-[#8c9097] dark:text-white/50 text-[0.75rem]">
-                    M.R.P-<s><CurrencyFormatter amount={price} isDecimalNumber={false} /></s>
+                    M.R.P-<s><CurrencyFormatter amount={price}  /></s>
                 </p>
             </>
         )}
