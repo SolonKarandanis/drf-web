@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState,PropsWithChildren } from 'react'
+import { FC, useState,PropsWithChildren, useRef } from 'react'
 import { twMerge } from "tailwind-merge";
 import { InputProps } from '../props';
 import FormError from '@/shared/components/form-error/form-error';
@@ -22,6 +22,7 @@ const FormInput:FC<PropsWithChildren<InputProps>>  = ({
     disabled,
     ...rest
 }) => {
+    const inputRef = useRef<HTMLInputElement>(null);
     const [showPassword, setShowPassword] = useState(false);
     const hasError = error? true:false;
     const labelHtml = children ? (
@@ -63,7 +64,8 @@ const FormInput:FC<PropsWithChildren<InputProps>>  = ({
             className={twMerge(inputCss,className)}
             aria-invalid={error ? "true" : "false"}
             {...(props ?? {})}
-            {...rest}/>
+            {...rest}
+            ref={inputRef}/>
        
     ):(
         <input 
@@ -74,7 +76,8 @@ const FormInput:FC<PropsWithChildren<InputProps>>  = ({
             className={twMerge(inputCss,className)}
             aria-invalid={error ? "true" : "false"}
             {...(props ?? {})}
-            {...rest}/>
+            {...rest}
+            ref={inputRef}/>
     );
 
     const errorHtml = error ? (<FormError error={error} />) : null;
