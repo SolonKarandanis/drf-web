@@ -11,6 +11,7 @@ import {signIn, SignInResponse} from "next-auth/react"
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import FormInput from "@/shared/components/form-input/form-input";
+import { useState } from "react";
 
 
 
@@ -19,7 +20,7 @@ const LoginForm = () => {
     const t = useTranslations();
     const formT = useTranslations("USERS.VALIDATION");
     const lform='LOGIN.FORM';
-    let loading = false;
+    const [signinLoading,setSigninLoading] = useState<boolean>(false);
     
     const {register,control,handleSubmit,formState: { errors , isValid },} = useForm<LoginSchema>({
         resolver: zodResolver(getLoginSchema(formT)),
@@ -32,7 +33,7 @@ const LoginForm = () => {
 
     const onSubmit:SubmitHandler<LoginSchema> = async (values: LoginSchema) =>{
         const {username,password} = values;
-        loading=true
+        setSigninLoading(true);
         signIn("credentials",{
             username,
             password,
@@ -40,7 +41,7 @@ const LoginForm = () => {
             callbackUrl:'/'
         })
         .then((response: SignInResponse| undefined) =>{
-            loading=false
+            setSigninLoading(false);
             if(response && response.ok){
                 console.log(response);
                 router.push(response.url!);
@@ -99,8 +100,8 @@ const LoginForm = () => {
                             intent="violet" 
                             size="md" 
                             type="submit"
-                            isLoading={loading}
-                            isDisabled={loading || !isValid}>                    
+                            isLoading={signinLoading}
+                            isDisabled={signinLoading || !isValid}>                    
                                 {t(`${lform}.BUTTONS.sign-in`)}
                         </FormButton>
                         {/* <Link href="/components/dashboards/crm/" className="ti-btn ti-btn-primary !bg-primary !text-white !font-medium">Sign In</Link> */}

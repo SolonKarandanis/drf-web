@@ -9,7 +9,8 @@ import { Mutex } from 'async-mutex';
 import { AllowedUrls, ApiControllers } from './api/ApiControllers';
 import { RefreshResponse } from '@/models/user.models';
 import { 
-	getAccessTokenValue, 
+	getAccessTokenValue,
+	getRefreshTokenValue,
 	setStorageValue 
 } from '@/utils/functions';
 import { baseUrl } from '@/utils/constants';
@@ -24,6 +25,7 @@ const baseQueryWithReauth: BaseQueryFn<
 	FetchBaseQueryError
 > = async (args, api, extraOptions) => {
 	const token = getAccessTokenValue();
+	const refresh = getRefreshTokenValue();
 	
 	await mutex.waitForUnlock();
 	
@@ -48,6 +50,7 @@ const baseQueryWithReauth: BaseQueryFn<
 					{
 						url: `${ApiControllers.AUTH}/refresh/`,
 						method: 'POST',
+						body:{refresh}
 					},
 					api,
 					extraOptions
