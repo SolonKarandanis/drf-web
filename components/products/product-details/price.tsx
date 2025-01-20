@@ -1,3 +1,4 @@
+import CurrencyFormatter from "@/shared/components/currency-formatter/currency-formatter";
 import { FC } from "react";
 
 
@@ -27,13 +28,13 @@ const Price:FC<Props> = ({
                 <p className="mb-1">
                     <span className="font-semibold h3">
                         <sup className="text-[0.875rem]">
-                            $</sup>{salePriceIntegerPart}<sup className="text-[0.875rem]">
+                            </sup><CurrencyFormatter amount={salePriceIntegerPart} isDecimalNumber={false} /><sup className="text-[0.875rem]">
                             {salePriceDecimalPart}
                         </sup>
                     </span>
                 </p>
                 <p className="mb-0 text-[#8c9097] dark:text-white/50 text-[0.75rem]">
-                    M.R.P-<s>${price}</s>
+                    M.R.P-<s><CurrencyFormatter amount={price} isDecimalNumber={false} /></s>
                 </p>
             </>
         )}

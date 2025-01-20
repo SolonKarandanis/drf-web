@@ -6,6 +6,7 @@ HtmlHTMLAttributes,
 ImgHTMLAttributes,
 ReactNode
 } from "react";
+import CurrencyFormatter from "../currency-formatter/currency-formatter";
   
 interface CardProps {
     children: ReactNode;
@@ -130,10 +131,10 @@ function Price({
       <p  className="mb-1 font-semibold text-[1rem] flex items-center justify-between" 
         {...props}>
           <span>
-            {price}
+            <CurrencyFormatter amount={price} />
             {oldPrice && (
               <span className="text-[#8c9097] dark:text-white/50 line-through ms-1 inline-block opacity-[0.6]">
-                {oldPrice}
+                <CurrencyFormatter amount={oldPrice} />
               </span>
             )}
           </span>
