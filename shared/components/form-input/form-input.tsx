@@ -1,15 +1,18 @@
 "use client";
 
-import { FC, useState,PropsWithChildren, useRef } from 'react'
+import { FC, useState,PropsWithChildren, useRef, forwardRef, useImperativeHandle } from 'react'
 import { twMerge } from "tailwind-merge";
 import { InputProps } from '../props';
 import FormError from '@/shared/components/form-error/form-error';
 import FormLabel from '../form-label/form-label';
 
+interface InputHandleApi{
+    focus:()=>void;
+    shake:()=>void;
+}
 
 
-
-const FormInput:FC<PropsWithChildren<InputProps>>  = ({
+const FormInput=forwardRef<InputHandleApi,PropsWithChildren<InputProps>>(({
     name,
     children,
     type='text',
@@ -21,9 +24,20 @@ const FormInput:FC<PropsWithChildren<InputProps>>  = ({
     error,
     disabled,
     ...rest
-}) => {
+},ref) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [showPassword, setShowPassword] = useState(false);
+    const [shouldShake, setShouldShake] = useState(false);
+
+    useImperativeHandle(ref, ()=>({
+        focus() {
+            // inputRef.current.focus();
+        },
+        shake() {
+            setShouldShake(true);
+        },
+    }),[]);
+
     const hasError = error? true:false;
     const labelHtml = children ? (
         <FormLabel 
@@ -53,6 +67,8 @@ const FormInput:FC<PropsWithChildren<InputProps>>  = ({
     const disabledCss =" cursor-not-allowed ";
 
     const inputCss = disabled ? `${defaultInputStyles} ${disabledCss}`: `${defaultInputStyles}`
+
+    const shakeCss = hasError ? 'shake-animation' : '';
 
 
     const inputHtml = type ==='password' ? (
@@ -113,6 +129,6 @@ const FormInput:FC<PropsWithChildren<InputProps>>  = ({
             {innerHtml}
         </section>
     )
-}
+})
 
 export default FormInput
