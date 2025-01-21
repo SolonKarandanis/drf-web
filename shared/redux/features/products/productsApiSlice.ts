@@ -155,10 +155,11 @@ const productsApiSlice = apiSlice.injectEndpoints({
         }),
         updateProduct:builder.mutation<ProductDetails,{uuid:string, request:UpdateProductRequest}>({
             query: ( {uuid,request})=>{
+                const formData = toFormData(request);
                 return {
 					url: `${ApiControllers.PRODUCTS}/${uuid}/update/`,
 					method: 'PUT',
-					body: request ,
+					body: formData ,
 				}
             }
         })
