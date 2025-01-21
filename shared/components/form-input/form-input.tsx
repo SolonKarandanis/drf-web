@@ -80,8 +80,7 @@ const FormInput=forwardRef<InputHandleApi,PropsWithChildren<InputProps>>(({
             className={twMerge(inputCss,className)}
             aria-invalid={error ? "true" : "false"}
             {...(props ?? {})}
-            {...rest}
-            ref={inputRef}/>
+            {...rest}/>
        
     ):(
         <input 
@@ -92,8 +91,7 @@ const FormInput=forwardRef<InputHandleApi,PropsWithChildren<InputProps>>(({
             className={twMerge(inputCss,className)}
             aria-invalid={error ? "true" : "false"}
             {...(props ?? {})}
-            {...rest}
-            ref={inputRef}/>
+            {...rest}/>
     );
 
     const errorHtml = error ? (<FormError error={error} />) : null;
