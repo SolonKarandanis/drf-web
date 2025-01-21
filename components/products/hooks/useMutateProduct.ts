@@ -46,6 +46,7 @@ export function useMutateProduct(){
     const product = useAppSelector(selectedProductSelector);
 
     return {
+        product,
         mutationLoading,
         handleCreateProductRequest,
         handleUpdateProduct,

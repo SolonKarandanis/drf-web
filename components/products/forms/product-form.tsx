@@ -13,7 +13,7 @@ import FormTextArea from '@/shared/components/form-textarea/form-textarea';
 import FormDate from '@/shared/components/form-date/form-date';
 import AttributesSection from './sections/attributes-section';
 import { useMutateProduct } from '../hooks/useMutateProduct';
-import { CreateProductRequest } from '@/models/product.models';
+import { CreateProductRequest, UpdateProductRequest } from '@/models/product.models';
 import FileUpload from '@/shared/components/file-upload/file-upload';
 
 
@@ -51,9 +51,10 @@ const ProductForm:FC<Props> = ({
     const formT = useTranslations("PRODUCTS.VALIDATION");
     const imageT = useTranslations("GLOBAL.VALIDATION.IMAGES");
     const {
-       mutationLoading,
-       handleCreateProductRequest,
-       handleUpdateProduct,
+        product,
+        mutationLoading,
+        handleCreateProductRequest,
+        handleUpdateProduct,
     } = useMutateProduct();
     
     const publishStatusOptions: Options[] = [
@@ -90,7 +91,16 @@ const ProductForm:FC<Props> = ({
     }
 
     const onUpdate: SubmitHandler<SaveProductSchema> = async (data) =>{
-        console.log(data)
+        const uuid = product?.uuid;
+        if(uuid){
+            const {category,publishDate, ...rest} = data;
+            const request:UpdateProductRequest={
+                categories:[category],
+                publishedDate: publishDate.toLocaleDateString(),
+                ...rest
+            };
+            handleUpdateProduct(uuid,request);
+        }
     }
 
     return (
