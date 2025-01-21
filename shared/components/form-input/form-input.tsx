@@ -22,7 +22,7 @@ const FormInput=forwardRef<InputHandleApi,PropsWithChildren<InputProps>>(({
     sectionClassName='',
     props,
     error,
-    disabled,
+    disabled=false,
     ...rest
 },ref) => {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -79,6 +79,7 @@ const FormInput=forwardRef<InputHandleApi,PropsWithChildren<InputProps>>(({
             type={(showPassword) ? 'text' : "password"}
             className={twMerge(inputCss,className)}
             aria-invalid={error ? "true" : "false"}
+            disabled={disabled}
             {...(props ?? {})}
             {...rest}/>
        
@@ -90,6 +91,7 @@ const FormInput=forwardRef<InputHandleApi,PropsWithChildren<InputProps>>(({
             type={type}
             className={twMerge(inputCss,className)}
             aria-invalid={error ? "true" : "false"}
+            disabled={disabled}
             {...(props ?? {})}
             {...rest}/>
     );

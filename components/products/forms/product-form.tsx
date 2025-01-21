@@ -119,7 +119,8 @@ const ProductForm:FC<Props> = ({
                                 sectionClassName="mb-2 col-span-12 xl:col-span-6"
                                 props={register("title")}
                                 error={errors.title?.message}
-                                loading={isProductLoading}>
+                                loading={isProductLoading}
+                                disabled={isEdit}>
                                 {t(`LABELS.product-name`)}
                             </FormInput>
                             <FormInput 
@@ -132,7 +133,8 @@ const ProductForm:FC<Props> = ({
                                 sectionClassName="mb-2 col-span-12 xl:col-span-6"
                                 props={register("sku")}
                                 error={errors.sku?.message}
-                                loading={isProductLoading}>
+                                loading={isProductLoading}
+                                disabled={isEdit}>
                                 {t(`LABELS.product-sku`)}
                             </FormInput>
                             <FormTextArea
