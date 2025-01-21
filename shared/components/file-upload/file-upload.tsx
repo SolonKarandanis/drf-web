@@ -1,6 +1,6 @@
 "use client"
 
-import {FC, PropsWithChildren, useEffect, useState} from 'react'
+import {FC, forwardRef, PropsWithChildren, useEffect, useImperativeHandle, useState} from 'react'
 import { FilePond, registerPlugin } from 'react-filepond';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
@@ -14,7 +14,15 @@ import { ActualFileObject, FilePondFile } from 'filepond';
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
-const FileUpload:FC<PropsWithChildren<FileInputProps>> = ({
+interface FileInputHandleApi{
+    focus:()=>void;
+    shake:()=>void;
+    clear:()=>void;
+}
+
+// :FC<PropsWithChildren<FileInputProps>> =
+
+const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProps>>(({
     labelIdle,
     field,
     required=false,
@@ -26,8 +34,20 @@ const FileUpload:FC<PropsWithChildren<FileInputProps>> = ({
     sectionClassName,
     setValue,
     children
-}) => {
+},ref) => {
     const [files, setFiles] = useState<ActualFileObject[]>([]);
+
+    useImperativeHandle(ref, ()=>({
+        focus() {
+            // inputRef.current.focus();
+        },
+        shake() {
+            
+        },
+        clear(){
+            setFiles([]);
+        }
+    }),[]);
     
     const hasError = error? true:false;
     const labelHtml = children ? (
@@ -49,6 +69,9 @@ const FileUpload:FC<PropsWithChildren<FileInputProps>> = ({
           </section>
         )
     }
+
+    const handleClearAll = () => setFiles([]);
+
 
     const onUpdateFiles =  (fileItems: FilePondFile[]) =>{
         setFiles(fileItems.map(fileItem => fileItem.file));
@@ -95,6 +118,6 @@ const FileUpload:FC<PropsWithChildren<FileInputProps>> = ({
             {errorHtml}
         </section>
     )
-}
+})
 
 export default FileUpload

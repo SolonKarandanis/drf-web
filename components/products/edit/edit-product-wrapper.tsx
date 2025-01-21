@@ -3,6 +3,7 @@
 import { FC} from "react"
 import { useGetProductDetails } from "../hooks/useGetProductDetails";
 import ProductForm from "../forms/product-form";
+import { useGetProductDetailsImages } from "../hooks/useGetProductDetailsImages";
 
 interface Props{
     uuid:string
@@ -18,6 +19,12 @@ const EditProductWrapper:FC<Props> = ({uuid}) => {
         colorsSelectedValues,
         genderSelectedValues,
     } = useGetProductDetails(uuid);
+
+    const {
+        isError,
+        isLoading,
+        productImages
+    } = useGetProductDetailsImages(uuid);
 
  
 
@@ -39,7 +46,8 @@ const EditProductWrapper:FC<Props> = ({uuid}) => {
             careInstructions:productData.careInstructions,
             gender:genderSelectedValues[0],
             colors:colorsSelectedValues,
-            sizes:sizesSelectedValues 
+            sizes:sizesSelectedValues,
+            images:[]
         };
 
         return (
