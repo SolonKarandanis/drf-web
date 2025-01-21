@@ -1,7 +1,8 @@
 import { handleError } from "@/lib/functions";
 import { ErrorResponse } from "@/models/error.models";
-import { CreatedProductResponse, CreateProductRequest, UpdateProductRequest } from "@/models/product.models";
+import { CreatedProductResponse, CreateProductRequest, ProductDetails, UpdateProductRequest } from "@/models/product.models";
 import { useCreateProductMutation, useUpdateProductMutation } from "@/shared/redux/features/products/productsApiSlice";
+import { selectedProductSelector } from "@/shared/redux/features/products/productsSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -28,12 +29,21 @@ export function useMutateProduct(){
     }
 
     const handleUpdateProduct = (uuid:string, request:UpdateProductRequest)=>{
-
+        updateProduct({uuid,request})
+            .unwrap()
+            .then((response:ProductDetails)=>{
+                toast.success(t("PRODUCTS.SUCCESS.update-product"));
+                router.push(`/products/${uuid}`);
+            })
+            .catch((error:ErrorResponse)=>{
+                toast.error(t("PRODUCTS.ERRORS.update-product"));
+                handleError(error);
+            })
     }
 
     const mutationLoading = createProductLoading || updateProductLoading;
 
-    // const user = useAppSelector(selectedUserSelector);
+    const product = useAppSelector(selectedProductSelector);
 
     return {
         mutationLoading,
