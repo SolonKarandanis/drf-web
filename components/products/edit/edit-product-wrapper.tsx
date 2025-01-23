@@ -22,7 +22,7 @@ const EditProductWrapper:FC<Props> = ({uuid}) => {
 
     const {
         isError,
-        isLoading,
+        isLoading:isImagesLoading,
         productImages
     } = useGetProductDetailsImages(uuid);
 
@@ -47,7 +47,7 @@ const EditProductWrapper:FC<Props> = ({uuid}) => {
             gender:genderSelectedValues[0],
             colors:colorsSelectedValues,
             sizes:sizesSelectedValues,
-            images:[]
+            images:productImages
         };
 
         return (

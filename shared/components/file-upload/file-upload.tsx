@@ -10,6 +10,9 @@ import { ACCEPTED_IMAGE_TYPES } from '@/utils/constants';
 import FormLabel from '../form-label/form-label';
 import FormError from '../form-error/form-error';
 import { ActualFileObject, FilePondFile } from 'filepond';
+import { useAppSelector } from '@/shared/redux/hooks';
+import { ImageModel } from '@/models/image.models';
+import { FilePondInitialFile } from 'filepond';
 
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
@@ -35,7 +38,29 @@ const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProp
     setValue,
     children
 },ref) => {
-    const [files, setFiles] = useState<ActualFileObject[]>([]);
+    const configState = useAppSelector((state)=>state.config);
+    const host = configState.djangoHost
+    const [filess] = useState([
+    {
+        source: `${host}/media/images/gbgoods_470126_sub7_3x4.avif`,
+        options: { type: "local" }
+    }
+    ]);
+
+    const initializeFiles = (images:ImageModel[]):FilePondInitialFile[]=>{
+        if(images && images.length ==0){
+            return [];
+        }
+        return images.map(image=> {
+            return {
+                source: `${host}${image.image}`,
+                options: { type: "local" }
+            } as FilePondInitialFile;
+        });
+    }
+
+    const [files, setFiles] = useState<Array<FilePondInitialFile | ActualFileObject | Blob | string>>(initializeFiles(field.value));
+    
 
     useImperativeHandle(ref, ()=>({
         focus() {
@@ -108,7 +133,18 @@ const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProp
             labelIdle={labelIdle}
             disabled={disabled}
             required={required}
-            instantUpload={false}/>
+            instantUpload={false}
+            server={{
+                load: (source, load, error, progress, abort, headers) => {
+                    console.log(source);
+                    var myRequest = new Request(source);
+                    fetch(myRequest).then(function(response) {
+                        response.blob().then(function(myBlob) {
+                        load(myBlob);
+                        });
+                    });
+                }
+              }}/>
     );
 
     return (
