@@ -23,7 +23,8 @@ interface FileInputHandleApi{
     clear:()=>void;
 }
 
-// :FC<PropsWithChildren<FileInputProps>> =
+type FileUploadFileType = Array<FilePondInitialFile | ActualFileObject | Blob | string>;
+
 
 const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProps>>(({
     labelIdle,
@@ -40,13 +41,6 @@ const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProp
 },ref) => {
     const configState = useAppSelector((state)=>state.config);
     const host = configState.djangoHost
-    const [filess] = useState([
-    {
-        source: `${host}/media/images/gbgoods_470126_sub7_3x4.avif`,
-        options: { type: "local" }
-    }
-    ]);
-
     const initializeFiles = (images:ImageModel[]):FilePondInitialFile[]=>{
         if(images && images.length ==0){
             return [];
@@ -54,12 +48,15 @@ const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProp
         return images.map(image=> {
             return {
                 source: `${host}${image.image}`,
-                options: { type: "local" }
+                file:{
+                    name: image.title
+                },
+                options: { type: "input" }
             } as FilePondInitialFile;
         });
     }
 
-    const [files, setFiles] = useState<Array<FilePondInitialFile | ActualFileObject | Blob | string>>(initializeFiles(field.value));
+    const [files, setFiles] = useState<FileUploadFileType>(initializeFiles(field.value));
     
 
     useImperativeHandle(ref, ()=>({
@@ -109,11 +106,18 @@ const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProp
     const convertToFiles =  async (filePondFiles:FilePondFile[]): Promise<File[]> =>{
         const files : File[]=[];
         for(const filePondFile of filePondFiles){
-            const bytes =  await filePondFile.file.arrayBuffer();
-            const name =filePondFile.file.name;
-            const type =filePondFile.file.type;
-            const blob = new Blob([bytes]);
-            files.push(new File([blob],name,{type}));
+            const file = filePondFile.file;
+            const name =filePondFile.filename;
+            const type =filePondFile.fileType;
+            if(file instanceof File){
+                const bytes =  await filePondFile.file.arrayBuffer();
+                const blob = new Blob([bytes]);
+                files.push(new File([blob],name,{type}));
+            }
+            if(file instanceof Blob){
+                files.push(new File([file],name,{type}));
+            }
+            
         }
         return files;
     }
@@ -135,14 +139,11 @@ const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProp
             required={required}
             instantUpload={false}
             server={{
-                load: (source, load, error, progress, abort, headers) => {
-                    console.log(source);
-                    var myRequest = new Request(source);
-                    fetch(myRequest).then(function(response) {
-                        response.blob().then(function(myBlob) {
-                        load(myBlob);
-                        });
-                    });
+                fetch:(url, load, error, progress, abort, headers)=>{
+                    const myRequest = new Request(url);
+                    fetch(myRequest,)
+                        .then((response)=> response.blob())
+                        .then(blob=> load(blob))
                 }
               }}/>
     );
