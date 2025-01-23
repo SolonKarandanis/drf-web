@@ -95,13 +95,14 @@ const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProp
     const handleClearAll = () => setFiles([]);
 
 
-    const onUpdateFiles =  (fileItems: FilePondFile[]) =>{
+    const handleUpdateFiles =  (fileItems: FilePondFile[]) =>{
         setFiles(fileItems.map(fileItem => fileItem.file));
         convertToFiles(fileItems)
             .then((files)=>{
                 setValue(field.name,files);
             })
     }
+
 
     const convertToFiles =  async (filePondFiles:FilePondFile[]): Promise<File[]> =>{
         const files : File[]=[];
@@ -129,8 +130,9 @@ const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProp
             className="basic-filepond" 
             accepted-file-types={ACCEPTED_IMAGE_TYPES}
             allowReorder={true}
+            onreorderfiles={handleUpdateFiles}
             files={files} 
-            onupdatefiles={(fileItems)=>onUpdateFiles(fileItems)}
+            onupdatefiles={handleUpdateFiles}
             allowMultiple={allowMultiple} 
             allowImagePreview={true} 
             maxFiles={maxFiles} 
