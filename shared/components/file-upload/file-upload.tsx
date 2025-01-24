@@ -144,8 +144,20 @@ const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProp
                 fetch:(url, load, error, progress, abort, headers)=>{
                     const myRequest = new Request(url);
                     fetch(myRequest,)
-                        .then((response)=> response.blob())
-                        .then(blob=> load(blob))
+                        .then((response)=> {
+                            if(response.status !==404){
+                                return response.blob();
+                            }
+                            return null;
+                        })
+                        .then(blob=> {
+                            if(blob){
+                                load(blob);
+                            }
+                        })
+                        .catch(error=>{
+                            console.log(error);
+                        })
                 }
               }}/>
     );
