@@ -1,6 +1,6 @@
 "use client"
 
-import {FC, forwardRef, PropsWithChildren, useEffect, useImperativeHandle, useRef, useState} from 'react'
+import {FC, forwardRef, PropsWithChildren, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react'
 import { FilePond, registerPlugin } from 'react-filepond';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
@@ -12,6 +12,7 @@ import FormError from '../form-error/form-error';
 import { ActualFileObject, FilePondFile } from 'filepond';
 import { useAppSelector } from '@/shared/redux/hooks';
 import { FilePondInitialFile } from 'filepond';
+import { ImageModel } from '@/models/image.models';
 
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
@@ -39,19 +40,17 @@ const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProp
     children
 },ref) => {
     const configState = useAppSelector((state)=>state.config);
-    const host = configState.djangoHost
-    const imageNames = useRef<string[]>([]);
-    const initializeFiles = (images:File[]):FilePondInitialFile[]=>{
-       
+    const host = configState.djangoHost;
+    const fileMap = new Map();
+    const initializeFiles = (images:File[]| ImageModel[]):FilePondInitialFile[]=>{
         if(images && images.length ==0){
-            imageNames.current=[]
+            fileMap.clear();
             return [];
         }
-        const names = imageNames.current
         const result:FilePondInitialFile[] =[]
         for(const image of images){
-            const found = names.find(n=> n === image.name)
-            if(!found){
+            if(image instanceof File){
+                
                 const filePondInitialFile = {
                     source: `${host}${image.name}`,
                     file:{
@@ -59,15 +58,37 @@ const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProp
                     },
                     options: { type: "input" }
                 }as FilePondInitialFile;
-                names.push(image.name);
+                result.push(filePondInitialFile);
+            }
+            else{
+                console.log('ImageModel');
+                const filePondInitialFile = {
+                    source: `${host}${image.image}`,
+                    file:{
+                        name: image.title
+                    },
+                    options: { type: "input" }
+                }as FilePondInitialFile;
                 result.push(filePondInitialFile);
             }
         }
-        console.log(result);
+
         return result;
     }
 
-    const [files, setFiles] = useState<FileUploadFileType>(initializeFiles(field.value));
+    const toMap=(results:FilePondInitialFile[]):Map<string, FilePondInitialFile>=>{
+        const map = new Map<string,FilePondInitialFile>();
+        for (const result of results){
+            map.set(result.source,result);
+        }
+        return map
+    }
+
+    const toArray = (map:Map<string, FilePondInitialFile>):FilePondInitialFile[] =>{
+        return Array.from(map, ([name, value]) => (value));
+    }
+
+    const [files, setFiles] = useState<FileUploadFileType>(toArray(toMap(initializeFiles(field.value))));
     
 
     useImperativeHandle(ref, ()=>({
