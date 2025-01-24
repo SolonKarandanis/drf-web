@@ -1,6 +1,6 @@
 "use client"
 
-import {FC, forwardRef, PropsWithChildren, useEffect, useImperativeHandle, useState} from 'react'
+import {FC, forwardRef, PropsWithChildren, useEffect, useImperativeHandle, useRef, useState} from 'react'
 import { FilePond, registerPlugin } from 'react-filepond';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
@@ -11,7 +11,6 @@ import FormLabel from '../form-label/form-label';
 import FormError from '../form-error/form-error';
 import { ActualFileObject, FilePondFile } from 'filepond';
 import { useAppSelector } from '@/shared/redux/hooks';
-import { ImageModel } from '@/models/image.models';
 import { FilePondInitialFile } from 'filepond';
 
 
@@ -41,19 +40,31 @@ const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProp
 },ref) => {
     const configState = useAppSelector((state)=>state.config);
     const host = configState.djangoHost
-    const initializeFiles = (images:ImageModel[]):FilePondInitialFile[]=>{
+    const imageNames = useRef<string[]>([]);
+    const initializeFiles = (images:File[]):FilePondInitialFile[]=>{
+       
         if(images && images.length ==0){
+            imageNames.current=[]
             return [];
         }
-        return images.map(image=> {
-            return {
-                source: `${host}${image.image}`,
-                file:{
-                    name: image.title
-                },
-                options: { type: "input" }
-            } as FilePondInitialFile;
-        });
+        const names = imageNames.current
+        const result:FilePondInitialFile[] =[]
+        for(const image of images){
+            const found = names.find(n=> n === image.name)
+            if(!found){
+                const filePondInitialFile = {
+                    source: `${host}${image.name}`,
+                    file:{
+                        name: image.name
+                    },
+                    options: { type: "input" }
+                }as FilePondInitialFile;
+                names.push(image.name);
+                result.push(filePondInitialFile);
+            }
+        }
+        console.log(result);
+        return result;
     }
 
     const [files, setFiles] = useState<FileUploadFileType>(initializeFiles(field.value));
@@ -145,15 +156,10 @@ const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProp
                     const myRequest = new Request(url);
                     fetch(myRequest,)
                         .then((response)=> {
-                            if(response.status !==404){
-                                return response.blob();
-                            }
-                            return null;
+                            return response.blob();
                         })
                         .then(blob=> {
-                            if(blob){
-                                load(blob);
-                            }
+                            load(blob);
                         })
                         .catch(error=>{
                             console.log(error);
