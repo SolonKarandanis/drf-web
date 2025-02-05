@@ -61,7 +61,6 @@ const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProp
                 result.push(filePondInitialFile);
             }
             else{
-                console.log('ImageModel');
                 const filePondInitialFile = {
                     source: `${host}${image.image}`,
                     file:{
@@ -72,8 +71,8 @@ const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProp
                 result.push(filePondInitialFile);
             }
         }
-
-        return result;
+        const removedDuplicatesArray = toArray(toMap(result));
+        return removedDuplicatesArray;
     }
 
     const toMap=(results:FilePondInitialFile[]):Map<string, FilePondInitialFile>=>{
@@ -88,7 +87,7 @@ const FileUpload = forwardRef<FileInputHandleApi,PropsWithChildren<FileInputProp
         return Array.from(map, ([name, value]) => (value));
     }
 
-    const [files, setFiles] = useState<FileUploadFileType>(toArray(toMap(initializeFiles(field.value))));
+    const [files, setFiles] = useState<FileUploadFileType>(initializeFiles(field.value));
     
 
     useImperativeHandle(ref, ()=>({
