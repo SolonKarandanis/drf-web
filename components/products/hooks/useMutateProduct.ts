@@ -33,7 +33,7 @@ export function useMutateProduct(){
             .unwrap()
             .then((response:ProductDetails)=>{
                 toast.success(t("PRODUCTS.SUCCESS.update-product"));
-                // router.push(`/products/${uuid}`);
+                router.push(`/products/${uuid}`);
             })
             .catch((error:ErrorResponse)=>{
                 toast.error(t("PRODUCTS.ERRORS.update-product"));

@@ -5,11 +5,15 @@ export const handleError =(errorResponse:ErrorResponse)=>{
     const {status, data} = errorResponse;
     for (const dataKey in data){
         const dataValue = data[dataKey];
-        for(const valueKey in dataValue){
-            const value = dataValue[valueKey];
-            toast.error(`(${status}) ${value}`);
+        if(!Array.isArray(dataValue)){
+            toast.error(`(${status}) ${dataValue}`);
         }
-        
+        else{
+            for(const valueKey in dataValue){
+                const value = dataValue[valueKey];
+                toast.error(`(${status}) ${value}`);
+            }
+        }
     }
     
 };
