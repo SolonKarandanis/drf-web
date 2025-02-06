@@ -16,7 +16,8 @@ const SimilarProductItem:FC<Props> = ({
   const configState = useAppSelector((state)=>state.config);
   const host = configState.djangoHost
   const path = configState.baseUrl
-  const imagePath = product.previewImage ?   `${host}${product.previewImage}` : `${path}/assets/images/ecommerce/png/16.png`;
+  const imagePath = product.previewImage ?   `${host}${product.previewImage.image}` : `${path}/assets/images/ecommerce/png/16.png`;
+
 
   return (
     <tr>

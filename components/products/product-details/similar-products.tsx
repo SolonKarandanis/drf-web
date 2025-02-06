@@ -5,6 +5,7 @@ import { FC } from 'react'
 import { useGetProductDetailsSimilarProducts } from '../hooks/useGetProductDetailsSimilarProducts';
 import SimilarProductItem from './similar-product-item';
 import SimilarProductsLoading from './similar-products-loading';
+import Link from 'next/link';
 
 interface Props{
     uuid:string;
@@ -40,9 +41,11 @@ const SimilarProducts:FC<Props> = ({uuid}) => {
                         
                         <tr>
                             <td className="grid">
-                                <button type="button" className="ti-btn ti-btn-info-full !font-medium">
-                                    View All Products
-                                </button>
+                                <Link 
+                                    href="/products/search/" 
+                                    className="ti-btn ti-btn-info-full !font-medium">
+                                        View All Products
+                                </Link>
                             </td>
                         </tr>
                     </tbody>
