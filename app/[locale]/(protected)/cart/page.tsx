@@ -364,7 +364,7 @@ const CartPage = async () => {
                                 </div>
                             </div>
                             <div className="grid p-4">
-                                <Link href="/components/pages/ecommerce/checkout/" className="ti-btn bg-primary  text-white !font-medium !mb-2">Proceed To Checkout</Link>
+                                <Link href="/components/pages/ecommerce/checkout/" className="ti-btn bg-success  text-white !font-medium !mb-2">Proceed To Checkout</Link>
                                 <Link href="/components/pages/ecommerce/products/" className="ti-btn bg-light  !font-medium">Countinue Shopping</Link>
                             </div>
                         </div>

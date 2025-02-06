@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 interface Props{
-    details:string;
+    details?:string;
     loading:boolean;
 }
 
