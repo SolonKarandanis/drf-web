@@ -185,7 +185,7 @@ const CartDropdown = () => {
                     </ul>
                     <div className={`p-3 empty-header-item border-t ${cartItemCount === 0 ? 'hidden' : 'block'}`}>
                         <div className="grid">
-                            <Link href="#!" className="w-full p-2 ti-btn ti-btn-success-full">Proceed to checkout</Link>
+                            <Link href="/cart" className="w-full p-2 ti-btn ti-btn-success-full">Proceed to checkout</Link>
                         </div>
                     </div>
                     <div className={`p-[3rem] empty-item ${cartItemCount === 0 ? 'block' : 'hidden'}`}>
