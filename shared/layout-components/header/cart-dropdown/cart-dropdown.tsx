@@ -12,6 +12,7 @@ import {
 import { CartItem } from "@/models/cart.models";
 import CartItemDropdown from "./cart-item-dropdown";
 import { Virtuoso } from 'react-virtuoso'
+import { useRouter } from "next/navigation";
 
 
 const CartDropdown = () => {
@@ -136,18 +137,25 @@ const CartDropdown = () => {
       ];
     const [cartItems, setCartItems] = useState([...cartProduct]);
     const [cartItemCount, setCartItemCount] = useState(cartProduct.length);
+    const router = useRouter()
+    const [open, setOpen] = useState(false)
 
 
     const handleRemove = (itemId:number) => {
         const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
         setCartItems(updatedCartItems);
         setCartItemCount(updatedCartItems.length);
-      };
+    };
+
+    const handleProceedToCart=()=>{
+        setOpen(false);
+        router.push("/cart");
+    }
 
     return (
         <div className="header-element cart-dropdown hs-dropdown ti-dropdown md:!block !hidden py-[1rem] md:px-[0.65rem] px-2 
             [--placement:bottom-right]">
-            <DropdownMenu>
+            <DropdownMenu open={open} onOpenChange={setOpen}>
                 <DropdownMenuTrigger asChild>
                     <button id="dropdown-cart" type="button"
                         className="hs-dropdown-toggle relative ti-dropdown-toggle !p-0 !border-0 flex-shrink-0  !rounded-full !shadow-none align-middle text-xs">
@@ -185,7 +193,11 @@ const CartDropdown = () => {
                     </ul>
                     <div className={`p-3 empty-header-item border-t ${cartItemCount === 0 ? 'hidden' : 'block'}`}>
                         <div className="grid">
-                            <Link href="/cart" className="w-full p-2 ti-btn ti-btn-success-full">Proceed to checkout</Link>
+                            <button 
+                                onClick={handleProceedToCart}
+                                className="w-full p-2 ti-btn ti-btn-success-full hover:bg-emerald-600">
+                                Proceed to cart
+                            </button>
                         </div>
                     </div>
                     <div className={`p-[3rem] empty-item ${cartItemCount === 0 ? 'block' : 'hidden'}`}>
