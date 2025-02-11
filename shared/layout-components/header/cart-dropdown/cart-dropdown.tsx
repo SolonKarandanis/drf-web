@@ -19,7 +19,7 @@ const CartDropdown = () => {
     const cartProduct:CartItem[] = [
         {
           id: 1,
-          imageSrc: "/assets/images/ecommerce/jpg/1.jpg",
+          previewImage:null,
           name: 'SomeThing Phone',
           unitPrice: 1.299,
           text: '6gb Ram',
@@ -31,7 +31,7 @@ const CartDropdown = () => {
         },
         {
           id: 2,
-          imageSrc: "/assets/images/ecommerce/jpg/3.jpg",
+          previewImage:null,
           name: 'Stop Watch',
           unitPrice: 179.29,
           text: '',
@@ -43,7 +43,7 @@ const CartDropdown = () => {
         },
         {
           id: 3,
-          imageSrc: "/assets/images/ecommerce/jpg/5.jpg",
+          previewImage:null,
           name: 'Photo Frame',
           unitPrice: 29.00,
           text: '',
@@ -55,7 +55,7 @@ const CartDropdown = () => {
         },
         {
           id: 4,
-          imageSrc: "/assets/images/ecommerce/jpg/4.jpg",
+          previewImage:null,
           name: 'Kikon Camera',
           unitPrice: 4.999,
           text: '50MM',
@@ -67,7 +67,7 @@ const CartDropdown = () => {
         },
         {
           id: 5,
-          imageSrc: "/assets/images/ecommerce/jpg/6.jpg",
+          previewImage:null,
           name: 'Canvas Shoes',
           unitPrice: 129.00,
           text: 'Sports',
@@ -79,7 +79,7 @@ const CartDropdown = () => {
         },
         {
             id: 6,
-            imageSrc: "/assets/images/ecommerce/jpg/6.jpg",
+            previewImage:null,
             name: 'Canvas Shoes',
             unitPrice: 129.00,
             text: 'Sports',
@@ -91,7 +91,7 @@ const CartDropdown = () => {
           },
           {
             id: 7,
-            imageSrc: "/assets/images/ecommerce/jpg/6.jpg",
+            previewImage:null,
             name: 'Canvas Shoes',
             unitPrice: 129.00,
             text: 'Sports',
@@ -103,7 +103,7 @@ const CartDropdown = () => {
           },
           {
             id: 8,
-            imageSrc: "/assets/images/ecommerce/jpg/6.jpg",
+            previewImage:null,
             name: 'Canvas Shoes',
             unitPrice: 129.00,
             text: 'Sports',
@@ -115,7 +115,7 @@ const CartDropdown = () => {
           },
           {
             id: 9,
-            imageSrc: "/assets/images/ecommerce/jpg/6.jpg",
+            previewImage:null,
             name: 'Canvas Shoes',
             unitPrice: 129.00,
             text: 'Sports',

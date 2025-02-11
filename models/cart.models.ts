@@ -1,8 +1,10 @@
+import { ImageModel } from "./image.models";
+
 export interface CartItem{
     id:number;
     name:string;
     text:string;
-    imageSrc: string;
+    previewImage:ImageModel|null;
     modificationAlert:boolean;
     quantity:number;
     unitPrice:number;

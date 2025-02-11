@@ -18,14 +18,14 @@ const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
     return (
         <li className={`ti-dropdown-item border-b dark:border-defaultborder/10 border-defaultborder hover:bg-violet-300`} key={item.id}>
             <div className="flex items-start cart-dropdown-item">
-                <Image
+                {/* <Image
                     alt="img"
                     src={`${path}${item.imageSrc}`}
                     width={700}
                     height={475}
                     sizes="100vw"
                     className="!h-[1.75rem] !w-[1.75rem] leading-[1.75rem] text-[0.65rem] rounded-[50%] br-5 me-3"
-                />
+                /> */}
 
                 <div className="grow">
                     <div className="flex items-start justify-between mb-0">
