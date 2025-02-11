@@ -3,13 +3,13 @@ export interface CartItem{
     name:string;
     text:string;
     imageSrc: string;
-    color:string;
     modificationAlert:boolean;
     quantity:number;
     unitPrice:number;
     totalPrice:number;
     productId:number;
     uuid:string;
+    attributes?:string;
 }
 
 export interface Cart{

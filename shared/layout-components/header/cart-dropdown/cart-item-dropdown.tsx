@@ -43,7 +43,7 @@ const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
                     </div>
                     <div className="flex items-start justify-between min-w-fit">
                         <ul className="flex header-product-item dark:text-white/50">
-                            <li>{item.color}</li>
+                            {/* <li>{item.color}</li> */}
                             <li>{item.text}</li>
                         </ul>
                     </div>
