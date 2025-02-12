@@ -1,15 +1,22 @@
+import { ImageModel } from "./image.models";
+
+export interface CartItemProduct{
+    sku:string;
+    title:string;
+    uuid:string;
+}
+
 export interface CartItem{
     id:number;
-    name:string;
-    text:string;
-    imageSrc: string;
-    color:string;
+    productDetails:CartItemProduct;
+    previewImage:ImageModel|null;
     modificationAlert:boolean;
     quantity:number;
     unitPrice:number;
     totalPrice:number;
     productId:number;
     uuid:string;
+    attributes?:string;
 }
 
 export interface Cart{
@@ -25,6 +32,7 @@ export interface Cart{
 export interface AddToCartRequest{
     productId:number;
     quantity:number;
+    attributes:string;
 }
 
 export interface UpdateQuantityRequest{

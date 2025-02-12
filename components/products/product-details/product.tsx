@@ -24,8 +24,8 @@ interface Props{
 const Product:FC<Props> = ({uuid}) => {
     const t = useTranslations();
     const {
-        isError,
-        isLoading,
+        isProductError,
+        isProductLoading,
         product,
         productSalePriceIntegerPart,
         productSalePriceDecimalPart,
@@ -35,7 +35,7 @@ const Product:FC<Props> = ({uuid}) => {
         productOwner
     } = useGetProductDetails(uuid);
 
-    if(isError){
+    if(isProductError){
         return <>{t("GLOBAL.FETCH-ERROR")}</>
     }
 
@@ -47,11 +47,11 @@ const Product:FC<Props> = ({uuid}) => {
                     <SkuTitle 
                         sku={product.sku}
                         title={product.title}
-                        loading={isLoading}/>
+                        loading={isProductLoading}/>
                     <ProductRating 
                         rating={product.averageRating} 
                         reviews={product.numberOfRatings} 
-                        loading={isLoading}/>
+                        loading={isProductLoading}/>
                     <div className="grid grid-cols-12 mb-6">
                         <div className="col-span-12 xxl:col-span-3 xl:col-span-12">
                             <p className="mb-1 lh-1 text-[0.6875rem] text-success font-semibold">Special Offer</p>
@@ -59,20 +59,20 @@ const Product:FC<Props> = ({uuid}) => {
                                 salePriceIntegerPart={productSalePriceIntegerPart}
                                 salePriceDecimalPart={productSalePriceDecimalPart} 
                                 price={product.price}
-                                loading={isLoading}/>
+                                loading={isProductLoading}/>
                         </div>
                         <div className="col-span-12 mt-4 xxl:col-span-4 xl:col-span-6 lg:col-span-6 md:col-span-6 sm:col-span-12 mml:mt-0">
                             <p className="mb-2 text-[.9375rem] font-semibold">Categories:</p>
                             <Categories 
                                 categories={productCategories}
-                                loading={isLoading}/>
+                                loading={isProductLoading}/>
                         </div>
                     </div>
                     <div className="mb-4">
                         <p className="text-[.9375rem] font-semibold mb-1">Description :</p>
                         <Content 
                             content={product.content}
-                            loading={isLoading}/>
+                            loading={isProductLoading}/>
                     </div>
                     <div className="mb-4">
                         <div className="grid grid-cols-12 gap-x-6">
@@ -119,18 +119,18 @@ const Product:FC<Props> = ({uuid}) => {
                         modelName={product.title}
                         availabilityStatus={product.availabilityStatusLabel}
                         publishStatus={product.publishStatusLabel}
-                        loading={isLoading}/>
+                        loading={isProductLoading}/>
                     <div className="mb-4">
                         <p className="text-[.9375rem] font-semibold mb-2">Fabric Details :</p>
                         <FabricDetails 
                             details={product.fabricDetails}
-                            loading={isLoading}/>
+                            loading={isProductLoading}/>
                     </div>
                     <div className="mb-4">
                         <p className="text-[.9375rem] font-semibold mb-2">Care Instructions :</p>
                         <CareInstructions 
                             instructions={product.careInstructions}
-                            loading={isLoading}/>
+                            loading={isProductLoading}/>
                     </div>
                     <div className="mb-0">
                         <p className="text-[.9375rem] font-semibold mb-3">Reviews &amp; Ratings :</p>
@@ -138,7 +138,7 @@ const Product:FC<Props> = ({uuid}) => {
                             <Ratings />
                             <Comments 
                                 comments={productComments} 
-                                loading={isLoading}/>
+                                loading={isProductLoading}/>
                         </div>
                     </div>
                 </div>
@@ -152,7 +152,7 @@ const Product:FC<Props> = ({uuid}) => {
                                 firstName={productOwner.firstName}
                                 lastName={productOwner.lastName}
                                 brandName={productBrands.name}
-                                loading={isLoading}/>
+                                loading={isProductLoading}/>
                         </div>
                         <div className="mb-4">
                             <p className="mb-0 font-semibold">Returns:</p>

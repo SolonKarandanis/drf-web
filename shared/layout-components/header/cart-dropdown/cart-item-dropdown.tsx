@@ -14,13 +14,16 @@ interface Props{
 const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
     const configState = useAppSelector((state)=>state.config);
     const path = configState.baseUrl
+    const host = configState.djangoHost
+    const productImage = item.previewImage
+    const imagePath = productImage ?   `${host}${productImage.image}` : `${path}/assets/images/faces/21.jpg`;
     
     return (
         <li className={`ti-dropdown-item border-b dark:border-defaultborder/10 border-defaultborder hover:bg-violet-300`} key={item.id}>
             <div className="flex items-start cart-dropdown-item">
                 <Image
-                    alt="img"
-                    src={`${path}${item.imageSrc}`}
+                    alt={item.previewImage?.alt|| 'alt'}
+                    src={`${imagePath}`}
                     width={700}
                     height={475}
                     sizes="100vw"
@@ -30,7 +33,9 @@ const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
                 <div className="grow">
                     <div className="flex items-start justify-between mb-0">
                         <div className="mb-0 !text-[0.8125rem] text-[#232323] font-semibold dark:text-[#8c9097] dark:text-white/50">
-                            <Link href="#!">{item.name}</Link>
+                            <Link href={`/products/${item.productDetails.uuid}`}>
+                                {`(${item.productDetails.sku}) ${item.productDetails.title}`}
+                            </Link>
                         </div>
 
                         <div className="inline-flex">
@@ -43,8 +48,15 @@ const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
                     </div>
                     <div className="flex items-start justify-between min-w-fit">
                         <ul className="flex header-product-item dark:text-white/50">
-                            <li>{item.color}</li>
-                            <li>{item.text}</li>
+                            {/* <li>{item.text}</li> */}
+                            <li>
+                                <span className="me-1">Size:</span>
+                                <span className="font-semibold text-[#8c9097] dark:text-white/50">Large</span>
+                            </li>
+                            <li>
+                                <span className="me-1">Color:</span>
+                                <span className="font-semibold text-[#8c9097] dark:text-white/50">Grey</span>
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -1,9 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import themeReducer from './features/themeSlice';
-import usersReducer from './features/users/usersSlice'
-import productsReducer from './features/products/productsSlice'
-import socialReducer from './features/social/socialSlice'
-import configReducer from './features/config/configSlice'
+import usersReducer from './features/users/usersSlice';
+import productsReducer from './features/products/productsSlice';
+import cartsReducer from './features/cart/cartSlice'
+import socialReducer from './features/social/socialSlice';
+import configReducer from './features/config/configSlice';
 import { apiSlice } from './apiSlice';
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -24,10 +25,16 @@ const productsPersistConfig = {
   storage: storage,
 };
 
+const cartsPersistConfig = {
+  key: "carts",
+  storage: storage,
+};
+
 const reducers = combineReducers({
   users: persistReducer(usersPersistConfig, usersReducer),
   socials:persistReducer(socialPersistConfig, socialReducer),
   products:persistReducer(productsPersistConfig, productsReducer),
+  carts:persistReducer(cartsPersistConfig, cartsReducer),
   theme: themeReducer,
   config:configReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
