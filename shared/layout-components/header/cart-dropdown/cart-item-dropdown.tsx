@@ -14,18 +14,21 @@ interface Props{
 const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
     const configState = useAppSelector((state)=>state.config);
     const path = configState.baseUrl
+    const host = configState.djangoHost
+    const productImage = item.previewImage
+    const imagePath = productImage ?   `${host}${productImage.image}` : `${path}/assets/images/faces/21.jpg`;
     
     return (
         <li className={`ti-dropdown-item border-b dark:border-defaultborder/10 border-defaultborder hover:bg-violet-300`} key={item.id}>
             <div className="flex items-start cart-dropdown-item">
-                {/* <Image
-                    alt="img"
-                    src={`${path}${item.imageSrc}`}
+                <Image
+                    alt={item.previewImage?.alt|| 'alt'}
+                    src={`${imagePath}`}
                     width={700}
                     height={475}
                     sizes="100vw"
                     className="!h-[1.75rem] !w-[1.75rem] leading-[1.75rem] text-[0.65rem] rounded-[50%] br-5 me-3"
-                /> */}
+                />
 
                 <div className="grow">
                     <div className="flex items-start justify-between mb-0">

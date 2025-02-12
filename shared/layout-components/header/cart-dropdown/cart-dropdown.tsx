@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link"
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { 
     DropdownMenu, 
     DropdownMenuContent, 
@@ -9,138 +9,33 @@ import {
     DropdownMenuSeparator, 
     DropdownMenuTrigger 
 } from "@/shared/shadcn/components/ui/dropdown-menu";
-import { CartItem } from "@/models/cart.models";
 import CartItemDropdown from "./cart-item-dropdown";
 import { Virtuoso } from 'react-virtuoso'
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useGetUserCart } from "@/components/cart/hooks/useGetUserCart";
 
 
 const CartDropdown = () => {
-    const cartProduct:CartItem[] = [
-        {
-          id: 1,
-          previewImage:null,
-          name: 'SomeThing Phone',
-          unitPrice: 1.299,
-          text: '6gb Ram',
-          modificationAlert:false,
-          productId:1,
-          quantity:4,
-          totalPrice:4,
-          uuid:'sss'
-        },
-        {
-          id: 2,
-          previewImage:null,
-          name: 'Stop Watch',
-          unitPrice: 179.29,
-          text: '',
-          modificationAlert:false,
-          productId:1,
-          quantity:4,
-          totalPrice:4,
-          uuid:'sss'
-        },
-        {
-          id: 3,
-          previewImage:null,
-          name: 'Photo Frame',
-          unitPrice: 29.00,
-          text: '',
-          modificationAlert:false,
-          productId:1,
-          quantity:4,
-          totalPrice:4,
-          uuid:'sss'
-        },
-        {
-          id: 4,
-          previewImage:null,
-          name: 'Kikon Camera',
-          unitPrice: 4.999,
-          text: '50MM',
-          modificationAlert:false,
-          productId:1,
-          quantity:4,
-          totalPrice:4,
-          uuid:'sss'
-        },
-        {
-          id: 5,
-          previewImage:null,
-          name: 'Canvas Shoes',
-          unitPrice: 129.00,
-          text: 'Sports',
-          modificationAlert:false,
-          productId:1,
-          quantity:4,
-          totalPrice:4,
-          uuid:'sss'
-        },
-        {
-            id: 6,
-            previewImage:null,
-            name: 'Canvas Shoes',
-            unitPrice: 129.00,
-            text: 'Sports',
-            modificationAlert:false,
-            productId:1,
-            quantity:4,
-            totalPrice:4,
-            uuid:'sss'
-          },
-          {
-            id: 7,
-            previewImage:null,
-            name: 'Canvas Shoes',
-            unitPrice: 129.00,
-            text: 'Sports',
-            modificationAlert:false,
-            productId:1,
-            quantity:4,
-            totalPrice:4,
-            uuid:'sss'
-          },
-          {
-            id: 8,
-            previewImage:null,
-            name: 'Canvas Shoes',
-            unitPrice: 129.00,
-            text: 'Sports',
-            modificationAlert:false,
-            productId:1,
-            quantity:4,
-            totalPrice:4,
-            uuid:'sss'
-          },
-          {
-            id: 9,
-            previewImage:null,
-            name: 'Canvas Shoes',
-            unitPrice: 129.00,
-            text: 'Sports',
-            modificationAlert:false,
-            productId:1,
-            quantity:4,
-            totalPrice:4,
-            uuid:'sss'
-          },
-      ];
-    const [cartItems, setCartItems] = useState([...cartProduct]);
-    const [cartItemCount, setCartItemCount] = useState(cartProduct.length);
-    const router = useRouter()
+    const t = useTranslations();
+    const {
+        cartItems,
+        isError,
+        isLoading,
+    } = useGetUserCart();
     const [open, setOpen] = useState(false)
 
-
     const handleRemove = (itemId:number) => {
-        const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
-        setCartItems(updatedCartItems);
-        setCartItemCount(updatedCartItems.length);
+        
     };
 
     const handleProceedToCart=()=>{
         setOpen(false);
-        router.push("/cart");
+        // router.push("/cart");
+    }
+
+    if(isError){
+        return <>{t("GLOBAL.FETCH-ERROR")}</>
     }
 
     return (
@@ -153,7 +48,7 @@ const CartDropdown = () => {
                         <i className="bx bx-cart header-link-icon"></i>
                         <span className="flex absolute h-5 w-5 -top-[0.25rem] end-0 -me-[0.6rem]">
                             <span className="relative inline-flex rounded-full h-[14.7px] w-[14px] text-[0.625rem] bg-sky-500 text-white justify-center items-center"
-                            id="cart-icon-badge">{cartItemCount}</span>
+                            id="cart-icon-badge">{cartItems?.length}</span>
                         </span>
                     </button>
                 </DropdownMenuTrigger>
@@ -169,7 +64,7 @@ const CartDropdown = () => {
                                 <Link href="#!"
                                     className="font-[600] py-[0.25/2rem] px-[0.45rem] rounded-[0.25rem] bg-sky-500 text-white text-[0.75em] "
                                     id="cart-data">
-                                    {cartItemCount} Item{cartItemCount !== 1 ? 's' : ''}
+                                    {cartItems?.length} Item{cartItems?.length !== 1 ? 's' : ''}
                                 </Link>
                             </div>
                         </div>
@@ -179,10 +74,10 @@ const CartDropdown = () => {
                         <Virtuoso 
                             className="!h-[200px]"
                             data={cartItems} 
-                            totalCount={cartItemCount}
+                            totalCount={cartItems?.length}
                             itemContent={(_,item)=><CartItemDropdown  item={item} removeItem={handleRemove} />}/>
                     </ul>
-                    <div className={`p-3 empty-header-item border-t ${cartItemCount === 0 ? 'hidden' : 'block'}`}>
+                    <div className={`p-3 empty-header-item border-t ${cartItems?.length === 0 ? 'hidden' : 'block'}`}>
                         <div className="grid">
                             <button 
                                 onClick={handleProceedToCart}
@@ -191,7 +86,7 @@ const CartDropdown = () => {
                             </button>
                         </div>
                     </div>
-                    <div className={`p-[3rem] empty-item ${cartItemCount === 0 ? 'block' : 'hidden'}`}>
+                    <div className={`p-[3rem] empty-item ${cartItems?.length === 0 ? 'block' : 'hidden'}`}>
                         <div className="text-center">
                             <span className="!w-[4rem] !h-[4rem] !leading-[4rem] rounded-[50%] avatar bg-warning/10 !text-warning">
                                 <i className="ri-shopping-cart-2-line text-[2rem]"></i>
