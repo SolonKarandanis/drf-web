@@ -77,7 +77,7 @@ const CartItemsSection = () => {
                                                         </div>
                                                         <div>
                                                             <div className="mb-1 text-[0.875rem] font-semibold">
-                                                                <Link href="#!">
+                                                                <Link href={`/products/${item.productDetails.uuid}`}>
                                                                     {`(${item.productDetails.sku}) ${item.productDetails.title}`}
                                                                 </Link>
                                                             </div>

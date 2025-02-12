@@ -3,6 +3,7 @@ import { ImageModel } from "./image.models";
 export interface CartItemProduct{
     sku:string;
     title:string;
+    uuid:string;
 }
 
 export interface CartItem{
