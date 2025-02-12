@@ -1,0 +1,31 @@
+import { Cart, CartItem } from "@/models/cart.models";
+import { useLazyGetUserCartQuery } from "@/shared/redux/features/cart/cartApiSlice";
+import { resetCart, setCart, userCartItemSelector, userCartSelector } from "@/shared/redux/features/cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
+import { useEffect } from "react";
+
+export function useGetUserCart(){
+    const [getcart,{isError,isLoading,data}] = useLazyGetUserCartQuery();
+    const dispatch = useAppDispatch();
+
+    useEffect(()=>{
+        getcart()
+            .unwrap()
+            .then((cart)=>{
+                dispatch(setCart(cart));
+            })
+            .catch((error)=>{
+                dispatch(resetCart());
+            });
+    },[]);
+
+    const cart:Cart | null= useAppSelector(userCartSelector);
+    const cartItems:CartItem[]| undefined= useAppSelector(userCartItemSelector);
+
+    return {
+        cart,
+        cartItems,
+        isError,
+        isLoading
+    }
+}
