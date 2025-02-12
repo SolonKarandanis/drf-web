@@ -1,9 +1,13 @@
 import { ImageModel } from "./image.models";
 
+export interface CartItemProduct{
+    sku:string;
+    title:string;
+}
+
 export interface CartItem{
     id:number;
-    name:string;
-    text:string;
+    productDetails:CartItemProduct;
     previewImage:ImageModel|null;
     modificationAlert:boolean;
     quantity:number;

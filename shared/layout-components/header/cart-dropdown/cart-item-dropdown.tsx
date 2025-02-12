@@ -33,7 +33,9 @@ const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
                 <div className="grow">
                     <div className="flex items-start justify-between mb-0">
                         <div className="mb-0 !text-[0.8125rem] text-[#232323] font-semibold dark:text-[#8c9097] dark:text-white/50">
-                            <Link href="#!">{item.name}</Link>
+                            <Link href="#!">
+                                {`(${item.productDetails.sku}) ${item.productDetails.title}`}
+                            </Link>
                         </div>
 
                         <div className="inline-flex">
@@ -46,8 +48,7 @@ const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
                     </div>
                     <div className="flex items-start justify-between min-w-fit">
                         <ul className="flex header-product-item dark:text-white/50">
-                            {/* <li>{item.color}</li> */}
-                            <li>{item.text}</li>
+                            {/* <li>{item.text}</li> */}
                         </ul>
                     </div>
                 </div>
