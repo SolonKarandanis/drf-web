@@ -2,8 +2,14 @@
 
 import { CartItem } from "@/models/cart.models";
 import Link from "next/link";
+import { useGetUserCart } from "./hooks/useGetUserCart";
 
 const CartItemsSection = () => {
+    const {
+        cartItems,
+        isError,
+        isLoading,
+    } = useGetUserCart();
     const cartProducts:CartItem[] = [
         {
             id: 1,

@@ -18,6 +18,7 @@ import { useGetUserCart } from "@/components/cart/hooks/useGetUserCart";
 
 const CartDropdown = () => {
     const t = useTranslations();
+    const router = useRouter();
     const {
         cartItems,
         isError,
@@ -31,7 +32,7 @@ const CartDropdown = () => {
 
     const handleProceedToCart=()=>{
         setOpen(false);
-        // router.push("/cart");
+        router.push("/cart");
     }
 
     if(isError){
