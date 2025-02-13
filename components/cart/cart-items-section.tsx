@@ -27,6 +27,14 @@ const CartItemsSection = () => {
     const handleProceedToShopping=()=>{
         router.push("/products/search");
     }
+
+    const handleAddToWishList = ()=>{
+
+    }
+
+    const handleRemoveFromCart = () =>{
+
+    }
    
     return (
         <div className="col-span-12 xxl:col-span-9">
@@ -148,7 +156,9 @@ const CartItemsSection = () => {
                                                 <td>
                                                     <div className="flex items-center">
                                                         <div className="hs-tooltip ti-main-tooltip">
-                                                            <button type="button" className="hs-tooltip-toggle ti-btn ti-btn-icon bg-success text-white !font-medium me-1">
+                                                            <button 
+                                                                onClick={handleAddToWishList} 
+                                                                className="hs-tooltip-toggle ti-btn ti-btn-icon bg-success text-white !font-medium me-1">
                                                                 <i className="ri-heart-line"></i>
                                                                 <span
                                                                     className="hs-tooltip-content  ti-main-tooltip-content py-1 px-2 !bg-black !text-xs !font-medium !text-white shadow-sm "
@@ -158,7 +168,8 @@ const CartItemsSection = () => {
                                                             </button>
                                                         </div>
                                                         <div className="hs-tooltip ti-main-tooltip ltr:[--placement:left] rtl:[--placement:right]">
-                                                            <button type="button"
+                                                            <button 
+                                                                onClick={handleRemoveFromCart}
                                                                 className="hs-tooltip-toggle ti-btn ti-btn-icon bg-danger text-white !font-medium btn-delete">
                                                                 <i className="ri-delete-bin-line"></i>
                                                                 <span

@@ -1,4 +1,5 @@
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
+import ButtonSection from '@/components/cart/buttons-section'
 import CartDetailsSection from '@/components/cart/cart-details-section'
 import CartItemsSection from '@/components/cart/cart-items-section'
 import CouponSection from '@/components/cart/coupon-section'
@@ -45,10 +46,7 @@ const CartPage = async () => {
                             <DeliverySection />
                             <CouponSection />
                             <CartDetailsSection />
-                            <div className="grid p-4">
-                                <Link href="/components/pages/ecommerce/checkout/" className="ti-btn bg-success  text-white !font-medium !mb-2">Proceed To Checkout</Link>
-                                <Link href="/products/search" className="ti-btn bg-light  !font-medium">Countinue Shopping</Link>
-                            </div>
+                            <ButtonSection />
                         </div>
                     </div>
                 </div>
