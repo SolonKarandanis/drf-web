@@ -2,6 +2,7 @@
 
 import { useGetProductMisc } from "@/components/products/hooks/useGetProductMisc";
 import { CartItem } from "@/models/cart.models"
+import CurrencyFormatter from "@/shared/components/currency-formatter/currency-formatter";
 import { useAppSelector } from "@/shared/redux/hooks";
 import Image from "next/image"
 import Link from "next/link"
@@ -57,8 +58,11 @@ const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
                         </div>
 
                         <div className="inline-flex">
+                            <span className="text-black mb-1 mr-1 dark:text-white !font-medium">
+                                {item.quantity}x
+                            </span>
                             <span className="text-black mb-1 dark:text-white !font-medium">
-                                {item.unitPrice}
+                                <CurrencyFormatter amount={item.unitPrice} />
                             </span>
                             <Link aria-label="anchor" href="#!" className="header-cart-remove ltr:float-right rtl:float-left dropdown-item-close" onClick={() => removeItem(item.id)}><i
                             className="ti ti-trash"></i></Link>
@@ -66,7 +70,6 @@ const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
                     </div>
                     <div className="flex items-start justify-between min-w-fit">
                         <ul className="flex header-product-item dark:text-white/50">
-                            {/* <li>{item.text}</li> */}
                             <li>
                                 <span className="me-1">Size:</span>
                                 <span className="font-semibold text-[#8c9097] dark:text-white/50">

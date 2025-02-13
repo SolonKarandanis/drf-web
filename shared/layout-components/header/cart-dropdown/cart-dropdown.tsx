@@ -43,7 +43,6 @@ const CartDropdown = () => {
     }
 
     if(!isLoading){
-        console.log(cartItems);
         return (
             <div className="header-element cart-dropdown hs-dropdown ti-dropdown md:!block !hidden py-[1rem] md:px-[0.65rem] px-2 
                 [--placement:bottom-right]">
