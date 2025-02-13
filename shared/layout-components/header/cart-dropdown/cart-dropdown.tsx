@@ -14,8 +14,6 @@ import { Virtuoso } from 'react-virtuoso'
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useGetUserCart } from "@/components/cart/hooks/useGetUserCart";
-import { useGetProductMisc } from "@/components/products/hooks/useGetProductMisc";
-import { CartItem } from "@/models/cart.models";
 
 
 const CartDropdown = () => {
@@ -69,12 +67,12 @@ const CartDropdown = () => {
                                 aria-labelledby="dropdown-cart">
                                 <div className="ti-dropdown-header !bg-transparent flex justify-between items-center !m-0 !p-4">
                                     <p className="text-black  !text-[1.0625rem] dark:text-[#8c9097] dark:text-white/50 font-semibold">
-                                        Cart Items
+                                        {t("CART.PAGE.cart-items")}
                                     </p>
                                     <Link href="#!"
                                         className="font-[600] py-[0.25/2rem] px-[0.45rem] rounded-[0.25rem] bg-sky-500 text-white text-[0.75em] "
                                         id="cart-data">
-                                        {cartItems?.length} Item{cartItems?.length !== 1 ? 's' : ''}
+                                        {cartItems?.length} {cartItems?.length !== 1 ? t("CART.LABELS.items") : t("CART.LABELS.item")}
                                     </Link>
                                 </div>
                             </div>
@@ -96,7 +94,7 @@ const CartDropdown = () => {
                                 <button 
                                     onClick={handleProceedToCart}
                                     className="w-full p-2 ti-btn ti-btn-success-full hover:bg-emerald-600">
-                                    Proceed to cart
+                                    {t("CART.BUTTONS.proceed-to-cart")}
                                 </button>
                             </div>
                         </div>
@@ -105,13 +103,12 @@ const CartDropdown = () => {
                                 <span className="!w-[4rem] !h-[4rem] !leading-[4rem] rounded-[50%] avatar bg-warning/10 !text-warning">
                                     <i className="ri-shopping-cart-2-line text-[2rem]"></i>
                                 </span>
-                                <h6 className="font-bold mb-1 mt-3 text-[1rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">Your Cart is Empty</h6>
-                                <span className="mb-3 !font-normal text-[0.8125rem] block text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">Add some items to make me happy :)</span>
+                                <h6 className="font-bold mb-1 mt-3 text-[1rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">{t("CART.LABELS.empty-cart")}</h6>
                                 <button
                                     onClick={handleProceedToShopping}
                                     className="ti-btn ti-btn-success btn-wave ti-btn-wave btn-sm m-1 !text-[0.75rem] !py-[0.25rem] !px-[0.5rem]"
                                     data-abc="true">
-                                    continue shopping 
+                                    {t("CART.BUTTONS.continue-shopping")} 
                                     <i className="bi bi-arrow-right ms-1"></i>
                                 </button>
                             </div>

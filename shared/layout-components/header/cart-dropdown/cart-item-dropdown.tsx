@@ -4,6 +4,7 @@ import { useGetProductMisc } from "@/components/products/hooks/useGetProductMisc
 import { CartItem } from "@/models/cart.models"
 import CurrencyFormatter from "@/shared/components/currency-formatter/currency-formatter";
 import { useAppSelector } from "@/shared/redux/hooks";
+import { useTranslations } from "next-intl";
 import Image from "next/image"
 import Link from "next/link"
 import { FC } from "react"
@@ -14,6 +15,7 @@ interface Props{
 }
 
 const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
+    const t = useTranslations("CART");
     const {
         sizesOptions,
         coloursOptions,
@@ -74,13 +76,13 @@ const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
                     <div className="flex items-start justify-between min-w-fit">
                         <ul className="flex header-product-item dark:text-white/50">
                             <li>
-                                <span className="me-1">Size:</span>
+                                <span className="me-1">{t("LABELS.size")}:</span>
                                 <span className="font-semibold text-[#8c9097] dark:text-white/50">
                                     {findItemSize(item)}
                                 </span>
                             </li>
                             <li>
-                                <span className="me-1">Color:</span>
+                                <span className="me-1">{t("LABELS.color")}:</span>
                                 <span className="font-semibold text-[#8c9097] dark:text-white/50">
                                     {findItemColor(item)}
                                 </span>

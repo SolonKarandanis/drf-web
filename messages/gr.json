@@ -376,5 +376,30 @@
             "update-product": "Κάτι πήγε στραβά κατα την ενημέρωση προϊόντος",
             "create-product": "Κάτι πήγε στραβά κατα τη δημιουργία του προϊόντος"
         }
+    },
+    "CART":{
+        "PAGE":{
+            "title":"Cart",
+            "cart-items":"Cart Items"
+        },
+        "LABELS":{
+            "product-name":"Product Name",
+            "price":"Price",
+            "quantity":"Quantity",
+            "total":"Total",
+            "action":"Action",
+            "size":"Size",
+            "color":"Color",
+            "item":"Item",
+            "items":"Items",
+            "empty-cart":"Your cart is empty"
+        },
+        "BUTTONS":{
+            "proceed-to-cart":"Proceed to Cart",
+            "proceed-to-checkout":"Proceed to Checkout",
+            "continue-shopping":"Continue Shopping",
+            "update-cart":"Update Cart",
+            "clear-cart":"Clear Cart"
+        }
     }
 }
