@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useGetUserCart } from "./hooks/useGetUserCart";
 import { useAppSelector } from "@/shared/redux/hooks";
+import CurrencyFormatter from "@/shared/components/currency-formatter/currency-formatter";
+import { useGetProductMisc } from "../products/hooks/useGetProductMisc";
 
 const CartItemsSection = () => {
     const {
@@ -10,6 +12,10 @@ const CartItemsSection = () => {
         isError,
         isLoading,
     } = useGetUserCart();
+    const {
+        sizesOptions,
+        coloursOptions,
+    } = useGetProductMisc();
     const configState = useAppSelector((state)=>state.config);
     const path = configState.baseUrl
     const host = configState.djangoHost
@@ -92,7 +98,7 @@ const CartItemsSection = () => {
                                                 </td>
                                                 <td>
                                                     <div className="font-semibold text-[0.875rem]">
-                                                        {item.unitPrice}
+                                                        <CurrencyFormatter amount={item.unitPrice} />
                                                     </div>
                                                 </td>
                                                 <td className="product-quantity-container">
@@ -121,7 +127,7 @@ const CartItemsSection = () => {
                                                 </td>
                                                 <td>
                                                     <div className="text-[0.875rem] font-semibold">
-                                                        {item.totalPrice}
+                                                        <CurrencyFormatter amount={item.totalPrice} />
                                                     </div>
                                                 </td>
                                                 <td>

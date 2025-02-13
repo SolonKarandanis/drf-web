@@ -64,8 +64,11 @@ const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
                             <span className="text-black mb-1 dark:text-white !font-medium">
                                 <CurrencyFormatter amount={item.unitPrice} />
                             </span>
-                            <Link aria-label="anchor" href="#!" className="header-cart-remove ltr:float-right rtl:float-left dropdown-item-close" onClick={() => removeItem(item.id)}><i
-                            className="ti ti-trash"></i></Link>
+                            <button 
+                                className="header-cart-remove ltr:float-right rtl:float-left dropdown-item-close" 
+                                onClick={() => removeItem(item.id)}>
+                                    <i className="ti ti-trash"></i>
+                            </button>
                         </div>
                     </div>
                     <div className="flex items-start justify-between min-w-fit">

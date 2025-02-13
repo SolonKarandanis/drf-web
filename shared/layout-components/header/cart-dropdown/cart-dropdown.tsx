@@ -37,6 +37,11 @@ const CartDropdown = () => {
         router.push("/cart");
     }
 
+    const handleProceedToShopping=()=>{
+        setOpen(false);
+        router.push("/products/search");
+    }
+
 
     if(isError){
         return <>{t("GLOBAL.FETCH-ERROR")}</>
@@ -102,10 +107,13 @@ const CartDropdown = () => {
                                 </span>
                                 <h6 className="font-bold mb-1 mt-3 text-[1rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">Your Cart is Empty</h6>
                                 <span className="mb-3 !font-normal text-[0.8125rem] block text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">Add some items to make me happy :)</span>
-                                <Link href="#!" className="ti-btn ti-btn-success btn-wave ti-btn-wave btn-sm m-1 !text-[0.75rem] !py-[0.25rem] !px-[0.5rem]"
+                                <button
+                                    onClick={handleProceedToShopping}
+                                    className="ti-btn ti-btn-success btn-wave ti-btn-wave btn-sm m-1 !text-[0.75rem] !py-[0.25rem] !px-[0.5rem]"
                                     data-abc="true">
-                                    continue shopping <i className="bi bi-arrow-right ms-1"></i>
-                                </Link>
+                                    continue shopping 
+                                    <i className="bi bi-arrow-right ms-1"></i>
+                                </button>
                             </div>
                         </div>
                     </DropdownMenuContent>
