@@ -20,8 +20,6 @@ const AttributesSection:FC<AttributesSectionProps> = ({
         sizesOptions,
         coloursOptions,
         gendersOptions,
-        isLoading,
-        isError
     } = useGetProductMisc();
 
     return (
@@ -38,7 +36,7 @@ const AttributesSection:FC<AttributesSectionProps> = ({
                         sectionClassName="col-span-12 xl:col-span-4 mb-2"
                         field={field}
                         error={errors.category?.message}
-                        loading={isLoading || isProductLoading}>
+                        loading={isProductLoading}>
                             {t(`LABELS.category`)}
                     </FormSelect>
                 )}
@@ -55,7 +53,7 @@ const AttributesSection:FC<AttributesSectionProps> = ({
                         sectionClassName="col-span-12 xl:col-span-4 mb-2"
                         field={field}
                         error={errors.gender?.message}
-                        loading={isLoading || isProductLoading}>
+                        loading={isProductLoading}>
                             {t(`LABELS.gender`)}
                     </FormSelect>
                 )}
@@ -72,7 +70,7 @@ const AttributesSection:FC<AttributesSectionProps> = ({
                         sectionClassName="col-span-12 xl:col-span-4 mb-2"
                         field={field}
                         error={errors.brand?.message}
-                        loading={isLoading || isProductLoading}>
+                        loading={isProductLoading}>
                             {t(`LABELS.brand`)}
                     </FormSelect>
                 )}
@@ -91,7 +89,7 @@ const AttributesSection:FC<AttributesSectionProps> = ({
                         field={field}
                         defaultValues={defaultValues.sizes}
                         error={errors.sizes?.message}
-                        loading={isLoading || isProductLoading}>
+                        loading={isProductLoading}>
                             {t(`LABELS.size`)}
                     </FormSelect>
                 )}
@@ -109,7 +107,7 @@ const AttributesSection:FC<AttributesSectionProps> = ({
                         field={field}
                         defaultValues={defaultValues.colors}
                         error={errors.colors?.message}
-                        loading={isLoading || isProductLoading}>
+                        loading={isProductLoading}>
                             {t(`LABELS.color`)}
                     </FormSelect>
                 )}

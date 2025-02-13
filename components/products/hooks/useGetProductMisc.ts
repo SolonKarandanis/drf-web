@@ -1,29 +1,15 @@
 import { AttributeOption, Brand, Category } from "@/models/product.models";
 import { 
-    useLazyGetAllAttributesQuery,
-    useLazyGetAllBrandsQuery, 
-    useLazyGetAllCategoriesQuery, 
-} from "@/shared/redux/features/products/productsApiSlice";
-import { 
     allBrandsSelector, 
     allCategoriesSelector, 
     allColoursSelector, 
     allGendersSelector, 
     allSizesSelector, 
-    setAtributes, 
-    setBrands, 
-    setCategories,
 } from "@/shared/redux/features/products/productsSlice";
-import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
-import { useEffect } from "react";
+import { useAppSelector } from "@/shared/redux/hooks";
 import { Options } from '@/shared/components/props';
 
 export function useGetProductMisc(){
-    const [getCategories,categoryState] = useLazyGetAllCategoriesQuery();
-    const [getBrands,brandState] = useLazyGetAllBrandsQuery();
-    const [getAttributes,attributeState] = useLazyGetAllAttributesQuery();
-
-    const dispatch = useAppDispatch();
     const categories:Category[]= useAppSelector(allCategoriesSelector);
     const brands:Brand[]= useAppSelector(allBrandsSelector);
     const sizes:AttributeOption[]= useAppSelector(allSizesSelector);
@@ -66,29 +52,6 @@ export function useGetProductMisc(){
     });
 
 
-    useEffect(()=>{
-        getCategories()
-            .unwrap()
-            .then((result) =>dispatch(setCategories(result)))
-            .catch((error)=>{
-        })
-
-        getBrands()
-            .unwrap()
-            .then((result) =>dispatch(setBrands(result)))
-            .catch((error)=>{
-        })
-
-        getAttributes()
-            .unwrap()
-            .then((result) =>dispatch(setAtributes(result)))
-            .catch((error)=>{
-        })
-    },[])
-
-    const isLoading = categoryState.isLoading || brandState.isLoading || attributeState.isLoading;
-
-    const isError = categoryState.isError || brandState.isError || attributeState.isError;
     
     return{
         categories,
@@ -101,8 +64,6 @@ export function useGetProductMisc(){
         coloursOptions,
         genders,
         gendersOptions,
-        isLoading,
-        isError
     }
 
 }
