@@ -1,6 +1,6 @@
 "use client"
 
-import { useGetSocials } from './useGetSocials';
+import { useGetSocials } from './hooks/useGetSocials';
 
 const SetSocials = () => {
   const {response} =useGetSocials();

@@ -14,11 +14,21 @@ import { Virtuoso } from 'react-virtuoso'
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useGetUserCart } from "@/components/cart/hooks/useGetUserCart";
+import { useGetProductMisc } from "@/components/products/hooks/useGetProductMisc";
 
 
 const CartDropdown = () => {
     const t = useTranslations();
     const router = useRouter();
+    // const {
+    //     categoriesOptions,
+    //     brandsOptions,
+    //     sizesOptions,
+    //     coloursOptions,
+    //     gendersOptions,
+    //     isLoading: loading,
+    //     isError: error
+    // } = useGetProductMisc();
     const {
         cartItems,
         isError,

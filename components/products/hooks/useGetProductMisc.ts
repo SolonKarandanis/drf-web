@@ -13,9 +13,6 @@ import {
     setAtributes, 
     setBrands, 
     setCategories,
-    setColours,
-    setGenders,
-    setSizes
 } from "@/shared/redux/features/products/productsSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useEffect } from "react";
@@ -74,19 +71,19 @@ export function useGetProductMisc(){
             .unwrap()
             .then((result) =>dispatch(setCategories(result)))
             .catch((error)=>{
-            })
+        })
 
         getBrands()
             .unwrap()
             .then((result) =>dispatch(setBrands(result)))
             .catch((error)=>{
-            })
+        })
 
         getAttributes()
             .unwrap()
             .then((result) =>dispatch(setAtributes(result)))
             .catch((error)=>{
-            })
+        })
     },[])
 
     const isLoading = categoryState.isLoading || brandState.isLoading || attributeState.isLoading;
