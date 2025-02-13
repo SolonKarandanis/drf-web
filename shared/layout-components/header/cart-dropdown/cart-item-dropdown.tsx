@@ -67,6 +67,7 @@ const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
                                 <CurrencyFormatter amount={item.unitPrice} />
                             </span>
                             <button 
+                                type="button"
                                 className="header-cart-remove ltr:float-right rtl:float-left dropdown-item-close" 
                                 onClick={() => removeItem(item.id)}>
                                     <i className="ti ti-trash"></i>

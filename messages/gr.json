@@ -379,30 +379,30 @@
     },
     "CART":{
         "PAGE":{
-            "title":"Cart",
-            "cart-items":"Cart Items"
+            "title":"Καλάθι",
+            "cart-items":"Προϊόντα Καλαθιού"
         },
         "LABELS":{
-            "product-name":"Product Name",
-            "price":"Price",
-            "quantity":"Quantity",
-            "total":"Total",
-            "action":"Action",
-            "size":"Size",
-            "color":"Color",
-            "item":"Item",
-            "items":"Items",
-            "empty-cart-title":"Empty Cart",
-            "empty-cart-description":"Your cart is empty"
+            "product-name":"Όνομα προϊόντος",
+            "price":"Τιμή",
+            "quantity":"Ποσότητα",
+            "total":"Σύνολο",
+            "action":"Ενέργεια",
+            "size":"Μέγεθος",
+            "color":"Χρώμα",
+            "item":"Προϊόν",
+            "items":"Προϊόντα",
+            "empty-cart-title":"Άδειο καλάθι",
+            "empty-cart-description":"Το καλάθι σας είναι άδειο"
         },
         "BUTTONS":{
-            "proceed-to-cart":"Proceed to Cart",
-            "proceed-to-checkout":"Proceed to Checkout",
-            "continue-shopping":"Continue Shopping",
-            "update-cart":"Update Cart",
-            "clear-cart":"Clear Cart",
-            "add-to-wishlist":"Add to Wishlist",
-            "remove-from-cart":"Remove from Cart"
+            "proceed-to-cart":"Προχωρήστε στο Καλάθι",
+            "proceed-to-checkout":"Προχωρήστε σε αγορά",
+            "continue-shopping":"Συνεχίστε τις αγορές",
+            "update-cart":"Ενημέρωση καλαθιού",
+            "clear-cart":"Εκκαθάριση Καλαθιού",
+            "add-to-wishlist":"Προσθήκη στα Αγαπημένα",
+            "remove-from-cart":"Αφαίρεση από το καλάθι"
         }
     }
 }

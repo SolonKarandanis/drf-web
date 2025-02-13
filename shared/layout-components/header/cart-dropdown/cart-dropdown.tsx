@@ -27,7 +27,7 @@ const CartDropdown = () => {
     const [open, setOpen] = useState(false)
 
     const handleRemove = (itemId:number) => {
-        
+        console.log(itemId);
     };
 
     const handleProceedToCart=()=>{
