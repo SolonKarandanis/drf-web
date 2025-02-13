@@ -103,7 +103,9 @@ const CartDropdown = () => {
                                 <span className="!w-[4rem] !h-[4rem] !leading-[4rem] rounded-[50%] avatar bg-warning/10 !text-warning">
                                     <i className="ri-shopping-cart-2-line text-[2rem]"></i>
                                 </span>
-                                <h6 className="font-bold mb-1 mt-3 text-[1rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">{t("CART.LABELS.empty-cart")}</h6>
+                                <h6 className="font-bold mb-1 mt-3 text-[1rem] text-defaulttextcolor dark:text-[#8c9097] dark:text-white/50">
+                                    {t("CART.LABELS.empty-cart-description")}
+                                </h6>
                                 <button
                                     onClick={handleProceedToShopping}
                                     className="ti-btn ti-btn-success btn-wave ti-btn-wave btn-sm m-1 !text-[0.75rem] !py-[0.25rem] !px-[0.5rem]"

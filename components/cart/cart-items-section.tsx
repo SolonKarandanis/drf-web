@@ -5,8 +5,12 @@ import { useGetUserCart } from "./hooks/useGetUserCart";
 import { useAppSelector } from "@/shared/redux/hooks";
 import CurrencyFormatter from "@/shared/components/currency-formatter/currency-formatter";
 import { useGetProductMisc } from "../products/hooks/useGetProductMisc";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 const CartItemsSection = () => {
+    const t = useTranslations("CART");
+    const router = useRouter(); 
     const {
         cartItems,
         isError,
@@ -19,6 +23,10 @@ const CartItemsSection = () => {
     const configState = useAppSelector((state)=>state.config);
     const path = configState.baseUrl
     const host = configState.djangoHost
+
+    const handleProceedToShopping=()=>{
+        router.push("/products/search");
+    }
    
     return (
         <div className="col-span-12 xxl:col-span-9">
@@ -26,15 +34,22 @@ const CartItemsSection = () => {
                 <div className="box !hidden" id="cart-empty-cart">
                     <div className="box-header">
                         <div className="box-title">
-                            Empty Cart
+                        {t("LABELS.empty-cart-title")}
                         </div>
                     </div>
                     <div className="flex items-center justify-center box-body">
                         <div className="text-center cart-empty">
                             <svg xmlns="http://www.w3.org/2000/svg" className="svg-muted" width="24" height="24" viewBox="0 0 24 24"><path d="M18.6 16.5H8.9c-.9 0-1.6-.6-1.9-1.4L4.8 6.7c0-.1 0-.3.1-.4.1-.1.2-.1.4-.1h17.1c.1 0 .3.1.4.2.1.1.1.3.1.4L20.5 15c-.2.8-1 1.5-1.9 1.5zM5.9 7.1 8 14.8c.1.4.5.8 1 .8h9.7c.5 0 .9-.3 1-.8l2.1-7.7H5.9z" /><path d="M6 10.9 3.7 2.5H1.3v-.9H4c.2 0 .4.1.4.3l2.4 8.7-.8.3zM8.1 18.8 6 11l.9-.3L9 18.5z" /><path d="M20.8 20.4h-.9V20c0-.7-.6-1.3-1.3-1.3H8.9c-.7 0-1.3.6-1.3 1.3v.5h-.9V20c0-1.2 1-2.2 2.2-2.2h9.7c1.2 0 2.2 1 2.2 2.2v.4z" /><path d="M8.9 22.2c-1.2 0-2.2-1-2.2-2.2s1-2.2 2.2-2.2c1.2 0 2.2 1 2.2 2.2s-1 2.2-2.2 2.2zm0-3.5c-.7 0-1.3.6-1.3 1.3 0 .7.6 1.3 1.3 1.3.8 0 1.3-.6 1.3-1.3 0-.7-.5-1.3-1.3-1.3zM18.6 22.2c-1.2 0-2.2-1-2.2-2.2s1-2.2 2.2-2.2c1.2 0 2.2 1 2.2 2.2s-.9 2.2-2.2 2.2zm0-3.5c-.8 0-1.3.6-1.3 1.3 0 .7.6 1.3 1.3 1.3.7 0 1.3-.6 1.3-1.3 0-.7-.5-1.3-1.3-1.3z" /></svg>
-                            <h3 className="font-bold mb-1 text-[1.75rem]">Your Cart is Empty</h3>
-                            <h5 className="mb-4 text-[1.25rem]">Add some items to make me happy :)</h5>
-                            <Link href="#!" className="ti-btn bg-primary text-white !font-medium m-4" data-abc="true">continue shopping <i className="bi bi-arrow-right ms-1"></i></Link>
+                            <h3 className="font-bold mb-1 text-[1.75rem]">
+                                {t("LABELS.empty-cart-description")}
+                            </h3>
+                            <button 
+                                onClick={handleProceedToShopping}
+                                className="ti-btn bg-primary text-white !font-medium m-4" 
+                                data-abc="true">
+                                {t("BUTTONS.continue-shopping")} 
+                                <i className="bi bi-arrow-right ms-1"></i>
+                            </button>
                         </div>
                     </div>
                 </div>                      
@@ -43,7 +58,7 @@ const CartItemsSection = () => {
                 <div className="box" id="cart-container-delete">
                     <div className="box-header">
                         <div className="box-title">
-                            Cart Items
+                            {t("PAGE.cart-items")}
                         </div>
                     </div>
                     <div className="box-body">
@@ -52,19 +67,19 @@ const CartItemsSection = () => {
                                 <thead>
                                     <tr>
                                         <th scope="row" className="text-start">
-                                            Product Name
+                                            {t("LABELS.product-name")}
                                         </th>
                                         <th scope="row" className="text-start">
-                                            Price
+                                            {t("LABELS.price")}
                                         </th>
                                         <th scope="row" className="text-start">
-                                            Quantity
+                                            {t("LABELS.quantity")}
                                         </th>
                                         <th scope="row" className="text-start">
-                                            Total
+                                            {t("LABELS.total")}
                                         </th>
                                         <th scope="row" className="text-start">
-                                            Action
+                                            {t("LABELS.action")}
                                         </th>
                                     </tr>
                                 </thead>
@@ -88,10 +103,10 @@ const CartItemsSection = () => {
                                                                 </Link>
                                                             </div>
                                                             <div className="flex items-center mb-1 align-middle">
-                                                                <span className="me-1">Size:</span><span className="font-semibold text-[#8c9097] dark:text-white/50">Large</span>
+                                                                <span className="me-1">{t("LABELS.size")}:</span><span className="font-semibold text-[#8c9097] dark:text-white/50">Large</span>
                                                             </div>
                                                             <div className="flex items-center mb-1 align-middle">
-                                                                <span className="me-1">Color:</span><span className="font-semibold text-[#8c9097] dark:text-white/50">Grey<span className="badge bg-success/10 text-success ms-4">In Offer</span></span>
+                                                                <span className="me-1">{t("LABELS.color")}:</span><span className="font-semibold text-[#8c9097] dark:text-white/50">Grey</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -138,7 +153,7 @@ const CartItemsSection = () => {
                                                                 <span
                                                                     className="hs-tooltip-content  ti-main-tooltip-content py-1 px-2 !bg-black !text-xs !font-medium !text-white shadow-sm "
                                                                     role="tooltip">
-                                                                    Add To Wishlist
+                                                                    {t("BUTTONS.add-to-wishlist")} 
                                                                 </span>
                                                             </button>
                                                         </div>
@@ -149,7 +164,7 @@ const CartItemsSection = () => {
                                                                 <span
                                                                     className="hs-tooltip-content  ti-main-tooltip-content py-1 px-2 !bg-black !text-xs !font-medium !text-white shadow-sm "
                                                                     role="tooltip">
-                                                                    Remove From cart
+                                                                    {t("BUTTONS.remove-from-cart")}
                                                                 </span>
                                                             </button>
                                                         </div>

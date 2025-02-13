@@ -392,14 +392,17 @@
             "color":"Color",
             "item":"Item",
             "items":"Items",
-            "empty-cart":"Your cart is empty"
+            "empty-cart-title":"Empty Cart",
+            "empty-cart-description":"Your cart is empty"
         },
         "BUTTONS":{
             "proceed-to-cart":"Proceed to Cart",
             "proceed-to-checkout":"Proceed to Checkout",
             "continue-shopping":"Continue Shopping",
             "update-cart":"Update Cart",
-            "clear-cart":"Clear Cart"
+            "clear-cart":"Clear Cart",
+            "add-to-wishlist":"Add to Wishlist",
+            "remove-from-cart":"Remove from Cart"
         }
     }
 }
