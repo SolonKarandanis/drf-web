@@ -1,5 +1,6 @@
 'use client';
 
+import { useGetProductMisc } from "@/components/products/hooks/useGetProductMisc";
 import { CartItem } from "@/models/cart.models"
 import { useAppSelector } from "@/shared/redux/hooks";
 import Image from "next/image"
@@ -12,11 +13,28 @@ interface Props{
 }
 
 const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
+    const {
+        sizesOptions,
+        coloursOptions,
+    } = useGetProductMisc();
     const configState = useAppSelector((state)=>state.config);
     const path = configState.baseUrl
     const host = configState.djangoHost
     const productImage = item.previewImage
     const imagePath = productImage ?   `${host}${productImage.image}` : `${path}/assets/images/faces/21.jpg`;
+
+    const findItemSize = (item:CartItem):string | undefined =>{
+        const size = item.attributes[1];
+        const selectedSize =sizesOptions.find(opt=>opt.value===size);
+        return selectedSize?.label;
+    }
+
+    const findItemColor = (item:CartItem):string | undefined =>{
+        const color = item.attributes[2];
+        const slectedColor = coloursOptions.find(opt=>opt.value===color)
+        return slectedColor?.label;
+    }
+
     
     return (
         <li className={`ti-dropdown-item border-b dark:border-defaultborder/10 border-defaultborder hover:bg-violet-300`} key={item.id}>
@@ -51,11 +69,15 @@ const CartItemDropdown:FC<Props> = ({item,removeItem}) => {
                             {/* <li>{item.text}</li> */}
                             <li>
                                 <span className="me-1">Size:</span>
-                                <span className="font-semibold text-[#8c9097] dark:text-white/50">Large</span>
+                                <span className="font-semibold text-[#8c9097] dark:text-white/50">
+                                    {findItemSize(item)}
+                                </span>
                             </li>
                             <li>
                                 <span className="me-1">Color:</span>
-                                <span className="font-semibold text-[#8c9097] dark:text-white/50">Grey</span>
+                                <span className="font-semibold text-[#8c9097] dark:text-white/50">
+                                    {findItemColor(item)}
+                                </span>
                             </li>
                         </ul>
                     </div>

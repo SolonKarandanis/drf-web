@@ -6,6 +6,9 @@ export interface CartItemProduct{
     uuid:string;
 }
 
+export const attributeIds = [1,2] as const;
+export type AttributeIds = (typeof attributeIds)[number]
+
 export interface CartItem{
     id:number;
     productDetails:CartItemProduct;
@@ -16,7 +19,7 @@ export interface CartItem{
     totalPrice:number;
     productId:number;
     uuid:string;
-    attributes?:string;
+    attributes:Record<AttributeIds, number>;
 }
 
 export interface Cart{
