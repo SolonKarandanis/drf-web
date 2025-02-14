@@ -60,15 +60,15 @@ function IconSection({children,className,...props}: DetailedHTMLProps<HTMLAttrib
 
 IconSection.Icon=Icon;
 
-interface CardIconProps extends  DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>{
-  href:string;
+interface CardIconProps extends  DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement>{
+  
 }
 
-function Icon({href,children,className,...props}: CardIconProps){
+function Icon({children,className,...props}: CardIconProps){
   return (
-    <Link aria-label="anchor" href={href} className={className}>
+    <button className={className} {...props}>
       {children}
-    </Link>
+    </button>
   )
 }
 

@@ -7,42 +7,56 @@ import {
 } from "../hooks/useGetProductSearchResults";
 import { useAppSelector } from "@/shared/redux/hooks";
 import ProductResultsLoading from "./product-results-loading";
+import { useRouter } from "next/navigation";
 
 const ProductResults = () => {
     const {
         results,
         isLoading
     } = useGetProductSearchResults();
-    const initialCall=useGetInitialProductSearchResults();
+    useGetInitialProductSearchResults();
+    const router = useRouter(); 
     const configState = useAppSelector((state)=>state.config);
     const host = configState.djangoHost
     const path = configState.baseUrl
+
+    
+
+    
 
     return (
         
         <div className="grid grid-cols-12 gap-x-6">
             {isLoading && (<ProductResultsLoading iterate={8} />)}
             {!isLoading && results.map((item) =>{
-                
                 const productImage = item.previewImage
                 const imagePath = productImage ?   `${host}${productImage.image}` : `${path}/assets/images/faces/21.jpg`;
+
+                const handleRouteToEdit = ()=>{
+                    router.push(`/products/${item.uuid}/edit`);
+                }
+
+                const handleAddToCart = (itemId:number) => {
+                    console.log(itemId);
+                };
+
                 return (
                     <Card key={item.id}>
                         <Card.Image src={imagePath} href={`/products/${item.uuid}`}/>
                         <Card.IconSection>
                             <Card.IconSection.Icon 
                                 className="wishlist"
-                                href={`/components/pages/ecommerce/wishlist/`}>
+                                >
                                 <i className="ri-heart-line"></i>
                             </Card.IconSection.Icon>
                             <Card.IconSection.Icon 
                                 className="cart"
-                                href={`/components/pages/ecommerce/cart/`}>
+                                >
                                 <i className="ri-shopping-cart-line"></i>
                             </Card.IconSection.Icon>
                             <Card.IconSection.Icon 
-                                className="view" 
-                                href={`/products/${item.uuid}/edit`}>
+                                className="view"
+                                onClick={handleRouteToEdit}>
                                 <i className="ri-eye-line"></i>
                             </Card.IconSection.Icon>
                         </Card.IconSection>
