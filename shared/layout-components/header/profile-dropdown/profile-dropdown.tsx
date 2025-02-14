@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from "next/image";
 import { useSession } from 'next-auth/react';
-import { getUserGroups } from '@/utils/user-utils';
+import { getUserGroupsCapitalized } from '@/utils/user-utils';
 import { useAppSelector } from '@/shared/redux/hooks';
 import { 
     DropdownMenu, 
@@ -24,7 +24,7 @@ const ProfileDropdown = ()=> {
         return null
     }
     const loggedUser = data.user!;
-    const groupNames =getUserGroups(loggedUser);
+    const groupNames =getUserGroupsCapitalized(loggedUser);
     
     // const imagePath = image.image ?   `${host}${image.image}` : `${path}/assets/images/ecommerce/png/16.png`;
     return (

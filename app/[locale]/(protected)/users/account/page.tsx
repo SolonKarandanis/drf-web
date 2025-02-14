@@ -2,7 +2,7 @@ import React from 'react'
 import { basePath } from '@/next.config';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
-import { getUserGroups } from '@/utils/user-utils';
+import { getUserGroupsCapitalized } from '@/utils/user-utils';
 
 
 const UserAcoountPage = async () => {
@@ -10,7 +10,7 @@ const UserAcoountPage = async () => {
     const session = await getServerSession(authOptions);
     const loggedInUser= session!.user!;
 
-    const groupNames =getUserGroups(loggedInUser);
+    const groupNames =getUserGroupsCapitalized(loggedInUser);
     const roles = groupNames.join(', ');
     return (
       <div>page</div>

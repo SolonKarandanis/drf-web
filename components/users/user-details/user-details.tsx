@@ -3,7 +3,7 @@
 import { FC} from "react";
 import SocialNetworks from "./social-networks";
 import Profile from "./profile";
-import { getUserGroups } from "@/utils/user-utils";
+import { getUserGroupsCapitalized } from "@/utils/user-utils";
 import ContactInformation from "./contanct-information";
 import ProfileLoading from "./profile-loading";
 import { useTranslations } from "next-intl";
@@ -48,7 +48,7 @@ const UserDetails:FC<Props> =  ({uuid}) => {
 
   if(user && loggedInUser){
     const isUserMe = uuid ===loggedInUser.uuid;
-    const groupNames =getUserGroups(user);
+    const groupNames =getUserGroupsCapitalized(user);
     const roles = groupNames.join(', ');
     const details = user.details;
 

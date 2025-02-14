@@ -13,6 +13,7 @@ import NotificationsDropdown from './notifications-dropdown/notifications-dropdo
 import FullscreenToggler from './fullscreen-toggler/fullscreen-toggler';
 import ProfileDropdown from './profile-dropdown/profile-dropdown';
 import Logo from './logo/logo';
+import { useSession } from 'next-auth/react';
 
 
 declare global {
@@ -39,8 +40,9 @@ type Props = {
 const Header:FC<Props> = ({path})=> {
   const dispatch = useAppDispatch();
   const themeState = useAppSelector(state => state.theme);
-
   const [storedata, SetStoreData] = useState(themeState);
+  const { data: session, status } = useSession();
+  console.log(session);
 
   useEffect(() => {
     const handleResize = () => {
