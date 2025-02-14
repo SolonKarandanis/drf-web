@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 export function useMutateUserCart(){
     const router = useRouter();
-    const t = useTranslations();
+    const t = useTranslations("CART");
     const dispatch = useAppDispatch();
 
     const [addItemsToCart, { isLoading:addItemsToCartLoading }] = useAddItemsToCartMutation();
@@ -20,11 +20,11 @@ export function useMutateUserCart(){
             .unwrap()
             .then((response:Cart)=>{
                 dispatch(setCart(response));
-                toast.success(t("PRODUCTS.SUCCESS.create-product"));
+                toast.success(t("SUCCESS.add-to-cart"));
                 // router.push(`/products/${response.productId}`);
             })
             .catch((error:ErrorResponse)=>{
-                toast.error(t("PRODUCTS.ERRORS.create-product"));
+                toast.error(t("ERRORS.add-to-cart"));
                 handleError(error);
             })
     }

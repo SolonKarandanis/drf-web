@@ -403,6 +403,18 @@
             "clear-cart":"Clear Cart",
             "add-to-wishlist":"Add to Wishlist",
             "remove-from-cart":"Remove from Cart"
+        },
+        "SUCCESS": {
+            "add-to-cart": "Successfully added item to Cart",
+            "remove-from-cart":"Successfully removed item from Cart",
+            "update-cart":"Successfully updated Cart",
+            "clear-cart":"Successfully cleared Cart"
+        },
+        "ERRORS": {
+            "add-to-cart": "Something went wrong! Item not added from cart",
+            "remove-from-cart":"Something went wrong! Item not removed from cart",
+            "update-cart":"Something went wrong with the Cart update",
+            "clear-cart":"Something went wrong with clearing the Cart"
         }
     }
 }

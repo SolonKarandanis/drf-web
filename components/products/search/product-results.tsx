@@ -8,21 +8,22 @@ import {
 import { useAppSelector } from "@/shared/redux/hooks";
 import ProductResultsLoading from "./product-results-loading";
 import { useRouter } from "next/navigation";
+import { useMutateUserCart } from "@/components/cart/hooks/useMutateUserCart";
 
 const ProductResults = () => {
     const {
         results,
         isLoading
     } = useGetProductSearchResults();
+    const {
+        mutationLoading,
+        handleAddItemsToCartRequest
+    } = useMutateUserCart();
     useGetInitialProductSearchResults();
     const router = useRouter(); 
     const configState = useAppSelector((state)=>state.config);
     const host = configState.djangoHost
     const path = configState.baseUrl
-
-    
-
-    
 
     return (
         
@@ -36,8 +37,12 @@ const ProductResults = () => {
                     router.push(`/products/${item.uuid}/edit`);
                 }
 
-                const handleAddToCart = (itemId:number) => {
-                    console.log(itemId);
+                const handleAddToCart = () => {
+                    console.log(item);
+                };
+
+                const handleAddToWishList = () => {
+                    console.log(item);
                 };
 
                 return (
@@ -46,12 +51,12 @@ const ProductResults = () => {
                         <Card.IconSection>
                             <Card.IconSection.Icon 
                                 className="wishlist"
-                                >
+                                onClick={handleAddToWishList}>
                                 <i className="ri-heart-line"></i>
                             </Card.IconSection.Icon>
                             <Card.IconSection.Icon 
                                 className="cart"
-                                >
+                                onClick={handleAddToCart}>
                                 <i className="ri-shopping-cart-line"></i>
                             </Card.IconSection.Icon>
                             <Card.IconSection.Icon 
