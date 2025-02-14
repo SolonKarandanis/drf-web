@@ -20,6 +20,8 @@ import { AddToCartSchema, getAddToCartSchema } from '@/schemas/cart.schemas'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import FormSelect from '@/shared/components/form-select/form-select'
+import { useGetProductMisc } from '../hooks/useGetProductMisc'
+import FormInput from '@/shared/components/form-input/form-input'
 
 interface Props{
     uuid:string;
@@ -41,8 +43,16 @@ const Product:FC<Props> = ({uuid}) => {
         productSizes,
         productColors,
     } = useGetProductDetails(uuid);
+    const {
+        sizesOptions,
+        coloursOptions,
+    } = useGetProductMisc();
 
-     const {
+    const productSizesOptions = sizesOptions.filter(opt=>productSizes?.map(ps=>ps.attributeOptionId).includes(Number(opt.value)));
+    const productColorOptions = coloursOptions.filter(opt=>productColors?.map(ps=>ps.attributeOptionId).includes(Number(opt.value)));
+
+
+    const {
         register,
         control,
         handleSubmit,
@@ -51,7 +61,8 @@ const Product:FC<Props> = ({uuid}) => {
         getValues
     } = useForm<AddToCartSchema>({
         resolver: zodResolver(getAddToCartSchema(formT))
-    })
+    });
+    const {errors} = formState;
 
     const onAddToCart: SubmitHandler<AddToCartSchema> = async (data) =>{
 
@@ -98,58 +109,58 @@ const Product:FC<Props> = ({uuid}) => {
                     </div>
                     <form className="mb-4">
                         <div className="grid grid-cols-12 gap-x-6">
-                            <div className="col-span-12 xxl:col-span-6 xl:col-span-6 lg:col-span-6 md:col-span-6 sm:col-span-12">
-                                <p className="text-[.9375rem] font-semibold mb-2">Colors :</p>
-                                {/* <Controller
+                            <div className="col-span-12 xxl:col-span-4 xl:col-span-4 lg:col-span-4 md:col-span-4 sm:col-span-12">
+                                <Controller
                                     name="color"
                                     control={control}
                                     render={({ field }) => (
                                         <FormSelect 
-                                            name="sizes"
+                                            name="color"
                                             isMulti={false}
                                             required={true}
                                             isSearchable={true}
-                                            options={productColors}
+                                            options={productColorOptions}
                                             sectionClassName="col-span-12 xl:col-span-6 mb-2"
                                             field={field}
-                                            defaultValues={defaultValues.sizes}
-                                            error={errors.sizes?.message}
+                                            error={errors.color?.message}
                                             loading={isProductLoading}>
                                                 <p className="text-[.9375rem] font-semibold mb-2">Colors :</p>
                                         </FormSelect>
                                     )}
-                                /> */}
-                                <p className="flex mb-0">
-                                    <Link aria-label="anchor" className="color-1 product-colors selected" href="#!">
-                                        <i className="ri-checkbox-blank-circle-fill"></i>
-                                    </Link>
-                                    <Link aria-label="anchor" className="color-2 product-colors" href="#!">
-                                        <i className="ri-checkbox-blank-circle-fill"></i>
-                                    </Link>
-                                    <Link aria-label="anchor" className="color-3 product-colors" href="#!">
-                                        <i className="ri-checkbox-blank-circle-fill"></i>
-                                    </Link>
-                                    <Link aria-label="anchor" className="color-4 product-colors" href="#!">
-                                        <i className="ri-checkbox-blank-circle-fill"></i>
-                                    </Link>
-                                    <Link aria-label="anchor" className="color-5 product-colors" href="#!">
-                                        <i className="ri-checkbox-blank-circle-fill"></i>
-                                    </Link>
-                                </p>
+                                />
                             </div>
-                            <div className="col-span-12 mt-4 xxl:col-span-6 xl:col-span-6 lg:col-span-6 md:col-span-6 sm:col-span-12 md:mt-0">
-                                <p className="text-[.9375rem] font-semibold mb-2">Dial Size(in mm) :</p>
-                                <p className="flex mb-0">
-                                    <Link className="color-1 product-sizes selected" href="#!">
-                                        44
-                                    </Link>
-                                    <Link className="color-2 product-sizes" href="#!">
-                                        40
-                                    </Link>
-                                    <Link className="color-3 product-sizes" href="#!">
-                                        38
-                                    </Link>
-                                </p>
+                            <div className="col-span-12 mt-4 xxl:col-span-4 xl:col-span-4 lg:col-span-4 md:col-span-4 sm:col-span-12 md:mt-0">
+                                <Controller
+                                    name="size"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <FormSelect 
+                                            name="size"
+                                            isMulti={false}
+                                            required={true}
+                                            isSearchable={true}
+                                            options={productSizesOptions}
+                                            sectionClassName="col-span-12 xl:col-span-6 mb-2"
+                                            field={field}
+                                            error={errors.size?.message}
+                                            loading={isProductLoading}>
+                                                <p className="text-[.9375rem] font-semibold mb-2">Dial Size(in mm) :</p>
+                                        </FormSelect>
+                                    )}
+                                />
+                            </div>
+                            <div className="col-span-12 mt-4 xxl:col-span-4 xl:col-span-4 lg:col-span-4 md:col-span-4 sm:col-span-12 md:mt-0">
+                                <FormInput 
+                                    type='text'
+                                    required={true}
+                                    name='quantity'
+                                    className={"w-full !rounded-md"}
+                                    sectionClassName="mb-2 col-span-12 xl:col-span-6"
+                                    props={register("quantity")}
+                                    error={errors.quantity?.message}
+                                    loading={isProductLoading}>
+                                    Quantity
+                                </FormInput>
                             </div>
                         </div>
                     </form>
