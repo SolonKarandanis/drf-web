@@ -12,13 +12,18 @@ export const getAccessToken = (loggedUser: User):string => loggedUser.access;
 
 export const getRefreshToken = (loggedUser: User):string => loggedUser.refresh;
 
-export const hasRole = (loggedUser: User| UserAcount, role:string): boolean =>{
+export const hasRole = (loggedUser: User| UserAcount| undefined, role:string): boolean =>{
+    if(!loggedUser){
+        return false;
+    }
     const found =loggedUser.groups.find(group=> group.name===role);
     return found ? true:false;
 }
 
-export const hasPermission = (loggedUser: User| UserAcount, permission:string):boolean =>{
+export const hasPermission = (loggedUser: User| UserAcount| undefined, permission:string):boolean =>{
+    if(!loggedUser){
+        return false;
+    }
     const permissions = getUserPermissions(loggedUser);
-    const found = permissions.find(perm=>perm=permission);
-    return found ? true: false;
+    return permissions.includes(permission);
 }

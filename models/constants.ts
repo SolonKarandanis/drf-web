@@ -1,10 +1,10 @@
-enum Role{
+export enum Role{
     ADMIN='ADMIN',
     BUYER='Buyer',
     SUPPLIER='Supplier',
 }
 
-enum Perimissions{
+export enum Perimissions{
     ADD_LOG_ENTRY = 'add_logentry',
     CHANGE_LOG_ENTRY='change_logentry',
     DELETE_LOG_ENTRY= 'delete_logentry',

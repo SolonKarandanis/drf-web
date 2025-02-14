@@ -12,7 +12,7 @@ type Props = {
 	children: ReactNode;
 }
 
-const ContentLayout:FC<Props> = ({children}) => {
+const ContentLayout:FC<Props> = async ({children}) => {
     const path = process.env.NODE_ENV === "production" ? basePath : "";
     return (
        <>

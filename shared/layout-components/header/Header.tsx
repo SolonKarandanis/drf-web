@@ -14,6 +14,8 @@ import FullscreenToggler from './fullscreen-toggler/fullscreen-toggler';
 import ProfileDropdown from './profile-dropdown/profile-dropdown';
 import Logo from './logo/logo';
 import { useSession } from 'next-auth/react';
+import { hasPermission } from '@/utils/user-utils';
+import { Perimissions } from '@/models/constants';
 
 
 declare global {
@@ -42,7 +44,8 @@ const Header:FC<Props> = ({path})=> {
   const themeState = useAppSelector(state => state.theme);
   const [storedata, SetStoreData] = useState(themeState);
   const { data: session, status } = useSession();
-  console.log(session);
+  const user = session?.user;
+  const canSeeCart =hasPermission(user,Perimissions.VIEW_CART);
 
   useEffect(() => {
     const handleResize = () => {
@@ -247,7 +250,7 @@ const Header:FC<Props> = ({path})=> {
               </div>
               <SelectLanguage />
               <ThemeToggler themeStoreState={themeState}/>
-              <CartDropdown />
+              {canSeeCart && <CartDropdown />}
               <NotificationsDropdown />
               <FullscreenToggler />
               <ProfileDropdown />
