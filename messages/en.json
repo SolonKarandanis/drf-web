@@ -404,6 +404,13 @@
             "add-to-wishlist":"Add to Wishlist",
             "remove-from-cart":"Remove from Cart"
         },
+        "VALIDATION":{
+            "required-color":"Color is required",
+            "required-size":"Size is required",
+            "required-quantity":"Quantity is required",
+            "integer-quantity":"Quantity value must be an integer",
+            "positive-quantity":"Quantity must be a positive value"
+        },
         "SUCCESS": {
             "add-to-cart": "Successfully added item to Cart",
             "remove-from-cart":"Successfully removed item from Cart",
