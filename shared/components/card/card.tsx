@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React, {
+  ButtonHTMLAttributes,
 DetailedHTMLProps,
 HTMLAttributes,
 HtmlHTMLAttributes,
@@ -60,7 +61,7 @@ function IconSection({children,className,...props}: DetailedHTMLProps<HTMLAttrib
 
 IconSection.Icon=Icon;
 
-interface CardIconProps extends  DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement>{
+interface CardIconProps extends ButtonHTMLAttributes<HTMLButtonElement>{
   
 }
 

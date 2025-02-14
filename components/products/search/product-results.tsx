@@ -9,6 +9,7 @@ import { useAppSelector } from "@/shared/redux/hooks";
 import ProductResultsLoading from "./product-results-loading";
 import { useRouter } from "next/navigation";
 import { useMutateUserCart } from "@/components/cart/hooks/useMutateUserCart";
+import { AddToCartRequest } from "@/models/cart.models";
 
 const ProductResults = () => {
     const {
@@ -38,7 +39,11 @@ const ProductResults = () => {
                 }
 
                 const handleAddToCart = () => {
-                    console.log(item);
+                    const request:AddToCartRequest = {
+                        productId:item.id,
+                        quantity:1
+                    };
+                    handleAddItemsToCartRequest([request]);
                 };
 
                 const handleAddToWishList = () => {
@@ -51,17 +56,20 @@ const ProductResults = () => {
                         <Card.IconSection>
                             <Card.IconSection.Icon 
                                 className="wishlist"
-                                onClick={handleAddToWishList}>
+                                onClick={handleAddToWishList}
+                                disabled={mutationLoading}>
                                 <i className="ri-heart-line"></i>
                             </Card.IconSection.Icon>
                             <Card.IconSection.Icon 
                                 className="cart"
-                                onClick={handleAddToCart}>
+                                onClick={handleAddToCart}
+                                disabled={mutationLoading}>
                                 <i className="ri-shopping-cart-line"></i>
                             </Card.IconSection.Icon>
                             <Card.IconSection.Icon 
                                 className="view"
-                                onClick={handleRouteToEdit}>
+                                onClick={handleRouteToEdit}
+                                disabled={mutationLoading}>
                                 <i className="ri-eye-line"></i>
                             </Card.IconSection.Icon>
                         </Card.IconSection>
