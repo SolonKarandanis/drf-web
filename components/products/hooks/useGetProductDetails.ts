@@ -47,8 +47,12 @@ export function useGetProductDetails(uuid:string){
 
     },[]);
 
-    const sizesSelectedValues = productAttributesData?.sizes.map(size=>size.attributeOptionId);
-    const colorsSelectedValues = productAttributesData?.colors.map(color=>color.attributeOptionId);
+    const productSizes = productAttributesData?.sizes;
+    const productColors = productAttributesData?.colors;
+    
+
+    const sizesSelectedValues = productSizes?.map(size=>size.attributeOptionId);
+    const colorsSelectedValues = productColors?.map(color=>color.attributeOptionId);
     const genderSelectedValues = productAttributesData?.genders.map(gender=>gender.attributeOptionId);
  
 
@@ -61,6 +65,8 @@ export function useGetProductDetails(uuid:string){
         productComments,
         productBrands,
         productCategories,
+        productSizes,
+        productColors,
         isProductError,
         isProductLoading,
         productData,

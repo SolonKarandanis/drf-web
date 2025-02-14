@@ -16,6 +16,10 @@ import Content from './content'
 import FabricDetails from './fabric-details'
 import CareInstructions from './care-instructions'
 import StockInfo from './stock-info'
+import { AddToCartSchema, getAddToCartSchema } from '@/schemas/cart.schemas'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import FormSelect from '@/shared/components/form-select/form-select'
 
 interface Props{
     uuid:string;
@@ -23,6 +27,7 @@ interface Props{
 
 const Product:FC<Props> = ({uuid}) => {
     const t = useTranslations();
+    const formT = useTranslations("CART.VALIDATION");
     const {
         isProductError,
         isProductLoading,
@@ -32,8 +37,25 @@ const Product:FC<Props> = ({uuid}) => {
         productBrands,
         productCategories,
         productComments,
-        productOwner
+        productOwner,
+        productSizes,
+        productColors,
     } = useGetProductDetails(uuid);
+
+     const {
+        register,
+        control,
+        handleSubmit,
+        formState,
+        setValue,
+        getValues
+    } = useForm<AddToCartSchema>({
+        resolver: zodResolver(getAddToCartSchema(formT))
+    })
+
+    const onAddToCart: SubmitHandler<AddToCartSchema> = async (data) =>{
+
+    }
 
     if(isProductError){
         return <>{t("GLOBAL.FETCH-ERROR")}</>
@@ -74,10 +96,29 @@ const Product:FC<Props> = ({uuid}) => {
                             content={product.content}
                             loading={isProductLoading}/>
                     </div>
-                    <div className="mb-4">
+                    <form className="mb-4">
                         <div className="grid grid-cols-12 gap-x-6">
                             <div className="col-span-12 xxl:col-span-6 xl:col-span-6 lg:col-span-6 md:col-span-6 sm:col-span-12">
                                 <p className="text-[.9375rem] font-semibold mb-2">Colors :</p>
+                                {/* <Controller
+                                    name="color"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <FormSelect 
+                                            name="sizes"
+                                            isMulti={false}
+                                            required={true}
+                                            isSearchable={true}
+                                            options={productColors}
+                                            sectionClassName="col-span-12 xl:col-span-6 mb-2"
+                                            field={field}
+                                            defaultValues={defaultValues.sizes}
+                                            error={errors.sizes?.message}
+                                            loading={isProductLoading}>
+                                                <p className="text-[.9375rem] font-semibold mb-2">Colors :</p>
+                                        </FormSelect>
+                                    )}
+                                /> */}
                                 <p className="flex mb-0">
                                     <Link aria-label="anchor" className="color-1 product-colors selected" href="#!">
                                         <i className="ri-checkbox-blank-circle-fill"></i>
@@ -111,7 +152,7 @@ const Product:FC<Props> = ({uuid}) => {
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </form>
                     
                     <ProductInfo 
                         brand={productBrands.name}
