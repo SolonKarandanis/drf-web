@@ -14,6 +14,8 @@ import { Virtuoso } from 'react-virtuoso'
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useGetUserCart } from "@/components/cart/hooks/useGetUserCart";
+import { useMutateUserCart } from "@/components/cart/hooks/useMutateUserCart";
+import { DeleteCartItemRequest } from "@/models/cart.models";
 
 
 const CartDropdown = () => {
@@ -24,10 +26,18 @@ const CartDropdown = () => {
         isError,
         isLoading,
     } = useGetUserCart();
+    const {
+        mutationLoading,
+        handleDeleteItemsFromCart
+    } = useMutateUserCart();
+
     const [open, setOpen] = useState(false)
 
     const handleRemove = (itemId:number) => {
-        console.log(itemId);
+        const request:DeleteCartItemRequest={
+            cartItemId:itemId
+        };
+        handleDeleteItemsFromCart([request]);
     };
 
     const handleProceedToCart=()=>{

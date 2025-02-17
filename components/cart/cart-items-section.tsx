@@ -7,6 +7,7 @@ import CurrencyFormatter from "@/shared/components/currency-formatter/currency-f
 import { useGetProductMisc } from "../products/hooks/useGetProductMisc";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { useMutateUserCart } from "./hooks/useMutateUserCart";
 
 const CartItemsSection = () => {
     const t = useTranslations("CART");
@@ -20,6 +21,14 @@ const CartItemsSection = () => {
         sizesOptions,
         coloursOptions,
     } = useGetProductMisc();
+    const {
+        mutationLoading,
+        handleDeleteItemsFromCart,
+        handleUpdateItemQuantities,
+        handleClearCart,
+    } = useMutateUserCart();
+
+
     const configState = useAppSelector((state)=>state.config);
     const path = configState.baseUrl
     const host = configState.djangoHost
