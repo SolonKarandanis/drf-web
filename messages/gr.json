@@ -347,6 +347,23 @@
                 "currentpage":"Λεπτομέρειες προϊόντος",
                 "activepage":"Προϊόντα",
                 "mainpage":"Λεπτομέρειες προϊόντος"
+            },
+            "LABELS":{
+                "reviews":"Κριτικές",
+                "categories":"Κατηγορίες",
+                "description":"Περιγραφή",
+                "colors":"Χρώματα",
+                "sizes":"Μεγέθη",
+                "quantity":"Ποσότητα",
+                "fabric-details":"Λεπτομέρειες υφάσματος",
+                "care-instructions":"Οδηγίες φροντίδας",
+                "ratings":"Αξιολογήσεις",
+                "product-details":"Λεπτομέρειες προϊόντος",
+                "brand":"Μάρκα",
+                "model-name":"Όνομα μοντέλου",
+                "color":"Χρώμα",
+                "availability-status":"Κατάσταση διαθεσιμότητας",
+                "publish-status":"Κατάσταση δημοσίευσης"
             }
         },
         "VALIDATION":{
