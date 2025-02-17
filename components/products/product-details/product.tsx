@@ -71,13 +71,16 @@ const Product:FC<Props> = ({uuid}) => {
     const {errors} = formState;
 
     const onAddToCart: SubmitHandler<AddToCartSchema> = async (data) =>{
-        console.log(data);
+        const {color,quantity,size} = data;
+        const attributesObj = {1:size,2:color};
+        const attributes =JSON.stringify(attributesObj);
         if(product){
-            // const request:AddToCartRequest = {
-            //     productId:product.id,
-            //     quantity:1
-            // };
-            // handleAddItemsToCartRequest([request]);
+            const request:AddToCartRequest = {
+                productId:product.id,
+                quantity,
+                attributes
+            };
+            handleAddItemsToCartRequest([request]);
         }
     }
 
