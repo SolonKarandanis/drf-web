@@ -1,4 +1,4 @@
-import { AddToCartRequest, Cart } from "@/models/cart.models";
+import { AddToCartRequest, Cart, DeleteCartItemRequest, UpdateQuantityRequest } from "@/models/cart.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
 
@@ -16,6 +16,33 @@ const cartsApiSlice = apiSlice.injectEndpoints({
                 }
             }
         }),
+        deleteItemsFromCart:builder.mutation<Cart,DeleteCartItemRequest[]>({
+            query: ( request:DeleteCartItemRequest[])=>{
+                return {
+                    url: `${ApiControllers.CART}/items/delete/`,
+                    method: 'DELETE',
+                    body: request ,
+                }
+            }
+        }),
+        updateCartItemsQuantity:builder.mutation<Cart,UpdateQuantityRequest[]>({
+            query: ( request:UpdateQuantityRequest[])=>{
+                return {
+                    url: `${ApiControllers.CART}/items/update/`,
+                    method: 'PUT',
+                    body: request ,
+                }
+            }
+        }),
+        clearCart:builder.mutation<Cart,void>({
+            query: ()=>{
+                return {
+                    url: `${ApiControllers.CART}/clear/`,
+                    method: 'PUT',
+                    body: {} ,
+                }
+            }
+        }),
     }),
      // @ts-ignore
 	overrideExisting: module.hot?.status() === "apply",
@@ -24,4 +51,7 @@ const cartsApiSlice = apiSlice.injectEndpoints({
 export const {
     useLazyGetUserCartQuery,
     useAddItemsToCartMutation,
+    useDeleteItemsFromCartMutation,
+    useUpdateCartItemsQuantityMutation,
+    useClearCartMutation,
 } = cartsApiSlice;
