@@ -396,6 +396,7 @@
             "empty-cart-description":"Your cart is empty"
         },
         "BUTTONS":{
+            "add-to-cart":"Add to Cart",
             "proceed-to-cart":"Proceed to Cart",
             "proceed-to-checkout":"Proceed to Checkout",
             "continue-shopping":"Continue Shopping",

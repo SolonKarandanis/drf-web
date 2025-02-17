@@ -71,12 +71,13 @@ const Product:FC<Props> = ({uuid}) => {
     const {errors} = formState;
 
     const onAddToCart: SubmitHandler<AddToCartSchema> = async (data) =>{
+        console.log(data);
         if(product){
-            const request:AddToCartRequest = {
-                productId:product.id,
-                quantity:1
-            };
-            handleAddItemsToCartRequest([request]);
+            // const request:AddToCartRequest = {
+            //     productId:product.id,
+            //     quantity:1
+            // };
+            // handleAddItemsToCartRequest([request]);
         }
     }
 
@@ -118,7 +119,7 @@ const Product:FC<Props> = ({uuid}) => {
                             content={product.content}
                             loading={isProductLoading}/>
                     </div>
-                    <form className="mb-4">
+                    <form onSubmit={handleSubmit(onAddToCart)} className="mb-4">
                         <div className="grid grid-cols-12 gap-x-6">
                             <div className="col-span-12 xxl:col-span-4 xl:col-span-4 lg:col-span-4 md:col-span-4 sm:col-span-12">
                                 <Controller
@@ -165,9 +166,7 @@ const Product:FC<Props> = ({uuid}) => {
                                     type='number'
                                     required={true}
                                     name='quantity'
-                                    className={"w-full !rounded-md"}
-                                    sectionClassName="mb-2 col-span-12 xl:col-span-6"
-                                    props={register("quantity")}
+                                    props={register("quantity",{valueAsNumber:true})}
                                     error={errors.quantity?.message}
                                     loading={isProductLoading}>
                                     Quantity
@@ -225,7 +224,9 @@ const Product:FC<Props> = ({uuid}) => {
                                 <Link href="#!" className="text-primary">click here</Link>․
                             </p>
                         </div>
-                        <ButtonGroup />
+                        <ButtonGroup 
+                            isLoading={mutationLoading}
+                            handleAddToCart={handleSubmit(onAddToCart)}/>
                     </div>
                 </div>
             </div>

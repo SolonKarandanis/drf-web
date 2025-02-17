@@ -1,19 +1,37 @@
 "use client"
 
-import Link from 'next/link'
-import React from 'react'
+import FormButton from '@/shared/components/button/form-button';
+import { useTranslations } from 'next-intl';
+import React, { BaseSyntheticEvent, FC } from 'react'
 
-const ButtonGroup = () => {
+interface Props{
+  isLoading:boolean;
+  handleAddToCart:(e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
+}
+
+const ButtonGroup:FC<Props> = ({isLoading,handleAddToCart}) => {
+  const t = useTranslations("CART.BUTTONS");
   return (
     <div className="grid gap-2">
-        <Link href="/components/pages/ecommerce/cart/" 
-            className="ti-btn bg-success !font-medium text-white">
-            Add To Cart
-        </Link>
-        <Link href="/components/pages/ecommerce/wishlist/" 
-            className="ti-btn bg-light !font-medium">
-            Add To Wishlist
-        </Link>
+        <FormButton 
+            intent="info" 
+            size="md" 
+            type="button"
+            className="ti-btn bg-success !font-medium text-white"
+            isLoading={isLoading}
+            disabled={isLoading}
+            onClick={handleAddToCart}>
+          {t(`add-to-cart`)}
+        </FormButton>
+        <FormButton 
+            intent="info" 
+            size="md" 
+            type="button"
+            className="ti-btn bg-slate-800 !font-medium"
+            isLoading={isLoading}
+            disabled={isLoading}>
+          {t(`add-to-wishlist`)}
+        </FormButton>
     </div>
   )
 }

@@ -396,6 +396,7 @@
             "empty-cart-description":"Το καλάθι σας είναι άδειο"
         },
         "BUTTONS":{
+            "add-to-cart":"Προσθήκη στο Καλάθι",
             "proceed-to-cart":"Προχωρήστε στο Καλάθι",
             "proceed-to-checkout":"Προχωρήστε σε αγορά",
             "continue-shopping":"Συνεχίστε τις αγορές",
