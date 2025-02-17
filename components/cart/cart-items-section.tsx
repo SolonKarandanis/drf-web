@@ -8,6 +8,7 @@ import { useGetProductMisc } from "../products/hooks/useGetProductMisc";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useMutateUserCart } from "./hooks/useMutateUserCart";
+import { DeleteCartItemRequest } from "@/models/cart.models";
 
 const CartItemsSection = () => {
     const t = useTranslations("CART");
@@ -37,12 +38,15 @@ const CartItemsSection = () => {
         router.push("/products/search");
     }
 
-    const handleAddToWishList = ()=>{
+    const handleAddToWishList = (cartItemId:number)=>{
 
     }
 
-    const handleRemoveFromCart = () =>{
-
+    const handleRemoveFromCart = (cartItemId:number) =>{
+        const request:DeleteCartItemRequest={
+            cartItemId
+        };
+        handleDeleteItemsFromCart([request]);
     }
    
     return (
@@ -166,7 +170,7 @@ const CartItemsSection = () => {
                                                     <div className="flex items-center">
                                                         <div className="hs-tooltip ti-main-tooltip">
                                                             <button 
-                                                                onClick={handleAddToWishList} 
+                                                                onClick={()=>handleAddToWishList(item.id)} 
                                                                 className="hs-tooltip-toggle ti-btn ti-btn-icon bg-success text-white !font-medium me-1">
                                                                 <i className="ri-heart-line"></i>
                                                                 <span
@@ -178,7 +182,7 @@ const CartItemsSection = () => {
                                                         </div>
                                                         <div className="hs-tooltip ti-main-tooltip ltr:[--placement:left] rtl:[--placement:right]">
                                                             <button 
-                                                                onClick={handleRemoveFromCart}
+                                                                onClick={()=>handleRemoveFromCart(item.id)}
                                                                 className="hs-tooltip-toggle ti-btn ti-btn-icon bg-danger text-white !font-medium btn-delete">
                                                                 <i className="ri-delete-bin-line"></i>
                                                                 <span
