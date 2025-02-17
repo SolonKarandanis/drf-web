@@ -22,6 +22,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import FormSelect from '@/shared/components/form-select/form-select'
 import { useGetProductMisc } from '../hooks/useGetProductMisc'
 import FormInput from '@/shared/components/form-input/form-input'
+import { useMutateUserCart } from '@/components/cart/hooks/useMutateUserCart'
+import { AddToCartRequest } from '@/models/cart.models'
 
 interface Props{
     uuid:string;
@@ -47,6 +49,10 @@ const Product:FC<Props> = ({uuid}) => {
         sizesOptions,
         coloursOptions,
     } = useGetProductMisc();
+    const {
+        mutationLoading,
+        handleAddItemsToCartRequest
+    } = useMutateUserCart();
 
     const productSizesOptions = sizesOptions.filter(opt=>productSizes?.map(ps=>ps.attributeOptionId).includes(Number(opt.value)));
     const productColorOptions = coloursOptions.filter(opt=>productColors?.map(ps=>ps.attributeOptionId).includes(Number(opt.value)));
@@ -65,7 +71,13 @@ const Product:FC<Props> = ({uuid}) => {
     const {errors} = formState;
 
     const onAddToCart: SubmitHandler<AddToCartSchema> = async (data) =>{
-
+        if(product){
+            const request:AddToCartRequest = {
+                productId:product.id,
+                quantity:1
+            };
+            handleAddItemsToCartRequest([request]);
+        }
     }
 
     if(isProductError){
@@ -87,7 +99,6 @@ const Product:FC<Props> = ({uuid}) => {
                         loading={isProductLoading}/>
                     <div className="grid grid-cols-12 mb-6">
                         <div className="col-span-12 xxl:col-span-3 xl:col-span-12">
-                            <p className="mb-1 lh-1 text-[0.6875rem] text-success font-semibold">Special Offer</p>
                             <Price
                                 salePriceIntegerPart={productSalePriceIntegerPart}
                                 salePriceDecimalPart={productSalePriceDecimalPart} 
@@ -151,7 +162,7 @@ const Product:FC<Props> = ({uuid}) => {
                             </div>
                             <div className="col-span-12 mt-4 xxl:col-span-4 xl:col-span-4 lg:col-span-4 md:col-span-4 sm:col-span-12 md:mt-0">
                                 <FormInput 
-                                    type='text'
+                                    type='number'
                                     required={true}
                                     name='quantity'
                                     className={"w-full !rounded-md"}
