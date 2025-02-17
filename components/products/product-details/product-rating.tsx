@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { FC } from "react";
 
 interface Props{
@@ -11,7 +14,7 @@ const ProductRating:FC<Props> = ({
   reviews,
   loading=false
 }) => {
-
+  const t = useTranslations("PRODUCTS.DETAILS.LABELS");
   if(loading){
     return (
       <div role="status" className="w-full rounded animate-pulse dark:border-gray-700">
@@ -29,7 +32,7 @@ const ProductRating:FC<Props> = ({
           <i className="align-middle ri-star-line text-warning"></i>
           <i className="align-middle ri-star-line text-warning"></i>
           <span className="font-semibold text-[#8c9097] dark:text-white/50 ms-1">
-              <span className="text-info">(0 Reviews)</span>
+              <span className="text-info">(0 {t("reviews")})</span>
           </span>
         </>
       )}
@@ -42,7 +45,7 @@ const ProductRating:FC<Props> = ({
           <i className="align-middle ri-star-half-s-fill text-warning"></i>
           <span className="font-semibold text-[#8c9097] dark:text-white/50 ms-1">
               {rating}
-              <span className="text-info">({reviews} Reviews)</span>
+              <span className="text-info">({reviews} {t("reviews")}))</span>
           </span>
         </>
       )}

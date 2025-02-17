@@ -347,6 +347,23 @@
                 "currentpage":"Product Details",
                 "activepage":"Products",
                 "mainpage":"Product Details"
+            },
+            "LABELS":{
+                "reviews":"Reviews",
+                "categories":"Categories",
+                "description":"Description",
+                "colors":"Colors",
+                "sizes":"Sizes",
+                "quantity":"Quantity",
+                "fabric-details":"Fabric Details",
+                "care-instructions":"Care Instructions",
+                "ratings":"Ratings",
+                "product-details":"Product Details",
+                "brand":"Brand",
+                "model-name":"Model Name",
+                "color":"Color",
+                "availability-status":"Availability Status",
+                "publish-status":"Publish Status"
             }
         },
         "VALIDATION":{

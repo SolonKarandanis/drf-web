@@ -110,14 +110,14 @@ const Product:FC<Props> = ({uuid}) => {
                                 loading={isProductLoading}/>
                         </div>
                         <div className="col-span-12 mt-4 xxl:col-span-4 xl:col-span-6 lg:col-span-6 md:col-span-6 sm:col-span-12 mml:mt-0">
-                            <p className="mb-2 text-[.9375rem] font-semibold">Categories:</p>
+                            <p className="mb-2 text-[.9375rem] font-semibold">{t("PRODUCTS.DETAILS.LABELS.categories")}:</p>
                             <Categories 
                                 categories={productCategories}
                                 loading={isProductLoading}/>
                         </div>
                     </div>
                     <div className="mb-4">
-                        <p className="text-[.9375rem] font-semibold mb-1">Description :</p>
+                        <p className="text-[.9375rem] font-semibold mb-1">{t("PRODUCTS.DETAILS.LABELS.description")} :</p>
                         <Content 
                             content={product.content}
                             loading={isProductLoading}/>
@@ -139,7 +139,7 @@ const Product:FC<Props> = ({uuid}) => {
                                             field={field}
                                             error={errors.color?.message}
                                             loading={isProductLoading}>
-                                                <p className="text-[.9375rem] font-semibold mb-2">Colors :</p>
+                                                <p className="text-[.9375rem] font-semibold mb-2">{t("PRODUCTS.DETAILS.LABELS.colors")} :</p>
                                         </FormSelect>
                                     )}
                                 />
@@ -159,7 +159,7 @@ const Product:FC<Props> = ({uuid}) => {
                                             field={field}
                                             error={errors.size?.message}
                                             loading={isProductLoading}>
-                                                <p className="text-[.9375rem] font-semibold mb-2">Dial Size(in mm) :</p>
+                                                <p className="text-[.9375rem] font-semibold mb-2">{t("PRODUCTS.DETAILS.LABELS.sizes")} :</p>
                                         </FormSelect>
                                     )}
                                 />
@@ -172,7 +172,7 @@ const Product:FC<Props> = ({uuid}) => {
                                     props={register("quantity",{valueAsNumber:true})}
                                     error={errors.quantity?.message}
                                     loading={isProductLoading}>
-                                    Quantity
+                                    {t("PRODUCTS.DETAILS.LABELS.quantity")}
                                 </FormInput>
                             </div>
                         </div>
@@ -186,19 +186,19 @@ const Product:FC<Props> = ({uuid}) => {
                         publishStatus={product.publishStatusLabel}
                         loading={isProductLoading}/>
                     <div className="mb-4">
-                        <p className="text-[.9375rem] font-semibold mb-2">Fabric Details :</p>
+                        <p className="text-[.9375rem] font-semibold mb-2">{t("PRODUCTS.DETAILS.LABELS.fabric-details")} :</p>
                         <FabricDetails 
                             details={product.fabricDetails}
                             loading={isProductLoading}/>
                     </div>
                     <div className="mb-4">
-                        <p className="text-[.9375rem] font-semibold mb-2">Care Instructions :</p>
+                        <p className="text-[.9375rem] font-semibold mb-2">{t("PRODUCTS.DETAILS.LABELS.care-instructions")} :</p>
                         <CareInstructions 
                             instructions={product.careInstructions}
                             loading={isProductLoading}/>
                     </div>
                     <div className="mb-0">
-                        <p className="text-[.9375rem] font-semibold mb-3">Reviews &amp; Ratings :</p>
+                        <p className="text-[.9375rem] font-semibold mb-3">{t("PRODUCTS.DETAILS.LABELS.reviews")} &amp; {t("PRODUCTS.DETAILS.LABELS.ratings")} :</p>
                         <div className="grid-cols-12 gap-6 sm:grid">
                             <Ratings />
                             <Comments 
