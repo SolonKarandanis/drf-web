@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useMutateUserCart } from "./hooks/useMutateUserCart";
 import { DeleteCartItemRequest } from "@/models/cart.models";
+import { useState } from "react";
 
 const CartItemsSection = () => {
     const t = useTranslations("CART");
@@ -108,6 +109,8 @@ const CartItemsSection = () => {
                                     {cartItems.map((item) => {
                                         const productImage = item.previewImage
                                         const imagePath = productImage ?   `${host}${productImage.image}` : `${path}/assets/images/faces/21.jpg`;
+                                        // const [quantity,setQuantity]= useState<number>(item.quantity);
+                                        // const [totalPrice,setTotalPrice]= useState<number>(item.totalPrice);
                                         return (
                                             <tr className="border border-solid border-inherit dark:border-defaultborder/10" key={item.id}>
                                                 <td>
