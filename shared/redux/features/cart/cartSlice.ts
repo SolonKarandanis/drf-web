@@ -1,4 +1,4 @@
-import { Cart, CartItem } from "@/models/cart.models";
+import { Cart, UpdateQuantityRequest } from "@/models/cart.models";
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 
@@ -20,6 +20,15 @@ const cartSlice = createSlice({
         },
         resetCart:(state)=>{
             state.cart=null;
+        },
+        updateCartItemQuantity:(state, action:PayloadAction<UpdateQuantityRequest>)=>{
+            const {cartItemId,quantity} =action.payload;
+            const cart = state.cart;
+            if(cart){
+                const cartItem = cart.cartItems.filter((item)=>item.id===cartItemId);
+            }
+            
+            
         }
     }
 });

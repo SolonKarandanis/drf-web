@@ -5,11 +5,6 @@ import Link from "next/link";
 import { useMutateUserCart } from "./hooks/useMutateUserCart";
 import FormButton from "@/shared/components/button/form-button";
 
-interface Props{
-  isLoading:boolean;
-//   handleAddToCart:(e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
-}
-
 const ButtonSection = () => {
     const t = useTranslations("CART.BUTTONS");
      const {

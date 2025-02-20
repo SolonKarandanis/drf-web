@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useMutateUserCart } from "./hooks/useMutateUserCart";
 import { DeleteCartItemRequest } from "@/models/cart.models";
+import FormInput from "@/shared/components/form-input/form-input";
 
 const CartItemsSection = () => {
     const t = useTranslations("CART");
@@ -138,7 +139,7 @@ const CartItemsSection = () => {
                                                     </div>
                                                 </td>
                                                 <td className="product-quantity-container">
-                                                    <div className="input-group dark:border-defaultborder/10 rounded-md !flex-nowrap">
+                                                    <form className="input-group dark:border-defaultborder/10 rounded-md !flex-nowrap">
                                                         <button 
                                                             aria-label="button" 
                                                             type="button"
@@ -146,6 +147,15 @@ const CartItemsSection = () => {
                                                                 product-quantity-minus !mb-0" >
                                                                 <i className="ri-subtract-line"></i>
                                                         </button>
+                                                        {/* <FormInput 
+                                                            type='number'
+                                                            required={true}
+                                                            name='quantity'
+                                                            props={register("quantity",{valueAsNumber:true})}
+                                                            error={errors.quantity?.message}
+                                                            loading={mutationLoading}>
+                                                            {t("LABELS.quantity")}
+                                                        </FormInput> */}
                                                         <input 
                                                             type="text" 
                                                             className="form-control form-control-sm text-center !w-[50px] !px-0" 
@@ -159,7 +169,7 @@ const CartItemsSection = () => {
                                                                 product-quantity-plus !mb-0" >
                                                                 <i className="ri-add-line"></i>
                                                         </button>
-                                                    </div>
+                                                    </form>
                                                 </td>
                                                 <td>
                                                     <div className="text-[0.875rem] font-semibold">
