@@ -9,6 +9,7 @@ const ButtonSection = () => {
     const t = useTranslations("CART.BUTTONS");
      const {
         mutationLoading,
+        canUpdateCart,
         handleUpdateItemQuantities,
         handleClearCart,
     } = useMutateUserCart();
@@ -21,7 +22,7 @@ const ButtonSection = () => {
                 type="button"
                 className="ti-btn !font-medium text-white"
                 isLoading={mutationLoading}
-                disabled={mutationLoading}
+                disabled={!canUpdateCart || mutationLoading}
                 >
                 {t(`update-cart`)}
             </FormButton>

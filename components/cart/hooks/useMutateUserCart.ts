@@ -10,13 +10,13 @@ import {
 import { setCart, userCartItemSelector, userCartSelector } from "@/shared/redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 export function useMutateUserCart(){
-    const router = useRouter();
     const t = useTranslations("CART");
     const dispatch = useAppDispatch();
+    const [updateQuantityRequests,setUpdateQuantityRequests]= useState<UpdateQuantityRequest[]>([]);
 
     const [addItemsToCart, { isLoading:addItemsToCartLoading }] = useAddItemsToCartMutation();
     const [deleteItemsFromCart, { isLoading:deleteItemsFromCartLoading }] = useDeleteItemsFromCartMutation();
@@ -50,8 +50,8 @@ export function useMutateUserCart(){
             })
     }
 
-    const handleUpdateItemQuantities = (request:UpdateQuantityRequest[]) =>{
-        updateItemQuantities(request)
+    const handleUpdateItemQuantities = () =>{
+        updateItemQuantities(updateQuantityRequests)
             .unwrap()
             .then((response:Cart)=>{
                 dispatch(setCart(response));
@@ -76,19 +76,51 @@ export function useMutateUserCart(){
             })
     }
 
+    const handleIncreaseQuantity= (cartItemId:number,itemQuantity:number) =>{
+        const existingRequest = updateQuantityRequests.find(req=>req.cartItemId===cartItemId);
+        if(existingRequest){
+            existingRequest.quantity +=1
+        }
+        else{
+            const update:UpdateQuantityRequest={
+                cartItemId:cartItemId,
+                quantity:itemQuantity +1
+            }
+            setUpdateQuantityRequests([...updateQuantityRequests,update]);
+        }
+    }
+
+    const handleDecreaseQuantity= (cartItemId:number,itemQuantity:number) =>{
+        const existingRequest = updateQuantityRequests.find(req=>req.cartItemId===cartItemId);
+        if(existingRequest){
+            existingRequest.quantity -=1
+        }
+        else{
+            const update:UpdateQuantityRequest={
+                cartItemId:cartItemId,
+                quantity:itemQuantity +1
+            }
+            setUpdateQuantityRequests([...updateQuantityRequests,update]);
+        }
+    }
+
     const cart:Cart | null= useAppSelector(userCartSelector);
     const cartItems:CartItem[]| undefined= useAppSelector(userCartItemSelector);
 
 
     const mutationLoading = addItemsToCartLoading || deleteItemsFromCartLoading || updateItemQuantitiesLoading || clearCartLoading;
+    const canUpdateCart = updateQuantityRequests.length>0;
 
     return {
         cart,
         cartItems,
         mutationLoading,
+        canUpdateCart,
         handleAddItemsToCartRequest,
         handleDeleteItemsFromCart,
         handleUpdateItemQuantities,
-        handleClearCart
+        handleClearCart,
+        handleIncreaseQuantity,
+        handleDecreaseQuantity
     }
 }
