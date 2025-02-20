@@ -46,6 +46,7 @@ export const authOptions: NextAuthOptions ={
                         body: JSON.stringify(credentials)
                     })
                     const response =await httpResponse.json();
+                    console.log(response);
                     if(httpResponse.status===401 && isErrorData(response)){
                         throw new Error(response.detail)
                     }
