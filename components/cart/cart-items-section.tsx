@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useMutateUserCart } from "./hooks/useMutateUserCart";
 import { DeleteCartItemRequest } from "@/models/cart.models";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 const CartItemsSection = () => {
     const t = useTranslations("CART");
@@ -109,8 +109,34 @@ const CartItemsSection = () => {
                                     {cartItems.map((item) => {
                                         const productImage = item.previewImage
                                         const imagePath = productImage ?   `${host}${productImage.image}` : `${path}/assets/images/faces/21.jpg`;
-                                        // const [quantity,setQuantity]= useState<number>(item.quantity);
-                                        // const [totalPrice,setTotalPrice]= useState<number>(item.totalPrice);
+                                        const [quantity,setQuantity]= useState<number>(item.quantity);
+                                        const [totalPrice,setTotalPrice]= useState<number>(item.totalPrice);
+                                        const cartItemId=item.id;
+                                        const price = item.unitPrice
+
+                                        const onAddQuantity = () =>{
+                                            const newQuantity = quantity +1;
+                                            const newTotalLinePrice = newQuantity * price
+                                            setQuantity(newQuantity);
+                                            setTotalPrice(newTotalLinePrice);
+                                            handleIncreaseQuantity(cartItemId,newQuantity);
+                                        }
+
+                                        const onSubtractQuantity = () =>{
+                                            const newQuantity = quantity -1;
+                                            const newTotalLinePrice = newQuantity * price
+                                            setQuantity(newQuantity);
+                                            setTotalPrice(newTotalLinePrice);
+                                            handleDecreaseQuantity(cartItemId,newQuantity);
+                                        }
+
+                                        const onChange = (event:ChangeEvent<HTMLInputElement>)=>{
+                                            const newQuantity = Number(event.target.value);
+                                            const newTotalLinePrice = newQuantity * price
+                                            setQuantity(newQuantity);
+                                            setTotalPrice(newTotalLinePrice);
+                                        }
+
                                         return (
                                             <tr className="border border-solid border-inherit dark:border-defaultborder/10" key={item.id}>
                                                 <td>
@@ -145,8 +171,9 @@ const CartItemsSection = () => {
                                                         <button 
                                                             aria-label="button" 
                                                             type="button"
-                                                                className="!border-0 ti-btn ti-btn-icon ti-btn-light  input-group-text flex-grow 
-                                                                product-quantity-minus !mb-0" >
+                                                            className="!border-0 ti-btn ti-btn-icon ti-btn-light  input-group-text flex-grow 
+                                                                product-quantity-minus !mb-0" 
+                                                            onClick={onSubtractQuantity}>
                                                                 <i className="ri-subtract-line"></i>
                                                         </button>
                                                         <input 
@@ -154,19 +181,21 @@ const CartItemsSection = () => {
                                                             className="form-control form-control-sm text-center !w-[50px] !px-0" 
                                                             aria-label="quantity" 
                                                             id="product-quantity" 
-                                                            defaultValue={item.quantity} />
+                                                            value={quantity} 
+                                                            onChange={(e)=>onChange(e)}/>
                                                         <button 
                                                             aria-label="button" 
                                                             type="button" 
                                                             className="!border-0 ti-btn ti-btn-icon ti-btn-light input-group-text flex-grow 
-                                                                product-quantity-plus !mb-0" >
+                                                                product-quantity-plus !mb-0" 
+                                                            onClick={onAddQuantity}>
                                                                 <i className="ri-add-line"></i>
                                                         </button>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div className="text-[0.875rem] font-semibold">
-                                                        <CurrencyFormatter amount={item.totalPrice} />
+                                                        <CurrencyFormatter amount={totalPrice} />
                                                     </div>
                                                 </td>
                                                 <td>

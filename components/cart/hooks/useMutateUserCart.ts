@@ -17,6 +17,7 @@ export function useMutateUserCart(){
     const t = useTranslations("CART");
     const dispatch = useAppDispatch();
     const [updateQuantityRequests,setUpdateQuantityRequests]= useState<UpdateQuantityRequest[]>([]);
+    const [totalCartPrice,setTotalCartPrice]= useState<number>();
 
     const [addItemsToCart, { isLoading:addItemsToCartLoading }] = useAddItemsToCartMutation();
     const [deleteItemsFromCart, { isLoading:deleteItemsFromCartLoading }] = useDeleteItemsFromCartMutation();
@@ -79,12 +80,12 @@ export function useMutateUserCart(){
     const handleIncreaseQuantity= (cartItemId:number,itemQuantity:number) =>{
         const existingRequest = updateQuantityRequests.find(req=>req.cartItemId===cartItemId);
         if(existingRequest){
-            existingRequest.quantity +=1
+            existingRequest.quantity =itemQuantity
         }
         else{
             const update:UpdateQuantityRequest={
                 cartItemId:cartItemId,
-                quantity:itemQuantity +1
+                quantity:itemQuantity
             }
             setUpdateQuantityRequests([...updateQuantityRequests,update]);
         }
@@ -93,12 +94,12 @@ export function useMutateUserCart(){
     const handleDecreaseQuantity= (cartItemId:number,itemQuantity:number) =>{
         const existingRequest = updateQuantityRequests.find(req=>req.cartItemId===cartItemId);
         if(existingRequest){
-            existingRequest.quantity -=1
+            existingRequest.quantity =itemQuantity
         }
         else{
             const update:UpdateQuantityRequest={
                 cartItemId:cartItemId,
-                quantity:itemQuantity +1
+                quantity:itemQuantity
             }
             setUpdateQuantityRequests([...updateQuantityRequests,update]);
         }
