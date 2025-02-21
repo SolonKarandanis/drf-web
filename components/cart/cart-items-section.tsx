@@ -27,7 +27,8 @@ const CartItemsSection = () => {
         mutationLoading,
         handleDeleteItemsFromCart,
         handleIncreaseQuantity,
-        handleDecreaseQuantity
+        handleDecreaseQuantity,
+        handleSetQuantity
     } = useMutateUserCart();
 
 
@@ -135,6 +136,7 @@ const CartItemsSection = () => {
                                             const newTotalLinePrice = newQuantity * price
                                             setQuantity(newQuantity);
                                             setTotalPrice(newTotalLinePrice);
+                                            handleSetQuantity(cartItemId,newQuantity);
                                         }
 
                                         return (

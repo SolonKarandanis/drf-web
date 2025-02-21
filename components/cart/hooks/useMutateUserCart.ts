@@ -10,14 +10,15 @@ import {
 import { setCart, userCartItemSelector, userCartSelector } from "@/shared/redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import {  useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 export function useMutateUserCart(){
     const t = useTranslations("CART");
     const dispatch = useAppDispatch();
-    const [updateQuantityRequests,setUpdateQuantityRequests]= useState<UpdateQuantityRequest[]>([]);
+    const updateQuantityRequests = useRef<UpdateQuantityRequest[]>([]);
     const [totalCartPrice,setTotalCartPrice]= useState<number>();
+
 
     const [addItemsToCart, { isLoading:addItemsToCartLoading }] = useAddItemsToCartMutation();
     const [deleteItemsFromCart, { isLoading:deleteItemsFromCartLoading }] = useDeleteItemsFromCartMutation();
@@ -30,7 +31,6 @@ export function useMutateUserCart(){
             .then((response:Cart)=>{
                 dispatch(setCart(response));
                 toast.success(t("SUCCESS.add-to-cart"));
-                // router.push(`/products/${response.productId}`);
             })
             .catch((error:ErrorResponse)=>{
                 toast.error(t("ERRORS.add-to-cart"));
@@ -52,16 +52,18 @@ export function useMutateUserCart(){
     }
 
     const handleUpdateItemQuantities = () =>{
-        updateItemQuantities(updateQuantityRequests)
-            .unwrap()
-            .then((response:Cart)=>{
-                dispatch(setCart(response));
-                toast.success(t("SUCCESS.update-cart"));
-            })
-            .catch((error:ErrorResponse)=>{
-                toast.error(t("ERRORS.update-cart"));
-                handleError(error);
-            })
+        const requests = updateQuantityRequests.current;
+        console.log(requests);
+        // updateItemQuantities(updateQuantityRequests)
+        //     .unwrap()
+        //     .then((response:Cart)=>{
+        //         dispatch(setCart(response));
+        //         toast.success(t("SUCCESS.update-cart"));
+        //     })
+        //     .catch((error:ErrorResponse)=>{
+        //         toast.error(t("ERRORS.update-cart"));
+        //         handleError(error);
+        //     })
     }
 
     const handleClearCart = () =>{
@@ -78,7 +80,8 @@ export function useMutateUserCart(){
     }
 
     const handleIncreaseQuantity= (cartItemId:number,itemQuantity:number) =>{
-        const existingRequest = updateQuantityRequests.find(req=>req.cartItemId===cartItemId);
+        const requests = updateQuantityRequests.current;
+        const existingRequest = requests.find(req=>req.cartItemId===cartItemId);
         if(existingRequest){
             existingRequest.quantity =itemQuantity
         }
@@ -87,12 +90,13 @@ export function useMutateUserCart(){
                 cartItemId:cartItemId,
                 quantity:itemQuantity
             }
-            setUpdateQuantityRequests([...updateQuantityRequests,update]);
+            updateQuantityRequests.current= [...requests,update]
         }
     }
 
     const handleDecreaseQuantity= (cartItemId:number,itemQuantity:number) =>{
-        const existingRequest = updateQuantityRequests.find(req=>req.cartItemId===cartItemId);
+        const requests = updateQuantityRequests.current;
+        const existingRequest = requests.find(req=>req.cartItemId===cartItemId);
         if(existingRequest){
             existingRequest.quantity =itemQuantity
         }
@@ -101,7 +105,22 @@ export function useMutateUserCart(){
                 cartItemId:cartItemId,
                 quantity:itemQuantity
             }
-            setUpdateQuantityRequests([...updateQuantityRequests,update]);
+            updateQuantityRequests.current= [...requests,update]
+        }
+    }
+
+    const handleSetQuantity= (cartItemId:number,itemQuantity:number) =>{
+        const requests = updateQuantityRequests.current;
+        const existingRequest = requests.find(req=>req.cartItemId===cartItemId);
+        if(existingRequest){
+            existingRequest.quantity =itemQuantity
+        }
+        else{
+            const update:UpdateQuantityRequest={
+                cartItemId:cartItemId,
+                quantity:itemQuantity
+            }
+            updateQuantityRequests.current= [...requests,update]
         }
     }
 
@@ -110,18 +129,18 @@ export function useMutateUserCart(){
 
 
     const mutationLoading = addItemsToCartLoading || deleteItemsFromCartLoading || updateItemQuantitiesLoading || clearCartLoading;
-    const canUpdateCart = updateQuantityRequests.length>0;
 
     return {
         cart,
         cartItems,
         mutationLoading,
-        canUpdateCart,
+        updateQuantityRequests,
         handleAddItemsToCartRequest,
         handleDeleteItemsFromCart,
         handleUpdateItemQuantities,
         handleClearCart,
         handleIncreaseQuantity,
-        handleDecreaseQuantity
+        handleDecreaseQuantity,
+        handleSetQuantity
     }
 }
