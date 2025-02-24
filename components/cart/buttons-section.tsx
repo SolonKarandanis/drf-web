@@ -18,8 +18,10 @@ const ButtonSection = () => {
     }= useCartData();
 
     const onUpdateItemQuantities =()=>{
-        console.log(updateRequests);
+        handleUpdateItemQuantities(updateRequests);
     }
+
+    const canUpdateCart = updateRequests.length > 0;
     
     
     return (
@@ -30,7 +32,7 @@ const ButtonSection = () => {
                 type="button"
                 className="ti-btn !font-medium text-white"
                 isLoading={mutationLoading}
-                disabled={mutationLoading}
+                disabled={mutationLoading || !canUpdateCart}
                 onClick={onUpdateItemQuantities}>
                 {t(`update-cart`)}
             </FormButton>
