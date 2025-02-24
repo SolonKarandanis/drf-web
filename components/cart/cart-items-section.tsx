@@ -28,7 +28,7 @@ const CartItemsSection = () => {
         handleDeleteItemsFromCart,
         handleIncreaseQuantity,
         handleDecreaseQuantity,
-        handleSetQuantity
+        handleSetQuantity,
     } = useMutateUserCart();
 
 

@@ -7,7 +7,6 @@ import DeliverySection from '@/components/cart/delivery-section'
 import PageHeader from '@/shared/layout-components/page-header/PageHeader'
 import { Metadata } from 'next'
 import { getServerSession } from 'next-auth'
-import Link from 'next/link'
 import React from 'react'
 
 

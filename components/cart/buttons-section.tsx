@@ -9,7 +9,6 @@ const ButtonSection = () => {
     const t = useTranslations("CART.BUTTONS");
      const {
         mutationLoading,
-        updateQuantityRequests,
         handleUpdateItemQuantities,
         handleClearCart,
     } = useMutateUserCart();
