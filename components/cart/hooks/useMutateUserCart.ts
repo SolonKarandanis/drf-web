@@ -10,14 +10,11 @@ import {
 import { setCart, userCartItemSelector, userCartSelector } from "@/shared/redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
 import { toast } from "react-toastify";
 
 export function useMutateUserCart(){
     const t = useTranslations("CART");
     const dispatch = useAppDispatch();
-    const [updateQuantityRequests,setUpdateQuantityRequests]= useState<UpdateQuantityRequest[]>([]);
-    const [totalCartPrice,setTotalCartPrice]= useState<number>();
 
 
     const [addItemsToCart, { isLoading:addItemsToCartLoading }] = useAddItemsToCartMutation();
@@ -51,18 +48,17 @@ export function useMutateUserCart(){
             })
     }
 
-    const handleUpdateItemQuantities = () =>{
-        console.log(updateQuantityRequests);
-        // updateItemQuantities(requests)
-        //     .unwrap()
-        //     .then((response:Cart)=>{
-        //         dispatch(setCart(response));
-        //         toast.success(t("SUCCESS.update-cart"));
-        //     })
-        //     .catch((error:ErrorResponse)=>{
-        //         toast.error(t("ERRORS.update-cart"));
-        //         handleError(error);
-        //     })
+    const handleUpdateItemQuantities = (updateQuantityRequests:UpdateQuantityRequest[]) =>{
+        updateItemQuantities(updateQuantityRequests)
+            .unwrap()
+            .then((response:Cart)=>{
+                dispatch(setCart(response));
+                toast.success(t("SUCCESS.update-cart"));
+            })
+            .catch((error:ErrorResponse)=>{
+                toast.error(t("ERRORS.update-cart"));
+                handleError(error);
+            })
     }
 
     const handleClearCart = () =>{
@@ -78,47 +74,6 @@ export function useMutateUserCart(){
             })
     }
 
-    const handleIncreaseQuantity= (cartItemId:number,itemQuantity:number) =>{
-        const existingRequest = updateQuantityRequests.find(req=>req.cartItemId===cartItemId);
-        if(existingRequest){
-            existingRequest.quantity =itemQuantity
-        }
-        else{
-            const update:UpdateQuantityRequest={
-                cartItemId:cartItemId,
-                quantity:itemQuantity
-            }
-            setUpdateQuantityRequests([...updateQuantityRequests,update ]);
-        }
-    }
-
-    const handleDecreaseQuantity= (cartItemId:number,itemQuantity:number) =>{
-        const existingRequest = updateQuantityRequests.find(req=>req.cartItemId===cartItemId);
-        if(existingRequest){
-            existingRequest.quantity =itemQuantity
-        }
-        else{
-            const update:UpdateQuantityRequest={
-                cartItemId:cartItemId,
-                quantity:itemQuantity
-            }
-            setUpdateQuantityRequests([...updateQuantityRequests,update ]);
-        }
-    }
-
-    const handleSetQuantity= (cartItemId:number,itemQuantity:number) =>{
-        const existingRequest = updateQuantityRequests.find(req=>req.cartItemId===cartItemId);
-        if(existingRequest){
-            existingRequest.quantity =itemQuantity
-        }
-        else{
-            const update:UpdateQuantityRequest={
-                cartItemId:cartItemId,
-                quantity:itemQuantity
-            }
-            setUpdateQuantityRequests([...updateQuantityRequests,update ]);
-        }
-    }
 
 
     const cart:Cart | null= useAppSelector(userCartSelector);
@@ -131,13 +86,9 @@ export function useMutateUserCart(){
         cart,
         cartItems,
         mutationLoading,
-        updateQuantityRequests,
         handleAddItemsToCartRequest,
         handleDeleteItemsFromCart,
         handleUpdateItemQuantities,
-        handleClearCart,
-        handleIncreaseQuantity,
-        handleDecreaseQuantity,
-        handleSetQuantity,
+        handleClearCart
     }
 }

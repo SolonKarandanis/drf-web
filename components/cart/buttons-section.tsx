@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useMutateUserCart } from "./hooks/useMutateUserCart";
 import FormButton from "@/shared/components/button/form-button";
+import { useCartData } from "./providers/cart-context";
 
 const ButtonSection = () => {
     const t = useTranslations("CART.BUTTONS");
@@ -12,6 +13,13 @@ const ButtonSection = () => {
         handleUpdateItemQuantities,
         handleClearCart,
     } = useMutateUserCart();
+    const {
+        updateRequests
+    }= useCartData();
+
+    const onUpdateItemQuantities =()=>{
+        console.log(updateRequests);
+    }
     
     
     return (
@@ -23,7 +31,7 @@ const ButtonSection = () => {
                 className="ti-btn !font-medium text-white"
                 isLoading={mutationLoading}
                 disabled={mutationLoading}
-                onClick={handleUpdateItemQuantities}>
+                onClick={onUpdateItemQuantities}>
                 {t(`update-cart`)}
             </FormButton>
             <FormButton 

@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useMutateUserCart } from "./hooks/useMutateUserCart";
 import { DeleteCartItemRequest } from "@/models/cart.models";
 import { ChangeEvent, useState } from "react";
+import { useCartApi } from "./providers/cart-context";
 
 const CartItemsSection = () => {
     const t = useTranslations("CART");
@@ -26,10 +27,10 @@ const CartItemsSection = () => {
     const {
         mutationLoading,
         handleDeleteItemsFromCart,
-        handleIncreaseQuantity,
-        handleDecreaseQuantity,
-        handleSetQuantity,
     } = useMutateUserCart();
+    const {
+        handleSetQuantity
+    }= useCartApi();
 
 
     const configState = useAppSelector((state)=>state.config);
@@ -120,7 +121,7 @@ const CartItemsSection = () => {
                                             const newTotalLinePrice = newQuantity * price
                                             setQuantity(newQuantity);
                                             setTotalPrice(newTotalLinePrice);
-                                            handleIncreaseQuantity(cartItemId,newQuantity);
+                                            handleSetQuantity(cartItemId,newQuantity);
                                         }
 
                                         const onSubtractQuantity = () =>{
@@ -128,7 +129,7 @@ const CartItemsSection = () => {
                                             const newTotalLinePrice = newQuantity * price
                                             setQuantity(newQuantity);
                                             setTotalPrice(newTotalLinePrice);
-                                            handleDecreaseQuantity(cartItemId,newQuantity);
+                                            handleSetQuantity(cartItemId,newQuantity);
                                         }
 
                                         const onChange = (event:ChangeEvent<HTMLInputElement>)=>{

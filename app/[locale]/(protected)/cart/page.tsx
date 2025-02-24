@@ -17,8 +17,6 @@ export const metadata:Metadata={
 }
 
 const CartPage = async () => {
-     
-
     const session = await getServerSession(authOptions);
     const {firstName, lastName}= session!.user!;
     const fullname = `${firstName} ${lastName}`;
