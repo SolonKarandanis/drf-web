@@ -30,7 +30,7 @@ const ButtonSection = () => {
                 intent="info" 
                 size="md" 
                 type="button"
-                className="ti-btn !font-medium text-white"
+                className="ti-btn !font-medium text-white w-full"
                 isLoading={mutationLoading}
                 disabled={mutationLoading || !canUpdateCart}
                 onClick={onUpdateItemQuantities}>
@@ -40,7 +40,7 @@ const ButtonSection = () => {
                 intent="danger" 
                 size="md" 
                 type="button"
-                className="ti-btn !font-medium text-white"
+                className="ti-btn !font-medium text-white w-full"
                 isLoading={mutationLoading}
                 disabled={mutationLoading}
                 onClick={handleClearCart}>
