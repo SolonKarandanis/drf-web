@@ -35,36 +35,34 @@ export const authOptions: NextAuthOptions ={
             },
             // The data returned from this function is passed forward as the
             // `user` variable to the signIn() and jwt() callback
-            async authorize(credentials, req) {
+            async authorize(credentials, req) {          
+                const httpResponse= await fetch(`${baseUrl}auth/token/`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(credentials)
+                })
+                const response =await httpResponse.json();
+                console.log(response);
+                if(httpResponse.status===401 && isErrorData(response)){
+                    throw new Error(response.detail)
+                }
                 
-              
-                    const httpResponse= await fetch(`${baseUrl}auth/token/`, {
-                        method: "POST",
-                        headers: {
-                          "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(credentials)
-                    })
-                    const response =await httpResponse.json();
-                    console.log(response);
-                    if(httpResponse.status===401 && isErrorData(response)){
-                        throw new Error(response.detail)
+                if(!isLoginResponse(response)){
+                    return null;
+                }
+                const {access,refresh} = response;
+                const user:User = await fetch(`${baseUrl}auth/users/account/`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization":`Bearer ${access}`,
                     }
-                   
-                    if(!isLoginResponse(response)){
-                        return null;
-                    }
-                    const {access,refresh} = response;
-                    const user:User = await fetch(`${baseUrl}auth/users/account/`, {
-                        method: "GET",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization":`Bearer ${access}`,
-                        }
-                    })
-                    .then(response => response.json())
-                      
-                    if (user) return {...user,access,refresh};
+                })
+                .then(response => response.json())
+                    
+                if (user) return {...user,access,refresh};
                
                 return null;
             }
@@ -90,6 +88,7 @@ export const authOptions: NextAuthOptions ={
                     body: JSON.stringify({refresh:token["refresh"]})
                 })
                 // .then(response => response.json())
+                console.log(response);
                 if(response.status===401){
                     redirect(`/auth/login`) 
                 }
