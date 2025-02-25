@@ -41,7 +41,6 @@ export interface AddToCartRequest{
 export interface UpdateQuantityRequest{
     cartItemId:number;
     quantity:number;
-    attributes?:string;
 }
 
 export interface DeleteCartItemRequest{
