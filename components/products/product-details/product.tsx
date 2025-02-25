@@ -63,8 +63,6 @@ const Product:FC<Props> = ({uuid}) => {
         control,
         handleSubmit,
         formState,
-        setValue,
-        getValues
     } = useForm<AddToCartSchema>({
         resolver: zodResolver(getAddToCartSchema(formT))
     });
