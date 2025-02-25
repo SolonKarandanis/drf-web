@@ -1,5 +1,6 @@
 'use client';
 
+import CurrencyFormatter from "@/shared/components/currency-formatter/currency-formatter";
 import { useCartData } from "./providers/cart-context";
 
 const CartDetailsSection = () => {
@@ -10,7 +11,9 @@ const CartDetailsSection = () => {
         <div className="p-4 border-b border-dashed dark:border-defaultborder/10">
             <div className="flex items-center justify-between mb-4">
                 <div className="text-[#8c9097] dark:text-white/50 opacity-[0.7]">Sub Total</div>
-                <div className="font-semibold text-[0.875rem]">$1,299</div>
+                <div className="font-semibold text-[0.875rem]">
+                    <CurrencyFormatter amount={totalCartValue} />
+                </div>
             </div>
             <div className="flex items-center justify-between mb-4">
                 <div className="text-[#8c9097] dark:text-white/50 opacity-[0.7]">Discount</div>
@@ -26,7 +29,9 @@ const CartDetailsSection = () => {
             </div>
             <div className="flex items-center justify-between">
                 <div className="text-[#8c9097] dark:text-white/50 opacity-[0.7]">Total :</div>
-                <div className="font-semibold text-[0.875rem] text-primary"> $1,387</div>
+                <div className="font-semibold text-[0.875rem] text-sky-600">
+                    <CurrencyFormatter amount={totalCartValue} />
+                </div>
             </div>
         </div>
     )

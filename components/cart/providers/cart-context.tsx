@@ -1,15 +1,14 @@
-import { UpdateQuantityRequest } from "@/models/cart.models";
+import { CartItem, UpdateQuantityRequest } from "@/models/cart.models";
 import { createContext, ReactNode, useContext, useMemo, useState } from "react";
+import { useGetUserCart } from "../hooks/useGetUserCart";
 
 type ContextState={
     updateRequests :UpdateQuantityRequest[];
     totalCartValue: number;
+    cartItems: CartItem[];
 }
 
-const initialValue: ContextState={
-    updateRequests:[],
-    totalCartValue:0
-};
+
 
 type ContextApi ={
     handleSetQuantity:(cartItemId:number,itemQuantity:number)=>void,
@@ -25,7 +24,17 @@ interface Props {
 
 
 const CartProvider: React.FC<Props> = ({ children }) => {
+    const {
+        cart,
+        cartItems
+    } = useGetUserCart();
+    const initialValue: ContextState={
+        updateRequests:[],
+        totalCartValue: cart ? cart.totalPrice: 0,
+        cartItems: cartItems ? cartItems : [],
+    };
     const [state, setState] = useState<ContextState>(initialValue);
+    
 
     const api = useMemo(()=>{
         const handleSetQuantity= (cartItemId:number,itemQuantity:number) =>{
@@ -38,8 +47,23 @@ const CartProvider: React.FC<Props> = ({ children }) => {
                     cartItemId:cartItemId,
                     quantity:itemQuantity
                 }
-                setState(({totalCartValue,updateRequests})=> ({totalCartValue,updateRequests:[...updateRequests,update ]}));
+                setState(({totalCartValue,updateRequests, cartItems})=> ({
+                    totalCartValue,cartItems,updateRequests:[...updateRequests,update ]
+                }));
             }
+            const existingItem = state.cartItems.find(item=>item.id===cartItemId);
+            if(existingItem){
+                const newTotalLinePrice = itemQuantity * existingItem.unitPrice;
+                existingItem.totalPrice = newTotalLinePrice;
+
+                const newTotalCartPrice =  state.cartItems
+                    .map(item=>item.totalPrice)
+                    .reduce((sum,price)=>sum + price,0);
+                setState(({totalCartValue,updateRequests, cartItems})=> ({
+                    totalCartValue:newTotalCartPrice,cartItems,updateRequests
+                }));
+            }
+            
         }
 
         return {
