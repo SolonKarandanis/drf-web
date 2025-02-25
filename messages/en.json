@@ -410,7 +410,11 @@
             "item":"Item",
             "items":"Items",
             "empty-cart-title":"Empty Cart",
-            "empty-cart-description":"Your cart is empty"
+            "empty-cart-description":"Your cart is empty",
+            "sub-total":"Sub Total",
+            "discount":"Discount",
+            "delivery-charges":"Delivery Charges",
+            "service-tax":"Service Tax"
         },
         "BUTTONS":{
             "add-to-cart":"Add to Cart",

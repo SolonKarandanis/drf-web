@@ -410,7 +410,11 @@
             "item":"Προϊόν",
             "items":"Προϊόντα",
             "empty-cart-title":"Άδειο καλάθι",
-            "empty-cart-description":"Το καλάθι σας είναι άδειο"
+            "empty-cart-description":"Το καλάθι σας είναι άδειο",
+            "sub-total":"Υπο Σύνολο",
+            "discount":"Εκπτωση",
+            "delivery-charges":"Χρεώσεις παράδοσης",
+            "service-tax":"Φόρος Υπηρεσιών"
         },
         "BUTTONS":{
             "add-to-cart":"Προσθήκη στο Καλάθι",
