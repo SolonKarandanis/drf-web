@@ -39,6 +39,7 @@ const CartProvider: React.FC<Props> = ({ children }) => {
     const api = useMemo(()=>{
         const handleSetQuantity= (cartItemId:number,itemQuantity:number) =>{
             const existingRequest = state.updateRequests.find(req=>req.cartItemId===cartItemId);
+            const existingItem = state.cartItems.find(item=>item.id===cartItemId);
             if(existingRequest){
                 existingRequest.quantity =itemQuantity
             }
@@ -51,7 +52,6 @@ const CartProvider: React.FC<Props> = ({ children }) => {
                     totalCartValue,cartItems,updateRequests:[...updateRequests,update ]
                 }));
             }
-            const existingItem = state.cartItems.find(item=>item.id===cartItemId);
             if(existingItem){
                 const newTotalLinePrice = itemQuantity * existingItem.unitPrice;
                 existingItem.totalPrice = newTotalLinePrice;
@@ -64,6 +64,10 @@ const CartProvider: React.FC<Props> = ({ children }) => {
                 }));
             }
             
+        }
+
+        const handleChangeItemAttribute= (cartItemId:number,itemQuantity:number)=>{
+
         }
 
         return {
