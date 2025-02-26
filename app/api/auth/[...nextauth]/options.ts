@@ -44,6 +44,7 @@ export const authOptions: NextAuthOptions ={
                     body: JSON.stringify(credentials)
                 })
                 const response =await httpResponse.json();
+                console.log("-------->providers");
                 console.log(response);
                 if(httpResponse.status===401 && isErrorData(response)){
                     throw new Error(response.detail)
@@ -88,6 +89,7 @@ export const authOptions: NextAuthOptions ={
                     body: JSON.stringify({refresh:token["refresh"]})
                 })
                 // .then(response => response.json())
+                console.log("-------->callbacks");
                 console.log(response);
                 if(response.status===401){
                     redirect(`/auth/login`) 

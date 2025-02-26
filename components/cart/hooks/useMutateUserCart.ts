@@ -5,7 +5,7 @@ import {
     useAddItemsToCartMutation, 
     useClearCartMutation, 
     useDeleteItemsFromCartMutation, 
-    useUpdateCartItemsQuantityMutation 
+    useUpdateCartItemsMutation 
 } from "@/shared/redux/features/cart/cartApiSlice";
 import { setCart, userCartItemSelector, userCartSelector } from "@/shared/redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
@@ -19,7 +19,7 @@ export function useMutateUserCart(){
 
     const [addItemsToCart, { isLoading:addItemsToCartLoading }] = useAddItemsToCartMutation();
     const [deleteItemsFromCart, { isLoading:deleteItemsFromCartLoading }] = useDeleteItemsFromCartMutation();
-    const [updateItemQuantities, { isLoading:updateItemQuantitiesLoading }] = useUpdateCartItemsQuantityMutation();
+    const [updateItems, { isLoading:updateItemsLoading }] = useUpdateCartItemsMutation();
     const [clearCart, { isLoading:clearCartLoading }] = useClearCartMutation();
 
     const handleAddItemsToCartRequest= (request:AddToCartRequest[]) =>{
@@ -48,8 +48,8 @@ export function useMutateUserCart(){
             })
     }
 
-    const handleUpdateItemQuantities = (updateQuantityRequests:UpdateQuantityRequest[]) =>{
-        updateItemQuantities(updateQuantityRequests)
+    const handleUpdateItems = (updateQuantityRequests:UpdateQuantityRequest[]) =>{
+        updateItems(updateQuantityRequests)
             .unwrap()
             .then((response:Cart)=>{
                 dispatch(setCart(response));
@@ -80,7 +80,7 @@ export function useMutateUserCart(){
     const cartItems:CartItem[]| undefined= useAppSelector(userCartItemSelector);
 
 
-    const mutationLoading = addItemsToCartLoading || deleteItemsFromCartLoading || updateItemQuantitiesLoading || clearCartLoading;
+    const mutationLoading = addItemsToCartLoading || deleteItemsFromCartLoading || updateItemsLoading || clearCartLoading;
 
     return {
         cart,
@@ -88,7 +88,7 @@ export function useMutateUserCart(){
         mutationLoading,
         handleAddItemsToCartRequest,
         handleDeleteItemsFromCart,
-        handleUpdateItemQuantities,
+        handleUpdateItems,
         handleClearCart
     }
 }

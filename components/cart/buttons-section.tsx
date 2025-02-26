@@ -10,7 +10,7 @@ const ButtonSection = () => {
     const t = useTranslations("CART.BUTTONS");
      const {
         mutationLoading,
-        handleUpdateItemQuantities,
+        handleUpdateItems,
         handleClearCart,
     } = useMutateUserCart();
     const {
@@ -18,7 +18,7 @@ const ButtonSection = () => {
     }= useCartData();
 
     const onUpdateItemQuantities =()=>{
-        handleUpdateItemQuantities(updateRequests);
+        handleUpdateItems(updateRequests);
     }
 
     const canUpdateCart = updateRequests.length > 0;

@@ -25,7 +25,7 @@ const cartsApiSlice = apiSlice.injectEndpoints({
                 }
             }
         }),
-        updateCartItemsQuantity:builder.mutation<Cart,UpdateQuantityRequest[]>({
+        updateCartItems:builder.mutation<Cart,UpdateQuantityRequest[]>({
             query: ( request:UpdateQuantityRequest[])=>{
                 return {
                     url: `${ApiControllers.CART}/items/update/`,
@@ -52,6 +52,6 @@ export const {
     useLazyGetUserCartQuery,
     useAddItemsToCartMutation,
     useDeleteItemsFromCartMutation,
-    useUpdateCartItemsQuantityMutation,
+    useUpdateCartItemsMutation,
     useClearCartMutation,
 } = cartsApiSlice;
