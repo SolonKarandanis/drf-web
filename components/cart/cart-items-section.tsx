@@ -17,7 +17,7 @@ const CartItemsSection = () => {
     const router = useRouter(); 
     const {
         cartItems,
-        cartItemAttributes,
+        productItemsAttributes,
         isError,
         isLoading,
     } = useGetUserCart();
@@ -53,8 +53,6 @@ const CartItemsSection = () => {
         handleDeleteItemsFromCart([request]);
     }
 
-    console.log(cartItemAttributes);
-   
     return (
         <div className="col-span-12 xxl:col-span-9">
             {!cartItems || cartItems.length ==0 && (
@@ -118,6 +116,10 @@ const CartItemsSection = () => {
                                         const [totalPrice,setTotalPrice]= useState<number>(item.totalPrice);
                                         const cartItemId=item.id;
                                         const price = item.unitPrice
+                                        const selectedItemAttributes = item.attributes;
+                                        const productItemAttributes = productItemsAttributes[item.id];
+                                        console.log(productItemAttributes);
+                                        console.log(selectedItemAttributes);
 
                                         const onAddQuantity = () =>{
                                             const newQuantity = quantity +1;
@@ -159,10 +161,12 @@ const CartItemsSection = () => {
                                                                 </Link>
                                                             </div>
                                                             <div className="flex items-center mb-1 align-middle">
-                                                                <span className="me-1">{t("LABELS.size")}:</span><span className="font-semibold text-[#8c9097] dark:text-white/50">Large</span>
+                                                                <span className="me-1">{t("LABELS.size")}:</span>
+                                                                <span className="font-semibold text-[#8c9097] dark:text-white/50">Large</span>
                                                             </div>
                                                             <div className="flex items-center mb-1 align-middle">
-                                                                <span className="me-1">{t("LABELS.color")}:</span><span className="font-semibold text-[#8c9097] dark:text-white/50">Grey</span>
+                                                                <span className="me-1">{t("LABELS.color")}:</span>
+                                                                <span className="font-semibold text-[#8c9097] dark:text-white/50">Grey</span>
                                                             </div>
                                                         </div>
                                                     </div>

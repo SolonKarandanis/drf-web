@@ -22,12 +22,12 @@ export function useGetUserCart(){
 
     const cart:Cart | null= useAppSelector(userCartSelector);
     const cartItems:CartItem[]| undefined= useAppSelector(userCartItemSelector);
-    const cartItemAttributes:Record<number,ProductAttributes>| undefined= useAppSelector(userCartItemProductAttributesSelector);
+    const productItemsAttributes:Record<number,ProductAttributes>| undefined= useAppSelector(userCartItemProductAttributesSelector);
 
     return {
         cart,
         cartItems,
-        cartItemAttributes,
+        productItemsAttributes,
         isError,
         isLoading
     }
