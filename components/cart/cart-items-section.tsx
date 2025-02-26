@@ -34,6 +34,8 @@ const CartItemsSection = () => {
         handleSetQuantity
     }= useCartApi();
 
+    console.log(sizesOptions);
+
 
     const configState = useAppSelector((state)=>state.config);
     const path = configState.baseUrl
@@ -239,16 +241,6 @@ const CartItemsSection = () => {
                                                                     {t("BUTTONS.remove-from-cart")}
                                                                 </span>
                                                             </FormButton>
-                                                            {/* <button 
-                                                                onClick={()=>handleRemoveFromCart(item.id)}
-                                                                className="hs-tooltip-toggle ti-btn ti-btn-icon bg-danger text-white !font-medium btn-delete">
-                                                                <i className="ri-delete-bin-line"></i>
-                                                                <span
-                                                                    className="hs-tooltip-content  ti-main-tooltip-content py-1 px-2 !bg-black !text-xs !font-medium !text-white shadow-sm "
-                                                                    role="tooltip">
-                                                                    {t("BUTTONS.remove-from-cart")}
-                                                                </span>
-                                                            </button> */}
                                                         </div>
                                                     </div>
                                                 </td>
