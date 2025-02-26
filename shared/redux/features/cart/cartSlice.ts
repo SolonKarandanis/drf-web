@@ -1,6 +1,7 @@
 import { Cart } from "@/models/cart.models";
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
+import { ProductAttributes } from "@/models/product.models";
 
 
 export interface CartState{
@@ -38,3 +39,13 @@ const carts = (state: RootState) => state.carts;
 export const userCartSelector = createSelector([carts],(carts)=>  carts.cart);
 
 export const userCartItemSelector = createSelector([userCartSelector],(cart)=> cart?.cartItems);
+
+export const userCartItemProductAttributesSelector = createSelector([userCartItemSelector],(cartItems)=> {
+    const map:Record<number,ProductAttributes>={};
+    if(cartItems && cartItems.length >0){
+        for(const cartItem of cartItems){
+            map[cartItem.id]=cartItem.productAttributes;
+        }
+    }
+    return map;
+});

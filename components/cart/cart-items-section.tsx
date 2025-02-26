@@ -17,6 +17,7 @@ const CartItemsSection = () => {
     const router = useRouter(); 
     const {
         cartItems,
+        cartItemAttributes,
         isError,
         isLoading,
     } = useGetUserCart();
@@ -51,6 +52,8 @@ const CartItemsSection = () => {
         };
         handleDeleteItemsFromCart([request]);
     }
+
+    console.log(cartItemAttributes);
    
     return (
         <div className="col-span-12 xxl:col-span-9">

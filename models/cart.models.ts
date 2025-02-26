@@ -1,4 +1,5 @@
 import { ImageModel } from "./image.models";
+import { ProductAttributes } from "./product.models";
 
 export interface CartItemProduct{
     sku:string;
@@ -20,6 +21,7 @@ export interface CartItem{
     productId:number;
     uuid:string;
     attributes:Record<AttributeIds, number>;
+    productAttributes: ProductAttributes;
 }
 
 export interface Cart{
