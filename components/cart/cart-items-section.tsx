@@ -11,6 +11,7 @@ import { useMutateUserCart } from "./hooks/useMutateUserCart";
 import { DeleteCartItemRequest } from "@/models/cart.models";
 import { ChangeEvent, useState } from "react";
 import { useCartApi } from "./providers/cart-context";
+import FormButton from "@/shared/components/button/form-button";
 
 const CartItemsSection = () => {
     const t = useTranslations("CART");
@@ -223,7 +224,22 @@ const CartItemsSection = () => {
                                                             </button>
                                                         </div>
                                                         <div className="hs-tooltip ti-main-tooltip ltr:[--placement:left] rtl:[--placement:right]">
-                                                            <button 
+                                                            <FormButton 
+                                                                intent="info" 
+                                                                size="sm" 
+                                                                type="button"
+                                                                className="hs-tooltip-toggle ti-btn ti-btn-icon bg-danger text-white !font-medium btn-delete !pr-1"
+                                                                isLoading={mutationLoading}
+                                                                disabled={mutationLoading}
+                                                                onClick={()=>handleRemoveFromCart(item.id)}>
+                                                                <i className="ri-delete-bin-line"></i>
+                                                                <span
+                                                                    className="hs-tooltip-content  ti-main-tooltip-content py-1 px-2 !bg-black !text-xs !font-medium !text-white shadow-sm "
+                                                                    role="tooltip">
+                                                                    {t("BUTTONS.remove-from-cart")}
+                                                                </span>
+                                                            </FormButton>
+                                                            {/* <button 
                                                                 onClick={()=>handleRemoveFromCart(item.id)}
                                                                 className="hs-tooltip-toggle ti-btn ti-btn-icon bg-danger text-white !font-medium btn-delete">
                                                                 <i className="ri-delete-bin-line"></i>
@@ -232,7 +248,7 @@ const CartItemsSection = () => {
                                                                     role="tooltip">
                                                                     {t("BUTTONS.remove-from-cart")}
                                                                 </span>
-                                                            </button>
+                                                            </button> */}
                                                         </div>
                                                     </div>
                                                 </td>
