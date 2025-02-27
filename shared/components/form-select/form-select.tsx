@@ -65,7 +65,7 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
     return (
         <section className={sectionClassName}>
             {labelHtml}
-            <div className='mt-2'>
+            <div className='relative mt-2'>
                 <Select
                     ref={ref}
                     name={name}
@@ -73,7 +73,6 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
                     placeholder={placeholderValue}
                     options={options}
                     classNamePrefix="Select2"
-                    
                     isMulti={isMulti}
                     isSearchable={isSearchable}
                     menuPlacement='auto'

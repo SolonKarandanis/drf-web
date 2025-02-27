@@ -1,5 +1,5 @@
 import { handleError } from "@/lib/functions";
-import { AddToCartRequest, Cart, CartItem, DeleteCartItemRequest, UpdateQuantityRequest } from "@/models/cart.models";
+import { AddToCartRequest, Cart, CartItem, DeleteCartItemRequest, UpdateItemRequest } from "@/models/cart.models";
 import { ErrorResponse } from "@/models/error.models";
 import { 
     useAddItemsToCartMutation, 
@@ -48,7 +48,7 @@ export function useMutateUserCart(){
             })
     }
 
-    const handleUpdateItems = (updateQuantityRequests:UpdateQuantityRequest[]) =>{
+    const handleUpdateItems = (updateQuantityRequests:UpdateItemRequest[]) =>{
         updateItems(updateQuantityRequests)
             .unwrap()
             .then((response:Cart)=>{

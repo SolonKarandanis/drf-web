@@ -13199,7 +13199,7 @@ caption {
 }
 
 .Select2__menu {
-  @apply z-[3]  !important;
+  @apply z-[3] absolute !important;
 }
 
 .Select2__multi-value {

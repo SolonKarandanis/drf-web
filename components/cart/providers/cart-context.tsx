@@ -1,9 +1,9 @@
-import { CartItem, UpdateQuantityRequest } from "@/models/cart.models";
+import { CartItem, UpdateItemRequest } from "@/models/cart.models";
 import { createContext, ReactNode, useContext, useMemo, useState } from "react";
 import { useGetUserCart } from "../hooks/useGetUserCart";
 
 type ContextState={
-    updateRequests :UpdateQuantityRequest[];
+    updateRequests :UpdateItemRequest[];
     totalCartValue: number;
     cartItems: CartItem[];
 }
@@ -44,7 +44,7 @@ const CartProvider: React.FC<Props> = ({ children }) => {
                 existingRequest.quantity =itemQuantity
             }
             else{
-                const update:UpdateQuantityRequest={
+                const update:UpdateItemRequest={
                     cartItemId:cartItemId,
                     quantity:itemQuantity
                 }

@@ -1,4 +1,4 @@
-import { AddToCartRequest, Cart, DeleteCartItemRequest, UpdateQuantityRequest } from "@/models/cart.models";
+import { AddToCartRequest, Cart, DeleteCartItemRequest, UpdateItemRequest } from "@/models/cart.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
 
@@ -25,8 +25,8 @@ const cartsApiSlice = apiSlice.injectEndpoints({
                 }
             }
         }),
-        updateCartItems:builder.mutation<Cart,UpdateQuantityRequest[]>({
-            query: ( request:UpdateQuantityRequest[])=>{
+        updateCartItems:builder.mutation<Cart,UpdateItemRequest[]>({
+            query: ( request:UpdateItemRequest[])=>{
                 return {
                     url: `${ApiControllers.CART}/items/update/`,
                     method: 'PUT',
