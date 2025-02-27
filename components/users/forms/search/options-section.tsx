@@ -23,17 +23,17 @@ const OptionsSection:FC<OptionsSectionProps> = ({
 }) => {
     const t = useTranslations("USERS.SEARCH.FORM.LABELS");
     const groupOptions:Options[] = [];
-    // const {
-    //     userGroups,
-    //     isUserGroupsLoading
-    // } = useGetUserGroups();
+    const {
+        userGroups,
+        isUserGroupsLoading
+    } = useGetUserGroups();
 
-    // if(!isUserGroupsLoading && userGroups){
-    //     userGroups.forEach((group)=> groupOptions.push({
-    //         value:group.id,
-    //         label:group.name
-    //     }))
-    // }
+    if(!isUserGroupsLoading && userGroups){
+        userGroups.forEach((group)=> groupOptions.push({
+            value:group.id,
+            label:group.name
+        }))
+    }
 
     const statusOptions:Options[] = [
         {value:'ACTIVE',label:t("status-active")},
