@@ -12,9 +12,17 @@ import { DeleteCartItemRequest } from "@/models/cart.models";
 import { ChangeEvent, useState } from "react";
 import { useCartApi } from "./providers/cart-context";
 import FormButton from "@/shared/components/button/form-button";
+import FormSelect from "@/shared/components/form-select/form-select";
+import { useForm } from "react-hook-form";
+import { 
+    getUpdateCartItemAttributesSchema, 
+    UpdateCartItemAttributesSchema 
+} from "@/schemas/cart.schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const CartItemsSection = () => {
     const t = useTranslations("CART");
+    const formT = useTranslations("CART.VALIDATION");
     const router = useRouter(); 
     const {
         cartItems,
@@ -55,6 +63,16 @@ const CartItemsSection = () => {
         };
         handleDeleteItemsFromCart([request]);
     }
+
+     const {
+        register,
+        control,
+        handleSubmit,
+        formState,
+    } = useForm<UpdateCartItemAttributesSchema>({
+        resolver: zodResolver(getUpdateCartItemAttributesSchema(formT))
+    });
+    const {errors} = formState;
 
     return (
         <div className="col-span-12 xxl:col-span-9">
@@ -165,7 +183,15 @@ const CartItemsSection = () => {
                                                             </div>
                                                             <div className="flex items-center mb-1 align-middle">
                                                                 <span className="me-1">{t("LABELS.size")}:</span>
-                                                                <span className="font-semibold text-[#8c9097] dark:text-white/50">Large</span>
+                                                                {/* <FormSelect 
+                                                                    name="size"
+                                                                    isMulti={false}
+                                                                    required={true}
+                                                                    isSearchable={true}
+                                                                    options={productSizesOptions}
+                                                                    sectionClassName="col-span-12 xl:col-span-6 mb-2">
+                                                                        <p className="text-[.9375rem] font-semibold mb-2">{t("LABELS.size")} :</p>
+                                                                </FormSelect> */}
                                                             </div>
                                                             <div className="flex items-center mb-1 align-middle">
                                                                 <span className="me-1">{t("LABELS.color")}:</span>
