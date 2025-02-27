@@ -50,15 +50,13 @@ const CartItemsSection = () => {
 
 
     const handleAddToWishList = (cartItemId:number)=>{
-        console.log(cartItemId);
     }
 
     const handleRemoveFromCart = (cartItemId:number) =>{
-        console.log(cartItemId);
-        // const request:DeleteCartItemRequest={
-        //     cartItemId
-        // };
-        // handleDeleteItemsFromCart([request]);
+        const request:DeleteCartItemRequest={
+            cartItemId
+        };
+        handleDeleteItemsFromCart([request]);
     }
 
     const updatequantitiesForm = useForm<UpdateCartItemQuantitiesSchema>({
@@ -244,8 +242,6 @@ const CartItemsSection = () => {
                                                 </td>
                                                 <td>
                                                     <CartItemButtons
-                                                        key={item.id} 
-                                                        cartItemId={item.id}
                                                         isLoading={mutationLoading}
                                                         handleAddToWishList={()=>handleAddToWishList(item.id)}
                                                         handleDeleteItemsFromCart={()=>handleRemoveFromCart(item.id)}
