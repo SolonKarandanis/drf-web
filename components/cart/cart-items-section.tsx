@@ -13,10 +13,12 @@ import { ChangeEvent, useState } from "react";
 import { useCartApi } from "./providers/cart-context";
 import FormButton from "@/shared/components/button/form-button";
 import FormSelect from "@/shared/components/form-select/form-select";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { 
     getUpdateCartItemAttributesSchema, 
-    UpdateCartItemAttributesSchema 
+    getUpdateCartItemQuantitiesSchema, 
+    UpdateCartItemAttributesSchema, 
+    UpdateCartItemQuantitiesSchema
 } from "@/schemas/cart.schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -64,15 +66,14 @@ const CartItemsSection = () => {
         handleDeleteItemsFromCart([request]);
     }
 
-     const {
-        register,
-        control,
-        handleSubmit,
-        formState,
-    } = useForm<UpdateCartItemAttributesSchema>({
+    const updatequantitiesForm = useForm<UpdateCartItemQuantitiesSchema>({
+        resolver: zodResolver(getUpdateCartItemQuantitiesSchema(formT))
+    });
+
+    const updateAttributesForm = useForm<UpdateCartItemAttributesSchema>({
         resolver: zodResolver(getUpdateCartItemAttributesSchema(formT))
     });
-    const {errors} = formState;
+    const {errors} = updateAttributesForm.formState;
 
     return (
         <div className="col-span-12 xxl:col-span-9">
@@ -175,27 +176,51 @@ const CartItemsSection = () => {
                                                                 <img src={imagePath} alt="" />
                                                             </span>
                                                         </div>
-                                                        <div>
+                                                        <div className="flex flex-col">
                                                             <div className="mb-1 text-[0.875rem] font-semibold">
                                                                 <Link href={`/products/${item.productDetails.uuid}`}>
                                                                     {`(${item.productDetails.sku}) ${item.productDetails.title}`}
                                                                 </Link>
                                                             </div>
-                                                            <div className="flex items-center mb-1 align-middle">
+                                                            <div className="flex flex-row items-center justify-start gap-2 mb-1">
                                                                 <span className="me-1">{t("LABELS.size")}:</span>
-                                                                {/* <FormSelect 
+                                                                <Controller
                                                                     name="size"
-                                                                    isMulti={false}
-                                                                    required={true}
-                                                                    isSearchable={true}
-                                                                    options={productSizesOptions}
-                                                                    sectionClassName="col-span-12 xl:col-span-6 mb-2">
-                                                                        <p className="text-[.9375rem] font-semibold mb-2">{t("LABELS.size")} :</p>
-                                                                </FormSelect> */}
+                                                                    control={updateAttributesForm.control}
+                                                                    render={({ field }) => (
+                                                                        <FormSelect 
+                                                                            name="size"
+                                                                            isMulti={false}
+                                                                            required={true}
+                                                                            isSearchable={true}
+                                                                            options={sizesOptions}
+                                                                            sectionClassName="col-span-12 xl:col-span-6 mb-2"
+                                                                            field={field}
+                                                                            error={errors.size?.message}
+                                                                            loading={mutationLoading}>
+                                                                        </FormSelect>
+                                                                    )}
+                                                                />
                                                             </div>
-                                                            <div className="flex items-center mb-1 align-middle">
+                                                            <div className="flex flex-row items-center justify-start mb-1">
                                                                 <span className="me-1">{t("LABELS.color")}:</span>
-                                                                <span className="font-semibold text-[#8c9097] dark:text-white/50">Grey</span>
+                                                                <Controller
+                                                                    name="color"
+                                                                    control={updateAttributesForm.control}
+                                                                    render={({ field }) => (
+                                                                        <FormSelect 
+                                                                            name="color"
+                                                                            isMulti={false}
+                                                                            required={true}
+                                                                            isSearchable={true}
+                                                                            options={coloursOptions}
+                                                                            sectionClassName="col-span-12 xl:col-span-6 mb-2"
+                                                                            field={field}
+                                                                            error={errors.size?.message}
+                                                                            loading={mutationLoading}>
+                                                                        </FormSelect>
+                                                                    )}
+                                                                />
                                                             </div>
                                                         </div>
                                                     </div>
