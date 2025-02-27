@@ -10,7 +10,6 @@ import { useMutateUserCart } from "./hooks/useMutateUserCart";
 import { DeleteCartItemRequest } from "@/models/cart.models";
 import { ChangeEvent, useState } from "react";
 import { useCartApi } from "./providers/cart-context";
-import FormButton from "@/shared/components/button/form-button";
 import FormSelect from "@/shared/components/form-select/form-select";
 import { Controller, useForm } from "react-hook-form";
 import { 
@@ -21,6 +20,7 @@ import {
 } from "@/schemas/cart.schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import EmptyCart from "./empty-cart";
+import CartItemButtons from "./cart-item-buttons";
 
 const CartItemsSection = () => {
     const t = useTranslations("CART");
@@ -50,14 +50,15 @@ const CartItemsSection = () => {
 
 
     const handleAddToWishList = (cartItemId:number)=>{
-
+        console.log(cartItemId);
     }
 
     const handleRemoveFromCart = (cartItemId:number) =>{
-        const request:DeleteCartItemRequest={
-            cartItemId
-        };
-        handleDeleteItemsFromCart([request]);
+        console.log(cartItemId);
+        // const request:DeleteCartItemRequest={
+        //     cartItemId
+        // };
+        // handleDeleteItemsFromCart([request]);
     }
 
     const updatequantitiesForm = useForm<UpdateCartItemQuantitiesSchema>({
@@ -242,37 +243,13 @@ const CartItemsSection = () => {
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div className="flex items-center">
-                                                        <div className="hs-tooltip ti-main-tooltip">
-                                                            <button 
-                                                                onClick={()=>handleAddToWishList(item.id)} 
-                                                                className="hs-tooltip-toggle ti-btn ti-btn-icon bg-success text-white !font-medium me-1">
-                                                                <i className="ri-heart-line"></i>
-                                                                <span
-                                                                    className="hs-tooltip-content  ti-main-tooltip-content py-1 px-2 !bg-black !text-xs !font-medium !text-white shadow-sm "
-                                                                    role="tooltip">
-                                                                    {t("BUTTONS.add-to-wishlist")} 
-                                                                </span>
-                                                            </button>
-                                                        </div>
-                                                        <div className="hs-tooltip ti-main-tooltip ltr:[--placement:left] rtl:[--placement:right]">
-                                                            <FormButton 
-                                                                intent="info" 
-                                                                size="sm" 
-                                                                type="button"
-                                                                className="hs-tooltip-toggle ti-btn ti-btn-icon bg-danger text-white !font-medium btn-delete !pr-1"
-                                                                isLoading={mutationLoading}
-                                                                disabled={mutationLoading}
-                                                                onClick={()=>handleRemoveFromCart(item.id)}>
-                                                                <i className="ri-delete-bin-line"></i>
-                                                                <span
-                                                                    className="hs-tooltip-content  ti-main-tooltip-content py-1 px-2 !bg-black !text-xs !font-medium !text-white shadow-sm "
-                                                                    role="tooltip">
-                                                                    {t("BUTTONS.remove-from-cart")}
-                                                                </span>
-                                                            </FormButton>
-                                                        </div>
-                                                    </div>
+                                                    <CartItemButtons
+                                                        key={item.id} 
+                                                        cartItemId={item.id}
+                                                        isLoading={mutationLoading}
+                                                        handleAddToWishList={()=>handleAddToWishList(item.id)}
+                                                        handleDeleteItemsFromCart={()=>handleRemoveFromCart(item.id)}
+                                                    />
                                                 </td>
                                             </tr>
                                         )}
