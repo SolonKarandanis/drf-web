@@ -19,11 +19,9 @@ import {
 } from '@/shared/redux/features/users/usersSlice';
 import { useTranslations } from 'next-intl';
 import { useGetUserSearchResults } from '../../hooks/useGetUserSearchResults';
-import { useGetUserGroups } from '../../hooks/useGetUserGroups';
 import FormInput from '@/shared/components/form-input/form-input';
 import FormButton from '@/shared/components/button/form-button';
-import FormSelect from '@/shared/components/form-select/form-select';
-import { Options } from '@/shared/components/props';
+import OptionsSection from './options-section';
 
 
 type Inputs = z.infer<typeof UserSearchSchema>
@@ -34,11 +32,6 @@ interface Props{
 
 const SearchUserForm:FC<Props> = ({}) => {
     const t = useTranslations();
-
-    const {
-        userGroups
-    } = useGetUserGroups();
-
     const {
         handleGetSearchResults,
         isLoading,
@@ -47,22 +40,8 @@ const SearchUserForm:FC<Props> = ({}) => {
 
     const dispatch = useAppDispatch();
 
-    const paging = searchRequest.paging
+    const paging = searchRequest.paging;
 
-    const groupOptions = userGroups.map((group)=> {
-            return {
-                value:group.id,
-                label:group.name
-            } as Options
-    })
-
-    const statusOptions:Options[] = [
-        {value:'ACTIVE',label:t("USERS.SEARCH.FORM.LABELS.status-active")},
-        {value:'UNVERIFIED',label:t("USERS.SEARCH.FORM.LABELS.status-unverified")},
-        {value:'DEACTIVATED',label:t("USERS.SEARCH.FORM.LABELS.status-deactivated")},
-        {value:'DELETED',label:t("USERS.SEARCH.FORM.LABELS.status-deleted")}
-    ]
-    
     const form = useForm<Inputs>({
         resolver: zodResolver(UserSearchSchema),
         defaultValues:{
@@ -137,35 +116,7 @@ const SearchUserForm:FC<Props> = ({}) => {
                             {t(`USERS.SEARCH.FORM.LABELS.email`)}
                         </FormInput>
                     </div>
-                    <div>
-                        <Controller
-                            name="role"
-                            control={form.control}
-                            render={({ field }) => (
-                                <FormSelect 
-                                    options={groupOptions}
-                                    sectionClassName="mb-2"
-                                    field={field}
-                                    error={errors.role?.message}>
-                                        {t("USERS.SEARCH.FORM.LABELS.role")}
-                                </FormSelect>
-                            )}
-                        />
-                        <Controller
-                            name="status"
-                            control={form.control}
-                            render={({ field }) => (
-                                <FormSelect 
-                                    options={statusOptions}
-                                    required={true}
-                                    sectionClassName="mb-2"
-                                    field={field}
-                                    error={errors.status?.message}>
-                                        {t("USERS.SEARCH.FORM.LABELS.status")}
-                                </FormSelect>
-                            )}
-                        />
-                    </div>
+                   <OptionsSection control={form.control} errors={errors} />
                 </div>
                 <div className='pt-5 mt-8' data-testid="buttons">
                     <div className='flex justify-between'>

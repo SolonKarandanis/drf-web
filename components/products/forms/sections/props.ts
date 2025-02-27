@@ -1,5 +1,5 @@
 import { ProductPublishedStatus } from "@/models/product.models";
-import { Control, DefaultValues, FieldErrors } from "react-hook-form";
+import { Control, FieldErrors } from "react-hook-form";
 
 export interface FormProps{
     title: string;
