@@ -44,8 +44,6 @@ const CartItemsSection = () => {
         handleSetQuantity
     }= useCartApi();
 
-    console.log(sizesOptions);
-
 
     const configState = useAppSelector((state)=>state.config);
     const path = configState.baseUrl
@@ -140,8 +138,12 @@ const CartItemsSection = () => {
                                         const price = item.unitPrice
                                         const selectedItemAttributes = item.attributes;
                                         const productItemAttributes = productItemsAttributes[item.id];
-                                        console.log(productItemAttributes);
-                                        console.log(selectedItemAttributes);
+                                        const productSizes=productItemAttributes.sizes.map(size=>size.attributeOptionId);
+                                        const productColors=productItemAttributes.colors.map(color=>color.attributeOptionId);
+                                        const productSizesOptions = sizesOptions.filter(option=>productSizes.includes(option.value as number));
+                                        const productColorOptions = coloursOptions.filter(option=>productColors.includes(option.value as number));
+                                        const selectedSize = selectedItemAttributes[1];
+                                        const selectedColor = selectedItemAttributes[2];
 
                                         const onAddQuantity = () =>{
                                             const newQuantity = quantity +1;
@@ -193,8 +195,9 @@ const CartItemsSection = () => {
                                                                             isMulti={false}
                                                                             required={true}
                                                                             isSearchable={true}
-                                                                            options={sizesOptions}
-                                                                            sectionClassName="col-span-12 xl:col-span-6 mb-2"
+                                                                            options={productSizesOptions}
+                                                                            defaultValues={[selectedSize]}
+                                                                            sectionClassName="col-span-12 xl:col-span-6 mb-2 "
                                                                             field={field}
                                                                             error={errors.size?.message}
                                                                             loading={mutationLoading}>
@@ -213,7 +216,8 @@ const CartItemsSection = () => {
                                                                             isMulti={false}
                                                                             required={true}
                                                                             isSearchable={true}
-                                                                            options={coloursOptions}
+                                                                            options={productColorOptions}
+                                                                            defaultValues={[selectedColor]}
                                                                             sectionClassName="col-span-12 xl:col-span-6 mb-2"
                                                                             field={field}
                                                                             error={errors.size?.message}

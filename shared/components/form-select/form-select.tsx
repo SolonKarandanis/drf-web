@@ -73,6 +73,7 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
                     placeholder={placeholderValue}
                     options={options}
                     classNamePrefix="Select2"
+                    
                     isMulti={isMulti}
                     isSearchable={isSearchable}
                     menuPlacement='auto'

@@ -8870,7 +8870,7 @@ span.flatpickr-weekday {
 }
 
 .select2-dropdown {
-  @apply bg-white dark:bg-bodybg border border-defaultborder dark:border-defaulttextcolor/10 rounded-md !important;
+  @apply bg-white dark:bg-bodybg border border-defaultborder dark:border-defaulttextcolor/10 rounded-md  !important;
 }
 
 .select2-container--default .select2-search--dropdown .select2-search__field {
@@ -13132,7 +13132,7 @@ caption {
 .rmsc.multi-select .dropdown-container,
 .rdl-actions .rdl-move,
 .Select2__control {
-  @apply border-defaultborder bg-white;
+  @apply border-defaultborder bg-white ;
 }
 
 .multi-select .dropdown-content {
@@ -13174,7 +13174,7 @@ caption {
 }
 
 .Select2__control, .Select2__menu {
-  @apply border-defaultborder !important;
+  @apply border-defaultborder  !important;
 }
 
 .Select2__option:hover {
@@ -13199,7 +13199,7 @@ caption {
 }
 
 .Select2__menu {
-  @apply z-[3] !important;
+  @apply z-[3]  !important;
 }
 
 .Select2__multi-value {
