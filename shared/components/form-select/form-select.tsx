@@ -65,7 +65,7 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
     return (
         <section className={sectionClassName}>
             {labelHtml}
-            <div className='relative mt-2'>
+            <div className='mt-2'>
                 <Select
                     ref={ref}
                     name={name}
@@ -76,6 +76,7 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
                     isMulti={isMulti}
                     isSearchable={isSearchable}
                     menuPlacement='auto'
+                    menuPortalTarget={document.body}
                     defaultValue={defaultVals}
                     value={options.find(c => c.value === value)}
                     onChange={(e: any) => e.value ? onChange(e.value) : onChange(e.map((c: any) => c.value))}
