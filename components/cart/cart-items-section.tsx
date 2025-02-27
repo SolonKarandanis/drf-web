@@ -197,7 +197,7 @@ const CartItemsSection = () => {
                                                                             isSearchable={true}
                                                                             options={productSizesOptions}
                                                                             defaultValues={[selectedSize]}
-                                                                            sectionClassName="col-span-12 xl:col-span-6 mb-2 "
+                                                                            sectionClassName="col-span-12 xl:col-span-6 mb-2 min-w-[10rem]"
                                                                             field={field}
                                                                             error={errors.size?.message}
                                                                             loading={mutationLoading}>
@@ -218,7 +218,7 @@ const CartItemsSection = () => {
                                                                             isSearchable={true}
                                                                             options={productColorOptions}
                                                                             defaultValues={[selectedColor]}
-                                                                            sectionClassName="col-span-12 xl:col-span-6 mb-2"
+                                                                            sectionClassName="col-span-12 xl:col-span-6 mb-2 min-w-[10rem]"
                                                                             field={field}
                                                                             error={errors.size?.message}
                                                                             loading={mutationLoading}>
