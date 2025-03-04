@@ -68,7 +68,7 @@ const CartItemAttributes:FC<Props> = ({
             attributesObj[2]=e.value;
         }
         const newAttributeString = JSON.stringify(attributesObj);
-        handleChangeItemAttribute(cartItemId,newAttributeString);
+        handleChangeItemAttribute(cartItemId,item.quantity,newAttributeString);
     }
 
     return (

@@ -49,17 +49,16 @@ export function useMutateUserCart(){
     }
 
     const handleUpdateItems = (updateQuantityRequests:UpdateItemRequest[]) =>{
-        console.log(updateQuantityRequests);
-        // updateItems(updateQuantityRequests)
-        //     .unwrap()
-        //     .then((response:Cart)=>{
-        //         dispatch(setCart(response));
-        //         toast.success(t("SUCCESS.update-cart"));
-        //     })
-        //     .catch((error:ErrorResponse)=>{
-        //         toast.error(t("ERRORS.update-cart"));
-        //         handleError(error);
-        //     })
+        updateItems(updateQuantityRequests)
+            .unwrap()
+            .then((response:Cart)=>{
+                dispatch(setCart(response));
+                toast.success(t("SUCCESS.update-cart"));
+            })
+            .catch((error:ErrorResponse)=>{
+                toast.error(t("ERRORS.update-cart"));
+                handleError(error);
+            })
     }
 
     const handleClearCart = () =>{
