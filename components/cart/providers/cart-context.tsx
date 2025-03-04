@@ -12,6 +12,7 @@ type ContextState={
 
 type ContextApi ={
     handleSetQuantity:(cartItemId:number,itemQuantity:number)=>void,
+    handleChangeItemAttribute:(cartItemId:number,attributes:string)=>void,
 }
 
 const CartDataContext = createContext<ContextState>({} as ContextState);
@@ -66,12 +67,25 @@ const CartProvider: React.FC<Props> = ({ children }) => {
             
         }
 
-        const handleChangeItemAttribute= (cartItemId:number,itemQuantity:number)=>{
-
+        const handleChangeItemAttribute= (cartItemId:number,attributes:string)=>{
+            const existingRequest = state.updateRequests.find(req=>req.cartItemId===cartItemId);
+            if(existingRequest){
+                existingRequest.attributes =attributes
+            }
+            else{
+                const update:UpdateItemRequest={
+                    cartItemId:cartItemId,
+                    attributes:attributes
+                }
+                setState(({totalCartValue,updateRequests, cartItems})=> ({
+                    totalCartValue,cartItems,updateRequests:[...updateRequests,update ]
+                }));
+            }
         }
 
         return {
-            handleSetQuantity
+            handleSetQuantity,
+            handleChangeItemAttribute
         }
     },[state]);
 

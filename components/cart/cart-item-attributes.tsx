@@ -11,6 +11,7 @@ import { FC } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { useGetProductMisc } from "../products/hooks/useGetProductMisc"
 import { ProductAttributes } from "@/models/product.models"
+import { useCartApi } from "./providers/cart-context"
 
 interface Props{
     item: CartItem;
@@ -29,6 +30,9 @@ const CartItemAttributes:FC<Props> = ({
         sizesOptions,
         coloursOptions,
     } = useGetProductMisc();
+    const {
+        handleChangeItemAttribute
+    }= useCartApi();
     const configState = useAppSelector((state)=>state.config);
     const path = configState.baseUrl
     const host = configState.djangoHost
@@ -50,8 +54,21 @@ const CartItemAttributes:FC<Props> = ({
     const selectedSize = selectedItemAttributes[1];
     const selectedColor = selectedItemAttributes[2];
 
-    const onChange= (e:any) =>{
-        console.log(e);
+    type SelectField = "size" | "color";
+
+    const onChange= (e:any,field:SelectField) =>{
+        const cartItemId = item.id;
+        const attributes = item.attributes;
+        const attributesSting =JSON.stringify(attributes);
+        const attributesObj = JSON.parse(attributesSting);
+        if(field == 'size'){
+            attributesObj[1]=e.value;
+        }
+        else{
+            attributesObj[2]=e.value;
+        }
+        const newAttributeString = JSON.stringify(attributesObj);
+        handleChangeItemAttribute(cartItemId,newAttributeString);
     }
 
     return (
@@ -84,7 +101,7 @@ const CartItemAttributes:FC<Props> = ({
                                 field={field}
                                 error={errors.size?.message}
                                 loading={isLoading}
-                                onChangeInput={(e)=>onChange(e)}>
+                                onChangeInput={(e)=>onChange(e,'size')}>
                             </FormSelect>
                         )}
                     />
@@ -106,7 +123,7 @@ const CartItemAttributes:FC<Props> = ({
                                 field={field}
                                 error={errors.color?.message}
                                 loading={isLoading}
-                                onChangeInput={(e)=>onChange(e)}>
+                                onChangeInput={(e)=>onChange(e,'color')}>
                             </FormSelect>
                         )}
                     />

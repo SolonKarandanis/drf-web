@@ -90,7 +90,6 @@ const CartItemsSection = () => {
                                         const cartItemId=item.id;
                                         const price = item.unitPrice
 
-
                                         const onAddQuantity = () =>{
                                             const newQuantity = quantity +1;
                                             const newTotalLinePrice = newQuantity * price
