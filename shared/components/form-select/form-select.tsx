@@ -20,6 +20,7 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
     isSearchable=false,
     defaultValues,
     field,
+    onChangeInput
 }) => {
     const {onChange, value, name, ref} = field;
     
@@ -58,6 +59,13 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
             defaultVals.push(value);
         }
     }
+
+    const handleOnChange = (e: any)=>{
+        e.value ? onChange(e.value) : onChange(e.map((c: any) => c.value));
+        if(onChangeInput){
+            onChangeInput(e);
+        }
+    }
    
 
     
@@ -79,7 +87,7 @@ const FormSelect:FC<PropsWithChildren<SelectProps>> = ({
                     menuPortalTarget={document.body}
                     defaultValue={defaultVals}
                     value={options.find(c => c.value === value)}
-                    onChange={(e: any) => e.value ? onChange(e.value) : onChange(e.map((c: any) => c.value))}
+                    onChange={handleOnChange}
                 />
             </div>
             {

@@ -46,7 +46,8 @@ export interface SelectProps extends Props{
     error?:string,
     field:ControllerRenderProps<any>,
     loading?:boolean,
-    defaultValues?:number[]
+    defaultValues?:number[];
+    onChangeInput?:(e: any)=>void;
 }
 
 export interface TableProps extends TableHTMLAttributes<HTMLTableElement>{

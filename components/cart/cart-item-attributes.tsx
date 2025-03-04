@@ -50,8 +50,12 @@ const CartItemAttributes:FC<Props> = ({
     const selectedSize = selectedItemAttributes[1];
     const selectedColor = selectedItemAttributes[2];
 
+    const onChange= (e:any) =>{
+        console.log(e);
+    }
+
     return (
-        <div className="flex items-center">
+        <form className="flex items-center">
             <div className="me-4">
                 <span className="avatar avatar-xxl bg-light">
                     <img src={imagePath} alt="" />
@@ -79,7 +83,8 @@ const CartItemAttributes:FC<Props> = ({
                                 sectionClassName="col-span-12 xl:col-span-6 mb-2 min-w-[10rem]"
                                 field={field}
                                 error={errors.size?.message}
-                                loading={isLoading}>
+                                loading={isLoading}
+                                onChangeInput={(e)=>onChange(e)}>
                             </FormSelect>
                         )}
                     />
@@ -99,14 +104,15 @@ const CartItemAttributes:FC<Props> = ({
                                 defaultValues={[selectedColor]}
                                 sectionClassName="col-span-12 xl:col-span-6 mb-2 min-w-[10rem]"
                                 field={field}
-                                error={errors.size?.message}
-                                loading={isLoading}>
+                                error={errors.color?.message}
+                                loading={isLoading}
+                                onChangeInput={(e)=>onChange(e)}>
                             </FormSelect>
                         )}
                     />
                 </div>
             </div>
-        </div>
+        </form>
     )
 }
 
