@@ -16,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import EmptyCart from "./empty-cart";
 import CartItemButtons from "./cart-item-buttons";
 import CartItemAttributes from "./cart-item-attributes";
+import CartItemQuantity from "./cart-item-quantity";
 
 const CartItemsSection = () => {
     const t = useTranslations("CART");
@@ -128,31 +129,11 @@ const CartItemsSection = () => {
                                                     </div>
                                                 </td>
                                                 <td className="product-quantity-container">
-                                                    <div className="input-group dark:border-defaultborder/10 rounded-md !flex-nowrap">
-                                                        <button 
-                                                            aria-label="button" 
-                                                            type="button"
-                                                            className="!border-0 ti-btn ti-btn-icon ti-btn-light  input-group-text flex-grow 
-                                                                product-quantity-minus !mb-0" 
-                                                            onClick={onSubtractQuantity}>
-                                                                <i className="ri-subtract-line"></i>
-                                                        </button>
-                                                        <input 
-                                                            type="text" 
-                                                            className="form-control form-control-sm text-center !w-[50px] !px-0" 
-                                                            aria-label="quantity" 
-                                                            id="product-quantity" 
-                                                            value={quantity} 
-                                                            onChange={(e)=>onChange(e)}/>
-                                                        <button 
-                                                            aria-label="button" 
-                                                            type="button" 
-                                                            className="!border-0 ti-btn ti-btn-icon ti-btn-light input-group-text flex-grow 
-                                                                product-quantity-plus !mb-0" 
-                                                            onClick={onAddQuantity}>
-                                                                <i className="ri-add-line"></i>
-                                                        </button>
-                                                    </div>
+                                                    <CartItemQuantity
+                                                        quantity={quantity}
+                                                        onSubtractQuantity={onSubtractQuantity}
+                                                        onAddQuantity={onAddQuantity}
+                                                        onChange={onChange}/>
                                                 </td>
                                                 <td>
                                                     <div className="text-[0.875rem] font-semibold">
