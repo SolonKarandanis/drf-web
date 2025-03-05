@@ -12,17 +12,16 @@ import { Controller, useForm } from "react-hook-form"
 import { useGetProductMisc } from "../products/hooks/useGetProductMisc"
 import { ProductAttributes } from "@/models/product.models"
 import { useCartApi } from "./providers/cart-context"
+import { useMutateUserCart } from "./hooks/useMutateUserCart"
 
 interface Props{
     item: CartItem;
     productItemsAttributes:Record<number, ProductAttributes>;
-    isLoading:boolean;
 }
 
 const CartItemAttributes:FC<Props> = ({
     item,
     productItemsAttributes,
-    isLoading
 }) => {
     const t = useTranslations("CART");
     const formT = useTranslations("CART.VALIDATION");
@@ -31,6 +30,9 @@ const CartItemAttributes:FC<Props> = ({
         sizesOptions,
         coloursOptions,
     } = useGetProductMisc();
+    const {
+        mutationLoading,
+    } = useMutateUserCart();
     const {
         handleChangeItemAttribute
     }= useCartApi();
@@ -100,7 +102,7 @@ const CartItemAttributes:FC<Props> = ({
                                 sectionClassName="col-span-12 xl:col-span-6 mb-2 min-w-[10rem]"
                                 field={field}
                                 error={errors.size?.message}
-                                loading={isLoading}
+                                loading={mutationLoading}
                                 onChangeInput={(e)=>onChange(e,'size')}>
                             </FormSelect>
                         )}
@@ -122,7 +124,7 @@ const CartItemAttributes:FC<Props> = ({
                                 sectionClassName="col-span-12 xl:col-span-6 mb-2 min-w-[10rem]"
                                 field={field}
                                 error={errors.color?.message}
-                                loading={isLoading}
+                                loading={mutationLoading}
                                 onChangeInput={(e)=>onChange(e,'color')}>
                             </FormSelect>
                         )}

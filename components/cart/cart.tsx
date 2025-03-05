@@ -9,7 +9,7 @@ import { CartProvider } from "./providers/cart-context";
 
 const Cart = () => {
   return (
-    <CartProvider>
+    <CartProvider >
         <div className="grid grid-cols-12 gap-0 sm:gap-x-6">
             <CartItemsSection />
             <div className="col-span-12 xxl:col-span-3">

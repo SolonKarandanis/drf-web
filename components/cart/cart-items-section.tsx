@@ -1,12 +1,9 @@
 'use client';
 
-import { useGetUserCart } from "./hooks/useGetUserCart";
 import CurrencyFormatter from "@/shared/components/currency-formatter/currency-formatter";
 import { useTranslations } from "next-intl";
-import { useMutateUserCart } from "./hooks/useMutateUserCart";
-import { DeleteCartItemRequest } from "@/models/cart.models";
 import { ChangeEvent, useState } from "react";
-import { useCartApi } from "./providers/cart-context";
+import { useCartApi, useCartData } from "./providers/cart-context";
 import EmptyCart from "./empty-cart";
 import CartItemButtons from "./cart-item-buttons";
 import CartItemAttributes from "./cart-item-attributes";
@@ -15,30 +12,13 @@ import CartItemQuantity from "./cart-item-quantity";
 const CartItemsSection = () => {
     const t = useTranslations("CART");
     const {
-        cartItems,
-        productItemsAttributes,
-        isError,
-        isLoading,
-    } = useGetUserCart();
-    const {
-        mutationLoading,
-        handleDeleteItemsFromCart,
-    } = useMutateUserCart();
-    const {
         handleSetQuantity
     }= useCartApi();
+    const {
+        cartItems,
+        productItemsAttributes
+    } = useCartData();
 
-
-    const handleAddToWishList = (cartItemId:number)=>{
-    }
-
-    const handleRemoveFromCart = (cartItemId:number) =>{
-        const request:DeleteCartItemRequest={
-            cartItemId
-        };
-        handleDeleteItemsFromCart([request]);
-    }
-    
     return (
         <div className="col-span-12 xxl:col-span-9">
             {!cartItems || cartItems.length ==0 && (
@@ -109,8 +89,7 @@ const CartItemsSection = () => {
                                                 <td>
                                                     <CartItemAttributes 
                                                         item={item}
-                                                        productItemsAttributes={productItemsAttributes}
-                                                        isLoading={mutationLoading}/>
+                                                        productItemsAttributes={productItemsAttributes}/>
                                                 </td>
                                                 <td>
                                                     <div className="font-semibold text-[0.875rem]">
@@ -131,10 +110,7 @@ const CartItemsSection = () => {
                                                 </td>
                                                 <td>
                                                     <CartItemButtons
-                                                        isLoading={mutationLoading}
-                                                        handleAddToWishList={()=>handleAddToWishList(item.id)}
-                                                        handleDeleteItemsFromCart={()=>handleRemoveFromCart(item.id)}
-                                                    />
+                                                        itemId={item.id}/>
                                                 </td>
                                             </tr>
                                         )}

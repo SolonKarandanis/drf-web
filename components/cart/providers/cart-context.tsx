@@ -1,11 +1,14 @@
-import { CartItem, UpdateItemRequest } from "@/models/cart.models";
-import { createContext, ReactNode, useContext, useMemo, useState } from "react";
-import { useGetUserCart } from "../hooks/useGetUserCart";
+import { Cart, CartItem, UpdateItemRequest } from "@/models/cart.models";
+import { ProductAttributes } from "@/models/product.models";
+import { createContext, ReactNode, useContext,useMemo, useState } from "react";
+import { useAppSelector } from "@/shared/redux/hooks";
+import { userCartItemProductAttributesSelector, userCartItemSelector, userCartSelector } from "@/shared/redux/features/cart/cartSlice";
 
 type ContextState={
     updateRequests :UpdateItemRequest[];
     totalCartValue: number;
     cartItems: CartItem[];
+    productItemsAttributes: Record<number, ProductAttributes>;
 }
 
 
@@ -24,18 +27,20 @@ interface Props {
 }
 
 
-const CartProvider: React.FC<Props> = ({ children }) => {
-    const {
-        cart,
-        cartItems
-    } = useGetUserCart();
+const CartProvider: React.FC<Props> = ({
+    children,
+}) => {
+    const cart:Cart | null= useAppSelector(userCartSelector);
+    const cartItems:CartItem[]| undefined= useAppSelector(userCartItemSelector);
+    const productItemsAttributes:Record<number,ProductAttributes>| undefined= useAppSelector(userCartItemProductAttributesSelector);
+
     const initialValue: ContextState={
         updateRequests:[],
         totalCartValue: cart ? cart.totalPrice: 0,
         cartItems: cartItems ? cartItems : [],
+        productItemsAttributes:productItemsAttributes
     };
     const [state, setState] = useState<ContextState>(initialValue);
-    
 
     const api = useMemo(()=>{
         const handleSetQuantity= (cartItemId:number,itemQuantity:number) =>{
@@ -50,8 +55,8 @@ const CartProvider: React.FC<Props> = ({ children }) => {
                     productId: findProductId(cartItemId),
                     quantity:itemQuantity
                 }
-                setState(({totalCartValue,updateRequests, cartItems})=> ({
-                    totalCartValue,cartItems,updateRequests:[...updateRequests,update ]
+                setState((state)=> ({
+                    ...state,updateRequests:[...state.updateRequests,update ]
                 }));
             }
             if(existingItem){
@@ -61,8 +66,8 @@ const CartProvider: React.FC<Props> = ({ children }) => {
                 const newTotalCartPrice =  state.cartItems
                     .map(item=>item.totalPrice)
                     .reduce((sum,price)=>sum + price,0);
-                setState(({totalCartValue,updateRequests, cartItems})=> ({
-                    totalCartValue:newTotalCartPrice,cartItems,updateRequests
+                setState((state)=> ({
+                    ...state,totalCartValue:newTotalCartPrice
                 }));
             }
             
@@ -81,8 +86,8 @@ const CartProvider: React.FC<Props> = ({ children }) => {
                     quantity:itemQuantity,
                     attributes:attributes
                 }
-                setState(({totalCartValue,updateRequests, cartItems})=> ({
-                    totalCartValue,cartItems,updateRequests:[...updateRequests,update ]
+                setState((state)=> ({
+                    ...state,updateRequests:[...state.updateRequests,update ]
                 }));
             }
         }
