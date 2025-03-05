@@ -20,7 +20,6 @@ import CartItemQuantity from "./cart-item-quantity";
 
 const CartItemsSection = () => {
     const t = useTranslations("CART");
-    const formT = useTranslations("CART.VALIDATION");
     const {
         cartItems,
         productItemsAttributes,
@@ -45,11 +44,7 @@ const CartItemsSection = () => {
         };
         handleDeleteItemsFromCart([request]);
     }
-
-    const updatequantitiesForm = useForm<UpdateCartItemQuantitiesSchema>({
-        resolver: zodResolver(getUpdateCartItemQuantitiesSchema(formT))
-    });
-
+    
     return (
         <div className="col-span-12 xxl:col-span-9">
             {!cartItems || cartItems.length ==0 && (
