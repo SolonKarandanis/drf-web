@@ -7,7 +7,7 @@ import { useAppSelector } from "@/shared/redux/hooks"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
-import { FC } from "react"
+import { FC, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { useGetProductMisc } from "../products/hooks/useGetProductMisc"
 import { ProductAttributes } from "@/models/product.models"
@@ -26,6 +26,7 @@ const CartItemAttributes:FC<Props> = ({
 }) => {
     const t = useTranslations("CART");
     const formT = useTranslations("CART.VALIDATION");
+    const [attributes,setAttributes]= useState<string>(JSON.stringify(item.attributes));
     const {
         sizesOptions,
         coloursOptions,
@@ -58,9 +59,7 @@ const CartItemAttributes:FC<Props> = ({
 
     const onChange= (e:any,field:SelectField) =>{
         const cartItemId = item.id;
-        const attributes = item.attributes;
-        const attributesSting =JSON.stringify(attributes);
-        const attributesObj = JSON.parse(attributesSting);
+        const attributesObj = JSON.parse(attributes);
         if(field == 'size'){
             attributesObj[1]=e.value;
         }
@@ -68,6 +67,7 @@ const CartItemAttributes:FC<Props> = ({
             attributesObj[2]=e.value;
         }
         const newAttributeString = JSON.stringify(attributesObj);
+        setAttributes(newAttributeString);
         handleChangeItemAttribute(cartItemId,item.quantity,newAttributeString);
     }
 
