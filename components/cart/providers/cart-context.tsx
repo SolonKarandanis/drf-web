@@ -47,6 +47,7 @@ const CartProvider: React.FC<Props> = ({ children }) => {
             else{
                 const update:UpdateItemRequest={
                     cartItemId:cartItemId,
+                    productId: findProductId(cartItemId),
                     quantity:itemQuantity
                 }
                 setState(({totalCartValue,updateRequests, cartItems})=> ({
@@ -73,8 +74,10 @@ const CartProvider: React.FC<Props> = ({ children }) => {
                 existingRequest.attributes =attributes
             }
             else{
+                
                 const update:UpdateItemRequest={
                     cartItemId:cartItemId,
+                    productId: findProductId(cartItemId),
                     quantity:itemQuantity,
                     attributes:attributes
                 }
@@ -82,6 +85,11 @@ const CartProvider: React.FC<Props> = ({ children }) => {
                     totalCartValue,cartItems,updateRequests:[...updateRequests,update ]
                 }));
             }
+        }
+
+        const findProductId = (cartItemId:number):number =>{
+            const cartItem =state.cartItems.find(item=>item.id===cartItemId)!;
+            return cartItem.productId;
         }
 
         return {
