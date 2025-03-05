@@ -7,12 +7,6 @@ import { useMutateUserCart } from "./hooks/useMutateUserCart";
 import { DeleteCartItemRequest } from "@/models/cart.models";
 import { ChangeEvent, useState } from "react";
 import { useCartApi } from "./providers/cart-context";
-import {useForm } from "react-hook-form";
-import { 
-    getUpdateCartItemQuantitiesSchema, 
-    UpdateCartItemQuantitiesSchema
-} from "@/schemas/cart.schemas";
-import { zodResolver } from "@hookform/resolvers/zod";
 import EmptyCart from "./empty-cart";
 import CartItemButtons from "./cart-item-buttons";
 import CartItemAttributes from "./cart-item-attributes";
