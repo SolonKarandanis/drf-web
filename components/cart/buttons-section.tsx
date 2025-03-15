@@ -2,24 +2,19 @@
 
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useMutateUserCart } from "./hooks/useMutateUserCart";
 import FormButton from "@/shared/components/button/form-button";
-import { useCartData } from "./providers/cart-context";
+import { useCartApi, useCartData } from "./providers/cart-context";
 
 const ButtonSection = () => {
     const t = useTranslations("CART.BUTTONS");
-     const {
-        mutationLoading,
-        handleUpdateItems,
-        handleClearCart,
-    } = useMutateUserCart();
     const {
-        updateRequests
+        updateRequests,
+        isLoading
     }= useCartData();
-
-    const onUpdateItemQuantities =()=>{
-        handleUpdateItems(updateRequests);
-    }
+    const {
+        onUpdateItems,
+        onClearCart
+    }= useCartApi();
 
     const canUpdateCart = updateRequests.length > 0;
     
@@ -31,9 +26,9 @@ const ButtonSection = () => {
                 size="md" 
                 type="button"
                 className="ti-btn !font-medium text-white w-full"
-                isLoading={mutationLoading}
-                disabled={mutationLoading || !canUpdateCart}
-                onClick={onUpdateItemQuantities}>
+                isLoading={isLoading}
+                disabled={isLoading || !canUpdateCart}
+                onClick={onUpdateItems}>
                 {t(`update-cart`)}
             </FormButton>
             <FormButton 
@@ -41,9 +36,9 @@ const ButtonSection = () => {
                 size="md" 
                 type="button"
                 className="ti-btn !font-medium text-white w-full"
-                isLoading={mutationLoading}
-                disabled={mutationLoading}
-                onClick={handleClearCart}>
+                isLoading={isLoading}
+                disabled={isLoading}
+                onClick={onClearCart}>
                 {t(`clear-cart`)}
             </FormButton>
             <Link 

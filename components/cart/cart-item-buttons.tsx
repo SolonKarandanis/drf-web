@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { FC } from "react";
 import { useMutateUserCart } from "./hooks/useMutateUserCart";
 import { DeleteCartItemRequest } from "@/models/cart.models";
+import { useCartApi, useCartData } from "./providers/cart-context";
 
 interface Props{
     itemId:number;
@@ -14,19 +15,15 @@ const CartItemButtons:FC<Props> = ({
     itemId
 }) => {
     const {
-        mutationLoading,
-        handleDeleteItemsFromCart,
-    } = useMutateUserCart();
+        isLoading
+    }= useCartData();
+    const {
+        onDeleteItem
+    }= useCartApi();
     
     const handleAddToWishList = (cartItemId:number)=>{
     }
     
-    const handleRemoveFromCart = (cartItemId:number) =>{
-        const request:DeleteCartItemRequest={
-            cartItemId
-        };
-        handleDeleteItemsFromCart([request]);
-    }
     const t = useTranslations("CART.BUTTONS");
     return (
         <div className="flex items-center">
@@ -48,9 +45,9 @@ const CartItemButtons:FC<Props> = ({
                     size="sm" 
                     type="button"
                     className="hs-tooltip-toggle ti-btn ti-btn-icon bg-danger text-white !font-medium btn-delete !pr-1"
-                    isLoading={mutationLoading}
-                    disabled={mutationLoading}
-                    onClick={()=>handleRemoveFromCart(itemId)}>
+                    isLoading={isLoading}
+                    disabled={isLoading}
+                    onClick={()=>onDeleteItem(itemId)}>
                     <i className="ri-delete-bin-line"></i>
                     <span
                         className="hs-tooltip-content  ti-main-tooltip-content py-1 px-2 !bg-black !text-xs !font-medium !text-white shadow-sm "

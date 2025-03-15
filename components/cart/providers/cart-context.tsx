@@ -1,21 +1,26 @@
-import { Cart, CartItem, UpdateItemRequest } from "@/models/cart.models";
+import { Cart, CartItem, DeleteCartItemRequest, UpdateItemRequest } from "@/models/cart.models";
 import { ProductAttributes } from "@/models/product.models";
-import { createContext, ReactNode, useContext,useMemo, useState } from "react";
+import { createContext, ReactNode, useContext,useEffect,useMemo, useState } from "react";
 import { useAppSelector } from "@/shared/redux/hooks";
 import { userCartItemProductAttributesSelector, userCartItemSelector, userCartSelector } from "@/shared/redux/features/cart/cartSlice";
+import { useMutateUserCart } from "../hooks/useMutateUserCart";
 
 type ContextState={
     updateRequests :UpdateItemRequest[];
     totalCartValue: number;
     cartItems: CartItem[];
     productItemsAttributes: Record<number, ProductAttributes>;
+    isLoading:boolean;
 }
 
 
 
 type ContextApi ={
-    handleSetQuantity:(cartItemId:number,itemQuantity:number)=>void,
-    handleChangeItemAttribute:(cartItemId:number,itemQuantity:number,attributes:string)=>void,
+    onSetQuantity:(cartItemId:number,itemQuantity:number)=>void,
+    onChangeItemAttribute:(cartItemId:number,itemQuantity:number,attributes:string)=>void,
+    onDeleteItem:(cartItemId:number)=>void,
+    onUpdateItems:()=>void,
+    onClearCart:()=>void,
 }
 
 const CartDataContext = createContext<ContextState>({} as ContextState);
@@ -30,20 +35,38 @@ interface Props {
 const CartProvider: React.FC<Props> = ({
     children,
 }) => {
-    const cart:Cart | null= useAppSelector(userCartSelector);
-    const cartItems:CartItem[]| undefined= useAppSelector(userCartItemSelector);
-    const productItemsAttributes:Record<number,ProductAttributes>| undefined= useAppSelector(userCartItemProductAttributesSelector);
+    const {
+        cart,
+        cartItems,
+        productItemsAttributes,
+        mutationLoading,
+        handleDeleteItemsFromCart,
+        handleUpdateItems,
+        handleClearCart,
+    } = useMutateUserCart();
 
     const initialValue: ContextState={
         updateRequests:[],
         totalCartValue: cart ? cart.totalPrice: 0,
         cartItems: cartItems ? cartItems : [],
-        productItemsAttributes:productItemsAttributes
+        productItemsAttributes:productItemsAttributes,
+        isLoading:mutationLoading
     };
     const [state, setState] = useState<ContextState>(initialValue);
 
+    useEffect(()=>{
+        const newValue: ContextState={
+            updateRequests:[],
+            totalCartValue: cart ? cart.totalPrice: 0,
+            cartItems: cartItems ? cartItems : [],
+            productItemsAttributes:productItemsAttributes,
+            isLoading:mutationLoading
+        };
+        setState(newValue);
+    },[cartItems]);
+
     const api = useMemo(()=>{
-        const handleSetQuantity= (cartItemId:number,itemQuantity:number) =>{
+        const onSetQuantity= (cartItemId:number,itemQuantity:number) =>{
             const existingRequest = state.updateRequests.find(req=>req.cartItemId===cartItemId);
             const existingItem = state.cartItems.find(item=>item.id===cartItemId);
             if(existingRequest){
@@ -73,7 +96,7 @@ const CartProvider: React.FC<Props> = ({
             
         }
 
-        const handleChangeItemAttribute= (cartItemId:number,itemQuantity:number,attributes:string)=>{
+        const onChangeItemAttribute= (cartItemId:number,itemQuantity:number,attributes:string)=>{
             const existingRequest = state.updateRequests.find(req=>req.cartItemId===cartItemId);
             if(existingRequest){
                 existingRequest.attributes =attributes
@@ -92,14 +115,32 @@ const CartProvider: React.FC<Props> = ({
             }
         }
 
+        const onUpdateItems = () =>{
+            handleUpdateItems(state.updateRequests);
+        }
+
+        const onClearCart = () =>{
+            handleClearCart();
+        }
+
+        const onDeleteItem =(cartItemId:number) =>{
+            const request:DeleteCartItemRequest={
+                cartItemId
+            };
+            handleDeleteItemsFromCart([request]);
+        }
+
         const findProductId = (cartItemId:number):number =>{
             const cartItem =state.cartItems.find(item=>item.id===cartItemId)!;
             return cartItem.productId;
         }
 
         return {
-            handleSetQuantity,
-            handleChangeItemAttribute
+            onSetQuantity,
+            onChangeItemAttribute,
+            onDeleteItem,
+            onUpdateItems,
+            onClearCart,
         }
     },[state]);
 

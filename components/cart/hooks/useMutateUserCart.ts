@@ -1,13 +1,14 @@
 import { handleError } from "@/lib/functions";
 import { AddToCartRequest, Cart, CartItem, DeleteCartItemRequest, UpdateItemRequest } from "@/models/cart.models";
 import { ErrorResponse } from "@/models/error.models";
+import { ProductAttributes } from "@/models/product.models";
 import { 
     useAddItemsToCartMutation, 
     useClearCartMutation, 
     useDeleteItemsFromCartMutation, 
     useUpdateCartItemsMutation 
 } from "@/shared/redux/features/cart/cartApiSlice";
-import { setCart, userCartItemSelector, userCartSelector } from "@/shared/redux/features/cart/cartSlice";
+import { setCart, userCartItemProductAttributesSelector, userCartItemSelector, userCartSelector } from "@/shared/redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
@@ -78,6 +79,7 @@ export function useMutateUserCart(){
 
     const cart:Cart | null= useAppSelector(userCartSelector);
     const cartItems:CartItem[]| undefined= useAppSelector(userCartItemSelector);
+    const productItemsAttributes:Record<number,ProductAttributes>| undefined= useAppSelector(userCartItemProductAttributesSelector);
 
 
     const mutationLoading = addItemsToCartLoading || deleteItemsFromCartLoading || updateItemsLoading || clearCartLoading;
@@ -85,6 +87,7 @@ export function useMutateUserCart(){
     return {
         cart,
         cartItems,
+        productItemsAttributes,
         mutationLoading,
         handleAddItemsToCartRequest,
         handleDeleteItemsFromCart,

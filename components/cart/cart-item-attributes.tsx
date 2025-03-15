@@ -11,7 +11,7 @@ import { FC, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { useGetProductMisc } from "../products/hooks/useGetProductMisc"
 import { ProductAttributes } from "@/models/product.models"
-import { useCartApi } from "./providers/cart-context"
+import { useCartApi, useCartData } from "./providers/cart-context"
 import { useMutateUserCart } from "./hooks/useMutateUserCart"
 
 interface Props{
@@ -31,10 +31,10 @@ const CartItemAttributes:FC<Props> = ({
         coloursOptions,
     } = useGetProductMisc();
     const {
-        mutationLoading,
-    } = useMutateUserCart();
+        isLoading
+    }= useCartData();
     const {
-        handleChangeItemAttribute
+        onChangeItemAttribute
     }= useCartApi();
     const configState = useAppSelector((state)=>state.config);
     const path = configState.baseUrl
@@ -70,7 +70,7 @@ const CartItemAttributes:FC<Props> = ({
         }
         const newAttributeString = JSON.stringify(attributesObj);
         setAttributes(newAttributeString);
-        handleChangeItemAttribute(cartItemId,item.quantity,newAttributeString);
+        onChangeItemAttribute(cartItemId,item.quantity,newAttributeString);
     }
 
     return (
@@ -102,7 +102,7 @@ const CartItemAttributes:FC<Props> = ({
                                 sectionClassName="col-span-12 xl:col-span-6 mb-2 min-w-[10rem]"
                                 field={field}
                                 error={errors.size?.message}
-                                loading={mutationLoading}
+                                loading={isLoading}
                                 onChangeInput={(e)=>onChange(e,'size')}>
                             </FormSelect>
                         )}
@@ -124,7 +124,7 @@ const CartItemAttributes:FC<Props> = ({
                                 sectionClassName="col-span-12 xl:col-span-6 mb-2 min-w-[10rem]"
                                 field={field}
                                 error={errors.color?.message}
-                                loading={mutationLoading}
+                                loading={isLoading}
                                 onChangeInput={(e)=>onChange(e,'color')}>
                             </FormSelect>
                         )}

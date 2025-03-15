@@ -12,7 +12,7 @@ import CartItemQuantity from "./cart-item-quantity";
 const CartItemsSection = () => {
     const t = useTranslations("CART");
     const {
-        handleSetQuantity
+        onSetQuantity
     }= useCartApi();
     const {
         cartItems,
@@ -65,7 +65,7 @@ const CartItemsSection = () => {
                                             const newTotalLinePrice = newQuantity * price
                                             setQuantity(newQuantity);
                                             setTotalPrice(newTotalLinePrice);
-                                            handleSetQuantity(cartItemId,newQuantity);
+                                            onSetQuantity(cartItemId,newQuantity);
                                         }
 
                                         const onSubtractQuantity = () =>{
@@ -73,7 +73,7 @@ const CartItemsSection = () => {
                                             const newTotalLinePrice = newQuantity * price
                                             setQuantity(newQuantity);
                                             setTotalPrice(newTotalLinePrice);
-                                            handleSetQuantity(cartItemId,newQuantity);
+                                            onSetQuantity(cartItemId,newQuantity);
                                         }
 
                                         const onChange = (event:ChangeEvent<HTMLInputElement>)=>{
@@ -81,7 +81,7 @@ const CartItemsSection = () => {
                                             const newTotalLinePrice = newQuantity * price
                                             setQuantity(newQuantity);
                                             setTotalPrice(newTotalLinePrice);
-                                            handleSetQuantity(cartItemId,newQuantity);
+                                            onSetQuantity(cartItemId,newQuantity);
                                         }
 
                                         return (
