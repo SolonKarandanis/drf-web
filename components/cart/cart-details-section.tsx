@@ -1,14 +1,15 @@
 'use client';
 
 import CurrencyFormatter from "@/shared/components/currency-formatter/currency-formatter";
-import { useCartData } from "./providers/cart-context";
 import { useTranslations } from "next-intl";
+import { useCartContext } from "./providers/cart-context";
 
 const CartDetailsSection = () => {
     const t = useTranslations("CART.LABELS");
     const {
-        totalCartValue
-    }= useCartData();
+        state
+    }= useCartContext();
+    const {totalCartValue} = state;
     return (
         <div className="p-4 border-b border-dashed dark:border-defaultborder/10">
             <div className="flex items-center justify-between mb-4">

@@ -3,18 +3,17 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import FormButton from "@/shared/components/button/form-button";
-import { useCartApi, useCartData } from "./providers/cart-context";
+import { useCartContext } from "./providers/cart-context";
 
 const ButtonSection = () => {
     const t = useTranslations("CART.BUTTONS");
     const {
-        updateRequests,
-        isLoading
-    }= useCartData();
-    const {
+        state,
         onUpdateItems,
         onClearCart
-    }= useCartApi();
+    }= useCartContext();
+
+    const {isLoading,updateRequests} =state;
 
     const canUpdateCart = updateRequests.length > 0;
     

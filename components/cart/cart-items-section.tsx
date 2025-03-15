@@ -3,21 +3,20 @@
 import CurrencyFormatter from "@/shared/components/currency-formatter/currency-formatter";
 import { useTranslations } from "next-intl";
 import { ChangeEvent, useState } from "react";
-import { useCartApi, useCartData } from "./providers/cart-context";
 import EmptyCart from "./empty-cart";
 import CartItemButtons from "./cart-item-buttons";
 import CartItemAttributes from "./cart-item-attributes";
 import CartItemQuantity from "./cart-item-quantity";
+import { useCartContext } from "./providers/cart-context";
 
 const CartItemsSection = () => {
     const t = useTranslations("CART");
     const {
+        state,
         onSetQuantity
-    }= useCartApi();
-    const {
-        cartItems,
-        productItemsAttributes
-    } = useCartData();
+    } = useCartContext();
+
+    const {cartItems,productItemsAttributes} = state;
 
     return (
         <div className="col-span-12 xxl:col-span-9">

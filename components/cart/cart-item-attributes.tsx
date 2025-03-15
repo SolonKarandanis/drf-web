@@ -11,8 +11,7 @@ import { FC, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { useGetProductMisc } from "../products/hooks/useGetProductMisc"
 import { ProductAttributes } from "@/models/product.models"
-import { useCartApi, useCartData } from "./providers/cart-context"
-import { useMutateUserCart } from "./hooks/useMutateUserCart"
+import { useCartContext } from "./providers/cart-context"
 
 interface Props{
     item: CartItem;
@@ -31,11 +30,10 @@ const CartItemAttributes:FC<Props> = ({
         coloursOptions,
     } = useGetProductMisc();
     const {
-        isLoading
-    }= useCartData();
-    const {
+        state,
         onChangeItemAttribute
-    }= useCartApi();
+    }= useCartContext();
+    const {isLoading} = state;
     const configState = useAppSelector((state)=>state.config);
     const path = configState.baseUrl
     const host = configState.djangoHost

@@ -3,9 +3,7 @@
 import FormButton from "@/shared/components/button/form-button"
 import { useTranslations } from "next-intl";
 import { FC } from "react";
-import { useMutateUserCart } from "./hooks/useMutateUserCart";
-import { DeleteCartItemRequest } from "@/models/cart.models";
-import { useCartApi, useCartData } from "./providers/cart-context";
+import { useCartContext } from "./providers/cart-context";
 
 interface Props{
     itemId:number;
@@ -15,11 +13,11 @@ const CartItemButtons:FC<Props> = ({
     itemId
 }) => {
     const {
-        isLoading
-    }= useCartData();
-    const {
+        state,
         onDeleteItem
-    }= useCartApi();
+    }= useCartContext();
+
+    const {isLoading}= state;
     
     const handleAddToWishList = (cartItemId:number)=>{
     }

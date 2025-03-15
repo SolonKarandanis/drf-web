@@ -1,8 +1,6 @@
-import { Cart, CartItem, DeleteCartItemRequest, UpdateItemRequest } from "@/models/cart.models";
+import { CartItem, DeleteCartItemRequest, UpdateItemRequest } from "@/models/cart.models";
 import { ProductAttributes } from "@/models/product.models";
 import { createContext, ReactNode, useContext,useEffect,useMemo, useState } from "react";
-import { useAppSelector } from "@/shared/redux/hooks";
-import { userCartItemProductAttributesSelector, userCartItemSelector, userCartSelector } from "@/shared/redux/features/cart/cartSlice";
 import { useMutateUserCart } from "../hooks/useMutateUserCart";
 
 type ContextState={
@@ -13,20 +11,18 @@ type ContextState={
     isLoading:boolean;
 }
 
-
-
-type ContextApi ={
+type Context = {
+    state: ContextState;
     onSetQuantity:(cartItemId:number,itemQuantity:number)=>void,
     onChangeItemAttribute:(cartItemId:number,itemQuantity:number,attributes:string)=>void,
     onDeleteItem:(cartItemId:number)=>void,
     onUpdateItems:()=>void,
     onClearCart:()=>void,
-}
-
-const CartDataContext = createContext<ContextState>({} as ContextState);
-const CartApiContext = createContext<ContextApi>({} as ContextApi);
+};
 
 
+
+const CartContext = createContext<Context>({} as Context);
 interface Props {
     children: ReactNode;
 }
@@ -54,21 +50,11 @@ const CartProvider: React.FC<Props> = ({
     };
     const [state, setState] = useState<ContextState>(initialValue);
 
-    useEffect(()=>{
-        const newValue: ContextState={
-            updateRequests:[],
-            totalCartValue: cart ? cart.totalPrice: 0,
-            cartItems: cartItems ? cartItems : [],
-            productItemsAttributes:productItemsAttributes,
-            isLoading:mutationLoading
-        };
-        setState(newValue);
-    },[cartItems]);
-
     const api = useMemo(()=>{
         const onSetQuantity= (cartItemId:number,itemQuantity:number) =>{
             const existingRequest = state.updateRequests.find(req=>req.cartItemId===cartItemId);
-            const existingItem = state.cartItems.find(item=>item.id===cartItemId);
+            const cartItems=state.cartItems;
+            const existingItem = cartItems.find(item=>item.id===cartItemId);
             if(existingRequest){
                 existingRequest.quantity =itemQuantity
             }
@@ -86,11 +72,11 @@ const CartProvider: React.FC<Props> = ({
                 const newTotalLinePrice = itemQuantity * existingItem.unitPrice;
                 existingItem.totalPrice = newTotalLinePrice;
 
-                const newTotalCartPrice =  state.cartItems
+                const newTotalCartPrice =  cartItems
                     .map(item=>item.totalPrice)
                     .reduce((sum,price)=>sum + price,0);
                 setState((state)=> ({
-                    ...state,totalCartValue:newTotalCartPrice
+                    ...state,totalCartValue:newTotalCartPrice,cartItems
                 }));
             }
             
@@ -136,6 +122,7 @@ const CartProvider: React.FC<Props> = ({
         }
 
         return {
+            state,
             onSetQuantity,
             onChangeItemAttribute,
             onDeleteItem,
@@ -148,28 +135,18 @@ const CartProvider: React.FC<Props> = ({
 
 
     return (
-      <CartApiContext.Provider value={api}>
-        <CartDataContext.Provider value={state}>
-            {children}
-        </CartDataContext.Provider>
-      </CartApiContext.Provider>
+      <CartContext.Provider value={api}>
+        {children}
+      </CartContext.Provider>
     );
 };
 
-const useCartData =()=>{
-    const context = useContext(CartDataContext)
+const useCartContext =()=>{
+    const context = useContext(CartContext)
 	if (context === undefined) {
 		throw new Error('useCartData must be used within a CartProvider')
 	}
 	return context
 }
 
-const useCartApi =()=>{
-    const context = useContext(CartApiContext)
-	if (context === undefined) {
-		throw new Error('useCartApi must be used within a CartProvider')
-	}
-	return context
-}
-
-export { CartProvider,useCartData,useCartApi }
+export { CartProvider,useCartContext }
