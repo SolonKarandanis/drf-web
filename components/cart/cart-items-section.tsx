@@ -1,14 +1,10 @@
 'use client';
 
-import CurrencyFormatter from "@/shared/components/currency-formatter/currency-formatter";
 import { useTranslations } from "next-intl";
-import { ChangeEvent, useState } from "react";
 import EmptyCart from "./empty-cart";
-import CartItemButtons from "./cart-item-buttons";
-import CartItemAttributes from "./cart-item-attributes";
-import CartItemQuantity from "./cart-item-quantity";
 import { useGetUserCart } from "./hooks/useGetUserCart";
 import { useMutateUserCart } from "./hooks/useMutateUserCart";
+import CartItems from "./cart-items";
 
 const CartItemsSection = () => {
     const t = useTranslations("CART");
@@ -17,9 +13,9 @@ const CartItemsSection = () => {
         productItemsAttributes
     }=useGetUserCart();
 
-    // const {
-    //     onSetQuantity
-    // } = useMutateUserCart();
+    const {
+        onSetQuantity
+    } = useMutateUserCart();
 
     return (
         <div className="col-span-12 xxl:col-span-9">
@@ -55,69 +51,10 @@ const CartItemsSection = () => {
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    {cartItems.map((item) => {
-                                        const [quantity,setQuantity]= useState<number>(item.quantity);
-                                        const [totalPrice,setTotalPrice]= useState<number>(item.totalPrice);
-                                        const cartItemId=item.id;
-                                        const price = item.unitPrice
-
-                                        const onAddQuantity = () =>{
-                                            const newQuantity = quantity +1;
-                                            const newTotalLinePrice = newQuantity * price
-                                            setQuantity(newQuantity);
-                                            setTotalPrice(newTotalLinePrice);
-                                            // onSetQuantity(cartItemId,newQuantity);
-                                        }
-
-                                        const onSubtractQuantity = () =>{
-                                            const newQuantity = quantity -1;
-                                            const newTotalLinePrice = newQuantity * price
-                                            setQuantity(newQuantity);
-                                            setTotalPrice(newTotalLinePrice);
-                                            // onSetQuantity(cartItemId,newQuantity);
-                                        }
-
-                                        const onChange = (event:ChangeEvent<HTMLInputElement>)=>{
-                                            const newQuantity = Number(event.target.value);
-                                            const newTotalLinePrice = newQuantity * price
-                                            setQuantity(newQuantity);
-                                            setTotalPrice(newTotalLinePrice);
-                                            // onSetQuantity(cartItemId,newQuantity);
-                                        }
-
-                                        return (
-                                            <tr className="border border-solid border-inherit dark:border-defaultborder/10" key={item.id}>
-                                                <td>
-                                                    <CartItemAttributes 
-                                                        item={item}
-                                                        productItemsAttributes={productItemsAttributes}/>
-                                                </td>
-                                                <td>
-                                                    <div className="font-semibold text-[0.875rem]">
-                                                        <CurrencyFormatter amount={item.unitPrice} />
-                                                    </div>
-                                                </td>
-                                                <td className="product-quantity-container">
-                                                    <CartItemQuantity
-                                                        quantity={quantity}
-                                                        onSubtractQuantity={onSubtractQuantity}
-                                                        onAddQuantity={onAddQuantity}
-                                                        onChange={onChange}/>
-                                                </td>
-                                                <td>
-                                                    <div className="text-[0.875rem] font-semibold">
-                                                        <CurrencyFormatter amount={totalPrice} />
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <CartItemButtons
-                                                        itemId={item.id}/>
-                                                </td>
-                                            </tr>
-                                        )}
-                                    )}
-                                </tbody>
+                                <CartItems 
+                                    cartItems={cartItems}
+                                    productItemsAttributes={productItemsAttributes}
+                                    onSetQuantity={onSetQuantity}/>
                             </table>
                         </div>
                     </div>
