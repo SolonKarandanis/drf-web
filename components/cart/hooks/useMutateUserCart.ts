@@ -8,7 +8,15 @@ import {
     useDeleteItemsFromCartMutation, 
     useUpdateCartItemsMutation 
 } from "@/shared/redux/features/cart/cartApiSlice";
-import { setCart, userCartItemProductAttributesSelector, userCartItemSelector, userCartSelector } from "@/shared/redux/features/cart/cartSlice";
+import { 
+    mutateItemAttributes,
+    mutateUpdateRequests,
+    setCart, 
+    userCartItemProductAttributesSelector, 
+    userCartItemSelector, 
+    userCartSelector, 
+    userUpdateRequestsSelector 
+} from "@/shared/redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
@@ -75,23 +83,32 @@ export function useMutateUserCart(){
             })
     }
 
-
-
     const cart:Cart | null= useAppSelector(userCartSelector);
     const cartItems:CartItem[]| undefined= useAppSelector(userCartItemSelector);
     const productItemsAttributes:Record<number,ProductAttributes>| undefined= useAppSelector(userCartItemProductAttributesSelector);
-
+    const updateRequests:UpdateItemRequest[]= useAppSelector(userUpdateRequestsSelector);
 
     const mutationLoading = addItemsToCartLoading || deleteItemsFromCartLoading || updateItemsLoading || clearCartLoading;
+
+    const onSetQuantity= (cartItemId:number,itemQuantity:number)=>{
+        mutateUpdateRequests({cartItemId,itemQuantity});
+    }
+
+    const onChangeItemAttribute= (cartItemId:number,itemQuantity:number,attributes:string)=>{
+        mutateItemAttributes({cartItemId,itemQuantity,attributes});
+    }
 
     return {
         cart,
         cartItems,
         productItemsAttributes,
+        updateRequests,
         mutationLoading,
         handleAddItemsToCartRequest,
         handleDeleteItemsFromCart,
         handleUpdateItems,
-        handleClearCart
+        handleClearCart,
+        onSetQuantity,
+        onChangeItemAttribute
     }
 }

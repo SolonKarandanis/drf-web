@@ -7,16 +7,19 @@ import EmptyCart from "./empty-cart";
 import CartItemButtons from "./cart-item-buttons";
 import CartItemAttributes from "./cart-item-attributes";
 import CartItemQuantity from "./cart-item-quantity";
-import { useCartContext } from "./providers/cart-context";
+import { useGetUserCart } from "./hooks/useGetUserCart";
+import { useMutateUserCart } from "./hooks/useMutateUserCart";
 
 const CartItemsSection = () => {
     const t = useTranslations("CART");
     const {
-        state,
-        onSetQuantity
-    } = useCartContext();
+        cartItems,
+        productItemsAttributes
+    }=useGetUserCart();
 
-    const {cartItems,productItemsAttributes} = state;
+    // const {
+    //     onSetQuantity
+    // } = useMutateUserCart();
 
     return (
         <div className="col-span-12 xxl:col-span-9">
@@ -64,7 +67,7 @@ const CartItemsSection = () => {
                                             const newTotalLinePrice = newQuantity * price
                                             setQuantity(newQuantity);
                                             setTotalPrice(newTotalLinePrice);
-                                            onSetQuantity(cartItemId,newQuantity);
+                                            // onSetQuantity(cartItemId,newQuantity);
                                         }
 
                                         const onSubtractQuantity = () =>{
@@ -72,7 +75,7 @@ const CartItemsSection = () => {
                                             const newTotalLinePrice = newQuantity * price
                                             setQuantity(newQuantity);
                                             setTotalPrice(newTotalLinePrice);
-                                            onSetQuantity(cartItemId,newQuantity);
+                                            // onSetQuantity(cartItemId,newQuantity);
                                         }
 
                                         const onChange = (event:ChangeEvent<HTMLInputElement>)=>{
@@ -80,7 +83,7 @@ const CartItemsSection = () => {
                                             const newTotalLinePrice = newQuantity * price
                                             setQuantity(newQuantity);
                                             setTotalPrice(newTotalLinePrice);
-                                            onSetQuantity(cartItemId,newQuantity);
+                                            // onSetQuantity(cartItemId,newQuantity);
                                         }
 
                                         return (

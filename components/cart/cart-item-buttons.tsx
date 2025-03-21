@@ -3,7 +3,8 @@
 import FormButton from "@/shared/components/button/form-button"
 import { useTranslations } from "next-intl";
 import { FC } from "react";
-import { useCartContext } from "./providers/cart-context";
+import { DeleteCartItemRequest } from "@/models/cart.models";
+import { useMutateUserCart } from "./hooks/useMutateUserCart";
 
 interface Props{
     itemId:number;
@@ -12,12 +13,18 @@ interface Props{
 const CartItemButtons:FC<Props> = ({
     itemId
 }) => {
-    const {
-        state,
-        onDeleteItem
-    }= useCartContext();
 
-    const {isLoading}= state;
+    const {
+        mutationLoading,
+        handleDeleteItemsFromCart
+    } = useMutateUserCart();
+
+     const onDeleteItem =(cartItemId:number) =>{
+        const request:DeleteCartItemRequest={
+            cartItemId
+        };
+        handleDeleteItemsFromCart([request]);
+    }
     
     const handleAddToWishList = (cartItemId:number)=>{
     }
@@ -43,8 +50,8 @@ const CartItemButtons:FC<Props> = ({
                     size="sm" 
                     type="button"
                     className="hs-tooltip-toggle ti-btn ti-btn-icon bg-danger text-white !font-medium btn-delete !pr-1"
-                    isLoading={isLoading}
-                    disabled={isLoading}
+                    isLoading={mutationLoading}
+                    disabled={mutationLoading}
                     onClick={()=>onDeleteItem(itemId)}>
                     <i className="ri-delete-bin-line"></i>
                     <span

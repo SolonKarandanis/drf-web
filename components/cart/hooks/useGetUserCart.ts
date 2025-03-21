@@ -1,7 +1,14 @@
 import { Cart, CartItem } from "@/models/cart.models";
 import { ProductAttributes } from "@/models/product.models";
 import { useLazyGetUserCartQuery } from "@/shared/redux/features/cart/cartApiSlice";
-import { resetCart, setCart, userCartItemProductAttributesSelector, userCartItemSelector, userCartSelector } from "@/shared/redux/features/cart/cartSlice";
+import { 
+    resetCart, 
+    setCart, 
+    userCartItemProductAttributesSelector, 
+    userCartItemSelector, 
+    userCartSelector, 
+    userCartTotalValueSelector 
+} from "@/shared/redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useEffect } from "react";
 
@@ -23,9 +30,10 @@ export function useGetUserCart(){
     const cart:Cart | null= useAppSelector(userCartSelector);
     const cartItems:CartItem[]| undefined= useAppSelector(userCartItemSelector);
     const productItemsAttributes:Record<number,ProductAttributes>| undefined= useAppSelector(userCartItemProductAttributesSelector);
-
+    const totalCartValue = useAppSelector(userCartTotalValueSelector);
     return {
         cart,
+        totalCartValue,
         cartItems,
         productItemsAttributes,
         isError,

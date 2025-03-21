@@ -11,7 +11,7 @@ import { FC, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { useGetProductMisc } from "../products/hooks/useGetProductMisc"
 import { ProductAttributes } from "@/models/product.models"
-import { useCartContext } from "./providers/cart-context"
+import { useMutateUserCart } from "./hooks/useMutateUserCart"
 
 interface Props{
     item: CartItem;
@@ -30,10 +30,9 @@ const CartItemAttributes:FC<Props> = ({
         coloursOptions,
     } = useGetProductMisc();
     const {
-        state,
+        mutationLoading,
         onChangeItemAttribute
-    }= useCartContext();
-    const {isLoading} = state;
+    } = useMutateUserCart();
     const configState = useAppSelector((state)=>state.config);
     const path = configState.baseUrl
     const host = configState.djangoHost
@@ -100,7 +99,7 @@ const CartItemAttributes:FC<Props> = ({
                                 sectionClassName="col-span-12 xl:col-span-6 mb-2 min-w-[10rem]"
                                 field={field}
                                 error={errors.size?.message}
-                                loading={isLoading}
+                                loading={mutationLoading}
                                 onChangeInput={(e)=>onChange(e,'size')}>
                             </FormSelect>
                         )}
@@ -122,7 +121,7 @@ const CartItemAttributes:FC<Props> = ({
                                 sectionClassName="col-span-12 xl:col-span-6 mb-2 min-w-[10rem]"
                                 field={field}
                                 error={errors.color?.message}
-                                loading={isLoading}
+                                loading={mutationLoading}
                                 onChangeInput={(e)=>onChange(e,'color')}>
                             </FormSelect>
                         )}

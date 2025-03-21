@@ -27,14 +27,13 @@ const productsPersistConfig = {
 
 const cartsPersistConfig = {
   key: "carts",
-  storage: storage,
 };
 
 const reducers = combineReducers({
   users: persistReducer(usersPersistConfig, usersReducer),
   socials:persistReducer(socialPersistConfig, socialReducer),
   products:persistReducer(productsPersistConfig, productsReducer),
-  carts:persistReducer(cartsPersistConfig, cartsReducer),
+  carts:cartsReducer,
   theme: themeReducer,
   config:configReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
