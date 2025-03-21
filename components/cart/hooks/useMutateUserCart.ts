@@ -98,6 +98,11 @@ export function useMutateUserCart(){
         mutateItemAttributes({cartItemId,itemQuantity,attributes});
     }
 
+    const onAddQuantity = (cartItemId:number)=>{
+        // const newQuantity = quantity +1;
+        // const newTotalLinePrice = newQuantity * price
+    }
+
     return {
         cart,
         cartItems,

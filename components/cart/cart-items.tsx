@@ -1,3 +1,5 @@
+"use client"
+
 import { CartItem } from "@/models/cart.models"
 import { ProductAttributes } from "@/models/product.models";
 import { ChangeEvent, FC, useState } from "react";
