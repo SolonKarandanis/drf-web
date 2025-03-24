@@ -2,7 +2,7 @@
 
 import { CartItem } from "@/models/cart.models"
 import { ProductAttributes } from "@/models/product.models";
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC } from "react";
 import CartItemAttributes from "./cart-item-attributes";
 import CurrencyFormatter from "@/shared/components/currency-formatter/currency-formatter";
 import CartItemQuantity from "./cart-item-quantity";

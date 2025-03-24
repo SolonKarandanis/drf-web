@@ -5,7 +5,6 @@ import EmptyCart from "./empty-cart";
 import { useGetUserCart } from "./hooks/useGetUserCart";
 import { useMutateUserCart } from "./hooks/useMutateUserCart";
 import CartItems from "./cart-items";
-import { ChangeEvent } from "react";
 
 const CartItemsSection = () => {
     const t = useTranslations("CART");
@@ -17,19 +16,6 @@ const CartItemsSection = () => {
     const {
         onSetQuantity
     } = useMutateUserCart();
-
-    const onAddQuantity = (cartItemId:number)=>{
-        // const newQuantity = quantity +1;
-        // const newTotalLinePrice = newQuantity * price
-    }
-
-    const onSubtractQuantity = (cartItemId:number) =>{
-
-    }
-
-    const onChange = (event:ChangeEvent<HTMLInputElement>)=>{
-
-    }
 
     return (
         <div className="col-span-12 xxl:col-span-9">
