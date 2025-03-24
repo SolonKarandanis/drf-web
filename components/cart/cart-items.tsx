@@ -19,7 +19,6 @@ const CartItems:FC<Props> = ({cartItems,productItemsAttributes,onSetQuantity}) =
     <tbody>
         {cartItems.map((item) => {
             const cartItemId=item.id;
-            const price = item.unitPrice
 
             const onAddQuantity = () =>{
                 const newQuantity = item.quantity +1;

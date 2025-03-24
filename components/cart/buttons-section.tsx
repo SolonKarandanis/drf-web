@@ -47,7 +47,7 @@ const ButtonSection = () => {
                         {t(`clear-cart`)}
                     </FormButton>
                     <Link 
-                        href="/components/pages/ecommerce/checkout/" 
+                        href="/checkout/" 
                         className="ti-btn bg-success hover:bg-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white !font-medium !mb-2">
                             {t("proceed-to-checkout")}
                     </Link>

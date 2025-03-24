@@ -28,7 +28,7 @@ const EmptyCart = () => {
                     </h3>
                     <button 
                         onClick={handleProceedToShopping}
-                        className="ti-btn bg-primary text-white !font-medium m-4" 
+                        className="ti-btn bg-light hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-700  !font-medium" 
                         data-abc="true">
                         {t("BUTTONS.continue-shopping")} 
                         <i className="bi bi-arrow-right ms-1"></i>
