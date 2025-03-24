@@ -32,12 +32,12 @@ const cartSlice = createSlice({
         mutateUpdateRequests:(state,action:PayloadAction<{cartItemId:number,itemQuantity:number}>)=>{
             const {cartItemId,itemQuantity} =action.payload;
             const existingRequest = state.updateRequests.find(req=>req.cartItemId===cartItemId);
-            const cart = state.cart
+            const cart = state.cart;
             if(cart){
                 const cartItems=cart.cartItems;
                 const existingItem = cartItems.find(item=>item.id===cartItemId);
                 if(existingRequest){
-                    existingRequest.quantity =itemQuantity
+                    existingRequest.quantity =itemQuantity;
                 }
                 else{
                     const update:UpdateItemRequest={
@@ -51,22 +51,24 @@ const cartSlice = createSlice({
                 if(existingItem){
                     const newTotalLinePrice = itemQuantity * existingItem.unitPrice;
                     existingItem.totalPrice = newTotalLinePrice;
+                    existingItem.quantity=itemQuantity;
     
                     const newTotalCartPrice =  cartItems
                         .map(item=>item.totalPrice)
                         .reduce((sum,price)=>sum + price,0);
-                    state.totalCartValue= newTotalCartPrice
+                    cart.totalPrice=newTotalCartPrice;
+                    state.totalCartValue= newTotalCartPrice;
                 }
             }
         },
         mutateItemAttributes:(state,action:PayloadAction<{cartItemId:number,itemQuantity:number,attributes:string}>)=>{
             const {cartItemId,itemQuantity,attributes} =action.payload;
             const existingRequest = state.updateRequests.find(req=>req.cartItemId===cartItemId);
-            const cart = state.cart
+            const cart = state.cart;
             if(cart){
                 const cartItems=cart.cartItems;
                 if(existingRequest){
-                    existingRequest.attributes =attributes
+                    existingRequest.attributes =attributes;
                 }
                 else{
                     const update:UpdateItemRequest={

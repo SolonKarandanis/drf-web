@@ -18,32 +18,21 @@ const CartItems:FC<Props> = ({cartItems,productItemsAttributes,onSetQuantity}) =
   return (
     <tbody>
         {cartItems.map((item) => {
-            const [quantity,setQuantity]= useState<number>(item.quantity);
-            const [totalPrice,setTotalPrice]= useState<number>(item.totalPrice);
             const cartItemId=item.id;
             const price = item.unitPrice
 
             const onAddQuantity = () =>{
-                const newQuantity = quantity +1;
-                const newTotalLinePrice = newQuantity * price
-                setQuantity(newQuantity);
-                setTotalPrice(newTotalLinePrice);
+                const newQuantity = item.quantity +1;
                 onSetQuantity(cartItemId,newQuantity);
             }
 
             const onSubtractQuantity = () =>{
-                const newQuantity = quantity -1;
-                const newTotalLinePrice = newQuantity * price
-                setQuantity(newQuantity);
-                setTotalPrice(newTotalLinePrice);
+                const newQuantity = item.quantity +1;
                 onSetQuantity(cartItemId,newQuantity);
             }
 
             const onChange = (event:ChangeEvent<HTMLInputElement>)=>{
                 const newQuantity = Number(event.target.value);
-                const newTotalLinePrice = newQuantity * price
-                setQuantity(newQuantity);
-                setTotalPrice(newTotalLinePrice);
                 onSetQuantity(cartItemId,newQuantity);
             }
 
@@ -61,14 +50,14 @@ const CartItems:FC<Props> = ({cartItems,productItemsAttributes,onSetQuantity}) =
                     </td>
                     <td className="product-quantity-container">
                         <CartItemQuantity
-                            quantity={quantity}
+                            quantity={item.quantity}
                             onSubtractQuantity={onSubtractQuantity}
                             onAddQuantity={onAddQuantity}
                             onChange={onChange}/>
                     </td>
                     <td>
                         <div className="text-[0.875rem] font-semibold">
-                            <CurrencyFormatter amount={totalPrice} />
+                            <CurrencyFormatter amount={item.totalPrice} />
                         </div>
                     </td>
                     <td>

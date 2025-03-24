@@ -91,11 +91,11 @@ export function useMutateUserCart(){
     const mutationLoading = addItemsToCartLoading || deleteItemsFromCartLoading || updateItemsLoading || clearCartLoading;
 
     const onSetQuantity= (cartItemId:number,itemQuantity:number)=>{
-        mutateUpdateRequests({cartItemId,itemQuantity});
+        dispatch(mutateUpdateRequests({cartItemId,itemQuantity}));
     }
 
     const onChangeItemAttribute= (cartItemId:number,itemQuantity:number,attributes:string)=>{
-        mutateItemAttributes({cartItemId,itemQuantity,attributes});
+        dispatch(mutateItemAttributes({cartItemId,itemQuantity,attributes}));
     }
 
     const onAddQuantity = (cartItemId:number)=>{
