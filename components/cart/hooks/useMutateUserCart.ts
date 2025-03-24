@@ -13,6 +13,7 @@ import {
     mutateUpdateRequests,
     setCart, 
     userCartItemProductAttributesSelector, 
+    userCartItemsCountSelector, 
     userCartItemSelector, 
     userCartSelector, 
     userUpdateRequestsSelector 
@@ -87,6 +88,7 @@ export function useMutateUserCart(){
     const cartItems:CartItem[]| undefined= useAppSelector(userCartItemSelector);
     const productItemsAttributes:Record<number,ProductAttributes>| undefined= useAppSelector(userCartItemProductAttributesSelector);
     const updateRequests:UpdateItemRequest[]= useAppSelector(userUpdateRequestsSelector);
+    const numberOfCartItems:number | undefined= useAppSelector(userCartItemsCountSelector);
 
     const mutationLoading = addItemsToCartLoading || deleteItemsFromCartLoading || updateItemsLoading || clearCartLoading;
 
@@ -101,6 +103,7 @@ export function useMutateUserCart(){
     return {
         cart,
         cartItems,
+        numberOfCartItems,
         productItemsAttributes,
         updateRequests,
         mutationLoading,

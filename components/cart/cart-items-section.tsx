@@ -10,7 +10,7 @@ const CartItemsSection = () => {
     const t = useTranslations("CART");
     const {
         cartItems,
-        productItemsAttributes
+        productItemsAttributes,
     }=useGetUserCart();
 
     const {
@@ -20,7 +20,7 @@ const CartItemsSection = () => {
     return (
         <div className="col-span-12 xxl:col-span-9">
             {!cartItems || cartItems.length ==0 && (
-                <EmptyCart />           
+                <EmptyCart />         
             )}
             {cartItems && cartItems.length>0 && (
                 <div className="box" id="cart-container-delete">

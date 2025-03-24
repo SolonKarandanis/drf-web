@@ -10,6 +10,7 @@ const ButtonSection = () => {
     const {
         mutationLoading,
         updateRequests,
+        numberOfCartItems,
         handleUpdateItems,
         handleClearCart
     } = useMutateUserCart();
@@ -23,31 +24,36 @@ const ButtonSection = () => {
     
     return (
         <div className="grid gap-2 p-4">
-            <FormButton 
-                intent="info" 
-                size="md" 
-                type="button"
-                className="ti-btn !font-medium text-white w-full"
-                isLoading={mutationLoading}
-                disabled={mutationLoading || !canUpdateCart}
-                onClick={onUpdateItems}>
-                {t(`update-cart`)}
-            </FormButton>
-            <FormButton 
-                intent="danger" 
-                size="md" 
-                type="button"
-                className="ti-btn !font-medium text-white w-full"
-                isLoading={mutationLoading}
-                disabled={mutationLoading}
-                onClick={handleClearCart}>
-                {t(`clear-cart`)}
-            </FormButton>
-            <Link 
-                href="/components/pages/ecommerce/checkout/" 
-                className="ti-btn bg-success hover:bg-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white !font-medium !mb-2">
-                    {t("proceed-to-checkout")}
-            </Link>
+            {numberOfCartItems && numberOfCartItems>0 &&(
+                <>
+                    <FormButton 
+                        intent="info" 
+                        size="md" 
+                        type="button"
+                        className="ti-btn !font-medium text-white w-full"
+                        isLoading={mutationLoading}
+                        disabled={mutationLoading || !canUpdateCart}
+                        onClick={onUpdateItems}>
+                        {t(`update-cart`)}
+                    </FormButton>
+                    <FormButton 
+                        intent="danger" 
+                        size="md" 
+                        type="button"
+                        className="ti-btn !font-medium text-white w-full"
+                        isLoading={mutationLoading}
+                        disabled={mutationLoading}
+                        onClick={handleClearCart}>
+                        {t(`clear-cart`)}
+                    </FormButton>
+                    <Link 
+                        href="/components/pages/ecommerce/checkout/" 
+                        className="ti-btn bg-success hover:bg-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white !font-medium !mb-2">
+                            {t("proceed-to-checkout")}
+                    </Link>
+                </>
+            )}
+            
             <Link 
                 href="/products/search" 
                 className="ti-btn bg-light hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-700  !font-medium">

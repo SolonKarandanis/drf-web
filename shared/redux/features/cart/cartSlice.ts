@@ -110,6 +110,8 @@ export const userUpdateRequestsSelector = createSelector([carts],(carts)=>  cart
 
 export const userCartItemSelector = createSelector([userCartSelector],(cart)=> cart?.cartItems);
 
+export const userCartItemsCountSelector = createSelector([userCartItemSelector],(items)=> items?.length);
+
 export const userCartItemProductAttributesSelector = createSelector([userCartItemSelector],(cartItems)=> {
     const map:Record<number,ProductAttributes>={};
     if(cartItems && cartItems.length >0){

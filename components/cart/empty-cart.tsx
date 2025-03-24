@@ -14,7 +14,7 @@ const EmptyCart = () => {
 
 
     return (
-        <div className="box !hidden" id="cart-empty-cart">
+        <div className="box" id="cart-empty-cart">
             <div className="box-header">
                 <div className="box-title">
                 {t("LABELS.empty-cart-title")}

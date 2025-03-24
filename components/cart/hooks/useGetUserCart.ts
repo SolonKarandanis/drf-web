@@ -5,6 +5,7 @@ import {
     resetCart, 
     setCart, 
     userCartItemProductAttributesSelector, 
+    userCartItemsCountSelector, 
     userCartItemSelector, 
     userCartSelector, 
     userCartTotalValueSelector 
@@ -31,10 +32,13 @@ export function useGetUserCart(){
     const cartItems:CartItem[]| undefined= useAppSelector(userCartItemSelector);
     const productItemsAttributes:Record<number,ProductAttributes>| undefined= useAppSelector(userCartItemProductAttributesSelector);
     const totalCartValue = useAppSelector(userCartTotalValueSelector);
+    const numberOfCartItems:number | undefined= useAppSelector(userCartItemsCountSelector);
+
     return {
         cart,
         totalCartValue,
         cartItems,
+        numberOfCartItems,
         productItemsAttributes,
         isError,
         isLoading
