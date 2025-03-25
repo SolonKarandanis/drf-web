@@ -19,9 +19,6 @@ const CartItemsSection = () => {
         onSetQuantity
     } = useMutateUserCart();
 
-    const loading = true;
-
-
     return (
         <div className="col-span-12 xxl:col-span-9">
             {isLoading &&(
