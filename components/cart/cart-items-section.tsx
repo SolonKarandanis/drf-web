@@ -5,24 +5,32 @@ import EmptyCart from "./empty-cart";
 import { useGetUserCart } from "./hooks/useGetUserCart";
 import { useMutateUserCart } from "./hooks/useMutateUserCart";
 import CartItems from "./cart-items";
+import CartItemsLoading from "./cart-items-loading";
 
 const CartItemsSection = () => {
     const t = useTranslations("CART");
     const {
         cartItems,
         productItemsAttributes,
+        isLoading,
     }=useGetUserCart();
 
     const {
         onSetQuantity
     } = useMutateUserCart();
 
+    const loading = true;
+
+
     return (
         <div className="col-span-12 xxl:col-span-9">
-            {!cartItems || cartItems.length ==0 && (
+            {isLoading &&(
+                <CartItemsLoading iterate={5} />
+            )}
+            {!isLoading && (!cartItems || cartItems.length ==0) && (
                 <EmptyCart />         
             )}
-            {cartItems && cartItems.length>0 && (
+            {!isLoading && cartItems && cartItems.length>0 &&(
                 <div className="box" id="cart-container-delete">
                     <div className="box-header">
                         <div className="box-title">
@@ -55,6 +63,7 @@ const CartItemsSection = () => {
                                     cartItems={cartItems}
                                     productItemsAttributes={productItemsAttributes}
                                     onSetQuantity={onSetQuantity}/>
+                            
                             </table>
                         </div>
                     </div>
