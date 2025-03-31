@@ -26,7 +26,7 @@ const CartItems:FC<Props> = ({cartItems,productItemsAttributes,onSetQuantity}) =
             }
 
             const onSubtractQuantity = () =>{
-                const newQuantity = item.quantity +1;
+                const newQuantity = item.quantity -1;
                 onSetQuantity(cartItemId,newQuantity);
             }
 

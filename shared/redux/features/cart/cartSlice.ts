@@ -29,6 +29,9 @@ const cartSlice = createSlice({
             state.cart=null;
             state.totalCartValue=0
         },
+        resetUpdateRequests:(state)=>{
+            state.updateRequests=[]
+        },
         mutateUpdateRequests:(state,action:PayloadAction<{cartItemId:number,itemQuantity:number}>)=>{
             const {cartItemId,itemQuantity} =action.payload;
             const existingRequest = state.updateRequests.find(req=>req.cartItemId===cartItemId);
@@ -94,6 +97,7 @@ const findProductId = (cartItems:CartItem[],cartItemId:number):number =>{
 export const { 
     setCart,
     resetCart,
+    resetUpdateRequests,
     mutateUpdateRequests,
     mutateItemAttributes
 } = cartSlice.actions;

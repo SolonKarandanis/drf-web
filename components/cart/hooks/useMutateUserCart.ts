@@ -11,6 +11,7 @@ import {
 import { 
     mutateItemAttributes,
     mutateUpdateRequests,
+    resetUpdateRequests,
     setCart, 
     userCartItemProductAttributesSelector, 
     userCartItemsCountSelector, 
@@ -63,6 +64,7 @@ export function useMutateUserCart(){
             .unwrap()
             .then((response:Cart)=>{
                 dispatch(setCart(response));
+                dispatch(resetUpdateRequests())
                 toast.success(t("SUCCESS.update-cart"));
             })
             .catch((error:ErrorResponse)=>{
