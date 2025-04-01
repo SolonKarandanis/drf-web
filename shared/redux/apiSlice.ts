@@ -42,7 +42,7 @@ const baseQueryWithReauth: BaseQueryFn<
 
 	let result = await baseQuery(args, api, extraOptions);
 
-	if (result.error && result.error.status === 401) {
+	if (result.error && result.error.status === 403) {
 		if (!mutex.isLocked()) {
 			const release = await mutex.acquire();
 			try {
