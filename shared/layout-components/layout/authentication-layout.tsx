@@ -6,7 +6,6 @@ import Switcher from '../switcher/switcher';
 const Authenticationlayout = ({children}:{ children: ReactNode}) => {
   return (
     <>
-      <body></body>
       {children}
       {/* <Switcher/> */}
     </>

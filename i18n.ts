@@ -3,7 +3,7 @@
 import { notFound } from "next/navigation";
 import { getRequestConfig } from "next-intl/server";
 import { type AbstractIntlMessages } from "next-intl";
-import { locales, type Locale } from "@/utils/locales";
+import { defaultLocale, locales, type Locale } from "@/utils/locales";
 
 const messageImports = {
   en: () => import("./messages/en.json"),
@@ -16,7 +16,6 @@ export function isValidLocale(locale: unknown): locale is Locale {
 
 export default getRequestConfig(async ({requestLocale}) => {
   const requested = await requestLocale;
-  const defaultLocale = 'en';
   
   // const baseLocale = new Intl.Locale(requested).baseName;
   if (!isValidLocale(requested)) notFound();

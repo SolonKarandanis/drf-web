@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 import '@/styles/globals.scss'
 import CustomProvider from '@/shared/redux/provider'
 import { FC } from "react";
-import { getMessages, unstable_setRequestLocale } from "next-intl/server";
+import { getMessages, } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import AuthProvider from "@/components/auth/auth-provider";
 import { ProgressBar } from "@/shared/layout-components/progress-bar/progress-bar";
@@ -24,9 +24,9 @@ type Props = {
   };
 };
 
-const RootLayout:FC<Props>= async ({children,params:{locale}}) => {
-  unstable_setRequestLocale(locale);
+const RootLayout:FC<Props>= async ({children,params}) => {
   const messages = await getMessages();
+  const { locale } = await params;
   return (
     <html lang={locale} 
       suppressHydrationWarning>

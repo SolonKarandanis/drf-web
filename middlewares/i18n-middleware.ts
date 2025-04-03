@@ -19,7 +19,10 @@ function getLocale(request: NextRequest): string | undefined {
     request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
   
     // @ts-ignore locales are readonly
-    const languages = new Negotiator({ headers: negotiatorHeaders }).languages()
+    let languages = new Negotiator({ headers: negotiatorHeaders }).languages()
+    if (languages.length === 1 && languages[0] === "*") {
+        languages = [defaultLocale];
+    }
   
     const locale = matchLocale(languages, locales, defaultLocale)
     return locale
@@ -45,6 +48,7 @@ export function withI18nMiddleware(middleware: CustomMiddleware) {
             // Redirect if there is no locale
             if (pathnameIsMissingLocale) {
                 const locale = getLocale(request)
+               
                 
                 return NextResponse.redirect(
                     new URL(
