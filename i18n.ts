@@ -14,12 +14,20 @@ export function isValidLocale(locale: unknown): locale is Locale {
   return locales.some((l) => l === locale);
 }
 
-export default getRequestConfig(async (params) => {
-  const baseLocale = new Intl.Locale(params.locale).baseName;
-  if (!isValidLocale(baseLocale)) notFound();
+export default getRequestConfig(async ({requestLocale}) => {
+  const requested = await requestLocale;
+  const defaultLocale = 'en';
+  
+  // const baseLocale = new Intl.Locale(requested).baseName;
+  if (!isValidLocale(requested)) notFound();
+  const locale = isValidLocale(requested)
+    ? requested
+    : defaultLocale;
 
-  const messages = (await messageImports[baseLocale]()).default;
+  const messages = (await messageImports[requested]()).default;
+
   return {
+    locale,
     messages,
   };
 });

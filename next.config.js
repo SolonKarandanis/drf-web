@@ -1,7 +1,6 @@
 
 
 const withNextIntl= require("next-intl/plugin");
-// const { withPigment }= require('@pigment-css/nextjs-plugin');
 
 const isProd = process.env.NODE_ENV === "production";
 const isDev = process.env.NODE_ENV === "development";
@@ -12,7 +11,6 @@ const nextConfig = {
   output: isDev ? undefined : "export",
   reactStrictMode: true,
   trailingSlash: true,
-  swcMinify: true,
   basePath: isProd ? "/ynex-js/preview" : undefined,
   assetPrefix : isProd ? "https://nextjs.spruko.com/ynex-js/preview/" : undefined,
   images: {
