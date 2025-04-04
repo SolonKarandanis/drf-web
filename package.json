@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prepare": "panda codegen",
-    "prepare clean": "panda codegen --clean",
     "dev": "rm -rf .next && next dev ",
     "build": "next build",
     "start": "next start",
