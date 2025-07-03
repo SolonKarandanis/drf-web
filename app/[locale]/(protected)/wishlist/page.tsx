@@ -22,7 +22,6 @@ const WishlistPage = async () =>{
         const {firstName, lastName}= session.user;
         const fullname = `${firstName} ${lastName}`;
         const canSeeWishlist =hasPermission(session.user,Perimissions.VIEW_WISH_LIST_ITEM);
-        console.log(canSeeWishlist);
         if(canSeeWishlist){
             return (
                 <>
