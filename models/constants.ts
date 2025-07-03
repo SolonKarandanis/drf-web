@@ -129,4 +129,8 @@ export enum Perimissions{
     CHANGE_SOCIAL_USER='socials.change_socialuser',
     DELETE_SOCIAL_USER='socials.delete_socialuser',
     VIEW_SOCIAL_USER='socials.view_socialuser',
+    ADD_WISH_LIST_ITEM = 'wishlist.add_wishlistitem',
+    CHANGE_WISH_LIST_ITEM = 'wishlist.change_wishlistitem',
+    DELETE_WISH_LIST_ITEM = 'wishlist.delete_wishlistitem',
+    VIEW_WISH_LIST_ITEM = 'wishlist.view_wishlistitem',
 }

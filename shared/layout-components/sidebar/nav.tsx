@@ -101,6 +101,14 @@ export const MenuItems:MenuItem[] =[
 					
 				]
 			},
+            {
+				icon: NestedmenuIcon, 
+                title: "Wishlist", 
+                type: "link", 
+                active: false, 
+                selected: false,
+                path: `/wishlist`,
+			},
         ]
     },
 ]
