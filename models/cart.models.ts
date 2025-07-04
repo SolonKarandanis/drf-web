@@ -1,3 +1,4 @@
+import { AttributeIds } from "./attributes.models";
 import { ImageModel } from "./image.models";
 import { ProductAttributes } from "./product.models";
 
@@ -6,9 +7,6 @@ export interface CartItemProduct{
     title:string;
     uuid:string;
 }
-
-export const attributeIds = [1,2] as const;
-export type AttributeIds = (typeof attributeIds)[number]
 
 export interface CartItem{
     id:number;
