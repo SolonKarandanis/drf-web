@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import Wishlist from "@/components/wishlist/Wishlist";
+import Wishlist from "@/components/wishlist/wishlist";
 import { Perimissions } from "@/models/constants";
 import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 import { hasPermission } from "@/utils/user-utils";
