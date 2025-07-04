@@ -13,3 +13,13 @@ export interface WihsilistItem{
     previewImage:ImageModel|null;
     productDetails:WishlistItemProduct;
 }
+
+export interface AddToWishlistRequest{
+    productId:number;
+    attributes?:string;
+}
+
+
+export interface DeleteWishlistItemRequest{
+    wishListItemId:number;
+}
