@@ -1,4 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import Wishlist from "@/components/wishlist/Wishlist";
 import { Perimissions } from "@/models/constants";
 import PageHeader from "@/shared/layout-components/page-header/PageHeader";
 import { hasPermission } from "@/utils/user-utils";
@@ -29,7 +30,7 @@ const WishlistPage = async () =>{
                         currentpage="Wishlist" 
                         activepage="Wishlist" 
                         mainpage={fullname} />
-                    <h1>Wishlist</h1>
+                    <Wishlist />
                 </>
             )
         }
