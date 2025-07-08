@@ -6,7 +6,12 @@ import { WishlistSearchResponse } from "@/models/search.models";
 const wishlistApiSlice = apiSlice.injectEndpoints({
     endpoints: builder =>({
         getUserWishlistItems: builder.query<WishlistSearchResponse,string>({
-            query:(query)=>`${ApiControllers.WISHLIST}?q=${query}`,
+            query:(query)=>{
+                const url = query? `${ApiControllers.WISHLIST}?q=${query}`: `${ApiControllers.WISHLIST}`
+                return {
+                    url
+                }
+            },
         }),
         addToWishlist:builder.mutation<WishlistSearchResponse,AddToWishlistRequest[]>({
             query: ( request:AddToWishlistRequest[])=>{
