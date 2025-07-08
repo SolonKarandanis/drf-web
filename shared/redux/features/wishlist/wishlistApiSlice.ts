@@ -1,7 +1,7 @@
 import { AddToWishlistRequest, DeleteWishlistItemRequest } from "@/models/wishlist.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
-import { WishlistSearchResponse } from "@/models/search.models";
+import { WishlistSearchRequest, WishlistSearchResponse } from "@/models/search.models";
 
 const wishlistApiSlice = apiSlice.injectEndpoints({
     endpoints: builder =>({
@@ -12,6 +12,15 @@ const wishlistApiSlice = apiSlice.injectEndpoints({
                     url
                 }
             },
+        }),
+        searchItems: builder.mutation<WishlistSearchResponse,WishlistSearchRequest>({
+            query: ( searchRequest:WishlistSearchRequest)=>{
+                return {
+                    url: `${ApiControllers.WISHLIST}/search/`,
+                    method: 'POST',
+                    body: searchRequest ,
+                }
+            }
         }),
         addToWishlist:builder.mutation<WishlistSearchResponse,AddToWishlistRequest[]>({
             query: ( request:AddToWishlistRequest[])=>{
@@ -38,6 +47,7 @@ const wishlistApiSlice = apiSlice.injectEndpoints({
 
 export const {
     useLazyGetUserWishlistItemsQuery,
+    useSearchItemsMutation,
     useAddToWishlistMutation,
     useDeleteWishlistItemsMutation,
 } = wishlistApiSlice;

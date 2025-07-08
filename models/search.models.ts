@@ -34,6 +34,10 @@ export interface ProductSearchRequest extends SearchRequest{
     sizes?:number[];
 }
 
+export interface WishlistSearchRequest extends SearchRequest{
+    query:string| null;
+}
+
 export interface SearchResponse{
     count: number;
     previous: number;
