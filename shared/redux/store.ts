@@ -5,6 +5,7 @@ import productsReducer from './features/products/productsSlice';
 import cartsReducer from './features/cart/cartSlice'
 import socialReducer from './features/social/socialSlice';
 import configReducer from './features/config/configSlice';
+import wishlistReducer from './features/wishlist/wishlistSlice';
 import { apiSlice } from './apiSlice';
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -34,6 +35,7 @@ const reducers = combineReducers({
   socials:persistReducer(socialPersistConfig, socialReducer),
   products:persistReducer(productsPersistConfig, productsReducer),
   carts:cartsReducer,
+  wishListItems:wishlistReducer,
   theme: themeReducer,
   config:configReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,

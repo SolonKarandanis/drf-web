@@ -1,13 +1,14 @@
-import { AddToWishlistRequest, DeleteWishlistItemRequest, WihsilistItem } from "@/models/wishlist.models";
+import { AddToWishlistRequest, DeleteWishlistItemRequest } from "@/models/wishlist.models";
 import { ApiControllers } from "../../api/ApiControllers";
 import { apiSlice } from "../../apiSlice";
+import { WishlistSearchResponse } from "@/models/search.models";
 
 const wishlistApiSlice = apiSlice.injectEndpoints({
     endpoints: builder =>({
-        getUserWishlistItems: builder.query<WihsilistItem[],string>({
+        getUserWishlistItems: builder.query<WishlistSearchResponse,string>({
             query:(query)=>`${ApiControllers.WISHLIST}?q=${query}`,
         }),
-        addToWishlist:builder.mutation<WihsilistItem[],AddToWishlistRequest[]>({
+        addToWishlist:builder.mutation<WishlistSearchResponse,AddToWishlistRequest[]>({
             query: ( request:AddToWishlistRequest[])=>{
                 return {
                     url: `${ApiControllers.WISHLIST}/items/`,
@@ -16,7 +17,7 @@ const wishlistApiSlice = apiSlice.injectEndpoints({
                 }
             }
         }),
-        deleteWishlistItems:builder.mutation<WihsilistItem[],DeleteWishlistItemRequest[]>({
+        deleteWishlistItems:builder.mutation<WishlistSearchResponse,DeleteWishlistItemRequest[]>({
             query: ( request:DeleteWishlistItemRequest[])=>{
                 return {
                     url: `${ApiControllers.WISHLIST}/items/delete/`,
