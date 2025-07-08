@@ -4,8 +4,8 @@ import { apiSlice } from "../../apiSlice";
 
 const wishlistApiSlice = apiSlice.injectEndpoints({
     endpoints: builder =>({
-        getUserWishlistItems: builder.query<WihsilistItem[],void>({
-            query:()=>`${ApiControllers.WISHLIST}`,
+        getUserWishlistItems: builder.query<WihsilistItem[],string>({
+            query:(query)=>`${ApiControllers.WISHLIST}?q=${query}`,
         }),
         addToWishlist:builder.mutation<WihsilistItem[],AddToWishlistRequest[]>({
             query: ( request:AddToWishlistRequest[])=>{

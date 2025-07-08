@@ -2,7 +2,10 @@ import { WihsilistItem } from "@/models/wishlist.models";
 
 export interface WishlistState{
     wishlistItems: WihsilistItem[];
-    totalCount: number;
+    totalCount: number| null;
+    pages:number| null;
+    next:number| null;
+    previous:number| null;
     // updateRequests:UpdateItemRequest[];
 }
 

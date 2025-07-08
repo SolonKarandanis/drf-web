@@ -1,5 +1,6 @@
 import { Products } from "./product.models";
 import { UserModel, UserStatus } from "./user.models";
+import { WihsilistItem } from "./wishlist.models";
 
 export enum SortDirection {
     ASC = 'ASC',
@@ -46,4 +47,8 @@ export interface UserSearchResponse extends SearchResponse{
 
 export interface ProductSearchResponse extends SearchResponse{
     data:Products[];
+}
+
+export interface WishlistSearchResponse extends SearchResponse{
+    data:WihsilistItem[];
 }
