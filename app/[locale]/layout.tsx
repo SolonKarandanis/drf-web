@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 import '@/styles/globals.scss'
 import CustomProvider from '@/shared/redux/provider'
 import { FC } from "react";
-import { getMessages, unstable_setRequestLocale } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import AuthProvider from "@/components/auth/auth-provider";
 import { ProgressBar } from "@/shared/layout-components/progress-bar/progress-bar";
@@ -26,7 +26,7 @@ type Props = {
 
 const RootLayout:FC<Props>= async ({children,params}) => {
   const {locale} = await params;
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
   const messages = await getMessages();
   return (
     <html lang={locale} 

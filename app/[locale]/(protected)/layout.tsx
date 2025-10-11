@@ -1,7 +1,7 @@
 import SetTokensLocalStorage from '@/components/auth/set-tokens-localstorage';
 import ContentLayout from '@/shared/layout-components/layout/content-layout';
 import { Locale, locales } from '@/utils/locales';
-import { unstable_setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { basePath } from '@/next.config';
 import SetConfig from '@/components/auth/set-config';
 import { ConfigModel } from '@/models/config.model';
@@ -15,7 +15,7 @@ export default async function Layout({ children,params }:{
 	}>;
 }) {
 	const {locale} = await params;
-	unstable_setRequestLocale(locale);
+	setRequestLocale(locale);
 	const path = process.env.NODE_ENV === "production" ? basePath : "";
 	const djangoHost = process.env.NEXT_PUBLIC_HOST;
 
