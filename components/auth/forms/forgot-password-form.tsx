@@ -2,7 +2,6 @@
 
 import CForm from "@/shared/components/form/cform"
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ForgotPasswordSchema,getForgotPasswordSchema } from '@/schemas/auth.schemas';
@@ -17,7 +16,6 @@ import FormButton from "@/shared/components/button/form-button";
 const ForgotPasswordForm = () => {
   const t = useTranslations('FORGOT-PASSWORD.FORM');
   const formT = useTranslations("USERS.VALIDATION");
-  const router = useRouter();
   
   const {register,handleSubmit,formState: { errors },watch} = useForm<ForgotPasswordSchema>({
     resolver: zodResolver(getForgotPasswordSchema(formT)),
@@ -35,8 +33,7 @@ const ForgotPasswordForm = () => {
 	// 	toast.error(`(${status}) ${detail}`);
 	// }
 
-  const onSubmit:SubmitHandler<ForgotPasswordSchema> = (values: ForgotPasswordSchema) =>{
-    const {email,newPassword,confirmPassword} = values;
+  const onSubmit:SubmitHandler<ForgotPasswordSchema> = () =>{
   }
   
   return (

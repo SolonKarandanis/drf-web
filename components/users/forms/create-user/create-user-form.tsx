@@ -1,6 +1,4 @@
 "use client";
-
-import * as z from "zod";
 import { useState } from "react";
 import { motion } from 'framer-motion'
 import { CreateUserSchema,getCreateUserSchema } from "@/schemas/auth.schemas";
@@ -82,7 +80,7 @@ const CreateUserForm = () => {
         reset,
         trigger,
         control,
-        formState: { errors,isDirty }
+        formState: { errors }
     } = useForm<CreateUserSchema>({
         resolver: zodResolver(getCreateUserSchema(formT))
     })

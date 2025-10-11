@@ -72,8 +72,7 @@ const ProductForm:FC<Props> = ({
         control,
         handleSubmit,
         formState,
-        setValue,
-        getValues
+        setValue
     } = useForm<SaveProductSchema>({
         resolver: zodResolver(getSaveProductSchema(formT,imageT)),
         defaultValues

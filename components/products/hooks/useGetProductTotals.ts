@@ -1,7 +1,6 @@
 import { 
     useLazyGetBrandsWithTotalsQuery, 
     useLazyGetCategoriesWithTotalsQuery, 
-    useLazyGetDiscountsWithTotalsQuery,
     useLazyGetSizesWithTotalsQuery
 } from "@/shared/redux/features/products/productsApiSlice";
 import { 
@@ -9,8 +8,6 @@ import {
     productsBrandsTotalsRestSelector,
     productsCategoriesTotalsFirstThreeSelector,
     productsCategoriesTotalsRestSelector,
-    productsDiscountsTotalsFirstThreeSelector,
-    productsDiscountsTotalsRestSelector,
     productsSizesTotalsForstThreeSelector,
     productsSizesTotalsRestSelector,
     setBrandsWithTotals,
@@ -24,7 +21,6 @@ export function useGetProductTotals(){
     const dispatch = useAppDispatch();
     const [getCategories, { isLoading:categoriesLoading}] = useLazyGetCategoriesWithTotalsQuery();
     const [getBrands, { isLoading:brandsLoading}] = useLazyGetBrandsWithTotalsQuery();
-    const [getDiscounts, { isLoading:discountsLoading}] = useLazyGetDiscountsWithTotalsQuery();
     const [getSizes, { isLoading:sizesLoading}] = useLazyGetSizesWithTotalsQuery();
    
    
@@ -62,9 +58,6 @@ export function useGetProductTotals(){
 
     const sizesFirstThree = useAppSelector(productsSizesTotalsForstThreeSelector);
     const sizesRest = useAppSelector(productsSizesTotalsRestSelector);
-
-    const discountsFirstThree = useAppSelector(productsDiscountsTotalsFirstThreeSelector);
-    const discountsRest = useAppSelector(productsDiscountsTotalsRestSelector);
 
     
     return {

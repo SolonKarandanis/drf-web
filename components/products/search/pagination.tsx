@@ -3,7 +3,6 @@
 import { useGetProductSearchResults } from "../hooks/useGetProductSearchResults";
 import { Button } from "@/shared/shadcn/components/ui/button";
 import ButtonLoading from "@/shared/components/button-loading/button-loading";
-import { MouseEvent } from "react";
 import { useProductFilters } from "../hooks/useProductFilters";
 import { ProductSearchRequest } from "@/models/search.models";
 
@@ -18,7 +17,7 @@ const Pagination = () => {
   const {query,page,size,setPage} = useProductFilters();
   
 
-  const handlePrevious = (event:MouseEvent<HTMLButtonElement>) =>{
+  const handlePrevious = () =>{
     const newPage = page-1
     setPage(newPage);
     const request:ProductSearchRequest={
@@ -31,7 +30,7 @@ const Pagination = () => {
     searchProducts(request);
   }
 
-  const handleNext = (event:MouseEvent<HTMLButtonElement>) =>{
+  const handleNext = () =>{
     const newPage = page+1
     setPage(newPage);
     const request:ProductSearchRequest={

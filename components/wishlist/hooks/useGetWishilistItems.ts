@@ -7,8 +7,7 @@ import { useAppDispatch } from "@/shared/redux/hooks";
 import { useEffect, useRef } from "react";
 
 export function useGetWishlistItemsSearchResults(){
-    const dispatch = useAppDispatch();
-    const [getItems] = useLazyGetUserWishlistItemsQuery();
+    useLazyGetUserWishlistItemsQuery();
 }
 
 export function useGetInitialWishlistItemsSearchResults(){

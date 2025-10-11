@@ -3,7 +3,7 @@
 import { useInitializeProductMisc } from "../products/hooks/useInitializeProductMisc";
 
 const SetProductMisc = () => {
-    const sinit = useInitializeProductMisc();
+    useInitializeProductMisc();
     return null;
 }
 

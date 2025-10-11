@@ -1,6 +1,6 @@
 "use client"
 
-import { ChangeEvent, MouseEvent,  } from 'react';
+import { ChangeEvent,  } from 'react';
 import { useGetProductSearchResults } from '../hooks/useGetProductSearchResults';
 import { ProductSearchRequest } from '@/models/search.models';
 import { useProductFilters } from '../hooks/useProductFilters';
@@ -16,7 +16,7 @@ const SearchBar = () => {
         isLoading
     } = useGetProductSearchResults();
 
-    const handleSearch = (event:MouseEvent<HTMLButtonElement>) => {
+    const handleSearch = () => {
         const request:ProductSearchRequest={
             query:query,
             categories,

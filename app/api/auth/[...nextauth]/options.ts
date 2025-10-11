@@ -35,7 +35,7 @@ export const authOptions: NextAuthOptions ={
             },
             // The data returned from this function is passed forward as the
             // `user` variable to the signIn() and jwt() callback
-            async authorize(credentials, req) {          
+            async authorize(credentials) {          
                 const httpResponse= await fetch(`${baseUrl}auth/token/`, {
                     method: "POST",
                     headers: {

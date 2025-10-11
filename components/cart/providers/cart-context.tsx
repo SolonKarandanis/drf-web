@@ -1,6 +1,6 @@
 import { CartItem, DeleteCartItemRequest, UpdateItemRequest } from "@/models/cart.models";
 import { ProductAttributes } from "@/models/product.models";
-import { createContext, ReactNode, useContext,useEffect,useMemo, useState } from "react";
+import { createContext, ReactNode, useContext,useMemo, useState } from "react";
 import { useMutateUserCart } from "../hooks/useMutateUserCart";
 
 type ContextState={

@@ -14,7 +14,7 @@ export const metadata:Metadata={
     ]
   }
 
-const page = () => {
+const Page = () => {
     const t = useTranslations();
     return (
         <>
@@ -49,4 +49,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

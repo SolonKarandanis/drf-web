@@ -16,7 +16,7 @@ export function useGetSocials(){
             .then((socials) => {
                 dispatch(setSocials(socials))
             })
-            .catch(error=>{
+            .catch(()=>{
                 dispatch(logout())
                 router.push('/api/auth/signout?callbackUrl=/');
             })

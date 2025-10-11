@@ -1,10 +1,7 @@
 "use client"
 
-import { getUpdateCartItemQuantitiesSchema, UpdateCartItemQuantitiesSchema } from "@/schemas/cart.schemas";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { ChangeEvent, FC } from "react";
-import { useForm } from "react-hook-form";
 
 interface Props {
     quantity:number;
@@ -19,10 +16,6 @@ const CartItemQuantity:FC<Props> = ({
     onSubtractQuantity,
     onChange,
 }) => {
-    const formT = useTranslations("CART.VALIDATION");
-    const updatequantitiesForm = useForm<UpdateCartItemQuantitiesSchema>({
-        resolver: zodResolver(getUpdateCartItemQuantitiesSchema(formT))
-    });
 
     return (
         <div className="input-group dark:border-defaultborder/10 rounded-md !flex-nowrap">

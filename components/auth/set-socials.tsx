@@ -3,7 +3,7 @@
 import { useGetSocials } from './hooks/useGetSocials';
 
 const SetSocials = () => {
-  const {response} =useGetSocials();
+  useGetSocials();
   return null;
 }
 

@@ -77,7 +77,6 @@ export function useProductFilters() {
     },[brands]);
 
     const setSize = useCallback((size:number | number[])=>{
-        const set = new Set();
         if (size) {
             size=toArray(size);
             const set = handleSetValues(sizes,size);

@@ -22,7 +22,7 @@ const LoginForm = () => {
     const lform='LOGIN.FORM';
     const [signinLoading,setSigninLoading] = useState<boolean>(false);
     
-    const {register,control,handleSubmit,formState: { errors , isValid },} = useForm<LoginSchema>({
+    const {register,handleSubmit,formState: { errors , isValid },} = useForm<LoginSchema>({
         resolver: zodResolver(getLoginSchema(formT)),
         defaultValues: {
           username: "",

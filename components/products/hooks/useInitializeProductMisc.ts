@@ -14,19 +14,19 @@ export function useInitializeProductMisc(){
         getCategories()
             .unwrap()
             .then((result) =>dispatch(setCategories(result)))
-            .catch((error)=>{
+            .catch(()=>{
         })
 
         getBrands()
             .unwrap()
             .then((result) =>dispatch(setBrands(result)))
-            .catch((error)=>{
+            .catch(()=>{
         })
 
         getAttributes()
             .unwrap()
             .then((result) =>dispatch(setAtributes(result)))
-            .catch((error)=>{
+            .catch(()=>{
         })
     },[])
 

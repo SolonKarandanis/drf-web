@@ -50,8 +50,6 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
         handleSubmit,
         register,
         control,
-        formState: { isValid, errors, isValidating, isDirty },
-        reset
       } = useForm<Inputs>({
         resolver: zodResolver(CreateUserSocialsSchema),
         defaultValues:{
@@ -122,7 +120,6 @@ const SocialNetworks:FC<Props> = ({canEditUser}) => {
                 <form id={formId} onSubmit={handleSubmit(onSubmit)}>
                     <section className="flex flex-col gap-3 mt-3">
                         {fields.map((field, index) =>{
-                            const selected = socials.find(s=>s.id===Number(field.socialId))!;
                             return (
                                 <div key={field.id} className="flex flex-row gap-8 rounded-lg shadow-sm shadow-[#f6f7f6] p-5 
                                     text-[1rem] border-t-[10px] border-solid border-[#f0f0f0] relative transition-all">

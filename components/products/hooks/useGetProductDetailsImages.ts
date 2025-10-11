@@ -14,7 +14,7 @@ export function useGetProductDetailsImages(uuid:string){
         getProductImages(uuid)
         .unwrap()
         .then((images) =>dispatch(setSelectedProductImages(images)))
-        .catch((error)=>{
+        .catch(()=>{
             // dispatch(resetSelectedProduct())
         })
     },[])

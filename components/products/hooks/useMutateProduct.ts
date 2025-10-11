@@ -1,9 +1,9 @@
 import { handleError } from "@/lib/functions";
 import { ErrorResponse } from "@/models/error.models";
-import { CreatedProductResponse, CreateProductRequest, ProductDetails, UpdateProductRequest } from "@/models/product.models";
+import { CreatedProductResponse, CreateProductRequest, UpdateProductRequest } from "@/models/product.models";
 import { useCreateProductMutation, useUpdateProductMutation } from "@/shared/redux/features/products/productsApiSlice";
 import { selectedProductSelector } from "@/shared/redux/features/products/productsSlice";
-import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
+import { useAppSelector } from "@/shared/redux/hooks";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
@@ -11,7 +11,6 @@ import { toast } from "react-toastify";
 export function useMutateProduct(){
     const router = useRouter();
     const t = useTranslations();
-    const dispatch = useAppDispatch();
     const [createProduct, { isLoading:createProductLoading }] = useCreateProductMutation();
     const [updateProduct, { isLoading:updateProductLoading }] = useUpdateProductMutation();
 
@@ -31,7 +30,7 @@ export function useMutateProduct(){
     const handleUpdateProduct = (uuid:string, request:UpdateProductRequest)=>{
         updateProduct({uuid,request})
             .unwrap()
-            .then((response:ProductDetails)=>{
+            .then(()=>{
                 toast.success(t("PRODUCTS.SUCCESS.update-product"));
                 router.push(`/products/${uuid}`);
             })

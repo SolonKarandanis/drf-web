@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks";
 import { useEffect } from "react";
 
 export function useGetUserCart(){
-    const [getcart,{isError,isLoading,data}] = useLazyGetUserCartQuery();
+    const [getcart,{isError,isLoading}] = useLazyGetUserCartQuery();
     const dispatch = useAppDispatch();
 
     useEffect(()=>{
@@ -23,7 +23,7 @@ export function useGetUserCart(){
             .then((cart)=>{
                 dispatch(setCart(cart));
             })
-            .catch((error)=>{
+            .catch(()=>{
                 dispatch(resetCart());
             });
     },[]);

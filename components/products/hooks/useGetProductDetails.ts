@@ -35,7 +35,7 @@ export function useGetProductDetails(uuid:string){
             .then((products) =>{
                 dispatch(setSelectedProduct(products));
             })
-            .catch((error)=>{
+            .catch(()=>{
                 dispatch(resetSelectedProduct());
             });
 

@@ -2,7 +2,6 @@
 
 
 import {useAppSelector } from '@/shared/redux/hooks';
-import * as z from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { UploadProfileImageSchema, getUploadProfileImageSchema } from '@/schemas/user.schemas';
@@ -32,7 +31,7 @@ const UploadPicture = () => {
       setValue("profileImage",fileUpload);
     }
 
-    const {register,handleSubmit,formState: { errors ,isSubmitting },setValue, watch} = useForm<UploadProfileImageSchema>({
+    const {register,handleSubmit,formState: { errors  },setValue, watch} = useForm<UploadProfileImageSchema>({
       resolver: zodResolver(getUploadProfileImageSchema(formT)),
       defaultValues:{
           profileImage:null

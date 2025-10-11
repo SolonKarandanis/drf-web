@@ -11,7 +11,7 @@ import { useEffect } from "react";
 
 export function useGetUserDetails(uuid:string){
     const [getUser, userData] = useLazyGetUserQuery();
-    const [getUserImage, imageData] = useLazyGetUserImageQuery();
+    const [getUserImage] = useLazyGetUserImageQuery();
     const dispatch = useAppDispatch();
 
     useEffect(()=>{
@@ -24,7 +24,7 @@ export function useGetUserDetails(uuid:string){
               .then((image)=>{
                 dispatch(setProfileImage(image))
               })
-              .catch((error)=>{
+              .catch(()=>{
                 dispatch(resetProfileImage())
               })
           })

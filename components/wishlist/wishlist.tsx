@@ -6,7 +6,7 @@ import WishlistHeader from "./wishlist-header";
 
 
 const Wishlist = () => {
-    const [allData, setAllData] = useState(Itemsdata1);
+    const [allData] = useState(Itemsdata1);
     
     return (
         <>

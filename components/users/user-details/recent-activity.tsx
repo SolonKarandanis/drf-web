@@ -1,5 +1,3 @@
-import Link from 'next/link'
-import {FC} from 'react'
 import { FaArrowDown, FaArrowUp, FaExclamation } from "react-icons/fa";
 
 

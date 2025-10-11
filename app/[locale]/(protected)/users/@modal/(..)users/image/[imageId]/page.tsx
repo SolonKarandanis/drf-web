@@ -12,9 +12,7 @@ type Props = {
     }
 }
 
-const ProfileImageModal:FC<Props> = ({
-    params:{imageId}
-}) => {
+const ProfileImageModal:FC<Props> = () => {
   const t = useTranslations();
   const configState = useAppSelector((state) => state.config);
   const profileImage = useAppSelector((state)=> state.users.userProfileImage);

@@ -3,7 +3,6 @@ import {FC} from 'react'
 import { SectionProps } from './props';
 
 const PersonalInfo:FC<SectionProps> = ({register,errors}) => {
-    const profileImageRef = register("profileImage");
     return (
         <>
             <h2 className='text-base font-semibold leading-7 text-gray-900'>

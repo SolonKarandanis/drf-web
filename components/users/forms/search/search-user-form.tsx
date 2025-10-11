@@ -3,7 +3,7 @@
 import {FC} from 'react'
 import * as z from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm, SubmitHandler, Controller } from 'react-hook-form'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { UserSearchSchema } from "@/schemas/search.schemas";
 import {
   Form,

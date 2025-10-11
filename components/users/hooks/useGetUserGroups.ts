@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 export function useGetUserGroups(){
     const dispatch = useAppDispatch();
-    const [getAllGroups,{isError,isLoading,data}] = useLazyGetAllGroupsQuery();
+    const [getAllGroups,{isLoading,data}] = useLazyGetAllGroupsQuery();
 
     useEffect(()=>{
         getAllGroups()

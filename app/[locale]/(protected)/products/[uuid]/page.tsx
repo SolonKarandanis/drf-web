@@ -21,15 +21,15 @@ export const metadata:Metadata={
   
   
 interface Props{
-    params:{
+    params: Promise<{
         uuid:string;
-    }
+    }>
 }
 
-const ProductDetailsPage:FC<Props>  =  async ({params:{uuid}}) => {
+const ProductDetailsPage:FC<Props>  =  async ({params}) => {
+    const {uuid} = await params;
     // const t = useTranslations("PRODUCTS.DETAILS.PAGE");
-    const session = await getServerSession(authOptions);
-    const loggedInUser= session!.user!;
+    await getServerSession(authOptions);
 
     return (
         <div>

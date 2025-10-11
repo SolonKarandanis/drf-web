@@ -11,7 +11,6 @@ interface Props{
 
 const EditProductWrapper:FC<Props> = ({uuid}) => {
     const {
-        isProductError,
         isProductLoading,
         productData,
         isProductAttributesLoading,
@@ -21,8 +20,6 @@ const EditProductWrapper:FC<Props> = ({uuid}) => {
     } = useGetProductDetails(uuid);
 
     const {
-        isError,
-        isLoading:isImagesLoading,
         productImages
     } = useGetProductDetailsImages(uuid);
 

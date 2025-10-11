@@ -1,4 +1,4 @@
-import {FC} from 'react'
+
 
 const Suggestionsdata = [
     { id: 1, src: "../../../assets/images/faces/15.jpg", name: 'Alister' },

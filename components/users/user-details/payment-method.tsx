@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaPaypal,FaLandmark, FaPlus,FaPencilAlt } from "react-icons/fa";
+import { FaPlus,FaPencilAlt } from "react-icons/fa";
 import { basePath } from '@/next.config';
 
 const PaymentMethod = () => {

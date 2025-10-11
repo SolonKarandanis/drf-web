@@ -26,7 +26,7 @@ const CartItemButtons:FC<Props> = ({
         handleDeleteItemsFromCart([request]);
     }
     
-    const handleAddToWishList = (cartItemId:number)=>{
+    const handleAddToWishList = ()=>{
     }
     
     const t = useTranslations("CART.BUTTONS");

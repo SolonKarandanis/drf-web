@@ -12,7 +12,6 @@ const nextConfig = {
   output: isDev ? undefined : "export",
   reactStrictMode: true,
   trailingSlash: true,
-  swcMinify: true,
   basePath: isProd ? "/ynex-js/preview" : undefined,
   assetPrefix : isProd ? "https://nextjs.spruko.com/ynex-js/preview/" : undefined,
   images: {

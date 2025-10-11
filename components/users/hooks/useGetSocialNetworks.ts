@@ -18,7 +18,7 @@ export function useGetSocialNetworks(uuid:string){
             dispatch(resetUserSocials());
             dispatch(setUserSocials(userSocials));
           })
-          .catch((error)=>{
+          .catch(()=>{
             // dispatch(resetProfileImage())
           })
     },[])

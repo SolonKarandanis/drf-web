@@ -2,10 +2,7 @@ import PageHeader from '@/shared/layout-components/page-header/PageHeader';
 import { Metadata } from 'next';
 import {FC,lazy, Suspense } from 'react'
 import RecentActivity from '@/components/users/user-details/recent-activity';
-import PreviousOrders from '@/components/users/user-details/previous-orders';
 import UserDetails from '@/components/users/user-details/user-details';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/options';
 
 const Account = lazy(() => import("@/components/users/user-details/account"));
 const RecentInvoices = lazy(() => import("@/components/users/user-details/recent-invoices"));
@@ -31,8 +28,6 @@ interface Props{
 }
 
 const UserDetailsPage:FC<Props> = async ({params:{uuid}}) => {
-  const session = await getServerSession(authOptions);
-  const loggedInUser= session!.user!;
   
   return (
     <>
