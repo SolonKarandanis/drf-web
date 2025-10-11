@@ -45,7 +45,7 @@ export function useGetProductDetails(uuid:string){
                 dispatch(setSelectedProductAttributes(attributes));
             })
 
-    },[]);
+    },[dispatch, getProduct, getProductAttributes, uuid]);
 
     const productSizes = productAttributesData?.sizes;
     const productColors = productAttributesData?.colors;

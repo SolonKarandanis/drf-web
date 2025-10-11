@@ -48,7 +48,7 @@ export function useGetProductTotals(){
             .then((data) =>{
                 dispatch(setSizesWithTotals(data));
             })
-    },[]);
+    },[dispatch, getBrands, getCategories, getSizes]);
 
     const categoriesFirstThree = useAppSelector(productsCategoriesTotalsFirstThreeSelector);
     const categoriesRest = useAppSelector(productsCategoriesTotalsRestSelector);

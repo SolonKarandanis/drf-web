@@ -5,14 +5,10 @@ import { useAppSelector } from '@/shared/redux/hooks'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import {FC} from 'react'
+import { useParams } from 'next/navigation'
 
-type Props = {
-    params: {
-        imageId: number,
-    }
-}
-
-const ProfileImageModal:FC<Props> = () => {
+const ProfileImageModal:FC = () => {
+  useParams<{imageId:string}>();
   const t = useTranslations();
   const configState = useAppSelector((state) => state.config);
   const profileImage = useAppSelector((state)=> state.users.userProfileImage);

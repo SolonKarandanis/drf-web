@@ -6,7 +6,7 @@ import React, { BaseSyntheticEvent, FC } from 'react'
 
 interface Props{
   isLoading:boolean;
-  handleAddToCart:(e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
+  handleAddToCart:(e?: BaseSyntheticEvent<object, object, object> | undefined) => Promise<void>
 }
 
 const ButtonGroup:FC<Props> = ({isLoading,handleAddToCart}) => {

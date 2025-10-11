@@ -26,9 +26,7 @@ import OptionsSection from './options-section';
 
 type Inputs = z.infer<typeof UserSearchSchema>
 
-interface Props{
 
-}
 
 const SearchUserForm:FC<Props> = ({}) => {
     const t = useTranslations();

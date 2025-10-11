@@ -11,7 +11,7 @@ export function useGetUserGroups(){
         getAllGroups()
             .unwrap()
             .then((groups) => dispatch(setUserGroups(groups)))
-    },[])
+    },[dispatch, getAllGroups])
     
     
 

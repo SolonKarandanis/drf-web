@@ -22,5 +22,5 @@ export interface SectionProps{
 
 export interface AttributesSectionProps extends SectionProps{
     defaultValues: {sizes: number[];colors:number[]};
-    control:Control<any>;
+    control:Control<FormProps>;
 }

@@ -22,12 +22,13 @@ export const metadata:Metadata={
 
 
 interface Props{
-    params:{
+    params: Promise<{
         uuid:string;
-    }
+    }>
 }
 
-const UserDetailsPage:FC<Props> = async ({params:{uuid}}) => {
+const UserDetailsPage:FC<Props> = async ({params}) => {
+  const {uuid} = await params;
   
   return (
     <>

@@ -129,7 +129,7 @@ const CartProvider: React.FC<Props> = ({
             onUpdateItems,
             onClearCart,
         }
-    },[state]);
+    },[state, handleClearCart, handleDeleteItemsFromCart, handleUpdateItems]);
 
     
 

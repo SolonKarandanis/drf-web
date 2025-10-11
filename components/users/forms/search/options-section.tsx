@@ -14,7 +14,7 @@ export interface FormProps{
 
 export interface OptionsSectionProps{
     errors: FieldErrors<FormProps>;
-    control:Control<any>;
+    control:Control<FormProps>;
 }
 
 const OptionsSection:FC<OptionsSectionProps> = ({

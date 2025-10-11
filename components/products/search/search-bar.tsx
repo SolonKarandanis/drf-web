@@ -31,7 +31,7 @@ const SearchBar = () => {
     };
 
     const handleOnChange=(event:ChangeEvent<HTMLInputElement>)=>{
-        let query = event.target.value;
+        const query = event.target.value;
         setQuery(query);
     }
 

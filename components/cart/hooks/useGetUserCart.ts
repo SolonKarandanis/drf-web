@@ -26,7 +26,7 @@ export function useGetUserCart(){
             .catch(()=>{
                 dispatch(resetCart());
             });
-    },[]);
+    },[dispatch, getcart]);
 
     const cart:Cart | null= useAppSelector(userCartSelector);
     const cartItems:CartItem[]| undefined= useAppSelector(userCartItemSelector);

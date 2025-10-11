@@ -28,7 +28,7 @@ export function useInitializeProductMisc(){
             .then((result) =>dispatch(setAtributes(result)))
             .catch(()=>{
         })
-    },[])
+    },[dispatch, getAttributes, getBrands, getCategories])
 
     return{
         categoryState,

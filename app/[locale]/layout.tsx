@@ -19,12 +19,13 @@ export const metadata: Metadata = {
 
 type Props = {
   children: React.ReactNode;
-  params: {
+  params: Promise<{
     locale: Locale;
-  };
+  }>;
 };
 
-const RootLayout:FC<Props>= async ({children,params:{locale}}) => {
+const RootLayout:FC<Props>= async ({children,params}) => {
+  const {locale} = await params;
   unstable_setRequestLocale(locale);
   const messages = await getMessages();
   return (

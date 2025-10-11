@@ -28,7 +28,7 @@ export function useGetUserDetails(uuid:string){
                 dispatch(resetProfileImage())
               })
           })
-    },[])
+    },[dispatch, getUser, getUserImage, uuid])
 
     const user = useAppSelector(selectedUserSelector);
     const profileImage = useAppSelector(userProfileImageSelector);

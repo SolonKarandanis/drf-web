@@ -17,7 +17,7 @@ export function useGetProductDetailsSimilarProducts(uuid:string){
         .catch(()=>{
             // dispatch(resetSelectedProduct())
         })
-    },[])
+    },[dispatch, getSimilarProducts, uuid])
 
     return {
         similarProducts,

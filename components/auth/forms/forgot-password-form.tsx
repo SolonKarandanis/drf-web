@@ -26,7 +26,7 @@ const ForgotPasswordForm = () => {
   useEffect(() => {
     const strength =passwordStrength(watch().newPassword);
     setPassStrength(strength.id);
-  }, [watch().newPassword]);
+  }, [watch]);
 
   // const handleError =(error:ErrorResponse)=>{
 	// 	const {status, data:{detail}} = error;

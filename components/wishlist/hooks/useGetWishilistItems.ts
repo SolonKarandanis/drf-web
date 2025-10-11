@@ -30,5 +30,5 @@ export function useGetInitialWishlistItemsSearchResults(){
         return () => {
             effectRan.current = true;
         }
-    },[]);
+    },[dispatch, getItems]);
 }

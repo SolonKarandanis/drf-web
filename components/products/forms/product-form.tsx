@@ -18,7 +18,7 @@ import FileUpload from '@/shared/components/file-upload/file-upload';
 
 
 interface Props{
-    defaultValues?:any;
+    defaultValues?:Partial<SaveProductSchema>;
     isProductLoading?:boolean;
     isEdit?:boolean;
 }

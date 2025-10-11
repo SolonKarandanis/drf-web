@@ -56,7 +56,7 @@ const CartItemAttributes:FC<Props> = ({
 
     type SelectField = "size" | "color";
 
-    const onChange= (e:any,field:SelectField) =>{
+    const onChange= (e:{value:string,label:string},field:SelectField) =>{
         const cartItemId = item.id;
         const attributesObj = JSON.parse(attributes);
         if(field == 'size'){

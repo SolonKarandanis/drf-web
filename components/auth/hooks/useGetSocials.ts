@@ -20,7 +20,7 @@ export function useGetSocials(){
                 dispatch(logout())
                 router.push('/api/auth/signout?callbackUrl=/');
             })
-    },[])
+    },[dispatch, getSocials, router])
 
     return {
         response

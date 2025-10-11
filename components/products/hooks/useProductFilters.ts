@@ -32,7 +32,7 @@ export function useProductFilters() {
         else{
             router.push(pathname); 
         }
-    },[]);
+    },[pathname, router, searchParams]);
 
     const setPage = useCallback((page:number)=>{
         if(page){
@@ -43,7 +43,7 @@ export function useProductFilters() {
         else{
             router.push(pathname); 
         }
-    },[]);
+    },[pathname, router, searchParams]);
 
     const setCategory = useCallback((category:number | number[])=>{
         if (category) {
@@ -59,7 +59,7 @@ export function useProductFilters() {
         } else { 
           router.push(pathname); 
         }
-    },[categories]);
+    },[categories, pathname, router, searchParams]);
 
     const setBrand = useCallback((brand:number | number[])=>{
         if (brand) {
@@ -74,7 +74,7 @@ export function useProductFilters() {
         } else { 
             router.push(pathname);
         }
-    },[brands]);
+    },[brands, pathname, router, searchParams]);
 
     const setSize = useCallback((size:number | number[])=>{
         if (size) {
@@ -89,7 +89,7 @@ export function useProductFilters() {
         } else { 
             router.push(pathname);
         }
-    },[sizes]);
+    },[sizes, pathname, router, searchParams]);
 
     const toArray=(value:number | number[]):number[]=>{
         if(!Array.isArray(value)){

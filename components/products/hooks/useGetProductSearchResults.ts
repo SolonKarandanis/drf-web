@@ -30,7 +30,7 @@ export function useGetProductSearchResults(){
             .catch((error:ErrorResponse) => {
                 handleError(error);
             });
-    },[]);
+    },[dispatch, search]);
 
     return {
         results,
@@ -72,5 +72,5 @@ export function useGetInitialProductSearchResults(){
         return () => {
             effectRan.current = true;
         }
-    },[]);
+    },[brands, categories, dispatch, page, query, search, size, sizes]);
 }
