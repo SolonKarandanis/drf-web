@@ -1,449 +1,249 @@
 {
-    "GLOBAL":{
-        "UNAUTHORIZED": "You are not authorized to access this page",
-        "OR":"Ή",
-        "NO-RESULTS":"Χωρίς αποτέλεσμα.",
-        "PAGE":"Σελίδα",
-        "OF":"του",
-        "SHOW":"Προβολή",
-        "COLUMNS":"Στήλες",
-        "EXPORT-AS":"Εξαγωγή ως",
-        "PDF":"Pdf",
-        "FETCH-ERROR":"Ω, όχι, υπήρξε ένα σφάλμα",
-        "LOADING":"Φόρτωση...",
-        "BUTTONS":{
-            "cancel": "Ματαίωση",
-            "load": "Φόρτωση",
-            "loading":"Φόρτωση....",
-            "delete": "Διαγραφή",
-            "search": "Αναζήτηση",
-            "reset": "Επαναφορά",
-            "save-search": "Αποθήκευση αναζήτησης",
-            "export-to-csv": "Εξαγωγή σε CSV",
-            "validate-and-continue": "Επικύρωση και Συνέχεια",
-            "finish": "Τέλος",
-            "back": "Πίσω",
-            "edit": "Επεξεργασία",
-            "save": "Αποθήκευση",
-            "send": "Αποστολή",
-            "submit": "Υποβολή",
-            "select": "Επιλογή",
-            "ok": "OK",
-            "yes": "Ναι",
-            "no": "Όχι",
-            "previous":"Προηγούμενη",
-            "next":"Επόμενη",
-            "toggle":"Εναλλαγή"
-        },
-        "FORMS": {
-            "ERRORS": {
-                "required": "This field is required",
-                "email": "Enter a valid email address",
-                "minlength": "Minimum characters required: {{ requiredLength }}",
-                "maxlength": "Maximum characters required: {{ requiredLength }}",
-                "samePassword": "Passwords don't match",
-                "strongPassword": "Password strength must be \"strong\"",
-                "forbiddenValue": "The given value is not allowed for this field",
-                "VALIDATION": {
-                    "summary": "Validation Error",
-                    "detail": "There are some fields that are invalid. Please, check the form."
-                }
-            },
-            "PLACEHOLDERS": {
-                "search": "Keywords",
-                "previous-value": "Previous value"
-            },
-            "ACTIONS": {
-                "title": "Actions"
-            }
-        },
-        "TABLES": {
-            "no-results": "No results found"
-        },
-        "CONFIRM-DIALOG": {
-            "sure-proceed": "Are you sure you want to proceed?"
-        },
-        "EMAIL": {
-            "sent": "Email has been sent"
-        },
-        "ERRORS": {
-            "unauthorized": "You are not logged in. Please, login first and then try again.",
-            "server": "Something went wrong. Error code",
-            "forbidden": "You are not authorized to access this resource.",
-            "not-found": "Cannot find the resource you are looking for...",
-            "summary": "Error",
-            "generic": "An error occured"
-        },
-        "SUCCESS": {
-            "summary": "success"
-        },
-        "WARNING": {
-            "summary": "warning"
-        },
-        "OTHER": {
-            "verifyingAccess": "Verifying Access",
-            "not-available": "N/A",
-            "not-specified": "Not Specified"
-        },
-        "LABELS": {
-            "all": "All",
-            "id": "ID",
-            "date-created": "Date Created",
-            "status": "Status",
-            "downloads": "Downloads",
-            "auto-generated": "Auto Generated",
-            "comments": "Comments",
-            "chars-remaining": "{{chars}} characters remaining",
-            "remove-chars": "Maximum characters allowed: {{max}}. Remove {{chars}} characters.",
-            "loading-data-wait": "Loading data, please wait",
-            "remove-item-from-list": "Click to remove {{itemType}}",
-            "add-at-least-one-xx-in-list": "Add at least one {{itemType}}",
-            "searching": "Searching...",
-            "select-value":"Επιλέξτε μια τιμή"
-        },
-        "VALIDATION":{
-            "IMAGES":{
-                "file-size":"Το αρχείο δεν πρέπει να είναι μεγαλύτερο από {max_size}. Bytes: {file_size}",
-                "file-type":"Το αρχείο πρέπει να είναι ένα από τα [{accepted_types}] όμως ήταν {type}"
-            }
-        }
-    },
-    "LOGIN":{
-        "PAGE":{
-            "title":"Είσοδος",
-            "description":"Καλώς ορίσατε πίσω",
-            "dont-have-account":"Δεν έχετε λογαριασμό;",
-            "sign-up":"Εγγραφείτε"
-        },
-        "FORM":{
-            "LABELS":{
-                "username":"Όνομα χρήστη",
-                "password":"Κωδικός πρόσβασης",
-                "forget-password":"Ξεχάσατε τον κωδικό πρόσβασης;",
-                "remember-password":"θυμάστε τον κωδικό ;"
-            },
-            "BUTTONS":{
-                "sign-in":"Συνδεθείτε"
-            },
-            "ERROR": {
-                "invalid-username": "Μη έγκυρο όνομα χρήστη",
-                "username-required": "Απαιτείται όνομα χρήστη"
-            },
-            "SUCCESS": {
-                "summary": "Συνδεθήκατε στον Λογαριασμό σας"
-            } 
-        }
-    },
-    "REGISTER":{
-        "PAGE":{
-            "title":"Εγγραφείτε",
-            "description":"Καλώς ήρθατε & Ελάτε μαζί μας δημιουργώντας έναν δωρεάν λογαριασμό!",
-            "already-have-account":"Έχετε ήδη λογαριασμό;",
-            "sign-in":"Συνδεθείτε"
-        },
-        "FORM":{
-            "LABELS":{
-                "first-name":"Όνομα",
-                "last-name":"Επίθετο",
-                "email":"Email",
-                "role":"Ρόλος",
-                "username":"Όνομα χρήστη","LOADING":"Loading...",
-                "password":"Κωδικός πρόσβασης",
-                "confirm-password":"Επιβεβαίωση Κωδικού",
-                "terms-description":"Δημιουργώντας έναν λογαριασμό συμφωνείτε με τους δικούς μας ",
-                "terms":"Όρους",
-                "conditions":"Συνθήκες",
-                "privacy-policy":"Πολιτική Απορρήτου"
-                
-            },
-            "BUTTONS":{
-                "create-account":"Δημιουργήστε λογαριασμό"
-            },
-            "SUCCESS": {
-                "summary": "Ελέγξτε το email για να επαληθεύσετε τον λογαριασμό"
-            } 
-        }
-    },
-    "FORGOT-PASSWORD":{
-        "PAGE":{
-            "title":"Ξεχάσατε τον κωδικό",
-            "already-have-account":"Έχετε ήδη λογαριασμό;",
-            "sign-in":"Συνδεθείτε"
-        },
-        "FORM":{
-            "LABELS":{
-                "email":"Email",
-                "password":"Κωδικός πρόσβασης",
-                "confirm-password":"Επιβεβαίωση Κωδικού"
-            },
-            "BUTTONS":{
-                "create-new-password":"Δημιουργία νέου κωδικού πρόσβασης"
-            },
-            "SUCCESS": {
-                "summary": "Ελέγξτε το email για να επαληθεύσετε τον λογαριασμό"
-            } 
-        }
-    },
-    "USERS":{
-        "SEARCH":{
-            "PAGE":{
-                "currentpage":"Αναζήτηση χρηστών",
-                "activepage":"Χρήστες",
-                "mainpage":"Αναζήτηση χρηστών"
-            },
-            "FORM":{
-                "LABELS":{
-                    "email":"Email",
-                    "username":"Όνομα χρήστη",
-                    "name":"Όνομα",
-                    "role":"Ρόλος χρήστη",
-                    "status": "Κατάσταση χρήστη",
-                    "status-active":"Ενεργός",
-                    "status-unverified":"Ανεπιβεβαίωτος",
-                    "status-deactivated":"Απενεργοποιημένος",
-                    "status-deleted":"Διαγραμένος"
-                },
-                "TABLE":{
-                    "COLUMNS":{
-                        "id":"Id",
-                        "username":"Όνομα χρήστη",
-                        "firstName":"Όνομα",
-                        "lastName":"Επίθετο",
-                        "status":"Κατάσταση χρήστη",
-                        "email":"Email",
-                        "createdDate":"Δημιουργήθηκε",
-                        "uuid":"Uuid",
-                        "actions":"Ενέργειες"
-                    }
-                    
-                }
-            }
-        },
-        "DETAILS":{
-            "LABELS":{
-                "bio":"Επαγγελματικό Βιογραφικό",
-                "profile":"Προφίλ",
-                "completed":"ολοκληρώθηκε",
-                "my-profile-picture":"Η φωτογραφία προφίλ μου",
-                "view-profile-modal-description":"Εικόνα χρήστη",
-                "view-profile-modal-title":"Εικόνα προφίλ",
-                "upload-profile-modal-description":"Μεταφόρτωση εικόνας προφίλ",
-                "upload-profile-modal-title":"Μεταφόρτωση αρχείου",
-                "contact-information":"Στοιχεία Επικοινωνίας",
-                "social-networks":"Κοινωνικά Δίκτυα",
-                "email":"Email",
-                "phone":"Τηλέφωνο",
-                "address":"Διεύθυνση",
-                "city":"Πόλη",
-                "state":"Πολιτεία",
-                "country":"Χώρα",
-                "zip":"Τ.Κ",
-                "settings":"Ρυθμίσεις",
-                "change-password":"Αλλαγή κωδικού πρόσβασης",
-                "status":"Κατάσταση χρήστη"
-            },
-            "FORM":{
-                "new-password":"Νέος κωδικός πρόσβασης",
-                "confirm-password":"Επιβεβαίωση Κωδικού"
-            },
-            "UPLOAD-PROFILE":{
-                "title":"Μεταφόρτωση εικόνας",
-                "photo-size-less-than":"Επιλέξτε το μέγεθος της φωτογραφίας θα πρέπει να είναι μικρότερο από",
-                "should-be-format":"και πρέπει να είναι ",
-                "format":"μορφή."
-            },
-            "BUTTONS":{
-                "show-profile-picture":"Εμφάνιση εικόνας προφίλ",
-                "upload-profile-picture":"Ανεβάστε μια νέα εικόνα",
-                "upload":"Μεταφόρτωση",
-                "reset":"Επαναφορά",
-                "delete-all":"Διαγραφή όλων",
-                "reset-password":"Επαναφορά κωδικού πρόσβασης"
-            },
-            "SUCCESS": {
-                "update-user": "Ο χρήστης ενημερώθηκε με επιτυχία",
-                "delete-user-socials":"Διαγράφηκαν με επιτυχία όλα τα κοινωνικά δίκτυα του χρήστη",
-                "delete-user-social":"Διαγράφηκε με επιτυχία το κοινωνικό δίκτυο του χρήστη",
-                "change-user-password":"Ο κωδικός πρόσβασης χρήστη ενημερώθηκε με επιτυχία",
-                "update-user-status":"Η κατάσταση του χρήστη ενημερώθηκε με επιτυχία"
-            } 
-        },
-        "VALIDATION":{
-            "required-username":"Το Όνομα χρήστη είναι υποχρεωτικό",
-            "required-first-name":"Το Όνομα είναι υποχρεωτικό",
-            "required-last-name":"Το επώνυμο είναι υποχρεωτικό",
-            "required-password":"Ο Κωδικός πρόσβασης είναι υποχρεωτικός",
-            "required-country":"Η χώρα είναι υποχρεωτική",
-            "required-street":"Η οδός είναι υποχρεωτική",
-            "required-city":"Η πόλη είναι υποχρεωτική",
-            "required-state":"Η πολιτεία είναι υποχρεωτική",
-            "required-zip":"Ο ταχυδρομικός κώδικας είναι υποχρεωτικός",
-            "required-email":"Το Email είναι υποχρεωτικό",
-            "min-password":"Απαιτούνται τουλάχιστον 6 χαρακτήρες",
-            "min-confirm-password":"Απαιτούνται τουλάχιστον 6 χαρακτήρες",
-            "passowrds-dont-match":"Οι κωδικοί πρόσβασης δεν ταιριάζουν"
-        }
-    },
-    "PRODUCTS":{
-        "SEARCH":{
-            "PAGE":{
-                "currentpage":"Αναζήτηση προϊόντων",
-                "activepage":"Προϊόντα",
-                "mainpage":"Αναζήτηση προϊόντων"
-            },
-            "LABELS":{
-                "categories":"ΚΑΤΗΓΟΡΙΕΣ",
-                "brands":"ΜΑΡΚΕΣ",
-                "sizes":"ΜΕΓΕΘΗ"
-            }
-        },
-        "EDIT":{
-            "PAGE":{
-                "currentpage":"Επεξεργασία προϊόντος",
-                "activepage":"Products",
-                "mainpage":"Επεξεργασία προϊόντος"
-            }
-        },
-        "CREATE":{
-            "PAGE":{
-                "currentpage":"Δημιουργία Προϊόντος",
-                "activepage":"Προϊόντα",
-                "mainpage":"Δημιουργία Προϊόντος"
-            },
-            "LABELS":{
-                "product-name":"Όνομα προϊόντος",
-                "product-sku":"SKU προϊόντος",
-                "product-description":"Περιγραφή",
-                "category":"Κατηγορία",
-                "gender":"Φύλο",
-                "size":"Μέγεθος",
-                "brand":"Μάρκα",
-                "color":"Χρώμα",
-                "publish-status":"Κατάσταση δημοσίευσης",
-                "availability-status":"Κατάσταση διαθεσιμότητας",
-                "published":"Δημοσιεύθηκε",
-                "scheduled":"Προγραμματισμένη",
-                "in-stock":"Σε απόθεμα",
-                "out-of-stock":"Εκτός αποθέματος",
-                "inventory":"Απόθεμα",
-                "price":"Τιμή",
-                "fabric-details":"Λεπτομέρειες υφάσματος",
-                "care-instructions":"Οδηγίες φροντίδας",
-                "publish-date":"Ημερομηνία δημοσίευσης",
-                "product-images":"Εικόνες προϊόντων"
-            },
-            "PLACEHOLDERS":{
-                "product-name":"*Το όνομα προϊόντος δεν πρέπει να υπερβαίνει τους 30 χαρακτήρες",
-                "product-description":"*Η περιγραφή δεν πρέπει να υπερβαίνει τα 500 γράμματα",
-                "product-images":"*Απαιτείται η μεταφόρτωση τουλάχιστον 6 εικόνων, βεβαιωθείτε ότι το μέγεθος της εικόνας ταιριάζει με το σωστό μέγεθος φόντου και όλες οι εικόνες πρέπει να διατηρούνται ομοιόμορφα με πλάτος και ύψος στο κοντέινερ εικόνας, το μέγεθος της εικόνας δεν πρέπει να υπερβαίνει τα 2 MB."
-            },
-            "BUTTONS":{
-                "add-product":"Προσθήκη προϊόντος",
-                "update-product":"Ενημέρωση προϊόντος"
-            }
-        },
-        "DETAILS":{
-            "PAGE":{
-                "currentpage":"Λεπτομέρειες προϊόντος",
-                "activepage":"Προϊόντα",
-                "mainpage":"Λεπτομέρειες προϊόντος"
-            },
-            "LABELS":{
-                "reviews":"Κριτικές",
-                "categories":"Κατηγορίες",
-                "description":"Περιγραφή",
-                "colors":"Χρώματα",
-                "sizes":"Μεγέθη",
-                "quantity":"Ποσότητα",
-                "fabric-details":"Λεπτομέρειες υφάσματος",
-                "care-instructions":"Οδηγίες φροντίδας",
-                "ratings":"Αξιολογήσεις",
-                "product-details":"Λεπτομέρειες προϊόντος",
-                "brand":"Μάρκα",
-                "model-name":"Όνομα μοντέλου",
-                "color":"Χρώμα",
-                "availability-status":"Κατάσταση διαθεσιμότητας",
-                "publish-status":"Κατάσταση δημοσίευσης"
-            }
-        },
-        "VALIDATION":{
-            "required-name":"Το Όνομα είναι υποχρεωτικό",
-            "required-sku":"Το Sku είναι υποχρεωτικό",
-            "required-category":"Η κατηγορία είναι υποχρεωτική",
-            "required-gender":"Το φύλο είναι υποχρεωτικό",
-            "required-sizes":"Απαιτείται τουλάχιστον ένα μέγεθος",
-            "required-brand":"Η μάρκα είναι υποχρεωτική",
-            "required-colors":"Απαιτείται τουλάχιστον ένα χρώμα",
-            "required-price":"Η τιμή είναι υποχρεωτική",
-            "required-inventory":"Το Απόθεμα είναι υποχρεωτικό",
-            "required-publish-status":"Η Κατάσταση δημοσίευσης είναι υποχρεωτική",
-            "required-availability-status":"Η Κατάσταση διαθεσιμότητας είναι υποχρεωτική",
-            "required-publish-date":"Η Ημερομηνία δημοσίευσης είναι υποχρεωτική",
-            "required-images":"Η προσθήκη εικόνων ειναι υποχρεωτική",
-            "min-publish-date":"Η Ημερομηνία δημοσίευσης δεν μπορει να ειναι πριν την σημερινή",
-            "integer-inventory":"Το Απόθεμα πρέπει να είναι ακέραια τιμή",
-            "positive-inventory":"Το Απόθεμα πρέπει να είναι θετική τιμή",
-            "positive-price":"Το Κόστος πρέπει να είναι θετική τιμή"
-        },
-        "SUCCESS": {
-            "update-product":"Το προϊόν ενημερώθηκε με επιτυχία",
-            "create-product":"Το προϊόν δημιουργήθηκε με επιτυχία"
-        },
-        "ERRORS": {
-            "update-product": "Κάτι πήγε στραβά κατα την ενημέρωση προϊόντος",
-            "create-product": "Κάτι πήγε στραβά κατα τη δημιουργία του προϊόντος"
-        }
-    },
-    "CART":{
-        "PAGE":{
-            "title":"Καλάθι",
-            "cart-items":"Προϊόντα Καλαθιού"
-        },
-        "LABELS":{
-            "product-name":"Όνομα προϊόντος",
-            "price":"Τιμή",
-            "quantity":"Ποσότητα",
-            "total":"Σύνολο",
-            "action":"Ενέργεια",
-            "size":"Μέγεθος",
-            "color":"Χρώμα",
-            "item":"Προϊόν",
-            "items":"Προϊόντα",
-            "empty-cart-title":"Άδειο καλάθι",
-            "empty-cart-description":"Το καλάθι σας είναι άδειο",
-            "sub-total":"Υπο Σύνολο",
-            "discount":"Εκπτωση",
-            "delivery-charges":"Χρεώσεις παράδοσης",
-            "service-tax":"Φόρος Υπηρεσιών"
-        },
-        "BUTTONS":{
-            "add-to-cart":"Προσθήκη στο Καλάθι",
-            "proceed-to-cart":"Προχωρήστε στο Καλάθι",
-            "proceed-to-checkout":"Προχωρήστε σε αγορά",
-            "continue-shopping":"Συνεχίστε τις αγορές",
-            "update-cart":"Ενημέρωση καλαθιού",
-            "clear-cart":"Εκκαθάριση Καλαθιού",
-            "add-to-wishlist":"Προσθήκη στα Αγαπημένα",
-            "remove-from-cart":"Αφαίρεση από το καλάθι"
-        },
-        "VALIDATION":{
-            "required-color":"Το χρώμα είναι υποχρεωτικό",
-            "required-size":"Το μέγεθος είναι υποχρεωτικό",
-            "required-quantity":"Η ποσότητα είναι υποχρεωτικό",
-            "integer-quantity":"Η ποσότητα πρέπει να είναι ακέραια τιμή",
-            "positive-quantity":"Η ποσότητα πρέπει να είναι θετική τιμή"
-        },
-        "SUCCESS": {
-            "add-to-cart": "Το προϊόν προστέθηκε με επιτυχία στο καλάθι",
-            "remove-from-cart":"Το προϊόν αφαιρέθηκε με επιτυχία στο καλάθι",
-            "update-cart":"Το καλάθι ενημερώθηκε με επιτυχία",
-            "clear-cart":"Το καλάθι εκκαθαρίστηκε με επιτυχία"
-        },
-        "ERRORS": {
-            "add-to-cart": "Κάτι πήγε στραβά! Το προϊόν δεν προστέθηκε από το καλάθι",
-            "remove-from-cart":"Κάτι πήγε στραβά! Το προϊόν δεν αφαιρέθηκε από το καλάθι",
-            "update-cart":"Κάτι πήγε στραβά με την ενημέρωση του καλαθιού",
-            "clear-cart":"Κάτι πήγε στραβά με την εκκαθάριση του καλαθιού"
-        }
-    }
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "login_title": "Σύνδεση",
+  "login_description": "Καλώς ορίσατε πίσω",
+  "login_username": "Όνομα χρήστη",
+  "login_password": "Κωδικός",
+  "login_submit": "Σύνδεση",
+  "login_error": "Η σύνδεση απέτυχε. Ελέγξτε τα στοιχεία σας.",
+  "login_have_no_account": "Δεν έχετε λογαριασμό;",
+  "login_sign_up": "Εγγραφή",
+  "login_forgot": "Ξεχάσατε τον κωδικό σας;",
+  "login_remember_me": "θυμάστε τον κωδικό ;",
+
+  "global_or": "Ή",
+
+  "register_title": "Δημιουργία λογαριασμού",
+  "register_description": "Καλώς ήρθατε & Ελάτε μαζί μας δημιουργώντας έναν δωρεάν λογαριασμό!",
+  "register_first_name": "Όνομα",
+  "register_last_name": "Επώνυμο",
+  "register_email": "Email",
+  "register_username": "Όνομα χρήστη",
+  "register_password": "Κωδικός",
+  "register_confirm_password": "Επιβεβαίωση κωδικού",
+  "register_role": "Ρόλος",
+  "register_role_placeholder": "Επιλέξτε ρόλο…",
+  "register_submit": "Δημιουργία λογαριασμού",
+  "register_have_account": "Έχετε ήδη λογαριασμό;",
+  "register_sign_in": "Σύνδεση",
+  "register_success": "Ο λογαριασμός δημιουργήθηκε. Συνδεθείτε.",
+  "register_error": "Η εγγραφή απέτυχε.",
+  "register_terms_agree": "Δημιουργώντας έναν λογαριασμό συμφωνείτε με τους δικούς μας ",
+  "register_terms": "Όρους",
+  "register_conditions": "Προϋποθέσεις",
+  "register_privacy_policy": "Πολιτική Απορρήτου",
+
+  "forgot_title": "Επαναφορά κωδικού",
+  "forgot_email": "Email",
+  "forgot_new_password": "Νέος κωδικός",
+  "forgot_confirm_password": "Επιβεβαίωση νέου κωδικού",
+  "forgot_submit": "Ενημέρωση κωδικού",
+  "forgot_back_to_login": "Επιστροφή στη σύνδεση",
+  "forgot_success": "Ο κωδικός ενημερώθηκε. Μπορείτε τώρα να συνδεθείτε με τον νέο σας κωδικό.",
+  "forgot_error": "Κάτι πήγε στραβά. Παρακαλώ δοκιμάστε ξανά.",
+
+  "logout_title": "Αποσύνδεση",
+  "logout_confirm": "Είστε σίγουροι ότι θέλετε να αποσυνδεθείτε;",
+  "logout_yes": "Ναι, αποσύνδεση",
+  "logout_cancel": "Άκυρο",
+
+  "dashboard_welcome": "Καλώς ήρθες, {name}!",
+  "dashboard_signout": "Αποσύνδεση",
+  "dashboard_browse_products": "Περιήγηση προϊόντων",
+  "language_label": "Γλώσσα",
+
+  "products_search_title": "Προϊόντα",
+  "products_search_placeholder": "Αναζήτηση με τίτλο ή SKU…",
+  "products_search_submit": "Αναζήτηση",
+  "products_search_filters_categories": "Κατηγορίες",
+  "products_search_no_results": "Δεν βρέθηκαν προϊόντα.",
+  "products_search_loading": "Φόρτωση προϊόντων…",
+  "products_search_error": "Αποτυχία φόρτωσης προϊόντων.",
+  "products_search_pagination": "Σελίδα {page} από {pages} ({count} συνολικά)",
+  "products_search_prev": "Προηγούμενη",
+  "products_search_next": "Επόμενη",
+  "products_search_filters_brands": "Μάρκες",
+  "products_search_filters_sizes": "Μεγέθη",
+  "products_search_sort_label": "Ταξινόμηση",
+  "products_search_sort_default": "Προεπιλογή",
+  "products_search_sort_price_asc": "Τιμή: Χαμηλή προς Υψηλή",
+  "products_search_sort_price_desc": "Τιμή: Υψηλή προς Χαμηλή",
+  "products_search_sort_rating": "Κορυφαία αξιολόγηση",
+  "products_search_sort_title": "Τίτλος Α–Ω",
+
+  "product_detail_back": "Πίσω στα προϊόντα",
+  "product_detail_loading": "Φόρτωση προϊόντος…",
+  "product_detail_error": "Αποτυχία φόρτωσης προϊόντος.",
+  "product_detail_not_found": "Το προϊόν δεν βρέθηκε.",
+  "product_detail_sku": "Κωδικός",
+  "product_detail_brand": "Μάρκα",
+  "product_detail_categories": "Κατηγορίες",
+  "product_detail_description": "Περιγραφή",
+  "product_detail_fabric": "Λεπτομέρειες υφάσματος",
+  "product_detail_care": "Οδηγίες φροντίδας",
+  "product_detail_availability": "Διαθεσιμότητα",
+  "product_detail_status": "Κατάσταση",
+  "product_detail_inventory": "Σε απόθεμα",
+  "product_detail_sold_by": "Πωλείται από",
+  "product_detail_reviews": "Αξιολογήσεις & Βαθμολογίες",
+  "product_detail_no_comments": "Δεν υπάρχουν αξιολογήσεις ακόμη.",
+  "product_detail_similar": "Παρόμοια προϊόντα",
+  "product_detail_no_similar": "Δεν βρέθηκαν παρόμοια προϊόντα.",
+  "product_detail_rating": "{rating} από 5 ({count} αξιολογήσεις)",
+
+  "product_form_create_title": "Δημιουργία προϊόντος",
+  "product_form_edit_title": "Επεξεργασία προϊόντος",
+  "product_form_title": "Όνομα προϊόντος",
+  "product_form_sku": "Κωδικός SKU",
+  "product_form_description": "Περιγραφή",
+  "product_form_fabric": "Λεπτομέρειες υφάσματος",
+  "product_form_care": "Οδηγίες φροντίδας",
+  "product_form_category": "Κατηγορία",
+  "product_form_brand": "Μάρκα",
+  "product_form_gender": "Φύλο",
+  "product_form_sizes": "Μεγέθη",
+  "product_form_colors": "Χρώματα",
+  "product_form_inventory": "Απόθεμα",
+  "product_form_price": "Τιμή",
+  "product_form_publish_date": "Ημερομηνία δημοσίευσης",
+  "product_form_publish_status": "Κατάσταση δημοσίευσης",
+  "product_form_availability": "Διαθεσιμότητα",
+  "product_form_images": "Εικόνες",
+  "product_form_images_hint": "Σύρετε & αποθέστε ή κάντε κλικ για προσθήκη εικόνων",
+  "product_form_submit_create": "Δημιουργία προϊόντος",
+  "product_form_submit_update": "Αποθήκευση αλλαγών",
+  "product_form_success_create": "Το προϊόν δημιουργήθηκε επιτυχώς.",
+  "product_form_success_update": "Το προϊόν ενημερώθηκε επιτυχώς.",
+  "product_form_error": "Κάτι πήγε στραβά. Δοκιμάστε ξανά.",
+  "product_form_loading": "Αποθήκευση…",
+  "product_form_back": "Πίσω στα προϊόντα",
+  "product_form_status_published": "Δημοσιευμένο",
+  "product_form_status_draft": "Πρόχειρο",
+  "product_form_status_archived": "Αρχειοθετημένο",
+  "product_form_avail_in_stock": "Σε απόθεμα",
+  "product_form_avail_out_of_stock": "Εξαντλημένο",
+
+  "users_search_title": "Χρήστες",
+  "users_search_placeholder_username": "Όνομα χρήστη…",
+  "users_search_placeholder_name": "Όνομα…",
+  "users_search_placeholder_email": "Email…",
+  "users_search_filter_role": "Ρόλος",
+  "users_search_filter_status": "Κατάσταση",
+  "users_search_filter_all_roles": "Όλοι οι ρόλοι",
+  "users_search_filter_all_statuses": "Όλες οι καταστάσεις",
+  "users_search_submit": "Αναζήτηση",
+  "users_search_no_results": "Δεν βρέθηκαν χρήστες.",
+  "users_search_loading": "Φόρτωση χρηστών…",
+  "users_search_error": "Αποτυχία φόρτωσης χρηστών.",
+  "users_search_pagination": "Σελίδα {page} από {pages} ({count} συνολικά)",
+  "users_search_prev": "Προηγούμενη",
+  "users_search_next": "Επόμενη",
+  "users_search_col_name": "Όνομα",
+  "users_search_col_username": "Χρήστης",
+  "users_search_col_email": "Email",
+  "users_search_col_status": "Κατάσταση",
+  "users_search_col_created": "Εγγραφή",
+
+  "user_detail_loading": "Φόρτωση χρήστη…",
+  "user_detail_error": "Αποτυχία φόρτωσης χρήστη.",
+  "user_detail_not_found": "Ο χρήστης δεν βρέθηκε.",
+  "user_detail_back": "Πίσω στους χρήστες",
+  "user_detail_username": "Όνομα χρήστη",
+  "user_detail_email": "Email",
+  "user_detail_status": "Κατάσταση",
+  "user_detail_member_since": "Μέλος από",
+  "user_detail_roles": "Ρόλοι",
+  "user_detail_no_roles": "Δεν έχουν ανατεθεί ρόλοι.",
+  "user_detail_bio": "Βιογραφία",
+  "user_detail_no_bio": "Δεν υπάρχει βιογραφία.",
+  "user_detail_contact": "Στοιχεία επικοινωνίας",
+  "user_detail_country": "Χώρα",
+  "user_detail_state": "Πολιτεία",
+  "user_detail_city": "Πόλη",
+  "user_detail_address": "Διεύθυνση",
+  "user_detail_zip": "Τ.Κ.",
+  "user_detail_phone": "Τηλέφωνο",
+  "user_detail_actions": "Ενέργειες λογαριασμού",
+  "user_detail_activate": "Ενεργοποίηση",
+  "user_detail_deactivate": "Απενεργοποίηση",
+  "user_detail_delete": "Διαγραφή λογαριασμού",
+  "user_detail_action_success": "Η ενέργεια εφαρμόστηκε επιτυχώς.",
+  "user_detail_action_error": "Η ενέργεια απέτυχε. Δοκιμάστε ξανά.",
+  "user_detail_bio_save": "Αποθήκευση bio",
+  "user_detail_bio_cancel": "Ακύρωση",
+  "user_detail_bio_edit": "Επεξεργασία",
+  "user_detail_bio_save_error": "Αποτυχία αποθήκευσης bio.",
+  "user_detail_contact_edit": "Επεξεργασία",
+  "user_detail_contact_save": "Αποθήκευση",
+  "user_detail_contact_cancel": "Ακύρωση",
+  "user_detail_contact_save_error": "Αποτυχία αποθήκευσης στοιχείων επικοινωνίας.",
+  "user_detail_products_stat": "Προϊόντα",
+  "user_detail_orders_stat": "Παραγγελίες",
+  "user_detail_following_stat": "Ακολουθώ",
+  "user_detail_upload_picture": "Ανέβασμα φωτογραφίας",
+  "user_detail_upload_hint": "JPG, PNG ή GIF, έως 2 MB",
+  "user_detail_upload_success": "Η φωτογραφία προφίλ ενημερώθηκε.",
+  "user_detail_upload_error": "Αποτυχία ανεβάσματος φωτογραφίας.",
+  "user_detail_change_password": "Αλλαγή κωδικού",
+  "user_detail_current_email": "Email (δεν μπορεί να αλλάξει)",
+  "user_detail_new_password": "Νέος κωδικός",
+  "user_detail_confirm_password": "Επιβεβαίωση νέου κωδικού",
+  "user_detail_change_password_submit": "Ενημέρωση κωδικού",
+  "user_detail_change_password_success": "Ο κωδικός ενημερώθηκε επιτυχώς.",
+  "user_detail_change_password_error": "Αποτυχία ενημέρωσης κωδικού.",
+  "user_detail_socials": "Κοινωνικά δίκτυα",
+  "user_detail_socials_add": "Προσθήκη δικτύου",
+  "user_detail_socials_url": "URL",
+  "user_detail_socials_save": "Αποθήκευση",
+  "user_detail_socials_cancel": "Ακύρωση",
+  "user_detail_socials_delete_all": "Αφαίρεση όλων",
+  "user_detail_socials_save_error": "Αποτυχία αποθήκευσης κοινωνικών δικτύων.",
+  "user_detail_socials_none": "Δεν έχουν προστεθεί κοινωνικά δίκτυα.",
+
+  "cart_title": "Το καλάθι μου",
+  "cart_empty": "Το καλάθι σας είναι άδειο.",
+  "cart_loading": "Φόρτωση καλαθιού…",
+  "cart_error": "Αποτυχία φόρτωσης καλαθιού.",
+  "cart_col_product": "Προϊόν",
+  "cart_col_price": "Τιμή μονάδας",
+  "cart_col_quantity": "Ποσ.",
+  "cart_col_total": "Σύνολο",
+  "cart_col_action": "Αφαίρεση",
+  "cart_size": "Μέγεθος",
+  "cart_color": "Χρώμα",
+  "cart_subtotal": "Υποσύνολο",
+  "cart_save": "Αποθήκευση αλλαγών",
+  "cart_clear": "Εκκαθάριση καλαθιού",
+  "cart_checkout": "Ολοκλήρωση αγοράς",
+  "cart_browse": "Περιήγηση προϊόντων",
+  "cart_save_success": "Το καλάθι ενημερώθηκε.",
+  "cart_save_error": "Αποτυχία ενημέρωσης καλαθιού.",
+  "cart_delete_success": "Το αντικείμενο αφαιρέθηκε.",
+  "cart_delete_error": "Αποτυχία αφαίρεσης αντικειμένου.",
+  "cart_clear_success": "Το καλάθι εκκαθαρίστηκε.",
+  "cart_clear_error": "Αποτυχία εκκαθάρισης καλαθιού.",
+  "cart_modification_alert": "Ορισμένα αντικείμενα στο καλάθι σας έχουν αλλάξει από τότε που τα προσθέσατε.",
+
+  "wishlist_title": "Λίστα επιθυμιών",
+  "wishlist_empty": "Η λίστα επιθυμιών σας είναι άδεια.",
+  "wishlist_loading": "Φόρτωση λίστας επιθυμιών…",
+  "wishlist_error": "Αποτυχία φόρτωσης λίστας επιθυμιών.",
+  "wishlist_search_placeholder": "Αναζήτηση στη λίστα…",
+  "wishlist_remove": "Αφαίρεση",
+  "wishlist_move_to_cart": "Προσθήκη στο καλάθι",
+  "wishlist_view_product": "Προβολή προϊόντος",
+  "wishlist_remove_success": "Το αντικείμενο αφαιρέθηκε από τη λίστα.",
+  "wishlist_remove_error": "Αποτυχία αφαίρεσης αντικειμένου.",
+  "wishlist_add_cart_success": "Το αντικείμενο προστέθηκε στο καλάθι.",
+  "wishlist_add_cart_error": "Αποτυχία προσθήκης στο καλάθι.",
+  "wishlist_browse": "Περιήγηση προϊόντων",
+  "product_add_to_cart": "Προσθήκη στο καλάθι",
+  "product_add_to_wishlist": "Λίστα επιθυμιών",
+  "product_add_to_wishlist_success": "Προστέθηκε στη λίστα επιθυμιών.",
+  "product_add_to_wishlist_error": "Αποτυχία προσθήκης στη λίστα επιθυμιών.",
+  "product_add_to_cart_success": "Προστέθηκε στο καλάθι.",
+  "product_add_to_cart_error": "Αποτυχία προσθήκης στο καλάθι.",
+  "product_detail_quantity": "Ποσότητα",
+  "product_detail_size": "Μέγεθος",
+  "product_detail_color": "Χρώμα"
 }

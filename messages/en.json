@@ -1,449 +1,249 @@
 {
-    "GLOBAL":{
-        "UNAUTHORIZED": "You are not authorized to access this page",
-        "OR":"OR",
-        "NO-RESULTS":"No results.",
-        "PAGE":"Page",
-        "OF":"of",
-        "SHOW":"Show",
-        "COLUMNS":"Columns",
-        "EXPORT-AS":"Export as",
-        "PDF":"Pdf",
-        "FETCH-ERROR":"Oh no, there was an error",
-        "LOADING":"Loading...",
-        "BUTTONS":{
-            "cancel": "Cancel",
-            "load": "Load",
-            "loading":"Loading....",
-            "delete": "Delete",
-            "search": "Search",
-            "reset": "Reset",
-            "save-search": "Save Search",
-            "export-to-csv": "Export to CSV",
-            "validate-and-continue": "Validate and Continue",
-            "finish": "Finish",
-            "back": "Back",
-            "edit": "Edit",
-            "save": "Save",
-            "send": "Send",
-            "submit": "Submit",
-            "select": "Select",
-            "ok": "OK",
-            "yes": "Yes",
-            "no": "No",
-            "previous":"Previous",
-            "next":"Next",
-            "toggle":"Toggle"
-        },
-        "FORMS": {
-            "ERRORS": {
-                "required": "This field is required",
-                "email": "Enter a valid email address",
-                "minlength": "Minimum characters required: {{ requiredLength }}",
-                "maxlength": "Maximum characters required: {{ requiredLength }}",
-                "samePassword": "Passwords don't match",
-                "strongPassword": "Password strength must be \"strong\"",
-                "forbiddenValue": "The given value is not allowed for this field",
-                "VALIDATION": {
-                    "summary": "Validation Error",
-                    "detail": "There are some fields that are invalid. Please, check the form."
-                }
-            },
-            "PLACEHOLDERS": {
-                "search": "Keywords",
-                "previous-value": "Previous value"
-            },
-            "ACTIONS": {
-                "title": "Actions"
-            }
-        },
-        "TABLES": {
-            "no-results": "No results found"
-        },
-        "CONFIRM-DIALOG": {
-            "sure-proceed": "Are you sure you want to proceed?"
-        },
-        "EMAIL": {
-            "sent": "Email has been sent"
-        },
-        "ERRORS": {
-            "unauthorized": "You are not logged in. Please, login first and then try again.",
-            "server": "Something went wrong. Error code",
-            "forbidden": "You are not authorized to access this resource.",
-            "not-found": "Cannot find the resource you are looking for...",
-            "summary": "Error",
-            "generic": "An error occured"
-        },
-        "SUCCESS": {
-            "summary": "success"
-        },
-        "WARNING": {
-            "summary": "warning"
-        },
-        "OTHER": {
-            "verifyingAccess": "Verifying Access",
-            "not-available": "N/A",
-            "not-specified": "Not Specified"
-        },
-        "LABELS": {
-            "all": "All",
-            "id": "ID",
-            "date-created": "Date Created",
-            "status": "Status",
-            "downloads": "Downloads",
-            "auto-generated": "Auto Generated",
-            "comments": "Comments",
-            "chars-remaining": "{{chars}} characters remaining",
-            "remove-chars": "Maximum characters allowed: {{max}}. Remove {{chars}} characters.",
-            "loading-data-wait": "Loading data, please wait",
-            "remove-item-from-list": "Click to remove {{itemType}}",
-            "add-at-least-one-xx-in-list": "Add at least one {{itemType}}",
-            "searching": "Searching...",
-            "select-value":"Select a value"
-        },
-        "VALIDATION":{
-            "IMAGES":{
-                "file-size":"The file must not be larger than {max_size}. Bytes: {file_size}",
-                "file-type":"File must be one of [{accepted_types}] but was {type}"
-            }
-        }
-    },
-    "LOGIN":{
-        "PAGE":{
-            "title":"Sign In",
-            "description":"Welcome back",
-            "dont-have-account":"Dont have an account?",
-            "sign-up":"Sign Up"
-        },
-        "FORM":{
-            "LABELS":{
-                "username":"Username",
-                "password":"Password",
-                "forget-password":"Forget password ?",
-                "remember-password":"Remember password ?"
-            },
-            "BUTTONS":{
-                "sign-in":"Sign In"
-            },
-            "ERROR": {
-                "invalid-username": "Invalid username",
-                "username-required": "Username is required"
-            },
-            "SUCCESS": {
-                "summary": "Logged in to your account"
-            } 
-        }
-    },
-    "REGISTER":{
-        "PAGE":{
-            "title":"Sign Up",
-            "description":"Welcome & Join us by creating a free account !",
-            "already-have-account":"Already have an account?",
-            "sign-in":"Sign In"
-        },
-        "FORM":{
-            "LABELS":{
-                "first-name":"First Name",
-                "last-name":"Last Name",
-                "email":"Email",
-                "role":"Role",
-                "username":"Username",
-                "password":"Password",
-                "confirm-password":"Confirm Password",
-                "terms-description":"By creating a account you agree to our ",
-                "terms":"Terms",
-                "conditions":"Conditions",
-                "privacy-policy":"Privacy Policy"
-                
-            },
-            "BUTTONS":{
-                "create-account":"Create Account"
-            },
-            "SUCCESS": {
-                "summary": "Please check email to verify account"
-            } 
-        }
-    },
-    "FORGOT-PASSWORD":{
-        "PAGE":{
-            "title":"Forgot Password",
-            "already-have-account":"Already have an account?",
-            "sign-in":"Sign In"
-        },
-        "FORM":{
-            "LABELS":{
-                "email":"Email",
-                "password":"Password",
-                "confirm-password":"Confirm Password"
-            },
-            "BUTTONS":{
-                "create-new-password":"Create new password"
-            },
-            "SUCCESS": {
-                "summary": "Please check email to verify account"
-            } 
-        }
-    },
-    "USERS":{
-        "SEARCH":{
-            "PAGE":{
-                "currentpage":"Search Users",
-                "activepage":"Users",
-                "mainpage":"Search Users"
-            },
-            "FORM":{
-                "LABELS":{
-                    "email":"Email",
-                    "username":"Username",
-                    "name":"Name",
-                    "role":"User Role",
-                    "status": "User Status",
-                    "status-active":"Active",
-                    "status-unverified":"Unverified",
-                    "status-deactivated":"Deactivated",
-                    "status-deleted":"Deleted"
-                },
-                "TABLE":{
-                    "COLUMNS":{
-                        "id":"Id",
-                        "username":"Username",
-                        "firstName":"First Name",
-                        "lastName":"Last Name",
-                        "status":"Status",
-                        "email":"Email",
-                        "createdDate":"Created",
-                        "uuid":"Uuid",
-                        "actions":"Actions"
-                    }
-                    
-                }
-            }
-        },
-        "DETAILS":{
-            "LABELS":{
-                "bio":"Professional Bio",
-                "profile":"Profile",
-                "completed":"completed",
-                "my-profile-picture":"My Profile Picture",
-                "view-profile-modal-description":"Users image",
-                "view-profile-modal-title":"Profile Picture",
-                "upload-profile-modal-description":"Upload Profile Image",
-                "upload-profile-modal-title":"Upload File",
-                "contact-information":"Contact Information",
-                "social-networks":"Social Networks",
-                "email":"Email",
-                "phone":"Phone",
-                "address":"Address",
-                "city":"City",
-                "state":"State",
-                "country":"Country",
-                "zip":"Zip code",
-                "settings":"Settings",
-                "change-password":"Change Password",
-                "status":"Status"
-            },
-            "FORM":{
-                "new-password":"New Password",
-                "confirm-password":"Confirm Password"
-            },
-            "UPLOAD-PROFILE":{
-                "title":"Upload picture",
-                "photo-size-less-than":"Choose photo size should be less than ",
-                "should-be-format":"and should be in ",
-                "format":"format."
-            },
-            "BUTTONS":{
-                "show-profile-picture":"Show Profile Picture",
-                "upload-profile-picture":"Upload a profile Picture",
-                "upload":"Upload",
-                "reset":"Reset",
-                "delete-all":"Delete All",
-                "reset-password":"Reset Password"
-            },
-            "SUCCESS": {
-                "update-user": "Successfully Updated user",
-                "delete-user-socials":"Successfully deleted  all user socials",
-                "delete-user-social":"Successfully deleted user social",
-                "change-user-password":"Successfully updated user's password",
-                "update-user-status":"Successfully updated user's status"
-            } 
-        },
-        "VALIDATION":{
-            "required-username":"Username is required",
-            "required-first-name":"First Name is required",
-            "required-last-name":"Last Name is required",
-            "required-password":"Password is required",
-            "required-country":"Country is required",
-            "required-street":"Street is required",
-            "required-city":"City is required",
-            "required-state":"State is required",
-            "required-zip":"Zip is required",
-            "required-email":"Email is required",
-            "min-password":"Minimum 6 characters required",
-            "min-confirm-password":"Minimum 6 characters required",
-            "passowrds-dont-match":"Password don't match"
-        }
-    },
-    "PRODUCTS":{
-        "SEARCH":{
-            "PAGE":{
-                "currentpage":"Search Products",
-                "activepage":"Products",
-                "mainpage":"Search Products"
-            },
-            "LABELS":{
-                "categories":"CATEGORIES",
-                "brands":"BRANDS",
-                "sizes":"SIZES"
-            }
-        },
-        "EDIT":{
-            "PAGE":{
-                "currentpage":"Edit Product",
-                "activepage":"Products",
-                "mainpage":"Edit Product"
-            }
-        },
-        "CREATE":{
-            "PAGE":{
-                "currentpage":"Create Product",
-                "activepage":"Products",
-                "mainpage":"Create Product"
-            },
-            "LABELS":{
-                "product-name":"Product name",
-                "product-sku":"Product SKU",
-                "product-description":"Description",
-                "category":"Category",
-                "gender":"Gender",
-                "size":"Size",
-                "brand":"Brand",
-                "color":"Color",
-                "publish-status":"Publish Status",
-                "availability-status":"Availability Status",
-                "published":"Published",
-                "scheduled":"Scheduled",
-                "in-stock":"In Stock",
-                "out-of-stock":"Out of Stock",
-                "inventory":"Inventory",
-                "price":"Price",
-                "fabric-details":"Fabric Details",
-                "care-instructions":"Care Instructions",
-                "publish-date":"Publish Date",
-                "product-images":"Product Images"
-            },
-            "PLACEHOLDERS":{
-                "product-name":"*Product Name should not exceed 30 characters",
-                "product-description":"*Description should not exceed 500 letters",
-                "product-images":"*Minimum 0f 6 images are need to be uploaded,make sure the image size match the proper background size and all images should be uniformly maintained with width and height to the image container,image size should not exceed 2MB."
-            },
-            "BUTTONS":{
-                "add-product":"Add Product",
-                "update-product":"Update Product"
-            }
-        },
-        "DETAILS":{
-            "PAGE":{
-                "currentpage":"Product Details",
-                "activepage":"Products",
-                "mainpage":"Product Details"
-            },
-            "LABELS":{
-                "reviews":"Reviews",
-                "categories":"Categories",
-                "description":"Description",
-                "colors":"Colors",
-                "sizes":"Sizes",
-                "quantity":"Quantity",
-                "fabric-details":"Fabric Details",
-                "care-instructions":"Care Instructions",
-                "ratings":"Ratings",
-                "product-details":"Product Details",
-                "brand":"Brand",
-                "model-name":"Model Name",
-                "color":"Color",
-                "availability-status":"Availability Status",
-                "publish-status":"Publish Status"
-            }
-        },
-        "VALIDATION":{
-            "required-name":"Name is required",
-            "required-sku":"Sku is required",
-            "required-category":"Category is required",
-            "required-gender":"Gender is required",
-            "required-sizes":"At least one size is required",
-            "required-brand":"Brand is required",
-            "required-colors":"At least one color is required",
-            "required-price":"Price is required",
-            "required-inventory":"Inventory is required",
-            "required-publish-status":"Publish Status is required",
-            "required-availability-status":"Availability Status is required",
-            "required-publish-date":"Publish Date is required",
-            "required-images":"Product images are required",
-            "min-publish-date":"The Publish Date cannot be before today",
-            "integer-inventory":"Inventory value must be an integer",
-            "positive-inventory":"Inventory must be a positive value",
-            "positive-price":"Price must be a positive value"
-        },
-        "SUCCESS": {
-            "update-product": "Successfully updated product",
-            "create-product":"Successfully created product"
-        },
-        "ERRORS": {
-            "update-product": "Something went wrong with the product update",
-            "create-product": "Something went wrong with the product creation"
-        }
-    },
-    "CART":{
-        "PAGE":{
-            "title":"Cart",
-            "cart-items":"Cart Items"
-        },
-        "LABELS":{
-            "product-name":"Product Name",
-            "price":"Price",
-            "quantity":"Quantity",
-            "total":"Total",
-            "action":"Action",
-            "size":"Size",
-            "color":"Color",
-            "item":"Item",
-            "items":"Items",
-            "empty-cart-title":"Empty Cart",
-            "empty-cart-description":"Your cart is empty",
-            "sub-total":"Sub Total",
-            "discount":"Discount",
-            "delivery-charges":"Delivery Charges",
-            "service-tax":"Service Tax"
-        },
-        "BUTTONS":{
-            "add-to-cart":"Add to Cart",
-            "proceed-to-cart":"Proceed to Cart",
-            "proceed-to-checkout":"Proceed to Checkout",
-            "continue-shopping":"Continue Shopping",
-            "update-cart":"Update Cart",
-            "clear-cart":"Clear Cart",
-            "add-to-wishlist":"Add to Wishlist",
-            "remove-from-cart":"Remove from Cart"
-        },
-        "VALIDATION":{
-            "required-color":"Color is required",
-            "required-size":"Size is required",
-            "required-quantity":"Quantity is required",
-            "integer-quantity":"Quantity value must be an integer",
-            "positive-quantity":"Quantity must be a positive value"
-        },
-        "SUCCESS": {
-            "add-to-cart": "Successfully added item to Cart",
-            "remove-from-cart":"Successfully removed item from Cart",
-            "update-cart":"Successfully updated Cart",
-            "clear-cart":"Successfully cleared Cart"
-        },
-        "ERRORS": {
-            "add-to-cart": "Something went wrong! Item not added from cart",
-            "remove-from-cart":"Something went wrong! Item not removed from cart",
-            "update-cart":"Something went wrong with the Cart update",
-            "clear-cart":"Something went wrong with clearing the Cart"
-        }
-    }
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "login_title": "Sign in",
+  "login_description": "Welcome back",
+  "login_username": "Username",
+  "login_password": "Password",
+  "login_submit": "Sign in",
+  "login_error": "Sign-in failed. Check your credentials.",
+  "login_have_no_account": "Don't have an account?",
+  "login_sign_up": "Sign up",
+  "login_forgot": "Forgot your password?",
+  "login_remember_me": "Remember password ?",
+
+  "global_or": "OR",
+
+  "register_title": "Create your account",
+  "register_description": "Welcome & Join us by creating a free account !",
+  "register_first_name": "First name",
+  "register_last_name": "Last name",
+  "register_email": "Email",
+  "register_username": "Username",
+  "register_password": "Password",
+  "register_confirm_password": "Confirm password",
+  "register_role": "Role",
+  "register_role_placeholder": "Select a role…",
+  "register_submit": "Create account",
+  "register_have_account": "Already have an account?",
+  "register_sign_in": "Sign in",
+  "register_success": "Account created. Please sign in.",
+  "register_error": "Registration failed.",
+  "register_terms_agree": "By creating a account you agree to our ",
+  "register_terms": "Terms",
+  "register_conditions": "Conditions",
+  "register_privacy_policy": "Privacy Policy",
+
+  "forgot_title": "Reset your password",
+  "forgot_email": "Email",
+  "forgot_new_password": "New password",
+  "forgot_confirm_password": "Confirm new password",
+  "forgot_submit": "Update password",
+  "forgot_back_to_login": "Back to sign in",
+  "forgot_success": "Password updated. You can now sign in with your new password.",
+  "forgot_error": "Something went wrong. Please try again.",
+
+  "logout_title": "Sign out",
+  "logout_confirm": "Are you sure you want to sign out?",
+  "logout_yes": "Yes, sign out",
+  "logout_cancel": "Cancel",
+
+  "dashboard_welcome": "Welcome, {name}!",
+  "dashboard_signout": "Sign out",
+  "dashboard_browse_products": "Browse products",
+  "language_label": "Language",
+
+  "products_search_title": "Products",
+  "products_search_placeholder": "Search by title or SKU…",
+  "products_search_submit": "Search",
+  "products_search_filters_categories": "Categories",
+  "products_search_no_results": "No products matched your search.",
+  "products_search_loading": "Loading products…",
+  "products_search_error": "Failed to load products.",
+  "products_search_pagination": "Page {page} of {pages} ({count} total)",
+  "products_search_prev": "Previous",
+  "products_search_next": "Next",
+  "products_search_filters_brands": "Brands",
+  "products_search_filters_sizes": "Sizes",
+  "products_search_sort_label": "Sort by",
+  "products_search_sort_default": "Default",
+  "products_search_sort_price_asc": "Price: Low to High",
+  "products_search_sort_price_desc": "Price: High to Low",
+  "products_search_sort_rating": "Top Rated",
+  "products_search_sort_title": "Title A–Z",
+
+  "product_detail_back": "Back to products",
+  "product_detail_loading": "Loading product…",
+  "product_detail_error": "Failed to load product.",
+  "product_detail_not_found": "Product not found.",
+  "product_detail_sku": "SKU",
+  "product_detail_brand": "Brand",
+  "product_detail_categories": "Categories",
+  "product_detail_description": "Description",
+  "product_detail_fabric": "Fabric details",
+  "product_detail_care": "Care instructions",
+  "product_detail_availability": "Availability",
+  "product_detail_status": "Status",
+  "product_detail_inventory": "In stock",
+  "product_detail_sold_by": "Sold by",
+  "product_detail_reviews": "Reviews & Ratings",
+  "product_detail_no_comments": "No reviews yet.",
+  "product_detail_similar": "Similar products",
+  "product_detail_no_similar": "No similar products found.",
+  "product_detail_rating": "{rating} out of 5 ({count} ratings)",
+
+  "product_form_create_title": "Create product",
+  "product_form_edit_title": "Edit product",
+  "product_form_title": "Product name",
+  "product_form_sku": "SKU",
+  "product_form_description": "Description",
+  "product_form_fabric": "Fabric details",
+  "product_form_care": "Care instructions",
+  "product_form_category": "Category",
+  "product_form_brand": "Brand",
+  "product_form_gender": "Gender",
+  "product_form_sizes": "Sizes",
+  "product_form_colors": "Colors",
+  "product_form_inventory": "Inventory",
+  "product_form_price": "Price",
+  "product_form_publish_date": "Publish date",
+  "product_form_publish_status": "Publish status",
+  "product_form_availability": "Availability",
+  "product_form_images": "Images",
+  "product_form_images_hint": "Drag & drop or click to add images",
+  "product_form_submit_create": "Create product",
+  "product_form_submit_update": "Save changes",
+  "product_form_success_create": "Product created successfully.",
+  "product_form_success_update": "Product updated successfully.",
+  "product_form_error": "Something went wrong. Please try again.",
+  "product_form_loading": "Saving…",
+  "product_form_back": "Back to products",
+  "product_form_status_published": "Published",
+  "product_form_status_draft": "Draft",
+  "product_form_status_archived": "Archived",
+  "product_form_avail_in_stock": "In stock",
+  "product_form_avail_out_of_stock": "Out of stock",
+
+  "users_search_title": "Users",
+  "users_search_placeholder_username": "Username…",
+  "users_search_placeholder_name": "Name…",
+  "users_search_placeholder_email": "Email…",
+  "users_search_filter_role": "Role",
+  "users_search_filter_status": "Status",
+  "users_search_filter_all_roles": "All roles",
+  "users_search_filter_all_statuses": "All statuses",
+  "users_search_submit": "Search",
+  "users_search_no_results": "No users matched your search.",
+  "users_search_loading": "Loading users…",
+  "users_search_error": "Failed to load users.",
+  "users_search_pagination": "Page {page} of {pages} ({count} total)",
+  "users_search_prev": "Previous",
+  "users_search_next": "Next",
+  "users_search_col_name": "Name",
+  "users_search_col_username": "Username",
+  "users_search_col_email": "Email",
+  "users_search_col_status": "Status",
+  "users_search_col_created": "Joined",
+
+  "user_detail_loading": "Loading user…",
+  "user_detail_error": "Failed to load user.",
+  "user_detail_not_found": "User not found.",
+  "user_detail_back": "Back to users",
+  "user_detail_username": "Username",
+  "user_detail_email": "Email",
+  "user_detail_status": "Status",
+  "user_detail_member_since": "Member since",
+  "user_detail_roles": "Roles",
+  "user_detail_no_roles": "No roles assigned.",
+  "user_detail_bio": "Bio",
+  "user_detail_no_bio": "No bio yet.",
+  "user_detail_contact": "Contact information",
+  "user_detail_country": "Country",
+  "user_detail_state": "State",
+  "user_detail_city": "City",
+  "user_detail_address": "Address",
+  "user_detail_zip": "Zip",
+  "user_detail_phone": "Phone",
+  "user_detail_actions": "Account actions",
+  "user_detail_activate": "Activate",
+  "user_detail_deactivate": "Deactivate",
+  "user_detail_delete": "Delete account",
+  "user_detail_action_success": "Action applied successfully.",
+  "user_detail_action_error": "Action failed. Please try again.",
+  "user_detail_bio_save": "Save bio",
+  "user_detail_bio_cancel": "Cancel",
+  "user_detail_bio_edit": "Edit",
+  "user_detail_bio_save_error": "Failed to save bio.",
+  "user_detail_contact_edit": "Edit",
+  "user_detail_contact_save": "Save",
+  "user_detail_contact_cancel": "Cancel",
+  "user_detail_contact_save_error": "Failed to save contact info.",
+  "user_detail_products_stat": "Products",
+  "user_detail_orders_stat": "Orders",
+  "user_detail_following_stat": "Following",
+  "user_detail_upload_picture": "Upload photo",
+  "user_detail_upload_hint": "JPG, PNG or GIF, max 2 MB",
+  "user_detail_upload_success": "Profile photo updated.",
+  "user_detail_upload_error": "Failed to upload photo.",
+  "user_detail_change_password": "Change password",
+  "user_detail_current_email": "Email (cannot change)",
+  "user_detail_new_password": "New password",
+  "user_detail_confirm_password": "Confirm new password",
+  "user_detail_change_password_submit": "Update password",
+  "user_detail_change_password_success": "Password updated successfully.",
+  "user_detail_change_password_error": "Failed to update password.",
+  "user_detail_socials": "Social networks",
+  "user_detail_socials_add": "Add network",
+  "user_detail_socials_url": "URL",
+  "user_detail_socials_save": "Save",
+  "user_detail_socials_cancel": "Cancel",
+  "user_detail_socials_delete_all": "Remove all",
+  "user_detail_socials_save_error": "Failed to save social networks.",
+  "user_detail_socials_none": "No social networks added yet.",
+
+  "cart_title": "My cart",
+  "cart_empty": "Your cart is empty.",
+  "cart_loading": "Loading cart…",
+  "cart_error": "Failed to load cart.",
+  "cart_col_product": "Product",
+  "cart_col_price": "Unit price",
+  "cart_col_quantity": "Qty",
+  "cart_col_total": "Total",
+  "cart_col_action": "Remove",
+  "cart_size": "Size",
+  "cart_color": "Color",
+  "cart_subtotal": "Subtotal",
+  "cart_save": "Save changes",
+  "cart_clear": "Clear cart",
+  "cart_checkout": "Checkout",
+  "cart_browse": "Browse products",
+  "cart_save_success": "Cart updated.",
+  "cart_save_error": "Failed to update cart.",
+  "cart_delete_success": "Item removed.",
+  "cart_delete_error": "Failed to remove item.",
+  "cart_clear_success": "Cart cleared.",
+  "cart_clear_error": "Failed to clear cart.",
+  "cart_modification_alert": "Some items in your cart have changed since you added them.",
+
+  "wishlist_title": "Wishlist",
+  "wishlist_empty": "Your wishlist is empty.",
+  "wishlist_loading": "Loading wishlist…",
+  "wishlist_error": "Failed to load wishlist.",
+  "wishlist_search_placeholder": "Search wishlist…",
+  "wishlist_remove": "Remove",
+  "wishlist_move_to_cart": "Add to cart",
+  "wishlist_view_product": "View product",
+  "wishlist_remove_success": "Item removed from wishlist.",
+  "wishlist_remove_error": "Failed to remove item.",
+  "wishlist_add_cart_success": "Item added to cart.",
+  "wishlist_add_cart_error": "Failed to add item to cart.",
+  "wishlist_browse": "Browse products",
+  "product_add_to_cart": "Add to cart",
+  "product_add_to_wishlist": "Wishlist",
+  "product_add_to_wishlist_success": "Added to wishlist.",
+  "product_add_to_wishlist_error": "Failed to add to wishlist.",
+  "product_add_to_cart_success": "Added to cart.",
+  "product_add_to_cart_error": "Failed to add to cart.",
+  "product_detail_quantity": "Quantity",
+  "product_detail_size": "Size",
+  "product_detail_color": "Color"
 }
