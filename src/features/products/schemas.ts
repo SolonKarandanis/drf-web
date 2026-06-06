@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { ProductAvailabilityStatus, ProductPublishedStatus } from '#/models/product.models'
+import { ProductAvailabilityStatus, ProductPublishedStatus } from './models'
 
 export const saveProductSchema = z.object({
   title: z.string().min(1, 'Title is required'),

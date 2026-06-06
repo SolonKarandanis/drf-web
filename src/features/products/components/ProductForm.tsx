@@ -5,12 +5,12 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Loader2, X } from 'lucide-react'
 import { toast } from 'sonner'
 
-import { saveProductSchema, toProductFormData, type SaveProductSchema } from '#/schemas/product.schemas'
+import { saveProductSchema, toProductFormData, type SaveProductSchema } from '../schemas'
 import {
   ProductAvailabilityStatus,
   ProductPublishedStatus,
   type AttributeOption,
-} from '#/models/product.models'
+} from '../models'
 import {
   allCategoriesQueryOptions,
   allBrandsQueryOptions,
@@ -19,7 +19,7 @@ import {
   allGendersQueryOptions,
   createProduct,
   updateProduct,
-} from '#/shared/query/products'
+} from '../api'
 import { m } from '#/paraglide/messages'
 import { Button } from '#/components/ui/button'
 import { Input } from '#/components/ui/input'

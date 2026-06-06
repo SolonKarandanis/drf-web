@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { authClient } from '#/lib/auth-client'
 import { removeLoginResponseFromStorage } from '#/shared/token-storage'
-import { accountQueryOptions } from '#/shared/query/user'
-import { cartQueryOptions } from '#/shared/query/cart'
+import { accountQueryOptions } from '#/features/users/account'
+import { cartQueryOptions } from '#/features/cart/api'
 import { getLocale, locales, setLocale } from '#/paraglide/runtime'
 import {
   DropdownMenu,

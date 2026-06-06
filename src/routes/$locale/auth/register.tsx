@@ -5,12 +5,12 @@ import { useState, useEffect } from 'react'
 import { passwordStrength } from 'check-password-strength'
 
 import { registerUser, type RegisterError } from '#/lib/register-server'
-import { registerUserSchema, type RegisterUserSchema } from '#/schemas/auth.schemas'
+import { registerUserSchema, type RegisterUserSchema } from '#/features/auth/schemas'
 import { useQuery } from '@tanstack/react-query'
-import { allGroupsQueryOptions } from '#/shared/query/users'
+import { allGroupsQueryOptions } from '#/features/users/api'
 import { m } from '#/paraglide/messages'
 import { CForm, FormInput, FormButton, PasswordStrength } from '#/components/form'
-import { SocialButtons } from '#/components/auth/SocialButtons'
+import { SocialButtons } from '#/features/auth/components/SocialButtons'
 
 export const Route = createFileRoute('/$locale/auth/register')({
   component: RegisterPage,

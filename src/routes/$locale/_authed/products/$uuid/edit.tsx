@@ -1,12 +1,12 @@
 import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { Loader2 } from 'lucide-react'
-import { ProductForm } from '#/components/products/ProductForm'
+import { ProductForm } from '#/features/products/components/ProductForm'
 import {
   productDetailsQueryOptions,
   productAttributesQueryOptions,
-} from '#/shared/query/products'
-import { ProductAvailabilityStatus, ProductPublishedStatus } from '#/models/product.models'
+} from '#/features/products/api'
+import { ProductAvailabilityStatus, ProductPublishedStatus } from '#/features/products/models'
 import { m } from '#/paraglide/messages'
 
 export const Route = createFileRoute('/$locale/_authed/products/$uuid/edit')({

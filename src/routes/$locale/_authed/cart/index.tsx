@@ -9,9 +9,9 @@ import {
   deleteCartItems,
   updateCartItems,
   clearCart as clearCartFn,
-} from '#/shared/query/cart'
-import { allSizesQueryOptions, allColoursQueryOptions } from '#/shared/query/products'
-import type { CartItem } from '#/models/cart.models'
+} from '#/features/cart/api'
+import { allSizesQueryOptions, allColoursQueryOptions } from '#/features/products/api'
+import type { CartItem } from '#/features/cart/models'
 import { m } from '#/paraglide/messages'
 import { Button } from '#/components/ui/button'
 

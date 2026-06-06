@@ -1,11 +1,11 @@
 import { queryOptions } from '@tanstack/react-query'
-import { fetchWithAuth } from './client'
-import { ApiControllers } from './api-controllers'
+import { fetchWithAuth } from '#/shared/http/client'
+import { ApiControllers } from '#/shared/http/api-controllers'
 import type {
   CreateUserSocialRequest,
   SocialModel,
   UserSocial,
-} from '#/models/social.models'
+} from './models'
 
 export const socialsQueryOptions = () =>
   queryOptions({

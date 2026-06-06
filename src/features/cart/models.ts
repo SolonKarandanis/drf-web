@@ -1,5 +1,5 @@
-import type { ImageModel } from './product.models'
-import type { ProductAttributes } from './product.models'
+import type { ImageModel } from '#/features/products/models'
+import type { ProductAttributes } from '#/features/products/models'
 
 export interface CartItemProduct {
   sku: string

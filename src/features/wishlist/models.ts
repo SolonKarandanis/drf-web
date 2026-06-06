@@ -1,4 +1,4 @@
-import type { ImageModel } from './product.models'
+import type { ImageModel } from '#/features/products/models'
 
 export interface WishlistItemProduct {
   sku: string

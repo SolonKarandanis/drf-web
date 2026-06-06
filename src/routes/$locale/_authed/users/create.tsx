@@ -5,9 +5,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
 
 import { getIsAdmin } from '#/lib/session-server'
-import { createUser, allGroupsQueryOptions } from '#/shared/query/users'
-import type { HttpError } from '#/shared/query/client'
-import { createUserSchema, type CreateUserSchema } from '#/schemas/auth.schemas'
+import { createUser, allGroupsQueryOptions } from '#/features/users/api'
+import type { HttpError } from '#/shared/http/client'
+import { createUserSchema, type CreateUserSchema } from '#/features/auth/schemas'
 import { Button } from '#/components/ui/button'
 import { FormInput } from '#/components/form'
 

@@ -2,7 +2,7 @@ import { Link, createFileRoute, useNavigate, useParams } from '@tanstack/react-r
 import { useQuery } from '@tanstack/react-query'
 import { authClient } from '#/lib/auth-client'
 import { removeLoginResponseFromStorage } from '#/shared/token-storage'
-import { accountQueryOptions } from '#/shared/query/user'
+import { accountQueryOptions } from '#/features/users/account'
 import { m } from '#/paraglide/messages'
 import { Button } from '#/components/ui/button'
 

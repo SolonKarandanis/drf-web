@@ -5,12 +5,12 @@ import { useState, useEffect } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { passwordStrength } from 'check-password-strength'
 
-import { forgotPasswordSchema, type ForgotPasswordSchema } from '#/schemas/auth.schemas'
-import { forgotPassword } from '#/shared/query/users'
-import type { HttpError } from '#/shared/query/client'
+import { forgotPasswordSchema, type ForgotPasswordSchema } from '#/features/auth/schemas'
+import { forgotPassword } from '#/features/users/api'
+import type { HttpError } from '#/shared/http/client'
 import { m } from '#/paraglide/messages'
 import { CForm, FormInput, FormButton, PasswordStrength } from '#/components/form'
-import { SocialButtons } from '#/components/auth/SocialButtons'
+import { SocialButtons } from '#/features/auth/components/SocialButtons'
 
 export const Route = createFileRoute('/$locale/auth/forgot-password')({
   component: ForgotPasswordPage,

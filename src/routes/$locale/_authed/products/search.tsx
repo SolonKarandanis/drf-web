@@ -10,10 +10,10 @@ import {
   brandsWithTotalsQueryOptions,
   sizesWithTotalsQueryOptions,
   searchProducts,
-} from '#/shared/query/products'
-import { addToCart } from '#/shared/query/cart'
-import { addToWishlist } from '#/shared/query/wishlist'
-import type { FilterOption, Products } from '#/models/product.models'
+} from '#/features/products/api'
+import { addToCart } from '#/features/cart/api'
+import { addToWishlist } from '#/features/wishlist/api'
+import type { FilterOption, Products } from '#/features/products/models'
 import { m } from '#/paraglide/messages'
 import { Button } from '#/components/ui/button'
 import { Input } from '#/components/ui/input'

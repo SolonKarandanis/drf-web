@@ -1,5 +1,5 @@
-import type { Products } from './product.models'
-import type { UserModel, UserStatus } from './user.models'
+import type { Products } from '#/features/products/models'
+import type { UserModel, UserStatus } from './models'
 
 export type SortDirection = 'asc' | 'desc'
 

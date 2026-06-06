@@ -7,9 +7,9 @@ import { toast } from 'sonner'
 import {
   userWishlistQueryOptions,
   deleteWishlistItems,
-} from '#/shared/query/wishlist'
-import { addToCart } from '#/shared/query/cart'
-import type { WishlistItem } from '#/models/wishlist.models'
+} from '#/features/wishlist/api'
+import { addToCart } from '#/features/cart/api'
+import type { WishlistItem } from '#/features/wishlist/models'
 import { m } from '#/paraglide/messages'
 import { Button } from '#/components/ui/button'
 import { Input } from '#/components/ui/input'

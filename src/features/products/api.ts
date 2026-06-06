@@ -1,6 +1,6 @@
 import { queryOptions } from '@tanstack/react-query'
-import { fetchWithAuth } from './client'
-import { ApiControllers } from './api-controllers'
+import { fetchWithAuth } from '#/shared/http/client'
+import { ApiControllers } from '#/shared/http/api-controllers'
 import type {
   AttributeOption,
   Category,
@@ -10,11 +10,11 @@ import type {
   ProductAttributes,
   ProductDetails,
   SimilarProduct,
-} from '#/models/product.models'
+} from './models'
 import type {
   ProductSearchRequest,
   ProductSearchResponse,
-} from '#/models/search.models'
+} from '#/features/users/search.models'
 
 const STALE_REFERENCE = 5 * 60 * 1000 // 5 min for reference data
 

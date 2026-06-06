@@ -8,7 +8,7 @@ import { signInWithDjango } from '#/lib/django-bridge'
 import { setLoginResponseInStorage } from '#/shared/token-storage'
 import { m } from '#/paraglide/messages'
 import { CForm, FormInput, FormButton, FormError } from '#/components/form'
-import { SocialButtons } from '#/components/auth/SocialButtons'
+import { SocialButtons } from '#/features/auth/components/SocialButtons'
 
 const schema = z.object({
   username: z.string().min(1),

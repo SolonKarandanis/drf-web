@@ -1,12 +1,12 @@
 import { queryOptions } from '@tanstack/react-query'
-import { fetchWithAuth } from './client'
-import { ApiControllers } from './api-controllers'
+import { fetchWithAuth } from '#/shared/http/client'
+import { ApiControllers } from '#/shared/http/api-controllers'
 import type {
   AddToCartRequest,
   Cart,
   DeleteCartItemRequest,
   UpdateItemRequest,
-} from '#/models/cart.models'
+} from './models'
 
 export const cartQueryOptions = () =>
   queryOptions({

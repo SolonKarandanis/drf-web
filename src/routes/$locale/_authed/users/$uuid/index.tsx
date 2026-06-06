@@ -13,23 +13,23 @@ import {
   updateUserBio,
   updateContactInfo,
   changeAccountStatus,
-} from '#/shared/query/users'
+} from '#/features/users/api'
 import {
   socialsQueryOptions,
   userSocialsQueryOptions,
   createUserSocials,
   deleteUserSocial,
   deleteAllUserSocials,
-} from '#/shared/query/socials'
+} from '#/features/socials/api'
 import { decodeJwtPayload, getAccessTokenValue } from '#/shared/token-storage'
-import { UserStatus } from '#/models/user.models'
+import { UserStatus } from '#/features/users/models'
 import type {
   ChangePasswordRequest,
   UpdateBioRequest,
   UpdateContactInfoRequest,
   UserAccountActions,
-} from '#/models/user.models'
-import type { CreateUserSocialRequest } from '#/models/social.models'
+} from '#/features/users/models'
+import type { CreateUserSocialRequest } from '#/features/socials/models'
 import { m } from '#/paraglide/messages'
 import { Button } from '#/components/ui/button'
 import { FormTextArea } from '#/components/form/FormTextArea'

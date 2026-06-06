@@ -1,7 +1,7 @@
 import { queryOptions } from '@tanstack/react-query'
-import { fetchWithAuth } from './client'
-import { ApiControllers } from './api-controllers'
-import type { UserAccount } from '#/models/user.models'
+import { fetchWithAuth } from '#/shared/http/client'
+import { ApiControllers } from '#/shared/http/api-controllers'
+import type { UserAccount } from './models'
 
 export const accountQueryOptions = () =>
   queryOptions({

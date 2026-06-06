@@ -1,6 +1,6 @@
 import { queryOptions } from '@tanstack/react-query'
-import { fetchWithAuth, fetchPublic } from './client'
-import { ApiControllers } from './api-controllers'
+import { fetchWithAuth, fetchPublic } from '#/shared/http/client'
+import { ApiControllers } from '#/shared/http/api-controllers'
 import type {
   ChangePasswordRequest,
   ChangeUserStatusRequest,
@@ -11,9 +11,9 @@ import type {
   UserAccount,
   UserAccountActions,
   UserGroup,
-} from '#/models/user.models'
-import type { ImageModel } from '#/models/product.models'
-import type { UserSearchRequest, UserSearchResponse } from '#/models/search.models'
+} from './models'
+import type { ImageModel } from '#/features/products/models'
+import type { UserSearchRequest, UserSearchResponse } from './search.models'
 
 export const userQueryOptions = (uuid: string) =>
   queryOptions({

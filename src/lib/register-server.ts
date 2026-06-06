@@ -1,5 +1,5 @@
 import { createServerFn } from '@tanstack/react-start'
-import { registerUserSchema } from '#/schemas/auth.schemas'
+import { registerUserSchema } from '#/features/auth/schemas'
 
 const DJANGO_URL = process.env.DJANGO_BACKEND_URL ?? 'http://localhost:8000/api/'
 

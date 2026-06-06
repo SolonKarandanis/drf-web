@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router'
-import { ProductForm } from '#/components/products/ProductForm'
+import { ProductForm } from '#/features/products/components/ProductForm'
 import { m } from '#/paraglide/messages'
 
 export const Route = createFileRoute('/$locale/_authed/products/create')({

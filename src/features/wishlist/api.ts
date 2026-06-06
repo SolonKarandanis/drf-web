@@ -1,11 +1,11 @@
 import { queryOptions } from '@tanstack/react-query'
-import { fetchWithAuth } from './client'
-import { ApiControllers } from './api-controllers'
+import { fetchWithAuth } from '#/shared/http/client'
+import { ApiControllers } from '#/shared/http/api-controllers'
 import type {
   AddToWishlistRequest,
   DeleteWishlistItemRequest,
   WishlistItem,
-} from '#/models/wishlist.models'
+} from './models'
 
 export const userWishlistQueryOptions = (q?: string) =>
   queryOptions({
