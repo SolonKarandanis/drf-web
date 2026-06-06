@@ -1,11 +1,10 @@
 import { createFileRoute, Link, useParams } from '@tanstack/react-router'
 import { useState } from 'react'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useForm, Controller } from 'react-hook-form'
 
-import {
-  useSearchUsersMutation,
-  useGetAllGroupsQuery,
-} from '#/shared/redux/usersApiSlice'
+import { searchUsers } from '#/shared/query/users'
+import { allGroupsQueryOptions } from '#/shared/query/users'
 import type { UserModel } from '#/models/user.models'
 import { UserStatus } from '#/models/user.models'
 import type { UserSearchRequest } from '#/models/search.models'
@@ -35,9 +34,11 @@ interface FormValues {
 
 function UserSearchPage() {
   const { locale } = useParams({ from: '/$locale/_authed/users/search' })
-  const { data: groups } = useGetAllGroupsQuery()
+  const { data: groups } = useQuery(allGroupsQueryOptions())
   const [page, setPage] = useState(1)
-  const [searchUsers, { data, isLoading, isError }] = useSearchUsersMutation()
+  const { mutate: doSearch, data, isPending: isLoading, isError } = useMutation({
+    mutationFn: searchUsers,
+  })
 
   const { register, handleSubmit, control, reset } = useForm<FormValues>({
     defaultValues: { username: '', name: '', email: '', role: null, status: null },
@@ -56,12 +57,12 @@ function UserSearchPage() {
 
   const onSubmit = (values: FormValues) => {
     setPage(1)
-    searchUsers(buildRequest(values, 1))
+    doSearch(buildRequest(values, 1))
   }
 
   const handlePage = (values: FormValues, next: number) => {
     setPage(next)
-    searchUsers(buildRequest(values, next))
+    doSearch(buildRequest(values, next))
   }
 
   return (
@@ -71,18 +72,11 @@ function UserSearchPage() {
       <div className="rounded-md border border-border bg-card p-6">
         <CForm onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-10">
-            {/* Left column — text inputs */}
             <div className="space-y-3">
-              <FormInput
-                {...register('username')}
-                placeholder={m.users_search_placeholder_username()}
-              >
+              <FormInput {...register('username')} placeholder={m.users_search_placeholder_username()}>
                 {m.users_search_placeholder_username()}
               </FormInput>
-              <FormInput
-                {...register('name')}
-                placeholder={m.users_search_placeholder_name()}
-              >
+              <FormInput {...register('name')} placeholder={m.users_search_placeholder_name()}>
                 {m.users_search_placeholder_name()}
               </FormInput>
               <FormInput
@@ -94,7 +88,6 @@ function UserSearchPage() {
               </FormInput>
             </div>
 
-            {/* Right column — react-select dropdowns */}
             <div className="space-y-3">
               <Controller
                 name="role"
@@ -143,9 +136,7 @@ function UserSearchPage() {
         </CForm>
       </div>
 
-      {isError && (
-        <p className="text-sm text-destructive">{m.users_search_error()}</p>
-      )}
+      {isError && <p className="text-sm text-destructive">{m.users_search_error()}</p>}
 
       {data && (
         <>
@@ -194,11 +185,21 @@ function UserTable({ users, locale }: { users: Array<UserModel>; locale: string 
       <table className="w-full text-sm">
         <thead className="bg-muted">
           <tr>
-            <th className="px-4 py-2 text-left font-medium text-muted-foreground">{m.users_search_col_name()}</th>
-            <th className="px-4 py-2 text-left font-medium text-muted-foreground">{m.users_search_col_username()}</th>
-            <th className="px-4 py-2 text-left font-medium text-muted-foreground">{m.users_search_col_email()}</th>
-            <th className="px-4 py-2 text-left font-medium text-muted-foreground">{m.users_search_col_status()}</th>
-            <th className="px-4 py-2 text-left font-medium text-muted-foreground">{m.users_search_col_created()}</th>
+            <th className="px-4 py-2 text-left font-medium text-muted-foreground">
+              {m.users_search_col_name()}
+            </th>
+            <th className="px-4 py-2 text-left font-medium text-muted-foreground">
+              {m.users_search_col_username()}
+            </th>
+            <th className="px-4 py-2 text-left font-medium text-muted-foreground">
+              {m.users_search_col_email()}
+            </th>
+            <th className="px-4 py-2 text-left font-medium text-muted-foreground">
+              {m.users_search_col_status()}
+            </th>
+            <th className="px-4 py-2 text-left font-medium text-muted-foreground">
+              {m.users_search_col_created()}
+            </th>
           </tr>
         </thead>
         <tbody className="divide-y divide-border">
@@ -240,7 +241,12 @@ function StatusBadge({ status, label }: { status: UserStatus; label: string }) {
           : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
 
   return (
-    <span className={['inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium', colorClass].join(' ')}>
+    <span
+      className={[
+        'inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium',
+        colorClass,
+      ].join(' ')}
+    >
       {label}
     </span>
   )

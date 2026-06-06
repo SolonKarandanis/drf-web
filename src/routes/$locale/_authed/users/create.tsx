@@ -1,10 +1,12 @@
 import { createFileRoute, redirect, useNavigate, useParams } from '@tanstack/react-router'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
 
 import { getIsAdmin } from '#/lib/session-server'
-import { useCreateUserMutation, useGetAllGroupsQuery } from '#/shared/redux/usersApiSlice'
+import { createUser, allGroupsQueryOptions } from '#/shared/query/users'
+import type { HttpError } from '#/shared/query/client'
 import { createUserSchema, type CreateUserSchema } from '#/schemas/auth.schemas'
 import { Button } from '#/components/ui/button'
 import { FormInput } from '#/components/form'
@@ -22,25 +24,23 @@ export const Route = createFileRoute('/$locale/_authed/users/create')({
 function CreateUserPage() {
   const { locale } = useParams({ from: '/$locale/_authed/users/create' })
   const navigate = useNavigate()
-  const { data: groups, isLoading: groupsLoading } = useGetAllGroupsQuery()
-  const [createUser, { isLoading }] = useCreateUserMutation()
+  const { data: groups, isLoading: groupsLoading } = useQuery(allGroupsQueryOptions())
+  const { mutateAsync, isPending } = useMutation({ mutationFn: createUser })
 
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm<CreateUserSchema>({
-    resolver: zodResolver(createUserSchema),
-  })
+  } = useForm<CreateUserSchema>({ resolver: zodResolver(createUserSchema) })
 
   const onSubmit = async (data: CreateUserSchema) => {
     try {
-      const user = await createUser(data).unwrap()
+      const user = await mutateAsync(data)
       navigate({ to: '/$locale/users/$uuid', params: { locale, uuid: user.uuid } })
     } catch (err: unknown) {
-      const detail = (err as { data?: { detail?: string } })?.data?.detail
-      setError('root', { message: detail ?? 'Failed to create user. Please try again.' })
+      const body = (err as HttpError)?.body as { detail?: string } | undefined
+      setError('root', { message: body?.detail ?? 'Failed to create user. Please try again.' })
     }
   }
 
@@ -83,9 +83,7 @@ function CreateUserPage() {
               </option>
             ))}
           </select>
-          {errors.role && (
-            <p className="text-xs text-destructive">{errors.role.message}</p>
-          )}
+          {errors.role && <p className="text-xs text-destructive">{errors.role.message}</p>}
         </div>
 
         <div className="grid grid-cols-2 gap-4">
@@ -114,8 +112,8 @@ function CreateUserPage() {
         )}
 
         <div className="flex gap-3 pt-2">
-          <Button type="submit" disabled={isLoading} className="gap-2">
-            {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+          <Button type="submit" disabled={isPending} className="gap-2">
+            {isPending && <Loader2 className="h-4 w-4 animate-spin" />}
             Create user
           </Button>
           <Button

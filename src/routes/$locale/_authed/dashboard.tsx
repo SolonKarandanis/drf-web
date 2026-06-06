@@ -1,18 +1,24 @@
 import { Link, createFileRoute, useNavigate, useParams } from '@tanstack/react-router'
-import { useGetLoggedInUserAccountQuery } from '#/shared/redux/userApiSlice'
+import { useQuery } from '@tanstack/react-query'
 import { authClient } from '#/lib/auth-client'
 import { removeLoginResponseFromStorage } from '#/shared/token-storage'
+import { accountQueryOptions } from '#/shared/query/user'
 import { m } from '#/paraglide/messages'
 import { Button } from '#/components/ui/button'
 
 export const Route = createFileRoute('/$locale/_authed/dashboard')({
+  loader: async ({ context }) => {
+    if (typeof window !== 'undefined') {
+      await context.queryClient.ensureQueryData(accountQueryOptions())
+    }
+  },
   component: Dashboard,
 })
 
 function Dashboard() {
   const { locale } = useParams({ from: '/$locale/_authed/dashboard' })
   const navigate = useNavigate()
-  const { data, isLoading, error } = useGetLoggedInUserAccountQuery()
+  const { data, isLoading, error } = useQuery(accountQueryOptions())
 
   const handleSignOut = async () => {
     await authClient.signOut()

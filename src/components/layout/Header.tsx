@@ -1,11 +1,11 @@
 import { useNavigate } from '@tanstack/react-router'
 import { Menu, Moon, Sun, ShoppingCart, LogOut, User } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useQuery } from '@tanstack/react-query'
 import { authClient } from '#/lib/auth-client'
 import { removeLoginResponseFromStorage } from '#/shared/token-storage'
-import { cartItemCountSelector } from '#/shared/redux/cartSlice'
-import { useGetLoggedInUserAccountQuery } from '#/shared/redux/userApiSlice'
+import { accountQueryOptions } from '#/shared/query/user'
+import { cartQueryOptions } from '#/shared/query/cart'
 import { getLocale, locales, setLocale } from '#/paraglide/runtime'
 import {
   DropdownMenu,
@@ -49,8 +49,12 @@ function useDarkMode() {
 export function Header({ locale, onToggleSidebar }: Props) {
   const navigate = useNavigate()
   const [dark, toggleDark] = useDarkMode()
-  const cartCount = useSelector(cartItemCountSelector)
-  const { data: user } = useGetLoggedInUserAccountQuery()
+  const { data: user } = useQuery(accountQueryOptions())
+  const { data: cart } = useQuery({
+    ...cartQueryOptions(),
+    select: (data) => data?.cartItems.length ?? 0,
+  })
+  const cartCount = cart ?? 0
   const currentLocale = getLocale()
 
   const handleSignOut = async () => {
@@ -60,7 +64,7 @@ export function Header({ locale, onToggleSidebar }: Props) {
   }
 
   const handleLocale = (next: string) => {
-    setLocale(next as typeof locales[number], { reload: false })
+    setLocale(next as (typeof locales)[number], { reload: false })
     navigate({ params: (prev) => ({ ...prev, locale: next }) })
   }
 
@@ -133,7 +137,9 @@ export function Header({ locale, onToggleSidebar }: Props) {
                 <User className="h-4 w-4 text-primary" />
               </div>
               <span className="hidden sm:block text-xs font-medium text-foreground">
-                {user ? `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim() || user.username : '…'}
+                {user
+                  ? `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim() || user.username
+                  : '…'}
               </span>
             </button>
           </DropdownMenuTrigger>
@@ -154,7 +160,10 @@ export function Header({ locale, onToggleSidebar }: Props) {
               My profile
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleSignOut} className="text-destructive focus:text-destructive">
+            <DropdownMenuItem
+              onClick={handleSignOut}
+              className="text-destructive focus:text-destructive"
+            >
               <LogOut className="mr-2 h-4 w-4" />
               Sign out
             </DropdownMenuItem>

@@ -1,17 +1,22 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import {
+  HeadContent,
+  Scripts,
+  createRootRouteWithContext,
+} from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Toaster } from 'sonner'
+import type { QueryClient } from '@tanstack/react-query'
 
 import { getLocale } from '#/paraglide/runtime'
-import { ReduxProvider } from '#/shared/redux/provider'
+import type { RouterContext } from '#/router'
 
 import appCss from '../styles.css?url'
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<RouterContext>()({
   beforeLoad: async () => {
-    // Other redirect strategies are possible; see
-    // https://github.com/TanStack/router/tree/main/examples/react/i18n-paraglide#offline-redirect
     if (typeof document !== 'undefined') {
       document.documentElement.setAttribute('lang', getLocale())
     }
@@ -19,48 +24,31 @@ export const Route = createRootRoute({
 
   head: () => ({
     meta: [
-      {
-        charSet: 'utf-8',
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
-      },
-      {
-        title: 'TanStack Start Starter',
-      },
+      { charSet: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { title: 'TanStack Start Starter' },
     ],
-    links: [
-      {
-        rel: 'stylesheet',
-        href: appCss,
-      },
-    ],
+    links: [{ rel: 'stylesheet', href: appCss }],
   }),
   shellComponent: RootDocument,
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const { queryClient } = Route.useRouteContext() as { queryClient: QueryClient }
   return (
     <html lang={getLocale()}>
       <head>
         <HeadContent />
       </head>
       <body>
-        <ReduxProvider>
+        <QueryClientProvider client={queryClient}>
           {children}
           <Toaster richColors position="top-right" closeButton />
-        </ReduxProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
         <TanStackDevtools
-          config={{
-            position: 'bottom-right',
-          }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
+          config={{ position: 'bottom-right' }}
+          plugins={[{ name: 'Tanstack Router', render: <TanStackRouterDevtoolsPanel /> }]}
         />
         <Scripts />
       </body>

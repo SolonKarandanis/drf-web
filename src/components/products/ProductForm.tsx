@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Loader2, X } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -11,14 +12,14 @@ import {
   type AttributeOption,
 } from '#/models/product.models'
 import {
-  useGetAllBrandsQuery,
-  useGetAllColoursQuery,
-  useGetAllGendersQuery,
-  useGetAllSizesQuery,
-  useGetAllCategoriesQuery,
-  useCreateProductMutation,
-  useUpdateProductMutation,
-} from '#/shared/redux/productsApiSlice'
+  allCategoriesQueryOptions,
+  allBrandsQueryOptions,
+  allSizesQueryOptions,
+  allColoursQueryOptions,
+  allGendersQueryOptions,
+  createProduct,
+  updateProduct,
+} from '#/shared/query/products'
 import { m } from '#/paraglide/messages'
 import { Button } from '#/components/ui/button'
 import { Input } from '#/components/ui/input'
@@ -47,14 +48,21 @@ const EMPTY_DEFAULTS: Partial<SaveProductSchema> = {
 }
 
 export function ProductForm({ defaultValues, isEdit = false, editUuid, onSuccess, onCancel }: Props) {
-  const { data: categories } = useGetAllCategoriesQuery()
-  const { data: brands } = useGetAllBrandsQuery()
-  const { data: sizes } = useGetAllSizesQuery()
-  const { data: colours } = useGetAllColoursQuery()
-  const { data: genders } = useGetAllGendersQuery()
+  const queryClient = useQueryClient()
+  const { data: categories } = useQuery(allCategoriesQueryOptions())
+  const { data: brands } = useQuery(allBrandsQueryOptions())
+  const { data: sizes } = useQuery(allSizesQueryOptions())
+  const { data: colours } = useQuery(allColoursQueryOptions())
+  const { data: genders } = useQuery(allGendersQueryOptions())
 
-  const [createProduct, { isLoading: creating }] = useCreateProductMutation()
-  const [updateProduct, { isLoading: updating }] = useUpdateProductMutation()
+  const { mutateAsync: doCreate, isPending: creating } = useMutation({
+    mutationFn: createProduct,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['products'] }),
+  })
+  const { mutateAsync: doUpdate, isPending: updating } = useMutation({
+    mutationFn: updateProduct,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['products'] }),
+  })
   const isLoading = creating || updating
 
   const {
@@ -93,11 +101,11 @@ export function ProductForm({ defaultValues, isEdit = false, editUuid, onSuccess
     const fd = toProductFormData(data)
     try {
       if (isEdit && editUuid) {
-        const result = await updateProduct({ uuid: editUuid, formData: fd }).unwrap()
+        const result = await doUpdate({ uuid: editUuid, formData: fd })
         toast.success(m.product_form_success_update())
         onSuccess(result.uuid)
       } else {
-        const result = await createProduct(fd).unwrap()
+        const result = await doCreate(fd)
         toast.success(m.product_form_success_create())
         onSuccess(result.productId)
       }

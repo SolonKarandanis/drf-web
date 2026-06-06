@@ -1,25 +1,26 @@
 import { createFileRoute, Link, useParams } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import { useForm, useFieldArray } from 'react-hook-form'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Loader2, Pencil, X, Check, Mail, Phone, MapPin, Camera, Plus, Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
 
 import {
-  useGetUserQuery,
-  useGetUserImageQuery,
-  useUploadUserImageMutation,
-  useResetPasswordMutation,
-  useUpdateUserBioMutation,
-  useUpdateContactInfoMutation,
-  useChangeAccountStatusMutation,
-} from '#/shared/redux/usersApiSlice'
+  userQueryOptions,
+  userImageQueryOptions,
+  uploadUserImage,
+  resetPassword,
+  updateUserBio,
+  updateContactInfo,
+  changeAccountStatus,
+} from '#/shared/query/users'
 import {
-  useGetSocialsQuery,
-  useGetUserSocialsQuery,
-  useCreateUserSocialsMutation,
-  useDeleteUserSocialMutation,
-  useDeleteAllUserSocialsMutation,
-} from '#/shared/redux/socialsApiSlice'
+  socialsQueryOptions,
+  userSocialsQueryOptions,
+  createUserSocials,
+  deleteUserSocial,
+  deleteAllUserSocials,
+} from '#/shared/query/socials'
 import { decodeJwtPayload, getAccessTokenValue } from '#/shared/token-storage'
 import { UserStatus } from '#/models/user.models'
 import type {
@@ -36,6 +37,12 @@ import { FormInput } from '#/components/form/FormInput'
 import { FormButton } from '#/components/form/FormButton'
 
 export const Route = createFileRoute('/$locale/_authed/users/$uuid/')({
+  loader: async ({ context, params }) => {
+    if (typeof window !== 'undefined') {
+      await context.queryClient.ensureQueryData(userQueryOptions(params.uuid))
+      context.queryClient.prefetchQuery(userImageQueryOptions(params.uuid))
+    }
+  },
   component: UserDetailPage,
 })
 
@@ -59,12 +66,12 @@ function getLoggedInUserId(): number | null {
 
 function UserDetailPage() {
   const { locale, uuid } = useParams({ from: '/$locale/_authed/users/$uuid/' })
-  const { data: user, isLoading, isError } = useGetUserQuery(uuid)
-  const { data: profileImage, refetch: refetchImage } = useGetUserImageQuery(uuid)
+  const queryClient = useQueryClient()
+  const { data: user, isLoading, isError } = useQuery(userQueryOptions(uuid))
+  const { data: profileImage } = useQuery(userImageQueryOptions(uuid))
 
   // getLoggedInUserId reads from localStorage which is only available client-side
-  // and only populated after _authed.tsx's useLayoutEffect runs. Reading it in
-  // useEffect (which fires after all layout effects) guarantees we see the token.
+  // and only populated after _authed.tsx's useLayoutEffect runs.
   const [loggedInUserId, setLoggedInUserId] = useState<number | null>(null)
   useEffect(() => {
     setLoggedInUserId(getLoggedInUserId())
@@ -122,7 +129,6 @@ function UserDetailPage() {
           <div className="rounded-md border border-border bg-card overflow-hidden">
             <div className="h-20 bg-gradient-to-r from-primary/20 to-primary/5" />
             <div className="px-6 pb-6 -mt-10">
-              {/* Avatar with upload */}
               <div className="mb-3">
                 <AvatarUpload
                   uuid={uuid}
@@ -131,7 +137,7 @@ function UserDetailPage() {
                   imageSrc={profileImage ? resolveImage(profileImage.image) : undefined}
                   imageAlt={profileImage?.alt}
                   isMe={isMe}
-                  onUploaded={refetchImage}
+                  onUploaded={() => queryClient.invalidateQueries({ queryKey: ['users', uuid, 'image'] })}
                 />
               </div>
 
@@ -220,19 +226,19 @@ interface AvatarUploadProps {
 
 function AvatarUpload({ uuid, firstName, lastName, imageSrc, imageAlt, isMe, onUploaded }: AvatarUploadProps) {
   const fileRef = useRef<HTMLInputElement>(null)
-  const [uploadImage, { isLoading }] = useUploadUserImageMutation()
-
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-    try {
-      await uploadImage({ userUuid: uuid, image: file, title: file.name, alt: file.name }).unwrap()
+  const { mutate, isPending } = useMutation({
+    mutationFn: uploadUserImage,
+    onSuccess: () => {
       toast.success(m.user_detail_upload_success())
       onUploaded()
-    } catch {
-      toast.error(m.user_detail_upload_error())
-    }
-    // reset so the same file can be re-selected if needed
+    },
+    onError: () => toast.error(m.user_detail_upload_error()),
+  })
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    mutate({ userUuid: uuid, image: file, title: file.name, alt: file.name })
     e.target.value = ''
   }
 
@@ -256,12 +262,12 @@ function AvatarUpload({ uuid, firstName, lastName, imageSrc, imageAlt, isMe, onU
           <>
             <button
               type="button"
-              disabled={isLoading}
+              disabled={isPending}
               onClick={() => fileRef.current?.click()}
               className="absolute bottom-0 right-0 h-7 w-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow hover:bg-primary/90 transition-colors disabled:opacity-50"
               title={m.user_detail_upload_picture()}
             >
-              {isLoading ? (
+              {isPending ? (
                 <Loader2 className="h-3.5 w-3.5 animate-spin" />
               ) : (
                 <Camera className="h-3.5 w-3.5" />
@@ -284,25 +290,27 @@ function AvatarUpload({ uuid, firstName, lastName, imageSrc, imageAlt, isMe, onU
   )
 }
 
-
 // ─── Bio ─────────────────────────────────────────────────────────────────────
 
 function BioSection({ uuid, bio, isMe }: { uuid: string; bio: string; isMe: boolean }) {
+  const queryClient = useQueryClient()
   const [isEdit, setIsEdit] = useState(false)
   const [error, setError] = useState('')
-  const [updateBio, { isLoading }] = useUpdateUserBioMutation()
+  const { mutate, isPending } = useMutation({
+    mutationFn: updateUserBio,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['users', uuid] })
+      setIsEdit(false)
+    },
+    onError: () => setError(m.user_detail_bio_save_error()),
+  })
   const { register, handleSubmit, reset } = useForm<UpdateBioRequest>({
     defaultValues: { bio },
   })
 
-  const onSubmit = async (data: UpdateBioRequest) => {
+  const onSubmit = (data: UpdateBioRequest) => {
     setError('')
-    try {
-      await updateBio({ uuid, request: data }).unwrap()
-      setIsEdit(false)
-    } catch {
-      setError(m.user_detail_bio_save_error())
-    }
+    mutate({ uuid, request: data })
   }
 
   const handleCancel = () => {
@@ -341,7 +349,7 @@ function BioSection({ uuid, bio, isMe }: { uuid: string; bio: string; isMe: bool
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
           <FormTextArea {...register('bio')} rows={4} />
           {error && <p className="text-xs text-destructive">{error}</p>}
-          <FormButton type="submit" size="sm" isLoading={isLoading}>
+          <FormButton type="submit" size="sm" isLoading={isPending}>
             <Check className="h-3 w-3 mr-1" />
             {m.user_detail_bio_save()}
           </FormButton>
@@ -372,9 +380,17 @@ interface ContactSectionProps {
 }
 
 function ContactSection({ uuid, details, email, isMe }: ContactSectionProps) {
+  const queryClient = useQueryClient()
   const [isEdit, setIsEdit] = useState(false)
   const [error, setError] = useState('')
-  const [updateContact, { isLoading }] = useUpdateContactInfoMutation()
+  const { mutate, isPending } = useMutation({
+    mutationFn: updateContactInfo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['users', uuid] })
+      setIsEdit(false)
+    },
+    onError: () => setError(m.user_detail_contact_save_error()),
+  })
   const { register, handleSubmit, reset } = useForm<UpdateContactInfoRequest>({
     defaultValues: {
       country: details?.country ?? '',
@@ -386,14 +402,9 @@ function ContactSection({ uuid, details, email, isMe }: ContactSectionProps) {
     },
   })
 
-  const onSubmit = async (data: UpdateContactInfoRequest) => {
+  const onSubmit = (data: UpdateContactInfoRequest) => {
     setError('')
-    try {
-      await updateContact({ uuid, request: data }).unwrap()
-      setIsEdit(false)
-    } catch {
-      setError(m.user_detail_contact_save_error())
-    }
+    mutate({ uuid, request: data })
   }
 
   const handleCancel = () => {
@@ -443,7 +454,7 @@ function ContactSection({ uuid, details, email, isMe }: ContactSectionProps) {
             <FormInput {...register('zip')} placeholder={m.user_detail_zip()} />
           </div>
           {error && <p className="text-xs text-destructive">{error}</p>}
-          <FormButton type="submit" size="sm" isLoading={isLoading}>
+          <FormButton type="submit" size="sm" isLoading={isPending}>
             <Check className="h-3 w-3 mr-1" />
             {m.user_detail_contact_save()}
           </FormButton>
@@ -486,14 +497,33 @@ interface SocialNetworksSectionProps {
 type SocialFormValues = { socials: Array<{ socialId: string; url: string }> }
 
 function SocialNetworksSection({ uuid, userId, isMe }: SocialNetworksSectionProps) {
+  const queryClient = useQueryClient()
   const [isEdit, setIsEdit] = useState(false)
   const [error, setError] = useState('')
 
-  const { data: allSocials = [], isLoading: socialsLoading } = useGetSocialsQuery()
-  const { data: userSocials = [], isLoading: userSocialsLoading } = useGetUserSocialsQuery(uuid)
-  const [createSocials, { isLoading: saving }] = useCreateUserSocialsMutation()
-  const [deleteOne, { isLoading: deletingOne }] = useDeleteUserSocialMutation()
-  const [deleteAll, { isLoading: deletingAll }] = useDeleteAllUserSocialsMutation()
+  const { data: allSocials = [], isLoading: socialsLoading } = useQuery(socialsQueryOptions())
+  const { data: userSocials = [], isLoading: userSocialsLoading } = useQuery(userSocialsQueryOptions(uuid))
+
+  const { mutate: saveSocials, isPending: saving } = useMutation({
+    mutationFn: createUserSocials,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['socials', uuid] })
+      setIsEdit(false)
+    },
+    onError: () => setError(m.user_detail_socials_save_error()),
+  })
+
+  const { mutate: deleteOne, isPending: deletingOne } = useMutation({
+    mutationFn: deleteUserSocial,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['socials', uuid] }),
+    onError: () => setError(m.user_detail_socials_save_error()),
+  })
+
+  const { mutate: deleteAll, isPending: deletingAll } = useMutation({
+    mutationFn: deleteAllUserSocials,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['socials', uuid] }),
+    onError: () => setError(m.user_detail_socials_save_error()),
+  })
 
   const mutating = saving || deletingOne || deletingAll
 
@@ -505,19 +535,14 @@ function SocialNetworksSection({ uuid, userId, isMe }: SocialNetworksSectionProp
 
   const { fields, append, remove } = useFieldArray({ name: 'socials', control })
 
-  const onSubmit = async (data: SocialFormValues) => {
+  const onSubmit = (data: SocialFormValues) => {
     setError('')
-    try {
-      const request: Array<CreateUserSocialRequest> = data.socials.map((s) => ({
-        userId,
-        socialId: Number(s.socialId),
-        url: s.url,
-      }))
-      await createSocials({ userUuid: uuid, request }).unwrap()
-      setIsEdit(false)
-    } catch {
-      setError(m.user_detail_socials_save_error())
-    }
+    const request: Array<CreateUserSocialRequest> = data.socials.map((s) => ({
+      userId,
+      socialId: Number(s.socialId),
+      url: s.url,
+    }))
+    saveSocials({ userUuid: uuid, request })
   }
 
   const handleEdit = () => {
@@ -532,28 +557,20 @@ function SocialNetworksSection({ uuid, userId, isMe }: SocialNetworksSectionProp
     setError('')
   }
 
-  const handleDeleteItem = async (index: number) => {
+  const handleDeleteItem = (index: number) => {
     const field = fields[index]
     const existing = userSocials.find(
       (s) => s.socialId === Number(field.socialId) && s.url === field.url,
     )
     remove(index)
     if (existing) {
-      try {
-        await deleteOne({ userUuid: uuid, id: existing.id }).unwrap()
-      } catch {
-        setError(m.user_detail_socials_save_error())
-      }
+      deleteOne({ userUuid: uuid, id: existing.id })
     }
   }
 
-  const handleDeleteAll = async () => {
-    try {
-      await deleteAll({ userUuid: uuid }).unwrap()
-      remove()
-    } catch {
-      setError(m.user_detail_socials_save_error())
-    }
+  const handleDeleteAll = () => {
+    deleteAll({ userUuid: uuid })
+    remove()
   }
 
   const isLoading = socialsLoading || userSocialsLoading
@@ -682,20 +699,21 @@ function SocialNetworksSection({ uuid, userId, isMe }: SocialNetworksSectionProp
 // ─── Change password ──────────────────────────────────────────────────────────
 
 function ChangePasswordSection({ email }: { email: string }) {
-  const [resetPassword, { isLoading }] = useResetPasswordMutation()
+  const { mutate, isPending } = useMutation({
+    mutationFn: resetPassword,
+    onSuccess: () => {
+      toast.success(m.user_detail_change_password_success())
+      reset({ email, newPassword: '', confirmPassword: '' })
+    },
+    onError: () => toast.error(m.user_detail_change_password_error()),
+  })
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ChangePasswordRequest>({
     defaultValues: { email, newPassword: '', confirmPassword: '' },
   })
 
-  const onSubmit = async (data: ChangePasswordRequest) => {
-    try {
-      await resetPassword(data).unwrap()
-      toast.success(m.user_detail_change_password_success())
-      reset({ email, newPassword: '', confirmPassword: '' })
-    } catch {
-      toast.error(m.user_detail_change_password_error())
-    }
+  const onSubmit = (data: ChangePasswordRequest) => {
+    mutate(data)
   }
 
   return (
@@ -724,7 +742,7 @@ function ChangePasswordSection({ email }: { email: string }) {
           placeholder={m.user_detail_confirm_password()}
           autoComplete="new-password"
         />
-        <FormButton type="submit" size="sm" isLoading={isLoading}>
+        <FormButton type="submit" size="sm" isLoading={isPending}>
           {m.user_detail_change_password_submit()}
         </FormButton>
       </form>
@@ -735,15 +753,18 @@ function ChangePasswordSection({ email }: { email: string }) {
 // ─── Account actions ──────────────────────────────────────────────────────────
 
 function AccountActions({ uuid, status }: { uuid: string; status: UserStatus }) {
-  const [changeStatus, { isLoading }] = useChangeAccountStatusMutation()
-
-  const apply = async (action: UserAccountActions) => {
-    try {
-      await changeStatus({ request: { userId: uuid }, action }).unwrap()
+  const queryClient = useQueryClient()
+  const { mutate, isPending } = useMutation({
+    mutationFn: changeAccountStatus,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['users', uuid] })
       toast.success(m.user_detail_action_success())
-    } catch {
-      toast.error(m.user_detail_action_error())
-    }
+    },
+    onError: () => toast.error(m.user_detail_action_error()),
+  })
+
+  const apply = (action: UserAccountActions) => {
+    mutate({ request: { userId: uuid }, action })
   }
 
   return (
@@ -752,18 +773,18 @@ function AccountActions({ uuid, status }: { uuid: string; status: UserStatus }) 
 
       <div className="flex flex-wrap gap-2">
         {status !== UserStatus.ACTIVE && (
-          <Button size="sm" variant="outline" disabled={isLoading} onClick={() => apply('ACTIVATE')}>
+          <Button size="sm" variant="outline" disabled={isPending} onClick={() => apply('ACTIVATE')}>
             {m.user_detail_activate()}
           </Button>
         )}
         {status === UserStatus.ACTIVE && (
-          <Button size="sm" variant="outline" disabled={isLoading} onClick={() => apply('DEACTIVATE')}>
+          <Button size="sm" variant="outline" disabled={isPending} onClick={() => apply('DEACTIVATE')}>
             {m.user_detail_deactivate()}
           </Button>
         )}
         {status !== UserStatus.DELETED && (
-          <Button size="sm" variant="destructive" disabled={isLoading} onClick={() => apply('DELETE')}>
-            {isLoading && <Loader2 className="mr-2 h-3 w-3 animate-spin" />}
+          <Button size="sm" variant="destructive" disabled={isPending} onClick={() => apply('DELETE')}>
+            {isPending && <Loader2 className="mr-2 h-3 w-3 animate-spin" />}
             {m.user_detail_delete()}
           </Button>
         )}

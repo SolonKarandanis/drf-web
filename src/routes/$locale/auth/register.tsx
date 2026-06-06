@@ -6,7 +6,8 @@ import { passwordStrength } from 'check-password-strength'
 
 import { registerUser, type RegisterError } from '#/lib/register-server'
 import { registerUserSchema, type RegisterUserSchema } from '#/schemas/auth.schemas'
-import { useGetAllGroupsQuery } from '#/shared/redux/usersApiSlice'
+import { useQuery } from '@tanstack/react-query'
+import { allGroupsQueryOptions } from '#/shared/query/users'
 import { m } from '#/paraglide/messages'
 import { CForm, FormInput, FormButton, PasswordStrength } from '#/components/form'
 import { SocialButtons } from '#/components/auth/SocialButtons'
@@ -20,7 +21,7 @@ function RegisterPage() {
   const navigate = useNavigate()
   const [serverError, setServerError] = useState<RegisterError | null>(null)
   const [passStrength, setPassStrength] = useState(0)
-  const { data: groups, isLoading: groupsLoading } = useGetAllGroupsQuery()
+  const { data: groups, isLoading: groupsLoading } = useQuery(allGroupsQueryOptions())
 
   const nonAdminGroups = (groups ?? []).filter((g) => g.name.toUpperCase() !== 'ADMIN')
 

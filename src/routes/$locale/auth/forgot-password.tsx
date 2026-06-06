@@ -2,10 +2,12 @@ import { Link, createFileRoute, useNavigate, useParams } from '@tanstack/react-r
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState, useEffect } from 'react'
+import { useMutation } from '@tanstack/react-query'
 import { passwordStrength } from 'check-password-strength'
 
 import { forgotPasswordSchema, type ForgotPasswordSchema } from '#/schemas/auth.schemas'
-import { useForgotPasswordMutation } from '#/shared/redux/usersApiSlice'
+import { forgotPassword } from '#/shared/query/users'
+import type { HttpError } from '#/shared/query/client'
 import { m } from '#/paraglide/messages'
 import { CForm, FormInput, FormButton, PasswordStrength } from '#/components/form'
 import { SocialButtons } from '#/components/auth/SocialButtons'
@@ -17,7 +19,7 @@ export const Route = createFileRoute('/$locale/auth/forgot-password')({
 function ForgotPasswordPage() {
   const { locale } = useParams({ from: '/$locale/auth/forgot-password' })
   const navigate = useNavigate()
-  const [forgotPassword] = useForgotPasswordMutation()
+  const { mutateAsync } = useMutation({ mutationFn: forgotPassword })
   const [passStrength, setPassStrength] = useState(0)
 
   const {
@@ -37,14 +39,14 @@ function ForgotPasswordPage() {
 
   const onSubmit = async (values: ForgotPasswordSchema) => {
     try {
-      await forgotPassword(values).unwrap()
+      await mutateAsync(values)
       navigate({ to: '/$locale/auth/login', params: { locale }, search: { reset: '1' } })
     } catch (err: unknown) {
-      const data = (err as { data?: Record<string, string[]> })?.data
-      if (data?.email) {
-        setError('email', { message: data.email[0] })
-      } else if (data?.password) {
-        setError('confirmPassword', { message: data.password[0] })
+      const body = (err as HttpError)?.body as Record<string, string[]> | undefined
+      if (body?.email) {
+        setError('email', { message: body.email[0] })
+      } else if (body?.password) {
+        setError('confirmPassword', { message: body.password[0] })
       } else {
         setError('root', { message: m.forgot_error() })
       }

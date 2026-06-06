@@ -1,19 +1,25 @@
 import { createFileRoute, Link, useParams } from '@tanstack/react-router'
 import { useState } from 'react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Loader2, Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
 
 import {
-  useGetUserWishlistQuery,
-  useDeleteWishlistItemsMutation,
-} from '#/shared/redux/wishlistApiSlice'
-import { useAddItemsToCartMutation } from '#/shared/redux/cartApiSlice'
+  userWishlistQueryOptions,
+  deleteWishlistItems,
+} from '#/shared/query/wishlist'
+import { addToCart } from '#/shared/query/cart'
 import type { WishlistItem } from '#/models/wishlist.models'
 import { m } from '#/paraglide/messages'
 import { Button } from '#/components/ui/button'
 import { Input } from '#/components/ui/input'
 
 export const Route = createFileRoute('/$locale/_authed/wishlist/')({
+  loader: async ({ context }) => {
+    if (typeof window !== 'undefined') {
+      await context.queryClient.ensureQueryData(userWishlistQueryOptions())
+    }
+  },
   component: WishlistPage,
 })
 
@@ -26,39 +32,33 @@ function resolveImage(path: string) {
 
 function WishlistPage() {
   const { locale } = useParams({ from: '/$locale/_authed/wishlist/' })
+  const queryClient = useQueryClient()
   const [query, setQuery] = useState('')
   const [submittedQuery, setSubmittedQuery] = useState<string | undefined>(undefined)
 
-  const { data: items, isLoading, isError, refetch } = useGetUserWishlistQuery(submittedQuery)
-  const [deleteItems] = useDeleteWishlistItemsMutation()
-  const [addToCart] = useAddItemsToCartMutation()
+  const { data: items, isLoading, isError } = useQuery(userWishlistQueryOptions(submittedQuery))
+
+  const deleteMutation = useMutation({
+    mutationFn: deleteWishlistItems,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['wishlist'] })
+      toast.success(m.wishlist_remove_success())
+    },
+    onError: () => toast.error(m.wishlist_remove_error()),
+  })
+
+  const addToCartMutation = useMutation({
+    mutationFn: addToCart,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['cart'] })
+      toast.success(m.wishlist_add_cart_success())
+    },
+    onError: () => toast.error(m.wishlist_add_cart_error()),
+  })
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     setSubmittedQuery(query || undefined)
-  }
-
-  const handleRemove = async (item: WishlistItem) => {
-    try {
-      await deleteItems([{ wishListItemId: item.id }]).unwrap()
-      refetch()
-      toast.success(m.wishlist_remove_success())
-    } catch {
-      toast.error(m.wishlist_remove_error())
-    }
-  }
-
-  const handleMoveToCart = async (item: WishlistItem) => {
-    try {
-      await addToCart([{
-        productId: item.productId,
-        quantity: 1,
-        attributes: item.attributes ?? undefined,
-      }]).unwrap()
-      toast.success(m.wishlist_add_cart_success())
-    } catch {
-      toast.error(m.wishlist_add_cart_error())
-    }
   }
 
   return (
@@ -84,9 +84,7 @@ function WishlistPage() {
         </div>
       )}
 
-      {isError && (
-        <p className="text-sm text-destructive">{m.wishlist_error()}</p>
-      )}
+      {isError && <p className="text-sm text-destructive">{m.wishlist_error()}</p>}
 
       {!isLoading && items && items.length === 0 && (
         <div className="flex flex-col items-center gap-4 py-16 text-center">
@@ -106,8 +104,14 @@ function WishlistPage() {
               key={item.id}
               item={item}
               locale={locale}
-              onRemove={() => handleRemove(item)}
-              onMoveToCart={() => handleMoveToCart(item)}
+              onRemove={() => deleteMutation.mutate([{ wishListItemId: item.id }])}
+              onMoveToCart={() =>
+                addToCartMutation.mutate([{
+                  productId: item.productId,
+                  quantity: 1,
+                  attributes: item.attributes ?? undefined,
+                }])
+              }
             />
           ))}
         </div>
@@ -168,7 +172,10 @@ function WishlistCard({
             {m.wishlist_move_to_cart()}
           </Button>
           <Button asChild size="sm" variant="outline" className="w-full">
-            <Link to="/$locale/products/$uuid" params={{ locale, uuid: item.productDetails.uuid }}>
+            <Link
+              to="/$locale/products/$uuid"
+              params={{ locale, uuid: item.productDetails.uuid }}
+            >
               {m.wishlist_view_product()}
             </Link>
           </Button>

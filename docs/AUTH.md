@@ -6,7 +6,7 @@ This app uses **two cooperating auth systems**. Knowing which one does what is t
 | --------------- | ------------------------------------------------- | ------------------------------------------------- |
 | **Django + SimpleJWT** | Real user accounts, business permissions, JWT access/refresh tokens | The `drf` backend (port 8000)                     |
 | **Better Auth** | Browser session cookie, route-guard truth         | TanStack Start server + Postgres (`better_auth_*` tables) |
-| **RTK Query**   | Authenticated API calls to Django, refresh retries | Browser only                                      |
+| **TanStack Query** | Authenticated API calls to Django, refresh retries | Browser only                                      |
 
 Django is the source of truth for **who the user is**. Better Auth is the source of truth for **whether this browser is logged in right now**. The two are kept in sync through a shadow-user pattern (see below).
 
@@ -77,12 +77,15 @@ Page load → TanStack Router beforeLoad on _authed.tsx
   → getServerSession() server fn reads BA cookie, calls auth.api.getSession()
   → if no session: redirect to /$locale/auth/login
   → if session exists: render dashboard
-  
-Dashboard mounts → useGetLoggedInUserAccountQuery() (RTK Query)
-  → baseQueryWithReauth reads localStorage.access
+
+Route loader → ensureQueryData(accountQueryOptions()) (TanStack Query)
+  → fetchWithAuth reads localStorage.access
   → GET http://localhost:8000/api/auth/users/account/
     Authorization: Bearer <access>
-  → 200 OK → data displayed
+  → result stored in TanStack Query cache
+
+Dashboard mounts → useQuery(accountQueryOptions())
+  → cache hit → data displayed immediately
 ```
 
 The two auth signals work independently. The BA cookie unlocks the route; the localStorage token unlocks the Django API call.
@@ -90,12 +93,12 @@ The two auth signals work independently. The BA cookie unlocks the route; the lo
 ## Refresh flow (when access token is invalid/expired)
 
 ```
-RTK Query call → Django returns 401 with code "token_not_valid"
-  → baseQueryWithReauth catches it
+fetchWithAuth call → Django returns 401 with code "token_not_valid"
+  → fetchWithAuth catches it
   → Acquires mutex (so only one refresh fires even with concurrent requests)
   → POST /api/auth/token/refresh/ with body { refresh }
   → Django returns { access: <new> }
-  → Write new access to localStorage
+  → Write new access to localStorage via setStorageValue('access', access)
   → Retry the original call → 200 OK
 ```
 
@@ -123,7 +126,7 @@ On sign-out, the frontend POSTs `{ refresh }` to Django's `POST /api/auth/logout
 | `src/routes/api/auth/$.ts`                    | Catchall route that mounts Better Auth's HTTP handlers      |
 | `src/routes/$locale/_authed.tsx`              | Protected layout. `beforeLoad` checks BA session.           |
 | `src/routes/$locale/auth/login.tsx`           | Login form. Calls `signInWithDjango`.                       |
-| `src/shared/redux/apiSlice.ts`                | RTK Query base. **Refresh logic lives here.**               |
+| `src/shared/query/client.ts`                  | `fetchWithAuth` + `fetchPublic`. **Refresh logic lives here.**  |
 | `src/shared/token-storage.ts`                 | `localStorage` helpers (`getAccessTokenValue`, …) + `decodeJwtPayload` |
 | `.env`                                        | `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `DATABASE_URL`, `DJANGO_BACKEND_URL`, `VITE_BACKEND_URL` |
 
@@ -181,10 +184,10 @@ Your access token is invalid/expired. If you ALSO see in Network/Django logs tha
 
 If you see NO refresh call:
 - Check that `localStorage.refresh` is set. If not, the refresh path is skipped (it requires a refresh token).
-- Check the dev console for the apiSlice path. The check is `result.error.status === 401 && refresh` (`src/shared/redux/apiSlice.ts`).
+- Check the dev console for the fetchWithAuth path. The check is `response.status === 401 && refresh` (`src/shared/query/client.ts`).
 
 If the refresh call fires but the retry STILL fails with 401:
-- Check that `getAccessTokenValue()` is read inside `prepareHeaders`, not captured at the top of `baseQueryWithReauth`. (This was a real bug in the original `drf-web` — see `MIGRATION_PLAN.md` finding #1a.)
+- Check that `getAccessTokenValue()` is read fresh inside `fetchWithAuth` on the retry, not captured before the refresh. (This was a real bug in the original `drf-web` — see `MIGRATION_PLAN.md` finding #1a.)
 - Manually inspect `localStorage.access` after the refresh — it should be the new token, not the bad one.
 
 ### "Protected route doesn't bounce me to login"
@@ -250,7 +253,7 @@ useLayoutEffect(() => {
 }, [djangoTokens])
 ```
 
-`isJwtExpiredOrMissing` decodes the JWT's `exp` claim via `decodeJwtPayload()` (see below). If the stored token is fresh, the session token is **never written** — ensuring RTK Query's refresh-cycle tokens (which are newer than the BA session snapshot) are not clobbered on navigation.
+`isJwtExpiredOrMissing` decodes the JWT's `exp` claim via `decodeJwtPayload()` (see below). If the stored token is fresh, the session token is **never written** — ensuring `fetchWithAuth`'s refresh-cycle tokens (which are newer than the BA session snapshot) are not clobbered on navigation.
 
 ### `decodeJwtPayload` — why it exists
 

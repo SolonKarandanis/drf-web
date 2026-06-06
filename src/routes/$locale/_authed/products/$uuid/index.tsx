@@ -1,20 +1,19 @@
 import { createFileRoute, Link, useParams } from '@tanstack/react-router'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Loader2, Star, ShoppingCart, Heart } from 'lucide-react'
 import { toast } from 'sonner'
 
 import {
-  useGetProductDetailsQuery,
-  useGetProductImagesQuery,
-  useGetSimilarProductsByIdQuery,
-  useGetProductAttributesQuery,
-  useGetAllSizesQuery,
-  useGetAllColoursQuery,
-} from '#/shared/redux/productsApiSlice'
-import { useAddItemsToCartMutation } from '#/shared/redux/cartApiSlice'
-import { useAddToWishlistMutation } from '#/shared/redux/wishlistApiSlice'
-import { setCart } from '#/shared/redux/cartSlice'
+  productDetailsQueryOptions,
+  productImagesQueryOptions,
+  similarProductsQueryOptions,
+  productAttributesQueryOptions,
+  allSizesQueryOptions,
+  allColoursQueryOptions,
+} from '#/shared/query/products'
+import { addToCart } from '#/shared/query/cart'
+import { addToWishlist } from '#/shared/query/wishlist'
 import type { Comment, ImageModel, ProductDetails, SimilarProduct } from '#/models/product.models'
 import { m } from '#/paraglide/messages'
 import { Button } from '#/components/ui/button'
@@ -22,6 +21,14 @@ import { Input } from '#/components/ui/input'
 import { Label } from '#/components/ui/label'
 
 export const Route = createFileRoute('/$locale/_authed/products/$uuid/')({
+  loader: async ({ context, params }) => {
+    if (typeof window !== 'undefined') {
+      await context.queryClient.ensureQueryData(productDetailsQueryOptions(params.uuid))
+      context.queryClient.prefetchQuery(productImagesQueryOptions(params.uuid))
+      context.queryClient.prefetchQuery(similarProductsQueryOptions(params.uuid))
+      context.queryClient.prefetchQuery(productAttributesQueryOptions(params.uuid))
+    }
+  },
   component: ProductDetailPage,
 })
 
@@ -35,14 +42,9 @@ function resolveImage(path: string) {
 function ProductDetailPage() {
   const { locale, uuid } = useParams({ from: '/$locale/_authed/products/$uuid/' })
 
-  const {
-    data: product,
-    isLoading,
-    isError,
-  } = useGetProductDetailsQuery(uuid)
-
-  const { data: images } = useGetProductImagesQuery(uuid)
-  const { data: similarProducts } = useGetSimilarProductsByIdQuery(uuid)
+  const { data: product, isLoading, isError } = useQuery(productDetailsQueryOptions(uuid))
+  const { data: images } = useQuery(productImagesQueryOptions(uuid))
+  const { data: similarProducts } = useQuery(similarProductsQueryOptions(uuid))
 
   if (isLoading) {
     return (
@@ -93,15 +95,12 @@ function ProductDetailPage() {
         <div className="col-span-12 lg:col-span-5 space-y-4">
           <ImageGallery images={images ?? []} title={product.title} />
           {similarProducts && similarProducts.length > 0 && (
-            <SimilarProductsSection
-              products={similarProducts}
-              locale={locale}
-            />
+            <SimilarProductsSection products={similarProducts} locale={locale} />
           )}
         </div>
 
         <div className="col-span-12 lg:col-span-7 space-y-6">
-          <ProductInfo product={product} />
+          <ProductInfo product={product} uuid={uuid} />
           <CommentsSection comments={product.comments} />
         </div>
       </div>
@@ -109,13 +108,7 @@ function ProductDetailPage() {
   )
 }
 
-function ImageGallery({
-  images,
-  title,
-}: {
-  images: Array<ImageModel>
-  title: string
-}) {
+function ImageGallery({ images, title }: { images: Array<ImageModel>; title: string }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const active = images[activeIndex]
 
@@ -172,41 +165,45 @@ function StarRating({ rating, count }: { rating: number | null; count: number })
             key={i}
             className={[
               'h-4 w-4',
-              i < filled
-                ? 'fill-amber-400 text-amber-400'
-                : 'fill-muted text-muted-foreground',
+              i < filled ? 'fill-amber-400 text-amber-400' : 'fill-muted text-muted-foreground',
             ].join(' ')}
           />
         ))}
       </div>
       <span className="text-xs text-muted-foreground">
-        {m.product_detail_rating({
-          rating: r.toFixed(1),
-          count: String(count),
-        })}
+        {m.product_detail_rating({ rating: r.toFixed(1), count: String(count) })}
       </span>
     </div>
   )
 }
 
-function ProductInfo({ product }: { product: ProductDetails }) {
-  const dispatch = useDispatch()
-  const [addToCart, { isLoading: cartLoading }] = useAddItemsToCartMutation()
-  const [addToWishlist, { isLoading: wishlistLoading }] = useAddToWishlistMutation()
+function ProductInfo({ product, uuid }: { product: ProductDetails; uuid: string }) {
+  const queryClient = useQueryClient()
+  const { mutate: doAddToCart, isPending: cartLoading } = useMutation({
+    mutationFn: addToCart,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['cart'] })
+      toast.success(m.product_add_to_cart_success())
+    },
+    onError: () => toast.error(m.product_add_to_cart_error()),
+  })
+  const { mutate: doAddToWishlist, isPending: wishlistLoading } = useMutation({
+    mutationFn: addToWishlist,
+    onSuccess: () => toast.success(m.product_add_to_wishlist_success()),
+    onError: () => toast.error(m.product_add_to_wishlist_error()),
+  })
   const [quantity, setQuantity] = useState(1)
   const [selectedSizeOptionId, setSelectedSizeOptionId] = useState<number | null>(null)
   const [selectedColorOptionId, setSelectedColorOptionId] = useState<number | null>(null)
 
-  const { data: productAttrs } = useGetProductAttributesQuery(product.uuid)
-  const { data: allSizes } = useGetAllSizesQuery()
-  const { data: allColours } = useGetAllColoursQuery()
+  const { data: productAttrs } = useQuery(productAttributesQueryOptions(uuid))
+  const { data: allSizes } = useQuery(allSizesQueryOptions())
+  const { data: allColours } = useQuery(allColoursQueryOptions())
 
-  const availableSizes = allSizes?.filter((s) =>
-    productAttrs?.sizes.some((a) => a.attributeOptionId === s.id)
-  ) ?? []
-  const availableColors = allColours?.filter((c) =>
-    productAttrs?.colors.some((a) => a.attributeOptionId === c.id)
-  ) ?? []
+  const availableSizes =
+    allSizes?.filter((s) => productAttrs?.sizes.some((a) => a.attributeOptionId === s.id)) ?? []
+  const availableColors =
+    allColours?.filter((c) => productAttrs?.colors.some((a) => a.attributeOptionId === c.id)) ?? []
 
   const salePrice = product.salePrice ?? 0
   const price = salePrice > 0 ? salePrice : product.price
@@ -218,21 +215,7 @@ function ProductInfo({ product }: { product: ProductDetails }) {
     if (selectedSizeOptionId !== null) attrs[1] = selectedSizeOptionId
     if (selectedColorOptionId !== null) attrs[2] = selectedColorOptionId
     const attributes = Object.keys(attrs).length > 0 ? JSON.stringify(attrs) : undefined
-
-    addToCart([{ productId: product.id, quantity, attributes }])
-      .unwrap()
-      .then((cart) => {
-        dispatch(setCart(cart))
-        toast.success(m.product_add_to_cart_success())
-      })
-      .catch(() => toast.error(m.product_add_to_cart_error()))
-  }
-
-  const handleAddToWishlist = () => {
-    addToWishlist([{ productId: product.id }])
-      .unwrap()
-      .then(() => toast.success(m.product_add_to_wishlist_success()))
-      .catch(() => toast.error(m.product_add_to_wishlist_error()))
+    doAddToCart([{ productId: product.id, quantity, attributes }])
   }
 
   return (
@@ -261,7 +244,9 @@ function ProductInfo({ product }: { product: ProductDetails }) {
           <p className="text-foreground">{product.brand.name}</p>
         </div>
         <div>
-          <p className="font-semibold text-muted-foreground mb-1">{m.product_detail_availability()}</p>
+          <p className="font-semibold text-muted-foreground mb-1">
+            {m.product_detail_availability()}
+          </p>
           <span
             className={[
               'inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium',
@@ -288,10 +273,7 @@ function ProductInfo({ product }: { product: ProductDetails }) {
           <p className="text-sm font-semibold mb-2">{m.product_detail_categories()}</p>
           <div className="flex flex-wrap gap-2">
             {product.categories.map((c) => (
-              <span
-                key={c.id}
-                className="rounded-full border border-border bg-muted px-3 py-1 text-xs"
-              >
+              <span key={c.id} className="rounded-full border border-border bg-muted px-3 py-1 text-xs">
                 {c.name}
               </span>
             ))}
@@ -402,7 +384,12 @@ function ProductInfo({ product }: { product: ProductDetails }) {
             )}
             {m.product_add_to_cart()}
           </Button>
-          <Button variant="outline" className="gap-2" disabled={busy} onClick={handleAddToWishlist}>
+          <Button
+            variant="outline"
+            className="gap-2"
+            disabled={busy}
+            onClick={() => doAddToWishlist([{ productId: product.id }])}
+          >
             {wishlistLoading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
             ) : (

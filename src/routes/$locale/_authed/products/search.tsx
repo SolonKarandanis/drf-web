@@ -1,18 +1,17 @@
 import { createFileRoute, Link, useParams } from '@tanstack/react-router'
 import { useEffect, useMemo, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Loader2, ShoppingCart, Heart } from 'lucide-react'
 import { toast } from 'sonner'
 
 import {
-  useGetCategoriesWithTotalsQuery,
-  useGetBrandsWithTotalsQuery,
-  useGetSizesWithTotalsQuery,
-  useSearchProductsMutation,
-} from '#/shared/redux/productsApiSlice'
-import { useAddItemsToCartMutation } from '#/shared/redux/cartApiSlice'
-import { useAddToWishlistMutation } from '#/shared/redux/wishlistApiSlice'
-import { setCart } from '#/shared/redux/cartSlice'
+  categoriesWithTotalsQueryOptions,
+  brandsWithTotalsQueryOptions,
+  sizesWithTotalsQueryOptions,
+  searchProducts,
+} from '#/shared/query/products'
+import { addToCart } from '#/shared/query/cart'
+import { addToWishlist } from '#/shared/query/wishlist'
 import type { FilterOption, Products } from '#/models/product.models'
 import { m } from '#/paraglide/messages'
 import { Button } from '#/components/ui/button'
@@ -35,6 +34,13 @@ function sortProducts(products: Array<Products>, key: SortKey): Array<Products> 
 }
 
 export const Route = createFileRoute('/$locale/_authed/products/search')({
+  loader: async ({ context }) => {
+    if (typeof window !== 'undefined') {
+      context.queryClient.prefetchQuery(categoriesWithTotalsQueryOptions())
+      context.queryClient.prefetchQuery(brandsWithTotalsQueryOptions())
+      context.queryClient.prefetchQuery(sizesWithTotalsQueryOptions())
+    }
+  },
   component: ProductSearchPage,
 })
 
@@ -48,22 +54,22 @@ function ProductSearchPage() {
   const [sortKey, setSortKey] = useState<SortKey>('default')
   const [page, setPage] = useState(1)
 
-  const { data: categories, isLoading: categoriesLoading } = useGetCategoriesWithTotalsQuery()
-  const { data: brands, isLoading: brandsLoading } = useGetBrandsWithTotalsQuery()
-  const { data: sizes, isLoading: sizesLoading } = useGetSizesWithTotalsQuery()
+  const { data: categories, isLoading: categoriesLoading } = useQuery(categoriesWithTotalsQueryOptions())
+  const { data: brands, isLoading: brandsLoading } = useQuery(brandsWithTotalsQueryOptions())
+  const { data: sizes, isLoading: sizesLoading } = useQuery(sizesWithTotalsQueryOptions())
 
-  const [searchProducts, { data: searchResult, isLoading, isError }] =
-    useSearchProductsMutation()
+  const { mutate: doSearch, data: searchResult, isPending: isLoading, isError } =
+    useMutation({ mutationFn: searchProducts })
 
   useEffect(() => {
-    searchProducts({
+    doSearch({
       query: committedQuery.trim() || null,
       categories: categoryIds.length > 0 ? categoryIds : undefined,
       brands: brandIds.length > 0 ? brandIds : undefined,
       sizes: sizeIds.length > 0 ? sizeIds : undefined,
       paging: { page, limit: PAGE_SIZE },
     })
-  }, [committedQuery, categoryIds, brandIds, sizeIds, page, searchProducts])
+  }, [committedQuery, categoryIds, brandIds, sizeIds, page, doSearch])
 
   const sortedResults = useMemo(
     () => sortProducts(searchResult?.data ?? [], sortKey),
@@ -238,13 +244,7 @@ function CheckboxFilter({
   )
 }
 
-function SortSelect({
-  value,
-  onChange,
-}: {
-  value: SortKey
-  onChange: (key: SortKey) => void
-}) {
+function SortSelect({ value, onChange }: { value: SortKey; onChange: (key: SortKey) => void }) {
   return (
     <div className="flex items-center gap-2 flex-shrink-0">
       <Label htmlFor="sort-select" className="text-sm whitespace-nowrap">
@@ -267,34 +267,26 @@ function SortSelect({
 }
 
 function ProductCard({ product, locale }: { product: Products; locale: string }) {
-  const dispatch = useDispatch()
-  const [addToCart, { isLoading: cartLoading }] = useAddItemsToCartMutation()
-  const [addToWishlist, { isLoading: wishlistLoading }] = useAddToWishlistMutation()
+  const queryClient = useQueryClient()
+  const { mutate: doAddToCart, isPending: cartLoading } = useMutation({
+    mutationFn: addToCart,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['cart'] })
+      toast.success(m.product_add_to_cart_success())
+    },
+    onError: () => toast.error(m.product_add_to_cart_error()),
+  })
+  const { mutate: doAddToWishlist, isPending: wishlistLoading } = useMutation({
+    mutationFn: addToWishlist,
+    onSuccess: () => toast.success(m.product_add_to_wishlist_success()),
+    onError: () => toast.error(m.product_add_to_wishlist_error()),
+  })
 
   const salePrice = product.salePrice ?? 0
   const price = salePrice > 0 ? salePrice : product.price
   const showOriginal = salePrice > 0 && salePrice < product.price
   const backendUrl =
     (import.meta.env.VITE_BACKEND_URL ?? 'http://localhost:8000/api/').replace(/\/api\/?$/, '')
-
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault()
-    addToCart([{ productId: product.id, quantity: 1 }])
-      .unwrap()
-      .then((cart) => {
-        dispatch(setCart(cart))
-        toast.success(m.product_add_to_cart_success())
-      })
-      .catch(() => toast.error(m.product_add_to_cart_error()))
-  }
-
-  const handleAddToWishlist = (e: React.MouseEvent) => {
-    e.preventDefault()
-    addToWishlist([{ productId: product.id }])
-      .unwrap()
-      .then(() => toast.success(m.product_add_to_wishlist_success()))
-      .catch(() => toast.error(m.product_add_to_wishlist_error()))
-  }
 
   const busy = cartLoading || wishlistLoading
 
@@ -332,7 +324,10 @@ function ProductCard({ product, locale }: { product: Products; locale: string })
           size="sm"
           className="flex-1 gap-1.5"
           disabled={busy}
-          onClick={handleAddToCart}
+          onClick={(e) => {
+            e.preventDefault()
+            doAddToCart([{ productId: product.id, quantity: 1 }])
+          }}
         >
           {cartLoading ? (
             <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -345,7 +340,10 @@ function ProductCard({ product, locale }: { product: Products; locale: string })
           size="sm"
           variant="outline"
           disabled={busy}
-          onClick={handleAddToWishlist}
+          onClick={(e) => {
+            e.preventDefault()
+            doAddToWishlist([{ productId: product.id }])
+          }}
           aria-label="Add to wishlist"
         >
           {wishlistLoading ? (

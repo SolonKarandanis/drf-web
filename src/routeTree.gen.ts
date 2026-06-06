@@ -139,7 +139,7 @@ const LocaleAuthedProductsUuidEditRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/$locale': typeof LocaleAuthedRouteWithChildren
+  '/$locale': typeof LocaleRouteWithChildren
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/dashboard': typeof LocaleAuthedDashboardRoute
   '/$locale/denied': typeof LocaleAuthedDeniedRoute

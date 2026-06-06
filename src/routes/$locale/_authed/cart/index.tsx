@@ -1,31 +1,27 @@
 import { createFileRoute, Link, useParams } from '@tanstack/react-router'
-import { useEffect } from 'react'
+import { useState } from 'react'
 import { Loader2, Minus, Plus, Trash2 } from 'lucide-react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 
 import {
-  useGetUserCartQuery,
-  useDeleteItemsFromCartMutation,
-  useUpdateCartItemsMutation,
-  useClearCartMutation,
-} from '#/shared/redux/cartApiSlice'
-import { useGetAllSizesQuery, useGetAllColoursQuery } from '#/shared/redux/productsApiSlice'
-import {
-  setCart,
-  resetCart,
-  mutateQuantity,
-  resetUpdateRequests,
-  cartItemsSelector,
-  cartTotalSelector,
-  cartUpdateRequestsSelector,
-  cartItemCountSelector,
-} from '#/shared/redux/cartSlice'
+  cartQueryOptions,
+  addToCart as addToCartFn,
+  deleteCartItems,
+  updateCartItems,
+  clearCart as clearCartFn,
+} from '#/shared/query/cart'
+import { allSizesQueryOptions, allColoursQueryOptions } from '#/shared/query/products'
 import type { CartItem } from '#/models/cart.models'
 import { m } from '#/paraglide/messages'
 import { Button } from '#/components/ui/button'
 
 export const Route = createFileRoute('/$locale/_authed/cart/')({
+  loader: async ({ context }) => {
+    if (typeof window !== 'undefined') {
+      await context.queryClient.ensureQueryData(cartQueryOptions())
+    }
+  },
   component: CartPage,
 })
 
@@ -38,58 +34,72 @@ function resolveImage(path: string) {
 
 function CartPage() {
   const { locale } = useParams({ from: '/$locale/_authed/cart/' })
-  const dispatch = useDispatch()
+  const queryClient = useQueryClient()
 
-  const { data, isLoading, isError } = useGetUserCartQuery()
-  const { data: allSizes } = useGetAllSizesQuery()
-  const { data: allColours } = useGetAllColoursQuery()
-  const [deleteItems, { isLoading: deleting }] = useDeleteItemsFromCartMutation()
-  const [updateItems, { isLoading: updating }] = useUpdateCartItemsMutation()
-  const [clearCart, { isLoading: clearing }] = useClearCartMutation()
+  const { data: cart, isLoading, isError } = useQuery(cartQueryOptions())
+  const { data: allSizes } = useQuery(allSizesQueryOptions())
+  const { data: allColours } = useQuery(allColoursQueryOptions())
+
+  // Local pending quantities replace the old cartSlice batching
+  const [pendingQuantities, setPendingQuantities] = useState<Map<number, number>>(new Map())
 
   const sizesMap = Object.fromEntries((allSizes ?? []).map((s) => [s.id, s.name]))
   const coloursMap = Object.fromEntries((allColours ?? []).map((c) => [c.id, c.name]))
 
-  const cartItems = useSelector(cartItemsSelector)
-  const totalPrice = useSelector(cartTotalSelector)
-  const updateRequests = useSelector(cartUpdateRequestsSelector)
-  const itemCount = useSelector(cartItemCountSelector)
+  // Apply pending quantity overrides so the UI feels instant
+  const displayItems = (cart?.cartItems ?? []).map((item) => {
+    const pending = pendingQuantities.get(item.id)
+    if (pending !== undefined) {
+      return { ...item, quantity: pending, totalPrice: pending * item.unitPrice }
+    }
+    return item
+  })
+  const displayTotal = displayItems.reduce((sum, i) => sum + i.totalPrice, 0)
 
-  useEffect(() => {
-    if (data) dispatch(setCart(data))
-    return () => { dispatch(resetCart()) }
-  }, [data, dispatch])
-
-  const handleDelete = async (cartItemId: number) => {
-    try {
-      const result = await deleteItems([{ cartItemId }]).unwrap()
-      dispatch(setCart(result))
+  const deleteMutation = useMutation({
+    mutationFn: deleteCartItems,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['cart'] })
       toast.success(m.cart_delete_success())
-    } catch {
-      toast.error(m.cart_delete_error())
-    }
-  }
+    },
+    onError: () => toast.error(m.cart_delete_error()),
+  })
 
-  const handleSave = async () => {
-    if (updateRequests.length === 0) return
-    try {
-      const result = await updateItems(updateRequests).unwrap()
-      dispatch(setCart(result))
-      dispatch(resetUpdateRequests())
+  const updateMutation = useMutation({
+    mutationFn: updateCartItems,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['cart'] })
+      setPendingQuantities(new Map())
       toast.success(m.cart_save_success())
-    } catch {
-      toast.error(m.cart_save_error())
-    }
+    },
+    onError: () => toast.error(m.cart_save_error()),
+  })
+
+  const clearMutation = useMutation({
+    mutationFn: clearCartFn,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['cart'] })
+      setPendingQuantities(new Map())
+      toast.success(m.cart_clear_success())
+    },
+    onError: () => toast.error(m.cart_clear_error()),
+  })
+
+  const handleDelete = (cartItemId: number) => {
+    deleteMutation.mutate([{ cartItemId }])
   }
 
-  const handleClear = async () => {
-    try {
-      const result = await clearCart().unwrap()
-      dispatch(setCart(result))
-      toast.success(m.cart_clear_success())
-    } catch {
-      toast.error(m.cart_clear_error())
-    }
+  const handleSave = () => {
+    if (pendingQuantities.size === 0) return
+    const requests = Array.from(pendingQuantities.entries()).map(([cartItemId, quantity]) => {
+      const item = cart?.cartItems.find((i) => i.id === cartItemId)
+      return { cartItemId, productId: item?.productId ?? 0, quantity }
+    })
+    updateMutation.mutate(requests)
+  }
+
+  const handleClear = () => {
+    clearMutation.mutate()
   }
 
   if (isLoading) {
@@ -113,13 +123,13 @@ function CartPage() {
     <div className="container mx-auto p-6 space-y-6">
       <h1 className="text-xl font-bold">{m.cart_title()}</h1>
 
-      {data?.modificationAlert && (
+      {cart?.modificationAlert && (
         <div className="rounded-md bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 px-4 py-3 text-sm text-yellow-800 dark:text-yellow-300">
           {m.cart_modification_alert()}
         </div>
       )}
 
-      {(!cartItems || itemCount === 0) ? (
+      {displayItems.length === 0 ? (
         <div className="flex flex-col items-center gap-4 py-16 text-center">
           <p className="text-muted-foreground">{m.cart_empty()}</p>
           <Button asChild variant="outline">
@@ -154,17 +164,17 @@ function CartPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
-                  {cartItems.map((item) => (
+                  {displayItems.map((item) => (
                     <CartRow
                       key={item.id}
                       item={item}
                       locale={locale}
                       sizesMap={sizesMap}
                       coloursMap={coloursMap}
-                      deleting={deleting}
+                      deleting={deleteMutation.isPending}
                       onDelete={() => handleDelete(item.id)}
                       onQuantityChange={(qty) =>
-                        dispatch(mutateQuantity({ cartItemId: item.id, quantity: qty }))
+                        setPendingQuantities((prev) => new Map(prev).set(item.id, qty))
                       }
                     />
                   ))}
@@ -173,18 +183,14 @@ function CartPage() {
             </div>
 
             <div className="flex gap-2 mt-4">
-              {updateRequests.length > 0 && (
-                <Button onClick={handleSave} disabled={updating}>
-                  {updating && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {pendingQuantities.size > 0 && (
+                <Button onClick={handleSave} disabled={updateMutation.isPending}>
+                  {updateMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                   {m.cart_save()}
                 </Button>
               )}
-              <Button
-                variant="outline"
-                onClick={handleClear}
-                disabled={clearing}
-              >
-                {clearing && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              <Button variant="outline" onClick={handleClear} disabled={clearMutation.isPending}>
+                {clearMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 {m.cart_clear()}
               </Button>
             </div>
@@ -195,11 +201,11 @@ function CartPage() {
             <div className="rounded-md border border-border bg-card p-6 space-y-4 sticky top-6">
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">{m.cart_subtotal()}</span>
-                <span className="font-semibold">${totalPrice.toFixed(2)}</span>
+                <span className="font-semibold">${displayTotal.toFixed(2)}</span>
               </div>
               <div className="border-t border-border pt-4 flex items-center justify-between font-semibold">
                 <span>Total</span>
-                <span className="text-lg">${totalPrice.toFixed(2)}</span>
+                <span className="text-lg">${displayTotal.toFixed(2)}</span>
               </div>
               <Button className="w-full">{m.cart_checkout()}</Button>
             </div>
@@ -255,8 +261,16 @@ function CartRow({
             </Link>
             <p className="text-xs text-muted-foreground">{item.productDetails.sku}</p>
             <div className="flex gap-2 mt-0.5 text-xs text-muted-foreground">
-              {sizeLabel && <span>{m.cart_size()}: {sizeLabel}</span>}
-              {colorLabel && <span>{m.cart_color()}: {colorLabel}</span>}
+              {sizeLabel && (
+                <span>
+                  {m.cart_size()}: {sizeLabel}
+                </span>
+              )}
+              {colorLabel && (
+                <span>
+                  {m.cart_color()}: {colorLabel}
+                </span>
+              )}
             </div>
           </div>
         </div>

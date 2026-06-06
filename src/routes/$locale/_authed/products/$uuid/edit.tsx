@@ -1,14 +1,21 @@
 import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router'
+import { useQuery } from '@tanstack/react-query'
 import { Loader2 } from 'lucide-react'
 import { ProductForm } from '#/components/products/ProductForm'
 import {
-  useGetProductDetailsQuery,
-  useGetProductAttributesQuery,
-} from '#/shared/redux/productsApiSlice'
+  productDetailsQueryOptions,
+  productAttributesQueryOptions,
+} from '#/shared/query/products'
 import { ProductAvailabilityStatus, ProductPublishedStatus } from '#/models/product.models'
 import { m } from '#/paraglide/messages'
 
 export const Route = createFileRoute('/$locale/_authed/products/$uuid/edit')({
+  loader: async ({ context, params }) => {
+    if (typeof window !== 'undefined') {
+      await context.queryClient.ensureQueryData(productDetailsQueryOptions(params.uuid))
+      await context.queryClient.ensureQueryData(productAttributesQueryOptions(params.uuid))
+    }
+  },
   component: EditProductPage,
 })
 
@@ -16,8 +23,10 @@ function EditProductPage() {
   const { locale, uuid } = useParams({ from: '/$locale/_authed/products/$uuid/edit' })
   const navigate = useNavigate()
 
-  const { data: product, isLoading: productLoading } = useGetProductDetailsQuery(uuid)
-  const { data: attributes, isLoading: attrsLoading } = useGetProductAttributesQuery(uuid)
+  const { data: product, isLoading: productLoading } = useQuery(productDetailsQueryOptions(uuid))
+  const { data: attributes, isLoading: attrsLoading } = useQuery(
+    productAttributesQueryOptions(uuid),
+  )
 
   const isLoading = productLoading || attrsLoading
 
