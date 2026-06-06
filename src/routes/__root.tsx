@@ -38,7 +38,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <html lang={getLocale()}>
       <head>
-        <HeadContent />
+        <HeadContent /><title></title>
       </head>
       <body>
         <QueryClientProvider client={queryClient}>

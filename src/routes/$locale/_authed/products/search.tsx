@@ -1,6 +1,7 @@
-import { createFileRoute, Link, useParams } from '@tanstack/react-router'
-import {type Dispatch, type SetStateAction, useEffect, useMemo, useState} from 'react'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { createFileRoute, Link, useParams, useSearch } from '@tanstack/react-router'
+import {useEffect, useMemo, useState} from 'react'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { z } from 'zod'
 import { Loader2, ShoppingCart, Heart } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -23,6 +24,15 @@ const PAGE_SIZE = 12
 
 type SortKey = 'default' | 'price_asc' | 'price_desc' | 'rating' | 'title'
 
+const searchParamsSchema = z.object({
+  q: z.string().optional().default(''),
+  categories: z.array(z.number()).optional().default([]),
+  brands: z.array(z.number()).optional().default([]),
+  sizes: z.array(z.number()).optional().default([]),
+  sort: z.enum(['default', 'price_asc', 'price_desc', 'rating', 'title']).optional().default('default'),
+  page: z.number().int().positive().optional().default(1),
+})
+
 function sortProducts(products: Array<Products>, key: SortKey): Array<Products> {
   if (key === 'default') return products
   const copy = [...products]
@@ -34,6 +44,7 @@ function sortProducts(products: Array<Products>, key: SortKey): Array<Products> 
 }
 
 export const Route = createFileRoute('/$locale/_authed/products/search')({
+  validateSearch: searchParamsSchema,
   loader: async ({ context }) => {
     if (typeof window !== 'undefined') {
       context.queryClient.prefetchQuery(categoriesWithTotalsQueryOptions())
@@ -46,13 +57,26 @@ export const Route = createFileRoute('/$locale/_authed/products/search')({
 
 function ProductSearchPage() {
   const { locale } = useParams({ from: '/$locale/_authed/products/search' })
-  const [query, setQuery] = useState('')
-  const [committedQuery, setCommittedQuery] = useState('')
-  const [categoryIds, setCategoryIds] = useState<Array<number>>([])
-  const [brandIds, setBrandIds] = useState<Array<number>>([])
-  const [sizeIds, setSizeIds] = useState<Array<number>>([])
-  const [sortKey, setSortKey] = useState<SortKey>('default')
-  const [page, setPage] = useState(1)
+  const search = useSearch({ from: '/$locale/_authed/products/search' })
+  const navigate = Route.useNavigate()
+
+  // Local state only for the text input — avoids navigating on every keypress
+  const [inputValue, setInputValue] = useState(search.q)
+
+  const set = (patch: Partial<z.infer<typeof searchParamsSchema>>) =>
+    navigate({
+      search: (prev) => {
+        const next = { ...prev, ...patch }
+        return {
+          ...(next.q ? { q: next.q } : {}),
+          ...(next.categories?.length ? { categories: next.categories } : {}),
+          ...(next.brands?.length ? { brands: next.brands } : {}),
+          ...(next.sizes?.length ? { sizes: next.sizes } : {}),
+          ...(next.sort !== 'default' ? { sort: next.sort } : {}),
+          ...(next.page !== 1 ? { page: next.page } : {}),
+        }
+      },
+    })
 
   const { data: categories, isLoading: categoriesLoading } = useQuery(categoriesWithTotalsQueryOptions())
   const { data: brands, isLoading: brandsLoading } = useQuery(brandsWithTotalsQueryOptions())
@@ -63,32 +87,30 @@ function ProductSearchPage() {
 
   useEffect(() => {
     doSearch({
-      query: committedQuery.trim() || null,
-      categories: categoryIds.length > 0 ? categoryIds : undefined,
-      brands: brandIds.length > 0 ? brandIds : undefined,
-      sizes: sizeIds.length > 0 ? sizeIds : undefined,
-      paging: { page, limit: PAGE_SIZE },
+      query: search.q.trim() || null,
+      categories: search.categories.length > 0 ? search.categories : undefined,
+      brands: search.brands.length > 0 ? search.brands : undefined,
+      sizes: search.sizes.length > 0 ? search.sizes : undefined,
+      paging: { page: search.page, limit: PAGE_SIZE },
     })
-  }, [committedQuery, categoryIds, brandIds, sizeIds, page, doSearch])
+  }, [search.q, search.categories, search.brands, search.sizes, search.page, doSearch])
 
   const sortedResults = useMemo(
-    () => sortProducts(searchResult?.data ?? [], sortKey),
-    [searchResult?.data, sortKey],
+    () => sortProducts(searchResult?.data ?? [], search.sort),
+    [searchResult?.data, search.sort],
   )
+
+  const toggle = (field: 'categories' | 'brands' | 'sizes', id: number) => {
+    const current = search[field]
+    set({
+      [field]: current.includes(id) ? current.filter((x) => x !== id) : [...current, id],
+      page: 1,
+    })
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setPage(1)
-    setCommittedQuery(query)
-  }
-
-  const toggle = (
-    ids: Array<number>,
-    setIds: Dispatch<SetStateAction<Array<number>>>,
-    id: number,
-  ) => {
-    setIds(ids.includes(id) ? ids.filter((x) => x !== id) : [...ids, id])
-    setPage(1)
+    set({ q: inputValue, page: 1 })
   }
 
   return (
@@ -109,22 +131,22 @@ function ProductSearchPage() {
             label={m.products_search_filters_categories()}
             items={categories}
             loading={categoriesLoading}
-            selectedIds={categoryIds}
-            onToggle={(id) => toggle(categoryIds, setCategoryIds, id)}
+            selectedIds={search.categories}
+            onToggle={(id) => toggle('categories', id)}
           />
           <CheckboxFilter
             label={m.products_search_filters_brands()}
             items={brands}
             loading={brandsLoading}
-            selectedIds={brandIds}
-            onToggle={(id) => toggle(brandIds, setBrandIds, id)}
+            selectedIds={search.brands}
+            onToggle={(id) => toggle('brands', id)}
           />
           <CheckboxFilter
             label={m.products_search_filters_sizes()}
             items={sizes}
             loading={sizesLoading}
-            selectedIds={sizeIds}
-            onToggle={(id) => toggle(sizeIds, setSizeIds, id)}
+            selectedIds={search.sizes}
+            onToggle={(id) => toggle('sizes', id)}
           />
         </aside>
 
@@ -135,15 +157,15 @@ function ProductSearchPage() {
               <Input
                 type="search"
                 placeholder={m.products_search_placeholder()}
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
               />
               <Button type="submit" disabled={isLoading}>
                 {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 {m.products_search_submit()}
               </Button>
             </form>
-            <SortSelect value={sortKey} onChange={setSortKey} />
+            <SortSelect value={search.sort} onChange={(sort) => set({ sort })} />
           </div>
 
           {isError && (
@@ -168,10 +190,10 @@ function ProductSearchPage() {
                 ))}
               </div>
               <Pagination
-                page={page}
+                page={search.page}
                 pages={searchResult?.pages || 1}
                 count={searchResult?.count ?? 0}
-                onPage={setPage}
+                onPage={(page) => set({ page })}
                 disabled={isLoading}
               />
             </>
