@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useParams } from '@tanstack/react-router'
-import { useEffect, useMemo, useState } from 'react'
+import {type Dispatch, type SetStateAction, useEffect, useMemo, useState} from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Loader2, ShoppingCart, Heart } from 'lucide-react'
 import { toast } from 'sonner'
@@ -76,7 +76,7 @@ function ProductSearchPage() {
     [searchResult?.data, sortKey],
   )
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setPage(1)
     setCommittedQuery(query)
@@ -84,7 +84,7 @@ function ProductSearchPage() {
 
   const toggle = (
     ids: Array<number>,
-    setIds: React.Dispatch<React.SetStateAction<Array<number>>>,
+    setIds: Dispatch<SetStateAction<Array<number>>>,
     id: number,
   ) => {
     setIds(ids.includes(id) ? ids.filter((x) => x !== id) : [...ids, id])
@@ -271,8 +271,7 @@ function ProductCard({ product, locale }: { product: Products; locale: string })
   const { mutate: doAddToCart, isPending: cartLoading } = useMutation({
     mutationFn: addToCart,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['cart'] })
-      toast.success(m.product_add_to_cart_success())
+      queryClient.invalidateQueries({queryKey: ['cart']}).then(__ => toast.success(m.product_add_to_cart_success()))
     },
     onError: () => toast.error(m.product_add_to_cart_error()),
   })

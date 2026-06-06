@@ -6,7 +6,6 @@ import { toast } from 'sonner'
 
 import {
   cartQueryOptions,
-  addToCart as addToCartFn,
   deleteCartItems,
   updateCartItems,
   clearCart as clearCartFn,
@@ -59,8 +58,8 @@ function CartPage() {
   const deleteMutation = useMutation({
     mutationFn: deleteCartItems,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['cart'] })
-      toast.success(m.cart_delete_success())
+      queryClient.invalidateQueries({queryKey: ['cart']}).then(__ =>toast.success(m.cart_delete_success()));
+
     },
     onError: () => toast.error(m.cart_delete_error()),
   })
@@ -68,9 +67,10 @@ function CartPage() {
   const updateMutation = useMutation({
     mutationFn: updateCartItems,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['cart'] })
-      setPendingQuantities(new Map())
-      toast.success(m.cart_save_success())
+      queryClient.invalidateQueries({queryKey: ['cart']}).then(__ => {
+        setPendingQuantities(new Map())
+        toast.success(m.cart_save_success())
+      })
     },
     onError: () => toast.error(m.cart_save_error()),
   })
@@ -78,9 +78,10 @@ function CartPage() {
   const clearMutation = useMutation({
     mutationFn: clearCartFn,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['cart'] })
-      setPendingQuantities(new Map())
-      toast.success(m.cart_clear_success())
+      queryClient.invalidateQueries({queryKey: ['cart']}).then(__ => {
+        setPendingQuantities(new Map())
+        toast.success(m.cart_clear_success())
+      })
     },
     onError: () => toast.error(m.cart_clear_error()),
   })
