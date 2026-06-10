@@ -2,6 +2,7 @@ import { Mutex } from 'async-mutex'
 import {
   getAccessTokenValue,
   getRefreshTokenValue,
+  removeLoginResponseFromStorage,
   setStorageValue,
 } from '#/shared/token-storage'
 import { ApiControllers } from './api-controllers'
@@ -75,6 +76,18 @@ export async function fetchWithAuth<T = unknown>(
           if (data?.access) {
             setStorageValue('access', data.access)
           }
+        } else {
+          // Refresh token is also rejected — all Django credentials are dead.
+          // Clear tokens, sign out of Better Auth, and force the user to re-login.
+          removeLoginResponseFromStorage()
+          const locale = window.location.pathname.split('/')[1] || 'en'
+          import('#/lib/auth-client').then(({ authClient }) => {
+            authClient.signOut().finally(() => {
+              window.location.replace(`/${locale}/auth/login`)
+            })
+          })
+          const body = await parseResponse<unknown>(refreshResponse)
+          throw new HttpError(refreshResponse.status, body)
         }
       } finally {
         release()
