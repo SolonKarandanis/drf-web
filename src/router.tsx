@@ -13,6 +13,7 @@ export function getRouter() {
       queries: {
         retry: 1,
         refetchOnWindowFocus: false,
+        notifyOnChangeProps:'all'
       },
     },
   })
