@@ -6,6 +6,7 @@ import {
   Users,
   ShoppingCart,
   Heart,
+  ClipboardList,
   ChevronDown,
   ChevronRight,
   LayoutDashboard,
@@ -18,6 +19,7 @@ const ICONS: Record<string, React.ElementType> = {
   users: Users,
   'shopping-cart': ShoppingCart,
   heart: Heart,
+  'clipboard-list': ClipboardList,
   dashboard: LayoutDashboard,
 }
 

@@ -34,6 +34,11 @@ export const NAV_ITEMS: Array<NavItem> = [
     ],
   },
   {
+    title: 'Orders',
+    icon: 'clipboard-list',
+    path: 'orders',
+  },
+  {
     title: 'Cart',
     icon: 'shopping-cart',
     path: 'cart',
