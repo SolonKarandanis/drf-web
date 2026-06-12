@@ -1,12 +1,13 @@
 import { useNavigate } from '@tanstack/react-router'
 import { Menu, Moon, Sun, ShoppingCart, LogOut, User, Bell } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { authClient } from '#/lib/auth-client'
 import { removeLoginResponseFromStorage } from '#/shared/token-storage'
 import { accountQueryOptions } from '#/features/users/account'
 import { cartQueryOptions } from '#/features/cart/api'
 import { unreadCountQueryOptions } from '#/features/notifications/api'
+import { NotificationDropdown } from '#/features/notifications/NotificationDropdown'
 import { getLocale, locales, setLocale } from '#/paraglide/runtime'
 import {
   DropdownMenu,
@@ -58,6 +59,19 @@ export function Header({ locale, onToggleSidebar }: Props) {
   const cartCount = cart ?? 0
   const { data: unreadData } = useQuery(unreadCountQueryOptions())
   const unreadCount = unreadData?.count ?? 0
+  const [notifOpen, setNotifOpen] = useState(false)
+  const notifRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!notifOpen) return
+    const handler = (e: MouseEvent) => {
+      if (notifRef.current && !notifRef.current.contains(e.target as Node)) {
+        setNotifOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [notifOpen])
   const currentLocale = getLocale()
 
   const handleSignOut = async () => {
@@ -115,18 +129,22 @@ export function Header({ locale, onToggleSidebar }: Props) {
         </button>
 
         {/* Notifications bell */}
-        <button
-          type="button"
-          className="relative rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-          aria-label="Notifications"
-        >
-          <Bell className="h-4 w-4" />
-          {unreadCount > 0 && (
-            <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center">
-              {unreadCount > 9 ? '9+' : unreadCount}
-            </span>
-          )}
-        </button>
+        <div ref={notifRef} className="relative">
+          <button
+            type="button"
+            onClick={() => setNotifOpen((o) => !o)}
+            className="relative rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+            aria-label="Notifications"
+          >
+            <Bell className="h-4 w-4" />
+            {unreadCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center">
+                {unreadCount > 9 ? '9+' : unreadCount}
+              </span>
+            )}
+          </button>
+          {notifOpen && <NotificationDropdown onClose={() => setNotifOpen(false)} />}
+        </div>
 
         {/* Cart */}
         <button

@@ -245,5 +245,15 @@
   "product_add_to_cart_error": "Αποτυχία προσθήκης στο καλάθι.",
   "product_detail_quantity": "Ποσότητα",
   "product_detail_size": "Μέγεθος",
-  "product_detail_color": "Χρώμα"
+  "product_detail_color": "Χρώμα",
+
+  "notification_title": "Ειδοποιήσεις",
+  "notification_empty": "Δεν υπάρχουν ειδοποιήσεις.",
+  "notification_load_more": "Φόρτωση περισσότερων",
+  "notification_order_created": "Νέα παραγγελία",
+  "notification_order_buyer_rejected": "Η παραγγελία απορρίφθηκε από τον αγοραστή",
+  "notification_order_supplier_rejected": "Η παραγγελία απορρίφθηκε από τον προμηθευτή",
+  "notification_order_approved": "Η παραγγελία εγκρίθηκε",
+  "notification_order_shipped": "Η παραγγελία απεστάλη",
+  "notification_order_received": "Η παραγγελία παραλήφθηκε"
 }

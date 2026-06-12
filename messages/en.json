@@ -245,5 +245,15 @@
   "product_add_to_cart_error": "Failed to add to cart.",
   "product_detail_quantity": "Quantity",
   "product_detail_size": "Size",
-  "product_detail_color": "Color"
+  "product_detail_color": "Color",
+
+  "notification_title": "Notifications",
+  "notification_empty": "No notifications.",
+  "notification_load_more": "Load more",
+  "notification_order_created": "New order placed",
+  "notification_order_buyer_rejected": "Order rejected by buyer",
+  "notification_order_supplier_rejected": "Order rejected by supplier",
+  "notification_order_approved": "Order approved",
+  "notification_order_shipped": "Order shipped",
+  "notification_order_received": "Order received"
 }
