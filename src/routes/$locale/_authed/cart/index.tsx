@@ -63,6 +63,7 @@ function CartPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart'] })
       queryClient.invalidateQueries({ queryKey: ['orders'] })
+      toast.success('Order placed successfully.')
       navigate({ to: '/$locale/orders', params: { locale } })
     },
     onError: (err: unknown) => {
