@@ -6,4 +6,5 @@ export enum ApiControllers {
   ORDERS = 'orders',
   SOCIALS = 'socials',
   WISHLIST = 'wishlist',
+  NOTIFICATIONS = 'notifications',
 }

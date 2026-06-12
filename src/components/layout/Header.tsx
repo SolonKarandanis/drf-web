@@ -1,11 +1,12 @@
 import { useNavigate } from '@tanstack/react-router'
-import { Menu, Moon, Sun, ShoppingCart, LogOut, User } from 'lucide-react'
+import { Menu, Moon, Sun, ShoppingCart, LogOut, User, Bell } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { authClient } from '#/lib/auth-client'
 import { removeLoginResponseFromStorage } from '#/shared/token-storage'
 import { accountQueryOptions } from '#/features/users/account'
 import { cartQueryOptions } from '#/features/cart/api'
+import { unreadCountQueryOptions } from '#/features/notifications/api'
 import { getLocale, locales, setLocale } from '#/paraglide/runtime'
 import {
   DropdownMenu,
@@ -55,6 +56,8 @@ export function Header({ locale, onToggleSidebar }: Props) {
     select: (data) => data?.cartItems.length ?? 0,
   })
   const cartCount = cart ?? 0
+  const { data: unreadData } = useQuery(unreadCountQueryOptions())
+  const unreadCount = unreadData?.count ?? 0
   const currentLocale = getLocale()
 
   const handleSignOut = async () => {
@@ -109,6 +112,20 @@ export function Header({ locale, onToggleSidebar }: Props) {
           aria-label="Toggle dark mode"
         >
           {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+        </button>
+
+        {/* Notifications bell */}
+        <button
+          type="button"
+          className="relative rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+          aria-label="Notifications"
+        >
+          <Bell className="h-4 w-4" />
+          {unreadCount > 0 && (
+            <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center">
+              {unreadCount > 9 ? '9+' : unreadCount}
+            </span>
+          )}
         </button>
 
         {/* Cart */}

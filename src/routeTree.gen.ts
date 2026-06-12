@@ -21,6 +21,7 @@ import { Route as LocaleAuthForgotPasswordRouteImport } from './routes/$locale/a
 import { Route as LocaleAuthedDeniedRouteImport } from './routes/$locale/_authed/denied'
 import { Route as LocaleAuthedDashboardRouteImport } from './routes/$locale/_authed/dashboard'
 import { Route as LocaleAuthedWishlistIndexRouteImport } from './routes/$locale/_authed/wishlist/index'
+import { Route as LocaleAuthedOrdersIndexRouteImport } from './routes/$locale/_authed/orders/index'
 import { Route as LocaleAuthedCartIndexRouteImport } from './routes/$locale/_authed/cart/index'
 import { Route as LocaleAuthedUsersSearchRouteImport } from './routes/$locale/_authed/users/search'
 import { Route as LocaleAuthedUsersCreateRouteImport } from './routes/$locale/_authed/users/create'
@@ -28,6 +29,7 @@ import { Route as LocaleAuthedProductsSearchRouteImport } from './routes/$locale
 import { Route as LocaleAuthedProductsCreateRouteImport } from './routes/$locale/_authed/products/create'
 import { Route as LocaleAuthedUsersUuidIndexRouteImport } from './routes/$locale/_authed/users/$uuid/index'
 import { Route as LocaleAuthedProductsUuidIndexRouteImport } from './routes/$locale/_authed/products/$uuid/index'
+import { Route as LocaleAuthedOrdersUuidIndexRouteImport } from './routes/$locale/_authed/orders/$uuid/index'
 import { Route as LocaleAuthedProductsUuidEditRouteImport } from './routes/$locale/_authed/products/$uuid/edit'
 
 const LocaleRoute = LocaleRouteImport.update({
@@ -91,6 +93,11 @@ const LocaleAuthedWishlistIndexRoute =
     path: '/wishlist/',
     getParentRoute: () => LocaleAuthedRoute,
   } as any)
+const LocaleAuthedOrdersIndexRoute = LocaleAuthedOrdersIndexRouteImport.update({
+  id: '/orders/',
+  path: '/orders/',
+  getParentRoute: () => LocaleAuthedRoute,
+} as any)
 const LocaleAuthedCartIndexRoute = LocaleAuthedCartIndexRouteImport.update({
   id: '/cart/',
   path: '/cart/',
@@ -130,6 +137,12 @@ const LocaleAuthedProductsUuidIndexRoute =
     path: '/products/$uuid/',
     getParentRoute: () => LocaleAuthedRoute,
   } as any)
+const LocaleAuthedOrdersUuidIndexRoute =
+  LocaleAuthedOrdersUuidIndexRouteImport.update({
+    id: '/orders/$uuid/',
+    path: '/orders/$uuid/',
+    getParentRoute: () => LocaleAuthedRoute,
+  } as any)
 const LocaleAuthedProductsUuidEditRoute =
   LocaleAuthedProductsUuidEditRouteImport.update({
     id: '/products/$uuid/edit',
@@ -153,8 +166,10 @@ export interface FileRoutesByFullPath {
   '/$locale/users/create': typeof LocaleAuthedUsersCreateRoute
   '/$locale/users/search': typeof LocaleAuthedUsersSearchRoute
   '/$locale/cart/': typeof LocaleAuthedCartIndexRoute
+  '/$locale/orders/': typeof LocaleAuthedOrdersIndexRoute
   '/$locale/wishlist/': typeof LocaleAuthedWishlistIndexRoute
   '/$locale/products/$uuid/edit': typeof LocaleAuthedProductsUuidEditRoute
+  '/$locale/orders/$uuid/': typeof LocaleAuthedOrdersUuidIndexRoute
   '/$locale/products/$uuid/': typeof LocaleAuthedProductsUuidIndexRoute
   '/$locale/users/$uuid/': typeof LocaleAuthedUsersUuidIndexRoute
 }
@@ -173,8 +188,10 @@ export interface FileRoutesByTo {
   '/$locale/users/create': typeof LocaleAuthedUsersCreateRoute
   '/$locale/users/search': typeof LocaleAuthedUsersSearchRoute
   '/$locale/cart': typeof LocaleAuthedCartIndexRoute
+  '/$locale/orders': typeof LocaleAuthedOrdersIndexRoute
   '/$locale/wishlist': typeof LocaleAuthedWishlistIndexRoute
   '/$locale/products/$uuid/edit': typeof LocaleAuthedProductsUuidEditRoute
+  '/$locale/orders/$uuid': typeof LocaleAuthedOrdersUuidIndexRoute
   '/$locale/products/$uuid': typeof LocaleAuthedProductsUuidIndexRoute
   '/$locale/users/$uuid': typeof LocaleAuthedUsersUuidIndexRoute
 }
@@ -196,8 +213,10 @@ export interface FileRoutesById {
   '/$locale/_authed/users/create': typeof LocaleAuthedUsersCreateRoute
   '/$locale/_authed/users/search': typeof LocaleAuthedUsersSearchRoute
   '/$locale/_authed/cart/': typeof LocaleAuthedCartIndexRoute
+  '/$locale/_authed/orders/': typeof LocaleAuthedOrdersIndexRoute
   '/$locale/_authed/wishlist/': typeof LocaleAuthedWishlistIndexRoute
   '/$locale/_authed/products/$uuid/edit': typeof LocaleAuthedProductsUuidEditRoute
+  '/$locale/_authed/orders/$uuid/': typeof LocaleAuthedOrdersUuidIndexRoute
   '/$locale/_authed/products/$uuid/': typeof LocaleAuthedProductsUuidIndexRoute
   '/$locale/_authed/users/$uuid/': typeof LocaleAuthedUsersUuidIndexRoute
 }
@@ -219,8 +238,10 @@ export interface FileRouteTypes {
     | '/$locale/users/create'
     | '/$locale/users/search'
     | '/$locale/cart/'
+    | '/$locale/orders/'
     | '/$locale/wishlist/'
     | '/$locale/products/$uuid/edit'
+    | '/$locale/orders/$uuid/'
     | '/$locale/products/$uuid/'
     | '/$locale/users/$uuid/'
   fileRoutesByTo: FileRoutesByTo
@@ -239,8 +260,10 @@ export interface FileRouteTypes {
     | '/$locale/users/create'
     | '/$locale/users/search'
     | '/$locale/cart'
+    | '/$locale/orders'
     | '/$locale/wishlist'
     | '/$locale/products/$uuid/edit'
+    | '/$locale/orders/$uuid'
     | '/$locale/products/$uuid'
     | '/$locale/users/$uuid'
   id:
@@ -261,8 +284,10 @@ export interface FileRouteTypes {
     | '/$locale/_authed/users/create'
     | '/$locale/_authed/users/search'
     | '/$locale/_authed/cart/'
+    | '/$locale/_authed/orders/'
     | '/$locale/_authed/wishlist/'
     | '/$locale/_authed/products/$uuid/edit'
+    | '/$locale/_authed/orders/$uuid/'
     | '/$locale/_authed/products/$uuid/'
     | '/$locale/_authed/users/$uuid/'
   fileRoutesById: FileRoutesById
@@ -359,6 +384,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleAuthedWishlistIndexRouteImport
       parentRoute: typeof LocaleAuthedRoute
     }
+    '/$locale/_authed/orders/': {
+      id: '/$locale/_authed/orders/'
+      path: '/orders'
+      fullPath: '/$locale/orders/'
+      preLoaderRoute: typeof LocaleAuthedOrdersIndexRouteImport
+      parentRoute: typeof LocaleAuthedRoute
+    }
     '/$locale/_authed/cart/': {
       id: '/$locale/_authed/cart/'
       path: '/cart'
@@ -408,6 +440,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleAuthedProductsUuidIndexRouteImport
       parentRoute: typeof LocaleAuthedRoute
     }
+    '/$locale/_authed/orders/$uuid/': {
+      id: '/$locale/_authed/orders/$uuid/'
+      path: '/orders/$uuid'
+      fullPath: '/$locale/orders/$uuid/'
+      preLoaderRoute: typeof LocaleAuthedOrdersUuidIndexRouteImport
+      parentRoute: typeof LocaleAuthedRoute
+    }
     '/$locale/_authed/products/$uuid/edit': {
       id: '/$locale/_authed/products/$uuid/edit'
       path: '/products/$uuid/edit'
@@ -426,8 +465,10 @@ interface LocaleAuthedRouteChildren {
   LocaleAuthedUsersCreateRoute: typeof LocaleAuthedUsersCreateRoute
   LocaleAuthedUsersSearchRoute: typeof LocaleAuthedUsersSearchRoute
   LocaleAuthedCartIndexRoute: typeof LocaleAuthedCartIndexRoute
+  LocaleAuthedOrdersIndexRoute: typeof LocaleAuthedOrdersIndexRoute
   LocaleAuthedWishlistIndexRoute: typeof LocaleAuthedWishlistIndexRoute
   LocaleAuthedProductsUuidEditRoute: typeof LocaleAuthedProductsUuidEditRoute
+  LocaleAuthedOrdersUuidIndexRoute: typeof LocaleAuthedOrdersUuidIndexRoute
   LocaleAuthedProductsUuidIndexRoute: typeof LocaleAuthedProductsUuidIndexRoute
   LocaleAuthedUsersUuidIndexRoute: typeof LocaleAuthedUsersUuidIndexRoute
 }
@@ -440,8 +481,10 @@ const LocaleAuthedRouteChildren: LocaleAuthedRouteChildren = {
   LocaleAuthedUsersCreateRoute: LocaleAuthedUsersCreateRoute,
   LocaleAuthedUsersSearchRoute: LocaleAuthedUsersSearchRoute,
   LocaleAuthedCartIndexRoute: LocaleAuthedCartIndexRoute,
+  LocaleAuthedOrdersIndexRoute: LocaleAuthedOrdersIndexRoute,
   LocaleAuthedWishlistIndexRoute: LocaleAuthedWishlistIndexRoute,
   LocaleAuthedProductsUuidEditRoute: LocaleAuthedProductsUuidEditRoute,
+  LocaleAuthedOrdersUuidIndexRoute: LocaleAuthedOrdersUuidIndexRoute,
   LocaleAuthedProductsUuidIndexRoute: LocaleAuthedProductsUuidIndexRoute,
   LocaleAuthedUsersUuidIndexRoute: LocaleAuthedUsersUuidIndexRoute,
 }
@@ -479,12 +522,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

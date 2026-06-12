@@ -8,6 +8,7 @@ import {
 } from '#/shared/token-storage'
 import { Sidebar } from '#/components/layout/Sidebar'
 import { Header } from '#/components/layout/Header'
+import { unreadCountQueryOptions } from '#/features/notifications/api'
 
 export const Route = createFileRoute('/$locale/_authed')({
   beforeLoad: async ({ params }) => {
@@ -20,9 +21,12 @@ export const Route = createFileRoute('/$locale/_authed')({
     }
     return { session }
   },
-  loader: async () => ({
-    djangoTokens: await getDjangoTokensFromSession(),
-  }),
+  loader: async ({ context }) => {
+    if (typeof window !== 'undefined') {
+      context.queryClient.prefetchQuery(unreadCountQueryOptions())
+    }
+    return { djangoTokens: await getDjangoTokensFromSession() }
+  },
   component: AuthedLayout,
 })
 
