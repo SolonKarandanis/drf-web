@@ -1,5 +1,6 @@
 import { Outlet, createFileRoute, redirect, useParams } from '@tanstack/react-router'
 import { useLayoutEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { getDjangoTokensFromSession, getServerSession } from '#/lib/session-server'
 import {
   decodeJwtPayload,
@@ -9,6 +10,8 @@ import {
 import { Sidebar } from '#/components/layout/Sidebar'
 import { Header } from '#/components/layout/Header'
 import { unreadCountQueryOptions } from '#/features/notifications/api'
+import { useNotificationSocket } from '#/features/notifications/hooks/useNotificationSocket'
+import { accountQueryOptions } from '#/features/users/account'
 
 export const Route = createFileRoute('/$locale/_authed')({
   beforeLoad: async ({ params }) => {
@@ -58,6 +61,8 @@ function AuthedLayout() {
   const { locale } = useParams({ from: '/$locale/_authed' })
   const [collapsed, setCollapsed] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
+  const { data: account } = useQuery(accountQueryOptions())
+  useNotificationSocket(account?.uuid)
 
   useLayoutEffect(() => {
     if (!djangoTokens) return
