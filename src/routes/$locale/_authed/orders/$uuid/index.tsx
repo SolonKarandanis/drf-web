@@ -13,7 +13,7 @@ import {
   receiveOrder,
   postOrderComment,
 } from '#/features/orders/api'
-import { OrderStatus, type Order, type OrderComment, type OrderItem } from '#/features/orders/models'
+import { OrderStatus, type Order, type OrderComment, type OrderItem, type OrderUser } from '#/features/orders/models'
 import { decodeJwtPayload, getAccessTokenValue } from '#/shared/token-storage'
 import { Button } from '#/components/ui/button'
 import {
@@ -103,8 +103,8 @@ function OrderActions({ order, uuid }: { order: Order; uuid: string }) {
 
   const userId = getCurrentUserId()
   const role =
-    userId === order.buyerId ? 'buyer'
-    : userId === order.supplierId ? 'supplier'
+    userId === order.buyer.id ? 'buyer'
+    : userId === order.supplier.id ? 'supplier'
     : null
 
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ['orders', uuid] })
@@ -286,6 +286,16 @@ function OrderDetailPage() {
   )
 }
 
+function UserCell({ label, user }: { label: string; user: OrderUser }) {
+  return (
+    <div>
+      <p className="text-xs text-muted-foreground mb-1">{label}</p>
+      <p className="font-medium">{user.firstName} {user.lastName}</p>
+      <p className="text-xs text-muted-foreground">{user.email}</p>
+    </div>
+  )
+}
+
 function OrderHeader({ order }: { order: Order }) {
   return (
     <div className="rounded-md border border-border bg-card p-6 grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm">
@@ -301,14 +311,8 @@ function OrderHeader({ order }: { order: Order }) {
         <p className="text-xs text-muted-foreground mb-1">Date Created</p>
         <p>{new Date(order.dateCreated).toLocaleDateString()}</p>
       </div>
-      <div>
-        <p className="text-xs text-muted-foreground mb-1">Buyer</p>
-        <p>#{order.buyerId}</p>
-      </div>
-      <div>
-        <p className="text-xs text-muted-foreground mb-1">Supplier</p>
-        <p>#{order.supplierId}</p>
-      </div>
+      <UserCell label="Buyer" user={order.buyer} />
+      <UserCell label="Supplier" user={order.supplier} />
       {order.dateShipped && (
         <div>
           <p className="text-xs text-muted-foreground mb-1">Date Shipped</p>

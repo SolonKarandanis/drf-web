@@ -7,6 +7,15 @@ export enum OrderStatus {
   RECEIVED = 'purchase.order.received',
 }
 
+export interface OrderUser {
+  id: number
+  uuid: string
+  username: string
+  firstName: string
+  lastName: string
+  email: string
+}
+
 export interface OrderList {
   id: number
   uuid: string
@@ -48,6 +57,8 @@ export interface OrderComment {
 }
 
 export interface Order extends OrderList {
+  buyer: OrderUser
+  supplier: OrderUser
   orderItems: OrderItem[]
   comments: OrderComment[]
 }
