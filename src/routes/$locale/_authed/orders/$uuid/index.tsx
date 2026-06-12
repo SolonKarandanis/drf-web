@@ -320,7 +320,7 @@ function OrderHeader({ order }: { order: Order }) {
 }
 
 function ItemsTable({ items }: { items: OrderItem[] }) {
-  if (items.length === 0) {
+  if (!items || items.length === 0) {
     return (
       <div>
         <h2 className="text-base font-semibold mb-3">Items</h2>

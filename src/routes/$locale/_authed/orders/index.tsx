@@ -117,7 +117,7 @@ function OrderRow({ order, locale }: { order: OrderList; locale: string }) {
       </td>
       <td className="px-4 py-3 text-right">
         <Link
-          to="/$locale/_authed/orders/$uuid/"
+          to="/$locale/orders/$uuid"
           params={{ locale, uuid: order.uuid }}
           className="text-xs font-medium text-primary hover:underline"
         >

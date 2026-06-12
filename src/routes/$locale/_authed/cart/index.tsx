@@ -63,7 +63,7 @@ function CartPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart'] })
       queryClient.invalidateQueries({ queryKey: ['orders'] })
-      navigate({ to: '/$locale/_authed/orders/', params: { locale } })
+      navigate({ to: '/$locale/orders', params: { locale } })
     },
     onError: (err: unknown) => {
       const isEmptyCart = err instanceof HttpError &&
