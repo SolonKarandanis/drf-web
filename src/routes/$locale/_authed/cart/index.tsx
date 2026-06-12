@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate, useParams } from '@tanstack/react-router'
+import { createFileRoute, Link, redirect, useNavigate, useParams } from '@tanstack/react-router'
 import { useState } from 'react'
 import { Loader2, Minus, Plus, Trash2 } from 'lucide-react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -16,8 +16,23 @@ import { allSizesQueryOptions, allColoursQueryOptions } from '#/features/product
 import type { CartItem } from '#/features/cart/models'
 import { m } from '#/paraglide/messages'
 import { Button } from '#/components/ui/button'
+import { decodeJwtPayload, getAccessTokenValue } from '#/shared/token-storage'
 
 export const Route = createFileRoute('/$locale/_authed/cart/')({
+  beforeLoad: ({ params }) => {
+    try {
+      const token = getAccessTokenValue()
+      if (token) {
+        const payload = decodeJwtPayload(token)
+        const groups = (payload.groups as string[] | undefined) ?? []
+        if (!groups.includes('BUYER')) {
+          throw redirect({ to: '/$locale/dashboard', params: { locale: params.locale } })
+        }
+      }
+    } catch (e) {
+      if (e instanceof Response || (e as { isRedirect?: boolean })?.isRedirect) throw e
+    }
+  },
   loader: async ({ context }) => {
     if (typeof window !== 'undefined') {
       await context.queryClient.ensureQueryData(cartQueryOptions())

@@ -24,8 +24,8 @@ export interface OrderList {
   isShipped: boolean
   dateCreated: string
   dateShipped: string | null
-  buyerId: number
-  supplierId: number
+  buyer: OrderUser
+  supplier: OrderUser
 }
 
 export interface OrderItem {

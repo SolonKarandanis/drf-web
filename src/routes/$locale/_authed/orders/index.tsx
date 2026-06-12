@@ -4,6 +4,17 @@ import { Loader2, Package } from 'lucide-react'
 
 import { userOrdersQueryOptions } from '#/features/orders/api'
 import { OrderStatus, type OrderList } from '#/features/orders/models'
+import { decodeJwtPayload, getAccessTokenValue } from '#/shared/token-storage'
+
+function getGroups(): string[] {
+  try {
+    const token = getAccessTokenValue()
+    if (!token) return []
+    return ((decodeJwtPayload(token).groups as string[] | undefined) ?? [])
+  } catch {
+    return []
+  }
+}
 
 export const Route = createFileRoute('/$locale/_authed/orders/')({
   loader: async ({ context }) => {
@@ -42,6 +53,9 @@ function StatusBadge({ status }: { status: OrderStatus }) {
 
 function OrdersPage() {
   const { locale } = useParams({ from: '/$locale/_authed/orders/' })
+  const groups = getGroups()
+  const isBuyer = groups.includes('BUYER')
+  const isAdmin = groups.includes('ADMIN')
   const { data: orders, isLoading, isError } = useQuery(userOrdersQueryOptions())
 
   if (isLoading) {
@@ -78,15 +92,15 @@ function OrdersPage() {
                 <th className="px-4 py-3 text-left font-medium text-muted-foreground">Date</th>
                 <th className="px-4 py-3 text-left font-medium text-muted-foreground">Status</th>
                 <th className="px-4 py-3 text-left font-medium text-muted-foreground">Total</th>
-                <th className="px-4 py-3 text-left font-medium text-muted-foreground">Buyer</th>
-                <th className="px-4 py-3 text-left font-medium text-muted-foreground">Supplier</th>
+                {(isAdmin || !isBuyer) && <th className="px-4 py-3 text-left font-medium text-muted-foreground">Buyer</th>}
+                {(isAdmin || isBuyer) && <th className="px-4 py-3 text-left font-medium text-muted-foreground">Supplier</th>}
                 <th className="px-4 py-3 text-left font-medium text-muted-foreground">Shipped</th>
                 <th className="px-4 py-3" />
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
               {orders.map((order) => (
-                <OrderRow key={order.id} order={order} locale={locale} />
+                <OrderRow key={order.id} order={order} locale={locale} isBuyer={isBuyer} isAdmin={isAdmin} />
               ))}
             </tbody>
           </table>
@@ -96,7 +110,7 @@ function OrdersPage() {
   )
 }
 
-function OrderRow({ order, locale }: { order: OrderList; locale: string }) {
+function OrderRow({ order, locale, isBuyer, isAdmin }: { order: OrderList; locale: string; isBuyer: boolean; isAdmin: boolean }) {
   return (
     <tr className="hover:bg-muted/30 transition-colors">
       <td className="px-4 py-3 text-muted-foreground">
@@ -106,8 +120,22 @@ function OrderRow({ order, locale }: { order: OrderList; locale: string }) {
         <StatusBadge status={order.status} />
       </td>
       <td className="px-4 py-3 font-medium">${order.totalPrice.toFixed(2)}</td>
-      <td className="px-4 py-3 text-muted-foreground">#{order.buyerId}</td>
-      <td className="px-4 py-3 text-muted-foreground">#{order.supplierId}</td>
+      {(isAdmin || !isBuyer) && (
+        <td className="px-4 py-3 text-muted-foreground">
+          <span className="block text-foreground text-xs font-medium">
+            {[order.buyer.firstName, order.buyer.lastName].filter(Boolean).join(' ') || order.buyer.username}
+          </span>
+          <span className="text-xs">{order.buyer.email}</span>
+        </td>
+      )}
+      {(isAdmin || isBuyer) && (
+        <td className="px-4 py-3 text-muted-foreground">
+          <span className="block text-foreground text-xs font-medium">
+            {[order.supplier.firstName, order.supplier.lastName].filter(Boolean).join(' ') || order.supplier.username}
+          </span>
+          <span className="text-xs">{order.supplier.email}</span>
+        </td>
+      )}
       <td className="px-4 py-3 text-muted-foreground">
         {order.isShipped
           ? order.dateShipped
