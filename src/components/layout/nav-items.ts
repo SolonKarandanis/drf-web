@@ -9,6 +9,7 @@ export interface NavItem {
   icon: string
   path?: string
   children?: Array<NavChild>
+  buyerOnly?: boolean
 }
 
 export const NAV_ITEMS: Array<NavItem> = [
@@ -42,10 +43,12 @@ export const NAV_ITEMS: Array<NavItem> = [
     title: 'Cart',
     icon: 'shopping-cart',
     path: 'cart',
+    buyerOnly: true,
   },
   {
     title: 'Wishlist',
     icon: 'heart',
     path: 'wishlist',
+    buyerOnly: true,
   },
 ]

@@ -27,9 +27,10 @@ interface Props {
   locale: string
   collapsed: boolean
   isAdmin: boolean
+  isBuyer: boolean
 }
 
-export function Sidebar({ locale, collapsed, isAdmin }: Props) {
+export function Sidebar({ locale, collapsed, isAdmin, isBuyer }: Props) {
   const pathname = useRouterState({ select: (s) => s.location.pathname })
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({})
 
@@ -58,7 +59,7 @@ export function Sidebar({ locale, collapsed, isAdmin }: Props) {
 
       {/* Nav */}
       <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5">
-        {NAV_ITEMS.map((item) => {
+        {NAV_ITEMS.filter((item) => !item.buyerOnly || isBuyer).map((item) => {
           const Icon = ICONS[item.icon] ?? Home
 
           if (item.children) {

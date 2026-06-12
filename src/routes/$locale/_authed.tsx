@@ -44,15 +44,24 @@ function isJwtExpiredOrMissing(token: string | null): boolean {
   }
 }
 
-function getIsAdminFromToken(): boolean {
+function getUserIdFromToken(token: string | null): number | null {
+  if (!token) return null
+  try {
+    const payload = decodeJwtPayload(token)
+    return typeof payload.user_id === 'number' ? payload.user_id : null
+  } catch {
+    return null
+  }
+}
+
+function getGroupsFromToken(): string[] {
   try {
     const token = getAccessTokenValue()
-    if (!token) return false
+    if (!token) return []
     const payload = decodeJwtPayload(token)
-    const groups = payload.groups as string[] | undefined
-    return groups?.includes('ADMIN') ?? false
+    return (payload.groups as string[] | undefined) ?? []
   } catch {
-    return false
+    return []
   }
 }
 
@@ -61,25 +70,34 @@ function AuthedLayout() {
   const { locale } = useParams({ from: '/$locale/_authed' })
   const [collapsed, setCollapsed] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
+  const [isBuyer, setIsBuyer] = useState(false)
   const { data: account } = useQuery(accountQueryOptions())
   useNotificationSocket(account?.uuid)
 
   useLayoutEffect(() => {
     if (!djangoTokens) return
-    // Only overwrite localStorage if it lacks a valid token. The reauth mechanism
-    // can refresh tokens independently of the session, so if localStorage has a
-    // fresh token we must not replace it with the (potentially stale) session token.
-    if (isJwtExpiredOrMissing(getAccessTokenValue())) {
+    const localToken = getAccessTokenValue()
+    // Write session tokens when: (a) localStorage has no valid token, OR (b) the
+    // stored token belongs to a different user (user switch). Case (b) is what
+    // breaks supplier login after a buyer session — the buyer's unexpired token
+    // stays in localStorage because it passes the expiry check, so all requests
+    // go out as the buyer. Comparing user_id catches this without touching the
+    // reauth path (same user, refreshed token keeps the same user_id).
+    const sessionUserId = getUserIdFromToken(djangoTokens.access)
+    const localUserId = getUserIdFromToken(localToken)
+    if (isJwtExpiredOrMissing(localToken) || localUserId !== sessionUserId) {
       setLoginResponseInStorage(djangoTokens)
     }
-    setIsAdmin(getIsAdminFromToken())
+    const groups = getGroupsFromToken()
+    setIsAdmin(groups.includes('ADMIN'))
+    setIsBuyer(groups.includes('BUYER'))
   }, [djangoTokens])
 
   return (
     <div className="flex h-screen overflow-hidden bg-background">
-      <Sidebar locale={locale} collapsed={collapsed} isAdmin={isAdmin} />
+      <Sidebar locale={locale} collapsed={collapsed} isAdmin={isAdmin} isBuyer={isBuyer} />
       <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
-        <Header locale={locale} onToggleSidebar={() => setCollapsed((c) => !c)} />
+        <Header locale={locale} onToggleSidebar={() => setCollapsed((c) => !c)} isBuyer={isBuyer} />
         <main className="flex-1 overflow-y-auto">
           <Outlet />
         </main>

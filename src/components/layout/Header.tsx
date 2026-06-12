@@ -21,6 +21,7 @@ import {
 interface Props {
   locale: string
   onToggleSidebar: () => void
+  isBuyer: boolean
 }
 
 function useDarkMode() {
@@ -48,13 +49,14 @@ function useDarkMode() {
   return [dark, toggleDark] as const
 }
 
-export function Header({ locale, onToggleSidebar }: Props) {
+export function Header({ locale, onToggleSidebar, isBuyer }: Props) {
   const navigate = useNavigate()
   const [dark, toggleDark] = useDarkMode()
   const { data: user } = useQuery(accountQueryOptions())
   const { data: cart } = useQuery({
     ...cartQueryOptions(),
     select: (data) => data?.cartItems.length ?? 0,
+    enabled: isBuyer,
   })
   const cartCount = cart ?? 0
   const { data: unreadData } = useQuery(unreadCountQueryOptions())
@@ -146,20 +148,22 @@ export function Header({ locale, onToggleSidebar }: Props) {
           {notifOpen && <NotificationDropdown onClose={() => setNotifOpen(false)} />}
         </div>
 
-        {/* Cart */}
-        <button
-          type="button"
-          onClick={() => navigate({ to: '/$locale/cart', params: { locale } })}
-          className="relative rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-          aria-label="Cart"
-        >
-          <ShoppingCart className="h-4 w-4" />
-          {cartCount > 0 && (
-            <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center">
-              {cartCount > 9 ? '9+' : cartCount}
-            </span>
-          )}
-        </button>
+        {/* Cart — buyers only */}
+        {isBuyer && (
+          <button
+            type="button"
+            onClick={() => navigate({ to: '/$locale/cart', params: { locale } })}
+            className="relative rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+            aria-label="Cart"
+          >
+            <ShoppingCart className="h-4 w-4" />
+            {cartCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center">
+                {cartCount > 9 ? '9+' : cartCount}
+              </span>
+            )}
+          </button>
+        )}
 
         {/* Profile dropdown */}
         <DropdownMenu>
