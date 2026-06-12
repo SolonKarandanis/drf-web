@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useParams } from '@tanstack/react-router'
+import { createFileRoute, Link, useNavigate, useParams } from '@tanstack/react-router'
 import { useState } from 'react'
 import { Loader2, Minus, Plus, Trash2 } from 'lucide-react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -10,6 +10,8 @@ import {
   updateCartItems,
   clearCart as clearCartFn,
 } from '#/features/cart/api'
+import { placeDraftOrders } from '#/features/orders/api'
+import { HttpError } from '#/shared/http/client'
 import { allSizesQueryOptions, allColoursQueryOptions } from '#/features/products/api'
 import type { CartItem } from '#/features/cart/models'
 import { m } from '#/paraglide/messages'
@@ -34,6 +36,7 @@ function resolveImage(path: string) {
 function CartPage() {
   const { locale } = useParams({ from: '/$locale/_authed/cart/' })
   const queryClient = useQueryClient()
+  const navigate = useNavigate()
 
   const { data: cart, isLoading, isError } = useQuery(cartQueryOptions())
   const { data: allSizes } = useQuery(allSizesQueryOptions())
@@ -54,6 +57,20 @@ function CartPage() {
     return item
   })
   const displayTotal = displayItems.reduce((sum, i) => sum + i.totalPrice, 0)
+
+  const checkoutMutation = useMutation({
+    mutationFn: placeDraftOrders,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['cart'] })
+      queryClient.invalidateQueries({ queryKey: ['orders'] })
+      navigate({ to: '/$locale/_authed/orders/', params: { locale } })
+    },
+    onError: (err: unknown) => {
+      const isEmptyCart = err instanceof HttpError &&
+        typeof err.body === 'string' && err.body.includes('empty.cart')
+      toast.error(isEmptyCart ? 'Your cart is empty.' : 'Failed to place order. Please try again.')
+    },
+  })
 
   const deleteMutation = useMutation({
     mutationFn: deleteCartItems,
@@ -208,7 +225,14 @@ function CartPage() {
                 <span>Total</span>
                 <span className="text-lg">${displayTotal.toFixed(2)}</span>
               </div>
-              <Button className="w-full">{m.cart_checkout()}</Button>
+              <Button
+                className="w-full"
+                onClick={() => checkoutMutation.mutate()}
+                disabled={checkoutMutation.isPending}
+              >
+                {checkoutMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                {m.cart_checkout()}
+              </Button>
             </div>
           </div>
         </div>

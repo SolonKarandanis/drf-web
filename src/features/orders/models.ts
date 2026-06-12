@@ -36,9 +36,15 @@ export interface OrderItem {
 
 export interface OrderComment {
   id: number
-  comment: string
-  author: string
-  createdAt: string
+  content: string
+  contentType: string
+  objectId: number
+  dateCreated: string
+  userId: number
+  username: string
+  userEmail: string
+  userFirstName: string
+  userLastName: string
 }
 
 export interface Order extends OrderList {
