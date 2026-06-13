@@ -1,6 +1,6 @@
 import { Outlet, createFileRoute, redirect, useParams } from '@tanstack/react-router'
 import { useLayoutEffect, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { getDjangoTokensFromSession, getServerSession } from '#/lib/session-server'
 import {
   decodeJwtPayload,
@@ -59,6 +59,7 @@ function getUserIdFromToken(token: string | null): number | null {
 function AuthedLayout() {
   const { djangoTokens } = Route.useLoaderData()
   const { locale } = useParams({ from: '/$locale/_authed' })
+  const queryClient = useQueryClient()
   const [collapsed, setCollapsed] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const [isBuyer, setIsBuyer] = useState(false)
@@ -78,6 +79,11 @@ function AuthedLayout() {
     const localUserId = getUserIdFromToken(localToken)
     if (isJwtExpiredOrMissing(localToken) || localUserId !== sessionUserId) {
       setLoginResponseInStorage(djangoTokens)
+      // Drop the cached account so useNotificationSocket gets undefined UUID
+      // until the fresh fetch resolves with the new user's data. Without this,
+      // the socket connects with the old user's UUID and the new user's token,
+      // causing Django to reject the handshake.
+      queryClient.removeQueries({ queryKey: ['user', 'account'] })
     }
     // Always read groups from the authoritative session token, not localStorage.
     // A same-user role change (e.g. Supplier → Buyer) keeps the same user_id so
