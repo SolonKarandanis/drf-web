@@ -5,6 +5,7 @@ import { Loader2, Package } from 'lucide-react'
 import { userOrdersQueryOptions } from '#/features/orders/api'
 import { OrderStatus, type OrderList } from '#/features/orders/models'
 import { decodeJwtPayload, getAccessTokenValue } from '#/shared/token-storage'
+import {ADMIN, BUYER} from "#/shared/constants.ts";
 
 function getGroups(): string[] {
   try {
@@ -54,8 +55,8 @@ function StatusBadge({ status }: { status: OrderStatus }) {
 function OrdersPage() {
   const { locale } = useParams({ from: '/$locale/_authed/orders/' })
   const groups = getGroups()
-  const isBuyer = groups.includes('BUYER')
-  const isAdmin = groups.includes('ADMIN')
+  const isBuyer = groups.includes(BUYER)
+  const isAdmin = groups.includes(ADMIN)
   const { data: orders, isLoading, isError } = useQuery(userOrdersQueryOptions())
 
   if (isLoading) {

@@ -1,4 +1,4 @@
-import { useNavigate } from '@tanstack/react-router'
+import { useNavigate, useRouter } from '@tanstack/react-router'
 import { Menu, Moon, Sun, ShoppingCart, LogOut, User, Bell } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
@@ -51,6 +51,7 @@ function useDarkMode() {
 
 export function Header({ locale, onToggleSidebar, isBuyer }: Props) {
   const navigate = useNavigate()
+  const router = useRouter()
   const [dark, toggleDark] = useDarkMode()
   const { data: user } = useQuery(accountQueryOptions())
   const { data: cart } = useQuery({
@@ -84,7 +85,9 @@ export function Header({ locale, onToggleSidebar, isBuyer }: Props) {
 
   const handleLocale = (next: string) => {
     setLocale(next as (typeof locales)[number], { reload: false })
-    navigate({ params: (prev) => ({ ...prev, locale: next }) })
+    const pathname = (router.state.resolvedLocation ?? router.state.location).pathname
+    const newPathname = pathname.replace(`/${currentLocale}`, `/${next}`)
+    navigate({ to: newPathname as any })
   }
 
   return (

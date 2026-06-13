@@ -12,6 +12,7 @@ import { Header } from '#/components/layout/Header'
 import { unreadCountQueryOptions } from '#/features/notifications/api'
 import { useNotificationSocket } from '#/features/notifications/hooks/useNotificationSocket'
 import { accountQueryOptions } from '#/features/users/account'
+import {ADMIN, BUYER} from "#/shared/constants.ts";
 
 export const Route = createFileRoute('/$locale/_authed')({
   beforeLoad: async ({ params }) => {
@@ -54,16 +55,6 @@ function getUserIdFromToken(token: string | null): number | null {
   }
 }
 
-function getGroupsFromToken(): string[] {
-  try {
-    const token = getAccessTokenValue()
-    if (!token) return []
-    const payload = decodeJwtPayload(token)
-    return (payload.groups as string[] | undefined) ?? []
-  } catch {
-    return []
-  }
-}
 
 function AuthedLayout() {
   const { djangoTokens } = Route.useLoaderData()
@@ -88,9 +79,18 @@ function AuthedLayout() {
     if (isJwtExpiredOrMissing(localToken) || localUserId !== sessionUserId) {
       setLoginResponseInStorage(djangoTokens)
     }
-    const groups = getGroupsFromToken()
-    setIsAdmin(groups.includes('ADMIN'))
-    setIsBuyer(groups.includes('BUYER'))
+    // Always read groups from the authoritative session token, not localStorage.
+    // A same-user role change (e.g. Supplier → Buyer) keeps the same user_id so
+    // the localStorage write above is skipped, but groups in the stored token are
+    // stale. djangoTokens.access is always fresh from the server session.
+    try {
+      const payload = decodeJwtPayload(djangoTokens.access)
+      const groups = (payload.groups as string[] | undefined) ?? []
+      setIsAdmin(groups.includes(ADMIN))
+      setIsBuyer(groups.includes(BUYER))
+    } catch {
+      // keep defaults (false)
+    }
   }, [djangoTokens])
 
   return (

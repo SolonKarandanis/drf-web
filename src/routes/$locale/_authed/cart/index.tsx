@@ -17,6 +17,7 @@ import type { CartItem } from '#/features/cart/models'
 import { m } from '#/paraglide/messages'
 import { Button } from '#/components/ui/button'
 import { decodeJwtPayload, getAccessTokenValue } from '#/shared/token-storage'
+import {BUYER} from "#/shared/constants.ts";
 
 export const Route = createFileRoute('/$locale/_authed/cart/')({
   beforeLoad: ({ params }) => {
@@ -25,7 +26,7 @@ export const Route = createFileRoute('/$locale/_authed/cart/')({
       if (token) {
         const payload = decodeJwtPayload(token)
         const groups = (payload.groups as string[] | undefined) ?? []
-        if (!groups.includes('BUYER')) {
+        if (!groups.includes(BUYER)) {
           throw redirect({ to: '/$locale/dashboard', params: { locale: params.locale } })
         }
       }
